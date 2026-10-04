@@ -14,20 +14,27 @@
 [![YouTube](https://img.shields.io/badge/YouTube-Profile-red?style=for-the-badge&logo=youtube)](https://www.youtube.com/@buguniao537)
 [![X](https://img.shields.io/badge/X-Profile-000000?style=for-the-badge&logo=x&logoColor=white)](https://x.com/Nikitka_aktikiN)
 
+## 🔥 2026 年 10 月 · 作者正在更新的新项目
+
+> OpenClaw 教程继续保留在下方 👇。这里先列出作者近期正在维护的新仓库，内容方向相近，欢迎顺手看看、点个 Star。
+
+| 预览 | 项目 | 一句话介绍 | Stars |
+|:---:|---|---|:---:|
+| <img src="https://raw.githubusercontent.com/xianyu110/awesome-gpt-6-astra/main/sources/martin/website/public/previews/cheerself-001.jpg" width="120" alt="GPT-6 Astra"> | [**awesome-gpt-6-astra**](https://github.com/xianyu110/awesome-gpt-6-astra) · [在线站](https://gpt-6-astra.cc/) | GPT-6 Astra 社区案例合集：游戏、3D、网页、Computer Use 等可玩 Demo，每条附作者与原帖 | [![Stars](https://img.shields.io/github/stars/xianyu110/awesome-gpt-6-astra?style=flat-square&logo=github&label=Stars)](https://github.com/xianyu110/awesome-gpt-6-astra) |
+| <img src="https://raw.githubusercontent.com/xianyu110/awesome-gpt-image2.5/main/assets/og-cover.png" width="120" alt="GPT Image 2.5"> | [**awesome-gpt-image2.5**](https://github.com/xianyu110/awesome-gpt-image2.5) · [画廊](https://xianyu110.github.io/awesome-gpt-image2.5/) | ChatGPT Images 2.5（Flare · Sunburst · Sketch）好玩用法画廊，可直接抄的 prompt 与评测 | [![Stars](https://img.shields.io/github/stars/xianyu110/awesome-gpt-image2.5?style=flat-square&logo=github&label=Stars)](https://github.com/xianyu110/awesome-gpt-image2.5) |
+| <img src="https://raw.githubusercontent.com/xianyu110/awesome-minimax-h3-prompts/main/assets/previews/cmsboram6001z04kzkda7f0i4.webp" width="120" alt="MiniMax H3"> | [**awesome-minimax-h3-prompts**](https://github.com/xianyu110/awesome-minimax-h3-prompts) · [在线浏览](https://tryminimax.asia/zh/minimax-h3-prompts) | MiniMax H3（海螺 3.0）视频提示词精选，每条配生成片段与作者署名 | [![Stars](https://img.shields.io/github/stars/xianyu110/awesome-minimax-h3-prompts?style=flat-square&logo=github&label=Stars)](https://github.com/xianyu110/awesome-minimax-h3-prompts) |
+| <img src="https://upload.maynor1024.live/file/1776480570690_img_048.png" width="120" alt="GPT Image 2"> | [**awesome-gptimage2**](https://github.com/xianyu110/awesome-gptimage2) · [在线站](https://awesome.gptimage2.asia/) | GPT Image 2 中文提示词实战手册：电商、海报、产品图等可复制的商业场景 prompt | [![Stars](https://img.shields.io/github/stars/xianyu110/awesome-gptimage2?style=flat-square&logo=github&label=Stars)](https://github.com/xianyu110/awesome-gptimage2) |
+| | [**gpt-codex**](https://github.com/xianyu110/gpt-codex) · [教程站](https://codex.maynorai.top/) | 写给小白的 OpenAI Codex 中文教程：从 0 到 1 把 Codex 真正用起来 | [![Stars](https://img.shields.io/github/stars/xianyu110/gpt-codex?style=flat-square&logo=github&label=Stars)](https://github.com/xianyu110/gpt-codex) |
+| | [**awesome-codex-tutorial**](https://github.com/xianyu110/awesome-codex-tutorial) · [在线版](https://xianyu110.github.io/awesome-codex-tutorial/) | Codex 中文教程库：入门教程、系列图文教程、实战案例库与速查资料 | [![Stars](https://img.shields.io/github/stars/xianyu110/awesome-codex-tutorial?style=flat-square&logo=github&label=Stars)](https://github.com/xianyu110/awesome-codex-tutorial) |
+| | [**awesome-claudcode-tutorial**](https://github.com/xianyu110/awesome-claudcode-tutorial) · [在线阅读](https://awesome.claude-opus.top/zh/) | 最全面的 Claude Code 中文教程，从零基础到企业级应用 | [![Stars](https://img.shields.io/github/stars/xianyu110/awesome-claudcode-tutorial?style=flat-square&logo=github&label=Stars)](https://github.com/xianyu110/awesome-claudcode-tutorial) |
+
+> 🦞 以下为 OpenClaw 中文教程原有内容，持续保留并按版本校对。
+
+---
+
 > 📖 **纸质书《OpenClaw超级个体实操手册》已上市！** 清华大学出版社出版，在开源教程基础上全面重写+逐条验证。🛒 [京东专属购买链接（¥42，原价¥59.8）](https://item.jd.com/14669463.html)
 
 > 🔄 **2026-09-10 更新说明**：本仓库当前按 **OpenClaw v2026.9.3（稳定版，2026-09-08 发布）** 校对；第 `1/2/5/7/8/10~15` 章已同步到 2026.9 主线。跨版本请先读 [`updates/2026-09-10-v2026.9.3.md`](updates/2026-09-10-v2026.9.3.md)，升级后执行 `openclaw doctor --fix`。
-
-## 🔗 MaynorAI 高星项目导航
-
-- [awesome-openclaw-tutorial](https://github.com/xianyu110/awesome-openclaw-tutorial)：OpenClaw 中文教程合集，从安装配置到实战案例和常见坑位一站式梳理。
-- [clawbot](https://github.com/xianyu110/clawbot)：Clawbot 完整配置指南，帮助开发者把 Claude Code 中转环境快速跑起来。
-- [gpt-codex](https://github.com/xianyu110/gpt-codex)：面向国内开发者的 OpenAI Codex 教程网站，覆盖使用入口、配置和实战案例。
-- [gemini-nanobanana-pro](https://github.com/xianyu110/gemini-nanobanana-pro)：基于 Gemini 图像模型的 AI 图片生成与编辑 Web 应用，适合快速体验文生图和改图流程。
-- [awesome-chatgpt-project](https://github.com/xianyu110/awesome-chatgpt-project)：ChatGPT 注册、项目资源和高效使用技巧整理，帮助新用户快速入门 AI 工具。
-- [awesome-claudcode-tutorial](https://github.com/xianyu110/awesome-claudcode-tutorial)：Claude Code 中文教程，从基础使用到团队级开发工作流。
-- [awesome-gptimage2](https://github.com/xianyu110/awesome-gptimage2)：GPT Image 2 中文资料站，聚焦模型能力、提示词框架和商业图片生成场景。
-- [CodexPlusPlus](https://github.com/xianyu110/CodexPlusPlus)：Codex App 外部增强启动器，通过 DevTools 协议注入增强能力，不修改原始安装文件。
 
 ## 📌 本教程与 OpenClaw 最新版差异说明
 
