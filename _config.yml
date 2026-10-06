@@ -1,6 +1,6 @@
 # Site settings
-title: Awesome OpenClaw Tutorial
-description: 从零开始玩转 OpenClaw：最全面的中文教程
+title: Giáo Trình Toàn Diện OpenClaw
+description: "Làm chủ OpenClaw từ số 0: Hướng dẫn tiếng Việt toàn diện nhất"
 baseurl: ""
 url: "https://awesome.tryopenclaw.asia"
 repository: xianyu110/awesome-openclaw-tutorial
@@ -25,25 +25,25 @@ kramdown:
 
 # Navigation
 navigation:
-  - title: 首页
+  - title: Trang chủ
     url: /
-  - title: 搜索
-    url: /search-enhanced.md
-  - title: 快速开始
+  - title: Tìm kiếm
+    url: /search.md
+  - title: Bắt đầu nhanh
     url: /docs/01-basics/03-quick-start
-  - title: 核心功能
+  - title: Tính năng cốt lõi
     url: /docs/02-core-features/04-file-management
-  - title: 进阶应用
+  - title: Ứng dụng nâng cao
     url: /docs/03-advanced/08-skills-extension
-  - title: 实战案例
+  - title: Ca thực chiến
     url: /docs/04-practical-cases/12-personal-productivity
-  - title: 附录
+  - title: Phụ lục
     url: /appendix/A-command-reference
-  - title: 国产Claw选购
+  - title: Chọn lựa giải pháp thay thế
     url: /appendix/O-domestic-claw-products
-  - title: Skills生态
+  - title: Hệ sinh thái Skills
     url: /appendix/N-skills-ecosystem
-  - title: 安全指南
+  - title: Hướng dẫn an toàn
     url: /docs/03-advanced/99-security-guide
 
 # Relative links

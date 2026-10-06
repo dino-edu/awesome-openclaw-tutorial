@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Tìm kiếm
+title: Tìm kiếm nâng cao
 ---
 
 <div class="search-container">
@@ -213,7 +213,7 @@ mark {
     return [...new Set(tokens)]; // Loại bỏ trùng lặp
   }
 
-  // 计算搜索相关性得分
+  // Tính điểm phù hợp
   function calculateScore(doc, queryTokens) {
     let score = 0;
     const title = (doc.title || '').toLowerCase();
@@ -222,31 +222,31 @@ mark {
     const fullText = title + ' ' + excerpt + ' ' + content;
 
     queryTokens.forEach(token => {
-      // 标题匹配（权重最高）
+      // Khớp tiêu đề (trọng số cao nhất)
       if (title.includes(token)) {
         score += 10;
-        if (title === token) score += 5; // 完全匹配
+        if (title === token) score += 5; // Khớp hoàn toàn
       }
 
-      // 摘要匹配
+      // Khớp trích dẫn
       if (excerpt.includes(token)) {
         score += 3;
       }
 
-      // 内容匹配
+      // Khớp nội dung
       if (content.includes(token)) {
         score += 1;
       }
 
-      // 计算出现次数
+      // Đếm tần suất xuất hiện
       const count = (fullText.match(new RegExp(token, 'g')) || []).length;
-      score += Math.min(count, 5); // 最多加5分
+      score += Math.min(count, 5); // Tối đa 5 điểm
     });
 
     return score;
   }
 
-  // 高亮关键词
+  // Đánh dấu nổi bật từ khóa
   function highlightKeywords(text, queryTokens) {
     queryTokens.forEach(token => {
       const regex = new RegExp(`(${token.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
@@ -255,7 +255,7 @@ mark {
     return text;
   }
 
-  // 执行搜索
+  // Thực hiện tìm kiếm
   function performSearch(query) {
     if (!query || query.trim() === '') {
       document.getElementById('search-results').innerHTML =
@@ -268,22 +268,25 @@ mark {
       document.getElementById('search-results').innerHTML =
         '<p class="loading">⏳ Đang tải chỉ mục tìm kiếm, vui lòng chờ...</p>';
       return;
+    }
 
     document.getElementById('search-results').innerHTML =
       '<p class="loading">🔍 Đang tìm kiếm...</p>';
-    // 分词
+
+    // Phân tách từ khóa
     const queryTokens = tokenize(query);
     console.log('Từ khóa tìm kiếm:', queryTokens);
-    // 计算每个文档的得分
+
+    // Tính điểm từng tài liệu
     const results = searchData.map(doc => ({
       ...doc,
       score: calculateScore(doc, queryTokens)
     })).filter(doc => doc.score > 0);
 
-    // 按得分排序
+    // Sắp xếp theo điểm số giảm dần
     results.sort((a, b) => b.score - a.score);
 
-    // 显示结果
+    // Hiển thị kết quả
     if (results.length === 0) {
       document.getElementById('search-stats').innerHTML = '😕 Không tìm thấy nội dung phù hợp';
       document.getElementById('search-results').innerHTML = `
@@ -304,11 +307,11 @@ mark {
       return;
     }
 
-    // 显示统计信息
+    // Hiển thị thống kê
     document.getElementById('search-stats').innerHTML =
       `✨ Tìm thấy ${results.length} kết quả liên quan`;
 
-    // 显示结果（最多50个）
+    // Hiển thị kết quả (tối đa 50 kết quả)
     let html = '';
     results.slice(0, 50).forEach((result, index) => {
       const title = highlightKeywords(result.title || 'Chưa đặt tên', queryTokens);
@@ -318,7 +321,7 @@ mark {
         queryTokens
       );
 
-      // 分类标签
+      // Nhãn danh mục
       let categoryBadge = '';
       if (result.category) {
         const categoryMap = {
@@ -352,7 +355,7 @@ mark {
     document.getElementById('search-results').innerHTML = html;
   }
 
-  // 加载搜索数据
+  // Tải dữ liệu chỉ mục tìm kiếm
   async function loadSearchData() {
     if (isLoading) return;
     isLoading = true;
@@ -365,7 +368,7 @@ mark {
 
     for (const file of searchFiles) {
       try {
-        console.log(`🔍 尝试加载: ${file}`);
+        console.log(`🔍 Đang thử tải: ${file}`);
         const response = await fetch(file);
 
         if (!response.ok) {
@@ -375,22 +378,22 @@ mark {
         const data = await response.json();
 
         if (!data || data.length === 0) {
-          throw new Error('搜索数据为空');
+          throw new Error('Dữ liệu tìm kiếm rỗng');
         }
 
         searchData = data;
-        console.log(`✅ 成功加载搜索索引: ${file}`, `共 ${data.length} 个文档`);
+        console.log(`✅ Tải thành công chỉ mục tìm kiếm: ${file}`, `Tổng cộng ${data.length} tài liệu`);
         isLoading = false;
         return;
 
       } catch (error) {
-        console.error(`❌ 加载失败 (${file}):`, error);
+        console.error(`❌ Tải thất bại (${file}):`, error);
         continue;
       }
     }
 
-    // 所有文件都加载失败
-    console.error('❌ 所有搜索索引文件都加载失败');
+    // Tất cả các file đều tải thất bại
+    console.error('❌ Tất cả các file chỉ mục tìm kiếm đều tải thất bại');
     document.getElementById('search-results').innerHTML = `
       <div class="no-results">
         <p style="font-size: 1.2rem; margin-bottom: 1rem;">😕 Tính năng tìm kiếm tạm thời chưa khả dụng</p>
@@ -413,12 +416,10 @@ mark {
     isLoading = false;
   }
 
-  // 初始化
+  // Khởi tạo
   document.addEventListener('DOMContentLoaded', function() {
-    // 加载搜索数据
     loadSearchData();
 
-    // 绑定搜索事件
     const searchInput = document.getElementById('search-input');
     const searchButton = document.getElementById('search-button');
 
@@ -432,7 +433,7 @@ mark {
       }
     });
 
-    // 实时搜索（输入时自动搜索，带防抖）
+    // Tìm kiếm theo thời gian thực (debounce)
     let searchTimeout;
     searchInput.addEventListener('input', function() {
       clearTimeout(searchTimeout);
@@ -450,7 +451,7 @@ mark {
       }
     });
 
-    // 检查URL参数
+    // Kiểm tra tham số URL
     const urlParams = new URLSearchParams(window.location.search);
     const queryParam = urlParams.get('q');
     if (queryParam) {

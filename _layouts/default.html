@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="vi">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -917,7 +917,7 @@
 
       const breadcrumb = document.createElement('nav');
       breadcrumb.className = 'breadcrumb';
-      breadcrumb.setAttribute('aria-label', '面包屑导航');
+      breadcrumb.setAttribute('aria-label', 'Điều hướng breadcrumb');
 
       const pathParts = path.split('/').filter(p => p && p !== 'index.html');
       const title = h1.textContent.trim();
@@ -956,7 +956,7 @@
       const headers = content.querySelectorAll('h2, h3, h4');
       if (headers.length < 3) return; // 章节太少时不显示目录
 
-      let tocHtml = '<div class="toc-title">📑 目录</div>';
+      let tocHtml = '<div class="toc-title">📑 Mục lục</div>';
       tocHtml += '<ul class="toc-list">';
 
       headers.forEach(header => {
@@ -1052,7 +1052,7 @@
       const backToTop = document.createElement('button');
       backToTop.className = 'back-to-top';
       backToTop.innerHTML = '↑';
-      backToTop.setAttribute('aria-label', '返回顶部');
+      backToTop.setAttribute('aria-label', 'Về đầu trang');
       document.body.appendChild(backToTop);
 
       // 显示/隐藏按钮
@@ -1077,7 +1077,7 @@
 <body>
   <header class="page-header" role="banner">
     <!-- 主题切换按钮 -->
-    <button class="theme-toggle" id="theme-toggle" aria-label="切换主题">
+    <button class="theme-toggle" id="theme-toggle" aria-label="Chuyển đổi giao diện sáng/tối">
       <span class="icon">🌙</span>
     </button>
 
@@ -1086,17 +1086,17 @@
 
     <div class="header-search">
       <form action="{{ '/search' | relative_url }}" method="get" class="search-form">
-        <input type="text" name="q" placeholder="🔍 搜索教程内容..." class="search-input" autocomplete="off">
-        <button type="submit" class="search-submit">搜索</button>
+        <input type="text" name="q" placeholder="🔍 Tìm kiếm nội dung giáo trình..." class="search-input" autocomplete="off">
+        <button type="submit" class="search-submit">Tìm kiếm</button>
       </form>
     </div>
 
     <div class="btn-group">
       <a href="{{ site.github.repository_url }}" class="btn">⭐ GitHub</a>
-      <a href="{{ '/' | relative_url }}" class="btn">🏠 首页</a>
-      <a href="{{ '/docs/01-basics/02-installation' | relative_url }}" class="btn">🚀 安装</a>
-      <a href="{{ '/docs/01-basics/03-quick-start' | relative_url }}" class="btn">⚡ 快速开始</a>
-      <a href="{{ '/appendix/A-command-reference' | relative_url }}" class="btn">📋 命令速查</a>
+      <a href="{{ '/' | relative_url }}" class="btn">🏠 Trang chủ</a>
+      <a href="{{ '/docs/01-basics/02-installation' | relative_url }}" class="btn">🚀 Cài đặt</a>
+      <a href="{{ '/docs/01-basics/03-quick-start' | relative_url }}" class="btn">⚡ Bắt đầu nhanh</a>
+      <a href="{{ '/appendix/A-command-reference' | relative_url }}" class="btn">📋 Tra cứu lệnh</a>
     </div>
   </header>
 
@@ -1105,15 +1105,16 @@
 
     <footer class="site-footer">
       <p>
-        由 <a href="https://github.com/xianyu110">@xianyu110</a> 维护 ·
-        教程基线 <a href="https://github.com/openclaw/openclaw/releases/tag/v2026.4.14">OpenClaw v2026.4.14</a> ·
-        采用 <a href="https://www.gnu.org/licenses/gpl-3.0.html">GPL-3.0 License</a>
+        Dự án gốc duy trì bởi <a href="https://github.com/xianyu110">@xianyu110</a> ·
+        Bản dịch tiếng Việt bởi cộng đồng OpenClaw Việt Nam ·
+        Bộ chuẩn giáo trình <a href="https://github.com/openclaw/openclaw/releases/tag/v2026.4.14">OpenClaw v2026.4.14</a> ·
+        Giấy phép <a href="https://www.gnu.org/licenses/gpl-3.0.html">GPL-3.0 License</a>
       </p>
       <p>
-        <a href="https://openclaw.ai">官网</a> ·
-        <a href="https://docs.openclaw.ai">官方文档</a> ·
-        <a href="https://clawhub.ai">ClawHub 技能广场</a> ·
-        <a href="https://github.com/xianyu110/awesome-openclaw-tutorial/issues">反馈问题</a>
+        <a href="https://openclaw.ai">Trang chủ OpenClaw</a> ·
+        <a href="https://docs.openclaw.ai">Tài liệu chính thức</a> ·
+        <a href="https://clawhub.ai">Chợ kỹ năng ClawHub</a> ·
+        <a href="https://github.com/xianyu110/awesome-openclaw-tutorial/issues">Báo lỗi / Góp ý</a>
       </p>
     </footer>
   </main>

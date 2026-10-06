@@ -15,10 +15,10 @@ def extract_title(content):
     match = re.search(r'^#\s+(.+)$', content, re.MULTILINE)
     if match:
         title = match.group(1)
-        # 移除章节号（如 "第1章："）
-        title = re.sub(r'^第[\dIVX]+章[：:]\s*', '', title)
+        # 移除章节号（如 "第1章："、"Chương 1:"、"Phụ lục A:"）
+        title = re.sub(r'^(?:第[\dIVX]+章|Chương\s+[\dIVX\d]+|Phụ\s+lục\s+[A-Z\dIVX]+)[：:]\s*', '', title, flags=re.IGNORECASE)
         return title.strip()
-    return "未命名文档"
+    return "Chưa đặt tên"
 
 def extract_excerpt(content, max_length=200):
     """提取摘要（引用块和第一个段落）"""
