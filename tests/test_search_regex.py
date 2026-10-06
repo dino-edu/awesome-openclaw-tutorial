@@ -1,7 +1,13 @@
+import os
+import sys
+import pathlib
 import re
 import pytest
-from scripts.generate_search_index import extract_title
 
+# Đảm bảo thư mục gốc dự án nằm trong sys.path để pytest chạy trực tiếp
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent.parent))
+
+from scripts.generate_search_index import extract_title
 def test_chapter_title_extraction():
     patterns = r'^(?:第[\dIVX]+章|Chương\s+[\dIVX\d]+)[：:]\s*'
     raw_title = "Chương 1: Giới thiệu về OpenClaw"

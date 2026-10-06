@@ -16,7 +16,7 @@ def extract_title(content):
     if match:
         title = match.group(1)
         # 移除章节号（如 "第1章："、"Chương 1:"、"Phụ lục A:"）
-        title = re.sub(r'^(?:第[\dIVX]+章|Chương\s+[\dIVX\d]+|Phụ\s+lục\s+[A-Z\dIVX]+)[：:]\s*', '', title, flags=re.IGNORECASE)
+        title = re.sub(r'^(?:第[\dIVX]+章|Chương\s+[\dIVX]+|Phụ\s+lục\s+[A-Z\dIVX]+)[：:]\s*', '', title, flags=re.IGNORECASE)
         return title.strip()
     return "Chưa đặt tên"
 
