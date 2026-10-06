@@ -1,1065 +1,586 @@
-> 📖 **纸质书《OpenClaw超级个体实操手册》已上市！** 清华大学出版社出版，在开源教程基础上全面重写+逐条验证。🛒 [京东专属购买链接（¥42，原价¥59.8）](https://item.jd.com/14669463.html)
+> 📖 **Giáo trình Awesome OpenClaw Tutorial** | Bản dịch tiếng Việt chính thức cho cộng đồng. Nguyên tác thuộc về tác giả [@xianyu110](https://github.com/xianyu110).
 
-# 第7章节 自动化工作流
+# Chương 7: Quy trình Tự động hóa
 
-> 💡 **本章节目标**：学会使用 OpenClaw构建自动化工作流，实现定时任务、网站监控、日报推送和循环任务配置。
+> 💡 **Mục tiêu của chương**: Nắm vững phương pháp xây dựng quy trình tự động hóa với OpenClaw: thiết lập tác vụ định kỳ Cron, thực chiến giám sát website, tự động gửi báo cáo tóm tắt hàng ngày và cấu hình chuỗi nhiệm vụ tuần hoàn bền bỉ.
 
-> 🔄 **v2026.9.3 对齐说明**：本章 cron / heartbeat 例子仍可参考，但请按 **Task Flow + Webhooks** 主线理解自动化。升级到 2026.8+ 后会话已迁入 SQLite；自动化里若仍写着旧的 `codex/*` / `openai-codex/*` 模型路由，请先执行 `openclaw doctor --fix`。长期/多步骤流程优先看第 13 章。
+> 🔄 **Lưu ý đối chiếu phiên bản v2026.9.3**: Các ví dụ về cron / heartbeat trong chương này vẫn có giá trị tham khảo ứng dụng thực tế cao. Tuy nhiên, xin lưu ý trục kiến trúc tự động hóa chính thức hiện nay được vận hành trên **Task Flow + Webhooks**. Sau khi nâng cấp lên phiên bản 2026.8+ (OpenClaw 2.0), dữ liệu phiên hội thoại đã được chuyển vào SQLite. Nếu hệ thống tự động hóa của bạn vẫn dùng các định tuyến mô hình cũ dạng `codex/*` hay `openai-codex/*`, vui lòng chạy lệnh `openclaw doctor --fix` trước tiên. Để tìm hiểu các quy trình dài hạn, nhiều bước phức tạp hơn, hãy xem tiếp Chương 13.
 
-## 🤖 本章节内内容
+## 🤖 Nội dung chương
 
-- 7.1 定时任务设置
-- 7.2 网站监控实战
-- 7.3 日报自动推送
-- 7.4 循环任务配置
+- 7.1 Thiết lập tác vụ định kỳ (Cron Jobs)
+- 7.2 Thực chiến giám sát website
+- 7.3 Tự động gửi báo cáo tóm tắt hàng ngày
+- 7.4 Cấu hình tác vụ tuần hoàn và chuỗi nhiệm vụ phụ thuộc
 
 ---
 
-## 7.1 定时任务设置
+## 7.1 Thiết lập tác vụ định kỳ (Cron Jobs)
 
-### 7.1.1 什么是定时任务
+### 7.1.1 Tác vụ định kỳ là gì?
 
-**定义**：
-定时任务是指在指定时间自动执行的任务，无需人工干预。
+**Định nghĩa**:
+Tác vụ định kỳ (Scheduled Tasks / Cron Jobs) là các nhiệm vụ được hệ thống tự động thực thi tại những mốc thời gian định sẵn mà không cần sự can thiệp thủ công của con người.
 
-**OpenClaw的独特优势**：
-- ✅ **心跳机制**：可以主动发布起对话
-- ✅ **智能调度**：自动管理任务执行
-- ✅ **灵活配置**：支持多种时间模式
-- ✅ **可靠执行**：失败自动重试
+**Ưu thế vượt trội của OpenClaw**:
+- ✅ **Cơ chế nhịp tim (Heartbeat)**: Có khả năng chủ động mở cuộc trò chuyện và gửi thông báo cho bạn.
+- ✅ **Điều phối thông minh**: Tự động quản lý tiến trình thực thi, kiểm tra điều kiện trước khi chạy.
+- ✅ **Cấu hình linh hoạt**: Hỗ trợ nhiều mô hình thời gian khác nhau từ ngôn ngữ tự nhiên đến biểu thức Cron.
+- ✅ **Thực thi bền bỉ và tin cậy**: Hỗ trợ cơ chế tự động thử lại khi gặp sự cố mạng hoặc lỗi tạm thời.
 
-OpenClaw 与其他 AI 工具在自动化能力上的对比如表 7-1 所示。
+So sánh khả năng tự động hóa giữa OpenClaw và các trợ lý AI trực tuyến khác được nêu ở Bảng 7-1:
 
-**表 7-1 OpenClaw 与其他 AI 工具自动化能力对比**
+**Bảng 7-1: So sánh khả năng tự động hóa giữa OpenClaw và các công cụ AI khác**
 
-| 特性 | OpenClaw | ChatGPT | Claude |
-|------|----------|---------|--------|
-| 主动对话 | ✅ | ❌ | ❌ |
-| 定时任务 | ✅ | ❌ | ❌ |
-| 本地执行 | ✅ | ❌ | ❌ |
-| 系统操作 | ✅ | ❌ | ❌ |
+| Đặc tính | OpenClaw | ChatGPT | Claude |
+|---|---|---|---|
+| Chủ động bắt đầu hội thoại | ✅ | ❌ | ❌ |
+| Tác vụ định kỳ độc lập | ✅ | ❌ | ❌ |
+| Thực thi trực tiếp trên máy cục bộ | ✅ | ❌ | ❌ |
+| Thao tác tệp tin và hệ điều hành | ✅ | ❌ | ❌ |
 
-### 7.1.2 心跳机制原理
+### 7.1.2 Nguyên lý của cơ chế nhịp tim (Heartbeat)
 
-**OpenClaw的心跳机制**：
+Cơ chế nhịp tim của OpenClaw hoạt động như sau:
 
-┌─────────────┐
-│  OpenClaw   │
-│   守护进程   │
-└──────┬──────┘
-       │
-       ├─ 每分钟检查一次
-       ├─ 匹配定时任务
-       ├─ 执行任务逻辑
-       └─ 发布送消息/执行操作
+```text
+┌───────────────────────┐
+│       OpenClaw        │
+│   Tiến trình Daemon   │
+└───────────┬───────────┘
+            │
+            ├─ Kiểm tra định kỳ mỗi phút
+            ├─ Khớp danh sách tác vụ đến hạn
+            ├─ Thực thi logic nghiệp vụ của tác vụ
+            └─ Gửi thông báo / Thao tác hệ thống
+```
 
-**工作流程**：
-1. OpenClaw后台运行
-2. 每分钟检查任务列表
-3. 到达设定时间时触发布
-4. 执行任务并发布送结果
-5. 记附录执行日志
+**Quy trình vận hành**:
+1. OpenClaw chạy nền dưới dạng tiến trình dịch vụ (Daemon).
+2. Hệ thống kiểm tra danh sách nhiệm vụ đã lên lịch mỗi phút.
+3. Khi đồng hồ chạm mốc thời gian thiết lập, tác vụ được kích hoạt.
+4. AI tiến hành thu thập dữ liệu, xử lý nghiệp vụ và gửi kết quả đến kênh bạn chọn.
+5. Ghi lại nhật ký lịch sử thực thi để theo dõi và kiểm tra.
 
-### 7.1.3 实战案例1：简单提醒
+### 7.1.3 Ca thực chiến 1: Nhắc nhở buổi sáng đơn giản
 
-**场景**：你想在每天早上8点收到一条访问候消息。
+**Tình huống**: Bạn muốn đúng 08:00 mỗi sáng nhận được một tin nhắn chào buổi sáng kèm tóm tắt lịch trình trong ngày.
 
-**OpenClaw操作**：
+**Thao tác với OpenClaw**:
 
-你：帮我设置1个定时提醒：
-每天早上8点，发布送早安访问候
+Bạn: Cài đặt giúp tôi 1 tác vụ định kỳ: Đúng 8 giờ mỗi sáng gửi tin nhắn chào buổi sáng cho tôi.
 
-OpenClaw：好的，我来设置定时提醒！
+OpenClaw: Vâng, tôi sẽ thiết lập tác vụ định kỳ cho bạn ngay!
 
-⏰ 定时任务详情：
-- 任务名称：早安访问候
-- 执行时间：每天 08:00
-- 任务内内容：发布送早安消息
-- 推送方式：飞书消息
+⏰ **Chi tiết tác vụ định kỳ**:
+- Tên tác vụ: Chào buổi sáng
+- Thời gian thực thi: 08:00 hàng ngày
+- Nội dung: Gửi lời chào và điểm tin ngày mới
+- Phương thức gửi: Tin nhắn Lark / Feishu
 
-任务预览：
-"☀️ 早安！新的一天开始了！
-今天是2026年2月10日，星期二
-天气：晴，15-25°C
-今日提醒：
-- 10:00 团队周会
-- 14:00 客户拜访
-- 16:00 项目复盘
+**Bản xem trước thông báo**:
+> "☀️ Chào buổi sáng! Ngày mới tốt lành!  
+> Hôm nay là Thứ Ba, ngày 10/02/2026  
+> Thời tiết: Nắng ráo, nhiệt độ 18 - 25°C  
+> Lịch trình hôm nay:  
+> - 10:00: Họp giao ban tuần nhóm  
+> - 14:00: Đi gặp đối tác  
+> - 16:00: Đánh giá tổng kết dự án  
+> Chúc bạn một ngày làm việc tràn đầy năng lượng và hiệu quả! 💪"
 
-加油，祝你今天工作顺利！💪"
+Đã thiết lập tác vụ định kỳ thành công ✅  
+Lần thực thi đầu tiên: 08:00 sáng mai.
 
-已设置定时任务 ✅
-首次执行：明天 08:00
+![Cài đặt tác vụ định kỳ thông báo buổi sáng](https://upload.maynor1024.live/file/1770910047044_image-20260212232722747.png)
 
-![image-20260212232722747](https://upload.maynor1024.live/file/1770910047044_image-20260212232722747.png)
+**08:00 sáng hôm sau**:
 
-**第二天早上8点**：
+OpenClaw chủ động gửi tin nhắn:
+```text
+☀️ Chào buổi sáng! Một ngày mới nhiều năng lượng nhé!
 
-OpenClaw：☀️ 早安！新的一天开始了！
+Hôm nay là Thứ Tư, ngày 11/02/2026
+Thời tiết: Nắng nhẹ, nhiệt độ 19 - 26°C
 
-今天是2026年2月11日，星期三
-天气：晴，15-25°C
+📅 Lịch biểu hôm nay:
+- 10:00: Họp giao ban tuần (Phòng họp A)
+- 14:00: Gặp khách hàng (Tại văn phòng đối tác)
+- 16:00: Review dự án (Họp online)
 
-📅 今日日程：
-- 10:00 团队周会（会议室A）
-- 14:00 客户拜访（客户公司）
-- 16:00 项目复盘（线上会议）
+✅ Việc cần ưu tiên xử lý:
+- Hoàn thiện báo cáo tiến độ dự án
+- Phản hồi email khách hàng
+- Rà soát tài liệu họp nhóm
 
-✅ 待怎么办事项：
-- 完成项目报告
-- 回复客户邮件
-- 准备周会材料
+💡 Lời khuyên cho bạn:
+- Hãy chuẩn bị sớm tài liệu trước chuyến gặp đối tác chiều nay
+- Dự trù thời gian đi lại khoảng 30 phút trên đường
 
-💡 今日建议：
-- 提前准备客户拜访材料
-- 预留路上时间（约30分钟）
+Chúc bạn hoàn thành xuất sắc các mục tiêu hôm nay! 💪
+```
 
-加油，祝你今天工作顺利！💪
+### 7.1.4 Ca thực chiến 2: Tự động tổng kết báo cáo tuần
 
-### 7.1.4 实战案例2：每周报告
+**Tình huống**: Bạn muốn vào 17:00 chiều Thứ Sáu hàng tuần, AI tự động tổng hợp toàn bộ kết quả công việc trong tuần và gửi báo cáo cho bạn.
 
-**场景**：你想每周五下午5点收到本周工作总结。
+**Thao tác với OpenClaw**:
 
-**OpenClaw操作**：
+Bạn: Cài đặt giúp tôi đúng 17:00 chiều Thứ Sáu hàng tuần, tự động tổng kết công việc trong tuần và gửi báo cáo cho tôi.
 
-你：帮我设置每周五下午5点，
-生成本周工作总结并发布送给我
+OpenClaw: Vâng, tôi sẽ thiết lập tác vụ tạo báo cáo tuần ngay!
 
-OpenClaw：好的，我来设置周报任务！
+⏰ **Chi tiết tác vụ định kỳ**:
+- Tên tác vụ: Báo cáo công việc tuần
+- Thời gian thực thi: 17:00 Thứ Sáu hàng tuần
+- Nội dung: Tự động tổng hợp kết quả công việc trong tuần
+- Kênh nhận tin: Tin nhắn Lark / Feishu + Email
 
-⏰ 定时任务详情：
-- 任务名称：周报生成
-- 执行时间：每周五 17:00
-- 任务内内容：生成本周工作总结
-- 推送方式：飞书消息 + 邮件
+**Cấu trúc báo cáo**:
+1. Danh sách các nhiệm vụ đã hoàn thành
+2. Các cuộc họp đã tham gia
+3. Kiến thức và tài liệu đã tích lũy
+4. Kế hoạch công việc tuần tới
+5. Các điểm nghẽn hoặc rủi ro cần lưu ý
 
-报告内内容：
-1. 本周完成的任务
-2. 本周参加的会议
-3. 本周学习的内内容
-4. 下周计划
-5. 需要关注的事项
+**Nguồn dữ liệu đối chiếu**:
+- Sự kiện trên Lịch hệ thống
+- Ghi chú trong bộ nhớ và ứng dụng Note
+- Danh sách công việc đã đánh dấu hoàn thành
 
-数据来源：
-- 日历事件
-- 备忘附录笔记
-- 任务完成记附录
+Đã thiết lập tác vụ thành công ✅  
+Lần chạy tiếp theo: 17:00 Thứ Sáu tuần này.
 
-已设置定时任务 ✅
-首次执行：本周五 17:00
+**17:00 chiều Thứ Sáu**:
 
-**周五下午5点**：
+OpenClaw gửi báo cáo:
+```text
+📊 BÁO CÁO CÔNG VIỆC TUẦN (10/02/2026 - 14/02/2026)
 
-OpenClaw：📊 本周工作总结（2026-02-10 至 2026-02-14）
+📋 Nhiệm vụ đã hoàn thành (8 mục):
+✅ Hoàn thành tài liệu đặc tả yêu cầu sản phẩm (PRD)
+✅ Thiết kế xong bản kiến trúc kỹ thuật
+✅ Thực hiện 3 lượt Code Review cho đội ngũ
+✅ Gặp và trao đổi với 2 đối tác chiến lược
+✅ Chia sẻ chuyên đề kỹ thuật nội bộ
+✅ Họp đánh giá tổng kết dự án
+✅ Hoàn tất bản dự thảo báo cáo tuần
+✅ Tổng hợp ghi chú chuyên môn mới
 
-## 📋 完成任务（8项）
-✅ 完成产品需求文档
-✅ 完成技术方案设计
-✅ 完成代码审查（3次）
-✅ 完成客户拜访（2次）
-✅ 完成团队分分享
-✅ 完成项目复盘
-✅ 完成周报撰写
-✅ 完成学习笔记整理
+📅 Cuộc họp đã tham gia (12 buổi):
+- Họp giao ban tuần: 2 buổi
+- Thảo luận giải pháp dự án: 4 buổi
+- Gặp gỡ đối tác: 2 buổi
+- Buổi chia sẻ kỹ thuật: 2 buổi
+- Review tiến độ: 2 buổi
 
-## 📅 参加会议（12场）
-- 团队周会：2次
-- 项目讨论：4次
-- 客户拜访：2次
-- 技术分分享：2次
-- 项目复盘：2次
+📚 Tri thức & Nghiên cứu:
+- Đọc 5 bài viết chuyên sâu về AI Agent
+- Tìm hiểu tính năng mới của React 19
+- Hoàn thành 2 bài học kỹ thuật
 
-## 📚 学习内内容
-- 阅读技术文章节：5篇
-- 学习新技术：React 19
-- 完成课程：2节
+📝 Kế hoạch tuần tới:
+- Hoàn thiện bản vẽ mẫu Prototype sản phẩm
+- Bắt đầu chu kỳ phát triển tính năng mới
+- Chuẩn bị slide chia sẻ kỹ thuật đợt 2
+- Khảo sát nhu cầu mở rộng người dùng
 
-## 📝 下周计划
-- 完成产品原型设计
-- 开始开发布工作
-- 准备技术分分享
-- 客户需求调研
+⚠️ Điểm cần lưu ý:
+- Tiến độ module tích hợp đang chậm khoảng 1 ngày
+- Cần bổ sung thêm tài nguyên kiểm thử trước đợt phát hành
 
-## ⚠️ 需要关注
-- 项目进度略有延迟
-- 需要增加开发布资源
-- 客户需求需要确认
+Đã gửi thành công qua Lark và Email ✅
+```
 
-已发布送到：
-- 飞书消息 ✅
-- 邮箱 ✅
+### 7.1.5 Ca thực chiến 3: Tổng kết tháng tự động
 
-### 7.1.5 实战案例3：每月总结
+**Tình huống**: Vào tối ngày cuối cùng của mỗi tháng, bạn muốn nhận bản tổng kết tháng.
 
-**场景**：你想每月最后一天生成月度总结。
+**Thao tác với OpenClaw**:
 
-**OpenClaw操作**：
+Bạn: Thiết lập giúp tôi tác vụ vào lúc 20:00 tối ngày cuối cùng của mỗi tháng, tự động tạo báo cáo tổng kết tháng.
 
-你：帮我设置每月最后一天晚上8点，
-生成月度总结
+OpenClaw: Đã thiết lập tác vụ định kỳ tổng kết tháng!
+- Tên tác vụ: Báo cáo tổng kết tháng
+- Thời gian: 20:00 ngày cuối cùng hàng tháng
+- Nội dung: Tình hình hoàn thành mục tiêu, tiến độ các dự án trọng điểm, thống kê dữ liệu năng suất và định hướng cho tháng tiếp theo.
 
-OpenClaw：好的，我来设置月报任务！
+### 7.1.6 Giải mã chi tiết biểu thức Cron
 
-⏰ 定时任务详情：
-- 任务名称：月度总结
-- 执行时间：每月最后一天 20:00
-- 任务内内容：生成月度工作总结
-- 推送方式：飞书消息 + 邮件 + 备忘附录
+**Biểu thức Cron là gì?**  
+Biểu thức Cron là một chuỗi văn bản gồm các trường phân cách bằng dấu cách, dùng để kiểm soát thời gian chạy tác vụ một cách chính xác tuyệt đối.
 
-报告内内容：
-1. 月度目标完成情况
-2. 重要项目进展
-3. 个人成长与学习
-4. 数据统计分析
-5. 下月计划与目标
+**Cấu trúc chuẩn 5 trường**:
+```text
+Phút  Giờ  Ngày-trong-tháng  Tháng  Thứ-trong-tuần
+ *     *          *            *          *
+ │     │          │            │          │
+ │     │          │            │          └─ Thứ (0 - 7, trong đó cả 0 và 7 đều là Chủ nhật)
+ │     │          │            └──────────── Tháng (1 - 12)
+ │     │          └───────────────────────── Ngày trong tháng (1 - 31)
+ │     └──────────────────────────────────── Giờ (0 - 23)
+ └────────────────────────────────────────── Phút (0 - 59)
+```
 
-已设置定时任务 ✅
-首次执行：2026-02-28 20:00
-
-
-### 7.1.6 Cron表达式详解
-
-**什么是Cron表达式**：
-
-Cron表达式是一种时间表达式，用于精确控制任务执行时间。
-
-**基本格式**：
-分钟 小时 日期 月份 星期
-
-* * * * *
-│ │ │ │ │
-│ │ │ │ └─ 星期 (0-7, 0和7都表示周日)
-│ │ │ └─── 月份 (1-12)
-│ │ └───── 日期 (1-31)
-│ └─────── 小时 (0-23)
-└───────── 分钟 (0-59)
-
-**常用示例**：
+**Các ví dụ biểu thức Cron thường dùng**:
 
 ```bash
-# 每天早上8点
+# Đúng 8 giờ sáng mỗi ngày
 0 8 * * *
 
-# 每周一上午10点
+# 10 giờ sáng Thứ Hai hàng tuần
 0 10 * * 1
 
-# 每月1号上午9点
+# 9 giờ sáng ngày mùng 1 hàng tháng
 0 9 1 * *
 
-# 每天中午12点和下午6点
+# 12 giờ trưa và 18 giờ chiều mỗi ngày
 0 12,18 * * *
 
-# 每小时执行一次
+# Chạy mỗi giờ một lần (ngay đầu giờ)
 0 * * * *
 
-# 每30分钟执行一次
+# Cứ mỗi 30 phút chạy một lần
 */30 * * * *
 
-# 工作日早上9点
+# 9 giờ sáng các ngày làm việc trong tuần (Thứ Hai đến Thứ Sáu)
 0 9 * * 1-5
 
-# 周末上午10点
+# 10 giờ sáng hai ngày cuối tuần (Thứ Bảy và Chủ Nhật)
 0 10 * * 0,6
-**OpenClaw使用Cron**：
+```
 
-你：帮我设置1个定时任务：
-每天早上8点、中午12点、晚上8点提醒我喝水
+**Cách OpenClaw hỗ trợ thiết lập Cron**:
 
-OpenClaw：好的，我来设置！
+Bạn chỉ cần nói bằng ngôn ngữ tự nhiên:
+> Bạn: Thiết lập giúp tôi 1 tác vụ định kỳ: Mỗi ngày vào lúc 8h sáng, 12h trưa và 8h tối nhắc tôi uống nước.
 
-⏰ Cron表达式：0 8,12,20 * * *
+OpenClaw sẽ tự động ánh xạ thành biểu thức Cron:
+`0 8,12,20 * * *` và kích hoạt ngay cho bạn mà bạn không cần phải tự tính toán cú pháp thủ công.
 
-解释：
-- 0：在整点执行
-- 8,12,20：早上8点、中午12点、晚上8点
-- * * *：每天、每月、每周
-
-任务内内容：
-"💧 该喝水了！
-保支持每天8杯水，身体更健康！
-今天已喝：[X]杯"
-
-已设置定时任务 ✅
 ---
 
-## 7.2 网站监控实战
+## 7.2 Thực chiến giám sát website
 
-### 7.2.1 为什么需要网站监控
+### 7.2.1 Tại sao bạn cần giám sát website?
 
-**常见需求**：
+**Các nhu cầu giám sát thực tế**:
+1. **Theo dõi blog công nghệ**: Nhận thông báo ngay khi tác giả bạn yêu thích xuất bản bài viết mới.
+2. **Theo dõi biến động giá hàng hóa**: Canh giá sản phẩm trên các sàn thương mại điện tử để mua vào thời điểm giảm giá tốt nhất.
+3. **Theo dõi tin tuyển dụng**: Phát hiện ngay khi doanh nghiệp mục tiêu mở đợt tuyển dụng vị trí bạn quan tâm.
+4. **Theo dõi tin tức ngành**: Nắm bắt kịp thời các sự kiện chấn động, chính sách pháp lý hoặc động thái của đối thủ cạnh tranh.
+5. **Theo dõi cập nhật dự án mã nguồn mở**: Nhận tin khi một kho mã nguồn GitHub ra mắt phiên bản Release mới.
 
-1. **技术博客更新**
-   - 关注的博主发布新文章节
-   - 及时学习新知识
+Làm thủ công bằng cách bấm F5 kiểm tra mỗi ngày sẽ rất mất thời gian và dễ bị lỡ thông tin. Để OpenClaw theo dõi giúp bạn là giải pháp thông minh và nhàn hạ hơn rất nhiều.
 
-2. **产品价格变化**
-   - 电商商品降价
-   - 及时购买省钱
+### 7.2.2 Nguyên lý phát hiện website thay đổi
 
-3. **招聘信息更新**
-   - 心仪公司发布布职位
-   - 第一时间投递
+Quy trình giám sát của OpenClaw:
 
-4. **新闻资讯监控**
-   - 行业动态更新
-   - 及时了解趋势
+`Kiểm tra định kỳ → Thu thập mã nguồn trang web → So sánh sự khác biệt (Diff) → Kích hoạt thông báo khi có thay đổi`
 
-5. **开源项目更新**
-   - GitHub项目发布布新版本
-   - 及时跟进学习
+**Các cơ chế phát hiện**:
+- **So sánh toàn văn**: Phù hợp với các trang đơn giản, kích thước nhỏ.
+- **So sánh vùng nội dung chỉ định (CSS Selector / DOM)**: Chỉ quét khu vực bài viết mới hoặc thẻ giá, loại bỏ các thành phần quảng cáo hoặc thanh điều hướng gây nhiễu.
+- **Theo dõi nguồn RSS/Atom**: Phương thức tin cậy và tiết kiệm băng thông nhất đối với các trang có hỗ trợ RSS feed.
 
-**传统做法**：
-- 手动定期检查
-- 内容易遗漏
-- 效率低下
+### 7.2.3 Ca thực chiến 1: Theo dõi cập nhật blog kỹ thuật
 
-**OpenClaw做法**：
-- 自动监控
-- 实时通知
-- 高效便捷
+**Thao tác với OpenClaw**:
 
-### 7.2.2 网站变化检测原理
+Bạn: Giúp tôi theo dõi cập nhật của trang blog kỹ thuật này:  
+`https://example-blog.com`  
+Mỗi ngày kiểm tra 2 lần, nếu có bài viết mới thì gửi tóm tắt cho tôi qua Lark.
 
-**OpenClaw的监控机制**：
+OpenClaw: Đã thiết lập cấu hình giám sát blog!
+- Tần suất: 2 lần mỗi ngày (09:00 và 18:00)
+- Đối tượng theo dõi: Tiêu đề và liên kết bài viết mới
+- Kênh thông báo: Tin nhắn Lark / Feishu
 
-定时检查 → 抓取网页 → 对比变化 → 发布送通知
-**检测方式**：
+![Thiết lập tác vụ giám sát website](https://upload.maynor1024.live/file/1770910079191_image-20260212232752122.png)
 
-1. **全文对比**
-   - 检测整个页面变化
-   - 适合小型页面
+**Khi phát hiện bài viết mới**:
 
-2. **关键内内容对比**
-   - 只检测特定区域
-   - 适合大型页面
+OpenClaw chủ động báo tin:
+```text
+📰 THÔNG BÁO BÀI VIẾT MỚI TỪ BLOG KỸ THUẬT!
 
-3. **RSS订阅**
-   - 使用RSS源
-   - 最稳定可靠
+Trang web: Example Blog
+Thời gian quét: 09:00, ngày 11/02/2026
 
-### 7.2.3 实战案例1：博客更新监控
+🆕 Phát hiện 1 bài viết mới:
 
-**场景**：你想监控某个技术博客的更新。
+Tiêu đề: Giải mã những tính năng đột phá trên React 19
+Tác giả: Dan Abramov
+Thời gian đăng: 20:00, ngày 10/02/2026
+Đường dẫn: https://example-blog.com/react-19
 
-**OpenClaw操作**：
+Tóm tắt nhanh nội dung:
+React 19 mang đến nhiều cải tiến lớn đáng chú ý:
+1. Trình biên dịch React Compiler tự động tối ưu hóa re-render
+2. Tối ưu hóa tính năng render đồng thời (Concurrent rendering)
+3. Hỗ trợ hệ thống kiểu TypeScript chặt chẽ và thông minh hơn
+4. Cải tiến cơ chế Actions và Server Functions
 
-你：帮我监控这个博客的更新：
-https://example-blog.com
-每天检查2次，有新文章节就通知我
+Thời lượng đọc ước tính: ~10 phút
+Đánh giá mức độ nên đọc: ⭐⭐⭐⭐⭐
 
-OpenClaw：好的，我来设置博客监控！
+Bạn có muốn tôi lưu bài viết này vào Memory Wiki không?
+```
 
-🔍 监控配置：
-- 网站：https://example-blog.com
-- 检查频率：每天2次（09:00, 18:00）
-- 监控内内容：新文章节标题和链接
-- 通知方式：飞书消息
+### 7.2.4 Ca thực chiến 2: Giám sát giá sản phẩm giảm sâu
 
-监控规则：
-- 检测文章节列表变化
-- 提取新文章节信息
-- 生成摘要
-- 发布送通知
+**Thao tác với OpenClaw**:
 
-已设置监控任务 ✅
-首次检查：明天 09:00
-![image-20260212232752122](https://upload.maynor1024.live/file/1770910079191_image-20260212232752122.png)
+Bạn: Giúp tôi theo dõi giá của sản phẩm này:  
+`https://shop.com/product/12345`  
+Nếu giá bán giảm xuống dưới 20.000.000 VNĐ thì lập tức thông báo cho tôi.
 
-**发布现更新时**：
+OpenClaw: Đã thiết lập giám sát giá!
+- Sản phẩm mục tiêu: iPhone 15 Pro
+- Giá hiện tại: 24.990.000 VNĐ
+- Mức giá kỳ vọng: ≤ 20.000.000 VNĐ
+- Tần suất kiểm tra: Mỗi giờ 1 lần
+- Kênh báo động: Lark + Tin nhắn điện thoại
 
-OpenClaw：📰 博客更新提醒！
+**Khi giá đạt mục tiêu**:
 
-网站：Example Blog
-检查时间：2026-02-11 09:00
+OpenClaw:
+```text
+🎉 BÁO ĐỘNG GIÁ SỐC! GIÁ ĐÃ GIẢM CHẠM MỤC TIÊU!
 
-🆕 发布现1篇新文章节：
+Sản phẩm: iPhone 15 Pro
+Giá hiện tại: 19.990.000 VNĐ ✅ (Đã đạt mức giá bạn mong muốn)
 
-标题：《React 19新特性详解》
-作者：张三
-发布布时间：2026-02-10 20:00
-链接：https://example-blog.com/react-19
+Biến động giá:
+- Giá trước đó: 24.990.000 VNĐ
+- Giá hiện tại: 19.990.000 VNĐ
+- Mức giảm: 5.000.000 VNĐ (Giảm 20%)
 
-文章节摘要：
-React 19带来了多项重要更新，包括：
-1. 新的编译器优化
-2. 改进的并发布渲染
-3. 更好的TypeScript支持
-...
+Khuyến nghị hành động:
+✅ Đây là mức giá thấp nhất trong vòng 60 ngày qua
+✅ Sản phẩm có số lượng giới hạn theo chương trình Flash Sale
+✅ Đề xuất bạn truy cập mua ngay kẻo hết hạn
 
-阅读时长：约10分钟
-推荐指数：⭐⭐⭐⭐⭐
+Đường dẫn mua hàng: https://shop.com/product/12345
+```
 
-是否保存到备忘附录？
-### 7.2.4 实战案例2：产品价格监控
+### 7.2.5 Ca thực chiến 3: Giám sát bảng tin tuyển dụng
 
-**场景**：你想买1个商品，等它降价时购买。
+**Thao tác với OpenClaw**:
 
-**OpenClaw操作**：
+Bạn: Theo dõi trang tuyển dụng của công ty này giúp tôi:  
+`https://company.com/careers`  
+Từ khóa: "Kỹ sư Frontend", "React". Nếu có vị trí mới phù hợp thì thông báo cho tôi.
 
-你：帮我监控这个商品的价格：
-https://shop.com/product/12345
-目标价格：低于500元就通知我
+OpenClaw sẽ quét định kỳ 3 lần mỗi ngày (09:00, 14:00, 20:00). Ngay khi có vị trí mới đăng tuyển, AI sẽ trích xuất mô tả công việc (JD), mức lương, yêu cầu kinh nghiệm và gửi thông báo tức thì, thậm chí hỗ trợ bạn rà soát lại CV để ứng tuyển kịp thời.
 
-OpenClaw：好的，我来设置价格监控！
+### 7.2.6 Tối ưu hóa tần suất giám sát để tránh bị chặn
 
-🔍 监控配置：
-- 商品：iPhone 15 Pro
-- 当前价格：¥5999
-- 目标价格：≤ ¥5000
-- 检查频率：每小时一次
-- 通知方式：飞书消息 + 短信
+Tần suất giám sát đề xuất cho từng loại mục tiêu được nêu ở Bảng 7-2:
 
-价格历史：
-- 最高价：¥6999（2026-01-01）
-- 最低价：¥5499（2026-01-20）
-- 平均价：¥5899
+**Bảng 7-2: Tần suất giám sát đề xuất cho từng loại trang web**
 
-预测：
-根据历史数据，预计2周内可能降至目标价格
+| Mục tiêu theo dõi | Tần suất đề xuất | Lý do |
+|---|---|---|
+| Blog công nghệ cá nhân | 2 lần / ngày | Bài viết xuất bản thưa thớt, không cần quét dày |
+| Bảng tin thời sự | 1 lần / giờ | Tin tức cập nhật liên tục |
+| Canh giá sản phẩm | 1 lần / giờ | Giá flash sale có thể đổi theo khung giờ |
+| Trang tuyển dụng | 2 - 3 lần / ngày | Tin tuyển dụng thường duyệt vào giờ hành chính |
+| Kho mã nguồn GitHub | 1 lần / ngày | Bản release phần mềm thường không ra mắt dồn dập |
 
-已设置监控任务 ✅
-**价格达到目标时**：
+**Lưu ý an toàn quan trọng**:
+- ⚠️ Tuyệt đối không đặt tần suất quét quá dày (như vài giây một lần), điều này có thể khiến IP của bạn bị website chặn truy cập.
+- ✅ Luôn ưu tiên dùng nguồn RSS nếu trang web có hỗ trợ.
+- ✅ Thiết lập khoảng cách giãn cách ngẫu nhiên (jitter) để tránh hành vi gửi request đều đặn như máy móc.
 
-OpenClaw：🎉 价格提醒！
-
-商品：iPhone 15 Pro
-当前价格：¥4999 ✅
-
-价格变化：
-- 原价：¥5999
-- 现价：¥4999
-- 降价：¥1000（16.7%）
-
-购买建议：
-✅ 已达到目标价格
-✅ 近期最低价
-✅ 建议立即购买
-
-购买链接：https://shop.com/product/12345
-
-是否需要我帮你下单？
-### 7.2.5 实战案例3：招聘信息监控
-
-**场景**：你想关注某公司的招聘信息。
-
-**OpenClaw操作**：
-
-你：帮我监控这个公司的招聘页面：
-https://company.com/careers
-关键词：前端工程师、React
-有匹配的职位就通知我
-
-OpenClaw：好的，我来设置招聘监控！
-
-🔍 监控配置：
-- 公司：Example Company
-- 页面：https://company.com/careers
-- 关键词：前端工程师、React
-- 检查频率：每天3次（09:00, 14:00, 20:00）
-- 通知方式：飞书消息 + 邮件
-
-当前职位：
-- 后端工程师（3个）
-- 产品经理（2个）
-- UI设计师（1个）
-
-暂无匹配职位，支持续监控中...
-
-已设置监控任务 ✅
-**发布现匹配职位时**：
-
-OpenClaw：💼 招聘信息提醒！
-
-公司：Example Company
-检查时间：2026-02-11 14:00
-
-🆕 发布现1个匹配职位：
-
-职位：高级前端工程师
-技术栈：React、TypeScript、Next.js
-薪资：25k-40k
-地点：北京
-经验：3-5年
-
-职位要求：
-✅ 精通React和TypeScript
-✅ 熟悉Next.js框架
-✅ 有大型项目经验
-✅ 良好的代码规范
-
-职位亮点：
-- 弹性工作制
-- 股票期权
-- 技术氛围好
-- 成长空间大
-
-发布布时间：2小时前
-申请人数：12人
-
-建议：
-⚡ 职位刚发布布，建议尽快投递
-⚡ 已帮你准备好简历
-
-是否立即投递？
-### 7.2.6 监控频率优化
-
-不同类型的监控任务需要不同的检查频率，如表 7-2 所示。
-
-**表 7-2 不同监控类型的推荐频率**
-
-| 监控类型 | 推荐频率 | 理由 |
-|---------|---------|------|
-| 博客更新 | 每天2次 | 更新不频繁 |
-| 新闻资讯 | 每小时1次 | 更新较频繁 |
-| 价格监控 | 每小时1次 | 价格变化快 |
-| 招聘信息 | 每天3次 | 更新适中 |
-| GitHub更新 | 每天1次 | 更新不频繁 |
-
-**注意事项**：
-
-⚠️ 避免过度监控：
-- 频率过高可能被网站封禁
-- 消耗过多资源
-- 产生大量无用通知
-
-✅ 推荐做法：
-- 根据网站更新频率调整
-- 使用RSS源（如果有）
-- 设置合理的检查间隔
-- 添加随机延迟
 ---
 
-## 7.3 日报自动推送
+## 7.3 Tự động gửi báo cáo tóm tắt hàng ngày
 
-### 7.3.1 为什么需要日报
+### 7.3.1 Giá trị của bản tin tóm tắt hàng ngày
 
-**日报的价值**：
+1. **Tổng hợp thông tin đa kênh**: Gom tất cả tin tức, dữ liệu thị trường và lịch hẹn vào một bản tóm tắt duy nhất, giúp bạn nắm bắt toàn cảnh chỉ trong 5 phút đọc.
+2. **Loại bỏ nhiễu loạn thông tin**: AI lọc sạch tin rác và clickbait, chỉ giữ lại các dữ kiện cô đọng cốt lõi.
+3. **Tiết kiệm thời gian đọc**: Không cần mở 10 tab trình duyệt mỗi sáng để xem tin.
+4. **Hỗ trợ định hướng công việc**: Giúp bạn chủ động sắp xếp thời gian làm việc trong ngày dựa trên lịch trình thực tế.
 
-1. **信息聚合**
-   - 一次性获取所有重要信息
-   - 节省时间
-
-2. **保支持更新**
-   - 及时了解行业动态
-   - 不错过重要信息
-
-3. **知识积累**
-   - 系统化学习
-   - 形成知识体系
-
-4. **工作规划**
-   - 了解今日安排
-   - 提前做好准备
-
-### 7.3.2 日报内内容设计
-
-**一份好的日报应该包含**：
+### 7.3.2 Cấu trúc của một bản tin ngày chuẩn mực
 
 ```markdown
-# AI行业日报（2026-02-11）
+# BẢN TIN TRÍ TUỆ NHÂN TẠO & CÔNG NGHỆ (11/02/2026)
 
-## 📰 今日要闻（3-5条）
-- 重要新闻
-- 行业动态
-- 技术突破
+## 📰 Tiêu điểm công nghệ trong ngày (3 - 5 tin nổi bật)
+- Tin tức cập nhật lớn từ các hãng công nghệ hàng đầu
+- Các bước đột phá nghiên cứu mới được công bố
 
-## 🔥 热门话题（3-5个）
-- 社区讨论
-- 技术趋势
-- 产品发布布
+## 🔥 Chủ đề nóng trong cộng đồng lập trình
+- Thảo luận nổi bật trên Hacker News / Reddit
+- Xu hướng phát triển công nghệ mới
 
-## 📚 精选文章节（3-5篇）
-- 技术教程
-- 深度分析
-- 实战案例
+## 📚 Bài viết kỹ thuật tuyển chọn
+- Các bài hướng dẫn thực hành chuyên sâu chất lượng cao
+- Phân tích kiến trúc hệ thống
 
-## 🛠️ 开源项目（2-3个）
-- 新项目推荐
-- 项目更新
-- 实用工具
+## 🛠️ Dự án mã nguồn mở đáng chú ý
+- Các repository thịnh hành trên GitHub Trending
+- Công cụ mã nguồn mở hữu ích mới phát hành
 
-## 📅 今日日程
-- 会议安排
-- 任务提醒
-- 重要事项
+## 📅 Lịch trình & Nhiệm vụ cá nhân hôm nay
+- Các cuộc hẹn cần tham gia
+- Danh sách việc cần ưu tiên hoàn thành
+```
 
-## 💡 每日一句
-- 励志名言
-- 技术感悟
-### 7.3.3 实战案例1：AI行业日报
+### 7.3.3 Ca thực chiến: Thiết lập bản tin AI hàng ngày
 
-**OpenClaw操作**：
+**Thao tác với OpenClaw**:
 
-你：帮我设置AI行业日报，
-每天早上8点推送，内内容包括：
-- AI新闻（5条）
-- 热门GitHub项目（3个）
-- 精选技术文章节（3篇）
-- 今日日程
+Bạn: Cài đặt giúp tôi bản tin công nghệ AI hàng ngày, gửi vào lúc 08:00 sáng, bao gồm:
+- 5 tin tức AI đáng chú ý nhất
+- 3 dự án GitHub Trending nổi bật
+- 3 bài viết kỹ thuật chọn lọc
+- Lịch trình cá nhân trong ngày của tôi
 
-OpenClaw：好的，我来设置AI日报！
+OpenClaw: Đã thiết lập tác vụ tạo bản tin AI hàng ngày!
+- Thời gian: 08:00 hàng ngày
+- Nguồn thu thập: Hacker News, GitHub Trending, các RSS blog công nghệ uy tín và Lịch cá nhân của bạn
+- Kênh nhận tin: Feishu Docs / Lark / Telegram
 
-⏰ 定时任务详情：
-- 任务名称：AI行业日报
-- 执行时间：每天 08:00
-- 推送方式：飞书云文档
-- 数据来源：
-  * Hacker News
-  * GitHub Trending
-  * 技术博客RSS
-  * 个人日历
+![Thiết lập gửi bản tin hàng ngày](https://upload.maynor1024.live/file/1770176303922_image_25.jpg)
 
-已设置定时任务 ✅
-首次推送：明天 08:00
-![设置日报推送](https://upload.maynor1024.live/file/1770176303922_image_25.jpg)
+**Giao diện bản tin thực tế nhận được**:
 
-**第二天早上8点**：
+![Minh họa bản tin công nghệ nhận được mỗi sáng](https://upload.maynor1024.live/file/1770176310383_image_27.jpg)
 
-![日报推送示例](https://upload.maynor1024.live/file/1770176310383_image_27.jpg)
+### 7.3.4 Lựa chọn kênh tiếp nhận thông báo
 
-OpenClaw：📊 AI行业日报（2026-02-11）
+So sánh các kênh nhận thông báo phổ biến được trình bày ở Bảng 7-3:
 
-## 📰 今日要闻
+**Bảng 7-3: So sánh ưu nhược điểm các kênh gửi thông báo**
 
-1. **OpenAI发布布GPT-5预览版**
-   - 性能提升50%
-   - 支持更长上下文
-   - 来源：OpenAI Blog
-
-2. **Google Gemini 3.0正式发布布**
-   - 多模态能力增强
-   - 免费额度提升
-   - 来源：Google AI Blog
-
-3. **Meta开源新一代LLaMA模型**
-   - 参数规模达700B
-   - 性能接近GPT-4
-   - 来源：Meta AI
-
-4. **Anthropic推出Claude Code**
-   - 专注代码生成
-   - 集成VSCode
-   - 来源：Anthropic
-
-5. **DeepMind突破蛋白质折叠难题**
-   - AlphaFold 3发布布
-   - 准确率提升至95%
-   - 来源：Nature
-
-## 🔥 热门GitHub项目
-
-1. **awesome-ai-tools** ⭐ 15.2k
-   - AI工具集合
-   - 每日更新
-   - 链接：github.com/...
-
-2. **llama-cpp** ⭐ 8.5k
-   - 本地运行大模型
-   - 性能优化
-   - 链接：github.com/...
-
-3. **chatgpt-web** ⭐ 12.3k
-   - ChatGPT网页版
-   - 开源免费
-   - 链接：github.com/...
-
-## 📚 精选文章节
-
-1. **《大模型提示词工程实战》**
-   - 作者：张三
-   - 阅读时长：15分钟
-   - 推荐指数：⭐⭐⭐⭐⭐
-
-2. **《如何用AI提升工作效率》**
-   - 作者：李四
-   - 阅读时长：10分钟
-   - 推荐指数：⭐⭐⭐⭐
-
-3. **《OpenClaw实战指南》**
-   - 作者：王五
-   - 阅读时长：20分钟
-   - 推荐指数：⭐⭐⭐⭐⭐
-
-## 📅 今日日程
-
-- 10:00 团队周会（会议室A）
-- 14:00 客户拜访（客户公司）
-- 16:00 项目复盘（线上会议）
-
-## 💡 每日一句
-
-"AI不会取代你，但会用AI的人会取代你。"
+| Kênh nhận tin | Ưu điểm | Nhược điểm | Kịch bản khuyên dùng |
+|---|---|---|---|
+| **Lark / Feishu** | Nhanh, tức thời, định dạng thẻ (Card) đẹp mắt | Dễ trôi tin nếu nhóm chat quá đông | Nhắc việc khẩn, thông báo ngắn |
+| **Feishu Docs** | Cấu trúc bài bản, dễ tìm kiếm và lưu trữ dài hạn | Cần mở liên kết để đọc | Bản tin tổng hợp dài, báo cáo tuần |
+| **Email** | Trang trọng, lưu trữ hồ sơ lâu dài | Tốc độ thông báo chậm hơn ứng dụng chat | Báo cáo tổng kết tháng, lưu trữ định kỳ |
+| **Telegram / Discord** | Dễ thiết lập webhook, thông báo linh hoạt | Ít phổ biến trong môi trường nội bộ công ty | Giám sát kỹ thuật, bot cá nhân |
 
 ---
 
-完整日报已保存到：飞书云文档 > AI日报 > 2026-02-11
-### 7.3.4 实战案例2：技术资讯日报
-
-**场景**：你是前端开发布者，想每天了解前端技术动态。
-
-**OpenClaw操作**：
-
-你：帮我设置前端技术日报，
-每天早上9点推送，内内容包括：
-- React/Vue/Angular最新动态
-- 前端工具和库更新
-- 技术文章节推荐
-- Stack Overflow热门访问题
-
-OpenClaw：好的，我来设置前端日报！
-
-⏰ 定时任务详情：
-- 任务名称：前端技术日报
-- 执行时间：每天 09:00
-- 推送方式：飞书消息
-- 数据来源：
-  * GitHub Trending (JavaScript)
-  * Dev.to前端标签
-  * Medium前端专栏
-  * Stack Overflow
-
-已设置定时任务 ✅
-### 7.3.5 实战案例3：个人工作日报
-
-**场景**：你想每天晚上收到今日工作总结。
-
-**OpenClaw操作**：
-
-你：帮我设置个人工作日报，
-每天晚上8点推送，内内容包括：
-- 今日完成的任务
-- 今日参加的会议
-- 今日学习的内内容
-- 明日待怎么办事项
-
-OpenClaw：好的，我来设置工作日报！
-
-⏰ 定时任务详情：
-- 任务名称：个人工作日报
-- 执行时间：每天 20:00
-- 推送方式：飞书消息 + 备忘附录
-- 数据来源：
-  * 日历事件
-  * 任务完成记附录
-  * 备忘附录笔记
-  * 学习记附录
+## 7.4 Cấu hình tác vụ tuần hoàn và chuỗi nhiệm vụ phụ thuộc
 
-已设置定时任务 ✅
-**晚上8点推送**：
-
-OpenClaw：📊 今日工作总结（2026-02-11）
-
-## ✅ 完成任务（5项）
-- 完成产品需求文档
-- 完成代码审查
-- 完成客户拜访
-- 完成技术分分享
-- 完成学习笔记
-
-## 📅 参加会议（3场）
-- 10:00 团队周会（1小时）
-- 14:00 客户拜访（1.5小时）
-- 16:00 项目复盘（1小时）
-
-## 📚 学习内内容
-- 阅读《React 19新特性》
-- 学习Next.js 14
-- 完成TypeScript练习
-
-## 📝 明日待怎么办
-- 完成产品原型设计
-- 准备技术分分享PPT
-- 回复客户邮件
-- 代码重构
+### 7.4.1 Phân biệt tác vụ định kỳ và tác vụ tuần hoàn
 
-## 📊 今日数据
-- 工作时长：8小时
-- 会议时长：3.5小时
-- 专注时长：4.5小时
-- 学习时长：1小时
-
-## 💭 今日感悟
-今天效率不错，完成了预定的所有任务。
-明天继续加油！💪
-
-已保存到备忘附录 ✅
-### 7.3.6 推送渠道选择
-
-不同的推送渠道各有优劣，如表 7-3 所示。
-
-**表 7-3 不同推送渠道对比**
-
-| 推送方式 | 优势 | 劣势 | 适合场景 |
-|---------|------|------|----------|
-| **飞书消息** | 即时、便捷 | 内容易被忽略 | 紧急提醒 |
-| **飞书云文档** | 结构化、可搜索 | 需要打开 | 详细报告 |
-| **邮件** | 正式、存档 | 不够即时 | 重要通知 |
-| **备忘附录** | 跨设备同步 | 不够醒目 | 长期保存 |
-| **企业微信** | 工作场景 | 需要配置 | 团队协作 |
+Sự khác biệt cốt lõi giữa hai loại tác vụ được nêu ở Bảng 7-4:
 
-**推荐组合**：
+**Bảng 7-4: Phân biệt tác vụ định kỳ và tác vụ tuần hoàn**
 
-日常提醒：飞书消息
-详细报告：飞书云文档
-重要通知：飞书消息 + 邮件
-长期保存：备忘附录
-团队分分享：企业微信
----
+| Tiêu chí | Tác vụ định kỳ (Scheduled) | Tác vụ tuần hoàn (Interval / Cyclic) |
+|---|---|---|
+| Thời điểm thực thi | Mốc thời gian cố định trên đồng hồ (ví dụ: 08:00 sáng) | Khoảng cách thời gian đều đặn (ví dụ: cứ mỗi 2 giờ) |
+| Kịch bản tiêu biểu | Báo cáo sáng, họp giao ban tuần, tổng kết tháng | Sao lưu dữ liệu định kỳ, kiểm tra trạng thái máy chủ |
 
-## 7.4 循环任务配置
+### 7.4.2 Ca thực chiến 1: Tự động sao lưu dữ liệu mỗi 6 giờ
 
-### 7.4.1 什么是循环任务
+**Thao tác với OpenClaw**:
 
-**定义**：
-循环任务是指按照一定规律重复执行的任务。
+Bạn: Thiết lập giúp tôi tác vụ sao lưu dữ liệu: Cứ mỗi 6 giờ sao lưu toàn bộ ghi chú và danh sách sự kiện lịch một lần.
 
-定时任务与循环任务的区别如表 7-4 所示。
+OpenClaw: Đã thiết lập tác vụ tuần hoàn sao lưu dữ liệu!
+- Khoảng cách lặp: Mỗi 6 giờ (00:00, 06:00, 12:00, 18:00)
+- Đối tượng sao lưu: Ghi chú, tệp cấu hình và cơ sở dữ liệu lịch
+- Thư mục lưu trữ: `~/Documents/Backups/`
+- Chính sách lưu trữ: Tự động nén tệp, mã hóa an toàn và chỉ giữ lại bản sao lưu của 7 ngày gần nhất để tiết kiệm ổ cứng.
 
-**表 7-4 定时任务与循环任务对比**
+### 7.4.3 Ca thực chiến 2: Nhắc nhở vận động và bảo vệ sức khỏe
 
-| 特性 | 定时任务 | 循环任务 |
-|------|---------|---------|
-| 执行时间 | 固定时间点 | 固定间隔 |
-| 示例 | 每天8点 | 每隔2小时 |
-| 适用场景 | 日报、提醒 | 监控、检查 |
+Bạn: Cài đặt nhắc nhở sức khỏe: Trong giờ làm việc các ngày trong tuần (Thứ Hai đến Thứ Sáu, từ 09:00 đến 18:00), cứ sau mỗi 1 tiếng hãy nhắc tôi đứng lên vận động, uống nước và thư giãn mắt.
 
-### 7.4.2 循环任务类型
+OpenClaw sẽ tự động chạy chu kỳ nhắc nhở hàng giờ, giúp bạn duy trì thói quen làm việc khoa học và bảo vệ sức khỏe khi ngồi máy tính lâu.
 
-**类型1：固定间隔**
-每隔X分钟/小时/天执行一次
-**类型2：条件触发布**
-当满足某个条件时执行
-**类型3：依赖任务**
-任务A完成后执行任务B
-### 7.4.3 实战案例1：数据备份
+### 7.4.4 Quản lý chuỗi nhiệm vụ phụ thuộc (Task Chains)
 
-**场景**：你想每隔6小时备份一次重要数据。
+Trong các quy trình phức tạp, các tác vụ thường có mối quan hệ phụ thuộc lẫn nhau: *Nhiệm vụ B chỉ được chạy sau khi Nhiệm vụ A hoàn thành thành công*.
 
-**OpenClaw操作**：
+**Tình huống**:
+1. Đúng 07:00 sáng, kiểm tra thời tiết trong ngày qua API.
+2. Nếu trời mưa, chuẩn bị thông báo nhắc mang ô. Nếu nhiệt độ dưới 15°C, nhắc mặc thêm áo ấm.
+3. Sau đó, tiến hành lấy lịch trình trong ngày và tổng hợp thành một thông báo duy nhất gửi cho bạn.
 
-你：帮我设置数据备份任务，
-每隔6小时备份一次备忘附录和日历
+OpenClaw cho phép xâu chuỗi các hành động này thành một luồng điều khiển có điều kiện mượt mà và logic.
 
-OpenClaw：好的，我来设置备份任务！
+### 7.4.5 Cơ chế thử lại khi gặp lỗi (Error Retry & Self-Healing)
 
-⏰ 循环任务详情：
-- 任务名称：数据备份
-- 执行间隔：每6小时
-- 执行时间：00:00, 06:00, 12:00, 18:00
-- 备份内内容：
-  * 备忘附录（所有笔记）
-  * 日历（所有事件）
-  * 任务列表
-- 备份位置：~/Documents/Backups/
+Quy trình tự phục hồi sự cố của OpenClaw:
 
-备份策略：
-- 保留最近7天的备份
-- 自动压缩
-- 加密存储
+`Thực thi tác vụ gặp lỗi → Đợi 1 phút → Thử lại lần 1 → Thất bại → Đợi 5 phút → Thử lại lần 2 → Thất bại → Đợi 15 phút → Thử lại lần 3 → Vẫn thất bại → Gửi cảnh báo sự cố đến người dùng và tạm dừng`
 
-已设置循环任务 ✅
-首次执行：今天 18:00
-### 7.4.4 实战案例2：健康提醒
+**Mẫu thông báo khi tác vụ gặp sự cố**:
+```text
+⚠️ CẢNH BÁO TÁC VỤ THỰC THI THẤT BẠI
 
-**场景**：你想每隔1小时提醒自己休息一下。
+Tên tác vụ: Bản tin Công nghệ AI
+Thời gian phát sinh: 08:00, ngày 11/02/2026
+Nguyên nhân: Mất kết nối mạng khi tải dữ liệu từ máy chủ nguồn (Network Timeout)
 
-**OpenClaw操作**：
+Số lần hệ thống đã thử lại: 3 lần
+Kết quả: Đều thất bại do đường truyền gián đoạn
 
-你：帮我设置健康提醒，
-工作日每隔1小时提醒我休息，
-周末不提醒
-
-OpenClaw：好的，我来设置健康提醒！
-
-⏰ 循环任务详情：
-- 任务名称：健康提醒
-- 执行间隔：每1小时
-- 执行时间：工作日 09:00-18:00
-- 提醒内内容：
-  * 站起来活动5分钟
-  * 眺望远方放松眼睛
-  * 喝一杯水
-
-提醒方式：
-- 飞书消息
-- Mac通知
-
-已设置循环任务 ✅
-下次提醒：10:00
-**每小时提醒**：
-
-OpenClaw：💪 健康提醒
-
-已经工作1小时了，该休息一下啦！
-
-建议活动：
-✓ 站起来走动5分钟
-✓ 眺望远方，放松眼睛
-✓ 喝一杯水（今天已喝3杯）
-✓ 做几个拉伸动作
-
-下次提醒：1小时后
-### 7.4.5 任务依赖管理
-
-**场景**：你想设置一系列有依赖关系的任务。
-
-**OpenClaw操作**：
-
-你：帮我设置任务链：
-1. 每天早上7点，检查天气
-2. 如果下雨，提醒带伞
-3. 如果气温低于10度，提醒多穿衣服
-4. 然后推送今日日程
-
-OpenClaw：好的，我来设置任务链！
-
-⏰ 任务链配置：
-
-任务1：检查天气
-- 执行时间：每天 07:00
-- 数据来源：天气API
-- 下一步：根据天气决定
-
-任务2：天气提醒（条件触发布）
-- 触发布条件：下雨 或 气温<10°C
-- 提醒内内容：
-  * 下雨 → 记得带伞☂️
-  * 气温低 → 多穿衣服🧥
-
-任务3：推送日程
-- 执行时机：任务2完成后
-- 推送内内容：今日日程安排
-
-已设置任务链 ✅
-首次执行：明天 07:00
-### 7.4.6 错误重试机制
-
-**OpenClaw的内容错机制**：
-
-任务执行失败 → 等待1分钟 → 重试
-重试失败 → 等待5分钟 → 再次重试
-再次失败 → 等待15分钟 → 最后重试
-最后失败 → 发布送错误通知 → 停止任务
-**错误通知示例**：
-
-OpenClaw：⚠️ 任务执行失败
-
-任务名称：AI行业日报
-失败时间：2026-02-11 08:00
-失败原因：网络连接超时
-
-已尝试重试：3次
-重试结果：全部失败
-
-建议：
-1. 检查网络连接
-2. 检查数据源是否可用
-3. 手动执行任务
-
-是否需要我继续重试？
+Khuyến nghị xử lý:
+1. Kiểm tra lại kết nối internet trên máy chủ / máy tính cục bộ
+2. Kiểm tra xem API nguồn có đang bảo trì hay không
+3. Thực hiện chạy lại tác vụ bằng lệnh thủ công: `openclaw task run ai-daily-digest`
+```
 
 ---
 
-## 📝 本章节小结
+## 📝 Tổng kết chương
 
-本章节学习了OpenClaw的自动化工作流功能：
+Sau chương này, bạn đã làm chủ toàn bộ nền tảng tự động hóa cốt lõi của OpenClaw:
 
-### 核心功能
-
-1. **定时任务设置**
-   - 心跳机制原理
-   - 简单提醒
-   - 周报月报
-   - Cron表达式
-
-2. **网站监控实战**
-   - 博客更新监控
-   - 价格监控
-   - 招聘信息监控
-   - 监控频率优化
-
-3. **日报自动推送**
-   - 日报内内容设计
-   - AI行业日报
-   - 技术资讯日报
-   - 个人工作日报
-
-4. **循环任务配置**
-   - 固定间隔任务
-   - 条件触发布任务
-   - 任务依赖管理
-   - 错误重试机制
-
-### 实战技巧
-
-- ✅ 合理设置任务频率
-- ✅ 选择合适的推送方式
-- ✅ 设计有价值的日报内内容
-- ✅ 建立任务依赖关系
-- ✅ 配置错误重试机制
-
-### 下一步
-
-- 学习第8章节：Skills扩展
-- 掌握ClawHub技能市场
-- 学习自定义Skills开发布
-- 构建个人技能库
+1. **Thiết lập tác vụ định kỳ Cron**: Nắm vững cơ chế nhịp tim (Heartbeat), hiểu rõ cú pháp biểu thức Cron và làm chủ các kịch bản chào buổi sáng, báo cáo tuần, báo cáo tháng.
+2. **Giám sát website thông minh**: Tự động phát hiện thay đổi trên blog, theo dõi giá sản phẩm, canh tin tuyển dụng và nắm bắt kỹ thuật chống chặn IP.
+3. **Tự động xuất bản tin hàng ngày**: Thiết kế luồng gom thông tin đa kênh, chắt lọc nội dung giá trị và xuất bản qua Lark, Feishu Docs hay Email.
+4. **Cấu hình chuỗi nhiệm vụ tuần hoàn**: Xây dựng kịch bản sao lưu dữ liệu, chuỗi tác vụ có điều kiện phụ thuộc và cơ chế tự động thử lại khi gặp sự cố mạng.
 
 ---
 
-## 🎯 实战练习
+## 🎯 Bài tập thực hành
 
-### 练习1：设置早安提醒
-1. 设置每天早上8点的早安提醒
-2. 包含天气、日程、待怎么办事项
-3. 推送到飞书
-
-### 练习2：监控技术博客
-1. 选择3个你关注的技术博客
-2. 设置更新监控
-3. 有新文章节时通知你
-
-### 练习3：创建个人日报
-1. 设计你的日报内内容
-2. 设置每天推送时间
-3. 选择合适的推送方式
+- **Bài tập 1: Lập lịch chào buổi sáng cá nhân**: Tự thiết lập một tác vụ gửi lời chào buổi sáng kèm danh sách việc cần làm vào 08:00 hàng ngày.
+- **Bài tập 2: Giám sát một website bạn yêu thích**: Chọn 1 trang web công nghệ hoặc 1 kho mã nguồn GitHub bạn quan tâm và cài đặt OpenClaw thông báo khi có bản cập nhật mới.
+- **Bài tập 3: Cấu hình kịch bản tự động sao lưu**: Thiết lập lịch định kỳ sao lưu một thư mục tài liệu quan trọng trên máy tính của bạn sang một vị trí an toàn.
 
 ---
 
-## 💡 常见访问题
+## 💡 Câu hỏi thường gặp
 
-**Q1：定时任务没有执行？**
-A：检查OpenClaw是否在后台运行，查看任务日志。
+**Q1: Tác vụ định kỳ đến giờ nhưng không chạy?**  
+A: Hãy kiểm tra xem tiến trình nền của OpenClaw có đang chạy hay không bằng lệnh `openclaw status`. Nếu máy tính bị rơi vào chế độ ngủ sâu (Sleep), các tác vụ nền có thể bị hoãn lại cho đến khi máy tính thức giấc.
 
-**Q2：网站监控被封禁？**
-A：降低监控频率，添加随机延迟，使用代理。
+**Q2: Giám sát website bị báo lỗi hoặc bị chặn truy cập?**  
+A: Hãy giãn tần suất kiểm tra thưa hơn, ưu tiên sử dụng link RSS nếu trang web có hỗ trợ, hoặc cấu hình thêm proxy nếu cần thiết.
 
-**Q3：日报内内容不准确？**
-A：检查数据源，调整内内容筛选规则。
-
-**Q4：循环任务占用资源？**
-A：优化任务逻辑，减少不必要的操作。
-
-**Q5：如何停止某个任务？**
-A：告诉OpenClaw"停止XX任务"即可。
+**Q3: Muốn dừng hoặc hủy một tác vụ định kỳ thì làm thế nào?**  
+A: Bạn chỉ cần nói với OpenClaw: *"Hãy dừng tác vụ [Tên tác vụ]"* hoặc dùng lệnh quản lý danh sách cron để xóa bỏ.
 
 ---
 
-**下一章节预告**：第8章节将学习Skills扩展，包括ClawHub技能市场、必装Skills推荐、自定义Skills开发布等内内容。
+**Chương tiếp theo**: [Chương 8: Mở rộng Skills](08-skills-extension.md) - Khám phá chợ kỹ năng ClawHub và tự phát triển Custom Skills cho riêng bạn
 
+**Trở về mục lục**: [README](../../README.md)
 
 ---
 
-## 🌐 在线阅读
+## 🌐 Đọc trực tuyến
 
-📖 **想在线阅读此章节节？**
+📖 **Bạn muốn đọc chương này trên nền tảng web?**
 
-[🔗 在线阅读此章节节](https://awesome.tryopenclaw.asia/docs/02-core-features/07-automation-workflow/)
+[🔗 Đọc trực tuyến: Chương 7 - Quy trình Tự động hóa](https://awesome.tryopenclaw.asia/docs/02-core-features/07-automation-workflow/)
 
-访问网站获取更好的阅读体验：
-- 📱 响应式设计，支持手机、平板、电脑
--  支持黑暗模式，保护眼睛
-- 🔍 内置搜索功能，快速定位内内容
-- 📋 目附录导航，轻松跳转章节节
+Trải nghiệm đọc tốt hơn trên website giáo trình:
+- 📱 Thiết kế tương thích hoàn hảo cho điện thoại, máy tính bảng và máy tính
+- 🌙 Chế độ nền tối (Dark Mode) dịu mắt
+- 🔍 Tích hợp tìm kiếm nhanh nội dung
+- 📋 Thanh điều hướng mục lục trực quan, dễ dàng chuyển đổi giữa các chương
 
-[🏠 访问完整教网站](https://awesome.tryopenclaw.asia)
+[🏠 Truy cập website giáo trình đầy đủ](https://awesome.tryopenclaw.asia)

@@ -1,1021 +1,670 @@
-> 📖 **纸质书《OpenClaw超级个体实操手册》已上市！** 清华大学出版社出版，在开源教程基础上全面重写+逐条验证。🛒 [京东专属购买链接（¥42，原价¥59.8）](https://item.jd.com/14669463.html)
+> 📖 **Giáo trình Awesome OpenClaw Tutorial** | Bản dịch tiếng Việt chính thức cho cộng đồng. Nguyên tác thuộc về tác giả [@xianyu110](https://github.com/xianyu110).
 
-# 第6章节 日程与任务管理
+# Chương 6: Quản lý Lịch trình & Tác vụ
 
-> 💡 **本章节目标**：学会使用 OpenClaw管理日程和任务，实现日历自动创建、微信截图识别、批量日程导入和智能提醒设置。
+> 💡 **Mục tiêu của chương**: Nắm vững kỹ năng sử dụng OpenClaw để quản lý lịch trình và tác vụ hàng ngày: tự động tạo sự kiện lịch, nhận diện ảnh chụp màn hình WeChat / ứng dụng nhắn tin, nhập lịch hàng loạt từ bảng tính và thiết lập lời nhắc việc thông minh.
 
-## 📅 本章节内内容
+## 📅 Nội dung chương
 
-- 6.1 日历自动创建
-- 6.2 微信截图识别
-- 6.3 批量日程导入
-- 6.4 提醒设置技巧
+- 6.1 Tự động tạo sự kiện lịch
+- 6.2 Nhận diện ảnh chụp màn hình ứng dụng chat
+- 6.3 Nhập lịch biểu hàng loạt
+- 6.4 Mẹo và chiến lược thiết lập lời nhắc
 
 ---
 
-## 6.1 日历自动创建
+## 6.1 Tự động tạo sự kiện lịch
 
-### 6.1.1 为什么需要日历自动创建
+### 6.1.1 Tại sao bạn cần tự động tạo lịch?
 
-在日常工作中，经常遇到这些场景：
-- 📱 微信聊天中约定会议时间
-- 📧 邮件中收到活动邀请
-- 💬 群聊中讨论项目deadline
-- 📝 文档中记附录的重要日期
+Trong công việc hàng ngày, chúng ta thường xuyên đối mặt với các tình huống:
+- 📱 Hẹn giờ họp hoặc gặp mặt qua tin nhắn WeChat / Zalo / Slack
+- 📧 Nhận email mời tham gia sự kiện hoặc hội thảo
+- 💬 Thảo luận deadline dự án trong các nhóm chat công việc
+- 📝 Các mốc thời gian quan trọng ghi chú rải rác trong văn bản
 
-传统做法：
-1. 记住时间地点
-2. 打开日历App
-3. 手动创建事件
-4. 设置提醒
+Cách làm thủ công thông thường:
+1. Cố gắng ghi nhớ thời gian và địa điểm
+2. Mở ứng dụng Lịch (Calendar)
+3. Nhập tiêu đề, ngày giờ, địa điểm thủ công
+4. Cài đặt các mốc thời gian nhắc nhở
 
-**访问题**：
-- ❌ 内容易遗忘
-- ❌ 操作繁琐
-- ❌ 信息内容易丢失
-- ❌ 效率低下
+**Vấn đề phát sinh**:
+- ❌ Rất dễ quên tạo lịch khi đang bận rộn
+- ❌ Thao tác lặp đi lặp lại phiền toái
+- ❌ Dễ nhập nhầm chi tiết quan trọng
+- ❌ Năng suất làm việc bị giảm sút
 
-OpenClaw可以自动识别并创建日历事件！
+OpenClaw có thể tự động nhận diện thông tin và tạo sự kiện lịch chính xác chỉ trong chớp mắt!
 
-### 6.1.2 核心原理
+### 6.1.2 Nguyên lý hoạt động cốt lõi
 
-OpenClaw的日历管理基于Mac日历Skills：
+Tính năng quản lý lịch biểu của OpenClaw dựa trên tích hợp hệ thống Lịch của macOS / Apple Calendar:
 
-文本/截图 → OpenClaw识别 → 提取信息 → 创建日历事件 → 同步到iPhone
+`Văn bản / Ảnh chụp → OpenClaw nhận diện → Trích xuất thông tin → Tạo sự kiện Lịch → Đồng bộ sang iPhone`
 
-**关键能力**：
-1. **智能识别**：自动识别时间、地点、人物
-2. **自动创建**：一键创建日历事件
-3. **跨设备同步**：Mac日历自动同步到iPhone
-4. **智能提醒**：自动设置合理的提醒时间
+**Các năng lực nổi bật**:
+1. **Nhận diện thông minh**: Tự động bóc tách thời gian, địa điểm, người tham gia và ghi chú.
+2. **Tạo lịch tức thì**: Khởi tạo sự kiện trên ứng dụng Lịch chỉ bằng một câu lệnh ngôn ngữ tự nhiên.
+3. **Đồng bộ đa thiết bị**: Lịch trên máy tính Mac sẽ tự động đồng bộ tức thời với iPhone / iPad qua iCloud.
+4. **Nhắc nhở thông minh**: Tự động tính toán các mốc nhắc nhở hợp lý trước khi sự kiện diễn ra.
 
-### 6.1.3 实战案例1：文本创建日历
+### 6.1.3 Ca thực chiến 1: Tạo lịch từ tin nhắn văn bản
 
-**场景**：你在微信上约了一个会议。
+**Tình huống**: Bạn vừa hẹn đối tác một cuộc họp qua tin nhắn.
 
-**微信聊天内内容**：
-张三：明天下午3点，在会议室A讨论项目方案，记得带笔记本
+**Nội dung tin nhắn**:
+> Anh Nam: Chiều mai 3 giờ, tại phòng họp A bàn về phương án dự án nhé, nhớ mang theo laptop.
 
-**OpenClaw操作**：
+**Thao tác với OpenClaw**:
 
-你：帮我创建一个日历事件：
-明天下午3点，在会议室A讨论项目方案
+Bạn: Giúp tôi tạo một sự kiện lịch: Chiều mai 3 giờ, tại phòng họp A bàn về phương án dự án.
 
-OpenClaw：好的，我来帮你创建日历事件。
+OpenClaw: Vâng, tôi sẽ tạo sự kiện lịch giúp bạn ngay bây giờ.
 
-[分析中...]
+[Đang phân tích...]
 
-OpenClaw：已创建日历事件！
+OpenClaw: Đã tạo sự kiện lịch thành công!
 
-📅 事件详情：
-- 标题：讨论项目方案
-- 时间：2026-02-11 15:00-16:00
-- 地点：会议室A
-- 参与人：张三
-- 备注：记得带笔记本
+📅 **Chi tiết sự kiện**:
+- Tiêu đề: Thảo luận phương án dự án
+- Thời gian: 15:00 - 16:00, ngày 11/02/2026
+- Địa điểm: Phòng họp A
+- Người tham gia: Anh Nam
+- Ghi chú: Nhớ mang theo laptop
 
-提醒设置：
-- 提前15分钟提醒
-- 提前1小时提醒
+**Cài đặt nhắc nhở**:
+- Nhắc trước 15 phút
+- Nhắc trước 1 giờ
 
-已同步到：
-- Mac日历 ✅
-- iPhone日历 ✅
+**Đã đồng bộ đến**:
+- Lịch Mac ✅
+- Lịch iPhone ✅
 
-![image-20260212231420791](https://upload.maynor1024.live/file/1770909307160_image-20260212231420791.png)
+![Minh họa tạo sự kiện lịch tự động](https://upload.maynor1024.live/file/1770909307160_image-20260212231420791.png)
 
-**查看效果**：
+**Kiểm tra kết quả**:
 
-打开Mac日历，你会看到：
+Mở ứng dụng Lịch trên máy Mac, bạn sẽ thấy sự kiện xuất hiện rõ ràng:
 
-![Mac日历显示](https://upload.maynor1024.live/file/1770176284226_image_21.jpg)
+![Giao diện Lịch Mac hiển thị sự kiện](https://upload.maynor1024.live/file/1770176284226_image_21.jpg)
 
-2026年2月11日 星期二
+```text
+Thứ Ba, ngày 11 tháng 2 năm 2026
 
-15:00-16:00  讨论项目方案
-             📍 会议室A
-             👤 张三
-             📝 记得带笔记本
-             
-             🔔 提前15分钟提醒
-             🔔 提前1小时提醒
+15:00 - 16:00  Thảo luận phương án dự án
+               📍 Phòng họp A
+               👤 Anh Nam
+               📝 Nhớ mang theo laptop
+               
+               🔔 Nhắc trước 15 phút
+               🔔 Nhắc trước 1 giờ
+```
 
-打开iPhone日历，自动同步显示相同内内容。
+Mở Lịch trên iPhone, sự kiện cũng được đồng bộ chính xác tương tự.
 
-### 6.1.4 实战案例2：复杂日程创建
+### 6.1.4 Ca thực chiến 2: Tạo lịch biểu phức tạp từ email
 
-**场景**：你收到一封会议邀请邮件。
+**Tình huống**: Bạn nhận được một email mời họp với nội dung nhiều mục chi tiết.
 
-**邮件内内容**：
-主题：2026年Q1产品规划会议
+**Nội dung email**:
+```text
+Chủ đề: Cuộc họp Lập kế hoạch Sản phẩm Q1/2026
 
-时间：2026年2月15日（周五）14:00-17:00
-地点：总部大楼3楼会议室
-参会人员：产品团队全体成员
-会议议程：
-1. Q1产品回顾（30分钟）
-2. Q2产品规划（60分钟）
-3. 资源分配讨论（60分钟）
-4. 总结与行动项（30分钟）
+Thời gian: 14:00 - 17:00, Thứ Sáu ngày 15/02/2026
+Địa điểm: Phòng họp tầng 3, Tòa nhà Trụ sở
+Thành phần tham dự: Toàn bộ thành viên đội ngũ Sản phẩm
 
-请提前准备：
-- Q1产品数据报告
-- Q2产品规划草案
-- 资源需求清单
+Chương trình họp:
+1. Đánh giá kết quả Q1 (30 phút)
+2. Kế hoạch sản phẩm Q2 (60 phút)
+3. Thảo luận phân bổ nguồn lực (60 phút)
+4. Tổng kết và giao việc cụ thể (30 phút)
 
-**OpenClaw操作**：
+Yêu cầu chuẩn bị trước:
+- Báo cáo số liệu sản phẩm Q1
+- Bản dự thảo kế hoạch Q2
+- Danh sách đề xuất nhu cầu nguồn lực
+```
 
-你：帮我根据这封邮件创建日历事件
-[粘贴邮件内内容]
+**Thao tác với OpenClaw**:
 
-OpenClaw：正在分析邮件内内容...
+Bạn: Hãy tạo sự kiện lịch chi tiết dựa trên nội dung email này giúp tôi:
+[Dán nội dung email vào]
 
-[分析完成]
+OpenClaw: Đang phân tích nội dung email...
 
-OpenClaw：已创建详细日历事件！
+[Phân tích hoàn tất]
 
-📅 事件详情：
-- 标题：2026年Q1产品规划会议
-- 时间：2026-02-15 14:00-17:00（3小时）
-- 地点：总部大楼3楼会议室
-- 参与人：产品团队全体成员
+OpenClaw: Đã tạo sự kiện lịch chi tiết thành công!
 
-会议议程：
-1. 14:00-14:30 Q1产品回顾
-2. 14:30-15:30 Q2产品规划
-3. 15:30-16:30 资源分配讨论
-4. 16:30-17:00 总结与行动项
+📅 **Chi tiết sự kiện**:
+- Tiêu đề: Cuộc họp Lập kế hoạch Sản phẩm Q1/2026
+- Thời gian: 14:00 - 17:00, ngày 15/02/2026 (Thời lượng: 3 giờ)
+- Địa điểm: Phòng họp tầng 3, Tòa nhà Trụ sở
+- Thành phần: Toàn bộ thành viên đội ngũ Sản phẩm
 
-准备事项：
-✓ Q1产品数据报告
-✓ Q2产品规划草案
-✓ 资源需求清单
+**Chương trình họp**:
+1. 14:00 - 14:30: Đánh giá kết quả Q1
+2. 14:30 - 15:30: Kế hoạch sản phẩm Q2
+3. 15:30 - 16:30: Thảo luận phân bổ nguồn lực
+4. 16:30 - 17:00: Tổng kết và giao việc cụ thể
 
-提醒设置：
-- 提前1天提醒（准备材料）
-- 提前2小时提醒（检查准备）
-- 提前30分钟提醒（前往会议室）
+**Hạng mục cần chuẩn bị**:
+- ✓ Báo cáo số liệu sản phẩm Q1
+- ✓ Bản dự thảo kế hoạch Q2
+- ✓ Danh sách đề xuất nhu cầu nguồn lực
 
-已同步到Mac和iPhone日历 ✅
+**Cài đặt lời nhắc**:
+- Nhắc trước 1 ngày (Chuẩn bị tài liệu báo cáo)
+- Nhắc trước 2 giờ (Kiểm tra lại công tác chuẩn bị)
+- Nhắc trước 30 phút (Di chuyển đến phòng họp)
 
-### 6.1.5 实战案例3：周期性事件
+Đã đồng bộ sang Lịch Mac và iPhone ✅
 
-**场景**：你需要设置每周例会。
+### 6.1.5 Ca thực chiến 3: Thiết lập sự kiện lặp lại định kỳ
 
-**OpenClaw操作**：
+**Tình huống**: Bạn cần tạo lịch họp giao ban hàng tuần cho đội nhóm.
 
-你：帮我创建一个周期性日历事件：
-每周一上午10点，团队周会，支持续1小时，会议室B
+**Thao tác với OpenClaw**:
 
-OpenClaw：已创建周期性事件！
+Bạn: Tạo giúp tôi một sự kiện lịch định kỳ: 10:00 sáng Thứ Hai hàng tuần, họp giao ban tuần của nhóm, thời lượng 1 giờ, tại phòng họp B.
 
-📅 事件详情：
-- 标题：团队周会
-- 时间：每周一 10:00-11:00
-- 地点：会议室B
-- 重复：每周
-- 结束：无限期（或指定结束日期）
+OpenClaw: Đã tạo sự kiện lịch định kỳ thành công!
 
-提醒设置：
-- 提前15分钟提醒
+📅 **Chi tiết sự kiện**:
+- Tiêu đề: Họp giao ban tuần của nhóm
+- Thời gian: 10:00 - 11:00, Thứ Hai hàng tuần
+- Địa điểm: Phòng họp B
+- Chu kỳ lặp lại: Hàng tuần
+- Kết thúc: Vô thời hạn (hoặc cho đến khi bạn yêu cầu dừng)
 
-已创建未来12周的事件：
-- 2026-02-10（周一）10:00
-- 2026-02-17（周一）10:00
-- 2026-02-24（周一）10:00
-- ... （共12次）
+**Cài đặt nhắc nhở**:
+- Nhắc trước 15 phút
 
-已同步到Mac和iPhone日历 ✅
+Đã khởi tạo chuỗi sự kiện cho 12 tuần tiếp theo:
+- 10:00 Thứ Hai, ngày 10/02/2026
+- 10:00 Thứ Hai, ngày 17/02/2026
+- 10:00 Thứ Hai, ngày 24/02/2026
+- ... (Tổng cộng 12 buổi)
 
+Đã đồng bộ sang Lịch Mac và iPhone ✅
 
-### 6.1.6 日历模板和最佳实践
+### 6.1.6 Mẫu sự kiện lịch và thực hành chuẩn mực
 
-**常用日历模板**：
+**Các mẫu lịch biểu thường dùng**:
 
-**模板1：会议事件**
-标题：[会议主题]
-时间：[日期] [开始时间]-[结束时间]
-地点：[会议室/线上链接]
-参与人：[参会人员]
-议程：[会议议程]
-准备：[需要准备的材料]
-提醒：提前1天、提前1小时、提前15分钟
+**Mẫu 1: Cuộc họp**
+```text
+Tiêu đề: [Chủ đề cuộc họp]
+Thời gian: [Ngày] [Giờ bắt đầu] - [Giờ kết thúc]
+Địa điểm: [Phòng họp / Link họp trực tuyến]
+Thành phần tham gia: [Danh sách người dự]
+Chương trình: [Nội dung thảo luận]
+Chuẩn bị: [Tài liệu cần mang theo]
+Lời nhắc: Trước 1 ngày, trước 1 giờ, trước 15 phút
+```
 
-**模板2：项目deadline**
-标题：[项目名称] - Deadline
-时间：[截止日期] 全天
-优先级：高
-提醒：提前1周、提前3天、提前1天、当天早上
-备注：[交付物清单]
+**Mẫu 2: Hạn chót dự án (Deadline)**
+```text
+Tiêu đề: [Tên dự án] - Hạn chót nộp sản phẩm
+Thời gian: [Hạn chót] Cả ngày
+Mức độ ưu tiên: Cao
+Lời nhắc: Trước 1 tuần, trước 3 ngày, trước 1 ngày, sáng ngày đến hạn
+Ghi chú: [Danh sách các kết quả bàn giao cần nộp]
+```
 
-**模板3：个人事项**
-标题：[事项名称]
-时间：[日期] [时间]
-地点：[地点]
-提醒：提前30分钟
-备注：[相关信息]
+**Mẫu 3: Lịch cá nhân**
+```text
+Tiêu đề: [Nội dung công việc]
+Thời gian: [Ngày] [Giờ]
+Địa điểm: [Địa điểm]
+Lời nhắc: Trước 30 phút
+Ghi chú: [Thông tin ghi nhớ bổ sung]
+```
 
-**最佳实践**：
+**Thực hành chuẩn mực tốt nhất**:
 
-1. **统一命名规范**
-会议：[会议] 项目讨论
-任务：[任务] 完成报告
-活动：[活动] 团建
-学习：[学习] 技术分分享
+1. **Quy tắc đặt tên nhất quán**:
+   - Cuộc họp: `[Họp] Thảo luận dự án`
+   - Nhiệm vụ: `[Task] Hoàn thành báo cáo`
+   - Hoạt động: `[Sự kiện] Teambuilding công ty`
+   - Học tập: `[Học tập] Buổi chia sẻ kỹ thuật`
 
-2. **合理设置提醒**
-重要会议：提前1天、1小时、15分钟
-普通会议：提前1小时、15分钟
-deadline：提前1周、3天、1天
-个人事项：提前30分钟
+2. **Cài đặt lời nhắc hợp lý**:
+   - Họp quan trọng: Nhắc trước 1 ngày, 1 giờ, 15 phút
+   - Họp thường kỳ: Nhắc trước 1 giờ, 15 phút
+   - Hạn chót (Deadline): Nhắc trước 1 tuần, 3 ngày, 1 ngày
+   - Việc cá nhân: Nhắc trước 30 phút
 
-3. **添加详细信息**
-- 会议链接（线上会议）
-- 会议室位置（线下会议）
-- 参会人员联系方式
-- 准备材料清单
-- 相关文档链接
+3. **Cung cấp đầy đủ thông tin chi tiết**:
+   - Link họp trực tuyến (Zoom / Google Meet / Lark)
+   - Vị trí phòng họp cụ thể
+   - Thông tin liên hệ của các bên tham gia
+   - Checklist những thứ cần chuẩn bị
 
-4. **使用颜色分类**
-红色：紧急重要
-橙色：重要不紧急
-黄色：紧急不重要
-绿色：个人事项
-蓝色：学习成长
+4. **Phân loại bằng nhãn màu trực quan**:
+   - 🔴 Đỏ: Khẩn cấp và quan trọng
+   - 🟠 Cam: Quan trọng nhưng không khẩn cấp
+   - 🟡 Vàng: Khẩn cấp nhưng ít quan trọng
+   - 🟢 Xanh lá: Việc cá nhân
+   - 🔵 Xanh dương: Học tập và phát triển bản thân
 
 ---
 
-## 6.2 微信截图识别
+## 6.2 Nhận diện ảnh chụp màn hình ứng dụng chat
 
-### 6.2.1 为什么需要截图识别
+### 6.2.1 Tại sao cần nhận diện từ ảnh chụp màn hình?
 
-**真实场景**：
+**Bối cảnh thực tế**:
 
-你在微信上收到这样的消息：
+Bạn thường xuyên nhận được những tin nhắn hẹn việc trong các nhóm chat như hình bên dưới:
 
-![微信日程提醒消息](https://upload.maynor1024.live/file/1771085154272_1b87855aba3ddbd3b354c0c25b88cc18.jpg)
+![Tin nhắn nhắc lịch hẹn trong ứng dụng chat](https://upload.maynor1024.live/file/1771085154272_1b87855aba3ddbd3b354c0c25b88cc18.jpg)
 
-张三：明天下午2点，在星巴克（国贸店）见面讨论新项目的事，
-记得带上你的方案，我请你喝咖啡😊
+> Hoàng Nam: Chiều mai 2 giờ gặp nhau ở Highlands Coffee (Chi nhánh Bà Triệu) bàn về dự án mới nhé, nhớ mang bản kế hoạch của bạn đi, mình mời cà phê 😊
 
-**传统做法**：
+**Cách làm thủ công thông thường**:
+1. Đọc tin nhắn
+2. Ghi nhớ ngày giờ, địa điểm trong đầu
+3. Thoát ứng dụng chat, mở ứng dụng Lịch
+4. Gõ từng dòng thông tin
+5. Đặt lời nhắc
 
-1. 看到消息
-2. 记住时间地点
-3. 打开日历
-4. 手动输入信息
-5. 设置提醒
+**Hạn chế**:
+- ❌ Trải qua quá nhiều bước thủ công rườm rà
+- ❌ Rất dễ quên hoặc nhớ nhầm giờ
+- ❌ Tốn thời gian thao tác
 
-**访问题**：
-- ❌ 步骤繁琐（5步）
-- ❌ 内容易遗忘
-- ❌ 信息可能记错
-- ❌ 效率低下
+**Cách làm với OpenClaw**:
+1. Chụp ảnh màn hình tin nhắn và gửi cho OpenClaw
+2. Hoàn thành! Mọi thứ được tự động đưa vào lịch biểu.
 
-**OpenClaw做法**：
-1. 截图发布给OpenClaw
-2. 完成！
+### 6.2.2 Quy trình nhận diện cốt lõi
 
-### 6.2.2 核心原理
+Luồng xử lý ảnh chụp màn hình của OpenClaw:
 
-OpenClaw的截图识别流程：
+`Ảnh chụp màn hình chat → OCR nhận diện ký tự → NLP bóc tách thông tin → Tạo sự kiện Lịch chuẩn xác`
 
-微信截图 → OCR文字识别 → NLP信息提取 → 创建日历事件
+**Các công nghệ then chốt**:
+1. **OCR bóc tách chữ**: Đọc toàn bộ văn bản trong bức ảnh.
+2. **Phân tích thời gian tự nhiên**: Hiểu các cụm từ như "chiều mai 2 giờ", "thứ Tư tuần sau lúc 9 rưỡi".
+3. **Trích xuất địa điểm**: Nhận diện các địa danh cụ thể như "Highlands Coffee (Chi nhánh Bà Triệu)".
+4. **Nhận diện nhân sự**: Nhận biết người gửi hoặc đối tác nhắc đến trong hội thoại.
+5. **Bóc tách nội dung chính**: Xác định hành động cốt lõi như "bàn về dự án mới".
 
-**关键技术**：
-1. **OCR识别**：提取截图中的文字
-2. **时间解析**：识别"明天下午2点"等自然语言
-3. **地点提取**：识别"星巴克（国贸店）"
-4. **人物识别**：识别"张三"
-5. **事项提取**：识别"聊新项目"
+### 6.2.3 Ca thực chiến 1: Cuộc hẹn ăn trưa / cà phê đơn giản
 
+**Nội dung ảnh chụp chat**:
+> Minh Trí: Tối mốt 7 giờ đi ăn chỗ cũ không bạn?  
+> Bạn: Ok chốt nhé!
 
-### 6.2.3 实战案例1：简单约会
+**Thao tác với OpenClaw**:
 
-**微信截图内内容**：
-李四：后天晚上7点，老地方吃饭？
-你：好的！
+Bạn: [Gửi ảnh chụp màn hình] Tạo lịch hẹn từ ảnh này giúp tôi.
 
-**OpenClaw操作**：
+OpenClaw: Đang quét nội dung bức ảnh...
 
-你：[发布送微信截图]
-帮我创建日历事件
+[Hoàn tất nhận diện OCR]
 
-OpenClaw：正在识别截图内内容...
+OpenClaw: Đã bóc tách được thông tin cuộc hẹn!
 
-[OCR识别完成]
+📅 **Chi tiết sự kiện**:
+- Tiêu đề: Đi ăn tối với Minh Trí
+- Thời gian: 19:00 - 20:30, ngày 12/02/2026
+- Địa điểm: Chỗ cũ (Cần bạn xác nhận địa chỉ cụ thể)
+- Người tham gia: Minh Trí
 
-OpenClaw：已识别到约会信息！
+**Cài đặt nhắc nhở**:
+- Nhắc trước 2 giờ
 
-📅 事件详情：
-- 标题：和李四吃饭
-- 时间：2026-02-12 19:00-20:30
-- 地点：老地方（需要你确认具体地址）
-- 参与人：李四
+Đã tạo sự kiện lịch thành công ✅
 
-提醒设置：
-- 提前2小时提醒
+💡 *Gợi ý: Nếu "chỗ cũ" có địa chỉ cụ thể, bạn chỉ cần nói cho tôi biết, tôi sẽ cập nhật ngay vào sự kiện lịch.*
 
-已创建日历事件 ✅
+**Bổ sung địa chỉ**:
+Bạn: Chỗ cũ là "Quán Lẩu Haidilao - Vincom Bà Triệu".
 
-💡 提示：如果"老地方"有具体地址，
-可以告诉我，我帮你更新到日历中。
+OpenClaw: Đã cập nhật địa điểm vào lịch!
+📍 Địa điểm: Lẩu Haidilao - Vincom Bà Triệu, Hai Bà Trưng, Hà Nội.
+Đã đồng bộ lại vào Lịch ✅
 
-**补充地址**：
-你：老地方是"海底捞（三里屯店）"
+### 6.2.4 Ca thực chiến 2: Cuộc họp nhóm phức tạp
 
-OpenClaw：已更新地址！
+**Ảnh chụp tin nhắn thông báo trong nhóm dự án**:
+> Quản lý dự án: @Tất cả thành viên  
+> Sáng Thứ Tư tuần sau lúc 9:30, tại phòng họp lớn tầng 5 công ty sẽ diễn ra buổi Kick-off dự án mới.  
+> Đề nghị các bạn tham gia đầy đủ, cuộc họp dự kiến kéo dài 2 giờ.  
+> Cần chuẩn bị trước:  
+> 1. Tài liệu yêu cầu dự án (PRD)  
+> 2. Đề xuất phương án kỹ thuật  
+> 3. Lộ trình tiến độ chi tiết (Timeline)  
+> Sau cuộc họp công ty sẽ mời cơm trưa toàn đội ngũ.
 
-📍 地点：海底捞（三里屯店）
-📍 地址：北京市朝阳区三里屯路19号
+**Thao tác với OpenClaw**:
 
-已同步到日历 ✅
+Bạn: [Gửi ảnh chụp màn hình nhóm chat] Tạo sự kiện lịch giúp tôi.
 
-### 6.2.4 实战案例2：复杂会议安排
+OpenClaw: Đang phân tích thông báo từ ảnh chụp...
 
-**微信群聊截图**：
-项目经理：@全体成员
-下周三上午9:30，在公司5楼大会议室开项目启动会
-请务必参加，会议预计2小时
-需要准备：
-1. 项目需求文档
-2. 技术方案
-3. 时间排期
+[Nhận diện hoàn tất]
 
-会后会有工作午餐
+OpenClaw: Đã trích xuất thông tin cuộc họp!
 
-**OpenClaw操作**：
+📅 **Chi tiết sự kiện**:
+- Tiêu đề: Cuộc họp Kick-off dự án mới
+- Thời gian: 09:30 - 11:30, ngày 19/02/2026 (Thời lượng: 2 giờ)
+- Địa điểm: Phòng họp lớn tầng 5 công ty
+- Thành phần: Toàn bộ thành viên đội ngũ dự án
 
-你：[发布送群聊截图]
-帮我创建日历事件
+**Hạng mục cần chuẩn bị**:
+- ✓ Tài liệu yêu cầu dự án (PRD)
+- ✓ Đề xuất phương án kỹ thuật
+- ✓ Lộ trình tiến độ chi tiết
 
-OpenClaw：正在识别群聊内内容...
+**Ghi chú**:
+- Sau cuộc họp có cơm trưa công ty
+- Yêu cầu tham gia đầy đủ
 
-[识别完成]
+**Cài đặt lời nhắc**:
+- Nhắc trước 1 ngày (Chuẩn bị tài liệu)
+- Nhắc trước 1 giờ
+- Nhắc trước 15 phút
 
-OpenClaw：已识别到会议信息！
+Đã tạo sự kiện lịch thành công ✅  
+💡 *Mẹo: Tôi đã tự động đánh dấu thêm khoảng thời gian trống 11:30 - 13:00 cho bữa cơm trưa cùng nhóm.*
 
-📅 事件详情：
-- 标题：项目启动会
-- 时间：2026-02-19 09:30-11:30（2小时）
-- 地点：公司5楼大会议室
-- 参与人：项目团队全体成员
+### 6.2.5 Ca thực chiến 3: Nhận diện và tạo hàng loạt lịch hẹn cùng lúc
 
-准备事项：
-✓ 项目需求文档
-✓ 技术方案
-✓ 时间排期
+**Nội dung ảnh chụp thông báo tuần**:
+> Kế hoạch làm việc tuần này:  
+> Thứ Hai 10:00 - Họp giao ban nhóm (Phòng họp A)  
+> Thứ Tư 14:00 - Đi gặp đối tác (Văn phòng đối tác)  
+> Thứ Sáu 16:00 - Đánh giá tổng kết dự án (Họp trực tuyến)
 
-备注：
-- 会后有工作午餐
-- 务必参加
+**Thao tác với OpenClaw**:
 
-提醒设置：
-- 提前1天提醒（准备材料）
-- 提前1小时提醒
-- 提前15分钟提醒
+Bạn: [Gửi ảnh chụp] Tạo toàn bộ các lịch hẹn này vào lịch giúp tôi.
 
-已创建日历事件 ✅
+OpenClaw: Đang nhận diện danh sách các sự kiện...
 
-💡 提示：已自动预留11:30-13:00的午餐时间
+[Nhận diện hoàn tất]
 
-### 6.2.5 实战案例3：多个事件批量创建
+OpenClaw: Đã bóc tách được 3 sự kiện riêng biệt!
 
-**微信截图内内容**：
-本周安排：
-周一10:00 - 团队周会（会议室A）
-周三14:00 - 客户拜访（客户公司）
-周五16:00 - 项目复盘（线上会议）
+📅 **Sự kiện 1**: Họp giao ban nhóm
+- Thời gian: 10:00 - 11:00, ngày 10/02/2026
+- Địa điểm: Phòng họp A
+- Trạng thái: ✅ Đã tạo
 
-**OpenClaw操作**：
+📅 **Sự kiện 2**: Đi gặp đối tác
+- Thời gian: 14:00 - 15:30, ngày 12/02/2026
+- Địa điểm: Văn phòng đối tác (Cần địa chỉ cụ thể)
+- Trạng thái: ✅ Đã tạo
 
-你：[发布送截图]
-帮我批量创建这些日历事件
+📅 **Sự kiện 3**: Đánh giá tổng kết dự án
+- Thời gian: 16:00 - 17:00, ngày 14/02/2026
+- Địa điểm: Họp trực tuyến (Cần bổ sung đường link họp)
+- Trạng thái: ✅ Đã tạo
 
-OpenClaw：正在识别多个事件...
+Toàn bộ sự kiện đã được đồng bộ vào Lịch ✅
 
-[识别完成]
+### 6.2.6 Tối ưu hóa độ chính xác nhận diện hình ảnh
 
-OpenClaw：已识别到3个事件！
+Để đạt độ chính xác cao nhất khi gửi ảnh cho OpenClaw:
 
-📅 事件1：团队周会
-- 时间：2026-02-10 10:00-11:00
-- 地点：会议室A
-✅ 已创建
-
-📅 事件2：客户拜访
-- 时间：2026-02-12 14:00-15:30
-- 地点：客户公司（需要具体地址）
-✅ 已创建
-
-📅 事件3：项目复盘
-- 时间：2026-02-14 16:00-17:00
-- 地点：线上会议（需要会议链接）
-✅ 已创建
-
-所有事件已同步到日历 ✅
-
-💡 提示：
-- 客户拜访需要补充具体地址
-- 项目复盘需要添加会议链接
-
-
-### 6.2.6 识别准确率优化
-
-**提高识别准确率的技巧**：
-
-**技巧1：清晰的截图**
-✅ 好的截图：
-- 文字清晰
-- 光线充足
-- 完整内内容
-
-❌ 不好的截图：
-- 模糊不清
-- 光线太暗
-- 内内容被截断
-
-
-**技巧2：结构化的信息**
-✅ 内容易识别：
-时间：明天下午3点
-地点：会议室A
-事项：讨论项目
-
-❌ 难以识别：
-明天下午在那个地方讨论那个事
-
-
-**技巧3：补充说明**
-你：[发布送截图]
-这是约明天下午的会议，地点在公司
-
-OpenClaw：收到！我会结合你的说明来识别。
-
-**技巧4：确认和修正**
-OpenClaw：我识别到的信息是：
-时间：明天下午3点
-地点：会议室A
-
-请确认是否正确？
-
-你：时间对了，但地点是会议室B
-
-OpenClaw：好的，已修正为会议室B ✅
+- **Mẹo 1: Ảnh chụp rõ ràng**: Ảnh chụp cần có độ phân giải đủ lớn, phông chữ tin nhắn rõ nét, không bị nhòe hay bị cắt góc mất thông tin quan trọng.
+- **Mẹo 2: Tin nhắn có cấu trúc**: Tin nhắn có định dạng rõ ràng (Thời gian, Địa điểm, Nội dung) sẽ giúp AI bóc tách nhanh và chuẩn xác hơn nhiều so với những câu nói bâng quơ.
+- **Mẹo 3: Gửi kèm câu lệnh định hướng ngắn**: Khi gửi ảnh, chỉ cần gõ thêm một câu ngắn gọn như: *"Đây là lịch họp chiều mai ở công ty, hãy tạo lịch giúp tôi"* — AI sẽ kết hợp câu lệnh này để loại trừ các thông tin gây nhiễu trong ảnh.
+- **Mẹo 4: Xác nhận và điều chỉnh**: OpenClaw luôn tóm tắt lại các trường dữ liệu trước hoặc ngay sau khi tạo, bạn hoàn toàn có thể yêu cầu sửa lại ngay nếu có thông tin chưa đúng ý.
 
 ---
 
-## 6.3 批量日程导入
+## 6.3 Nhập lịch biểu hàng loạt
 
-### 6.3.1 为什么需要批量导入
+### 6.3.1 Tại sao cần tính năng nhập hàng loạt?
 
-**常见场景**：
+**Các kịch bản thực tế điển hình**:
 
-1. **新学期课程表**
-   - 10-20门课程
-   - 每周重复
-   - 不同教室
+1. **Thời khóa biểu học tập mới**:
+   - Từ 10 - 20 môn học khác nhau
+   - Lặp lại theo từng tuần trong suốt học kỳ
+   - Diễn ra ở nhiều phòng học khác nhau
 
-2. **项目里程碑**
-   - 多个关键节点
-   - 不同负责人
-   - 各种deadline
+2. **Các mốc tiến độ dự án (Milestones)**:
+   - Rất nhiều mốc bàn giao then chốt
+   - Nhiều nhân sự phụ trách riêng lẻ
+   - Hàng loạt deadline liên hoàn
 
-3. **会议日程**
-   - 多场会议
-   - 不同时间地点
-   - 不同参与人
+3. **Lịch làm việc của đoàn công tác hoặc hội nghị**:
+   - Hàng chục phiên họp, hội thảo nối tiếp nhau
+   - Phân bố theo nhiều khung giờ và địa điểm
 
-**传统做法**：
-- 一个一个手动创建
-- 耗时1-2小时
-- 内容易出错
+Tự gõ tay từng sự kiện sẽ mất từ 1 - 2 giờ và cực kỳ dễ gõ nhầm. Với OpenClaw, bạn chỉ cần một tệp Excel hoặc CSV là có thể nhập toàn bộ lịch trình chỉ trong vòng 1 phút!
 
-**OpenClaw做法**：
-- 准备Excel/CSV文件
-- 一键批量导入
-- 5分钟完成
+### 6.3.2 Nhập lịch từ bảng tính Excel
 
-### 6.3.2 Excel日程导入
+**Bước 1: Chuẩn bị tệp Excel (`Thoi_khoa_bieu.xlsx`)**:
 
-**步骤1：准备Excel文件**
+| Tiêu đề | Ngày bắt đầu | Giờ bắt đầu | Giờ kết thúc | Địa điểm | Ghi chú | Chu kỳ lặp |
+|---|---|---|---|---|---|---|
+| Toán cao cấp | 2026-02-10 | 08:00 | 09:40 | Giảng đường A101 | Thầy Vương | Thứ Hai hàng tuần |
+| Tiếng Anh chuyên ngành | 2026-02-10 | 10:00 | 11:40 | Giảng đường B203 | Cô Lan | Thứ Hai hàng tuần |
+| Nhập môn Trí tuệ nhân tạo | 2026-02-11 | 14:00 | 15:40 | Phòng thực hành C301 | Thầy Tuấn | Thứ Ba hàng tuần |
+| Giáo dục thể chất | 2026-02-12 | 08:00 | 09:40 | Nhà thi đấu | Thầy Hùng | Thứ Tư hàng tuần |
 
-创建一个Excel文件（`课程表.xlsx`）：
+**Bước 2: Yêu cầu OpenClaw nhập dữ liệu**:
 
-| 标题 | 日期 | 开始时间 | 结束时间 | 地点 | 备注 | 重复 |
-|------|------|----------|----------|------|------|------|
-| 高等数学 | 2026-02-10 | 08:00 | 09:40 | 教学楼A101 | 王老师 | 每周一 |
-| 大学英语 | 2026-02-10 | 10:00 | 11:40 | 教学楼B203 | 李老师 | 每周一 |
-| 计算机基础 | 2026-02-11 | 14:00 | 15:40 | 实验楼C301 | 张老师 | 每周二 |
-| 体育课 | 2026-02-12 | 08:00 | 09:40 | 体育馆 | 刘老师 | 每周三 |
+Bạn: Giúp tôi nhập thời khóa biểu trong tệp này vào ứng dụng Lịch.  
+[Tải tệp `Thoi_khoa_bieu.xlsx` lên]
 
-**步骤2：OpenClaw导入**
+OpenClaw: Đang đọc nội dung tệp Excel...
 
-你：帮我导入这个课程表到日历
-[上传 课程表.xlsx]
+[Đọc hoàn tất]
 
-OpenClaw：正在读取Excel文件...
+OpenClaw: Đã nhận diện được 4 môn học định kỳ!
 
-[读取完成]
+Đang tiến hành tạo các sự kiện lịch...
 
-OpenClaw：已识别到4门课程！
+✅ Toán cao cấp (Thứ Hai hàng tuần 08:00 - 09:40)  
+✅ Tiếng Anh chuyên ngành (Thứ Hai hàng tuần 10:00 - 11:40)  
+✅ Nhập môn Trí tuệ nhân tạo (Thứ Ba hàng tuần 14:00 - 15:40)  
+✅ Giáo dục thể chất (Thứ Tư hàng tuần 08:00 - 09:40)  
 
-正在创建日历事件...
+Đã tạo toàn bộ các buổi học cho học kỳ này (Tổng cộng 16 tuần, gồm 64 sự kiện lịch).
 
-✅ 高等数学（每周一 08:00-09:40）
-✅ 大学英语（每周一 10:00-11:40）
-✅ 计算机基础（每周二 14:00-15:40）
-✅ 体育课（每周三 08:00-09:40）
+Cài đặt lời nhắc:
+- Nhắc trước 15 phút trước mỗi tiết học
 
-已创建本学期所有课程（共16周，64个事件）
+Đã đồng bộ sang Lịch Mac và iPhone ✅
 
-提醒设置：
-- 每节课提前15分钟提醒
+### 6.3.3 Xử lý định dạng CSV
 
-已同步到Mac和iPhone日历 ✅
-
-
-### 6.3.3 CSV格式处理
-
-**CSV文件示例**（`项目里程碑.csv`）：
+**Mẫu tệp CSV (`Tien_do_du_an.csv`)**:
 
 ```csv
-标题,日期,时间,地点,负责人,优先级
-需求评审,2026-02-15,14:00-16:00,会议室A,张三,高
-设计评审,2026-02-20,10:00-12:00,会议室B,李四,高
-开发布完成,2026-03-01,全天,无,王五,高
-测试完成,2026-03-10,全天,无,赵六,中
-上线发布布,2026-03-15,09:00-18:00,机房,张三,高
-**OpenClaw导入**：
+Tiêu đề,Ngày,Khung giờ,Địa điểm,Người phụ trách,Mức ưu tiên
+Đánh giá yêu cầu phần mềm,2026-02-15,14:00-16:00,Phòng họp A,Hoàng Nam,Cao
+Duyệt bản thiết kế hệ thống,2026-02-20,10:00-12:00,Phòng họp B,Thu Trang,Cao
+Hoàn thành phát triển tính năng,2026-03-01,Cả ngày,Nội bộ,Quang Huy,Cao
+Hoàn tất kiểm thử QA,2026-03-10,Cả ngày,Nội bộ,Khánh Linh,Trung bình
+Phát hành chính thức lên Production,2026-03-15,09:00-18:00,Phòng vận hành,Hoàng Nam,Cao
+```
 
-你：帮我导入项目里程碑
-[上传 项目里程碑.csv]
+**Thao tác nhập với OpenClaw**:
 
-OpenClaw：正在读取CSV文件...
+Bạn: Nhập danh sách các mốc tiến độ dự án từ tệp CSV này vào lịch giúp tôi.  
+[Tải tệp `Tien_do_du_an.csv` lên]
 
-[读取完成]
+OpenClaw: Đang xử lý tệp CSV...
 
-OpenClaw：已识别到5个里程碑！
+[Xử lý hoàn tất]
 
-📅 需求评审
-- 时间：2026-02-15 14:00-16:00
-- 负责人：张三
-- 优先级：高
-✅ 已创建
+OpenClaw: Đã nhận diện được 5 mốc tiến độ quan trọng!
 
-📅 设计评审
-- 时间：2026-02-20 10:00-12:00
-- 负责人：李四
-- 优先级：高
-✅ 已创建
+📅 **Đánh giá yêu cầu phần mềm**
+- Thời gian: 14:00 - 16:00, ngày 15/02/2026
+- Phụ trách: Hoàng Nam
+- Mức độ ưu tiên: Cao
+- Trạng thái: ✅ Đã tạo
 
-📅 开发布完成
-- 时间：2026-03-01 全天
-- 负责人：王五
-- 优先级：高
-✅ 已创建
+📅 **Duyệt bản thiết kế hệ thống**
+- Thời gian: 10:00 - 12:00, ngày 20/02/2026
+- Phụ trách: Thu Trang
+- Mức độ ưu tiên: Cao
+- Trạng thái: ✅ Đã tạo
 
-📅 测试完成
-- 时间：2026-03-10 全天
-- 负责人：赵六
-- 优先级：中
-✅ 已创建
+📅 **Hoàn thành phát triển tính năng**
+- Thời gian: Cả ngày, 01/03/2026
+- Phụ trách: Quang Huy
+- Mức độ ưu tiên: Cao
+- Trạng thái: ✅ Đã tạo
 
-📅 上线发布布
-- 时间：2026-03-15 09:00-18:00
-- 负责人：张三
-- 优先级：高
-✅ 已创建
+📅 **Hoàn tất kiểm thử QA**
+- Thời gian: Cả ngày, 10/03/2026
+- Phụ trách: Khánh Linh
+- Mức độ ưu tiên: Trung bình
+- Trạng thái: ✅ Đã tạo
 
-所有里程碑已同步到日历 ✅
+📅 **Phát hành chính thức lên Production**
+- Thời gian: 09:00 - 18:00, ngày 15/03/2026
+- Phụ trách: Hoàng Nam
+- Mức độ ưu tiên: Cao
+- Trạng thái: ✅ Đã tạo
 
-提醒设置：
-- 高优先级：提前1周、3天、1天
-- 中优先级：提前3天、1天
-### 6.3.4 批量创建事件
+Tất cả các mốc tiến độ đã được đồng bộ vào Lịch với cơ chế nhắc việc:
+- Ưu tiên Cao: Nhắc trước 1 tuần, trước 3 ngày và trước 1 ngày.
+- Ưu tiên Trung bình: Nhắc trước 3 ngày và trước 1 ngày.
 
-**场景**：你需要创建一系列会议。
+### 6.3.4 Tạo lịch hàng loạt trực tiếp từ văn bản
 
-**OpenClaw操作**：
+Bạn cũng có thể cung cấp danh sách bằng văn bản mà không cần tạo tệp:
 
-你：帮我创建以下会议：
+Bạn: Giúp tôi tạo các cuộc họp định kỳ sau, bắt đầu từ tuần tới và kéo dài trong 12 tuần:
+1. 10:00 sáng Thứ Hai hàng tuần: Họp giao ban tuần, phòng họp A, thời lượng 1 giờ.
+2. 14:00 chiều Thứ Tư hàng tuần: Chia sẻ công nghệ, phòng họp B, thời lượng 2 giờ.
+3. 16:00 chiều Thứ Sáu hàng tuần: Review dự án, online, thời lượng 1 giờ.
 
-1. 每周一10:00，团队周会，会议室A，1小时
-2. 每周三14:00，技术分分享，会议室B，2小时
-3. 每周五16:00，项目复盘，线上会议，1小时
+OpenClaw sẽ tự động tính toán lịch biểu và tạo đủ 36 sự kiện trên Lịch của bạn chỉ trong một lượt thực thi!
 
-从下周开始，支持续12周
+### 6.3.5 Kiểm tra dữ liệu và xử lý xung đột thời gian
 
-OpenClaw：正在批量创建会议...
+OpenClaw sở hữu các cơ chế kiểm tra thông minh giúp bảo vệ lịch biểu của bạn:
 
-[创建中...]
-
-OpenClaw：已完成批量创建！
-
-📊 创建统计：
-- 团队周会：12次
-- 技术分分享：12次
-- 项目复盘：12次
-- 总计：36个事件
-
-时间范围：
-- 开始：2026-02-17
-- 结束：2026-05-09
-
-提醒设置：
-- 所有会议提前15分钟提醒
-
-已同步到Mac和iPhone日历 ✅
-
-💡 提示：可以在日历中单独修改某次会议
-### 6.3.5 数据验证和错误处理
-
-**OpenClaw的智能验证**：
-
-**验证1：时间冲突检测**
-OpenClaw：⚠️ 检测到时间冲突！
-
-冲突事件：
-- 2026-02-15 14:00 需求评审（会议室A）
-- 2026-02-15 14:30 客户拜访（客户公司）
-
-建议：
-1. 调整需求评审到15:00
-2. 调整客户拜访到16:00
-3. 取消其中一个
-
-请选择处理方式：
-**验证2：日期格式错误**
-OpenClaw：⚠️ 发布现日期格式错误！
-
-错误行：
-- 第3行：日期"2026/02/30"无效（2月没有30日）
-- 第5行：时间"25:00"无效（超过24小时）
-
-已自动修正：
-- 第3行：改为"2026-03-01"
-- 第5行：改为"23:00"
-
-请确认是否正确？
-**验证3：必填字段缺失**
-OpenClaw：⚠️ 发布现必填字段缺失！
-
-缺失信息：
-- 第2行：缺少"标题"
-- 第4行：缺少"日期"
-
-建议：
-1. 补充缺失信息
-2. 跳过这些行
-3. 使用默认值
-
-请选择处理方式：
----
-
-## 6.4 提醒设置技巧
-
-### 6.4.1 提醒类型和时机
-
-**提醒类型**：
-
-1. **时间提醒**
-   - 提前X分钟/小时/天
-   - 准时提醒
-   - 延迟提醒
-
-2. **位置提醒**
-   - 到达某地时提醒
-   - 离开某地时提醒
-
-3. **重复提醒**
-   - 每天/每周/每月
-   - 自定义周期
-
-**提醒时机选择**：
-
-不同类型的事件需要不同的提醒策略，如表 6-1 所示。
-
-**表 6-1 不同事件类型的推荐提醒时机**
-
-| 事件类型 | 推荐提醒时机 | 理由 |
-|---------|-------------|------|
-| 重要会议 | 提前1天、1小时、15分钟 | 充分准备 |
-| 普通会议 | 提前1小时、15分钟 | 及时赶到 |
-| 项目deadline | 提前1周、3天、1天 | 避免拖延 |
-| 日常任务 | 提前30分钟 | 不打断工作 |
-| 约会 | 提前2小时、30分钟 | 预留准备时间 |
-| 课程 | 提前15分钟 | 准时到达 |
-
-### 6.4.2 多级提醒设置
-
-**场景**：重要项目deadline。
-
-**OpenClaw操作**：
-
-你：帮我设置项目deadline的提醒：
-2026年3月15日，产品上线
-
-OpenClaw：好的，我来设置多级提醒！
-
-📅 事件：产品上线
-⏰ 日期：2026-03-15
-
-提醒设置：
-
-🔔 第1级提醒（提前2周）
-- 时间：2026-03-01 09:00
-- 内内容：距离产品上线还有2周，开始最后冲刺
-- 行动：检查进度，确认资源
-
-🔔 第2级提醒（提前1周）
-- 时间：2026-03-08 09:00
-- 内内容：距离产品上线还有1周，进入倒计时
-- 行动：完成测试，准备上线方案
-
-🔔 第3级提醒（提前3天）
-- 时间：2026-03-12 09:00
-- 内内容：距离产品上线还有3天，最后检查
-- 行动：确认上线流程，准备回滚方案
-
-🔔 第4级提醒（提前1天）
-- 时间：2026-03-14 09:00
-- 内内容：明天产品上线，做好准备
-- 行动：团队动员，确认值班安排
-
-🔔 第5级提醒（当天早上）
-- 时间：2026-03-15 08:00
-- 内内容：今天产品上线，加油！
-- 行动：最后检查，准备上线
-
-已设置5级提醒 ✅
-### 6.4.3 智能提醒策略
-
-**OpenClaw的智能提醒**：
-
-**策略1：根据事件重要性**
-你：帮我创建一个重要会议：
-明天下午3点，董事会会议
-
-OpenClaw：检测到"董事会会议"，
-这是重要会议，建议设置：
-
-🔔 提前1天提醒（准备材料）
-🔔 提前2小时提醒（检查准备）
-🔔 提前30分钟提醒（前往会议室）
-🔔 提前10分钟提醒（最后确认）
-
-是否采用此提醒方案？
-**策略2：根据地点距离**
-你：帮我创建日历：
-明天下午2点，在客户公司开会
-
-OpenClaw：检测到需要外出，
-根据地点距离（约30分钟车程），建议：
-
-🔔 提前2小时提醒（准备出发布）
-🔔 提前1小时提醒（确认路线）
-🔔 提前30分钟提醒（立即出发布）
-
-已自动计算路程时间 ✅
-**策略3：根据准备需求**
-你：帮我创建日历：
-下周一上午10点，产品演示
-
-OpenClaw：检测到需要准备演示，建议：
-
-🔔 提前3天提醒（准备演示材料）
-🔔 提前1天提醒（演练演示流程）
-🔔 提前2小时提醒（检查设备）
-🔔 提前30分钟提醒（前往会议室）
-
-准备清单：
-✓ 演示PPT
-✓ 产品Demo
-✓ 备用方案
-✓ 投影设备
-
-已创建提醒和清单 ✅
-### 6.4.4 与其他工具集成
-
-**集成1：飞书提醒**
-
-你：把日历提醒同步到飞书
-
-OpenClaw：已配置飞书提醒！
-
-提醒方式：
-- 日历提醒（Mac/iPhone）
-- 飞书消息提醒
-- 飞书日历同步
-
-示例：
-当"明天下午3点会议"提前1小时时：
-1. Mac通知中心弹窗 ✅
-2. iPhone锁屏通知 ✅
-3. 飞书消息提醒 ✅
-
-已同步到飞书 ✅
-**集成2：企业微信提醒**
-
-你：把重要会议提醒发布到企业微信
-
-OpenClaw：已配置企业微信提醒！
-
-提醒规则：
-- 标记为"重要"的会议
-- 提前1天、1小时发布送企业微信消息
-
-消息格式：
-📅 重要会议提醒
-标题：[会议名称]
-时间：[会议时间]
-地点：[会议地点]
-准备：[准备事项]
-
-已配置完成 ✅
-**集成3：邮件提醒**
-
-你：把项目deadline发布邮件提醒我
-
-OpenClaw：已配置邮件提醒！
-
-提醒规则：
-- 所有deadline事件
-- 提前1周、3天、1天发布送邮件
-
-邮件内内容：
-主题：[项目名称] Deadline提醒
-内内容：
-- 截止时间
-- 剩余天数
-- 完成进度
-- 行动建议
-
-已配置完成 ✅
-### 6.4.5 提醒管理技巧
-
-**技巧1：避免提醒疲劳**
-
-❌ 不好的做法：
-- 所有事件都设置多个提醒
-- 提醒时间过于密集
-- 提醒内内容千篇一律
-
-✅ 好的做法：
-- 重要事件多提醒，普通事件少提醒
-- 提醒时间合理分散
-- 提醒内内容个性化
-**技巧2：提醒内内容优化**
-
-❌ 普通提醒：
-"会议提醒：15分钟后开会"
-
-✅ 优化提醒：
-"📅 产品评审会议
-⏰ 15分钟后（14:45）
-📍 会议室A（3楼）
-👤 参会人：产品团队
-📝 记得带：产品方案、数据报告"
-**技巧3：提醒优先级**
-
-🔴 高优先级（立即处理）
-- 重要会议（提前10分钟）
-- 紧急任务（当天）
-- 客户约会（提前30分钟）
-
-🟡 中优先级（尽快处理）
-- 普通会议（提前15分钟）
-- 常规任务（提前1天）
-- 团队活动（提前2小时）
-
-🟢 低优先级（有空处理）
-- 学习计划（提前1天）
-- 个人事项（提前30分钟）
-- 兴趣活动（提前2小时）
-**技巧4：提醒时间优化**
-
-根据个人习惯调整：
-
-早起型（7:00起床）：
-- 早上提醒：08:00
-- 中午提醒：12:00
-- 晚上提醒：19:00
-
-晚睡型（9:00起床）：
-- 早上提醒：10:00
-- 中午提醒：14:00
-- 晚上提醒：21:00
-
-工作日 vs 周末：
-- 工作日：提前1小时
-- 周末：提前2小时（更放松）
+- **Phát hiện trùng lịch (Conflicts)**: Nếu sự kiện mới trùng giờ với một lịch hẹn quan trọng đã có từ trước, OpenClaw sẽ cảnh báo ngay và gợi ý các khung giờ trống lân cận.
+- **Sửa lỗi ngày tháng bất hợp lý**: Tự động phát hiện và cảnh báo các giá trị ngày tháng sai quy tắc (ví dụ: ngày 30 tháng 2, hoặc khung giờ 25:00).
+- **Phát hiện thiếu trường bắt buộc**: Nếu tệp dữ liệu thiếu mất ngày diễn ra hoặc thiếu tiêu đề sự kiện, OpenClaw sẽ thông báo để bạn quyết định bổ sung hoặc áp dụng giá trị mặc định.
 
 ---
 
-## 📝 本章节小结
+## 6.4 Mẹo và chiến lược thiết lập lời nhắc
 
-本章节学习了OpenClaw的日程与任务管理功能：
+### 6.4.1 Phân loại và lựa chọn thời điểm nhắc việc
 
-### 核心功能
+**Các hình thức nhắc việc**:
+1. **Nhắc theo mốc thời gian**: Trước X phút / giờ / ngày, nhắc đúng giờ bắt đầu.
+2. **Nhắc theo vị trí địa lý (Location-based)**: Nhắc khi bạn vừa đến hoặc vừa rời khỏi một địa điểm cụ thể.
+3. **Nhắc việc lặp lại**: Hàng ngày, hàng tuần, hàng tháng hoặc theo chu kỳ riêng.
 
-1. **日历自动创建**
-   - 文本识别创建
-   - 复杂日程处理
-   - 周期性事件设置
-   - 日历模板使用
+Khuyến nghị thời điểm nhắc nhở theo từng nhóm sự kiện được trình bày ở Bảng 6-1:
 
-2. **微信截图识别**
-   - OCR文字识别
-   - 智能信息提取
-   - 批量事件创建
-   - 识别准确率优化
+**Bảng 6-1: Thời điểm nhắc nhở đề xuất cho từng loại sự kiện**
 
-3. **批量日程导入**
-   - Excel文件导入
-   - CSV格式处理
-   - 数据验证
-   - 错误处理
+| Loại sự kiện | Thời điểm nhắc đề xuất | Lý do |
+|---|---|---|
+| Cuộc họp quan trọng | Trước 1 ngày, trước 1 giờ, trước 15 phút | Đủ thời gian chuẩn bị tài liệu kỹ lưỡng |
+| Cuộc họp thường lệ | Trước 1 giờ, trước 15 phút | Kịp thời di chuyển và chuẩn bị tâm thế |
+| Hạn chót nộp dự án | Trước 1 tuần, trước 3 ngày, trước 1 ngày | Tránh tình trạng nước đến chân mới nhảy |
+| Tác vụ thường nhật | Trước 30 phút | Không làm gián đoạn dòng tập trung công việc |
+| Hẹn gặp đối tác / Ăn trưa | Trước 2 giờ, trước 30 phút | Dự trù thời gian chuẩn bị và di chuyển trên đường |
+| Tiết học / Khóa học | Trước 15 phút | Đảm bảo có mặt đúng giờ vào lớp |
 
-4. **提醒设置技巧**
-   - 多级提醒
-   - 智能提醒策略
-   - 工具集成
-   - 提醒管理优化
+### 6.4.2 Cài đặt lời nhắc đa tầng (Multi-tier Reminders)
 
-### 实战技巧
+**Tình huống**: Bạn phụ trách dự án phát hành sản phẩm quan trọng vào ngày 15/03/2026.
 
-- ✅ 统一命名规范
-- ✅ 合理设置提醒
-- ✅ 添加详细信息
-- ✅ 使用颜色分类
-- ✅ 避免提醒疲劳
-- ✅ 优化提醒内内容
+Bạn: Cài đặt giúp tôi lời nhắc đa tầng cho hạn chót phát hành sản phẩm ngày 15/03/2026.
 
-### 下一步
+OpenClaw sẽ tự động lập kế hoạch 5 tầng nhắc nhở:
+- 🔔 **Tầng 1 (Trước 2 tuần - 09:00 ngày 01/03)**: Còn 2 tuần nữa là đến ngày phát hành, bắt đầu giai đoạn nước rút.
+- 🔔 **Tầng 2 (Trước 1 tuần - 09:00 ngày 08/03)**: Còn 1 tuần cuối cùng, hoàn tất kiểm thử và rà soát phương án triển khai.
+- 🔔 **Tầng 3 (Trước 3 ngày - 09:00 ngày 12/03)**: Còn 3 ngày, tổng duyệt quy trình phát hành và phương án rollback dự phòng.
+- 🔔 **Tầng 4 (Trước 1 ngày - 09:00 ngày 14/03)**: Ngày mai phát hành sản phẩm, xác nhận lịch trực của đội ngũ vận hành.
+- 🔔 **Tầng 5 (Sáng ngày phát hành - 08:00 ngày 15/03)**: Hôm nay là ngày phát hành sản phẩm! Kiểm tra lần cuối và sẵn sàng triển khai.
 
-- 学习第7章节：自动化工作流
-- 掌握定时任务设置
-- 实现网站监控
-- 构建自动化系统
+### 6.4.3 Chiến lược nhắc nhở theo bối cảnh thực tế
 
----
+- **Theo mức độ quan trọng**: Nhận diện các sự kiện lớn (như "Họp Hội đồng Quản trị", "Bảo vệ Luận án") để tự động thiết lập các lời nhắc chuẩn bị tài liệu sớm hơn bình thường.
+- **Theo khoảng cách di chuyển**: Nếu địa điểm sự kiện nằm ở xa, OpenClaw có thể tính toán thời gian đi đường để nhắc bạn xuất phát sớm trước 30 - 45 phút.
+- **Kèm danh mục chuẩn bị (Checklist)**: Khi tạo lịch thuyết trình demo sản phẩm, OpenClaw sẽ đính kèm luôn checklist những thứ cần kiểm tra: Slide trình chiếu, bản demo, thiết bị kết nối và máy chiếu.
 
-## 🎯 实战练习
+### 6.4.4 Tích hợp kênh nhận thông báo
 
-### 练习1：创建本周日程
-1. 列出本周所有安排
-2. 使用 OpenClaw创建日历事件
-3. 设置合理的提醒
-4. 在手机上查看
+Bạn có thể cấu hình để nhận thông báo lịch trình qua nhiều kênh quen thuộc:
 
-### 练习2：微信截图识别
-1. 找一条微信约会消息
-2. 截图发布给OpenClaw
-3. 让它创建日历事件
-4. 检查识别准确性
+- **Thông báo qua Lark / Feishu**: Nhận tin nhắn thông báo họp trực tiếp trong ứng dụng chat công việc, đồng bộ lịch vào Feishu Calendar.
+- **Thông báo qua WeCom / DingTalk**: Gửi thẻ thông báo tóm tắt thông tin họp đến tài khoản doanh nghiệp.
+- **Gửi email nhắc nhở**: Tự động gửi email tóm tắt tiến độ đối với các deadline dự án quan trọng trước 3 ngày và 1 ngày.
 
-### 练习3：批量导入课程表
-1. 准备一个Excel课程表
-2. 使用 OpenClaw批量导入
-3. 检查所有事件
-4. 调整提醒设置
+### 6.4.5 Bí quyết quản lý để không bị "bội thực thông báo"
+
+1. **Tránh đặt quá nhiều thông báo cho mọi sự việc**: Chỉ đặt thông báo đa tầng cho sự kiện quan trọng; những sự việc thông thường chỉ cần một mốc nhắc trước 15 phút.
+2. **Nội dung thông báo cần cô đọng và hữu ích**: Thay vì chỉ hiện "15 phút nữa có cuộc họp", một thông báo chuẩn sẽ ghi rõ: Phòng họp nào, cần mang theo tài liệu gì, ai chủ trì.
+3. **Phân chia mức độ ưu tiên theo khung giờ**: Điều chỉnh thông báo phù hợp với nhịp sinh hoạt sinh học của bạn (người dậy sớm hay người làm việc đêm) để thông báo xuất hiện đúng lúc bạn tỉnh táo nhất.
 
 ---
 
-## 💡 常见访问题
+## 📝 Tổng kết chương
 
-**Q1：日历事件创建失败？**
-A：检查Mac日历权限，确保OpenClaw有访问权限。
+Trong chương này, bạn đã làm chủ các tính năng quản lý lịch và tác vụ của OpenClaw:
 
-**Q2：截图识别不准确？**
-A：确保截图清晰，文字完整，必要时手动补充信息。
-
-**Q3：批量导入出错？**
-A：检查Excel格式，确保日期时间格式正确。
-
-**Q4：提醒没有收到？**
-A：检查通知设置，确保Mac和iPhone通知权限已开启。
-
-**Q5：如何删除批量创建的事件？**
-A：在日历中选择事件，批量删除，或让OpenClaw帮你删除。
+1. **Tự động tạo sự kiện lịch**: Tạo lịch tức thì từ văn bản tự nhiên, xử lý lịch họp phức tạp, thiết lập chuỗi sự kiện lặp lại định kỳ.
+2. **Nhận diện ảnh chụp màn hình chat**: Trích xuất dữ liệu từ tin nhắn ứng dụng chat, tự động bóc tách ngày giờ, địa điểm và tạo lịch chính xác.
+3. **Nhập lịch biểu hàng loạt**: Nhập toàn bộ thời khóa biểu, mốc tiến độ dự án từ tệp Excel và CSV chỉ trong vài giây.
+4. **Chiến lược nhắc nhở thông minh**: Thiết lập lời nhắc đa tầng, nhắc theo ngữ cảnh di chuyển, tích hợp thông báo qua Lark / Feishu, Email và Lịch hệ thống.
 
 ---
 
-**下一章节预告**：第7章节将学习自动化工作流，包括定时任务设置、网站监控实战、日报自动推送等高级功能。
+## 🎯 Bài tập thực hành
 
+- **Bài tập 1: Lập lịch tuần cá nhân**: Liệt kê toàn bộ các sự kiện dự kiến trong tuần tới, yêu cầu OpenClaw tạo lịch và kiểm tra kết quả đồng bộ trên điện thoại của bạn.
+- **Bài tập 2: Nhận diện ảnh chụp tin nhắn hẹn gặp**: Chụp ảnh màn hình một đoạn tin nhắn hẹn cà phê hoặc hẹn họp, gửi cho OpenClaw để AI tự tạo sự kiện.
+- **Bài tập 3: Nhập bảng tính kế hoạch**: Tạo một tệp bảng tính nhỏ chứa 3 - 5 sự kiện và yêu cầu OpenClaw nhập hàng loạt vào lịch hệ thống.
 
 ---
 
-## 🌐 在线阅读
+## 💡 Câu hỏi thường gặp
 
-📖 **想在线阅读此章节节？**
+**Q1: Sự kiện tạo ra không đồng bộ sang iPhone?**  
+A: Hãy kiểm tra xem máy Mac và iPhone của bạn có cùng đăng nhập một tài khoản iCloud và đã bật tính năng đồng bộ Lịch (Calendar) trong cài đặt iCloud hay chưa.
 
-[🔗 在线阅读此章节节](https://awesome.tryopenclaw.asia/docs/02-core-features/06-schedule-management/)
+**Q2: Nhận diện chữ trong ảnh chụp bị sai lệch?**  
+A: Đảm bảo ảnh chụp màn hình rõ nét, phông chữ tin nhắn không bị mờ. Bạn có thể gõ kèm thêm một câu hướng dẫn ngắn để AI nhận diện chuẩn xác hơn.
 
-访问网站获取更好的阅读体验：
-- 📱 响应式设计，支持手机、平板、电脑
--  支持黑暗模式，保护眼睛
-- 🔍 内置搜索功能，快速定位内内容
-- 📋 目附录导航，轻松跳转章节节
+**Q3: Nhập tệp Excel bị báo lỗi cấu trúc?**  
+A: Kiểm tra lại tên các cột tiêu đề (Tiêu đề, Ngày, Giờ bắt đầu, Giờ kết thúc) và định dạng ngày tháng (khuyến nghị chuẩn `YYYY-MM-DD`).
 
-[🏠 访问完整教网站](https://awesome.tryopenclaw.asia)
+**Q4: Làm thế nào để xóa một loạt sự kiện đã tạo nhầm?**  
+A: Bạn chỉ cần nói với OpenClaw: *"Hãy xóa giúp tôi toàn bộ các sự kiện vừa tạo"* hoặc mở ứng dụng Lịch chọn xóa hàng loạt thủ công.
+
+---
+
+**Chương tiếp theo**: [Chương 7: Quy trình Tự động hóa](07-automation-workflow.md) - Xây dựng Task Flow, Webhooks và Lập lịch Cron tự động
+
+**Trở về mục lục**: [README](../../README.md)
+
+---
+
+## 🌐 Đọc trực tuyến
+
+📖 **Bạn muốn đọc chương này trên nền tảng web?**
+
+[🔗 Đọc trực tuyến: Chương 6 - Quản lý Lịch trình & Tác vụ](https://awesome.tryopenclaw.asia/docs/02-core-features/06-schedule-management/)
+
+Trải nghiệm đọc tốt hơn trên website giáo trình:
+- 📱 Thiết kế tương thích hoàn hảo cho điện thoại, máy tính bảng và máy tính
+- 🌙 Chế độ nền tối (Dark Mode) dịu mắt
+- 🔍 Tích hợp tìm kiếm nhanh nội dung
+- 📋 Thanh điều hướng mục lục trực quan, dễ dàng chuyển đổi giữa các chương
+
+[🏠 Truy cập website giáo trình đầy đủ](https://awesome.tryopenclaw.asia)

@@ -1,95 +1,95 @@
-> 📖 **纸质书《OpenClaw超级个体实操手册》已上市！** 清华大学出版社出版，在开源教程基础上全面重写+逐条验证。🛒 [京东专属购买链接（¥42，原价¥59.8）](https://item.jd.com/14669463.html)
+> 📖 **Giáo trình Awesome OpenClaw Tutorial** | Bản dịch tiếng Việt chính thức cho cộng đồng. Nguyên tác thuộc về tác giả [@xianyu110](https://github.com/xianyu110).
 
-# 第5章节 知识库与第二大脑（Active Memory / Memory Wiki / 研究归档）
+# Chương 5: Cơ sở Tri thức & Bộ Não Thứ Hai (Active Memory / Memory Wiki / Lưu trữ Nghiên cứu)
 
-> 本章目标：用 OpenClaw 当前官方主线，把“知识库”这件事讲清楚：什么交给 Active Memory，什么交给 Memory Wiki，什么只是临时资料，不要再把旧的第三方同步 Skill 当默认方案。
-
----
-
-## 版本基线
-
-- **当前稳定版**：`v2026.9.3`（2026-09-08 发布）
-- 本章默认按 `v2026.9.3` 稳定版写
+> **Mục tiêu của chương**: Dựa trên lộ trình chính thức hiện tại của OpenClaw, làm sáng tỏ toàn diện khái niệm "Cơ sở tri thức" (Knowledge Base): phần nào nên giao cho Active Memory, phần nào nên đưa vào Memory Wiki, và phần nào chỉ là tài liệu tạm thời. Bạn không nên tiếp tục xem các Skill đồng bộ bên thứ ba cũ kỹ là giải pháp mặc định.
 
 ---
 
-## 先给小白的阅读说明
+## Cột mốc phiên bản
 
-### 这一章到底解决什么问题
-
-很多人一提“知识库”，脑子里想到的是：
-
-- 把网页存进 Notion
-- 把笔记同步到 Obsidian
-- 做一堆目录和标签
-
-这些不是没用，但它们已经不是 OpenClaw 当前的主线。现在更推荐你把知识系统拆成 3 层：
-
-1. **Active Memory**：回复前先回忆相关上下文
-2. **Memory Wiki**：把长期知识整理成结构化、可检索的知识层
-3. **临时资料处理**：网页抓取、会议纪要、研究摘录，先整理再决定要不要进入长期知识层
-
-### 如果你只想先跑通，先看这几节
-
-- **想让 OpenClaw 更“记得住你”**：看 `5.2`
-- **想开始搭第二大脑**：看 `5.3`
-- **想做文章、项目、论文资料沉淀**：看 `5.4`
-- **你已经在用 Obsidian**：看 `5.5`
-
-### 小白最容易犯的 3 个错
-
-- 一上来就先折腾同步，而不是先把记忆主线配通
-- 把“临时资料”直接塞进长期知识库，最后越存越乱
-- 以为所有知识都必须结构化，结果迟迟不开始
-
-### 本章一句话结论
-
-先让 OpenClaw 能**记得住**，再让它能**查得到**，最后才考虑它要不要**同步到别的笔记工具**。
+- **Bản ổn định hiện tại**: `v2026.9.3` (Phát hành ngày 08/09/2026)
+- Nội dung chương này được biên soạn và kiểm chứng mặc định trên bản ổn định `v2026.9.3`
 
 ---
 
-## 5.1 2026.4 之后，知识库的正确主线是什么？
+## Hướng dẫn nhập môn dành cho người mới bắt đầu
 
-旧版教程里，“知识库”主要靠网页归档、Notion 同步、Obsidian 同步来实现。但在当前官方主线里，更重要的是下面这套组合：
+### Chương này giải quyết vấn đề gì?
 
-| 层级 | 负责什么 | 适合什么场景 |
-|------|----------|--------------|
-| `Active Memory` | 回复前先回忆相关偏好、事实、上下文 | 聊天、长期协作、偏好记忆 |
-| `Memory Wiki` | 把长期知识编译成结构化知识层 | 项目知识、研究资料、长期主题沉淀 |
-| `openclaw infer web fetch/search` | 收集外部资料 | 网页、文档、新闻、调研资料 |
-| `wiki ingest / compile / search / get` | 资料入库、整理、检索 | 第二大脑、团队知识、项目档案 |
+Khi nhắc đến "Cơ sở tri thức", nhiều người thường nghĩ ngay đến:
 
-你可以这样理解：
+- Lưu trang web vào Notion
+- Đồng bộ ghi chú vào Obsidian
+- Tạo hàng đống thư mục và gắn nhãn (tags) phức tạp
 
-- **Active Memory** 解决的是“回复时能不能想起来”
-- **Memory Wiki** 解决的是“长期资料能不能整理好、查得准”
-- **网页抓取 / 转写 / 摘要** 解决的是“怎么把外部信息先拿进来”
+Những cách làm trên không phải là vô ích, nhưng chúng không còn là lộ trình chính thức của OpenClaw nữa. Hiện tại, chúng tôi khuyến nghị bạn chia hệ thống tri thức thành 3 tầng rõ rệt:
+
+1. **Active Memory (Bộ nhớ chủ động)**: Tự động gợi nhớ ngữ cảnh, sở thích và dữ kiện liên quan trước khi trả lời.
+2. **Memory Wiki**: Tổng hợp và biên dịch tri thức dài hạn thành một tầng tri thức có cấu trúc, có thể tra cứu và truy xuất bằng chứng xác thực.
+3. **Xử lý tài liệu tạm thời**: Thu thập dữ liệu web, biên bản cuộc họp, trích đoạn nghiên cứu — xử lý tinh gọn trước khi quyết định có đưa vào tầng tri thức dài hạn hay không.
+
+### Nếu bạn chỉ muốn chạy thử nhanh, hãy xem các mục sau
+
+- **Muốn OpenClaw "ghi nhớ bạn" tốt hơn**: Xem mục `5.2`
+- **Muốn bắt đầu xây dựng Bộ não thứ hai**: Xem mục `5.3`
+- **Muốn tích lũy tài liệu nghiên cứu, bài viết, dự án**: Xem mục `5.4`
+- **Bạn đã và đang dùng sẵn Obsidian**: Xem mục `5.5`
+
+### 3 sai lầm người mới rất dễ mắc phải
+
+- Vừa bắt đầu đã vội vã cài đặt các plugin đồng bộ ngoài, thay vì cấu hình thông suốt luồng ghi nhớ chính thức.
+- Ném thẳng toàn bộ "tài liệu tạm thời" vào cơ sở tri thức dài hạn, khiến dữ liệu ngày càng hỗn loạn và loãng ngữ cảnh.
+- Nghĩ rằng mọi thông tin đều bắt buộc phải cấu trúc hóa hoàn hảo, dẫn đến chần chừ và không bao giờ bắt tay vào làm.
+
+### Kết luận ngắn gọn của chương
+
+Trước tiên, hãy để OpenClaw **nhớ được**, sau đó giúp nó **tra cứu được**, và cuối cùng mới cân nhắc xem có cần **đồng bộ sang các công cụ ghi chú khác** hay không.
 
 ---
 
-## 5.2 Active Memory：先让 OpenClaw 记得住你
+## 5.1 Sau phiên bản 2026.4, đâu là luồng cơ sở tri thức chuẩn xác?
 
-官方文档对 Active Memory 的定义很明确：它是一个**在主回复之前运行的阻塞式记忆子代理**。它会在合适的会话里先用 `memory_search`、`memory_get` 找相关记忆，再把精简结果交给主回复。
+Trong các tài liệu cũ, "Cơ sở tri thức" chủ yếu dựa vào việc lưu trữ trang web, đồng bộ Notion, đồng bộ Obsidian. Tuy nhiên, trong luồng phát triển chính thức hiện nay, bộ công cụ sau mới là cốt lõi:
 
-### 5.2.1 什么时候该开
+| Tầng | Nhiệm vụ chính | Kịch bản phù hợp |
+|------|----------------|------------------|
+| `Active Memory` | Gợi nhớ sở thích, sự thật, ngữ cảnh trước khi trả lời | Hội thoại hàng ngày, cộng tác dài hạn, ghi nhớ thói quen |
+| `Memory Wiki` | Biên dịch tri thức dài hạn thành tầng tri thức có cấu trúc | Tri thức dự án, tài liệu nghiên cứu, tích lũy chủ đề dài hạn |
+| `openclaw infer web fetch/search` | Thu thập dữ liệu từ internet | Trang web, tài liệu trực tuyến, tin tức, tài liệu khảo sát |
+| `wiki ingest / compile / search / get` | Nạp dữ liệu, biên dịch tổng hợp, tra cứu, trích xuất | Bộ não thứ hai, tri thức nhóm, hồ sơ lưu trữ dự án |
 
-适合直接开启的情况：
+Bạn có thể hiểu một cách trực quan như sau:
 
-- 你经常和同一个 agent 长期协作
-- 你希望它记住你的习惯、偏好、工作背景
-- 你希望它少问重复问题
+- **Active Memory** giải quyết bài toán: *"Khi trả lời, AI có nhớ ra điều này không?"*
+- **Memory Wiki** giải quyết bài toán: *"Tài liệu dài hạn có được sắp xếp khoa học, tìm kiếm chuẩn xác và truy nguyên nguồn gốc được không?"*
+- **Web scraping / Transcribe / Summary** giải quyết bài toán: *"Làm thế nào để đưa thông tin bên ngoài vào hệ thống một cách tinh gọn?"*
 
-先不要急着开的情况：
+---
 
-- 你只是偶尔临时问几句
-- 你现在主要在排查模型/认证问题
-- 你对延迟非常敏感，想先把基础链路跑通
+## 5.2 Active Memory: Giúp OpenClaw luôn nhớ rõ bạn
 
-### 5.2.2 官方推荐起步配置
+Tài liệu chính thức định nghĩa Active Memory rất rõ ràng: Đây là một **tác tử bộ nhớ phụ dạng chặn (blocking memory sub-agent) chạy trước khi câu trả lời chính được tạo ra**. Trong các phiên hội thoại phù hợp, nó sẽ sử dụng `memory_search` và `memory_get` để tìm kiếm những ký ức liên quan, sau đó bàn giao phần tóm tắt cô đọng nhất cho câu trả lời chính của AI.
 
-根据官方文档，最安全的起步方式是：启用插件、只绑定一个对话 agent、只先在 direct chat 里使用。
+### 5.2.1 Khi nào nên bật Active Memory?
 
-把下面这段写到 `openclaw.json`：
+Những trường hợp rất nên kích hoạt ngay:
+
+- Bạn thường xuyên làm việc lâu dài với cùng một AI Agent.
+- Bạn muốn AI ghi nhớ thói quen, sở thích cá nhân, bối cảnh công việc và phong cách làm việc của bạn.
+- Bạn muốn AI bớt hỏi lại những thông tin cũ bạn đã từng chia sẻ.
+
+Những trường hợp chưa cần vội bật:
+
+- Bạn chỉ thỉnh thoảng hỏi vài câu hỏi ngắn mang tính tra cứu tạm thời.
+- Bạn đang trong giai đoạn cấu hình, kiểm tra mô hình hoặc sửa lỗi xác thực.
+- Bạn cực kỳ nhạy cảm với độ trễ (latency) và muốn kiểm tra đường truyền cơ bản chạy ổn định trước.
+
+### 5.2.2 Cấu hình khởi động chuẩn theo tài liệu chính thức
+
+Theo hướng dẫn chính thức, cách bắt đầu an toàn nhất là: Kích hoạt plugin, chỉ liên kết với duy nhất agent hội thoại chính, và chỉ áp dụng trong cuộc trò chuyện trực tiếp (direct chat).
+
+Hãy thêm đoạn cấu hình sau vào tệp `openclaw.json`:
 
 ```json5
 {
@@ -114,52 +114,52 @@
 }
 ```
 
-改完以后，重启你当前使用的 Gateway 进程或服务。
+Sau khi sửa xong, hãy khởi động lại tiến trình Gateway hoặc dịch vụ nền bạn đang sử dụng.
 
-### 5.2.3 看到什么算 Active Memory 已经跑通
+### 5.2.3 Dấu hiệu nhận biết Active Memory đã chạy thành công
 
-你可以先用最简单的方式判断：
+Bạn có thể quan sát qua các tiêu chí đơn giản sau:
 
-- 同一个对话里，OpenClaw 开始更稳定地记住你的偏好和背景
-- 开启 `/verbose` 或 `/trace` 时，能看到 Active Memory 的状态信息
-- 没有明显的模型报错、超时报错或空转
+- Trong cùng một luồng hội thoại, OpenClaw bắt đầu ghi nhớ ổn định các thông tin nền tảng và sở thích của bạn.
+- Khi bật chế độ `/verbose` hoặc `/trace`, bạn thấy các bản ghi trạng thái của Active Memory xuất hiện.
+- Không có lỗi gọi mô hình, không bị lỗi quá thời gian (timeout) hoặc chạy vòng lặp vô tận.
 
-### 5.2.4 小白怎么理解这些配置项
+### 5.2.4 Giải thích ý nghĩa các thông số cấu hình
 
-- `agents: ["main"]`：只让 `main` 这个 agent 用主动记忆
-- `allowedChatTypes: ["direct"]`：先只在私聊/直接对话里使用，避免一上来全局打开
-- `queryMode: "recent"`：优先看最近上下文，速度和效果更平衡
-- `promptStyle: "balanced"`：默认是稳妥模式，适合大多数用户
-- `timeoutMs: 15000`：超过 15 秒就放弃，避免拖慢回复太多
+- `agents: ["main"]`: Chỉ cho phép agent `main` sử dụng tính năng bộ nhớ chủ động.
+- `allowedChatTypes: ["direct"]`: Tạm thời chỉ kích hoạt trong chat riêng / hội thoại trực tiếp 1-1, tránh bật ồ ạt trên các kênh chat nhóm.
+- `queryMode: "recent"`: Ưu tiên quét ngữ cảnh gần nhất, đạt độ cân bằng tối ưu giữa tốc độ phản hồi và hiệu quả truy xuất.
+- `promptStyle: "balanced"`: Chế độ cân bằng mặc định, phù hợp với đại đa số người dùng.
+- `timeoutMs: 15000`: Nếu quá 15 giây không truy xuất xong sẽ tự động bỏ qua để tránh làm gián đoạn câu trả lời quá lâu.
 
-如果你是第一次用，不建议一开始就改得太激进。默认先跑稳，再谈优化。
+Nếu đây là lần đầu tiên sử dụng, bạn không nên tinh chỉnh quá sâu. Hãy để cấu hình mặc định chạy ổn định trước rồi mới tối ưu sau.
 
 ---
 
-## 5.3 Memory Wiki：把长期知识整理成“能查、能证据回溯”的知识层
+## 5.3 Memory Wiki: Biên dịch tri thức dài hạn thành tầng tri thức có cấu trúc và truy nguyên bằng chứng
 
-官方对 `memory-wiki` 的定位不是普通笔记插件，而是一个**把 durable memory 编译成知识 vault 的 bundled plugin**。
+Tài liệu chính thức định vị `memory-wiki` không phải là một plugin ghi chú thông thường, mà là một **bundled plugin chuyên biên dịch bộ nhớ bền vững (durable memory) thành một kho tri thức (knowledge vault)**.
 
-它和 Active Memory 的关系是：
+Mối quan hệ giữa nó và Active Memory:
 
-- Active Memory 负责“回复时先想起来”
-- Memory Wiki 负责“把长期知识整理成稳定页面、claims、evidence、dashboards”
+- **Active Memory** chịu trách nhiệm: *"Nhớ ra trước khi trả lời"*.
+- **Memory Wiki** chịu trách nhiệm: *"Tổng hợp tri thức dài hạn thành các trang hoàn chỉnh, hệ thống các luận điểm (claims), bằng chứng (evidence) và bảng điều khiển trực quan (dashboards)"*.
 
-### 5.3.1 为什么它比“随手记笔记”更适合长期知识
+### 5.3.1 Tại sao Memory Wiki vượt trội hơn ghi chú thông thường?
 
-Memory Wiki 的优势不只是“能存”，而是：
+Điểm mạnh của Memory Wiki không dừng lại ở việc "lưu trữ được", mà nằm ở:
 
-- 有专门的 wiki vault
-- 支持结构化 `claim / evidence`
-- 能编译出稳定页面和 digest
-- 能用 `wiki_search` / `wiki_get` 精准检索
-- 可以和活动记忆层做 shared search
+- Sở hữu wiki vault chuyên biệt độc lập.
+- Hỗ trợ cấu trúc luận điểm / bằng chứng (`claim / evidence`) chặt chẽ.
+- Có khả năng biên dịch thành các trang tài liệu ổn định và bản tóm lược (digest).
+- Hỗ trợ truy xuất chuẩn xác bằng các lệnh `wiki_search` / `wiki_get`.
+- Có thể chia sẻ tìm kiếm chung (shared search) với tầng Active Memory.
 
-这更像一个“知识层”，而不是一个“笔记堆”。
+Điều này tạo nên một "Tầng tri thức" thực thụ thay vì một "Kho tài liệu lộn xộn".
 
-### 5.3.2 官方推荐起步配置
+### 5.3.2 Cấu hình khởi động mẫu
 
-官方文档建议把配置放到 `plugins.entries.memory-wiki.config`。下面这份是比较适合新手的起步版本：
+Tài liệu hướng dẫn đặt cấu hình bên trong `plugins.entries.memory-wiki.config`. Dưới đây là mẫu cấu hình khởi đầu rất thích hợp cho người mới:
 
 ```json5
 {
@@ -211,52 +211,52 @@ Memory Wiki 的优势不只是“能存”，而是：
 }
 ```
 
-### 5.3.3 小白先记住 4 个关键开关就够了
+### 5.3.3 4 thông số quan trọng người mới cần nắm vững
 
-- `vaultMode: "isolated"`：最适合刚开始，先把 wiki 当独立知识层
-- `renderMode: "obsidian"`：如果你已经在用 Obsidian，会比较顺手
-- `search.backend: "shared"`：需要时可以和共享记忆检索打通
-- `createDashboards: true`：让 wiki 自动生成更容易浏览的汇总页
+- `vaultMode: "isolated"`: Lựa chọn tốt nhất cho giai đoạn đầu, quản lý wiki như một tầng tri thức độc lập.
+- `renderMode: "obsidian"`: Rất thuận tiện nếu bạn đã quen thuộc với giao diện và định dạng liên kết của Obsidian.
+- `search.backend: "shared"`: Cho phép tích hợp tìm kiếm dùng chung với tầng bộ nhớ khi cần.
+- `createDashboards: true`: Tự động tạo các trang bảng điều khiển tổng quan giúp bạn dễ dàng duyệt qua toàn bộ tri thức.
 
-### 5.3.4 什么时候用 `bridge` 模式
+### 5.3.4 Khi nào nên kích hoạt chế độ `bridge`?
 
-只有在你已经明确知道：
+Chỉ khi bạn nắm rõ và đáp ứng đủ hai điều kiện sau:
 
-- 自己的 active memory backend 已经有公开 bridge artifacts
-- 想把记忆层里的长期资料编译进 wiki
+- Hệ thống Active Memory backend của bạn đã tạo ra các hiện vật (bridge artifacts) công khai.
+- Bạn muốn tự động biên dịch các dữ liệu dài hạn tích lũy từ bộ nhớ hội thoại vào trong Wiki.
 
-这时再考虑 `bridge`。如果你现在只是第一次上手，先用 `isolated`。
+Khi đó mới nên cân nhắc bật `bridge`. Nếu mới bắt đầu, hãy luôn chọn `isolated`.
 
 ---
 
-## 5.4 最适合小白先跑通的知识库流程
+## 5.4 Quy trình ứng dụng cơ sở tri thức tối ưu cho người mới
 
-这一节不讲大而全的系统，只讲最短闭环。
+Mục này không bàn về các lý thuyết phức tạp, mà tập trung vào vòng lặp thực chiến ngắn gọn nhất.
 
-### 5.4.1 流程 A：把一份本地笔记收进 Wiki
+### 5.4.1 Quy trình A: Đưa một ghi chú cục bộ vào Wiki
 
-先初始化：
+Khởi tạo kho Wiki trước:
 
 ```bash
 openclaw wiki init
 openclaw wiki status
 ```
 
-然后准备一份最简单的 Markdown 笔记，例如 `./notes/customer-onboarding.md`：
+Chuẩn bị một tệp ghi chú Markdown đơn giản, ví dụ `./notes/customer-onboarding.md`:
 
 ```md
-# Customer Onboarding
+# Hướng dẫn Onboarding Khách hàng
 
-## 现状
-- 新用户第一次接触产品时，最容易卡在权限配置
-- 现有帮助文档太散，入口不统一
+## Thực trạng
+- Người dùng mới khi tiếp cận sản phẩm thường dễ bị vướng ở bước cấu hình phân quyền.
+- Tài liệu hướng dẫn hiện tại quá phân tán, thiếu một đầu mối tập trung.
 
-## 我的判断
-- 应该做一份统一 onboarding checklist
-- 首屏应该先给 3 个最常见动作
+## Đánh giá & Định hướng
+- Cần xây dựng một checklist onboarding thống nhất và ngắn gọn.
+- Màn hình đầu tiên nên hiển thị ngay 3 thao tác cốt lõi thường dùng nhất.
 ```
 
-把它导入 Wiki：
+Tiến hành nạp vào Wiki:
 
 ```bash
 openclaw wiki ingest ./notes/customer-onboarding.md
@@ -264,75 +264,75 @@ openclaw wiki compile
 openclaw wiki lint
 ```
 
-搜索并读取：
+Tìm kiếm và đọc lại nội dung:
 
 ```bash
 openclaw wiki search "onboarding"
 openclaw wiki get <lookup>
 ```
 
-### 5.4.2 看到什么算 Wiki 已经跑通
+### 5.4.2 Dấu hiệu nhận biết Wiki đã hoạt động trơn tru
 
-至少满足下面 4 条：
+Tối thiểu cần đạt được 4 điều kiện sau:
 
-- `openclaw wiki status` 能看到 vault 状态正常
-- `openclaw wiki ingest` 能成功吃进你的文件
-- `openclaw wiki compile` 没有报结构错误
-- `openclaw wiki search` 能搜到你刚导入的主题
+- Lệnh `openclaw wiki status` báo trạng thái vault bình thường.
+- Lệnh `openclaw wiki ingest` nạp tệp thành công không báo lỗi.
+- Lệnh `openclaw wiki compile` biên dịch xong xuôi, không phát sinh lỗi cấu trúc.
+- Lệnh `openclaw wiki search` tìm thấy chính xác chủ đề bạn vừa nạp.
 
-### 5.4.3 流程 B：把网页资料变成长期知识
+### 5.4.3 Quy trình B: Biến thông tin trang web thành tri thức dài hạn
 
-更推荐的顺序不是“直接同步到第三方笔记工具”，而是：
+Thứ tự xử lý chuẩn mực không phải là "đồng bộ thẳng vào ứng dụng ghi chú", mà là:
 
-1. 先抓网页资料
-2. 让 OpenClaw 摘要成你自己的笔记
-3. 再决定是否进入 Wiki
+1. Thu thập dữ liệu từ trang web.
+2. Để OpenClaw tóm tắt và chắt lọc thành ghi chú mang phong cách của bạn.
+3. Đánh giá xem có xứng đáng đưa vào Wiki dài hạn hay không.
 
-先抓取网页：
+Thu thập dữ liệu web bằng CLI:
 
 ```bash
 openclaw infer web search --query "OpenClaw Active Memory use cases" --json
 openclaw infer web fetch --url https://docs.openclaw.ai/concepts/active-memory --json
 ```
 
-然后你可以让 OpenClaw 帮你整理成一份 Markdown 摘要，再保存到 `./notes/`，最后继续：
+Sau đó, bạn yêu cầu OpenClaw tổng hợp thành một bản tóm tắt Markdown, lưu vào thư mục `./notes/`, rồi tiếp tục thực hiện:
 
 ```bash
 openclaw wiki ingest ./notes/active-memory-summary.md
 openclaw wiki compile
 ```
 
-### 5.4.4 流程 C：项目知识沉淀
+### 5.4.4 Quy trình C: Tích lũy tri thức dự án
 
-项目知识最适合进 Wiki 的内容是：
+Những nội dung rất nên đưa vào Wiki dự án:
 
-- 架构决策
-- 常见故障排查
-- 客户/用户共性问题
-- 术语解释
-- 上线复盘
+- Các quyết định về kiến trúc kỹ thuật (Architectural Decision Records).
+- Hướng dẫn xử lý các sự cố thường gặp.
+- Câu hỏi chung của khách hàng và người dùng.
+- Bảng giải thích thuật ngữ chuyên ngành.
+- Biên bản đúc kết sau các đợt phát hành sản phẩm (Post-mortem / Retrospective).
 
-不适合一股脑塞进去的内容是：
+Những nội dung **không nên** vội vàng đưa vào:
 
-- 一次性的临时聊天记录
-- 未经整理的超长日志
-- 还没确认真假的外部信息
+- Tin nhắn trò chuyện vụn vặt diễn ra một lần.
+- Các tệp nhật ký (logs) siêu dài chưa qua xử lý lọc sạch.
+- Thông tin trôi nổi bên ngoài chưa được kiểm chứng tính xác thực.
 
-最好的习惯是：**先整理，再入库**。
+Thói quen tốt nhất là: **Chắt lọc và sắp xếp trước, nạp vào kho tri thức sau**.
 
 ---
 
-## 5.5 如果你已经在用 Obsidian，应该怎么理解它和 Wiki 的关系
+## 5.5 Nếu bạn đang dùng Obsidian: Hiểu đúng mối quan hệ giữa Obsidian và Wiki
 
-这一章不再把 Obsidian 当成默认主线，而把它放回它更适合的位置：**展示层 / 编辑层**。
+Chúng ta không coi Obsidian là phương thức vận hành bắt buộc, mà đặt nó về đúng vị trí sở trường nhất: **Tầng hiển thị và giao diện chỉnh sửa thủ công**.
 
-### 更推荐的关系是
+### Mối quan hệ tương hỗ khuyến nghị
 
-- OpenClaw 负责记忆、编译、检索
-- Wiki 负责知识结构
-- Obsidian 负责你的人类阅读和手工编辑体验
+- OpenClaw đảm nhận: Ghi nhớ, biên dịch, suy luận và tìm kiếm.
+- Wiki đảm nhận: Cấu trúc hóa tri thức, bằng chứng và liên kết.
+- Obsidian đảm nhận: Trải nghiệm đọc trực quan của con người và thao tác biên tập thủ công.
 
-如果你已经在用 Obsidian，可以重点关注这些命令：
+Nếu bạn đang dùng Obsidian, hãy lưu ý các câu lệnh hữu ích sau:
 
 ```bash
 openclaw wiki obsidian status
@@ -341,63 +341,85 @@ openclaw wiki obsidian open syntheses/alpha-summary.md
 openclaw wiki obsidian daily
 ```
 
-### 不再推荐当默认主线的旧写法
+### Các cách làm cũ không còn được khuyến khích
 
-下面这些旧路线，现在不再建议当成入门默认方案：
+Những hướng đi cũ sau đây không còn được xem là phương án mặc định:
 
 - `clawhub install notion-sync`
 - `clawhub install obsidian-sync`
-- 先装同步 Skill，再把第三方笔记工具当记忆主系统
+- Cài đặt các Skill đồng bộ trước, rồi dùng công cụ ghi chú bên thứ ba làm hệ thống ghi nhớ chính của AI.
 
-它们不是完全不能做，而是更适合作为**你已经有现成工作流时的补充集成**，而不是当前官方知识主线。
-
----
-
-## 5.6 本章最容易踩的坑
-
-### 坑 1：把所有资料都当长期知识
-
-不是所有东西都值得进 Wiki。一个很实用的判断标准是：
-
-- 这条信息以后还会反复被用到吗？
-- 它是否已经整理到足够清楚？
-- 它是否值得被检索、引用和复盘？
-
-### 坑 2：一上来就开太多模式
-
-新手建议顺序：
-
-1. 先开 Active Memory
-2. 再初始化 Wiki
-3. 先用 `isolated` 模式
-4. 跑通后再考虑 `bridge`
-
-### 坑 3：把同步当成目标，把知识本身忘了
-
-Notion、Obsidian、备忘录都只是载体。真正该优先解决的，是：
-
-- OpenClaw 能不能想起来
-- 资料能不能查得到
-- 结论有没有证据来源
+Những cách trên không phải là hoàn toàn vô dụng, nhưng chúng chỉ đóng vai trò là **tích hợp bổ trợ khi bạn đã có sẵn quy trình làm việc từ trước**, hoàn toàn không phải là trục kiến trúc tri thức chính thức hiện tại của OpenClaw.
 
 ---
 
-## 5.7 给小白的最短落地顺序
+## 5.6 Các lưu ý và kinh nghiệm tránh lỗi quan trọng
 
-如果你今天只想花 30 分钟先把“知识库”跑起来，按这个顺序做：
+### Lưu ý 1: Coi mọi mẩu thông tin đều là tri thức dài hạn
 
-1. 打开 Active Memory
-2. 初始化 Memory Wiki
-3. 写一份自己的本地 Markdown 笔记
-4. `wiki ingest` + `wiki compile`
-5. `wiki search` 看能不能搜到
-6. 再决定要不要接 Obsidian
+Không phải thứ gì cũng xứng đáng đưa vào Wiki. Tiêu chí đánh giá thực tế bao gồm:
+
+- Thông tin này trong tương lai có được tái sử dụng nhiều lần không?
+- Nó đã được chắt lọc đủ rõ ràng, súc tích chưa?
+- Nó có giá trị để tra cứu, trích dẫn bằng chứng và xem lại sau này không?
+
+### Lưu ý 2: Vừa bắt đầu đã bật quá nhiều chế độ phức tạp
+
+Trình tự an toàn cho người mới:
+
+1. Kích hoạt Active Memory trước.
+2. Khởi tạo Memory Wiki.
+3. Dùng chế độ `isolated` trước.
+4. Chạy ổn định rồi mới cân nhắc chuyển sang chế độ `bridge`.
+
+### Lưu ý 3: Đặt nặng việc đồng bộ mà quên mất bản chất tri thức
+
+Notion, Obsidian hay Apple Notes đều chỉ là công cụ lưu trữ bề mặt. Điều bạn thực sự cần ưu tiên giải quyết là:
+
+- OpenClaw có nhớ ra được khi cần thiết hay không?
+- Tài liệu có dễ dàng tìm lại được không?
+- Các kết luận đưa ra có bằng chứng rõ ràng làm chỗ dựa hay không?
 
 ---
 
-## 5.8 官方参考
+## 5.7 Lộ trình triển khai nhanh trong 30 phút
 
-- Active Memory：https://docs.openclaw.ai/concepts/active-memory
-- Memory Wiki：https://docs.openclaw.ai/plugins/memory-wiki
-- Wiki CLI：https://docs.openclaw.ai/cli/wiki
-- Inference CLI：https://docs.openclaw.ai/cli/infer
+Nếu bạn muốn thiết lập hệ sinh thái cơ sở tri thức hoạt động ngay hôm nay, hãy làm theo đúng 6 bước:
+
+1. Kích hoạt Active Memory trong cấu hình.
+2. Khởi tạo Memory Wiki bằng `openclaw wiki init`.
+3. Tự viết một tệp ghi chú Markdown đơn giản trên máy.
+4. Thực hiện `wiki ingest` + `wiki compile`.
+5. Chạy `wiki search` xem AI có tìm thấy nội dung vừa nạp hay không.
+6. Sau đó mới quyết định có cần kết nối với Obsidian hay không.
+
+---
+
+## 5.8 Tài liệu tham khảo chính thức
+
+- Tài liệu Active Memory: https://docs.openclaw.ai/concepts/active-memory
+- Plugin Memory Wiki: https://docs.openclaw.ai/plugins/memory-wiki
+- Wiki CLI: https://docs.openclaw.ai/cli/wiki
+- Inference CLI: https://docs.openclaw.ai/cli/infer
+
+---
+
+**Chương tiếp theo**: [Chương 6: Quản lý Lịch trình & Tác vụ](06-schedule-management.md) - Tự động hóa lịch biểu và nhắc việc thông minh
+
+**Trở về mục lục**: [README](../../README.md)
+
+---
+
+## 🌐 Đọc trực tuyến
+
+📖 **Bạn muốn đọc chương này trên nền tảng web?**
+
+[🔗 Đọc trực tuyến: Chương 5 - Cơ sở Tri thức & Bộ Não Thứ Hai](https://awesome.tryopenclaw.asia/docs/02-core-features/05-knowledge-management/)
+
+Trải nghiệm đọc tốt hơn trên website giáo trình:
+- 📱 Thiết kế tương thích hoàn hảo cho điện thoại, máy tính bảng và máy tính
+- 🌙 Chế độ nền tối (Dark Mode) dịu mắt
+- 🔍 Tích hợp tìm kiếm nhanh nội dung
+- 📋 Thanh điều hướng mục lục trực quan, dễ dàng chuyển đổi giữa các chương
+
+[🏠 Truy cập website giáo trình đầy đủ](https://awesome.tryopenclaw.asia)

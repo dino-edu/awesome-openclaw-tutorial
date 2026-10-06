@@ -1,697 +1,731 @@
-> 📖 **纸质书《OpenClaw超级个体实操手册》已上市！** 清华大学出版社出版，在开源教程基础上全面重写+逐条验证。🛒 [京东专属购买链接（¥42，原价¥59.8）](https://item.jd.com/14669463.html)
+> 📖 **Giáo trình Awesome OpenClaw Tutorial** | Bản dịch tiếng Việt chính thức cho cộng đồng. Nguyên tác thuộc về tác giả [@xianyu110](https://github.com/xianyu110).
 
-# 第4章节：本地文件管理
+# Chương 4: Quản lý Tệp tin Cục bộ
 
-> OpenClaw最强大的功能之一，就是可以访问和管理你电脑上的文件。这是在线AI无法做到的。
+> Một trong những tính năng mạnh mẽ nhất của OpenClaw là khả năng truy cập và quản lý các tệp tin trực tiếp trên máy tính của bạn — điều mà các dịch vụ AI trực tuyến thông thường hoàn toàn không thể làm được.
 
-## 快速导航
+## Điều hướng nhanh
 
-- 🔍 [智能文件搜索](#智能文件搜索)
-- 📦 [批量文件处理](#批量文件处理)
-- 📁 [文件自动整理](#文件自动整理)
-- 🧹 [硬盘清理优化](#硬盘清理优化)
+- 🔍 [Tìm kiếm tệp thông minh](#41-tìm-kiếm-tệp-thông-minh)
+- 📦 [Xử lý tệp hàng loạt](#42-xử-lý-tệp-hàng-loạt)
+- 📁 [Tự động sắp xếp tệp](#43-tự-động-sắp-xếp-tệp)
+- 🧹 [Dọn dẹp và tối ưu hóa ổ cứng](#44-dọn-dẹp-và-tối-ưu-hóa-ổ-cứng)
 
-## 4.1 智能文件搜索
+---
 
-### 为什么需要智能搜索？
+## 4.1 Tìm kiếm tệp thông minh
 
-传统的文件搜索只能按文件名查找，但经常遇到：
-- ❌ 忘记文件名，只记得内内容
-- ❌ 文件太多，不知道在哪个文件夹
-- ❌ 需要同时搜索多种类型的文件
-- ❌ 需要根据内内容筛选文件
+### Tại sao bạn cần tìm kiếm thông minh?
 
-**OpenClaw的智能搜索可以**：
-- ✅ 根据文件内内容搜索
-- ✅ 理解自然语言描述
-- ✅ 跨文件夹搜索
-- ✅ 智能过滤和排序
+Cách tìm kiếm tệp truyền thống chỉ dựa vào tên tệp, nhưng thực tế bạn rất hay gặp phải các tình huống:
+- ❌ Quên mất tên tệp, chỉ nhớ mang máng nội dung bên trong
+- ❌ Quá nhiều tệp tin, không nhớ đã lưu trong thư mục nào
+- ❌ Cần tìm kiếm đồng thời nhiều định dạng tệp khác nhau
+- ❌ Cần lọc tệp dựa trên ngữ cảnh và nội dung chi tiết
 
-### 场景1：找文件
+**Tìm kiếm thông minh của OpenClaw giúp bạn**:
+- ✅ Tìm kiếm trực tiếp theo nội dung bên trong tệp
+- ✅ Hiểu các câu mô tả bằng ngôn ngữ tự nhiên
+- ✅ Tìm kiếm xuyên suốt qua nhiều thư mục
+- ✅ Tự động lọc và sắp xếp kết quả thông minh
 
-**真实案例**：找发布票
+### Tình huống 1: Tìm tệp thất lạc
 
-> 我电脑里有一堆发布票，特别乱，我忘了哪一张是买跑步机的了。
-> 按过去，我得一张一张点开来搜索。真的，这事太呆逼了。
+**Trường hợp thực tế**: Tìm hóa đơn
 
-![混乱的发布票文件夹 - 传统文件管理的痛点](https://upload.maynor1024.live/file/1770176215000_image_4.jpg)
+> Trong máy tính của tôi có một đống hóa đơn lưu trữ rất lộn xộn. Tôi quên mất hóa đơn mua máy chạy bộ là tệp nào.
+> Theo cách cũ, tôi sẽ phải bấm mở từng ảnh một để xem. Thật sự việc này vô cùng tốn thời gian và máy móc.
 
-**传统方法**：
-1. 打开文件夹
-2. 一张一张点开图片
-3. 查看内内容
-4. 找到目标文件
-5. 耗时：10-30分钟
+![Thư mục hóa đơn lộn xộn - Nỗi đau của quản lý tệp truyền thống](https://upload.maynor1024.live/file/1770176215000_image_4.jpg)
 
-**OpenClaw方法**：
+**Cách truyền thống**:
+1. Mở thư mục
+2. Nhấp mở từng hình ảnh
+3. Xem nội dung bên trong
+4. Tìm tệp đích
+5. Thời gian tiêu tốn: 10 - 30 phút
 
-我：帮我找一下我电脑上的一张发布票，里面详情是买了一个跑步机，
-然后把那个发布票用文件发布给我。
-![OpenClaw智能搜索 - 通过语义理解找到目标文件](https://upload.maynor1024.live/file/1770176217951_image_5.jpg)
+**Cách dùng OpenClaw**:
 
-**OpenClaw执行过程**：
-1. 🔍 搜索所有图片文件
-2. 📄 使用OCR识别文字
-3. 🎯 匹配"跑步机"关键词
-4. 📤 发布送找到的文件
+Tôi: Tìm giúp tôi một hóa đơn trên máy tính, chi tiết bên trong có mục mua máy chạy bộ, sau đó gửi tệp hóa đơn đó qua cho tôi.
 
-![找到的发布票详情 - 精准匹配用户需求](https://upload.maynor1024.live/file/1770176224257_image_6.jpg)
+![Tìm kiếm thông minh OpenClaw - Tìm đúng tệp đích nhờ hiểu ngữ nghĩa](https://upload.maynor1024.live/file/1770176217951_image_5.jpg)
 
-**结果**：
-- ⏱️ 耗时：30-60秒
-- ✅ 准确率：100%
-- 😊 体验：太爽了！
+**Quy trình OpenClaw thực thi**:
+1. 🔍 Quét toàn bộ các tệp hình ảnh
+2. 📄 Dùng OCR nhận diện văn bản trong ảnh
+3. 🎯 Khớp từ khóa "máy chạy bộ"
+4. 📤 Gửi lại tệp tin đã tìm thấy
 
-### 搜索命令示例
+![Chi tiết hóa đơn tìm thấy - Khớp chính xác nhu cầu người dùng](https://upload.maynor1024.live/file/1770176224257_image_6.jpg)
 
-#### 按内内容搜索
+**Kết quả**:
+- ⏱️ Thời gian tiêu tốn: 30 - 60 giây
+- ✅ Độ chính xác: 100%
+- 😊 Trải nghiệm: Vô cùng tiện lợi và mượt mà!
 
-找一下包含"合同"的PDF文件
-搜索所有提到"项目计划"的文档
-找一下我写的关于AI的笔记
-#### 按类型搜索
+### Ví dụ câu lệnh tìm kiếm
 
-找出所有的PNG图片
-搜索最近下载的PDF文件
-找一下所有的Excel表格
-#### 按时间搜索
+#### Tìm theo nội dung
 
-找一下最近7天修改的文件
-搜索上个月创建的文档
-找一下今天下载的文件
-#### 按大小搜索
+- Tìm giúp tôi các tệp PDF có chứa từ khóa "hợp đồng"
+- Tìm kiếm tất cả tài liệu có nhắc đến "kế hoạch dự án"
+- Tìm lại những ghi chú tôi đã viết về chủ đề AI
 
-找出大于100MB的文件
-搜索所有小于1MB的图片
-找一下占用空间最大的10个文件
-#### 组合搜索
+#### Tìm theo định dạng
 
-找一下最近一周内，包含"发布票"的图片文件
-搜索下载文件夹里，大于10MB的PDF
-找一下桌面上，今天修改过的Word文档
-### 搜索技巧
+- Lọc ra tất cả các hình ảnh định dạng PNG
+- Tìm các tệp PDF vừa tải xuống gần đây
+- Tìm kiếm toàn bộ bảng tính Excel trên máy
 
-#### 技巧1：描述内内容而非文件名
+#### Tìm theo thời gian
 
-**❌ 不好的搜索**：
-找一下IMG_1234.jpg
-**✅ 好的搜索**：
-找一下我去年在海边拍的照片
-#### 技巧2：提供上下文
+- Tìm các tệp được chỉnh sửa trong 7 ngày gần nhất
+- Tìm kiếm tài liệu được tạo vào tháng trước
+- Lọc ra những tệp được tải xuống trong ngày hôm nay
 
-**❌ 不好的搜索**：
-找发布票
-**✅ 好的搜索**：
-找一下我上个月买跑步机的发布票，应该是在下载文件夹里
-#### 技巧3：指定搜索范围
+#### Tìm theo dung lượng
 
-**❌ 不好的搜索**：
-找所有文件
-**✅ 好的搜索**：
-在文档文件夹里找所有的PDF文件
-#### 技巧4：使用排序
+- Lọc ra những tệp có dung lượng lớn hơn 100MB
+- Tìm tất cả hình ảnh có kích thước dưới 1MB
+- Liệt kê 10 tệp đang chiếm nhiều dung lượng ổ cứng nhất
 
-**❌ 不好的搜索**：
-找图片
-**✅ 好的搜索**：
-找最近修改的10张图片，按时间排序
-### 实战练习
+#### Tìm kiếm kết hợp đa điều kiện
 
-**练习1：找照片**
-帮我找一下我电脑上所有的自拍照片
-**练习2：找文档**
-找一下包含"年度总结"的Word文档
-**练习3：找下载文件**
-找一下我最近下载的所有PDF文件
-## 4.2 批量文件处理
+- Tìm các tệp ảnh chứa "hóa đơn" phát sinh trong vòng 1 tuần qua
+- Tìm kiếm trong thư mục Downloads các tệp PDF có dung lượng trên 10MB
+- Tìm trên Desktop những tài liệu Word đã được chỉnh sửa trong hôm nay
 
-### 场景2：整理发布票报销
+### Mẹo tìm kiếm hiệu quả
 
-**真实案例**：自动填写报销单
+#### Mẹo 1: Mô tả nội dung thay vì cố nhớ tên tệp
 
-> 公司财务有个非常严格的规定，就是发布票需要填写在1个excel模板上，
-> 然后把发布票和这个excel文件一起提交给财务。
+- **❌ Câu lệnh chưa tốt**: Tìm giúp tôi tệp IMG_1234.jpg
+- **✅ Câu lệnh hiệu quả**: Tìm giúp tôi bức ảnh tôi chụp ở bãi biển vào năm ngoái
+
+#### Mẹo 2: Cung cấp ngữ cảnh cụ thể
+
+- **❌ Câu lệnh chưa tốt**: Tìm hóa đơn
+- **✅ Câu lệnh hiệu quả**: Tìm hóa đơn mua máy chạy bộ tháng trước của tôi, hình như nằm trong thư mục Downloads
+
+#### Mẹo 3: Giới hạn phạm vi tìm kiếm
+
+- **❌ Câu lệnh chưa tốt**: Tìm tất cả tệp
+- **✅ Câu lệnh hiệu quả**: Tìm tất cả các tệp PDF nằm trong thư mục Documents
+
+#### Mẹo 4: Yêu cầu sắp xếp kết quả
+
+- **❌ Câu lệnh chưa tốt**: Tìm ảnh
+- **✅ Câu lệnh hiệu quả**: Tìm 10 bức ảnh được chỉnh sửa gần đây nhất, sắp xếp theo thứ tự thời gian
+
+### Bài tập thực hành
+
+- **Bài tập 1: Tìm ảnh**: Tìm giúp tôi tất cả ảnh selfie trên máy tính
+- **Bài tập 2: Tìm tài liệu**: Tìm các tài liệu Word có nội dung "tổng kết năm"
+- **Bài tập 3: Tìm tệp tải về**: Tìm tất cả tệp PDF tôi đã tải về gần đây
+
+---
+
+## 4.2 Xử lý tệp hàng loạt
+
+### Tình huống 2: Sắp xếp hóa đơn thanh toán hoàn ứng
+
+**Trường hợp thực tế**: Tự động điền bảng kê hoàn ứng chi phí
+
+> Bộ phận kế toán công ty có quy định rất nghiêm ngặt: toàn bộ hóa đơn phải được kê khai chi tiết vào một bảng mẫu Excel, sau đó nộp kèm hóa đơn gốc và tệp Excel này cho kế toán.
 > 
-> 以前，虽然都不会笨到用手填，但还是要把所有发布票都传到ChatGPT
-> 或者别的AI产品上，然后让他们来帮忙填写。
+> Trước đây, dù không đến mức phải gõ tay từng chữ, nhưng tôi vẫn phải tải từng hóa đơn lên ChatGPT hoặc các công cụ AI khác để nhờ trích xuất thông tin.
 
-**传统方法**：
-1. 打开ChatGPT
-2. 上传发布票图片（一张一张）
-3. 让AI提取信息
-4. 复制到Excel
-5. 重复N次
-6. 耗时：30-60分钟
+**Cách truyền thống**:
+1. Mở ChatGPT
+2. Tải từng ảnh hóa đơn lên (lần lượt từng tấm)
+3. Yêu cầu AI trích xuất thông tin
+4. Sao chép kết quả vào Excel
+5. Lặp lại N lần
+6. Thời gian tiêu tốn: 30 - 60 phút
 
-**OpenClaw方法**：
+**Cách dùng OpenClaw**:
 
-我：我希望你帮我把我本地那个1月发布票文件夹里的所有发布票都整理一下，
-按照那个下载文件里报销单.xlsx的模板格式填进去，
-再把填好的表格用文件发布送给我。
-![批量整理发布票 - 自动分类和重命名](https://upload.maynor1024.live/file/1770176222217_image_7.jpg)
+Tôi: Tôi muốn bạn giúp tôi tổng hợp toàn bộ hóa đơn trong thư mục hóa đơn tháng 1 cục bộ, điền theo đúng cấu trúc mẫu của tệp bang_ke_hoan_ung.xlsx trong thư mục Downloads, rồi gửi lại bảng tính đã điền hoàn chỉnh cho tôi.
 
-**OpenClaw执行过程**：
-1. 📁 读取发布票文件夹
-2. 🔍 识别所有发布票图片
-3. 📄 OCR提取信息（日期、金额、商家等）
-4. 📊 读取Excel模板
-5. ✍️ 按模板格式填写
-6. 💾 保存新文件
-7. 📤 发布送给你
+![Xử lý hóa đơn hàng loạt - Tự động phân loại và đổi tên](https://upload.maynor1024.live/file/1770176222217_image_7.jpg)
 
-**结果**：
-- ⏱️ 耗时：2-5分钟
-- ✅ 准确率：95%+
-- 😊 体验：直接搞定！
+**Quy trình OpenClaw thực thi**:
+1. 📁 Đọc thư mục chứa hóa đơn
+2. 🔍 Nhận diện toàn bộ ảnh hóa đơn
+3. 📄 Dùng OCR trích xuất thông tin (ngày tháng, số tiền, đơn vị bán hàng, v.v.)
+4. 📊 Đọc tệp mẫu Excel
+5. ✍️ Điền dữ liệu chuẩn xác theo cấu trúc bảng mẫu
+6. 💾 Lưu tệp mới hoàn chỉnh
+7. 📤 Gửi lại tệp cho bạn
 
-### 批量处理命令示例
+**Kết quả**:
+- ⏱️ Thời gian tiêu tốn: 2 - 5 phút
+- ✅ Độ chính xác: 95%+
+- 😊 Trải nghiệm: Hoàn thành tự động chỉ với một câu lệnh!
 
-#### 批量读取
+### Ví dụ câu lệnh xử lý hàng loạt
 
-读取文档文件夹里所有的PDF文件
-提取所有图片中的文字
-读取所有Excel表格的第一行
-#### 批量提取信息
+#### Đọc hàng loạt
 
-从所有发布票中提取日期、金额、商家信息
-从所有简历中提取姓名、电话、邮箱
-从所有合同中提取甲方、乙方、金额
-#### 批量格式转换
+- Đọc toàn bộ các tệp PDF nằm trong thư mục Documents
+- Trích xuất văn bản từ tất cả các hình ảnh được chọn
+- Đọc dòng đầu tiên (tiêu đề cột) của toàn bộ bảng tính Excel
 
-把所有Word文档转换成PDF
-把所有PNG图片转换成JPG
-把所有Excel表格导出为CSV
-#### 批量数据整理
+#### Trích xuất thông tin hàng loạt
 
-把所有发布票信息整理到一个Excel表格
-把所有联系人信息整理成通讯附录
-把所有会议记附录整理成一份总结
-### 实战案例
+- Trích xuất ngày tháng, số tiền, tên nhà cung cấp từ tất cả các hóa đơn
+- Trích xuất họ tên, số điện thoại, email từ toàn bộ hồ sơ ứng viên (CV)
+- Trích xuất thông tin bên A, bên B, giá trị hợp đồng từ toàn bộ tệp hợp đồng
 
-#### 案例1：整理客户信息
+#### Chuyển đổi định dạng hàng loạt
 
-**场景**：
-- 有100份客户资料（Word文档）
-- 需要提取：公司名、联系人、电话、邮箱
-- 整理到Excel表格
+- Chuyển đổi toàn bộ tài liệu Word thành PDF
+- Đổi định dạng tất cả ảnh PNG sang JPG
+- Xuất toàn bộ bảng tính Excel thành tệp CSV
 
-**命令**：
-帮我从"客户资料"文件夹里的所有Word文档中，
-提取公司名、联系人、电话、邮箱，
-整理到一个Excel表格里，
-按公司名排序。
-**结果**：
-- 自动提取100份资料
-- 生成规范的Excel表格
-- 耗时：5-10分钟
+#### Tổng hợp dữ liệu hàng loạt
 
-#### 案例2：批量提取PDF内内容
+- Tổng hợp thông tin từ tất cả hóa đơn vào một bảng tính Excel duy nhất
+- Gom toàn bộ thông tin liên hệ thành một danh bạ chuẩn
+- Tổng hợp biên bản các cuộc họp thành một bản tóm lược chung
 
-**场景**：
-- 有50份PDF报告
-- 需要提取每份报告的摘要
-- 整理成一份汇总文档
+### Ca thực chiến
 
-**命令**：
-读取"报告"文件夹里所有的PDF文件，
-提取每份报告的摘要部分（通常在第一页），
-整理成一份Word文档，
-每个摘要标注来源文件名。
-**结果**：
-- 自动读取50份PDF
-- 提取摘要内内容
-- 生成汇总文档
+#### Ca 1: Sắp xếp thông tin khách hàng
 
-#### 案例3：批量图片识别
+**Tình huống**:
+- Có 100 tài liệu Word chứa hồ sơ khách hàng
+- Cần trích xuất: Tên công ty, Người liên hệ, Điện thoại, Email
+- Gom lại thành một bảng tính Excel
 
-**场景**：
-- 有200张名片照片
-- 需要提取联系信息
-- 整理成通讯附录
+**Câu lệnh**:
+> Giúp tôi trích xuất Tên công ty, Người liên hệ, Điện thoại và Email từ toàn bộ tài liệu Word trong thư mục "Ho_so_khach_hang", sau đó gom vào một bảng tính Excel và sắp xếp theo tên công ty.
 
-**命令**：
-识别"名片"文件夹里所有图片，
-提取姓名、公司、职位、电话、邮箱，
-整理成Excel通讯附录，
-按公司分类。
-**结果**：
-- OCR识别200张名片
-- 自动分类整理
-- 生成标准通讯附录
+**Kết quả**:
+- Tự động trích xuất thông tin từ 100 tài liệu
+- Tạo bảng tính Excel chuẩn mực
+- Thời gian thực hiện: 5 - 10 phút
 
-### 错误处理和内容错
+#### Ca 2: Trích xuất tóm tắt hàng loạt tệp PDF
 
-#### 处理识别错误
+**Tình huống**:
+- Có 50 báo cáo PDF
+- Cần trích xuất phần tóm tắt (Executive Summary) của từng báo cáo
+- Gom thành một tài liệu tổng hợp duy nhất
 
-我：帮我检查一下刚才生成的Excel表格，
-看看有没有识别错误的地方，
-比如电话号码格式不对、金额异常等。
-#### 处理缺失信息
+**Câu lệnh**:
+> Đọc toàn bộ các tệp PDF trong thư mục "Bao_cao", trích xuất phần tóm tắt của từng báo cáo (thường ở trang đầu tiên), gom thành một tài liệu Word và ghi chú rõ tên tệp nguồn tương ứng cho mỗi phần tóm tắt.
 
-我：有些发布票可能信息不全，
-如果缺少必填项，请单独列出来，
-我手动补充。
-#### 处理格式访问题
+**Kết quả**:
+- Tự động đọc 50 tệp PDF
+- Trích xuất chính xác nội dung tóm tắt
+- Xuất bản tài liệu tổng hợp đầy đủ nguồn dẫn
 
-我：如果遇到无法识别的文件格式，
-请跳过并告诉我，
-我会手动处理。
-## 4.3 文件自动整理
+#### Ca 3: Nhận diện ảnh danh thiếp hàng loạt
 
-### 场景3：批量重命名文件
+**Tình huống**:
+- Có 200 bức ảnh chụp danh thiếp
+- Cần lấy thông tin liên hệ
+- Lập thành danh bạ liên lạc
 
-**真实案例**：邀请函重命名
+**Câu lệnh**:
+> Nhận diện toàn bộ ảnh trong thư mục "Danh_thiep", trích xuất Họ tên, Công ty, Chức vụ, Số điện thoại, Email, rồi lập thành danh bạ Excel phân loại theo từng công ty.
 
-> 设计同学给我做了一些邀请函，是微信发布我的，然后我存下来的。
-> 存完了以后，发布现一个BUG。
-> 名字全特么是微信文件XXX。
-> 太BUG了，我根本不知道谁是谁的。
+**Kết quả**:
+- Quét OCR 200 danh thiếp
+- Tự động phân loại và chuẩn hóa
+- Tạo danh bạ liên hệ bài bản
 
-![混乱的邀请函文件 - 文件名不规范](https://upload.maynor1024.live/file/1770176232438_image_8.jpg)
+### Xử lý lỗi và dự phòng dữ liệu
 
-**传统方法**：
-1. 打开每张图片
-2. 看内内容
-3. 手动重命名
-4. 重复N次
-5. 耗时：20-30分钟
+#### Xử lý lỗi nhận diện
+> Tôi: Hãy kiểm tra lại bảng tính Excel vừa tạo xem có lỗi nhận diện nào không, ví dụ như sai định dạng số điện thoại hoặc số tiền bất thường.
 
-**OpenClaw方法**：
+#### Xử lý thiếu thông tin
+> Tôi: Một số hóa đơn có thể bị mờ hoặc thiếu thông tin. Nếu thiếu các trường bắt buộc, hãy liệt kê riêng ra để tôi bổ sung thủ công.
 
-我：让OpenClaw根据我邀请函里面对应的人名，
-把外面的名字改成"人名-邀请函.jpg"的格式。
-![批量重命名后 - 文件名清晰规范](https://upload.maynor1024.live/file/1770176231952_image_9.jpg)
+#### Xử lý sự cố định dạng tệp
+> Tôi: Nếu gặp định dạng tệp không thể nhận diện được, hãy bỏ qua và báo lại tên tệp cho tôi để tôi xử lý riêng.
 
-**OpenClaw执行过程**：
-1. 📁 读取所有图片
-2. 🔍 OCR识别人名
-3. ✍️ 生成新文件名
-4. 📝 批量重命名
-5. ✅ 完成
+---
 
-**结果**：
-- ⏱️ 耗时：1-2分钟
-- ✅ 准确率：100%
-- 😊 体验：一句话搞定！
+## 4.3 Tự động sắp xếp tệp
 
-### 文件整理命令示例
+### Tình huống 3: Đổi tên tệp hàng loạt
 
-#### 批量重命名
+**Trường hợp thực tế**: Đổi tên thư mời
 
-把所有图片按拍摄日期重命名，格式：YYYY-MM-DD_序号.jpg
-把所有文档按内内容主题重命名
-把所有下载文件按类型重命名
-#### 文件分类
+> Bạn thiết kế gửi cho tôi một loạt thư mời qua WeChat, sau đó tôi tải toàn bộ về máy.
+> Tải xong thì phát hiện vấn đề:
+> Tên tệp nào cũng là dạng `WeChat_File_XXX.jpg`.
+> Thật sự không thể biết tệp nào là thư mời của ai.
 
-把桌面上的文件按类型分类到不同文件夹
-把下载文件夹里的文件按日期分类
-把照片按拍摄地点分类
-#### 文件夹结构优化
+![Tệp thư mời lộn xộn - Tên tệp không theo chuẩn](https://upload.maynor1024.live/file/1770176232438_image_8.jpg)
 
-帮我整理一下项目文件夹，按功能模块分类
-优化我的文档文件夹结构，让它更清晰
-把所有散乱的文件整理到合适的文件夹
-### 实战案例
+**Cách truyền thống**:
+1. Mở từng bức ảnh
+2. Đọc nội dung xem tên khách mời là ai
+3. Đổi tên tệp thủ công
+4. Lặp lại N lần
+5. Thời gian tiêu tốn: 20 - 30 phút
 
-#### 案例1：整理下载文件夹
+**Cách dùng OpenClaw**:
 
-**场景**：
-- 下载文件夹有500+文件
-- 各种类型混在一起
-- 需要分类整理
+Tôi: Hãy để OpenClaw nhận diện tên người tương ứng bên trong từng thư mời, rồi đổi tên tệp bên ngoài theo định dạng: "Tên_người - Thu_moi.jpg".
 
-**命令**：
-帮我整理下载文件夹：
-1. 按文件类型分类（文档、图片、视频、压缩包等）
-2. 每个类型创建一个子文件夹
-3. 把文件移动到对应文件夹
-4. 删除重复文件
-5. 告诉我整理结果
-**结果**：
-✅ 整理完成！
+![Sau khi đổi tên hàng loạt - Tên tệp rõ ràng, đúng chuẩn](https://upload.maynor1024.live/file/1770176231952_image_9.jpg)
 
-📊 统计：
-- 文档：120个 → Documents/
-- 图片：200个 → Images/
-- 视频：50个 → Videos/
-- 压缩包：30个 → Archives/
-- 其他：100个 → Others/
+**Quy trình OpenClaw thực thi**:
+1. 📁 Đọc tất cả hình ảnh trong thư mục
+2. 🔍 Nhận diện OCR tên người trong thư mời
+3. ✍️ Tạo tên tệp chuẩn mới
+4. 📝 Đổi tên hàng loạt trên ổ đĩa
+5. ✅ Hoàn tất
 
-🗑️ 删除重复文件：15个
-💾 释放空间：2.3GB
-#### 案例2：照片自动分类
+**Kết quả**:
+- ⏱️ Thời gian tiêu tốn: 1 - 2 phút
+- ✅ Độ chính xác: 100%
+- 😊 Trải nghiệm: Xong ngay chỉ với một câu lệnh!
 
-**场景**：
-- 有1000+张照片
-- 需要按日期和地点分类
-- 方便查找
+### Ví dụ câu lệnh sắp xếp tệp
 
-**命令**：
-帮我整理照片文件夹：
-1. 按拍摄日期创建文件夹（YYYY-MM格式）
-2. 如果照片有地理位置信息，在文件名中标注
-3. 删除模糊和重复的照片
-4. 生成一个索引文件
-**结果**：
-✅ 整理完成！
+#### Đổi tên hàng loạt
 
-📁 文件夹结构：
+- Đổi tên toàn bộ ảnh theo ngày chụp, định dạng: `YYYY-MM-DD_STT.jpg`
+- Đổi tên tất cả tài liệu theo chủ đề nội dung bên trong
+- Đổi tên toàn bộ tệp trong Downloads theo định dạng loại tệp
+
+#### Phân loại tệp
+
+- Phân loại các tệp ngoài Desktop vào từng thư mục tương ứng theo định dạng
+- Gom các tệp trong thư mục Downloads vào các thư mục theo tháng/ngày tải về
+- Phân loại ảnh chụp theo vị trí địa lý
+
+#### Tối ưu hóa cấu trúc thư mục
+
+- Giúp tôi sắp xếp lại thư mục dự án, phân loại theo từng mô-đun chức năng
+- Tối ưu cấu trúc thư mục Documents để gọn gàng và dễ tra cứu hơn
+- Gom toàn bộ tệp nằm rải rác vào đúng thư mục phù hợp
+
+### Ca thực chiến
+
+#### Ca 1: Dọn dẹp thư mục Downloads
+
+**Tình huống**:
+- Thư mục Downloads có hơn 500 tệp tin đủ loại nằm lẫn lộn
+- Cần phân loại gọn gàng
+
+**Câu lệnh**:
+> Giúp tôi sắp xếp thư mục Downloads:
+> 1. Phân loại theo định dạng (Documents, Images, Videos, Archives, v.v.)
+> 2. Tạo các thư mục con tương ứng
+> 3. Di chuyển tệp vào đúng thư mục
+> 4. Xóa các tệp trùng lặp
+> 5. Báo cáo lại kết quả sau khi hoàn thành
+
+**Kết quả**:
+```text
+✅ Sắp xếp hoàn tất!
+
+📊 Thống kê:
+- Tài liệu: 120 tệp → Documents/
+- Hình ảnh: 200 tệp → Images/
+- Video: 50 tệp → Videos/
+- Tệp nén: 30 tệp → Archives/
+- Khác: 100 tệp → Others/
+
+🗑️ Đã xóa tệp trùng lặp: 15 tệp
+💾 Giải phóng dung lượng: 2.3GB
+```
+
+#### Ca 2: Tự động phân loại ảnh
+
+**Tình huống**:
+- Hơn 1.000 bức ảnh chụp cần sắp xếp
+- Phân loại theo ngày và địa điểm để tiện tra cứu
+
+**Câu lệnh**:
+> Giúp tôi sắp xếp thư mục Photos:
+> 1. Tạo thư mục theo tháng chụp (định dạng YYYY-MM)
+> 2. Nếu ảnh có thông tin GPS, hãy thêm địa danh vào tên tệp
+> 3. Lọc bỏ ảnh bị mờ và ảnh trùng lặp
+> 4. Tạo một tệp chỉ mục tóm tắt
+
+**Kết quả**:
+```text
+✅ Sắp xếp hoàn tất!
+
+📁 Cấu trúc thư mục:
 Photos/
 ├── 2025-12/
-│   ├── 2025-12-01_北京_001.jpg
-│   ├── 2025-12-01_北京_002.jpg
+│   ├── 2025-12-01_HaNoi_001.jpg
+│   ├── 2025-12-01_HaNoi_002.jpg
 │   └── ...
 ├── 2026-01/
-│   ├── 2026-01-15_上海_001.jpg
+│   ├── 2026-01-15_DaNang_001.jpg
 │   └── ...
-└── index.txt (索引文件)
+└── index.txt (Tệp chỉ mục tra cứu)
 
-🗑️ 删除模糊照片：50张
-🗑️ 删除重复照片：30张
-#### 案例3：文档归档
+🗑️ Đã xóa ảnh mờ: 50 tấm
+🗑️ Đã xóa ảnh trùng: 30 tấm
+```
 
-**场景**：
-- 项目结束，需要归档
-- 文档散落在各处
-- 需要统一整理
+#### Ca 3: Lưu trữ tài liệu dự án hoàn tất
 
-**命令**：
-帮我归档"XX项目"的所有文档：
-1. 搜索所有相关文档（包含项目名称）
-2. 按文档类型分类（需求、设计、代码、测试等）
-3. 创建归档文件夹结构
-4. 移动文件到对应位置
-5. 生成项目文档清单
-**结果**：
-✅ 归档完成！
+**Tình huống**:
+- Dự án kết thúc, cần đóng gói lưu trữ (archive)
+- Tài liệu nằm phân tán ở nhiều nơi
 
-📁 文件夹结构：
-XX项目_归档_2026-02-10/
-├── 01_需求文档/
-├── 02_设计文档/
-├── 03_开发布文档/
-├── 04_测试文档/
-├── 05_部署文档/
-└── 文档清单.xlsx
+**Câu lệnh**:
+> Giúp tôi lưu trữ toàn bộ tài liệu của "Dự án XX":
+> 1. Tìm tất cả tài liệu có chứa tên dự án
+> 2. Phân loại theo nhóm (Yêu cầu, Thiết kế, Mã nguồn, Kiểm thử, Triển khai)
+> 3. Tạo cấu trúc thư mục lưu trữ bài bản
+> 4. Di chuyển tệp vào đúng vị trí
+> 5. Xuất danh mục kiểm kê tài liệu ra tệp Excel
 
-📊 统计：
-- 总文件数：156个
-- 总大小：1.2GB
-### 自动化脚本编写
+**Kết quả**:
+```text
+✅ Đóng gói lưu trữ hoàn tất!
 
-如果你经常需要整理某类文件，可以让OpenClaw生成自动化脚本：
+📁 Cấu trúc thư mục:
+Du_an_XX_Archive_2026-02-10/
+├── 01_Yeu_cau/
+├── 02_Thiet_ke/
+├── 03_Phat_trien/
+├── 04_Kiem_thu/
+├── 05_Trien_khai/
+└── Danh_muc_tai_lieu.xlsx
 
-我：帮我写1个脚本，每周自动整理下载文件夹，
-按照刚才的规则分类。
-OpenClaw会生成一个可以定时运行的脚本，实现自动化整理。
+📊 Thống kê:
+- Tổng số tệp: 156 tệp
+- Tổng dung lượng: 1.2GB
+```
 
-## 4.4 硬盘清理优化
+### Viết kịch bản tự động hóa
 
-### 场景4：清理硬盘垃圾
+Nếu bạn thường xuyên phải sắp xếp một loại tệp nhất định, hãy yêu cầu OpenClaw tạo script tự động:
 
-**真实案例**：释放硬盘空间
+> Tôi: Hãy viết cho tôi 1 script tự động dọn dẹp và sắp xếp thư mục Downloads mỗi tuần, phân loại theo các quy tắc vừa rồi.
 
-> 如果你硬盘快满了，你也别下那些扫描清垃圾的软件了。
-> 直接让OpenClaw给你过一遍。
+OpenClaw sẽ tạo kịch bản có thể chạy định kỳ để tự động hóa toàn bộ công việc này.
 
-![硬盘空间清理 - 智能识别大文件和重复文件](https://upload.maynor1024.live/file/1770176234805_image_10.jpg)
+---
 
-**传统方法**：
-1. 下载清理软件
-2. 扫描硬盘
-3. 手动选择删除
-4. 担心误删重要文件
-5. 耗时：30-60分钟
+## 4.4 Dọn dẹp và tối ưu hóa ổ cứng
 
-**OpenClaw方法**：
+### Tình huống 4: Dọn rác ổ cứng
 
-我：帮我分析一下硬盘空间使用情况，
-找出占用空间最大的文件和文件夹，
-建议哪些可以清理。
-**OpenClaw执行过程**：
-1. 📊 扫描硬盘
-2. 📈 分析空间占用
-3. 🔍 找出大文件
-4. 🗑️ 识别垃圾文件
-5. 💡 提供清理建议
+**Trường hợp thực tế**: Giải phóng không gian lưu trữ
 
-### 清理命令示例
+> Khi ổ cứng của bạn sắp đầy, bạn không cần phải tải thêm các phần mềm dọn rác cồng kềnh. Hãy để OpenClaw quét và xử lý giúp bạn.
 
-#### 查找大文件
+![Dọn dẹp không gian ổ cứng - Tự động nhận diện tệp lớn và tệp trùng lặp](https://upload.maynor1024.live/file/1770176234805_image_10.jpg)
 
-找出占用空间最大的10个文件
-查找大于1GB的文件
-分析哪个文件夹占用空间最多
-#### 查找重复文件
+**Cách truyền thống**:
+1. Tải phần mềm dọn dẹp
+2. Quét ổ cứng
+3. Chọn từng mục để xóa thủ công
+4. Lo lắng xóa nhầm tệp quan trọng
+5. Thời gian tiêu tốn: 30 - 60 phút
 
-找出所有重复的文件
-查找重复的照片
-找出重复的文档
-#### 查找临时文件
+**Cách dùng OpenClaw**:
 
-找出所有临时文件
-查找缓存文件
-找出可以安全删除的文件
-#### 清理建议
+Tôi: Phân tích giúp tôi tình trạng sử dụng dung lượng ổ cứng, tìm ra các tệp và thư mục đang chiếm nhiều dung lượng nhất, đồng thời gợi ý những mục nào có thể dọn dẹp an toàn.
 
-分析我的硬盘，给出清理建议
-哪些文件可以移动到外部硬盘
-哪些文件可以压缩存储
-### 实战案例：释放100GB空间
+**Quy trình OpenClaw thực thi**:
+1. 📊 Quét ổ cứng
+2. 📈 Phân tích dung lượng chiếm dụng
+3. 🔍 Lọc ra các tệp dung lượng lớn
+4. 🗑️ Nhận diện tệp rác và bộ nhớ đệm tạm thời
+5. 💡 Đưa ra đề xuất dọn dẹp an toàn
 
-**第一步：分析空间占用**
+### Ví dụ câu lệnh dọn dẹp
 
-我：帮我分析一下硬盘空间使用情况
-**OpenClaw回复**：
-📊 硬盘空间分析：
+#### Tìm tệp dung lượng lớn
 
-总内容量：500GB
-已使用：450GB (90%)
-剩余：50GB (10%)
+- Tìm 10 tệp đang chiếm nhiều dung lượng nhất
+- Lọc ra toàn bộ các tệp có kích thước lớn hơn 1GB
+- Phân tích xem thư mục nào đang ngốn nhiều dung lượng ổ đĩa nhất
 
-⚠️ 空间不足警告！
+#### Tìm tệp trùng lặp
 
-占用空间最多的文件夹：
+- Quét toàn bộ các tệp bị trùng lặp nội dung
+- Tìm các bức ảnh trùng lặp
+- Lọc ra các tài liệu bị trùng bản sao
+
+#### Tìm tệp tạm thời và cache
+
+- Tìm tất cả các tệp tạm thời (temp files)
+- Quét các tệp bộ nhớ đệm (cache) hệ thống và ứng dụng
+- Liệt kê các tệp có thể xóa an toàn mà không ảnh hưởng tới hệ điều hành
+
+#### Đề xuất dọn dẹp
+
+- Phân tích ổ cứng và đưa ra khuyến nghị dọn dẹp
+- Những tệp nào nên chuyển sang ổ cứng ngoài?
+- Những tệp nào có thể nén lại để tiết kiệm bộ nhớ?
+
+### Ca thực chiến: Giải phóng 100GB dung lượng
+
+**Bước 1: Phân tích mức độ sử dụng dung lượng**
+
+> Tôi: Phân tích tình trạng sử dụng ổ cứng của tôi.
+
+**OpenClaw phản hồi**:
+```text
+📊 Phân tích không gian ổ cứng:
+
+Tổng dung lượng: 500GB
+Đã sử dụng: 450GB (90%)
+Còn trống: 50GB (10%)
+
+⚠️ Cảnh báo dung lượng sắp đầy!
+
+Các thư mục chiếm nhiều dung lượng nhất:
 1. ~/Library/Caches - 80GB
 2. ~/Downloads - 50GB
 3. ~/Movies - 120GB
 4. ~/Documents - 100GB
 5. ~/Desktop - 30GB
-**第二步：查找大文件**
+```
 
-我：找出大于1GB的文件
-**OpenClaw回复**：
-🔍 找到35个大于1GB的文件：
+**Bước 2: Tìm tệp dung lượng lớn**
 
-视频文件（25个）：
-1. 项目演示.mov - 15GB
-2. 会议附录像_2025-12.mp4 - 8GB
+> Tôi: Lọc ra các tệp lớn hơn 1GB.
+
+**OpenClaw phản hồi**:
+```text
+🔍 Tìm thấy 35 tệp có dung lượng trên 1GB:
+
+Tệp video (25 tệp):
+1. Demo_du_an.mov - 15GB
+2. Video_ghi_am_hop_2025-12.mp4 - 8GB
 3. ...
 
-虚拟机镜像（5个）：
+Tệp máy ảo (5 tệp):
 1. Windows.vmdk - 50GB
 2. Ubuntu.vmdk - 30GB
 3. ...
 
-备份文件（5个）：
-1. iPhone备份_2025-12.backup - 20GB
+Tệp sao lưu (5 tệp):
+1. iPhone_backup_2025-12.backup - 20GB
 2. ...
 
-💡 建议：
-- 视频文件可以压缩或移动到外部硬盘
-- 旧的虚拟机镜像可以删除
-- 旧的备份文件可以删除
-**第三步：查找重复文件**
+💡 Đề xuất:
+- Các tệp video có thể nén lại hoặc chuyển sang ổ cứng ngoài
+- Các tệp máy ảo cũ không dùng có thể xóa bỏ
+- Các bản sao lưu điện thoại cũ có thể dọn dẹp bớt
+```
 
-我：找出所有重复的文件
-**OpenClaw回复**：
-🔍 找到120组重复文件：
+**Bước 3: Tìm tệp trùng lặp**
 
-重复照片（80组）：
-- IMG_1234.jpg (3份) - 15MB
-- IMG_5678.jpg (2份) - 10MB
+> Tôi: Tìm tất cả các tệp trùng lặp.
+
+**OpenClaw phản hồi**:
+```text
+🔍 Tìm thấy 120 nhóm tệp trùng lặp:
+
+Ảnh trùng lặp (80 nhóm):
+- IMG_1234.jpg (3 bản sao) - 15MB
+- IMG_5678.jpg (2 bản sao) - 10MB
 - ...
 
-重复文档（30组）：
-- 报告_v1.docx (4份) - 5MB
-- 方案_final.pptx (3份) - 20MB
+Tài liệu trùng lặp (30 nhóm):
+- Bao_cao_v1.docx (4 bản sao) - 5MB
+- Phuong_an_final.pptx (3 bản sao) - 20MB
 - ...
 
-重复下载（10组）：
-- setup.exe (2份) - 100MB
+Tệp cài đặt tải về trùng lặp (10 nhóm):
+- setup.exe (2 bản sao) - 100MB
 - ...
 
-💡 可释放空间：约8GB
-**第四步：清理临时文件**
+💡 Dung lượng có thể giải phóng: khoảng 8GB
+```
 
-我：找出所有可以安全删除的临时文件和缓存
-**OpenClaw回复**：
-🗑️ 可安全删除的文件：
+**Bước 4: Quét tệp tạm thời**
 
-系统缓存：
+> Tôi: Tìm tất cả tệp tạm thời và cache có thể xóa an toàn.
+
+**OpenClaw phản hồi**:
+```text
+🗑️ Các tệp có thể xóa an toàn:
+
+Bộ nhớ đệm hệ thống:
 - ~/Library/Caches - 80GB
-  - Safari缓存 - 20GB
-  - Chrome缓存 - 30GB
-  - 其他应用缓存 - 30GB
+  - Safari Cache - 20GB
+  - Chrome Cache - 30GB
+  - Cache các ứng dụng khác - 30GB
 
-临时文件：
+Tệp tạm thời:
 - /tmp - 5GB
-- ~/Downloads/临时文件 - 10GB
+- ~/Downloads/Temp - 10GB
 
-日志文件件：
+Tệp nhật ký (logs):
 - ~/Library/Logs - 3GB
 
-💡 可释放空间：约98GB
+💡 Dung lượng có thể giải phóng: khoảng 98GB
 
-⚠️ 建议：
-- 系统缓存可以全部清理
-- 临时文件可以全部删除
-- 日志文件件保留最近1个月的
-**第五步：执行清理**
+⚠️ Đề xuất:
+- Cache hệ thống có thể dọn dẹp toàn bộ
+- Tệp tạm thời có thể xóa hết
+- Tệp log chỉ nên giữ lại trong 1 tháng gần nhất
+```
 
-我：好的，帮我清理这些文件，
-但是要先备份重要的，
-然后再删除。
-**OpenClaw回复**：
-✅ 清理完成！
+**Bước 5: Thực hiện dọn dẹp**
 
-📊 清理结果：
-- 删除缓存文件：80GB
-- 删除临时文件：15GB
-- 删除重复文件：8GB
-- 删除旧备份：20GB
+> Tôi: Được rồi, hãy dọn dẹp các tệp này giúp tôi. Nhớ sao lưu những tệp quan trọng trước khi xóa nhé.
 
-💾 总共释放空间：123GB
+**OpenClaw phản hồi**:
+```text
+✅ Dọn dẹp hoàn tất!
 
-📁 备份位置：
-- 重要文件已备份到：~/Backup/清理前备份_2026-02-10/
+📊 Kết quả dọn dẹp:
+- Xóa tệp bộ nhớ đệm: 80GB
+- Xóa tệp tạm thời: 15GB
+- Xóa tệp trùng lặp: 8GB
+- Xóa bản sao lưu cũ: 20GB
 
-⚠️ 建议：
-- 定期清理缓存（每月一次）
-- 及时删除不需要的下载文件
-- 使用外部硬盘存储大文件
-### 安全删除策略
+💾 Tổng dung lượng đã giải phóng: 123GB
 
-#### 三步确认法
+📁 Vị trí bản sao lưu:
+- Các tệp quan trọng đã được sao lưu tại: ~/Backup/CleanBackup_2026-02-10/
 
-1. **第一步：分析**
-   ```
-   分析哪些文件可以删除
-   ```
+⚠️ Lời khuyên:
+- Nên dọn cache định kỳ mỗi tháng một lần
+- Định kỳ xóa các tệp không cần thiết trong thư mục Downloads
+- Lưu trữ các tệp dung lượng lớn trên ổ cứng ngoài hoặc lưu trữ đám mây
+```
 
-2. **第二步：备份**
-   ```
-   把重要文件备份到安全位置
-   ```
+### Chiến lược xóa an toàn
 
-3. **第三步：删除**
-   ```
-   确认无误后，删除文件
+#### Quy trình xác nhận 3 bước
+
+1. **Bước 1: Phân tích**
+   ```text
+   Phân tích những tệp nào có thể xóa an toàn
    ```
 
-#### 保护重要文件
+2. **Bước 2: Sao lưu**
+   ```text
+   Sao lưu các tệp quan trọng vào vị trí an toàn
+   ```
 
-我：在清理之前，请确保以下文件夹不被删除：
-- ~/Documents/重要文档
-- ~/Projects
-- ~/Photos
-#### 可恢复删除
+3. **Bước 3: Thực thi xóa**
+   ```text
+   Sau khi người dùng xác nhận không có vấn đề gì mới thực hiện xóa
+   ```
 
-我：先把文件移动到回收站，
-而不是直接删除，
-这样如果误删了还能恢复。
-### 定期清理计划
+#### Bảo vệ thư mục quan trọng
 
-让OpenClaw帮你制定定期清理计划：
+> Tôi: Trước khi dọn dẹp, tuyệt đối không được xóa bất kỳ tệp nào trong các thư mục sau:
+> - `~/Documents/Tai_lieu_quan_trong`
+> - `~/Projects`
+> - `~/Photos`
 
-我：帮我制定一个定期清理计划，
-每周自动清理缓存和临时文件，
-每月检查大文件和重复文件。
-**OpenClaw回复**：
-✅ 已创建定期清理计划：
+#### Xóa có thể khôi phục (Chuyển vào Thùng rác)
 
-📅 每周任务（每周日晚上10点）：
-- 清理系统缓存
-- 清理浏览器缓存
-- 清理临时文件
-- 清理下载文件夹（超过30天的文件）
+> Tôi: Hãy di chuyển các tệp vào Thùng rác (Trash / Recycle Bin) thay vì xóa vĩnh viễn, để nếu lỡ có nhầm lẫn thì tôi vẫn có thể khôi phục lại được.
 
-📅 每月任务（每月1号）：
-- 查找大文件（>1GB）
-- 查找重复文件
-- 分析空间占用
-- 生成清理报告
+### Kế hoạch dọn dẹp định kỳ
 
-💡 预计每月可释放：20-30GB
+Hãy để OpenClaw lập lịch dọn dẹp tự động giúp bạn:
 
-⚠️ 重要提醒：
-- 清理前会自动备份
-- 清理后会发布送通知
-- 可以随时取消任务
-## 本章节小结
+> Tôi: Lập giúp tôi một kế hoạch dọn dẹp định kỳ: hàng tuần tự động xóa cache và tệp tạm, hàng tháng kiểm tra tệp lớn và tệp trùng lặp.
 
-通过本章节，你应该已经掌握了：
+**OpenClaw phản hồi**:
+```text
+✅ Đã thiết lập kế hoạch dọn dẹp định kỳ:
 
-✅ **智能文件搜索**：根据内内容找文件，不再依赖文件名  
-✅ **批量文件处理**：一次处理100+文件，自动提取信息  
-✅ **文件自动整理**：智能分类、重命名、归档  
-✅ **硬盘清理优化**：找出垃圾文件，释放大量空间  
+📅 Tác vụ hàng tuần (22:00 tối Chủ nhật hàng tuần):
+- Xóa cache hệ thống
+- Xóa cache trình duyệt
+- Xóa tệp tạm thời
+- Dọn dẹp các tệp trong Downloads đã lưu quá 30 ngày
 
-**关键要点**：
-- OpenClaw可以访问本地文件，这是在线AI做不到的
-- 描述内内容而非文件名，让AI理解你的需求
-- 批量处理节省大量时间
-- 定期清理保支持硬盘健康
+📅 Tác vụ hàng tháng (Ngày 1 hàng tháng):
+- Quét tệp lớn (>1GB)
+- Quét tệp trùng lặp
+- Phân tích tình trạng dung lượng
+- Xuất báo cáo dọn dẹp
 
-## 实战项目：打造你的文件管理助手
+💡 Ước tính dung lượng giải phóng mỗi tháng: 20 - 30GB
 
-### 项目目标
-
-创建一个完整的文件管理工作流，包括：
-1. 每天自动整理下载文件夹
-2. 每周清理缓存和临时文件
-3. 每月检查大文件和重复文件
-4. 重要文件自动备份
-
-### 实施步骤
-
-**第一步：设置自动整理**
-帮我设置每天晚上10点自动整理下载文件夹，
-按文件类型分类。
-**第二步：设置定期清理**
-设置每周日晚上11点清理缓存和临时文件。
-**第三步：设置月度检查**
-设置每月1号检查大文件和重复文件，
-生成清理报告。
-**第四步：设置自动备份**
-设置每天自动备份重要文件夹到外部硬盘。
-
-### 预期效果
-
-- 📁 下载文件夹始终保支持整洁
-- 💾 硬盘空间充足（至少保支持20%空闲）
-- 🔒 重要文件有备份
-- ⏱️ 每月节省5-10小时整理时间
+⚠️ Lưu ý quan trọng:
+- Luôn tự động tạo bản sao lưu trước khi xóa
+- Gửi thông báo cho bạn sau khi dọn dẹp xong
+- Bạn có thể hủy hoặc điều chỉnh tác vụ bất cứ lúc nào
+```
 
 ---
 
-**下一章节**：[第5章节：知识库管理](05-knowledge-management.md) - 打造个人知识库系统
+## Tổng kết chương
 
-**返回目附录**：[README](../../README.md)
+Qua chương này, bạn đã nắm vững các kỹ năng:
 
+✅ **Tìm kiếm tệp thông minh**: Tìm kiếm theo ngữ nghĩa và nội dung, không còn phụ thuộc vào tên tệp  
+✅ **Xử lý tệp hàng loạt**: Xử lý 100+ tệp cùng lúc, tự động trích xuất và gom dữ liệu  
+✅ **Tự động sắp xếp tệp**: Phân loại thông minh, đổi tên hàng loạt, lưu trữ dự án khoa học  
+✅ **Dọn dẹp và tối ưu hóa ổ cứng**: Phát hiện tệp rác, tệp trùng lặp và giải phóng dung lượng bộ nhớ an toàn  
+
+**Điểm cốt lõi cần nhớ**:
+- OpenClaw có quyền truy cập hệ thống tệp cục bộ — lợi thế vượt trội so với các AI chạy trên web.
+- Hãy mô tả nội dung bạn cần thay vì cố nhớ tên tệp, AI sẽ tự hiểu ngữ cảnh.
+- Xử lý hàng loạt giúp bạn tiết kiệm hàng giờ thao tác lặp đi lặp lại.
+- Dọn dẹp định kỳ giúp hệ thống của bạn luôn vận hành trơn tru và an toàn.
 
 ---
 
-## 🌐 在线阅读
+## Dự án thực hành: Xây dựng Trợ lý quản lý tệp cá nhân
 
-📖 **想在线阅读此章节节？**
+### Mục tiêu dự án
 
-[🔗 在线阅读此章节节](https://awesome.tryopenclaw.asia/docs/02-core-features/04-file-management/)
+Thiết lập một quy trình quản lý tệp tự động khép kín:
+1. Tự động dọn dẹp và phân loại thư mục Downloads mỗi ngày
+2. Dọn cache và tệp tạm thời mỗi tuần
+3. Kiểm tra tệp lớn và tệp trùng lặp mỗi tháng
+4. Tự động sao lưu tài liệu quan trọng
 
-访问网站获取更好的阅读体验：
-- 📱 响应式设计，支持手机、平板、电脑
--  支持黑暗模式，保护眼睛
-- 🔍 内置搜索功能，快速定位内内容
-- 📋 目附录导航，轻松跳转章节节
+### Các bước thực hiện
 
-[🏠 访问完整教网站](https://awesome.tryopenclaw.asia)
+- **Bước 1: Thiết lập tự động sắp xếp**
+  > Cài đặt giúp tôi lịch 22:00 hàng ngày tự động sắp xếp thư mục Downloads theo định dạng tệp.
+
+- **Bước 2: Thiết lập dọn dẹp định kỳ**
+  > Cài đặt lịch 23:00 tối Chủ nhật hàng tuần dọn dẹp bộ nhớ đệm và tệp tạm.
+
+- **Bước 3: Thiết lập kiểm tra hàng tháng**
+  > Cài đặt lịch vào ngày 1 hàng tháng quét các tệp lớn và tệp trùng lặp, xuất báo cáo cho tôi.
+
+- **Bước 4: Thiết lập sao lưu tự động**
+  > Thiết lập sao lưu tự động hàng ngày các thư mục tài liệu quan trọng sang ổ cứng ngoài.
+
+### Hiệu quả đạt được
+
+- 📁 Thư mục Downloads luôn ngăn nắp, sạch sẽ
+- 💾 Ổ cứng luôn có đủ không gian trống (duy trì ít nhất 20% dung lượng trống)
+- 🔒 Tài liệu quan trọng luôn có bản sao lưu an toàn
+- ⏱️ Tiết kiệm từ 5 - 10 giờ dọn dẹp thủ công mỗi tháng
+
+---
+
+**Chương tiếp theo**: [Chương 5: Cơ sở Tri thức & Bộ Não Thứ Hai](05-knowledge-management.md) - Xây dựng hệ thống tri thức cá nhân với Active Memory và Memory Wiki
+
+**Trở về mục lục**: [README](../../README.md)
+
+---
+
+## 🌐 Đọc trực tuyến
+
+📖 **Bạn muốn đọc chương này trên nền tảng web?**
+
+[🔗 Đọc trực tuyến: Chương 4 - Quản lý Tệp tin Cục bộ](https://awesome.tryopenclaw.asia/docs/02-core-features/04-file-management/)
+
+Trải nghiệm đọc tốt hơn trên website giáo trình:
+- 📱 Thiết kế tương thích hoàn hảo cho điện thoại, máy tính bảng và máy tính
+- 🌙 Chế độ nền tối (Dark Mode) dịu mắt
+- 🔍 Tích hợp tìm kiếm nhanh nội dung
+- 📋 Thanh điều hướng mục lục trực quan, dễ dàng chuyển đổi giữa các chương
+
+[🏠 Truy cập website giáo trình đầy đủ](https://awesome.tryopenclaw.asia)
