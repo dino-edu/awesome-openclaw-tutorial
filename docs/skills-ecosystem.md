@@ -1,131 +1,134 @@
-# OpenClaw Skills 生态说明
+# Hệ sinh thái Skills của OpenClaw
 
-## 📊 Skills 分类统计（2026年2月）
+## 📊 Thống kê Phân loại Skills (Tháng 02/2026)
 
-### 📦 内置 Skills（预装）
+### 📦 Skills tích hợp sẵn (Built-in Skills)
 
-**数量**: 49个  
-**位置**: OpenClaw 安装包自带  
-**特点**: 开箱即用，无需安装  
-**类型**: 文件管理、知识管理、日程管理、自动化等
+**Số lượng**: 49 skills  
+**Vị trí**: Đi kèm mặc định trong gói cài đặt OpenClaw  
+**Đặc điểm**: Dùng được ngay lập tức, không cần cài đặt thêm  
+**Phân loại**: Quản lý tệp tin, quản lý tri thức, quản lý lịch trình, tự động hóa...
 
-**说明**: 这些 Skills 在安装 OpenClaw 时就已经包含，可以直接使用，无需额外安装。
+**Mô tả**: Những Skills này đã nằm sẵn trong mã nguồn OpenClaw khi cài đặt, bạn có thể gọi trực tiếp trong phiên làm việc mà không cần thiết lập gì thêm.
 
-**查看命令**:
+**Lệnh kiểm tra**:
 ```bash
 openclaw skills list --builtin
-```text
----
-
-### 🏪 ClawHub 官方 Skills
-
-**数量**: 93个（包含49个内置）  
-**位置**: ClawHub 官方仓库  
-**特点**: 官方维护，质量保证  
-**安装**: `clawhub install <skill-name>`
-
-**说明**: ClawHub 是 OpenClaw 官方的 Skills 市场，提供经过官方审核和维护的高质量 Skills。
-
-**访问方式**:
-```bash
-# 搜索 Skills
-clawhub search <关键词>
-
-# 安装 Skills
-clawhub install <skill-name>
-
-# 查看已安装
-openclaw skills list
-```text
----
-
-### 🌐 社区 Skills（扩展）
-
-**数量**: 1715+个  
-**位置**: GitHub 社区贡献  
-**特点**: 功能丰富，需要筛选  
-**安装**: 手动安装或通过 GitHub
-
-**说明**: 社区开发者贡献的 Skills，涵盖各种场景和需求。质量参差不齐，使用前建议查看评价和文档。
-
-**安装方式**:
-```bash
-# 从 GitHub 克隆
-git clone https://github.com/user/skill-name ~/.openclaw/skills/skill-name
-
-# 或使用 clawhub（如果已发布）
-clawhub install community/skill-name
 ```
 
 ---
 
-### 🏢 企业级 Skills（百度千帆）
+### 🏪 Skills chính thức trên ClawHub (Official Skills)
 
-**数量**: 1715个  
-**位置**: 百度千帆平台  
-**特点**: 企业级质量，覆盖20+行业  
-**适用**: 企业用户、行业应用
+**Số lượng**: 93 skills (đã bao gồm 49 skills tích hợp sẵn)  
+**Vị trí**: Kho lưu trữ chính thức ClawHub  
+**Đặc điểm**: Được đội ngũ OpenClaw trực tiếp bảo trì, bảo đảm chất lượng và độ an toàn  
+**Lệnh cài đặt**: `openclaw skills install <skill-name>`
 
-**说明**: 百度千帆提供的企业级 Skills 生态，专为企业场景设计，包含行业解决方案。
+**Mô tả**: ClawHub là chợ tiện ích mở rộng Skills chính thức của OpenClaw, cung cấp các bộ kỹ năng đã trải qua quy trình kiểm thử và rà soát bảo mật nghiêm ngặt.
 
-**行业覆盖**:
-- 金融、医疗、教育、零售
-- 制造、物流、客服、营销
-- 等 20+ 行业
+**Cách tra cứu và sử dụng**:
+```bash
+# Tìm kiếm Skills
+openclaw skills search <từ_khóa>
 
----
+# Cài đặt Skill vào không gian làm việc
+openclaw skills install <skill-name>
 
-## 📈 总计
-
-| 类型 | 数量 | 质量 | 推荐度 |
-|------|------|------|--------|
-| 内置 Skills | 49个 | ⭐⭐⭐⭐⭐ | 必用 |
-| ClawHub 官方 | 93个 | ⭐⭐⭐⭐⭐ | 强烈推荐 |
-| 社区 Skills | 1715+个 | ⭐⭐⭐ | 按需选择 |
-| 企业级 Skills | 1715个 | ⭐⭐⭐⭐⭐ | 企业推荐 |
-| **总计** | **1800+个** | - | - |
+# Xem danh sách Skills khả dụng
+openclaw skills list --eligible
+```
 
 ---
 
-## 🎯 推荐安装
+### 🌐 Skills do Cộng đồng phát triển (Community Skills)
 
-### Top 20 必装 Skills
+**Số lượng**: Hơn 1.715 skills  
+**Vị trí**: Đóng góp trên GitHub bởi cộng đồng mã nguồn mở toàn cầu  
+**Đặc điểm**: Năng lực phong phú, phủ khắp nhiều tác vụ ngách, đòi hỏi người dùng chọn lọc  
+**Phương thức cài đặt**: Cài đặt thủ công hoặc kéo trực tiếp từ GitHub
 
-详见 [第8章：Skills扩展](03-advanced/08-skills-extension.md)
+**Mô tả**: Các bộ kỹ năng do các nhà phát triển trong cộng đồng xây dựng, giải quyết vô vàn kịch bản thực tế. Chất lượng giữa các repo có thể khác nhau, vì vậy bạn nên xem trước mã nguồn và tài liệu hướng dẫn trước khi sử dụng.
 
-### 新手推荐
+**Cách cài đặt**:
+```bash
+# Clone trực tiếp từ GitHub vào thư mục skills của workspace
+git clone https://github.com/user/skill-name skills/skill-name
 
-1. **从内置 Skills 开始** - 熟悉基本功能
-2. **安装 Top 5 核心 Skills** - 扩展核心能力
-3. **根据需求选择社区 Skills** - 满足特定场景
-
----
-
-## 💡 使用建议
-
-### 选择 Skills 的原则
-
-1. **优先使用内置 Skills** - 稳定可靠
-2. **官方 Skills 次之** - 质量保证
-3. **社区 Skills 谨慎选择** - 查看评价和文档
-4. **企业用户考虑企业级 Skills** - 专业支持
-
-### 避免过度安装
-
-- ❌ 不要一次性安装太多 Skills
-- ✅ 按需安装，逐步扩展
-- ✅ 定期清理不用的 Skills
-- ✅ 关注 Skills 更新
+# Hoặc cài đặt qua ClawHub nếu tác giả đã phát hành
+openclaw skills install community/skill-name
+```
 
 ---
 
-## 🔗 相关链接
+### 🏢 Skills dành cho Doanh nghiệp (Enterprise Skills)
 
-- [第8章：Skills扩展](03-advanced/08-skills-extension.md) - 详细的 Skills 使用指南
-- [ClawHub 市场](https://clawhub.ai) - 官方 Skills 市场
-- [Skills 开发文档](https://docs.openclaw.ai/skills) - 开发自己的 Skills
+**Số lượng**: Hơn 1.715 skills  
+**Đặc điểm**: Đạt chuẩn doanh nghiệp, bao phủ giải pháp chuyên sâu cho hơn 20 ngành nghề  
+**Đối tượng**: Khách hàng tổ chức, doanh nghiệp, ứng dụng chuyên ngành
+
+**Mô tả**: Hệ sinh thái kỹ năng cấp doanh nghiệp được thiết kế riêng cho các kịch bản sản xuất kinh doanh lớn, tích hợp sẵn các gói giải pháp theo từng ngành dọc.
+
+**Các lĩnh vực bao phủ**:
+- Tài chính, ngân hàng, bảo hiểm
+- Y tế, dược phẩm, chăm sóc sức khỏe
+- Giáo dục và đào tạo trực tuyến
+- Bán lẻ, thương mại điện tử, chuỗi cung ứng
+- Sản xuất, logistics, chăm sóc khách hàng tự động, marketing đa kênh
 
 ---
 
-**最后更新**: 2026-02-14  
-**数据来源**: OpenClaw 官方统计
+## 📈 Tổng hợp số liệu
+
+| Phân loại | Số lượng | Mức độ kiểm duyệt | Mức độ khuyến nghị |
+|---|---|---|---|
+| Skills tích hợp sẵn | 49 | ⭐⭐⭐⭐⭐ | Bắt buộc nắm vững |
+| Skills chính thức ClawHub | 93 | ⭐⭐⭐⭐⭐ | Khuyến nghị sử dụng |
+| Skills từ Cộng đồng | 1.715+ | ⭐⭐⭐ | Chọn lọc theo nhu cầu |
+| Skills Cấp Doanh nghiệp | 1.715+ | ⭐⭐⭐⭐⭐ | Dành cho khối doanh nghiệp |
+| **Tổng cộng** | **1.800+** | - | - |
+
+---
+
+## 🎯 Gợi ý Lộ trình Cài đặt
+
+### Top Skills cốt lõi nên trang bị
+
+Chi tiết xem tại [Chương 8: Mở rộng Skills](03-advanced/08-skills-extension.md).
+
+### Lời khuyên cho người mới bắt đầu
+
+1. **Khởi đầu từ các Skills tích hợp sẵn**: Làm quen với quy trình thao tác và cơ chế phản hồi cơ bản.
+2. **Cài đặt thêm các Skills chính thức**: Mở rộng các năng lực xử lý nâng cao đã được kiểm chứng.
+3. **Bổ sung Skills cộng đồng theo đúng bài toán thực tế**: Chỉ tìm kiếm và cài đặt khi gặp bài toán cụ thể mà hệ thống tích hợp chưa có.
+
+---
+
+## 💡 Thực hành Tối ưu
+
+### Nguyên tắc chọn lựa Skills
+
+1. **Ưu tiên giải pháp tích hợp sẵn**: Ổn định, an toàn và đồng bộ hoàn hảo với phiên bản OpenClaw hiện hành.
+2. **Kế đến là Skills chính thức từ ClawHub**: Đảm bảo cập nhật thường xuyên và tài liệu đầy đủ.
+3. **Thận trọng với Skills từ cộng đồng**: Luôn đọc kỹ tệp `SKILL.md` và mã nguồn trước khi cài đặt.
+4. **Áp dụng Skills doanh nghiệp khi vận hành quy mô lớn**: Hưởng lợi từ sự hỗ trợ kỹ thuật chuyên nghiệp.
+
+### Tránh cài đặt tràn lan
+
+- ❌ Không cài hàng loạt hàng chục Skills cùng lúc khi chưa có nhu cầu sử dụng thực tế.
+- ✅ Cài đặt có chọn lọc, mở rộng từng bước theo tiến độ công việc.
+- ✅ Định kỳ dọn dẹp các Skills không còn sử dụng để giữ ngữ cảnh gọn gàng.
+- ✅ Thường xuyên kiểm tra và cập nhật phiên bản mới của các Skills đang dùng.
+
+---
+
+## 🔗 Liên kết Tham khảo Liên quan
+
+- [Chương 8: Mở rộng Skills](03-advanced/08-skills-extension.md) - Hướng dẫn chi tiết cách tìm kiếm, cài đặt và tự viết Custom Skills
+- [Chợ ứng dụng ClawHub](https://clawhub.ai) - Chợ Skills chính thức của OpenClaw
+- [Tài liệu Phát triển Skills](https://docs.openclaw.ai/skills) - Hướng dẫn tự xây dựng Skills cho riêng bạn
+
+---
+
+**Cập nhật lần cuối**: 14/02/2026  
+**Nguồn dữ liệu**: Thống kê chính thức từ OpenClaw

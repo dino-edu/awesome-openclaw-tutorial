@@ -1,97 +1,97 @@
-> 📖 **纸质书《OpenClaw超级个体实操手册》已上市！** 清华大学出版社出版，在开源教程基础上全面重写+逐条验证。🛒 [京东专属购买链接（¥42，原价¥59.8）](https://item.jd.com/14669463.html)
+> 📖 **Giáo trình Awesome OpenClaw Tutorial** | Bản dịch tiếng Việt chính thức cho cộng đồng. Nguyên tác thuộc về tác giả [@xianyu110](https://github.com/xianyu110).
 
-# 第10章节 API 与外部能力集成（Infer / Webhooks / 媒体工作流）
+# Chương 10: Tích hợp API và Năng lực Bên ngoài (Infer / Webhooks / Luồng Media)
 
-> 本章目标：按 OpenClaw 官方最新主线，把模型推理、媒体能力、Webhook 接入和外部系统联动这几件事讲清楚，并替换掉旧的第三方 Skill 默认路线。
-
----
-
-## 版本基线（请先统一口径）
-
-- **当前稳定版**：`v2026.9.3`（2026 年 6 月 16 日发布）
-- 本章默认按 **`v2026.9.3` 稳定版** 写；历史 beta / 旧模型路由只作为旧案例参考
-
-> 如果你机器上还停在 `v2026.4.12` 或更早版本，先升级再看这一章，不然你会在命令名、能力入口和配置路径上反复踩坑。
+> Mục tiêu chương: Bám sát lộ trình kỹ thuật chính thức mới nhất của OpenClaw để làm rõ cơ chế suy luận mô hình (infer), năng lực đa phương tiện (media), tích hợp Webhook và liên kết các hệ thống bên ngoài, đồng thời thay thế triệt để các hướng dẫn dùng Skill bên thứ ba đã lỗi thời.
 
 ---
 
-## 先给小白的阅读说明
+## Mốc phiên bản chuẩn (Thống nhất quy chuẩn trước khi bắt đầu)
 
-### 这章适合谁
+- **Phiên bản ổn định hiện tại**: `v2026.9.3` (phát hành 16/06/2026)
+- Chương này mặc định viết theo **bản ổn định `v2026.9.3`**; các phiên bản beta cũ hoặc định tuyến mô hình lịch sử chỉ mang tính chất tham khảo.
 
-- 你已经把 OpenClaw 装好，想让它调用模型、图片、音频、视频或网页能力
-- 你想把 Notion、表单、Webhook、自动化平台接进 OpenClaw
-- 你看过旧教程，发现很多 Skill 名称已经装不上，想知道现在到底该怎么做
-
-### 开始前要先准备什么
-
-在继续之前，至少先确认这 3 件事：
-
-1. `openclaw onboard` 已跑过
-2. `openclaw models status` 能看到你已经登录的 provider
-3. 你知道自己现在是在做哪一类事：**命令行推理**、**会话内工具调用**，还是**外部系统触发**
-
-### 如果你只想先跑通，按这个顺序看
-
-- **只想先让命令跑通**：看 `10.2` + `10.3`
-- **只想接外部系统**：看 `10.4`
-- **只想知道旧 Skill 为什么不该再照抄**：看 `10.1` + `10.5`
-
-### 先记住 3 句话
-
-- `openclaw infer` 负责**无头、脚本化、命令行调用**
-- agent 工具负责**会话里自动调用能力**
-- `hooks` / `webhooks` / `Task Flow` 负责**外部事件接入和多步骤编排**
+> Nếu máy của bạn vẫn ở bản `v2026.4.12` hoặc cũ hơn, hãy nâng cấp phiên bản trước khi đọc tiếp chương này, nếu không bạn sẽ liên tục gặp lỗi về tên câu lệnh, cổng truy cập năng lực và đường dẫn cấu hình.
 
 ---
 
-## 10.1 2026.4 之后，API 集成的正确主线是什么？
+## Hướng dẫn định hướng nhanh cho người mới
 
-旧版教程的主要问题，不是“不会接 API”，而是默认把很多**已经过时的第三方 Skill 名称**和**不再是官方主路线的命令**当成首选方案。现在更推荐的路径是：
+### Chương này phù hợp với ai?
 
-| 需求 | 旧写法常见问题 | 现在推荐的官方路径 |
-|------|----------------|--------------------|
-| 文本推理 | 零散脚本、手工拼 provider | `openclaw infer model run` |
-| 图片生成 | 依赖历史第三方 Skill | `openclaw infer image generate` 或 agent 工具 `image_generate` |
-| 视频生成 | 旧命令、旧 Skill 名称失效 | `openclaw infer video generate` 或 agent 工具 `video_generate` |
-| 语音转写 | 手工脚本多、格式易错 | `openclaw infer audio transcribe` |
-| TTS 合成 | 旧命令路径不统一 | `openclaw infer tts convert` 或 agent 工具 `tts` |
-| Web 搜索 / 抓取 | 自己维护爬虫 | `openclaw infer web search` / `openclaw infer web fetch` |
-| Embedding | 各 provider 自己写一套 | `openclaw infer embedding create` |
-| 外部系统触发 | 靠 cron + shell 拼接 | `hooks` / `webhooks` plugin / `Task Flow` |
-| 本地媒体工作流 | 零散脚本 + 图形界面切换 | 官方 `ComfyUI` provider/plugin |
+- Bạn đã cài đặt xong OpenClaw và muốn gọi mô hình AI, sinh ảnh, xử lý âm thanh, video hoặc cào dữ liệu web.
+- Bạn muốn kết nối Notion, biểu mẫu (form), Webhook hoặc các nền tảng tự động hóa vào OpenClaw.
+- Bạn từng đọc tài liệu cũ và thấy nhiều tên Skill đã không còn cài đặt được, muốn biết cách tiếp cận chuẩn xác hiện nay.
 
-一句话总结：
+### Những việc cần chuẩn bị trước khi bắt đầu
 
-1. **“推理类”需求**优先走 `openclaw infer`
-2. **“会话内自动调用”**优先交给 agent 工具（`image_generate`、`video_generate`、`music_generate`、`tts`）
-3. **“外部系统驱动”**优先走 `hooks`、`webhooks` plugin 和 `Task Flow`
-4. 只有这些都不满足时，再考虑自定义 plugin 或外部中间层
+Trước khi đi tiếp, hãy chắc chắn bạn đã hoàn thành 3 điều kiện sau:
+
+1. Đã chạy qua trình thiết lập `openclaw onboard`
+2. Lệnh `openclaw models status` hiển thị các nhà cung cấp (providers) bạn đã đăng nhập
+3. Bạn xác định rõ mình đang làm tác vụ thuộc nhóm nào: **Suy luận qua dòng lệnh**, **Gọi công cụ tự động trong phiên chat**, hay **Kích hoạt từ hệ thống bên ngoài**
+
+### Nếu bạn chỉ muốn chạy thông suốt nhanh nhất, hãy đọc theo thứ tự:
+
+- **Chỉ muốn chạy thông lệnh trước**: Xem mục `10.2` + `10.3`
+- **Chỉ muốn kết nối hệ thống bên ngoài**: Xem mục `10.4`
+- **Muốn hiểu vì sao không nên sao chép Skill cũ**: Xem mục `10.1` + `10.5`
+
+### 3 nguyên tắc cốt lõi cần ghi nhớ
+
+- `openclaw infer` phụ trách **các lệnh gọi headless, kịch bản tự động hóa và chạy qua CLI**
+- Các công cụ của agent phụ trách **tự động kích hoạt năng lực ngay trong phiên hội thoại**
+- `hooks` / `webhooks` / `Task Flow` phụ trách **tiếp nhận sự kiện từ bên ngoài và điều phối đa bước**
 
 ---
 
-## 10.2 先把 provider 和模型能力配好
+## 10.1 Sau cột mốc 2026.4, lộ trình tích hợp API chuẩn là gì?
 
-在开始接入任何 API 前，先确保 OpenClaw 自己已经能正常访问模型与媒体能力。最短路径：
+Vấn đề lớn nhất ở các tài liệu cũ không phải là "không biết kết nối API", mà là mặc định xem các **Skill bên thứ ba đã quá hạn** và **các câu lệnh không còn được khuyên dùng** làm lựa chọn hàng đầu. Lộ trình chuẩn hóa hiện nay gồm:
+
+| Nhu cầu | Nhược điểm ở cách viết cũ | Lộ trình chính thức khuyên dùng hiện nay |
+|---|---|---|
+| Suy luận văn bản | Script rời rạc, tự ghép nối provider thủ công | `openclaw infer model run` |
+| Tạo ảnh | Phụ thuộc vào các Skill bên thứ ba cũ | `openclaw infer image generate` hoặc công cụ agent `image_generate` |
+| Tạo video | Lệnh cũ, tên Skill cũ không còn hoạt động | `openclaw infer video generate` hoặc công cụ agent `video_generate` |
+| Chuyển âm thanh thành văn bản (Transcribe) | Nhiều script thủ công, định dạng dễ lỗi | `openclaw infer audio transcribe` |
+| Chuyển văn bản thành giọng nói (TTS) | Đường dẫn câu lệnh cũ không thống nhất | `openclaw infer tts convert` hoặc công cụ agent `tts` |
+| Tìm kiếm Web / Cào dữ liệu | Tự viết và bảo trì crawler | `openclaw infer web search` / `openclaw infer web fetch` |
+| Tạo Embedding | Mỗi provider tự viết một chuẩn riêng | `openclaw infer embedding create` |
+| Kích hoạt từ hệ thống bên ngoài | Ghép nối chắp vá bằng cron + shell | `hooks` / plugin `webhooks` / `Task Flow` |
+| Luồng xử lý media cục bộ | Script rời rạc + chuyển đổi giao diện đồ họa | Provider/plugin `ComfyUI` chính thức |
+
+Tóm tắt trong một câu:
+
+1. **Nhu cầu "suy luận / tác vụ trực tiếp"**: Ưu tiên dùng `openclaw infer`
+2. **"Tự động gọi trong phiên chat"**: Giao cho các công cụ tích hợp sẵn của agent (`image_generate`, `video_generate`, `music_generate`, `tts`)
+3. **"Điều khiển bởi hệ thống bên ngoài"**: Ưu tiên dùng `hooks`, plugin `webhooks` và `Task Flow`
+4. Chỉ khi các phương án trên không đáp ứng được, mới cân nhắc viết custom plugin hoặc middleware bên ngoài.
+
+---
+
+## 10.2 Thiết lập nhà cung cấp (provider) và năng lực mô hình
+
+Trước khi kết nối bất kỳ API nào, hãy đảm bảo OpenClaw của bạn đã kết nối và truy cập bình thường tới các mô hình AI và năng lực media. Trình tự ngắn nhất:
 
 ```bash
-# 1) 推荐：先走引导向导
+# 1) Khuyên dùng: Chạy wizard hướng dẫn từng bước
 openclaw onboard
 
-# 2) 查看模型与认证状态
+# 2) Kiểm tra trạng thái mô hình và xác thực
 openclaw models status
 openclaw models list
 
-# 3) 按 provider 登录
+# 3) Đăng nhập theo từng provider
 openclaw models auth login --provider openai --set-default
 openclaw models auth login --provider anthropic --method cli --set-default
 
-# 4) 设置主模型与图像理解兜底模型
+# 4) Thiết lập mô hình chính và mô hình fallback cho tác vụ thị giác (image)
 openclaw models set openai/gpt-5.4
 openclaw models set-image openai/gpt-4.1-mini
 ```
 
-如果你是多 provider 环境，建议同时配好主模型和回退链：
+Nếu bạn ở trong môi trường đa provider, khuyến nghị cấu hình đồng thời mô hình chính và chuỗi dự phòng (fallbacks):
 
 ```bash
 openclaw models set openai/gpt-5.4
@@ -99,41 +99,41 @@ openclaw models fallbacks add anthropic/claude-sonnet-4-5
 openclaw models fallbacks add google/gemini-2.5-pro
 ```
 
-**什么时候需要 `models status --probe`？**
+**Khi nào cần chạy `models status --probe`?**
 
-- 你怀疑 token 已过期
-- provider 列表看着有，但实测不通
-- 刚切换了 OAuth / API key，需要确认可用性
+- Bạn nghi ngờ token đã hết hạn
+- Danh sách provider hiển thị bình thường nhưng gọi thực tế lại lỗi
+- Vừa chuyển đổi OAuth / API key và cần kiểm tra khả dụng ngay
 
 ```bash
 openclaw models status --probe
 ```
 
-### 看到什么算配置成功
+### Dấu hiệu nhận biết cấu hình thành công
 
-如果下面这些都成立，说明你已经可以继续往下学：
+Nếu thỏa mãn các tiêu chí sau, bạn đã sẵn sàng đi tiếp:
 
-- `openclaw models status` 能看到主模型和已登录 provider
-- `openclaw models status --probe` 没有明显的 auth / token 错误
-- 你已经知道自己默认要走哪条模型路线
+- `openclaw models status` hiển thị mô hình chính và các provider đã đăng nhập
+- `openclaw models status --probe` không báo lỗi xác thực (auth/token)
+- Bạn đã xác định rõ mô hình mặc định mà mình sẽ sử dụng
 
-如果这里都不通，先别急着接外部系统。先把模型认证和默认模型配通，再往后走。
+Nếu bước này chưa thông, đừng vội kết nối hệ thống bên ngoài. Hãy cấu hình xác thực và kiểm tra mô hình mặc định chạy tốt trước đã.
 
 ---
 
-## 10.3 `openclaw infer`：当前最重要的统一入口
+## 10.3 `openclaw infer`: Cổng thống nhất quan trọng nhất hiện nay
 
-官方文档已经明确：`openclaw infer` 是当前**标准的无头能力入口**。它覆盖：
+Tài liệu chính thức nêu rõ: `openclaw infer` hiện là **cổng chuẩn cho mọi năng lực headless (không giao diện)**. Lệnh này bao quát:
 
-- 文本推理
-- 图片生成 / 编辑 / 描述
-- 音频转写
-- 语音合成
-- 视频生成 / 描述
-- Web 搜索 / 抓取
-- Embedding 创建
+- Suy luận văn bản
+- Tạo / chỉnh sửa / mô tả hình ảnh
+- Chuyển âm thanh thành văn bản
+- Tổng hợp giọng nói (TTS)
+- Tạo / phân tích video
+- Tìm kiếm web / cào dữ liệu URL
+- Tạo vector nhúng (Embedding)
 
-### 10.3.1 常用命令速览
+### 10.3.1 Xem nhanh các lệnh thường dùng
 
 ```bash
 openclaw infer model run --prompt "Reply with exactly: smoke-ok" --json
@@ -145,106 +145,124 @@ openclaw infer web search --query "OpenClaw docs" --json
 openclaw infer embedding create --text "friendly lobster" --json
 ```
 
-对小白来说，不要一口气全跑。最稳的顺序是：
+Đối với người mới, không nên chạy thử tất cả cùng lúc. Trình tự thử nghiệm ổn định nhất:
 
-1. 先跑 `model run`，确认文本模型能用
-2. 再跑 `web search`，确认联网推理路径没问题
-3. 需要哪种媒体能力，再单独测哪一个
+1. Chạy `model run` trước để xác nhận mô hình văn bản hoạt động
+2. Chạy tiếp `web search` để kiểm tra khả năng truy cập mạng
+3. Cần năng lực media nào thì mới kiểm tra riêng năng lực đó
 
-这样一旦失败，你更容易知道是**模型认证问题**、**文件路径问题**，还是**媒体 provider 没配好**。
+Cách làm này giúp bạn lập tức khoanh vùng lỗi do **xác thực mô hình**, **đường dẫn tệp tin**, hay do **chưa cấu hình provider media**.
 
-### 10.3.2 文本推理：把零散脚本换成标准命令
-
-```bash
-openclaw infer model run   --prompt "用 5 条 bullet 总结 OpenClaw v2026.9.3 的主要变化"   --json
-```
-
-适合：
-
-- shell 脚本里做一跳摘要
-- CI 里做 release note 总结
-- 给下游自动化产出稳定 JSON
-
-### 10.3.3 图片生成：默认走官方能力
+### 10.3.2 Suy luận văn bản: Chuẩn hóa thay cho các script rời rạc
 
 ```bash
-openclaw infer image generate   --prompt "一张手写白板风格的 OpenClaw 工作流示意图"   --json
+openclaw infer model run \
+  --prompt "Dùng 5 gạch đầu dòng tóm tắt các điểm mới chính của OpenClaw v2026.9.3" \
+  --json
 ```
 
-如果你是从现有文件继续改图，用 `image edit`；如果你要读图说明内容，用 `image describe`：
+Rất phù hợp cho:
+
+- Tóm tắt nội dung nhanh trong shell script
+- Sinh ghi chú phát hành (release notes) trong luồng CI/CD
+- Xuất dữ liệu JSON có cấu trúc ổn định cho hệ thống tự động hóa hạ nguồn
+
+### 10.3.3 Tạo hình ảnh: Mặc định dùng năng lực chính thức
 
 ```bash
-openclaw infer image describe   --file ./ui-screenshot.png   --model openai/gpt-4.1-mini   --json
+openclaw infer image generate \
+  --prompt "Hình minh họa sơ đồ luồng công việc OpenClaw theo phong cách vẽ tay trên bảng trắng" \
+  --json
 ```
 
-> 注意：`image describe` 这类命令的 `--model` 必须写成完整的 `<provider/model>` 形式。
-
-### 10.3.4 音频转写：不要再手写 whisper 脚本
+Nếu muốn sửa tiếp từ ảnh có sẵn, dùng `image edit`; nếu muốn agent đọc hiểu và mô tả ảnh, dùng `image describe`:
 
 ```bash
-openclaw infer audio transcribe   --file ./team-sync.m4a   --language zh   --prompt "重点提取人名、决策与行动项"   --json
+openclaw infer image describe \
+  --file ./ui-screenshot.png \
+  --model openai/gpt-4.1-mini \
+  --json
 ```
 
-适合：
+> Lưu ý: Tham số `--model` của các lệnh như `image describe` bắt buộc phải viết đầy đủ định dạng `<provider/model>`.
 
-- 会议纪要
-- 播客拆解
-- 微信语音 / 飞书语音整理
-
-### 10.3.5 TTS：统一走 `tts convert`
+### 10.3.4 Xử lý âm thanh (Transcribe): Không cần tự viết script Whisper
 
 ```bash
-openclaw infer tts convert   --text "今天的日报已经生成完成"   --output ./daily-report.mp3   --json
+openclaw infer audio transcribe \
+  --file ./team-sync.m4a \
+  --language vi \
+  --prompt "Tập trung trích xuất tên người, các quyết định chính và các đầu việc cần làm" \
+  --json
 ```
 
-如果你是在 agent 对话里，需要回复直接带语音，优先让 agent 自动调用 `tts` 工具；如果你是在脚本、批处理或自动化流水线里，优先用 `infer tts convert`。
+Phù hợp cho:
 
-### 10.3.6 视频生成：现在是异步任务，不是同步截图脚本
+- Lập biên bản cuộc họp
+- Bóc tách nội dung podcast
+- Xử lý và tổng hợp tin nhắn thoại từ Telegram, Lark, Zalo
+
+### 10.3.5 Chuyển giọng nói (TTS): Chuẩn hóa qua `tts convert`
 
 ```bash
-openclaw infer video generate   --prompt "一段 5 秒的电影感镜头：小龙虾在日落海边冲浪"   --json
+openclaw infer tts convert \
+  --text "Báo cáo công việc hàng ngày đã được tạo thành công" \
+  --output ./daily-report.mp3 \
+  --json
 ```
 
-需要注意两点：
+Nếu bạn đang trong phiên hội thoại và muốn agent trả lời trực tiếp bằng giọng nói, hãy để agent tự gọi công cụ `tts`. Nếu bạn đang viết script hoặc chạy tác vụ tự động hóa hàng loạt, hãy ưu tiên dùng `infer tts convert`.
 
-1. 视频生成通常是**异步长任务**，底层 provider 会先返回任务 id
-2. OpenClaw 会把视频任务纳入 task ledger，必要时你可以配合 `openclaw tasks list` 查看进度
+### 10.3.6 Tạo video: Hiện là tác vụ bất đồng bộ (Async Task)
 
-### 10.3.7 Web 搜索与抓取：先用官方再谈爬虫
+```bash
+openclaw infer video generate \
+  --prompt "Một cảnh quay điện ảnh dài 5 giây: chú tôm hùm đang lướt sóng lúc hoàng hôn trên biển" \
+  --json
+```
+
+Cần lưu ý 2 điểm quan trọng:
+
+1. Sinh video là **tác vụ kéo dài và chạy bất đồng bộ**, provider phía dưới sẽ trả về mã `task id` trước.
+2. OpenClaw sẽ ghi nhận tác vụ video vào task ledger, bạn có thể chạy `openclaw tasks list` để theo dõi tiến độ khi cần.
+
+### 10.3.7 Tìm kiếm Web và trích xuất dữ liệu: Dùng công cụ chuẩn trước khi nghĩ đến crawler
 
 ```bash
 openclaw infer web search --query "OpenClaw v2026.9.3 release notes" --json
 openclaw infer web fetch --url https://docs.openclaw.ai/cli/infer --json
 ```
 
-这套命令特别适合：
+Bộ lệnh này đặc biệt phù hợp cho:
 
-- 自动化日报
-- 竞品监控
-- 资料初筛
-- 内容采编前的资料抓取
+- Bản tin tổng hợp tự động hàng ngày
+- Giám sát đối thủ cạnh tranh và tin tức ngành
+- Sàng lọc tài liệu sơ bộ
+- Thu thập tư liệu trước khi biên tập nội dung
 
-### 10.3.8 Embedding：统一走 `embedding create`
+### 10.3.8 Tạo Vector Embedding: Chuẩn hóa qua `embedding create`
 
 ```bash
-openclaw infer embedding create   --text "客户反馈：物流延迟、赔付说明不清晰"   --json
+openclaw infer embedding create \
+  --text "Phản hồi từ khách hàng: Giao hàng chậm, quy định bồi thường không rõ ràng" \
+  --json
 ```
 
-适合：
+Phù hợp cho:
 
-- FAQ 聚类
-- 工单语义归类
-- 外部知识库入库前向量化
+- Phân cụm câu hỏi thường gặp (FAQ)
+- Phân loại ngữ nghĩa ticket hỗ trợ khách hàng
+- Vector hóa dữ liệu trước khi nạp vào cơ sở tri thức bên ngoài
 
 ---
 
-## 10.4 外部系统怎么接？用 Hooks、Webhooks Plugin 和 Task Flow
+## 10.4 Kết nối hệ thống bên ngoài: Dùng Hooks, Webhooks Plugin và Task Flow
 
-### 10.4.1 轻量触发：`hooks`
+### 10.4.1 Kích hoạt gọn nhẹ: Dùng `hooks`
 
-如果只是让外部系统“叫醒” OpenClaw 或启动一次 isolated agent run，最轻的方案是 `hooks`。
+Nếu bạn chỉ cần hệ thống bên ngoài "đánh thức" OpenClaw hoặc kích hoạt một phiên chạy agent độc lập (isolated run), giải pháp nhẹ nhàng nhất là `hooks`.
 
-配置示例：
+Ví dụ cấu hình:
 
 ```json
 {
@@ -256,29 +274,35 @@ openclaw infer embedding create   --text "客户反馈：物流延迟、赔付�
 }
 ```
 
-**唤醒主会话**：
+**Đánh thức phiên chính (Wake)**:
 
 ```bash
-curl -X POST http://127.0.0.1:18789/hooks/wake   -H 'Authorization: Bearer SECRET'   -H 'Content-Type: application/json'   -d '{"text":"New email received","mode":"now"}'
+curl -X POST http://127.0.0.1:18789/hooks/wake \
+  -H 'Authorization: Bearer SECRET' \
+  -H 'Content-Type: application/json' \
+  -d '{"text":"New email received","mode":"now"}'
 ```
 
-**启动一次 isolated agent run**：
+**Khởi chạy một phiên agent độc lập**:
 
 ```bash
-curl -X POST http://127.0.0.1:18789/hooks/agent   -H 'Authorization: Bearer SECRET'   -H 'Content-Type: application/json'   -d '{"message":"Summarize inbox","name":"Email","model":"openai/gpt-5.4-mini"}'
+curl -X POST http://127.0.0.1:18789/hooks/agent \
+  -H 'Authorization: Bearer SECRET' \
+  -H 'Content-Type: application/json' \
+  -d '{"message":"Summarize inbox","name":"Email","model":"openai/gpt-5.4-mini"}'
 ```
 
-适合场景：
+Kịch bản ứng dụng thích hợp:
 
-- 表单提交后触发摘要
-- 新邮件 / 新工单到来后做初筛
-- CI 成功后让 OpenClaw 生成更新说明
+- Kích hoạt tóm tắt sau khi có người gửi form biểu mẫu
+- Phân loại nhanh khi có email mới hoặc ticket mới
+- Yêu cầu OpenClaw tạo báo cáo cập nhật sau khi build CI/CD thành công
 
-### 10.4.2 复杂编排：`webhooks` plugin + Task Flow
+### 10.4.2 Điều phối quy trình phức tạp: Dùng plugin `webhooks` + Task Flow
 
-如果你需要**多步骤、可追踪、能继续推进**的工作流，直接上 `webhooks` plugin。
+Nếu bạn cần một quy trình làm việc **nhiều bước, có thể theo dõi trạng thái và tiếp tục chạy**: hãy sử dụng trực tiếp plugin `webhooks`.
 
-官方配置示例：
+Ví dụ cấu hình chính thức:
 
 ```json
 {
@@ -307,13 +331,16 @@ curl -X POST http://127.0.0.1:18789/hooks/agent   -H 'Authorization: Bearer SECR
 }
 ```
 
-创建 flow：
+Tạo một flow làm việc mới:
 
 ```bash
-curl -X POST https://gateway.example.com/plugins/webhooks/zapier   -H 'Content-Type: application/json'   -H 'Authorization: Bearer YOUR_SHARED_SECRET'   -d '{"action":"create_flow","goal":"Review inbound queue"}'
+curl -X POST https://gateway.example.com/plugins/webhooks/zapier \
+  -H 'Content-Type: application/json' \
+  -H 'Authorization: Bearer YOUR_SHARED_SECRET' \
+  -d '{"action":"create_flow","goal":"Review inbound queue"}'
 ```
 
-在 flow 中再创建子任务：
+Tạo tiếp tác vụ con bên trong flow:
 
 ```json
 {
@@ -325,91 +352,91 @@ curl -X POST https://gateway.example.com/plugins/webhooks/zapier   -H 'Content-T
 }
 ```
 
-适合场景：
+Kịch bản ứng dụng thích hợp:
 
-- Zapier / n8n / Make 触发多步任务
-- 客服工单分诊
-- 线索筛选 + 跟进 + 汇总
-- 周报流水线、内容审核流水线
+- Zapier / n8n / Make kích hoạt các quy trình nhiều bước
+- Điều phối và phân loại ticket chăm sóc khách hàng
+- Sàng lọc đầu mối kinh doanh + theo dõi + tổng hợp báo cáo
+- Dây chuyền sản xuất bản tin hàng tuần hoặc duyệt nội dung tự động
 
-### 10.4.3 Notion 现在怎么接才对？
+### 10.4.3 Cách kết nối Notion chuẩn xác hiện nay
 
-本章旧内容里那一大段“Notion Skill 全套配置”最大的问题，不是 Notion 不能接，而是**默认路线已经不对了**。
+Vấn đề lớn nhất của hướng dẫn "cấu hình Notion Skill trọn gói" trong các tài liệu cũ không phải là Notion không kết nối được, mà là **cách làm đó đã lạc hậu**.
 
-现在更稳的做法是：
+Cách tiếp cận chuẩn xác và bền vững hiện nay là:
 
-1. **如果只是把 OpenClaw 结果写入 Notion**：优先用 Zapier / n8n / 自家中间层，通过 webhook 接入
-2. **如果要形成可持续的内部工作流**：用 `webhooks` plugin 把外部事件绑定到 Task Flow
-3. **如果你需要深度定制**：自己写 plugin，不要依赖历史第三方 Skill 名称
+1. **Nếu chỉ ghi kết quả từ OpenClaw vào Notion**: Ưu tiên dùng Zapier / n8n / dịch vụ trung gian riêng, kết nối qua Webhook.
+2. **Nếu muốn tạo quy trình làm việc nội bộ liên tục**: Dùng plugin `webhooks` để gắn sự kiện bên ngoài vào Task Flow.
+3. **Nếu có nhu cầu tùy biến sâu**: Tự viết plugin riêng, không nên phụ thuộc vào tên Skill bên thứ ba cũ.
 
-也就是说：
+Nói cách khác:
 
-- **Notion 依然能接**
-- 但它不再应该占据“官方默认主线”的位置
-- 现在的默认主线是 **Infer + Hooks/Webhooks + Task Flow + Plugin**
+- **Notion vẫn hoàn toàn kết nối được**
+- Nhưng nó không nên đóng vai trò là "lối đi mặc định duy nhất"
+- Lộ trình kỹ thuật chuẩn hiện nay là **Infer + Hooks/Webhooks + Task Flow + Plugin**
 
 ---
 
-## 10.5 这一章最容易踩的坑
+## 10.5 Những cạm bẫy dễ mắc phải nhất trong chương này
 
-### 坑 1：继续照着旧 Skill 名称安装
+### Bẫy 1: Cố tìm và cài đặt theo tên Skill cũ
 
-处理方式：
+Cách xử lý chuẩn:
 
-- 先看官方 docs / release notes
-- 优先确认能力是否已经内建到 `infer` 或 agent 工具中
-- 只有官方路线没有时，才继续搜社区插件
+- Kiểm tra tài liệu chính thức và ghi chú phát hành (release notes) mới nhất
+- Xác nhận xem tính năng đó đã được tích hợp sẵn vào `infer` hoặc công cụ của agent chưa
+- Chỉ khi OpenClaw chưa hỗ trợ chính thức, mới tìm plugin hoặc công cụ trong cộng đồng
 
-### 坑 2：把媒体能力当同步脚本理解
+### Bẫy 2: Coi năng lực media như script xử lý đồng bộ thông thường
 
-- 图片和 TTS 多数是同步返回
-- 视频和音乐常常是后台任务
-- 这两类长任务最好配合 `openclaw tasks list`、`openclaw tasks show` 观察状态
+- Tạo ảnh và TTS đa số trả về kết quả đồng bộ ngay lập tức
+- Tạo video và sinh nhạc thường là tác vụ chạy ngầm bất đồng bộ
+- Với các tác vụ chạy ngầm, hãy kết hợp theo dõi trạng thái qua `openclaw tasks list` và `openclaw tasks show`
 
-### 坑 3：`--model` 没写 provider 前缀
+### Bẫy 3: Quên viết tiền tố provider khi dùng cờ `--model`
 
-下列命令场景里，建议始终写全：
+Trong các lệnh sau, luôn khuyến nghị viết đầy đủ định dạng:
 
 - `image describe`
 - `audio transcribe`
 - `video describe`
-- 任何你明确指定 provider 的脚本
+- Bất kỳ kịch bản nào bạn muốn chỉ định đích danh nhà cung cấp
 
-正确示例：
+Ví dụ đúng chuẩn:
 
 ```bash
 openclaw infer audio transcribe --file ./memo.m4a --model openai/whisper-1 --json
 ```
 
-### 坑 4：把 secret 直接写死在仓库里
+### Bẫy 4: Lưu cứng secret và token trực tiếp trong repository
 
-官方文档已经明确支持 SecretRef。优先顺序：
+Tài liệu chính thức đã hỗ trợ cơ chế SecretRef an toàn. Thứ tự ưu tiên:
 
-1. `env`
-2. `file`
-3. `exec`
+1. `env` (biến môi trường)
+2. `file` (tệp bảo mật trên đĩa)
+3. `exec` (chương trình quản lý khóa)
 
-不要把 webhook secret、provider token、第三方 API key 直接写进公开仓库。
-
----
-
-## 10.6 本章实践建议
-
-如果你现在就要把 OpenClaw 接到业务里，推荐按下面的顺序走：
-
-1. **先跑通 `openclaw onboard` 与 `openclaw infer`**
-2. **再配图片 / 视频 / TTS 的默认模型**
-3. **轻量触发用 `hooks`**
-4. **多步骤流程用 `webhooks` plugin + `Task Flow`**
-5. **本地多媒体深度编排再上 `ComfyUI`**
+Tuyệt đối không lưu cứng webhook secret, provider token, hay API key vào các file cấu hình công khai trên Git.
 
 ---
 
-## 10.7 官方参考
+## 10.6 Lời khuyên thực hành
 
-- GitHub Releases：https://github.com/openclaw/openclaw/releases
-- Inference CLI：https://docs.openclaw.ai/cli/infer
-- Models CLI：https://docs.openclaw.ai/cli/models
-- Webhooks Plugin：https://docs.openclaw.ai/plugins/webhooks
-- Scheduled Tasks：https://docs.openclaw.ai/automation/cron-jobs
-- Task Flow：https://docs.openclaw.ai/automation/taskflow
+Nếu bạn muốn đưa OpenClaw vào ứng dụng thực tế ngay hôm nay, hãy làm theo các bước sau:
+
+1. **Chạy thông suốt `openclaw onboard` và `openclaw infer` trước**
+2. **Thiết lập mô hình mặc định cho ảnh / video / TTS**
+3. **Dùng `hooks` cho các kích hoạt sự kiện đơn giản**
+4. **Dùng plugin `webhooks` + `Task Flow` cho các luồng công việc nhiều bước**
+5. **Chỉ triển khai `ComfyUI` khi cần điều phối media chuyên sâu tại máy cục bộ**
+
+---
+
+## 10.7 Tài liệu tham khảo chính thức
+
+- GitHub Releases: https://github.com/openclaw/openclaw/releases
+- Inference CLI: https://docs.openclaw.ai/cli/infer
+- Models CLI: https://docs.openclaw.ai/cli/models
+- Webhooks Plugin: https://docs.openclaw.ai/plugins/webhooks
+- Scheduled Tasks: https://docs.openclaw.ai/automation/cron-jobs
+- Task Flow: https://docs.openclaw.ai/automation/taskflow

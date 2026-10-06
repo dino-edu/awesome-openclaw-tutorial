@@ -1,141 +1,144 @@
-> 📖 **纸质书《OpenClaw超级个体实操手册》已上市！** 清华大学出版社出版，在开源教程基础上全面重写+逐条验证。🛒 [京东专属购买链接（¥42，原价¥59.8）](https://item.jd.com/14669463.html)
+> 📖 **Giáo trình Awesome OpenClaw Tutorial** | Bản dịch tiếng Việt chính thức cho cộng đồng. Nguyên tác thuộc về tác giả [@xianyu110](https://github.com/xianyu110).
 
-# 第9章节 多平台集成
+# Chương 9: Tích hợp Đa Nền tảng (Lark/Feishu, DingTalk, WeCom, Telegram, Discord)
 
-> 💡 **本章节目标**：学会将OpenClaw接入飞书、企业微信、钉钉、QQ等国内主流平台，实现随时随地使用AI助手。飞书作为最现代化、开发布友好的平台，将优先介绍。
+> 💡 **Mục tiêu chương**: Học cách kết nối OpenClaw với các nền tảng giao tiếp phổ biến như Lark/Feishu (ByteDance), WeCom (WeChat Doanh nghiệp), DingTalk (Alibaba), Discord, Telegram, QQ, v.v., để có thể tương tác với trợ lý AI mọi lúc mọi nơi. Lark/Feishu với thiết kế hiện đại và thân thiện nhất cho nhà phát triển sẽ được ưu tiên hướng dẫn chi tiết hàng đầu.
 
-## 📱 本章节内内容
+## 📱 Nội dung chương
 
-- 9.1 飞书Bot配置
-  - 9.1.1 飞书机器人介绍
-  - 9.1.2 快速开始
-  - 9.1.3 创建飞书应用
-  - 9.1.4 配置 OpenClaw
-  - 9.1.5 启动并测试
-  - 9.1.6 访问控制
-  - 9.1.7 群组配置
-  - 9.1.8 获取群组/用户 ID
-  - 9.1.9 高级配置
-  - 9.1.10 多账号配置
-  - 9.1.11 多 Agent 配置
-    - 9.1.11.1 配合飞书使用
-    - 9.1.11.2 实战案例：4个专业助手
-    - 9.1.11.3 配置注意事项
-    - 9.1.11.4 故障排查
-    - 9.1.11.5 配置对比
-    - 9.1.11.6 使用建议
-    - 9.1.11.7 本地多 Agent 管理（无需绑定 IM 平台）⭐新增
-- 9.2 企业微信Bot配置
-- 9.3 钉钉Bot配置
-- 9.4 QQ Bot配置
-- 9.5 微信接入（ClawBot 官方方案）⭐新增
-  - 9.5.1 ClawBot 是什么
-  - 9.5.2 安装步骤
-  - 9.5.3 工作原理
-  - 9.5.4 与第三方方案对比
-  - 9.5.5 配置与使用
-  - 9.5.6 注意事项
-- 9.6 浏览器渠道（Dashboard v2）⭐新增
-  - 9.6.1 什么是浏览器渠道
-  - 9.6.2 适用场景
-  - 9.6.3 访问方式与功能
+- 9.1 Cấu hình Bot Lark / Feishu
+  - 9.1.1 Giới thiệu về Bot Feishu / Lark
+  - 9.1.2 Bắt đầu nhanh
+  - 9.1.3 Bước 1: Tạo ứng dụng Lark / Feishu
+  - 9.1.4 Bước 2: Cấu hình OpenClaw
+  - 9.1.5 Bước 3: Khởi chạy và kiểm thử
+  - 9.1.6 Kiểm soát truy cập (Access Control)
+  - 9.1.7 Cấu hình nhóm chat
+  - 9.1.8 Cách lấy Chat ID và User ID
+  - 9.1.9 Cấu hình nâng cao
+  - 9.1.10 Các lệnh thường dùng
+  - 9.1.11 Xử lý sự cố
+  - 9.1.12 Bảng tham chiếu cấu hình
+  - 9.1.13 Các loại tin nhắn hỗ trợ
+  - 9.1.14 Tích hợp sâu vào hệ sinh thái Lark / Feishu
+  - 9.1.15 Ca thực chiến: Cấu hình Bot kép
+- 9.2 Cấu hình Bot WeCom (WeChat Doanh nghiệp)
+- 9.3 Cấu hình Bot DingTalk (Alibaba)
+- 9.4 Cấu hình Bot QQ
+- 9.5 Kết nối WeChat cá nhân (Giải pháp chính thức ClawBot) ⭐ Mới
+  - 9.5.1 ClawBot là gì?
+  - 9.5.2 Các bước cài đặt
+  - 9.5.3 Nguyên lý hoạt động
+  - 9.5.4 So sánh với các giải pháp bên thứ ba
+  - 9.5.5 Cấu hình và sử dụng
+  - 9.5.6 Lưu ý an toàn
+- 9.6 Kênh Trình duyệt Web (Dashboard v2) ⭐ Mới
+  - 9.6.1 Kênh trình duyệt là gì?
+  - 9.6.2 Kịch bản phù hợp
+  - 9.6.3 Cách truy cập và tính năng
+- 9.7 So sánh và Lựa chọn Nền tảng Tích hợp
+- 9.1.16 Mô hình Đa Bot Đa Agent: Xây dựng Đội ngũ Trợ lý AI Chuyên biệt
+- 9.1.17 Cấu hình Đa Agent (Phương thức truyền thống qua Bindings)
+- 9.1.18 Quản lý Đa Agent Cục bộ (Không cần gắn nền tảng chat) ⭐ Mới
+- 9.12 OpenClaw Manager - Công cụ Quản lý Trực quan
+- 9.13 Các Công cụ Quản lý Trực quan Khác trong Cộng đồng (ClawX, ClawPanel)
 
 ---
 
-## 9.1 飞书Bot配置
+## 9.1 Cấu hình Bot Lark / Feishu
 
-> 💡 **状态**：生产就绪，支持机器人私聊和群组，使用 WebSocket 长连接模式接收消息。
+> 💡 **Trạng thái**: Sẵn sàng cho môi trường sản xuất (Production-ready), hỗ trợ chat 1-1 và tương tác nhóm, nhận sự kiện qua kết nối dài WebSocket ổn định.
 
-### 9.1.1 飞书机器人介绍
+### 9.1.1 Giới thiệu về Bot Feishu / Lark
 
-**飞书的优势**：
+**Những ưu thế vượt trội của Lark / Feishu (ByteDance)**:
 
-1. **现代化怎么办公**
-   - 文档协作
-   - 多维表格
-   - 视频会议
+1. **Không gian làm việc số hiện đại**
+   - Cộng tác tài liệu đám mây (Cloud Docs) mượt mà
+   - Bảng cơ sở dữ liệu đa chiều (Bitable / Multi-dimensional tables)
+   - Tích hợp lịch họp và video call tiện lợi
 
-2. **高效沟通**
-   - 消息卡片
-   - 互动组件
-   - 流式输出
+2. **Giao tiếp hiệu quả và trực quan**
+   - Thẻ tin nhắn tương tác (Interactive Message Cards) đẹp mắt
+   - Các nút bấm hành động (Components) linh hoạt
+   - Hỗ trợ phản hồi theo dòng dữ liệu (Streaming Output) tức thì
 
-3. **开发布友好**
-   - API设计优秀
-   - 文档详细
-   - WebSocket长连接
+3. **Thân thiện tối đa với nhà phát triển**
+   - Thiết kế RESTful API và SDK chuẩn chỉ, tài liệu rõ ràng
+   - Cơ chế kết nối dài WebSocket không đòi hỏi IP tĩnh hay mở cổng Public Webhook
+   - Phân quyền theo chuẩn OAuth2 minh bạch
 
-4. **免费使用**
-   - 功能强大
-   - 稳定可靠
+4. **Chi phí tối ưu**
+   - Các tính năng mở rộng nền tảng miễn phí, ổn định cao
 
-### 9.1.2 快速开始
+### 9.1.2 Bắt đầu nhanh
 
-添加飞书渠道有两种方式：
+Có hai cách để thêm kênh Lark / Feishu vào OpenClaw:
 
-**方式一：通过安装向导添加（推荐）**
+**Cách 1: Thêm qua Trình Hướng dẫn Cài đặt (Khuyên dùng)**
 
-如果您刚安装完 OpenClaw，可以直接运行向导：
+Nếu vừa cài đặt OpenClaw, bạn chỉ cần chạy lệnh hướng dẫn:
 
 ```bash
 openclaw setup
 ```
 
-向导会引导您完成：
-1. 创建飞书应用并获取凭证
-2. 配置应用凭证
-3. 启动网关
+Trình hướng dẫn sẽ dẫn dắt bạn qua các bước:
+1. Tạo ứng dụng trên Lark/Feishu Open Platform và lấy thông tin xác thực
+2. Điền App ID và App Secret
+3. Khởi chạy Gateway
 
-✅ **完成配置后**，您可以使用以下命令检查网关状态：
+✅ **Sau khi hoàn tất cấu hình**, bạn có thể dùng các lệnh sau để kiểm tra:
 ```bash
-openclaw gateway status      # 查看网关运行状态
-openclaw logs --follow       # 查看实时日志
+openclaw gateway status      # Xem trạng thái hoạt động của Gateway
+openclaw logs --follow       # Theo dõi nhật ký hệ thống thời gian thực
 ```
 
-**方式二：通过命令行添加**
+**Cách 2: Thêm trực tiếp qua Dòng lệnh**
 
-如果您已经完成了初始安装，可以用以下命令添加飞书渠道：
+Nếu đã hoàn thành cài đặt ban đầu, bạn có thể thêm kênh bằng lệnh:
 
 ```bash
 openclaw channels add
 ```
-然后根据交互式提示选择 Feishu，输入 App ID 和 App Secret 即可。
+Chọn **Feishu** (hoặc Lark), sau đó dán `App ID` và `App Secret` tương ứng.
 
-✅ **完成配置后**，您可以使用以下命令管理网关：
+✅ **Sau khi cấu hình xong**, quản lý Gateway bằng các lệnh:
 ```bash
-openclaw gateway status      # 查看网关运行状态
-openclaw gateway restart     # 重启网关以应用新配置
-openclaw logs --follow       # 查看实时日志
+openclaw gateway status      # Xem trạng thái Gateway
+openclaw gateway restart     # Khởi động lại Gateway để nạp cấu hình mới
+openclaw logs --follow       # Theo dõi log thời gian thực
 ```
-### 9.1.3 第一步：创建飞书应用
 
-#### 1. 打开飞书开放平台
+### 9.1.3 Bước 1: Tạo ứng dụng Lark / Feishu
 
-访问 [飞书开放平台](https://open.feishu.cn/app)，使用飞书账号登录。
+#### 1. Mở Nền tảng Mở (Open Platform)
 
-> 💡 **Lark（国际版）**：请使用 https://open.larksuite.com/app，并在配置中设置 `domain: "lark"`。
+Truy cập [Feishu Open Platform](https://open.feishu.cn/app) (hoặc [Lark Open Platform](https://open.larksuite.com/app) nếu bạn dùng bản quốc tế), đăng nhập bằng tài khoản của bạn.
 
-#### 2. 创建应用
+> 💡 **Với bản quốc tế Lark**: Vui lòng truy cập https://open.larksuite.com/app và thêm cấu hình `domain: "lark"` trong OpenClaw.
 
-1. 点击 **创建企业自建应用**
-2. 填写应用名称和描述
-3. 选择应用图标
+#### 2. Tạo ứng dụng mới
 
-![飞书开放平台 - 创建企业自建应用](https://upload.maynor1024.live/file/1770734336224_image_1770734318.jpg)
+1. Nhấp chọn **Tạo ứng dụng tùy chỉnh cho doanh nghiệp** (Custom App)
+2. Điền tên ứng dụng và mô tả hoạt động
+3. Tải lên ảnh đại diện biểu tượng ứng dụng
 
-#### 3. 获取应用凭证
+![Nền tảng Mở Feishu - Tạo ứng dụng tùy chỉnh doanh nghiệp](https://upload.maynor1024.live/file/1770734336224_image_1770734318.jpg)
 
-在应用的 **凭证与基础信息** 页面，复制：
-- **App ID**（格式如 `cli_xxx`）
+#### 3. Lấy thông tin xác thực ứng dụng
+
+Tại trang **Thông tin cơ bản & Xác thực** (Credentials & Basic Info), sao chép:
+- **App ID** (định dạng dạng `cli_xxx`)
 - **App Secret**
 
-❗ **重要**：请妥善保管 App Secret，不要分分享给他人。
+❗ **Lưu ý bảo mật**: Hãy bảo quản cẩn thận App Secret, tuyệt đối không gửi công khai cho người khác.
 
-![飞书应用凭证 - App ID和App Secret](https://upload.maynor1024.live/file/1770734332380_image_1770734319.jpg)
+![Thông tin xác thực ứng dụng - App ID và App Secret](https://upload.maynor1024.live/file/1770734332380_image_1770734319.jpg)
 
-#### 4. 配置应用权限
+#### 4. Cấu hình quyền hạn ứng dụng
 
-在 **权限管理** 页面，点击 **批量导入** 按钮，粘贴以下 JSON 配置一键导入所需权限：
+Tại trang **Quản lý quyền hạn** (Permissions), nhấp vào nút **Nhập hàng loạt** (Batch Import), sau đó dán chuỗi JSON sau để cấp trọn gói các quyền cần thiết:
 
 ```json
 {
@@ -172,72 +175,73 @@ openclaw logs --follow       # 查看实时日志
   }
 }
 ```
-![飞书应用权限配置 - 批量导入JSON权限](https://upload.maynor1024.live/file/1770734343156_image_1770734320.jpg)
+![Cấu hình quyền hạn ứng dụng - Nhập hàng loạt quyền JSON](https://upload.maynor1024.live/file/1770734343156_image_1770734320.jpg)
 
-#### 5. 启用机器人能力
+#### 5. Bật tính năng Bot (Robot)
 
-在 **应用能力** > **机器人** 页面：
-1. 开启机器人能力
-2. 配置机器人名称
+Tại trang **Năng lực ứng dụng** (App Features) > **Bot** (Robot):
+1. Bật công tắc kích hoạt năng lực Bot
+2. Đặt tên hiển thị cho Bot
 
-![飞书机器人配置 - 启用机器人功能](https://upload.maynor1024.live/file/1770734349201_image_1770734321.jpg)
+![Cấu hình Bot - Kích hoạt tính năng Bot](https://upload.maynor1024.live/file/1770734349201_image_1770734321.jpg)
 
-#### 6. 配置事件订阅
+#### 6. Cấu hình Đăng ký Sự kiện (Event Subscription)
 
-⚠️ **重要提醒**：在配置事件订阅前，请务必确保已完成以下步骤：
-1. 运行 `openclaw channels add` 添加了 Feishu 渠道
-2. 网关处于启动状态（可通过 `openclaw gateway status` 检查状态）
+⚠️ **Nhắc nhở quan trọng**: Trước khi cấu hình đăng ký sự kiện, hãy đảm bảo bạn đã:
+1. Chạy lệnh `openclaw channels add` để thêm kênh Feishu/Lark
+2. Gateway đang ở trạng thái chạy (kiểm tra qua `openclaw gateway status`)
 
-在 **事件订阅** 页面：
+Tại trang **Đăng ký sự kiện** (Event Subscriptions):
 
-**步骤1：选择长连接模式**
-1. 选择 **使用长连接接收事件**（WebSocket 模式）
+**Bước 1: Chọn chế độ Kết nối dài**
+1. Chọn tùy chọn **Sử dụng kết nối dài để nhận sự kiện** (chế độ WebSocket)
 
-**步骤2：添加事件**
-2. 添加事件：`im.message.receive_v1`（接收消息）
+**Bước 2: Thêm sự kiện**
+2. Thêm sự kiện: `im.message.receive_v1` (Nhận tin nhắn)
 
-**步骤3：配置必需权限（重要）**
+**Bước 3: Cấu hình các quyền hạn bắt buộc**
 
-在配置事件订阅的同时，请确保在 **权限管理** 页面已添加以下权限：
+Hãy chắc chắn rằng trong trang **Quản lý quyền hạn**, bạn đã thêm 3 quyền cốt lõi sau:
 
-| 权限标识 | 权限名称 | 是否必需 | 说明 |
-|---------|---------|---------|------|
-| `im:message` | 获取与发布送单聊、群组消息 | ✅ 必需 | 接收和发布送消息 |
-| `im:message:send_as_bot` | 以应用身份发布消息 | ✅ 必需 | 以机器人身份回复 |
-| `contact:contact.base:readonly` | 获取通讯附录基本信息 | ✅ 必需 | 识别用户身份 |
+| Quyền hạn | Tên quyền | Bắt buộc | Mục đích sử dụng |
+|---|---|---|---|
+| `im:message` | Đọc và gửi tin nhắn đơn/nhóm | ✅ Bắt buộc | Nhận và phát tin nhắn |
+| `im:message:send_as_bot` | Gửi tin nhắn dưới danh nghĩa ứng dụng | ✅ Bắt buộc | Phản hồi tin nhắn với tư cách bot |
+| `contact:contact.base:readonly` | Đọc thông tin cơ bản trong danh bạ | ✅ Bắt buộc | Nhận diện danh tính người gửi |
 
-> 💡 **为什么需要 `contact:contact.base:readonly` 权限？**
+> 💡 **Vì sao quyền `contact:contact.base:readonly` lại bắt buộc?**
 > 
-> 这个权限用于获取用户的基本信息（如用户名、部门等），OpenClaw需要这些信息来：
-> - ✅ 识别消息发布送者
-> - ✅ 实现访问控制（allowlist/denylist）
-> - ✅ 提供个性化服务
-> - ✅ 记附录对话历史
+> Quyền này cho phép đọc thông tin người dùng (tên, phòng ban), OpenClaw cần dữ liệu này để:
+> - ✅ Nhận diện chính xác người gửi tin nhắn
+> - ✅ Thực thi cơ chế kiểm soát truy cập (allowlist / denylist)
+> - ✅ Cá nhân hóa câu trả lời
+> - ✅ Ghi nhận lịch sử hội thoại đúng người
 > 
-> ⚠️ **如果缺少此权限，机器人将无法正常响应消息！**
+> ⚠️ **Nếu thiếu quyền này, bot sẽ không thể phản hồi tin nhắn của bạn!**
 
-**配置截图示例**：
+**Minh họa quyền danh bạ**:
 
-![飞书权限配置 - 通讯附录权限](https://upload.maynor1024.live/file/1771065454975_image-20260214183727712.png)
+![Cấu hình quyền Feishu - Quyền danh bạ cơ bản](https://upload.maynor1024.live/file/1771065454975_image-20260214183727712.png)
 
-⚠️ **注意**：如果网关未启动或渠道未添加，长连接设置将保存失败。
+⚠️ **Lưu ý**: Nếu Gateway chưa khởi động hoặc chưa thêm kênh, nút lưu thiết lập kết nối dài trên console sẽ báo lỗi.
 
-![飞书事件订阅 - 使用长连接接收消息](https://upload.maynor1024.live/file/1770734352151_image_1770734322.jpg)
+![Đăng ký sự kiện Feishu - Dùng kết nối dài nhận tin nhắn](https://upload.maynor1024.live/file/1770734352151_image_1770734322.jpg)
 
-**常见错误排查：**
+**Xử lý các lỗi cấu hình Gateway thường gặp:**
 
-如果遇到 "Gateway start blocked: set gateway.mode=local" 错误：
-```bash
-# 确保配置文件中设置了 gateway.mode
+Nếu gặp thông báo lỗi "Gateway start blocked: set gateway.mode=local":
+```json
+// Hãy đảm bảo trong tệp cấu hình đã khai báo gateway.mode:
 {
   "gateway": {
     "mode": "local"
   }
 }
 ```
-如果遇到 "Gateway auth is set to token, but no token is configured" 错误：
-```bash
-# 方式1：在配置文件中设置 token
+
+Nếu gặp thông báo lỗi "Gateway auth is set to token, but no token is configured":
+```json
+// Cách 1: Thiết lập token trực tiếp trong tệp cấu hình
 {
   "gateway": {
     "auth": {
@@ -246,39 +250,43 @@ openclaw logs --follow       # 查看实时日志
     }
   }
 }
-
-# 方式2：使用环境变量
+```
+Hoặc dùng biến môi trường:
+```bash
+# Cách 2: Sử dụng biến môi trường
 export OPENCLAW_GATEWAY_TOKEN="your-secure-token"
 ```
-#### 7. 发布布应用
 
-1. 在 **版本管理与发布布** 页面创建版本
-2. 提交审核并发布布
-3. 等待管理员审批（企业自建应用通常自动通过）
+#### 7. Phát hành Ứng dụng
 
-### 9.1.4 第二步：配置 OpenClaw
+1. Vào trang **Quản lý phiên bản và phát hành** (Version Management & Release), chọn tạo phiên bản mới
+2. Điền ghi chú mô tả phiên bản và gửi xét duyệt
+3. Chờ quản trị viên phê duyệt (với ứng dụng nội bộ công ty tự xây dựng, hệ thống thường tự động duyệt ngay lập tức)
 
-#### 安装 Feishu 插件
+### 9.1.4 Bước 2: Cấu hình OpenClaw
+
+#### Cài đặt Plugin Feishu
 
 ```bash
-# 安装 Feishu 插件
+# Cài đặt plugin Feishu chính thức
 openclaw plugins install @openclaw/feishu
 
-# 本地 checkout（在 git 仓库内运行）
+# Hoặc cài từ mã nguồn cục bộ (nếu chạy trong kho git clone)
 openclaw plugins install ./extensions/feishu
 ```
-#### 通过向导配置（推荐）
 
-运行以下命令，根据提示粘贴 App ID 和 App Secret：
+#### Cấu hình qua Trình Hướng dẫn (Khuyên dùng)
+
+Chạy câu lệnh sau và dán `App ID` cùng `App Secret` khi được hỏi:
 
 ```bash
 openclaw channels add
 ```
-选择 **Feishu**，然后输入您在第一步获取的凭证即可。
+Chọn **Feishu**, sau đó nhập các thông tin xác thực đã lấy ở Bước 1.
 
-#### 通过配置文件配置
+#### Cấu hình thủ công qua Tệp Cấu hình
 
-编辑 `~/.openclaw/openclaw.json`：
+Chỉnh sửa tệp `~/.openclaw/openclaw.json`:
 
 ```json
 {
@@ -290,22 +298,24 @@ openclaw channels add
         "main": {
           "appId": "cli_xxx",
           "appSecret": "xxx",
-          "botName": "我的AI助手"
+          "botName": "Trợ lý AI của tôi"
         }
       }
     }
   }
 }
 ```
-#### 通过环境变量配置
+
+#### Cấu hình qua Biến Môi trường
 
 ```bash
 export FEISHU_APP_ID="cli_xxx"
 export FEISHU_APP_SECRET="xxx"
 ```
-#### Lark（国际版）域名配置
 
-如果您的租户在 Lark（国际版），请设置域名为 `lark`：
+#### Cấu hình tên miền cho bản quốc tế Lark
+
+Nếu tổ chức của bạn đăng ký trên Lark quốc tế, hãy đặt trường tên miền thành `lark`:
 
 ```json
 {
@@ -322,50 +332,56 @@ export FEISHU_APP_SECRET="xxx"
   }
 }
 ```
-### 9.1.5 第三步：启动并测试
 
-#### 1. 启动网关
+### 9.1.5 Bước 3: Khởi chạy và Kiểm thử
+
+#### 1. Khởi động Gateway
 
 ```bash
-# 安装并启动网关
+# Cài đặt dịch vụ và khởi chạy Gateway
 openclaw gateway install
 
-# 检查网关状态
+# Kiểm tra trạng thái hoạt động
 openclaw gateway status
 
-# 查看实时日志
+# Xem nhật ký log trực tiếp
 openclaw logs --follow
 ```
-**网关启动成功的标志：**
-✅ Gateway: running (pid xxxxx, state active)
-✅ Gateway target: ws://127.0.0.1:18789
-✅ Source: local loopback
-#### 2. 发布送测试消息
 
-在飞书中找到您创建的机器人，发布送一条消息，例如："hi"。
+**Dấu hiệu nhận biết Gateway đã chạy thành công:**
+- ✅ Gateway: running (pid xxxxx, state active)
+- ✅ Gateway target: ws://127.0.0.1:18789
+- ✅ Source: local loopback
 
-**在日志中应该能看到：**
+#### 2. Gửi tin nhắn thử nghiệm
+
+Tìm bot vừa tạo trên ứng dụng Lark/Feishu, gửi một tin nhắn chào hỏi, ví dụ: `"hi"`.
+
+**Trong log hệ thống bạn sẽ thấy:**
+```text
 HEARTBEAT_OK
 hi
 connected | running
 agent main | session main (heartbeat) | local-antigravity/gemini-3-pro-high
-#### 3. 配对授权
+```
 
-默认情况下（`dmPolicy: "pairing"`），机器人会回复一个 **配对码**。您需要批准此代码：
+#### 3. Ghép đôi và Cấp quyền (Pairing Approval)
+
+Ở chính sách mặc định (`dmPolicy: "pairing"`), bot sẽ phản hồi kèm một **Mã ghép đôi** (Pairing Code). Bạn cần duyệt mã này qua dòng lệnh:
 
 ```bash
-# 查看待审批的配对请求
+# Xem danh sách yêu cầu ghép đôi đang chờ duyệt
 openclaw pairing list feishu
 
-# 批准配对（替换 <配对码> 为实际收到的代码）
-openclaw pairing approve feishu <配对码>
+# Duyệt ghép đôi (thay <mã_ghép_đôi> bằng mã nhận được từ bot)
+openclaw pairing approve feishu <mã_ghép_đôi>
 
-# 示例
+# Ví dụ
 openclaw pairing approve feishu ABC123
 ```
-批准后即可正常对话。
+Sau khi duyệt xong, bạn có thể trò chuyện với bot bình thường.
 
-**如果不想使用配对模式：**
+**Nếu bạn muốn mở quyền tự do, không cần bước ghép đôi:**
 ```json
 {
   "channels": {
@@ -376,47 +392,48 @@ openclaw pairing approve feishu ABC123
   }
 }
 ```
-### 9.1.6 访问控制
 
-#### 私聊访问
+### 9.1.6 Kiểm soát Truy cập (Access Control)
 
-**默认策略**：`dmPolicy: "pairing"`，陌生用户会收到配对码
+#### Truy cập Tin nhắn Riêng (Direct Message)
 
-**批准配对**：
-```bash
-openclaw pairing list feishu           # 查看待审批列表
-openclaw pairing approve feishu <CODE> # 批准
-```
-**白名单模式**：通过 `channels.feishu.allowFrom` 配置允许的用户 Open ID
+- **Chính sách mặc định**: `dmPolicy: "pairing"`, người lạ nhắn tin sẽ nhận được mã ghép đôi yêu cầu quản trị viên phê duyệt
+- **Duyệt ghép đôi**:
+  ```bash
+  openclaw pairing list feishu           # Xem danh sách chờ
+  openclaw pairing approve feishu <CODE> # Duyệt mã
+  ```
+- **Chế độ danh sách trắng (Allowlist)**: Khai báo các Open ID được phép thông qua `channels.feishu.allowFrom`
 
-#### 群组访问
+#### Truy cập Nhóm chat (Group Chat)
 
-**1. 群组策略**（`channels.feishu.groupPolicy`）：
-- `"open"` = 允许群组中所有人（默认）
-- `"allowlist"` = 仅允许 `groupAllowFrom` 中的用户
-- `"disabled"` = 禁用群组消息
+1. **Chính sách nhóm** (`channels.feishu.groupPolicy`):
+   - `"open"` = Cho phép tất cả mọi người trong nhóm tương tác (mặc định)
+   - `"allowlist"` = Chỉ cho phép các người dùng nằm trong `groupAllowFrom`
+   - `"disabled"` = Tắt hoàn toàn tính năng trong nhóm chat
 
-**2. @提及要求**（`channels.feishu.groups.<chat_id>.requireMention`）：
-- `true` = 需要 @机器人才响应（默认）
-- `false` = 无需 @也响应
+2. **Yêu cầu nhắc tên @ (Mention)** (`channels.feishu.groups.<chat_id>.requireMention`):
+   - `true` = Bắt buộc phải tag @ tên bot thì bot mới trả lời (mặc định)
+   - `false` = Không cần tag @, bot tự động phản hồi mọi tin nhắn trong nhóm
 
-### 9.1.7 群组配置示例
+### 9.1.7 Ví dụ Cấu hình Nhóm chat
 
-#### 允许所有群组，需要 @提及（默认行为）
+#### Cho phép mọi nhóm, yêu cầu phải tag @ (Hành vi mặc định)
 
 ```json
 {
   "channels": {
     "feishu": {
       "groupPolicy": "open"
-      // 默认 requireMention: true
+      // Mặc định requireMention: true
     }
   }
 }
 ```
-#### 允许所有群组，无需 @提及
 
-需要为特定群组配置：
+#### Cho phép nhóm cụ thể không cần tag @
+
+Cấu hình riêng cho từng nhóm chỉ định:
 
 ```json
 {
@@ -429,7 +446,8 @@ openclaw pairing approve feishu <CODE> # 批准
   }
 }
 ```
-#### 仅允许特定用户在群组中使用
+
+#### Chỉ cho phép một số người dùng nhất định được dùng bot trong nhóm
 
 ```json
 {
@@ -441,57 +459,53 @@ openclaw pairing approve feishu <CODE> # 批准
   }
 }
 ```
-### 9.1.8 获取群组/用户 ID
 
-#### 获取群组 ID（chat_id）
+### 9.1.8 Cách lấy Chat ID và User ID
 
-群组 ID 格式为 `oc_xxx`，可以通过以下方式获取：
+#### Lấy Chat ID của nhóm (`chat_id`)
 
-**方法一**（推荐）：
-1. 启动网关并在群组中 @机器人发布消息
-2. 运行 `openclaw logs --follow` 查看日志中的 `chat_id`
+Chat ID có định dạng bắt đầu bằng `oc_xxx`. Bạn có thể lấy bằng:
 
-**方法二**：使用飞书 API 调试工具获取机器人所在群组列表。
+**Cách 1 (Khuyên dùng)**:
+1. Bật Gateway và tag @ tên bot gửi tin nhắn vào nhóm
+2. Chạy `openclaw logs --follow`, quan sát dòng log để thấy `chat_id`
 
-#### 获取用户 ID（open_id）
+**Cách 2**: Sử dụng công cụ API Explorer trên Lark/Feishu Open Platform để gọi API lấy danh sách nhóm bot tham gia.
 
-用户 ID 格式为 `ou_xxx`，可以通过以下方式获取：
+#### Lấy Open ID của người dùng (`open_id`)
 
-**方法一**（推荐）：
-1. 启动网关并给机器人发布消息
-2. 运行 `openclaw logs --follow` 查看日志中的 `open_id`
+Open ID người dùng có định dạng `ou_xxx`. Bạn có thể lấy bằng:
 
-**方法二**：查看配对请求列表，其中包含用户的 Open ID：
+**Cách 1 (Khuyên dùng)**:
+1. Bật Gateway và nhắn tin riêng cho bot
+2. Chạy `openclaw logs --follow`, đọc trường `open_id` trong log
+
+**Cách 2**: Chạy lệnh xem danh sách ghép đôi, mã `open_id` sẽ hiển thị trực tiếp:
 ```bash
 openclaw pairing list feishu
 ```
-### 9.1.9 高级配置
 
-#### 自定义菜单
+### 9.1.9 Cấu hình Nâng cao
 
-添加常用命令在菜单上
+#### Menu Tùy chỉnh (Custom Menu)
 
-![飞书机器人菜单 - 添加常用命令快捷入口](https://upload.maynor1024.live/file/1770874980945_image-20260212134245771.png)
+Thêm các nút bấm lệnh tắt thường dùng ngay trên thanh menu trò chuyện của bot:
 
+![Menu Bot Feishu - Thêm các phím tắt lệnh thường dùng](https://upload.maynor1024.live/file/1770874980945_image-20260212134245771.png)
 
+Ví dụ tạo 3 phím tắt tiện ích: Phiên mới (`/reset`), Danh sách kỹ năng (`/skills`), Tiếp tục (`/continue`):
 
+![Minh họa Menu Tùy chỉnh - Phiên mới / Kỹ năng / Tiếp tục](https://upload.maynor1024.live/file/1770874990637_image-20260212134300933.png)
 
+#### Cấu hình Đa tài khoản Bot (Multi-account)
 
-这里我新建了三个常用命令：新建对话，列出技能，继续。
+OpenClaw hỗ trợ quản lý đồng thời nhiều Bot Lark/Feishu trên cùng một hệ thống. Tính năng này rất hữu ích khi:
+- Các phòng ban/đội ngũ khác nhau dùng bot riêng
+- Tách biệt môi trường thử nghiệm (Testing) và môi trường thực tế (Production)
+- Tạo các trợ lý chuyên môn riêng biệt (Hỗ trợ code, Viết bài, Quản lý dự án)
+- Cấu hình bot chính và bot dự phòng
 
-![自定义菜单示例 - 新建对话/列出技能/继续](https://upload.maynor1024.live/file/1770874990637_image-20260212134300933.png)
-
-
-
-#### 多账号配置
-
-OpenClaw 支持同时管理多个飞书机器人，这在以下场景非常有用：
-- 不同团队使用不同的机器人
-- 测试环境和生产环境分离
-- 不同功能的专用机器人
-- 主备机器人配置
-
-**基础配置示例（2个机器人）：**
+**Mẫu cấu hình cơ bản cho 2 Bot:**
 
 ```json
 {
@@ -503,13 +517,13 @@ OpenClaw 支持同时管理多个飞书机器人，这在以下场景非常有�
         "bot1": {
           "appId": "cli_xxxxxxxxxxxxxxxx",
           "appSecret": "your-app-secret-1",
-          "botName": "OpenClaw助手1",
+          "botName": "Trợ lý OpenClaw 1",
           "enabled": true
         },
         "bot2": {
           "appId": "cli_yyyyyyyyyyyyyyyy",
           "appSecret": "your-app-secret-2",
-          "botName": "OpenClaw助手2",
+          "botName": "Trợ lý OpenClaw 2",
           "enabled": true
         }
       },
@@ -549,9 +563,10 @@ OpenClaw 支持同时管理多个飞书机器人，这在以下场景非常有�
   }
 }
 ```
-> 💡 **实战提示**：上面的配置示例来自真实的多机器人部署案例。注意 `appSecret` 和 `token` 在生产环境中应该妥善保管，不要提交到代码仓库。
 
-**多机器人配置示例（4个专业助手）：**
+> 💡 **Kinh nghiệm thực tế**: Hãy bảo mật cẩn thận `appSecret` và `token`, tuyệt đối không commit tệp cấu hình này lên Git công khai.
+
+**Mẫu cấu hình 4 Trợ lý Chuyên nghiệp:**
 
 ```json
 {
@@ -563,25 +578,25 @@ OpenClaw 支持同时管理多个飞书机器人，这在以下场景非常有�
         "main-assistant": {
           "appId": "cli_main_xxxxxx",
           "appSecret": "your-main-secret",
-          "botName": "主助理",
+          "botName": "Trợ lý Tổng hợp",
           "enabled": true
         },
         "content-creator": {
           "appId": "cli_content_xxxxxx",
           "appSecret": "your-content-secret",
-          "botName": "内内容创作助手",
+          "botName": "Trợ lý Sáng tạo Nội dung",
           "enabled": true
         },
         "tech-dev": {
           "appId": "cli_tech_xxxxxx",
           "appSecret": "your-tech-secret",
-          "botName": "技术开发布助手",
+          "botName": "Trợ lý Phát triển Kỹ thuật",
           "enabled": true
         },
         "ai-news": {
           "appId": "cli_news_xxxxxx",
           "appSecret": "your-news-secret",
-          "botName": "AI资讯助手",
+          "botName": "Trợ lý Tin tức AI",
           "enabled": true
         }
       },
@@ -611,3000 +626,327 @@ OpenClaw 支持同时管理多个飞书机器人，这在以下场景非常有�
   }
 }
 ```
-> ⚠️ **重要提示**：在多账号配置中，不需要使用 `bindings` 来绑定不同的 agent。所有机器人会自动共分享 `agents.defaults` 配置。如果需要不同的模型，可以在对话中使用 `/model` 命令切换。
 
-**配置说明：**
+> ⚠️ **Lưu ý**: Trong mô hình cấu hình đa tài khoản chung một Gateway, bạn không nhất thiết phải cấu hình phần `bindings` phức tạp. Mọi bot sẽ dùng chung cấu hình mặc định trong `agents.defaults`. Nếu cần dùng mô hình khác nhau giữa các bot, bạn có thể gõ lệnh `/model` ngay trong đoạn chat để chuyển đổi linh hoạt.
 
-| 参数 | 说明 | 必填 |
-|------|------|------|
-| `accounts.<id>` | 账号唯一标识符（自定义） | ✅ |
-| `appId` | 飞书应用的 App ID | ✅ |
-| `appSecret` | 飞书应用的 App Secret | ✅ |
-| `botName` | 机器人显示名称 | ❌ |
-| `enabled` | 是否启用该账号 | ❌ (默认 true) |
+**Giải thích các thông số cấu hình:**
 
-**多机器人使用场景：**
+| Tham số | Ý nghĩa | Bắt buộc |
+|---|---|---|
+| `accounts.<id>` | Mã định danh duy nhất của tài khoản (tự đặt) | ✅ |
+| `appId` | App ID của ứng dụng trên Lark/Feishu | ✅ |
+| `appSecret` | App Secret của ứng dụng | ✅ |
+| `botName` | Tên hiển thị của bot | ❌ |
+| `enabled` | Trạng thái kích hoạt bot | ❌ (Mặc định: true) |
 
-1. **一人公司/独立开发布者**
-   - 主助理：任务分发布、日程管理
-   - 内内容创作助手：文章节、视频脚本
-   - 技术开发布助手：代码开发布、调试
-   - AI资讯助手：行业动态追踪
+**Kịch bản phân tách nhóm bot thực tế**:
 
-2. **团队协作**
-   - 技术团队助手：代码审查、技术讨论
-   - 产品团队助手：需求分析、用户反馈
-   - 运营团队助手：数据分析、内内容运营
-   - 测试助手：测试环境专用
+1. **Phân tách theo môi trường (Environment Separation)**
+   - Production: `cli_prod_xxx` (Chính sách pairing nghiêm ngặt)
+   - Staging: `cli_staging_xxx` (Chính sách mở thử nghiệm)
+   - Development: `cli_dev_xxx` (Tạm tắt khi không dùng)
 
-3. **环境分离**
-   - 生产环境助手：正式业务使用
-   - 测试环境助手：功能测试
-   - 开发布环境助手：开发布调试
+2. **Phân tách theo phòng ban (Team Separation)**
+   - Đội kỹ thuật: `cli_tech_xxx`
+   - Đội kinh doanh: `cli_sales_xxx`
+   - Đội nhân sự: `cli_hr_xxx`
 
-重要
-
-在 **事件订阅** 页面：
-
-**步骤1：选择长连接模式**
-1. 选择 **使用长连接接收事件**（WebSocket 模式）
-
-**步骤2：添加事件**
-2. 添加事件：`im.message.receive_v1`（接收消息）
-
-**步骤3：配置必需权限**
-3. 在 **权限管理** 页面，确保已添加：
-   - ✅ `im:message`（获取与发布送单聊、群组消息）
-   - ✅ `im:message:send_as_bot`（以应用身份发布消息）
-   - ✅ `contact:contact.base:readonly`（获取通讯附录基本信息）⭐ 必需
-
-> 💡 缺少 `contact:contact.base:readonly` 权限会导致机器人无法识别用户，无法正常响应消息。
-2. 添加事件：`im.message.receive_v1`（接收消息）
-
-
-
-![飞书长连接配置 - WebSocket模式事件订阅](https://upload.maynor1024.live/file/1770880072503_image-20260212150740769.png)
-
-![飞书事件订阅成功 - 长连接已建立](https://upload.maynor1024.live/file/1770880042274_image-20260212150708631.png)
-
-
-
-**实战场景1：团队分离**
-
-为不同团队创建专用机器人：
-
-```json
-{
-  "channels": {
-    "feishu": {
-      "accounts": {
-        "tech-team": {
-          "appId": "cli_tech_xxx",
-          "appSecret": "tech_secret",
-          "botName": "技术团队助手",
-          "enabled": true
-        },
-        "sales-team": {
-          "appId": "cli_sales_xxx",
-          "appSecret": "sales_secret",
-          "botName": "销售团队助手",
-          "enabled": true
-        },
-        "hr-team": {
-          "appId": "cli_hr_xxx",
-          "appSecret": "hr_secret",
-          "botName": "HR助手",
-          "enabled": true
-        }
-      }
-    }
-  }
-}
-```
-**实战场景2：环境分离**
-
-测试环境和生产环境使用不同的机器人：
-
-```json
-{
-  "channels": {
-    "feishu": {
-      "accounts": {
-        "production": {
-          "appId": "cli_prod_xxx",
-          "appSecret": "prod_secret",
-          "botName": "OpenClaw生产环境",
-          "enabled": true,
-          "dmPolicy": "pairing"
-        },
-        "staging": {
-          "appId": "cli_staging_xxx",
-          "appSecret": "staging_secret",
-          "botName": "OpenClaw测试环境",
-          "enabled": true,
-          "dmPolicy": "open"
-        },
-        "development": {
-          "appId": "cli_dev_xxx",
-          "appSecret": "dev_secret",
-          "botName": "OpenClaw开发布环境",
-          "enabled": false
-        }
-      }
-    }
-  }
-}
-```
-**实战场景3：功能分离**
-
-不同功能使用专用机器人：
-
-```json
-{
-  "channels": {
-    "feishu": {
-      "accounts": {
-        "general": {
-          "appId": "cli_general_xxx",
-          "appSecret": "general_secret",
-          "botName": "通用助手",
-          "enabled": true
-        },
-        "code-review": {
-          "appId": "cli_code_xxx",
-          "appSecret": "code_secret",
-          "botName": "代码审查助手",
-          "enabled": true
-        },
-        "document": {
-          "appId": "cli_doc_xxx",
-          "appSecret": "doc_secret",
-          "botName": "文档助手",
-          "enabled": true
-        }
-      }
-    }
-  }
-}
-```
-**配合多 Agent 使用**
-
-将不同的飞书机器人绑定到不同的 Agent，实现更精细的功能分离：
-
-```json
-{
-  "agents": {
-    "list": [
-      {
-        "id": "general-agent",
-        "workspace": "/home/user/general",
-        "agentDir": "/home/user/.openclaw/agents/general/agent"
-      },
-      {
-        "id": "code-agent",
-        "workspace": "/home/user/code-review",
-        "agentDir": "/home/user/.openclaw/agents/code/agent"
-      },
-      {
-        "id": "doc-agent",
-        "workspace": "/home/user/document",
-        "agentDir": "/home/user/.openclaw/agents/doc/agent"
-      }
-    ]
-  },
-  "channels": {
-    "feishu": {
-      "accounts": {
-        "general": {
-          "appId": "cli_general_xxx",
-          "appSecret": "general_secret",
-          "botName": "通用助手"
-        },
-        "code-review": {
-          "appId": "cli_code_xxx",
-          "appSecret": "code_secret",
-          "botName": "代码审查助手"
-        },
-        "document": {
-          "appId": "cli_doc_xxx",
-          "appSecret": "doc_secret",
-          "botName": "文档助手"
-        }
-      }
-    }
-  },
-  "bindings": [
-    {
-      "agentId": "general-agent",
-      "match": {
-        "channel": "feishu",
-        "account": "general"
-      }
-    },
-    {
-      "agentId": "code-agent",
-      "match": {
-        "channel": "feishu",
-        "account": "code-review"
-      }
-    },
-    {
-      "agentId": "doc-agent",
-      "match": {
-        "channel": "feishu",
-        "account": "document"
-      }
-    }
-  ]
-}
-```
-**管理多个机器人**
+**Các lệnh quản lý đa bot:**
 
 ```bash
-# 查看所有渠道状态
+# Xem danh sách tất cả các kênh và tài khoản đang hoạt động
 openclaw channels list
 
-# 启用/禁用特定账号：通过修改配置文件控制
-# 编辑 ~/.openclaw/channels/feishu.json，设置 "enabled": true/false
-
-# 重启网关使配置生效
+# Khởi động lại Gateway để nạp thay đổi
 openclaw gateway restart
 
-# 查看特定渠道的日志
+# Xem log riêng của kênh Feishu
 openclaw channels logs feishu
 ```
-**配置文件位置**
 
+#### Phản hồi theo Dòng (Streaming Output)
+
+Bật cờ `streaming: true` trong cấu hình giúp bot hiển thị câu trả lời từng chữ theo thời gian thực thay vì chờ sinh xong toàn bộ văn bản mới gửi, mang lại trải nghiệm mượt mà vượt trội.
+
+#### Trích dẫn Tin nhắn (Message Quoting)
+
+Tùy chọn `replyToMode: "all"` hoặc `"thread"` giúp bot tự động trích dẫn lại câu hỏi của người dùng, cực kỳ hữu ích trong các nhóm chat đông người để tránh trôi ngữ cảnh.
+
+### 9.1.10 Các Lệnh Thường dùng
+
+#### Các lệnh gửi trực tiếp cho Bot trong khung chat:
+- `/reset`: Xóa lịch sử phiên làm việc hiện tại, bắt đầu cuộc trò chuyện mới
+- `/skills`: Liệt kê các Skills đang được kích hoạt
+- `/model`: Xem hoặc chuyển đổi mô hình AI đang sử dụng
+- `/status`: Kiểm tra trạng thái kết nối của hệ thống
+
+#### Các lệnh quản trị Gateway:
+- `openclaw gateway start`: Khởi động Gateway
+- `openclaw gateway stop`: Dừng Gateway
+- `openclaw gateway restart`: Khởi động lại Gateway
+- `openclaw gateway status`: Kiểm tra trạng thái tiến trình
+
+### 9.1.11 Xử lý Sự cố (Troubleshooting)
+
+#### Lỗi cú pháp JSON trong tệp cấu hình
+Tránh nhầm lẫn cú pháp Python (`True`/`False`) với JSON (`true`/`false`), không để thừa dấu phẩy ở phần tử cuối cùng. Hãy chạy lệnh kiểm tra:
 ```bash
-# 主配置文件
-~/.openclaw/openclaw.json
-
-# 或者使用独立的渠道配置文件
-~/.openclaw/channels/feishu.json
-```
-**独立配置文件示例：**
-
-```bash
-# 创建独立配置文件
-mkdir -p ~/.openclaw/channels
-nano ~/.openclaw/channels/feishu.json
-```
-```json
-{
-  "enabled": true,
-  "accounts": {
-    "main": {
-      "appId": "cli_xxx",
-      "appSecret": "xxx",
-      "botName": "主机器人"
-    },
-    "backup": {
-      "appId": "cli_yyy",
-      "appSecret": "yyy",
-      "botName": "备用机器人"
-    }
-  }
-}
-```
-
-**注意事项：**
-
-1. **App ID 和 App Secret 必须唯一**
-   - 每个机器人必须使用不同的飞书应用
-   - 不能多个账号共用同一个 App ID
-
-2. **账号标识符命名规范**
-   - 使用小写字母和连字符
-   - 避免使用特殊字符
-   - 建议使用有意义的名称（如 `tech-team`、`production`）
-
-3. **启用/禁用控制**
-   - `enabled: true` - 账号启用，机器人会接收和处理消息
-   - `enabled: false` - 账号禁用，机器人不会接收消息
-   - 可以随时通过修改配置文件或命令行切换
-
-4. **网关重启**
-   - 修改配置后需要重启网关：`openclaw gateway restart`
-
-5. **日志查看**
-   - 多账号时，日志会标注账号标识符
-   - 使用 `openclaw channels logs <channel-name>` 查看特定渠道日志
-
-**故障排查：**
-
-**访问题1：某个机器人收不到消息**
-
-```bash
-# 检查账号是否启用
-openclaw channels status
-
-# 查看该账号的日志
-openclaw channels logs feishu
-
-# 检查配置是否正确
-openclaw config get channels.feishu.accounts.main
-```
-**访问题2：多个机器人冲突**
-
-确保每个机器人使用不同的飞书应用：
-- 不同的 App ID
-- 不同的 App Secret
-- 在飞书开放平台创建多个应用
-
-**访问题3：切换账号不生效**
-
-```bash
-# 重启网关使配置生效
-openclaw gateway restart
-```
-**访问题4：配置验证失败 - bindings 错误**
-
-Error: bindings.0.match: Unrecognized key: "account"
-**原因**：在多账号配置中，不需要使用 `bindings` 来绑定 agent。
-
-**解决方案**：
-1. 删除配置文件中的 `bindings` 部分
-2. 所有机器人会自动使用 `agents.defaults` 配置
-3. 如果需要不同模型，在对话中使用 `/model` 命令切换
-
-**正确的配置结构**：
-```json
-{
-  "channels": {
-    "feishu": {
-      "accounts": {
-        "bot1": { ... },
-        "bot2": { ... }
-      }
-    }
-  },
-  "agents": {
-    "defaults": {
-      "model": { "primary": "your-model" },
-      "workspace": "/path/to/workspace"
-    }
-  }
-  // ❌ 不需要 bindings
-}
-```
-**访问题5：配置后运行 openclaw doctor 报错**
-
-```bash
-# 运行诊断
 openclaw doctor
-
-# 如果提示配置访问题，运行自动修复
-openclaw update repair
-openclaw doctor
-
-# 验证配置
-openclaw doctor
-# 应该看到：✅ Config valid
 ```
-**最佳实践：**
 
-1. **使用有意义的账号名称**
-   ```json
-   "accounts": {
-     "prod-main": { ... },      // 生产环境主机器人
-     "prod-backup": { ... },    // 生产环境备份
-     "test": { ... }            // 测试环境
-   }
-   ```
+#### Gateway báo lỗi xung đột cổng mạng (Port already in use)
+Nếu cổng mặc định 18789 đã bị ứng dụng khác chiếm giữ:
+```bash
+# Tìm tiến trình đang chiếm cổng
+lsof -i :18789
 
-2. **为不同环境使用不同的策略**
-   ```json
-   "production": {
-     "dmPolicy": "pairing",     // 生产环境需要配对
-     "groupPolicy": "allowlist" // 群组白名单
-   },
-   "development": {
-     "dmPolicy": "open",        // 开发布环境开放访问
-     "groupPolicy": "open"      // 群组开放
-   }
-   ```
-
-3. **定期备份配置**
-   ```bash
-   # 备份配置文件
-   cp ~/.openclaw/openclaw.json ~/.openclaw/openclaw.json.backup
-   
-   # 或使用 OpenClaw 备份命令
-   openclaw backup create
-   ```
-
-4. **使用环境变量管理敏感信息**
-   ```bash
-   # 在 ~/.bashrc 或 ~/.zshrc 中设置
-   export FEISHU_MAIN_APP_ID="cli_xxx"
-   export FEISHU_MAIN_APP_SECRET="xxx"
-   export FEISHU_BACKUP_APP_ID="cli_yyy"
-   export FEISHU_BACKUP_APP_SECRET="yyy"
-   ```
-   
-   然后在配置文件中引用：
-   ```json
-   {
-     "channels": {
-       "feishu": {
-         "accounts": {
-           "main": {
-             "appId": "${FEISHU_MAIN_APP_ID}",
-             "appSecret": "${FEISHU_MAIN_APP_SECRET}"
-           }
-         }
-       }
-     }
-   }
-   ```
-
-#### 流式输出
-
-飞书支持通过交互式卡片实现流式输出，机器人会实时更新卡片内内容显示生成进度。
-
-```json
-{
-  "channels": {
-    "feishu": {
-      "streaming": true,      // 启用流式卡片输出（默认 true）
-      "blockStreaming": true  // 启用块级流式（默认 true）
-    }
-  }
+# Hoặc đổi sang cổng khác trong cấu hình openclaw.json:
+"gateway": {
+  "port": 18790
 }
 ```
-如需禁用流式输出（等待完整回复后一次性发布送），可设置 `streaming: false`。
 
-#### 消息引用
-
-在群聊中，机器人的回复可以引用用户发布送的原始消息，让对话上下文更加清晰。
-
-```json
-{
-  "channels": {
-    "feishu": {
-      "replyToMode": "all",  // 账户级别配置（默认 "all"）
-      "groups": {
-        "oc_xxx": {
-          "replyToMode": "first"  // 特定群组可以覆盖
-        }
-      }
-    }
-  }
-}
-```
-`replyToMode` 值说明：
-- `"off"` = 不引用原消息（私聊默认值）
-- `"first"` = 仅在第一条回复时引用原消息
-- `"all"` = 所有回复都引用原消息（群聊默认值）
-
-#### 多 Agent 路由
-
-通过 `bindings` 配置，您可以用一个飞书机器人对接多个不同功能或性格的 Agent：
-
-```json
-{
-  "agents": {
-    "list": [
-      { "id": "main" },
-      {
-        "id": "clawd-fan",
-        "workspace": "/home/user/clawd-fan",
-        "agentDir": "/home/user/.openclaw/agents/clawd-fan/agent"
-      },
-      {
-        "id": "clawd-xi",
-        "workspace": "/home/user/clawd-xi",
-        "agentDir": "/home/user/.openclaw/agents/clawd-xi/agent"
-      }
-    ]
-  },
-  "bindings": [
-    {
-      "agentId": "main",
-      "match": {
-        "channel": "feishu",
-        "peer": { "kind": "dm", "id": "ou_28b31a88..." }
-      }
-    },
-    {
-      "agentId": "clawd-fan",
-      "match": {
-        "channel": "feishu",
-        "peer": { "kind": "dm", "id": "ou_0fe6b1c9..." }
-      }
-    },
-    {
-      "agentId": "clawd-xi",
-      "match": {
-        "channel": "feishu",
-        "peer": { "kind": "group", "id": "oc_xxx..." }
-      }
-    }
-  ]
-}
-```
-### 9.1.10 常用命令
-
-#### 机器人命令
-
-| 命令 | 说明 |
-|------|------|
-| `/status` | 查看机器人状态 |
-| `/reset` | 重置对话会话 |
-| `/model` | 查看/切换模型 |
-
-#### 网关管理命令
-
-| 命令 | 说明 |
-|------|------|
-| `openclaw gateway status` | 查看网关运行状态 |
-| `openclaw gateway install` | 安装/启动网关服务 |
-| `openclaw gateway stop` | 停止网关服务 |
-| `openclaw gateway restart` | 重启网关服务 |
-| `openclaw logs --follow` | 实时查看日志输出 |
-
-### 9.1.11 故障排除
-
-#### 机器人在群组中不响应
-
-1. 检查机器人是否已添加到群组
-2. 检查是否 @了机器人（默认需要 @提及）
-3. 检查 `groupPolicy` 是否为 `"disabled"`
-4. 查看日志：`openclaw logs --follow`
-
-#### 机器人收不到消息
-
-**可能原因及解决方案**：
-
-1. **检查应用是否已发布布并审批通过**
-   ```bash
-   # 在飞书开放平台查看应用状态
-   # 确保应用已通过审核并发布布
-   ```
-
-2. **检查事件订阅是否配置正确**
-   - ✅ 已选择"使用长连接接收事件"（WebSocket模式）
-   - ✅ 已添加事件：`im.message.receive_v1`
-   - ✅ 长连接状态显示"已连接"
-
-3. **检查权限配置是否完整**⭐ 重要
-   
-   缺少权限会导致机器人无法正常工作，请确保已添加以下权限：
-   
-   | 权限标识 | 权限名称 | 检查方法 |
-   |---------|---------|---------|
-   | `im:message` | 获取与发布送单聊、群组消息 | 在权限管理页面查看 |
-   | `im:message:send_as_bot` | 以应用身份发布消息 | 在权限管理页面查看 |
-   | `contact:contact.base:readonly` | 获取通讯附录基本信息 | ⭐ 必需，否则无法识别用户 |
-   
-   **如何检查权限**：
-   1. 登录飞书开放平台
-   2. 进入你的应用
-   3. 点击"权限管理"
-   4. 确认上述三个权限都已添加
-   5. 如果缺少，点击"添加权限"补充
-   ```
-   
-   **常见错误**：
-   - ❌ 只添加了 `im:message`，忘记添加 `contact:contact.base:readonly`
-   - ❌ 权限添加后未重新发布布应用
-   - ❌ 权限范围设置不正确
-
-4. **检查网关状态**
-   ```bash
-   # 查看网关是否正常运行
-   openclaw gateway status
-   
-   # 查看实时日志
-   openclaw logs --follow
-   ```
-
-5. **检查渠道配置**
-   ```bash
-   # 查看飞书渠道配置
-   openclaw channels list
-   
-   # 确认 appId 和 appSecret 正确
-   openclaw config get channels.feishu
-   ```
-
-1. 检查应用是否已发布布并审批通过
-2. 检查事件订阅是否配置正确（`im.message.receive_v1`）
-3. 检查是否选择了 **长连接** 模式
-4. 检查应用权限是否完整
-5. 检查网关是否正在运行：`openclaw gateway status`
-6. 查看实时日志：`openclaw logs --follow`
-
-#### 配置文件 JSON 语法错误
-
-**错误示例：**
-JSON5 parse error at line 443: Python True/False vs JSON true/false
-**解决方案：**
-```bash
-# 检查 JSON 语法
-cat ~/.openclaw/openclaw.json | python -m json.tool
-
-# 常见错误：
-# ❌ "enabled": True   (Python 语法)
-# ✅ "enabled": true   (JSON 语法)
-
-# ❌ 多余的逗号
-# ✅ 最后一项不要逗号
-```
-#### 网关启动失败
-
-**错误1：Gateway start blocked**
-```bash
-# 错误信息
-Gateway start blocked: set gateway.mode=local (current: unset)
-
-# 解决方案：在配置文件中添加
-{
-  "gateway": {
-    "mode": "local"
-  }
-}
-```
-**错误2：Gateway auth token 未配置**
-```bash
-# 错误信息
-Gateway auth is set to token, but no token is configured
-
-# 解决方案1：配置文件
-{
-  "gateway": {
-    "auth": {
-      "mode": "token",
-      "token": "your-secure-token"
-    }
-  }
-}
-
-# 解决方案2：环境变量
-export OPENCLAW_GATEWAY_TOKEN="your-secure-token"
-```
-**错误3：插件未找到**
-```bash
-# 错误信息
-Config validation failed: plugins.entries.qqbot: plugin not found: qqbot
-
-# 解决方案：移除未安装的插件配置
-{
-  "plugins": {
-    "entries": {
-      "feishu": {
-        "enabled": true
-      }
-      // 移除 qqbot, ddingtalk, wecom 等未安装的插件
-    }
-  }
-}
-```
-**错误4：工作空间路径错误**
-```bash
-# 错误信息
-run error: Error: ENOENT: no such file or directory, mkdir '/root'
-
-# 解决方案：修正 workspace 路径（macOS 示例）
-{
-  "agents": {
-    "defaults": {
-      "workspace": "/Users/yourusername/clawd"  // 使用正确的 macOS 路径
-    }
-  }
-}
-```
-#### App Secret 泄露怎么怎么办
-
-1. 在飞书开放平台重置 App Secret
-2. 更新配置文件中的 App Secret
-3. 重启网关：`openclaw gateway restart`
-
-#### 发布送消息失败
-
-1. 检查应用是否有 `im:message:send_as_bot` 权限
-2. 检查应用是否已发布布
-3. 查看日志获取详细错误信息：`openclaw logs --follow`
-
-#### 网关端口被占用
-
-```bash
-# 错误信息
-Port 18789 is already in use
-
-# 解决方案1：停止现有网关
-openclaw gateway stop
-
-# 解决方案2：使用不同端口
-{
-  "gateway": {
-    "port": 18790
-  }
-}
-```
-#### 配置修改不生效
-
-```bash
-# 修改配置后必须重启网关
-openclaw gateway restart
-
-# 检查配置是否正确加载
-openclaw config get channels.feishu
-```
-### 9.1.12 配置参考
-
-| 配置项 | 说明 | 默认值 |
-|--------|------|--------|
-| `channels.feishu.enabled` | 启用/禁用渠道 | `true` |
-| `channels.feishu.domain` | API 域名（`feishu` 或 `lark`） | `feishu` |
-| `channels.feishu.accounts.<id>.appId` | 应用 App ID | - |
-| `channels.feishu.accounts.<id>.appSecret` | 应用 App Secret | - |
-| `channels.feishu.dmPolicy` | 私聊策略 | `pairing` |
-| `channels.feishu.allowFrom` | 私聊白名单（open_id 列表） | - |
-| `channels.feishu.groupPolicy` | 群组策略 | `open` |
-| `channels.feishu.groupAllowFrom` | 群组白名单 | - |
-| `channels.feishu.groups.<chat_id>.requireMention` | 是否需要 @提及 | `true` |
-| `channels.feishu.textChunkLimit` | 消息分块大小 | `2000` |
-| `channels.feishu.mediaMaxMb` | 媒体大小限制 | `30` |
-| `channels.feishu.streaming` | 启用流式卡片输出 | `true` |
-| `channels.feishu.blockStreaming` | 启用块级流式 | `true` |
-
-#### dmPolicy 策略说明
-
-| 值 | 行为 |
-|----|------|
-| `"pairing"` | **默认**。未知用户收到配对码，管理员批准后才能对话 |
-| `"allowlist"` | 仅 `allowFrom` 列表中的用户可对话，其他静默忽略 |
-| `"open"` | 允许所有人对话（需在 allowFrom 中加 `"*"`） |
-| `"disabled"` | 完全禁止私聊 |
-
-### 9.1.13 支持的消息类型
-
-#### 接收
-- ✅ 文本消息
-- ✅ 图片
-- ✅ 文件
-- ✅ 音频
-- ✅ 视频
-- ✅ 表情包
-
-#### 发布送
-- ✅ 文本消息
-- ✅ 图片
-- ✅ 文件
-- ✅ 音频
-- ⚠️ 富文本（部分支持）
-
-### 9.1.14 与飞书生态集成
-
-**集成飞书文档**
-功能：
-- 创建文档
-- 编辑文档
-- 分分享文档
-- 权限管理
-
-示例：
-你：把这段内内容保存到飞书文档
-OpenClaw：已保存到飞书文档 ✅
-链接：https://...
-**集成飞书多维表格**
-功能：
-- 创建表格
-- 添加数据
-- 查询数据
-- 数据分析
-
-示例：
-你：把发布票信息添加到多维表格
-OpenClaw：已添加3条记附录 ✅
-**集成飞书日历**
-功能：
-- 创建日程
-- 修改日程
-- 删除日程
-- 日程提醒
-
-示例：
-你：明天下午3点开会
-OpenClaw：已添加到飞书日历 ✅
----
-
-### 9.1.15 实战案例：配置双机器人
-
-> 💡 **真实案例**：本节展示一个实际的双机器人配置案例，适用于需要分离不同功能或团队的场景。
-
-#### 场景说明
-
-某团队需要两个飞书机器人：
-- **机器人1**：用于日常怎么办公和通用任务
-- **机器人2**：用于特定项目或测试环境
-
-#### 完整配置步骤
-
-**1. 在飞书开放平台创建两个应用**
-
-分别创建两个企业自建应用，获取：
-- 机器人1：App ID `cli_xxxxxxxxxxxxxxxx`，App Secret
-- 机器人2：App ID `cli_yyyyyyyyyyyyyyyy`，App Secret
-
-**2. 配置 OpenClaw**
-
-编辑 `~/.openclaw/openclaw.json`：
-
-```json
-{
-  "meta": {
-    "lastTouchedVersion": "2026.2.6-3",
-    "lastTouchedAt": "2026-02-08T09:49:58.322Z"
-  },
-  "channels": {
-    "feishu": {
-      "enabled": true,
-      "dmPolicy": "pairing",
-      "accounts": {
-        "bot1": {
-          "appId": "cli_xxxxxxxxxxxxxxxx",
-          "appSecret": "your-app-secret-1",
-          "botName": "OpenClaw助手1",
-          "enabled": true
-        },
-        "bot2": {
-          "appId": "cli_yyyyyyyyyyyyyyyy",
-          "appSecret": "your-app-secret-2",
-          "botName": "OpenClaw助手2",
-          "enabled": true
-        }
-      },
-      "domain": "feishu",
-      "groupPolicy": "open",
-      "connectionMode": "websocket",
-      "requireMention": true,
-      "renderMode": "auto",
-      "streaming": true,
-      "blockStreaming": true,
-      "replyToMode": "all"
-    }
-  },
-  "gateway": {
-    "port": 18789,
-    "mode": "local",
-    "bind": "lan",
-    "auth": {
-      "mode": "token",
-      "token": "your-secure-random-token-here"
-    }
-  },
-  "agents": {
-    "defaults": {
-      "model": {
-        "primary": "your-model-provider/your-model"
-      },
-      "workspace": "/path/to/your/workspace",
-      "compaction": {
-        "mode": "safeguard"
-      },
-      "maxConcurrent": 4
-    }
-  },
-  "plugins": {
-    "entries": {
-      "feishu": {
-        "enabled": true
-      }
-    }
-  }
-}
-```
-**3. 配置飞书应用权限**
-
-为两个应用分别配置权限（批量导入 JSON，参见 9.1.3 节）。
-
-**4. 配置事件订阅**
-
-为两个应用分别配置：
-- 选择 **使用长连接接收事件**
-- 添加事件：`im.message.receive_v1`
-
-**5. 启动网关**
-
-```bash
-# 启动网关
-openclaw gateway install
-
-# 检查状态
-openclaw gateway status
-
-# 应该看到：
-# ✅ Gateway: running (pid 57344, state active)
-# ✅ Gateway target: ws://127.0.0.1:18789
-```
-**6. 测试机器人**
-
-在飞书中分别给两个机器人发布送消息：
-
-你：hi
-机器人：[配对码] 请管理员批准配对
-**7. 批准配对**
-
-```bash
-# 查看配对请求
-openclaw pairing list feishu
-
-# 批准机器人1
-openclaw pairing approve feishu <配对码1>
-
-# 批准机器人2
-openclaw pairing approve feishu <配对码2>
-```
-**8. 验证运行**
-
-查看日志确认两个机器人都在正常运行：
-
-```bash
-openclaw logs --follow
-
-# 应该看到：
-# HEARTBEAT_OK
-# hi
-# connected | running
-# agent main | session main (heartbeat)
-```
-#### 常见访问题处理
-
-**访问题1：配置文件 JSON 语法错误**
-
-```bash
-# 错误：JSON5 parse error at line 443
-# 原因：使用了 Python 语法（True/False）而非 JSON 语法（true/false）
-
-# 检查语法
-cat ~/.openclaw/openclaw.json | python -m json.tool
-
-# 修正：
-# ❌ "enabled": True
-# ✅ "enabled": true
-```
-**访问题2：网关启动失败**
-
-```bash
-# 错误：Gateway start blocked: set gateway.mode=local
-# 解决：确保配置了 gateway.mode
-
-{
-  "gateway": {
-    "mode": "local"
-  }
-}
-```
-**访问题3：工作空间路径错误**
-
-```bash
-# 错误：ENOENT: no such file or directory, mkdir '/root'
-# 原因：配置文件中使用了 Linux 路径，但实际是 macOS
-
-# 修正（macOS）：
-{
-  "agents": {
-    "defaults": {
-      "workspace": "/Users/yourusername/clawd"
-    }
-  }
-}
-```
-**访问题4：插件未找到**
-
-```bash
-# 错误：plugin not found: qqbot
-# 原因：配置文件中引用了未安装的插件
-
-# 解决：只保留已安装的插件
-{
-  "plugins": {
-    "entries": {
-      "feishu": {
-        "enabled": true
-      }
-      // 移除 qqbot, ddingtalk, wecom 等
-    }
-  }
-}
-```
-#### 配置检查清单
-
-- [ ] 两个飞书应用已创建
-- [ ] App ID 和 App Secret 已获取
-- [ ] 配置文件 JSON 语法正确
-- [ ] gateway.mode 已设置为 "local"
-- [ ] gateway.auth.token 已配置
-- [ ] workspace 路径正确（macOS/Linux）
-- [ ] 只配置了已安装的插件
-- [ ] 两个应用的权限已配置
-- [ ] 两个应用的事件订阅已配置（长连接）
-- [ ] 两个应用已发布布
-- [ ] 网关已启动并运行正常
-- [ ] 两个机器人都已配对批准
-- [ ] 日志显示正常运行
-
-#### 成功标志
-
-配置成功后，你应该看到：
-
-```bash
-# 网关状态
-$ openclaw gateway status
-✅ Gateway: running (pid xxxxx, state active)
-✅ Gateway target: ws://127.0.0.1:18789
-
-# 日志输出
-$ openclaw logs --follow
-HEARTBEAT_OK
-hi
-connected | running
-agent main | session main (heartbeat) | your-model-provider/your-model
-tokens 25k/200k (13%)
-```
-两个机器人都可以正常接收和回复消息！🎉
+#### Bị lộ App Secret
+Nếu lỡ để lộ App Secret lên kho mã nguồn công khai:
+1. Lập tức truy cập Feishu Open Platform, tạo lại App Secret mới (Reset Secret)
+2. Cập nhật khóa mới vào cấu hình OpenClaw
+3. Khởi động lại Gateway: `openclaw gateway restart`
+
+### 9.1.12 Bảng Tham chiếu Cấu hình Kênh Feishu
+
+| Thuộc tính | Kiểu dữ liệu | Mặc định | Mô tả |
+|---|---|---|---|
+| `enabled` | boolean | `true` | Bật/tắt kênh |
+| `domain` | string | `"feishu"` | `"feishu"` (nội địa) hoặc `"lark"` (quốc tế) |
+| `dmPolicy` | string | `"pairing"` | Chính sách chat 1-1 (`pairing`, `open`, `allowlist`) |
+| `groupPolicy` | string | `"open"` | Chính sách nhóm (`open`, `allowlist`, `disabled`) |
+| `connectionMode` | string | `"websocket"` | Phương thức kết nối (WebSocket) |
+| `streaming` | boolean | `true` | Xuất kết quả theo dòng dữ liệu thời gian thực |
+| `requireMention` | boolean | `true` | Bắt buộc tag @ tên bot trong nhóm |
+
+### 9.1.13 Các Loại Tin nhắn Hỗ trợ
+
+- **Nhận vào**: Văn bản, Hình ảnh, Tệp tài liệu (PDF, Word, TXT), Tin nhắn thoại, Lời mời tham gia nhóm.
+- **Gửi ra**: Văn bản thường, Thẻ tương tác đa phương tiện (Interactive Card), Bảng Markdown, Đoạn mã có tô màu cú pháp (Code blocks).
+
+### 9.1.14 Tích hợp sâu vào Hệ sinh thái Lark / Feishu
+
+OpenClaw có thể kết hợp mạnh mẽ với các công cụ trong Lark/Feishu:
+- **Tài liệu đám mây (Docs)**: Đọc nội dung biên bản cuộc họp và tự động xuất tài liệu mới
+- **Bảng đa chiều (Bitable)**: Tự động ghi chép dữ liệu khách hàng hoặc trạng thái công việc
+- **Lịch công tác (Calendar)**: Trợ lý kiểm tra lịch trống và nhắc nhở cuộc họp tự động
+
+### 9.1.15 Ca Thực chiến: Cấu hình Bot Kép (Dual Bots)
+
+Giả sử bạn cần chạy 2 bot:
+- Bot 1: Trợ lý Hỗ trợ Khách hàng
+- Bot 2: Trợ lý Viết mã & Kỹ thuật
+
+Trình tự thiết lập:
+1. Tạo 2 ứng dụng độc lập trên Lark/Feishu Open Platform, lấy 2 cặp `App ID` và `App Secret`.
+2. Khai báo 2 bot vào mục `accounts` trong `feishu.json`.
+3. Khởi động Gateway: `openclaw gateway restart`.
+4. Nhắn tin cho từng bot để nhận mã ghép đôi và tiến hành phê duyệt.
+5. Cả 2 bot sẽ cùng lúc hoạt động độc lập và mượt mà trên cùng một Gateway.
 
 ---
 
-## 9.4 QQ Bot配置
+## 9.4 Cấu hình Bot QQ
 
-### 9.4.1 QQ机器人介绍
+### 9.4.1 Giới thiệu về QQ Bot
 
-**QQ的优势**：
+**Ưu thế của nền tảng QQ**:
+- Lượng người dùng cá nhân và cộng đồng giải trí cực kỳ đông đảo
+- Tính năng nhóm chat và kênh cộng đồng sôi nổi
+- Nền tảng mở hỗ trợ API chính thức cho cả nhóm chat và kênh cá nhân
 
-1. **用户基础**
-   - 用户量大
-   - 覆盖面广
-   - 使用习惯
+### 9.4.2 Các bước tạo QQ Bot
 
-2. **社交属性**
-   - 群聊活跃
-   - 互动性强
-   - 娱乐功能
+1. **Đăng ký tài khoản trên Nền tảng Mở QQ**: Truy cập https://q.qq.com/ và tạo tài khoản nhà phát triển (lưu ý: cần đăng ký riêng, không phải quét QR thông thường).
+2. **Tạo ứng dụng Bot**: Vào mục Quản lý Robot, điền tên, biểu tượng và mô tả.
+3. **Lấy thông tin xác thực**:
+   - `BotAppID`
+   - `Bot Secret`
+4. **Cấu hình IP Whitelist**: Thêm địa chỉ IP máy chủ của bạn vào danh sách cho phép trên cổng quản trị QQ.
+5. **Thêm tài khoản thử nghiệm**: Điền số QQ của bạn vào danh sách thành viên thử nghiệm để có quyền kết bạn và tương tác trước khi phát hành công khai.
 
-3. **开放平台**
-   - QQ频道
-   - QQ群机器人
-   - API支持
+### 9.4.3 Cấu hình OpenClaw với QQ
 
-4. **免费使用**
-   - 基础功能免费
-   - 易于上手
+Chạy wizard cấu hình:
+```bash
+openclaw onboard
+```
+Chọn kênh **QQ**, sau đó điền `BotAppID` và `Bot Secret`.
 
-### 9.4.2 创建QQ机器人
+Khởi chạy Gateway nền:
+```bash
+openclaw gateway start
+```
+Gửi tin nhắn chào hỏi từ ứng dụng QQ để xác nhận kết nối thành công.
 
-> ⚠️ **重要提示**：QQ开放平台需要先注册账号，不是直接用QQ登录！请务必先完成注册。
+---
 
-**步骤1：注册QQ开放平台账号**
+## 9.6 Cấu hình Bot Discord (Tham khảo)
 
-1. **访问QQ开放平台**：
-   https://q.qq.com/
-   ```
+> ⚠️ **Lưu ý lịch sử**: Discord là nền tảng quốc tế cực kỳ mạnh mẽ cho các cộng đồng mã nguồn mở và đội ngũ phát triển toàn cầu. Các lệnh trước đây từng dùng tiền tố `clawdbot`, hiện nay toàn bộ đã được chuẩn hóa về `openclaw`.
 
-2. **注册新账号**：
-   - ⚠️ 不是QQ登录，需要单独注册
-   - 点击"注册"按钮
-   - 填写注册信息
-   - 完成邮箱/手机验证
+### 9.5.1 Ưu thế của Discord
+- Hỗ trợ đa ngôn ngữ, cộng đồng lập trình viên và game toàn cầu
+- Hệ thống phân quyền máy chủ (Server/Guild), kênh văn bản và kênh thoại chi tiết
+- Định dạng tin nhắn phong phú với Embeds và Components
 
-3. **登录平台**：
-   - 使用刚注册的账号登录
-   - 不要使用QQ扫码登录
-
-**步骤2：创建机器人**
-
-1. **进入机器人管理**：
-   - 登录后点击"机器人"
-   - 点击"创建机器人"
-
-2. **填写机器人信息**：
-   - 机器人名称：自定义（如：我的AI助手）
-   - 机器人头像：上传图片
-   - 机器人简介：简单描述功能
-   - 点击"创建"
-
-3. **等待审核**：
-   - 提交后等待审核（通常几分钟）
-   - 审核通过后即可使用
-
-**步骤3：配置机器人**
-
-1. **获取机器人凭证**：
-   - 进入机器人详情页
-   - 点击"开发布管理"
-   - 记附录以下信息：
-     - **机器人ID**（BotAppID）
-     - **机器人密钥**（Bot Secret）
-
-2. **配置IP白名单**：
-   - 在"开发布管理"页面
-   - 找到"IP白名单"设置
-   - 添加你的服务器公网IP地址
-   - 点击"保存"
-
-3. **添加测试用户**：
-   - 在"管理" → "成员管理"
-   - 点击"添加成员"
-   - 输入你的QQ号
-   - 将自己添加为测试用户
-
-4. **扫码添加机器人好友**：
-   - 在机器人详情页找到二维码
-   - 用手机QQ扫码
-   - 添加机器人为好友
-
-**步骤4：配置 OpenClaw连接**
-
-1. **获取服务器IP地址**：
-   - 如果使用腾讯云，在控制台查看公网IP
-   - 记附录这个IP地址
-
-2. **在腾讯云Lighthouse配置**（如果使用腾讯云）：
-   - 登录腾讯云：https://console.cloud.tencent.com/lighthouse
-   - 进入实例详情
-   - 点击"应用管理"标签
-   - 找到"QQ机器人配置"区域
-   - 填入：
-     - 机器人ID（BotAppID）
-     - 机器人密钥（Bot Secret）
-   - 点击"应用配置"
-
-3. **本地配置方式**：
+### 9.5.2 Trình tự thiết lập Discord Bot
+1. Truy cập [Discord Developer Portal](https://discord.com/developers/applications).
+2. Nhấp chọn **New Application**, đặt tên cho ứng dụng.
+3. Vào mục **Bot**, nhấn **Reset Token** để lấy `Bot Token` (hãy lưu trữ an toàn).
+4. Bật tùy chọn **Message Content Intent** để bot có quyền đọc nội dung tin nhắn.
+5. Tạo URL mời bot: Tại mục **OAuth2** > **URL Generator**, tích chọn scope `bot` cùng quyền gửi tin nhắn, sau đó dán link vào trình duyệt để thêm bot vào máy chủ Discord của bạn.
+6. Thêm kênh Discord vào OpenClaw:
    ```bash
-   # 运行配置向导
    openclaw onboard
-   
-   # 选择 QuickStart
-   # 选择模型（如 Kimi 2.5）
-   # 输入模型 API Key
-   # 选择通道：QQ
-   # 输入机器人ID和密钥
    ```
-
-
-### 9.4.3 配置 OpenClaw
-
-> 💡 **前置要求**：请先完成 OpenClaw 的基础安装和配置，详见 [第2章节：环境搭建](../01-basics/02-installation.md)。
-
-**方式一：使用腾讯云Lighthouse（推荐）**
-
-如果你使用腾讯云Lighthouse部署OpenClaw，配置非常简单：
-
-1. **进入应用管理**：
-   - 登录腾讯云控制台
-   - 进入轻量应用服务器
-   - 点击实例 → "应用管理"
-
-2. **配置QQ机器人**：
-   - 找到"QQ机器人配置"区域
-   - 填入机器人ID和密钥
-   - 点击"应用配置"
-   - 等待配置生效
-
-3. **验证连接**：
-   - 打开手机QQ
-   - 给机器人发布送消息："你好"
-   - 如果收到回复，说明配置成功
-
-**方式二：本地配置**
-
-如果你是本地部署或其他云服务器，使用命令行配置：
-
-```bash
-# 1. 运行配置向导
-openclaw onboard
-
-# 2. 选择配置选项
-# - 选择 Yes 接受风险
-# - 选择 QuickStart（快速开始）
-
-# 3. 配置模型
-# - 选择模型供应商（如 Moonshot AI）
-# - 输入 API Key
-# - 选择默认模型（如 kimi-code/kimi-for-codi）
-
-# 4. 配置通道
-# - 选择通道：QQ
-# - 输入机器人ID（BotAppID）
-# - 输入机器人密钥（Bot Secret）
-
-# 5. 配置Skills和Hooks
-# - Skills：选择 Yes，可以先不安装
-# - Hooks：选择 session-memory
-
-# 6. 重启服务
-# - 选择 Yes 重启 gateway 服务
-
-# 7. 测试连接
-# - 选择打开 TUI（终端界面）
-# - 或直接在QQ中测试
-```
-**方式三：手动编辑配置文件**
-
-```bash
-# 编辑配置文件
-nano ~/.openclaw/config.json
-
-# 添加QQ配置
-{
-  "channels": {
-    "qq": {
-      "enabled": true,
-      "botAppId": "你的机器人ID",
-      "botSecret": "你的机器人密钥",
-      "profiles": ["default"]
-    }
-  }
-}
-
-# 重启服务
-systemctl --user restart openclaw-gateway.service
-```
-**启动Gateway服务**
-
-```bash
-# 方式1：前台运行（用于测试）
-openclaw gateway --port 18789 --verbose
-
-# 方式2：后台运行（推荐）
-nohup openclaw gateway --port 18789 --verbose > /dev/null 2>&1 &
-
-# 方式3：使用systemd（最稳定）
-systemctl --user enable openclaw-gateway.service
-systemctl --user start openclaw-gateway.service
-```
-**验证配置**
-
-```bash
-# 查看服务状态
-systemctl --user status openclaw-gateway.service
-
-# 查看日志
-journalctl --user -u openclaw-gateway.service -f
-
-# 测试连接
-# 在QQ中给机器人发布送消息："你好"
-```
-### 9.4.4 实战案例
-
-**案例1：个人助手**
-功能：
-- 日常对话
-- 信息查询
-- 任务提醒
-- 娱乐互动
-
-使用示例：
-你：今天天气怎么样？
-OpenClaw：今天晴天，15-25°C
-
-你：提醒我明天交作业
-OpenClaw：已设置提醒 ✅
-**案例2：群管理**
-功能：
-- 群公告
-- 成员管理
-- 消息统计
-- 自动回复
-
-使用示例：
-管理员：@OpenClaw 发布布公告
-OpenClaw：公告已发布布 ✅
-
-成员：@OpenClaw 查询群规
-OpenClaw：群规如下...
-**案例3：娱乐互动**
-功能：
-- 聊天对话
-- 讲笑话
-- 猜谜语
-- 玩游戏
-
-使用示例：
-你：讲个笑话
-OpenClaw：好的，听我说...
-
-你：猜谜语
-OpenClaw：什么东西...
-### 9.4.5 限制和注意事项
-
-**功能限制**：
-⚠️ QQ机器人有以下限制：
-- 消息频率限制
-- 功能权限限制
-- 审核要求严格
-- 部分API需要申请
-- 目前不支持主动发布送消息（2026.2.6测试）
-**注意事项**：
-✅ 遵守平台规则
-✅ 不发布送违规内内容
-✅ 合理使用API
-✅ 及时响应用户
-✅ 定期检查服务状态
-**常见访问题**：
-
-1. **机器人不回复消息**：
-   - 检查IP白名单是否正确
-   - 检查机器人ID和密钥是否正确
-   - 查看Gateway服务是否运行
-   - 检查服务器日志
-
-2. **配置后无法连接**：
-   - 确认已添加为测试用户
-   - 确认已添加机器人好友
-   - 重启Gateway服务
-   - 检查防火墙设置
-
-3. **消息延迟**：
-   - 检查网络连接
-   - 检查服务器负载
-   - 考虑升级服务器配置
+   Chọn kênh **Discord** và điền `Bot Token`.
 
 ---
 
-## 9.6 Discord Bot配置（参考）
+## 9.5 Kết nối WeChat Cá nhân (Giải pháp chính thức ClawBot)
 
-> ⚠️ **过时提示**：本节内内容编写于2026年1月，当时OpenClaw还叫Clawbot/Moltbot。虽然部分命令已过时，但配置流程仍可作为参考。
+> 💡 **Trạng thái**: Bản thử nghiệm mở rộng (dựa trên dự án mã nguồn mở WeChatFerry).
 
-### 9.5.1 Discord机器人介绍
+### 9.5.1 ClawBot là gì?
+ClawBot cung cấp giải pháp cầu nối cho phép tài khoản WeChat cá nhân của bạn tự động nhận diện và phản hồi tin nhắn bằng trí tuệ nhân tạo, hỗ trợ cả chat riêng và quản lý nhóm chat thông minh.
 
-**Discord的优势**：
-
-1. **国际化平台**
-   - 全球用户基础
-   - 多语言支持
-   - 社区活跃
-
-2. **开发布友好**
-   - API完善
-   - 文档详细
-   - 权限灵活
-
-3. **功能丰富**
-   - 支持语音频道
-   - 支持富文本
-   - 支持自定义表情
-
-**适用场景**：
-- ✅ 国际团队协作
-- ✅ 游戏社区
-- ✅ 开源项目
-- ✅ 技术交流
-
-### 9.5.2 创建Discord机器人
-
-**步骤1：访问开发布者门户**
-
-https://discord.com/developers/applications
-**步骤2：创建应用**
-
-1. 点击"New Application"
-2. 输入应用名称（如：My OpenClaw Bot）
-3. 点击"Create"
-
-**步骤3：创建Bot**
-
-1. 在左侧菜单选择"Bot"
-2. 点击"Add Bot"
-3. 点击"Reset Token" → "Copy"
-4. ⚠️ **保存Token**，后续无法再查看
-
-**步骤4：配置Bot权限**
-
-1. 在Bot页面下滑
-2. 开启"Message Content Intent"
-3. 点击"Save Changes"
-
-**步骤5：生成邀请链接**
-
-1. 在左侧菜单选择"OAuth2" → "URL Generator"
-2. 在"Scopes"中勾选：`bot`
-3. 在"Bot Permissions"中勾选：
-   - Send Messages
-   - Read Message History
-4. 复制生成的URL
-
-**步骤6：邀请Bot到服务器**
-
-1. 在浏览器中打开刚才复制的URL
-2. 选择你的Discord服务器
-3. 点击"授权"
-4. 完成验证
-
-### 9.5.3 配置 OpenClaw（旧版命令参考）
-
-> ⚠️ **注意**：以下命令使用的是旧版本的`clawdbot`命令，新版本应使用`openclaw`。
-
-**配置步骤**（需要更新为新命令）：
-
+### 9.5.2 Cài đặt và Sử dụng
 ```bash
-# 旧版命令（仅供参考）
-clawdbot onboard
+# Cài đặt plugin WeChat chính thức
+openclaw plugins install @openclaw/wechat
 
-# 新版命令（推荐）
-openclaw onboard
-
-# 配置流程：
-# 1. 选择 Yes 接受风险
-# 2. 选择 QuickStart
-# 3. 配置模型（如 GLM 4.7）
-# 4. 选择通道：Discord
-# 5. 输入 Bot Token
-# 6. 配置 Skills 和 Hooks
+# Khởi động Gateway để tải plugin
+openclaw gateway start
 ```
-**启动服务**：
 
-```bash
-# 旧版命令
-clawdbot gateway --port 18789 --verbose
-
-# 新版命令
-openclaw gateway --port 18789 --verbose
-
-# 后台运行
-nohup openclaw gateway --port 18789 --verbose > /dev/null 2>&1 &
-```
-**配对连接**：
-
-```bash
-# 1. 在Discord中私聊Bot，获取配对码
-# 2. 停止Gateway服务（Ctrl+C）
-# 3. 运行配对命令（旧版）
-clawdbot pairing approve discord <Pairing code>
-
-# 新版命令（需要确认）
-openclaw pairing approve discord <Pairing code>
-
-# 4. 重新启动Gateway
-openclaw gateway --port 18789 --verbose
-```
-### 9.5.4 使用Discord Bot
-
-**私聊模式**：
-1. 在Discord中找到你的Bot
-2. 点击Bot头像
-3. 点击"发布送消息"
-4. 直接发布送消息即可
-**群聊模式**：
-1. 在频道中@Bot
-2. 输入你的访问题
-3. Bot会回复你
-
-示例：
-@MyBot 今天天气怎么样？
-### 9.5.5 注意事项
-
-**命令更新**：
-- 本节使用的`clawdbot`命令已过时
-- 新版本统一使用`openclaw`命令
-- 配置流程基本相同，但命令需要更新
-
-**配置参考**：
-- Discord的配置流程仍然有效
-- Bot创建步骤没有变化
-- 主要是OpenClaw 命令需要更新
-
-**推荐做法**：
-- 优先使用国内平台（飞书、QQ、企微）
-- Discord适合国际团队
-- 如需使用Discord，请参考最新官方文档
+⚠️ **Lưu ý an toàn quan trọng**: Nền tảng WeChat có chính sách kiểm soát nghiêm ngặt đối với các hành vi tự động hóa tài khoản cá nhân. Không nên sử dụng tài khoản công việc chính để chạy tự động quy mô lớn nhằm tránh nguy cơ bị khóa tài khoản tạm thời.
 
 ---
 
-## 9.5 微信接入（ClawBot 官方方案）
+## 9.6 Kênh Trình duyệt Web (Dashboard v2)
 
-> 💡 **状态**：公测中（2026年3月随橙皮书 v1.4 发布），基于 WeChatFerry 开源项目。
+> 💡 **Trạng thái**: Sẵn sàng, đi kèm phiên bản Dashboard v2 giao diện hiện đại.
 
-### 9.5.1 ClawBot 是什么
+### 9.6.1 Kênh trình duyệt là gì?
+Không cần cài đặt bất kỳ ứng dụng chat nào trên điện thoại hay máy tính, bạn có thể tương tác trực tiếp với OpenClaw thông qua trình duyệt Web tại địa chỉ cục bộ:
 
-**ClawBot** 是 OpenClaw 官方提供的微信接入插件，让你可以在**个人微信**中直接与 OpenClaw 智能体对话。
-
-**核心特点**：
-
-- **官方维护**：由 OpenClaw 团队开发和维护，质量有保障
-- **基于 WeChatFerry**：使用成熟的 WeChatFerry 开源 hook 方案
-- **插件式安装**：一行命令即可安装，无需手动编译
-- **实时收发消息**：支持私聊和群聊消息的监听与回复
-
-**适用人群**：
-
-- 微信重度用户，希望在微信中使用 AI 助手
-- 需要微信群自动化运营（如客户群自动回复）
-- 已有 OpenClaw 部署环境，想扩展微信渠道
-
-### 9.5.2 安装步骤
-
-**前提条件**：
-
-1. 已完成 OpenClaw 基础安装（参考第2章）
-2. Windows 系统已登录微信 PC 客户端
-3. 微信版本需与 WeChatFerry 兼容（查看官方文档获取支持的版本列表）
-
-**第一步：安装 ClawBot 插件**
-
-```bash
-# 安装官方微信插件
-openclaw plugins install @openclaw/wechat-clawbot
-
-# 验证安装
-openclaw plugins list | grep wechat
+```text
+http://127.0.0.1:18789/?token=your-token
 ```
 
-**第二步：配置微信连接**
-
-```bash
-# 编辑配置文件
-openclaw config edit
-
-# 或直接设置
-openclaw config set channels.wechat.enabled true
-```
-
-**第三步：启动并测试**
-
-```bash
-# 启动 Gateway（会自动加载已安装的插件）
-openclaw gateway --port 18789
-
-# 在另一个终端查看日志
-openclaw gateway logs --follow
-```
-
-启动成功后，在微信中给"文件传输助手"发送测试消息，确认 ClawBot 正常工作。
-
-### 9.5.3 工作原理
-
-```
-微信PC客户端
-    │
-    ↓ （WeChatFerry Hook）
-┌──────────────┐
-│  ClawBot 插件  │ ← 监听微信消息事件
-└──────┬───────┘
-       │
-       ↓ （WebSocket）
-┌──────────────┐
-│ OpenClaw核心  │ ← AI推理 + Skills处理
-└──────┬───────┘
-       │
-       ↓ （消息回复）
-┌──────────────┐
-│  ClawBot 插件  │ ← 通过微信API发送回复
-└──────┬───────┘
-       │
-       ↓
-微信PC客户端
-```
-
-**流程说明**：
-
-1. ClawBot 通过 WeChatFerry 库 hook 微信 PC 客户端的消息接口
-2. 当收到新消息时，ClawBot 将消息转发给 OpenClaw 核心
-3. OpenClaw 核心调用 AI 模型生成回复（支持所有已配置的模型）
-4. 回复通过 ClawBot 发送回微信
-
-### 9.5.4 与第三方方案对比
-
-| 特性 | ClawBot（官方） | WeChatFerry（原始） | ComWeChatBot | wxbot |
-|------|----------------|-------------------|-------------|-------|
-| **维护方** | OpenClaw 官方 | 社区 | 社区 | 社区 |
-| **安装难度** | ⭐（一行命令） | ⭐⭐⭐（手动编译） | ⭐⭐⭐ | ⭐⭐ |
-| **与 OpenClaw 集成** | ✅ 原生集成 | ❌ 需自行开发 | ❌ 需自行开发 | ❌ 需自行开发 |
-| **Skills 支持** | ✅ 完整支持 | ❌ | ❌ | ❌ |
-| **稳定性** | ⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐ | ⭐⭐⭐ |
-| **更新频率** | 跟随 OpenClaw | 社区驱动 | 较低 | 社区驱动 |
-| **推荐度** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐ | ⭐⭐⭐ |
-
-**推荐使用 ClawBot 的理由**：
-
-- 原生集成，无需额外开发
-- 完整支持 OpenClaw 的 Skills 和 Agent 能力
-- 官方维护，更新及时
-- 一行命令安装，配置简单
-
-### 9.5.5 配置与使用
-
-**基本配置**：
-
-```yaml
-# config.yaml 中的微信渠道配置
-channels:
-  wechat:
-    enabled: true
-    # 监听的群聊（留空则监听所有群）
-    groups:
-      - "群名称1"
-      - "群名称2"
-    # 是否响应私聊
-    private_chat: true
-    # 自动回复的前缀（用于区分AI回复）
-    reply_prefix: "[AI] "
-```
-
-**使用技巧**：
-
-1. **群聊场景**：在群聊中 @机器人 或使用特定关键词触发回复
-2. **私聊场景**：直接发送消息即可获得 AI 回复
-3. **多群管理**：可以为不同群配置不同的 Agent 人设（通过 SOUL.md）
-4. **消息格式**：支持 Markdown 格式回复，包含代码块、表格等
-
-### 9.5.6 注意事项
-
-> ⚠️ **重要风险提示**
-
-1. **个人微信风险**
-   - ClawBot 基于 hook 方案，本质上是对微信客户端的逆向操作
-   - 虽然基于成熟的开源项目，但仍存在被封号的风险
-   - **强烈建议使用小号或专用微信号**，不要使用主力微信号
-
-2. **封号风险**
-   - 频繁自动回复可能触发微信的风控机制
-   - 建议设置回复频率限制（如每分钟最多回复 10 条）
-   - 避免在群聊中发送大量相同内容
-
-3. **合规建议**
-   - 仅用于个人学习和研究用途
-   - 不要用于商业营销、垃圾消息发送等违规用途
-   - 遵守微信平台的使用条款
-
-4. **技术限制**
-   - 目前仅支持 Windows 平台（依赖微信 PC 客户端）
-   - 微信版本更新可能导致兼容性问题，需及时关注更新
+### 9.6.2 Kịch bản phù hợp
+- Môi trường làm việc hạn chế, không được phép cài đặt ứng dụng chat ngoài
+- Cần tải lên và tải xuống các tệp dữ liệu lớn trực tiếp vào workspace
+- Muốn theo dõi trực quan lượng tiêu thụ Token và trạng thái bộ nhớ thời gian thực
 
 ---
 
-## 9.6 浏览器渠道（Dashboard v2）
+## 9.7 So sánh và Lựa chọn Nền tảng Tích hợp
 
-> 💡 **状态**：稳定可用，随橙皮书 v1.3 发布 Dashboard v2 全新管理后台。
+### 9.7.1 Bảng so sánh tính năng
 
-### 9.6.1 什么是浏览器渠道
+| Nền tảng | Bản chất & Đơn vị chủ quản | Môi trường văn phòng | Thân thiện nhà phát triển | Kết nối WebSocket | Trải nghiệm di động |
+|---|---|---|---|---|---|
+| **Lark / Feishu** | ByteDance | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ✅ Sẵn có, cực kỳ ổn định | ⭐⭐⭐⭐⭐ Xuất sắc |
+| **WeCom** | WeChat Doanh nghiệp (Tencent) | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ✅ Hỗ trợ Webhook/API | ⭐⭐⭐⭐⭐ Tốt |
+| **DingTalk** | Alibaba | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ✅ Hỗ trợ Stream mode | ⭐⭐⭐⭐ Tốt |
+| **Discord** | Discord Inc. | ⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ✅ WebSocket Gateway | ⭐⭐⭐⭐⭐ Xuất sắc |
+| **Telegram** | Telegram FZ-LLC | ⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ✅ Bot API Long-polling | ⭐⭐⭐⭐⭐ Xuất sắc |
+| **QQ** | Tencent | ⭐⭐ | ⭐⭐⭐ | ✅ WebSocket | ⭐⭐⭐⭐ Khá |
 
-浏览器渠道是 OpenClaw 提供的最简单的使用方式——**直接在浏览器中使用 OpenClaw，无需安装任何客户端或 IM 平台**。
+### 9.7.2 Gợi ý lựa chọn theo nhu cầu thực tế
 
-只需在浏览器中打开 Dashboard 地址，就可以：
-- 与 AI 智能体对话
-- 管理理 Skills 和配置
-- 查看运行日志和状态
-- 上传文件和知识库
-
-### 9.6.2 适用场景
-
-| 场景 | 说明 |
-|------|------|
-| **临时使用** | 在别人电脑或公共电脑上临时使用，不想安装软件 |
-| **公司电脑受限** | 公司电脑无法安装新软件，但浏览器可以上网 |
-| **多设备切换** | 在不同电脑上通过浏览器统一访问 |
-| **团队演示** | 通过浏览器向同事演示 OpenClaw 的功能 |
-| **快速体验** | 想快速体验 OpenClaw，不想折腾客户端安装 |
-
-### 9.6.3 访问方式与功能
-
-**访问地址**：
-
-```
-http://127.0.0.1:18789/
-```
-
-如果是远程服务器部署，将 `127.0.0.1` 替换为服务器 IP：
-
-```
-http://你的服务器IP:18789/?token=你的访问令牌
-```
-
-**Dashboard v2 新功能**（橙皮书 v1.3 发布）：
-
-- **全新 UI 设计**：更直观的数据展示和配置界面
-- **实时对话**：支持流式输出，体验更流畅
-- **Skills 管理**：直接在浏览器中安装、启用、禁用 Skills
-- **模型切换**：可视化切换不同 AI 模型
-- **知识库管理**：上传和管理知识库文件
-- **日志查看**：实时查看 Gateway 运行日志
-- **多用户支持**：支持多用户同时在线使用
-
-**安全建议**：
-
-- 本地使用无需特别配置
-- 远程访问务必设置 token 认证
-- 生产环境建议配置 HTTPS
-- 使用防火墙限制访问来源 IP
+- **Đội ngũ công nghệ, lập trình viên, startup hiện đại**: Chọn **Lark / Feishu (ByteDance)** làm kênh giao tiếp chính.
+- **Doanh nghiệp vừa và lớn, mạng lưới quan hệ khách hàng nội địa**: Chọn **WeCom (WeChat Doanh nghiệp)** hoặc **DingTalk (Alibaba)**.
+- **Cộng đồng mã nguồn mở, dự án quốc tế**: Chọn **Discord** hoặc **Telegram**.
+- **Cá nhân muốn dùng nhanh, không phụ thuộc IM**: Dùng trực tiếp **Dashboard v2 trên Trình duyệt Web**.
 
 ---
 
-## 9.7 平台对比与选择
+## 9.1.16 Mô hình Đa Bot Đa Agent: Xây dựng Đội ngũ Trợ lý AI Chuyên biệt
 
-### 9.7.1 功能对比
+> 💡 **Hướng dẫn toàn diện**: Hướng dẫn xây dựng đội ngũ trợ lý AI đa nhiệm bằng kiến trúc Nhiều Gateway + Nhiều Bot.
 
-| 功能 | 飞书 | 企业微信 | 钉钉 | QQ | 微信（ClawBot） |
-|------|------|---------|------|-----|----------------|
-| 企业怎么办公 | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐ | ⭐ |
-| 即时通讯 | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
-| 文档协作 | ⭐⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐ | ⭐ |
-| 开发布友好 | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐ |
-| 用户基础 | ⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
-| 免费额度 | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ |
+### 9.1.16.1 Vì sao cần Đa Agent?
 
-### 9.7.2 使用场景推荐
+Là một chuyên gia độc lập hoặc solopreneur, bạn thường phải đảm nhiệm nhiều vai trò:
+- **Trợ lý Trọng yếu (Main Assistant)**: Dùng mô hình mạnh nhất (Claude Opus / GPT-4o) để lập kế hoạch chiến lược
+- **Trợ lý Viết nội dung (Content Creator)**: Chuyên trách viết blog, bài viết mạng xã hội, newsletter
+- **Trợ lý Công nghệ (Tech Dev)**: Chuyên rà soát code, sửa lỗi phần mềm và kiến trúc hệ thống
+- **Trợ lý Tổng hợp Tin tức (AI News)**: Chuyên tóm tắt thị trường, nghiên cứu xu hướng công nghệ
 
-**飞书**：
-✅ 适合场景：
-- 现代化怎么办公
-- 文档协作
-- 知识管理
-- 团队协作
-- 技术团队
+Mô hình đơn Agent buộc bạn phải liên tục chuyển đổi ngữ cảnh và đổi prompt thủ công. Mô hình Đa Agent cho phép mỗi trợ lý sở hữu tính cách, bộ nhớ và không gian làm việc hoàn toàn riêng biệt.
 
-❌ 不适合：
-- 传统企业
-- 简单需求
-**企业微信**：
-✅ 适合场景：
-- 企业内部使用
-- 需要与微信互通
-- 客户服务
-- 营销推广
+![Kiến trúc Đa Agent](https://i-blog.csdnimg.cn/img_convert/d9d0d47052a8dbef500c9ceab133ee7e.png)
 
-❌ 不适合：
-- 纯个人使用
-- 需要复杂文档协作
-**钉钉**：
-✅ 适合场景：
-- 企业怎么办公
-- 考勤管理
-- 审批流程
-- 项目管理
+### 9.1.16.2 So sánh các Phương án Triển khai
 
-❌ 不适合：
-- 个人娱乐
-- 社交互动
-**QQ**：
-✅ 适合场景：
-- 个人使用
-- 社交互动
-- 娱乐功能
-- 学生群体
+#### Phương án 1: Một Gateway duy nhất + Bindings (Ít khuyên dùng)
+- Gặp hạn chế khi cơ chế so khớp `peer.id` phân giải không đồng nhất giữa các nhóm chat.
+- Người dùng phải gõ lệnh `/reset` và `/agent` thủ công để chuyển đổi qua lại.
 
-❌ 不适合：
-- 企业怎么办公
-- 正式场合
-**微信（ClawBot）**：
-✅ 适合场景：
-- 个人微信自动化
-- 微信群智能回复
-- 客户群运营
-- 微信重度用户
+#### Phương án 2: Nhiều Gateway độc lập + Nhiều Bot riêng biệt (Khuyên dùng) ✅
+- Mỗi bot trên Lark/Feishu kết nối với một tiến trình Gateway riêng biệt qua tham số `--profile`.
+- Phân tách cổng mạng (18789, 18790, 18791, 18792).
+- Hoàn toàn độc lập về bộ nhớ, context và mô hình AI.
+- Người dùng chỉ cần mở khung chat với đúng bot là xong, không cần bất kỳ câu lệnh chuyển đổi nào.
 
-❌ 不适合：
-- 企业正式办公
-- 大规模商业运营（有封号风险）
-- 对稳定性要求极高的场景
+### 9.1.16.3 Thiết kế Kiến trúc Profile
 
-### 9.7.3 多平台组合策略
-
-**策略1：工作+生活分离**
-工作：飞书/企业微信/钉钉
-生活：QQ
-
-优势：
-- 工作生活分离
-- 专注度更高
-- 管理更方便
-**策略2：全平台覆盖**
-同时接入所有平台
-
-优势：
-- 覆盖所有用户
-- 随时随地使用
-- 功能互补
-
-劣势：
-- 维护成本高
-- 消息分散
-**策略3：主次搭配（推荐）**
-主平台：飞书（日常使用）
-辅平台：企业微信（客户沟通）
-
-优势：
-- 重点突出
-- 成本可控
-- 易于管理
----
-
-## 📝 本章节小结
-
-本章节学习了OpenClaw的多平台集成功能：
-
-### 核心内内容
-
-1. **飞书Bot配置**
-   - 创建飞书应用
-   - 配置 OpenClaw
-   - 实战案例（个人助手、项目管理）
-   - 与飞书生态集成
-   - 高级功能（流式输出、多Agent路由）
-
-2. **企业微信Bot配置**
-   - 注册和创建应用
-   - 配置 OpenClaw
-   - 实战案例（个人助手、团队协作、客户服务）
-   - 手机端使用技巧
-
-3. **钉钉Bot配置**
-   - 创建钉钉应用
-   - 配置 OpenClaw
-   - 实战案例（工作助手、审批流程）
-
-4. **QQ Bot配置**
-   - 创建QQ机器人
-   - 配置 OpenClaw
-   - 实战案例（个人助手、群管理、娱乐互动）
-   - 限制和注意事项
-
-5. **微信接入（ClawBot 官方方案）**
-   - 官方插件安装与配置
-   - 基于 WeChatFerry 的工作原理
-   - 与第三方方案对比
-   - 风险提示与注意事项
-
-6. **浏览器渠道（Dashboard v2）**
-   - 零安装使用 OpenClaw
-   - Dashboard v2 全新功能
-   - 适用场景与安全建议
-
-### 平台选择
-
-- **飞书**：现代化怎么办公、文档协作、技术团队（推荐优先）
-- **企业微信**：企业怎么办公、客户服务
-- **钉钉**：考勤管理、审批流程
-- **QQ**：个人使用、社交互动
-- **微信**：微信重度用户、群自动化（注意封号风险）
-- **浏览器**：临时使用、受限环境、快速体验
-
-### 实战技巧
-
-- ✅ 选择合适的平台
-- ✅ 合理配置权限
-- ✅ 优化使用体验
-- ✅ 多平台组合使用
-- ✅ 遵守平台规则
-
-### 下一步
-
-- 学习第10章节：API服务封装
-- 掌握Banana绘图、Notion同步等
-- 构建多功能AI工具箱
-
----
-
-## 🎯 实战练习
-
-### 练习1：配置飞书Bot
-1. 注册飞书开放平台
-2. 创建应用
-3. 配置 OpenClaw
-4. 测试文档集成
-
-### 练习2：配置企业微信Bot
-1. 注册企业微信
-2. 创建应用
-3. 配置 OpenClaw
-4. 测试基本功能
-
-### 练习3：多平台对比
-1. 分别体验4个平台
-2. 对比功能差异
-3. 选择适合自己的平台
-
----
-
-## 💡 常见访问题
-
-**Q1：哪个平台最好用？**
-A：看使用场景。技术团队推荐飞书（开发布友好、功能强大），企业用飞书/钉钉，个人用QQ，客户服务用企业微信。
-
-**Q2：可以同时接入多个平台吗？**
-A：可以，OpenClaw支持同时接入多个平台。
-
-**Q3：配置复杂吗？**
-A：云端部署很简单，参考官方教程即可。飞书配置最简单，支持WebSocket长连接。
-
-**Q4：免费吗？**
-A：平台基础功能都免费，OpenClaw也免费。
-
-**Q5：手机上能用吗？**
-A：可以，所有平台都支持手机端。飞书的移动端体验最好。
-
----
-
-## 📚 参考资源
-
-### 官方教程
-
-**飞书**：
-- 快速接入指南：https://cloud.tencent.com/developer/article/2626151
-- 视频教程：https://cloud.tencent.com/developer/video/85055
-
-**企业微信**：
-- 快速接入指南：https://cloud.tencent.com/developer/article/2625147
-- 视频教程：https://cloud.tencent.com/developer/video/85003
-
-**钉钉**：
-- 快速接入指南：https://cloud.tencent.com/developer/article/2626553
-- 视频教程：https://cloud.tencent.com/developer/video/85055
-
-**QQ**：
-- 快速接入指南：https://cloud.tencent.com/developer/article/2626045
-- 视频教程：https://cloud.tencent.com/developer/video/85003
-
-### 社区资源
-
-- OpenClaw社区：https://docs.openclaw.ai
-- 交流群：扫码加入
-- 访问题反馈：GitHub Issues
-
----
-
-**下一章节预告**：第10章节将学习API服务封装，包括Banana绘图集成、Notion数据同步、视频生成服务、语音合成接入等内内容。
-
-
-## 9.1.16 多机器人多 Agent 模式：打造你的 AI 助手团队
-
-> 💡 **完整教程**：本节详细介绍如何使用多 Gateway + 多飞书机器人架构，打造专业的 AI 助手团队。
-
-### 9.1.16.1 为什么需要多 Agent？
-
-作为超级个体创业者，你可能需要不同类型的 AI 助手来处理不同的工作：
-
-- **主助理**：使用最强大的模型（Claude Opus）处理复杂任务
-- **内内容创作助手**：专注于文章节写作、文案创作
-- **技术开发布助手**：处理代码开发布、技术访问题
-- **AI 资讯助手**：快速获取和整理 AI 行业动态
-
-传统的单 Agent 模式需要频繁切换模型和上下文，效率低下。多 Agent 模式让你可以同时拥有多个专业助手，各司其职。
-
-![多Agent架构](https://i-blog.csdnimg.cn/img_convert/d9d0d47052a8dbef500c9ceab133ee7e.png)
-
-### 9.1.16.2 实现方案对比
-
-#### 方案一：单 Gateway + Bindings（不推荐）
-
-```json
-{
-  "bindings": [
-    {
-      "agentId": "main-agent",
-      "match": {
-        "channel": "feishu",
-        "peer": {
-          "kind": "group",
-          "id": "oc_xxx"
-        }
-      }
-    }
-  ]
-}
-```
-**访问题**：
-- ❌ OpenClaw 2026.3.2 的 bindings 功能不稳定
-- ❌ peer.id 匹配经常失败
-- ❌ 所有群组都路由到同一个 agent
-- ❌ 需要 `/reset` + `/agent` 命令手动切换
-
-#### 方案二：多 Gateway + 多飞书机器人（推荐）✅
-
-**核心思路**：
-- 创建 4 个飞书机器人应用
-- 启动 4 个独立的 OpenClaw Gateway
-- 每个 Gateway 连接一个飞书机器人
-- 每个 Gateway 使用不同的 Agent 和模型
-
-**优势**：
-- ✅ 完全独立，互不干扰
-- ✅ 直接私聊不同机器人即可切换 agent
-- ✅ 不需要群组配置
-- ✅ 不需要手动切换命令
-- ✅ 配置清晰，易于管理
-- ✅ 可以独立重启某个 Gateway
-
-### 9.1.16.3 架构设计
-
-#### 整体架构
-
+```text
 ┌─────────────────────────────────────────────────────────┐
-│                      飞书 (Feishu)                       │
+│              Lark / Feishu (Ứng dụng Chat)               │
 ├─────────────────────────────────────────────────────────┤
-│  机器人1: 主助理          机器人2: 内内容创作助手          │
-│  机器人3: 技术开发布助手    机器人4: AI资讯助手            │
+│  Bot 1: Trợ lý Chính       Bot 2: Sáng tạo Nội dung     │
+│  Bot 3: Kỹ sư Phần mềm     Bot 4: Tin tức & Nghiên cứu   │
 └─────────────────────────────────────────────────────────┘
                           ↓ WebSocket
 ┌─────────────────────────────────────────────────────────┐
-│                   OpenClaw Gateway 层                    │
+│                   Tầng Gateway OpenClaw                 │
 ├──────────────┬──────────────┬──────────────┬────────────┤
 │ Gateway 1    │ Gateway 2    │ Gateway 3    │ Gateway 4  │
-│ 端口: 18789  │ 端口: 18790  │ 端口: 18791  │ 端口: 18792│
+│ Port: 18789  │ Port: 18790  │ Port: 18791  │ Port: 18792│
 │ Profile:     │ Profile:     │ Profile:     │ Profile:   │
-│ main-        │ content-     │ tech-dev     │ ai-news    │
-│ assistant    │ creator      │              │            │
+│ main-agent   │ content      │ tech-dev     │ news-agent │
 └──────────────┴──────────────┴──────────────┴────────────┘
                           ↓
 ┌─────────────────────────────────────────────────────────┐
-│                      Agent 层                            │
+│                     Tầng Mô hình AI                     │
 ├──────────────┬──────────────┬──────────────┬────────────┤
-│ main-agent   │ content-agent│ tech-agent   │ainews-agent│
 │ Claude Opus  │ Claude Sonnet│ Claude Sonnet│ Gemini 2.5 │
-│ 4.6 Thinking │ 4.5          │ 4.5 Thinking │ Flash      │
+│ Thinking     │ 4.5          │ Thinking     │ Flash      │
 └──────────────┴──────────────┴──────────────┴────────────┘
-#### Profile 隔离机制
-
-使用 `--profile <name>` 参数，OpenClaw 会：
-- 配置文件：`~/.openclaw-<name>/openclaw.json`
-- 状态数据：`~/.openclaw-<name>/`
-- 独立端口：18789, 18790, 18791, 18792
-- 独立会话：完全隔离的上下文
-
-### 9.1.16.4 配置步骤
-
-#### 第一步：创建飞书机器人应用
-
-在飞书开放平台创建 4 个机器人应用：
-
-1. **主助理**
-   - 应用名称：主助理
-   - 描述：处理复杂任务的主力助手
-   - 获取 App ID 和 App Secret
-
-2. **内内容创作助手**
-   - 应用名称：内内容创作助手
-   - 描述：专注内内容创作和文案写作
-   - 获取 App ID 和 App Secret
-
-3. **技术开发布助手**
-   - 应用名称：技术开发布助手
-   - 描述：处理代码开发布和技术访问题
-   - 获取 App ID 和 App Secret
-
-4. **AI资讯助手**
-   - 应用名称：AI资讯助手
-   - 描述：快速获取 AI 行业资讯
-   - 获取 App ID 和 App Secret
-
-**重要配置**：
-- 启用机器人能力
-- 配置事件订阅：选择"长连接"模式
-- 添加权限：消息接收、消息发布送
-
-#### 第二步：配置 Agent
-
-创建 4 个 Agent 配置目附录：
-
-```bash
-mkdir -p agent-configs/{main-agent,content-agent,tech-agent,ainews-agent}
 ```
-为每个 Agent 创建配置文件：
 
-**agent-configs/main-agent/USER.md**：
-
-```markdown
-# 用户信息
-
-- 姓名：Maynor
-- 职业：超级个体创业者
-- 工作领域：AI 技术、内内容创作、技术开发布
-```
-**agent-configs/main-agent/SOUL.md**：
-
-```markdown
-# Agent 身份
-
-你是 Maynor 的主助理，负责处理各类复杂任务。使用 Claude Opus 4.6 Thinking 模型，提供最高质量的服务。
-```
-类似地为其他 3 个 Agent 创建配置文件。
-
-#### 第三步：运行配置脚本
-
-使用自动化脚本创建多 Gateway 配置：
-
-```bash
-# 下载配置脚本
-curl -O https://example.com/setup-multi-gateway.sh
-chmod +x setup-multi-gateway.sh
-
-# 运行配置脚本
-./setup-multi-gateway.sh
-```
-脚本会自动：
-1. 停止当前 Gateway
-2. 备份现有配置
-3. 创建 4 个独立的 Profile 配置
-4. 生成管理脚本
-
-#### 第四步：启动所有 Gateway
-
-```bash
-# 启动所有 Gateway
-./start-all-gateways.sh
-
-# 检查状态
-./check-gateways.sh
-
-# 验证配置
-./verify-setup.sh
-```
-### 9.1.16.5 使用方法
-
-#### 直接私聊机器人
-
-这是最简单的使用方式：
-
-1. **处理复杂任务**
-   - 在飞书中搜索"主助理"机器人
-   - 直接发布送消息
-   - 自动使用 Claude Opus 4.6 Thinking
-
-2. **创作内内容**
-   - 搜索"内内容创作助手"机器人
-   - 发布送写作需求
-   - 自动使用 Claude Sonnet 4.5
-
-3. **开发布代码**
-   - 搜索"技术开发布助手"机器人
-   - 发布送技术访问题
-   - 自动使用 Claude Sonnet 4.5 Thinking
-
-4. **获取资讯**
-   - 搜索"AI资讯助手"机器人
-   - 请求最新动态
-   - 自动使用 Gemini 2.5 Flash（快速响应）
-
-#### 在群组中使用（可选）
-
-如果需要在群组中使用：
-
-1. 将对应的机器人添加到群组
-2. @ 机器人发布送消息
-3. 每个群组可以添加多个机器人，灵活切换
-
-**建议**：
-- 工作群：添加主助理 + 技术开发布助手
-- 内内容创作群：添加内内容创作助手
-- 资讯群：添加 AI资讯助手
-
-### 9.1.16.6 管理和维护
-
-#### 日常管理
-
-```bash
-# 查看所有 Gateway 状态
-./check-gateways.sh
-
-# 查看实时日志
-tail -f logs-main-assistant.log
-tail -f logs-content-creator.log
-tail -f logs-tech-dev.log
-tail -f logs-ai-news.log
-
-# 查看所有日志
-tail -f logs-*.log
-```
-#### 重启 Gateway
-
-```bash
-# 重启所有
-./stop-all-gateways.sh
-sleep 2
-./start-all-gateways.sh
-
-# 重启单个
-ps aux | grep "openclaw.*--profile main-assistant"
-kill <PID>
-./start-main-assistant.sh
-```
-#### 修改配置
-
-```bash
-# 编辑配置
-vim ~/.openclaw-main-assistant/openclaw.json
-
-# 验证配置
-jq . ~/.openclaw-main-assistant/openclaw.json
-
-# 重启生效
-# (停止并重启对应的 Gateway)
-```
-#### 监控资源
-
-```bash
-# 查看内存占用
-ps aux | grep openclaw-gateway | awk '{print $4, $11}'
-
-# 查看 CPU 占用
-ps aux | grep openclaw-gateway | awk '{print $3, $11}'
-
-# 查看端口占用
-lsof -i :18789
-lsof -i :18790
-lsof -i :18791
-lsof -i :18792
-```
-### 9.1.16.7 实战案例
-
-#### 案例一：内内容创作工作流
-
-**场景**：写一篇技术文章节
-
-1. **构思阶段**
-   - 私聊"主助理"：讨论文章节主题和大纲
-   - 使用 Claude Opus 进行深度思考
-
-2. **写作阶段**
-   - 私聊"内内容创作助手"：撰写文章节内内容
-   - 使用 Claude Sonnet 快速生成
-
-3. **代码示例**
-   - 私聊"技术开发布助手"：编写代码示例
-   - 使用 Claude Sonnet Thinking 确保代码质量
-
-4. **资讯补充**
-   - 私聊"AI资讯助手"：获取最新技术动态
-   - 使用 Gemini Flash 快速检索
-
-#### 案例二：技术开发布工作流
-
-**场景**：开发布一个新功能
-
-1. **需求分析**
-   - 主助理：分析需求，设计架构
-
-2. **代码实现**
-   - 技术开发布助手：编写代码，调试访问题
-
-3. **文档编写**
-   - 内内容创作助手：编写技术文档
-
-4. **技术调研**
-   - AI资讯助手：查找相关技术资料
-
-#### 案例三：日常工作场景
-
-**上午 9:00 - 规划工作**
-- 主助理：制定今天的工作计划
-
-**上午 10:00 - 写作**
-- 内内容创作助手：撰写文章节
-
-**下午 2:00 - 开发布**
-- 技术开发布助手：编写代码
-
-**下午 4:00 - 学习**
-- AI资讯助手：了解行业动态
-
-**晚上 8:00 - 总结**
-- 主助理：总结今天的工作
-
-### 9.1.16.8 性能和成本
-
-#### 资源占用
-
-- **内存**：每个 Gateway 约 400MB
-- **总内存**：4 个 Gateway 约 1.6GB
-- **CPU**：空闲时几乎为 0，处理时根据任务而定
-- **磁盘**：配置文件和日志约 100MB
-
-#### 成本分析
-
-假设使用自建 API 代理：
-
-| Agent | 模型 | 用途 | 月使用量 | 月成本 |
-|-------|------|------|----------|--------|
-| main-agent | Claude Opus 4.6 | 复杂任务 | 100万 tokens | $15 |
-| content-agent | Claude Sonnet 4.5 | 内内容创作 | 200万 tokens | $6 |
-| tech-agent | Claude Sonnet 4.5 | 技术开发布 | 150万 tokens | $4.5 |
-| ainews-agent | Gemini 2.5 Flash | 资讯获取 | 300万 tokens | $0 |
-| **总计** | - | - | 750万 tokens | **$25.5** |
-
-**成本优化建议**：
-- 简单任务使用 Gemini Flash（免费）
-- 复杂任务才使用 Claude Opus
-- 内内容创作使用 Claude Sonnet（性价比高）
-
-### 9.1.16.9 故障排查
-
-#### Gateway 启动失败
-
-**症状**：运行 `./start-all-gateways.sh` 后，`./check-gateways.sh` 显示进程未运行
-
-**排查步骤**：
-
-```bash
-# 1. 查看日志
-tail -50 logs-main-assistant.log
-
-# 2. 检查配置
-jq . ~/.openclaw-main-assistant/openclaw.json
-
-# 3. 检查端口占用
-lsof -i :18789
-
-# 4. 运行 doctor
-openclaw --profile main-assistant doctor
-```
-**常见访问题**：
-- 配置文件格式错误：运行 `jq` 验证
-- 端口被占用：更换端口或停止占用进程
-- 飞书配置错误：检查 App ID 和 App Secret
-
-#### 机器人无响应
-
-**症状**：在飞书中 @ 机器人，没有回复
-
-**排查步骤**：
-
-```bash
-# 1. 检查 Gateway 是否运行
-./check-gateways.sh
-
-# 2. 查看实时日志
-tail -f logs-main-assistant.log
-
-# 3. 检查飞书连接
-grep "WebSocket client started" logs-main-assistant.log
-```
-**常见原因**：
-- Gateway 未启动：运行 `./start-all-gateways.sh`
-- 飞书连接断开：检查网络，重启 Gateway
-- 配置错误：验证飞书 App ID 和 Secret
-
-#### 使用了错误的 Agent
-
-**症状**：私聊"内内容创作助手"，但使用的是 Claude Opus 模型
-
-**原因**：配置文件中 Agent 设置错误
-
-**解决**：
-
-```bash
-# 检查配置
-jq '.agents.list[0].id, .agents.list[0].model.primary' \
-  ~/.openclaw-content-creator/openclaw.json
-
-# 应该输出：
-# "content-agent"
-# "local-antigravity/claude-sonnet-4-5"
-```
-### 9.1.16.10 高级技巧
-
-#### 技巧一：使用 tmux 管理
-
-```bash
-# 创建 tmux 会话
-tmux new -s openclaw
-
-# 分割窗口
-Ctrl+b %  # 垂直分割
-Ctrl+b "  # 水平分割
-
-# 在不同窗口中运行不同的 Gateway
-./start-main-assistant.sh
-./start-content-creator.sh
-./start-tech-dev.sh
-./start-ai-news.sh
-
-# 查看所有日志
-tail -f logs-*.log
-```
-#### 技巧二：配置开机自启动
-
-使用 launchd（macOS）：
-
-```bash
-# 创建 plist 文件
-cat > ~/Library/LaunchAgents/com.openclaw.main-assistant.plist << 'EOF'
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-  <key>Label</key>
-  <string>com.openclaw.main-assistant</string>
-  <key>ProgramArguments</key>
-  <array>
-    <string>/usr/local/bin/openclaw</string>
-    <string>--profile</string>
-    <string>main-assistant</string>
-    <string>gateway</string>
-    <string>run</string>
-  </array>
-  <key>RunAtLoad</key>
-  <true/>
-  <key>KeepAlive</key>
-  <true/>
-</dict>
-</plist>
-EOF
-
-# 加载服务
-launchctl load ~/Library/LaunchAgents/com.openclaw.main-assistant.plist
-```
-#### 技巧三：日志轮转
-
-```bash
-# 创建日志轮转脚本
-cat > rotate-logs.sh << 'EOF'
-#!/bin/zsh
-for log in logs-*.log; do
-  if [ -f "$log" ] && [ $(stat -f%z "$log") -gt 10485760 ]; then
-    mv "$log" "$log.$(date +%Y%m%d_%H%M%S)"
-    touch "$log"
-  fi
-done
-EOF
-
-chmod +x rotate-logs.sh
-
-# 添加到 crontab（每小时执行）
-crontab -e
-# 添加：0 * * * * /path/to/rotate-logs.sh
-```
-### 9.1.16.11 总结
-
-多 Gateway + 多飞书机器人的方案是目前最稳定、最简单的多 Agent 实现方式：
-
-**核心优势**：
-- ✅ 直接私聊不同机器人，自动使用对应 agent
-- ✅ 完全独立，互不干扰
-- ✅ 不需要复杂的 bindings 配置
-- ✅ 不需要手动切换命令
-- ✅ 配置清晰，易于管理
-
-**适用场景**：
-- 超级个体创业者
-- 需要多个专业助手
-- 不同任务使用不同模型
-- 追求稳定性和可靠性
-
-**下一步**：
-1. 创建飞书机器人应用
-2. 运行配置脚本
-3. 启动所有 Gateway
-4. 开始使用你的 AI 助手团队！
+Mỗi profile được cách ly dữ liệu tại `~/.openclaw-<name>/`:
+- Cấu hình riêng: `~/.openclaw-<name>/openclaw.json`
+- Trạng thái phiên chat độc lập
+- Cổng dịch vụ riêng biệt
+
+### 9.1.16.4 Các bước Thiết lập Thực tế
+
+1. Tạo 4 ứng dụng Bot tương ứng trên Lark/Feishu Open Platform.
+2. Tạo thư mục cấu hình cho từng Agent với 2 tệp `USER.md` (thông tin người dùng) và `SOUL.md` (định hình tính cách, phong cách trả lời của Agent).
+3. Khởi chạy 4 tiến trình Gateway tương ứng theo từng cổng mạng:
+   ```bash
+   openclaw gateway --profile main-agent --port 18789
+   openclaw gateway --profile content --port 18790
+   openclaw gateway --profile tech-dev --port 18791
+   openclaw gateway --profile news-agent --port 18792
+   ```
+4. Kiểm tra trạng thái và duyệt ghép đôi cho từng bot.
 
 ---
 
-## 9.1.17 多 Agent 配置（传统方式）
+## 9.1.17 Cấu hình Đa Agent (Phương thức Truyền thống qua Bindings)
 
-> ⚠️ **注意**：本节介绍的是传统的单 Gateway + Bindings 方式，推荐使用上面的多 Gateway 方案。
-
-### 什么是多 Agent？
-
-多 Agent 配置允许：
-- 每个飞书机器人使用不同的 Agent
-- 每个 Agent 使用不同的模型
-- 每个 Agent 使用独立的工作空间
-- 每个 Agent 有独立的配置和上下文
-
-### 9.1.17.1 配置结构（传统方式）
-
-```json
-{
-  "agents": {
-    "list": [
-      {
-        "id": "agent-id",
-        "workspace": "/path/to/workspace",
-        "model": {
-          "primary": "provider/model"
-        }
-      }
-    ],
-    "defaults": {
-      "compaction": { "mode": "safeguard" },
-      "maxConcurrent": 4
-    }
-  },
-  "channels": {
-    "feishu": {
-      "accounts": {
-        "bot-name": { ... }
-      }
-    }
-  },
-  "bindings": [
-    {
-      "agentId": "agent-id",
-      "match": {
-        "channel": "feishu",
-        "peer": {
-          "kind": "dm",
-          "id": "ou_user_id"
-        }
-      }
-    }
-  ]
-}
-```
-### 9.1.17.2 实战案例：4个专业助手（传统方式）
-
-**场景**：一人公司，需要不同的专业助手处理不同任务。
-
-**配置示例**：
-
-```json
-{
-  "agents": {
-    "list": [
-      {
-        "id": "main-agent",
-        "workspace": "/Users/username/clawd",
-        "model": {
-          "primary": "anthropic/claude-sonnet-4"
-        }
-      },
-      {
-        "id": "content-agent",
-        "workspace": "/Users/username/clawd/content",
-        "model": {
-          "primary": "anthropic/claude-sonnet-4"
-        }
-      },
-      {
-        "id": "tech-agent",
-        "workspace": "/Users/username/clawd/tech",
-        "model": {
-          "primary": "anthropic/claude-sonnet-4"
-        }
-      },
-      {
-        "id": "ainews-agent",
-        "workspace": "/Users/username/clawd/ainews",
-        "model": {
-          "primary": "google/gemini-2-flash"
-        }
-      }
-    ],
-    "defaults": {
-      "compaction": { "mode": "safeguard" },
-      "maxConcurrent": 4,
-      "subagents": { "maxConcurrent": 8 }
-    }
-  },
-  "channels": {
-    "feishu": {
-      "accounts": {
-        "main-assistant": {
-          "appId": "cli_main_xxx",
-          "appSecret": "xxx",
-          "botName": "主助理"
-        },
-        "content-creator": {
-          "appId": "cli_content_xxx",
-          "appSecret": "xxx",
-          "botName": "内内容创作助手"
-        },
-        "tech-dev": {
-          "appId": "cli_tech_xxx",
-          "appSecret": "xxx",
-          "botName": "技术开发布助手"
-        },
-        "ai-news": {
-          "appId": "cli_news_xxx",
-          "appSecret": "xxx",
-          "botName": "AI资讯助手"
-        }
-      }
-    }
-  },
-  "bindings": [
-    {
-      "agentId": "main-agent",
-      "match": {
-        "channel": "feishu",
-        "peer": { "kind": "dm", "id": "ou_xxx1" }
-      }
-    },
-    {
-      "agentId": "content-agent",
-      "match": {
-        "channel": "feishu",
-        "peer": { "kind": "dm", "id": "ou_xxx2" }
-      }
-    },
-    {
-      "agentId": "tech-agent",
-      "match": {
-        "channel": "feishu",
-        "peer": { "kind": "dm", "id": "ou_xxx3" }
-      }
-    },
-    {
-      "agentId": "ainews-agent",
-      "match": {
-        "channel": "feishu",
-        "peer": { "kind": "dm", "id": "ou_xxx4" }
-      }
-    }
-  ]
-}
-```
-### 9.1.17.3 获取用户 ID（传统方式）
-
-**方法1：通过日志获取（推荐）**
-
-```bash
-# 1. 启动网关并查看日志
-openclaw gateway restart
-openclaw logs --follow
-
-# 2. 在飞书中给每个机器人发布送消息
-
-# 3. 在日志中查找 open_id
-# 格式：ou_xxxxxxxxxxxxxxxx
-```
-**日志示例**：
-[feishu] Received message from ou_18d36d8a49c010dfe20ace2a29250c04
-[feishu] Bot: 主助理
-**方法2：通过配对请求获取**
-
-```bash
-openclaw pairing list feishu
-
-# 输出示例：
-# Pending pairing requests:
-# - Code: ABC123, User: ou_xxx, Bot: 主助理
-```
-### 9.1.17.4 配置步骤（传统方式）
-
-**步骤1：创建工作空间目附录**
-
-```bash
-mkdir -p /Users/username/clawd/content
-mkdir -p /Users/username/clawd/tech
-mkdir -p /Users/username/clawd/ainews
-```
-**步骤2：获取所有用户 ID**
-
-按照上面的方法，获取每个机器人对应的用户 ID。
-
-**步骤3：更新配置文件**
-
-将获取到的用户 ID 填入 `bindings` 部分。
-
-**步骤4：应用配置**
-
-```bash
-# 备份现有配置
-cp ~/.openclaw/openclaw.json ~/.openclaw/openclaw.json.backup
-
-# 应用新配置
-cp your-config.json ~/.openclaw/openclaw.json
-
-# 验证配置
-openclaw doctor
-
-# 重启网关
-openclaw gateway restart
-```
-**步骤5：验证运行**
-
-```bash
-# 查看 Agent 状态
-openclaw doctor
-
-# 应该看到：
-# Agents: main-agent (default), content-agent, tech-agent, ainews-agent
-# Session store: 4 entries
-
-# 查看日志
-openclaw logs --follow | grep bindings
-
-# 应该看到：
-# [bindings] Matched agent: main-agent for user ou_xxx
-```
-### 9.1.17.5 配置注意事项
-
-**⚠️ 重要：agents.list 配置限制**
-
-这是最常见的配置错误！`agents.list` 中的每个 Agent 只能包含以下字段：
-
-```json
-{
-  "id": "agent-id",           // ✅ Agent 标识符（必填）
-  "workspace": "/path",       // ✅ 工作空间路径（必填）
-  "model": { "primary": "" }  // ✅ 使用的模型（可选）
-  // ❌ 不能包含 compaction
-  // ❌ 不能包含 maxConcurrent
-  // ❌ 不能包含 subagents
-  // ❌ 不能包含 models
-}
-```
-**错误示例（会导致配置验证失败）**：
-```json
-{
-  "agents": {
-    "list": [
-      {
-        "id": "main-agent",
-        "workspace": "/path",
-        "compaction": { "mode": "safeguard" },  // ❌ 错误！
-        "maxConcurrent": 4                       // ❌ 错误！
-      }
-    ]
-  }
-}
-```
-**正确示例**：
-```json
-{
-  "agents": {
-    "list": [
-      {
-        "id": "main-agent",
-        "workspace": "/path",
-        "model": { "primary": "provider/model" }  // ✅ 正确
-      }
-    ],
-    "defaults": {
-      "compaction": { "mode": "safeguard" },  // ✅ 在这里配置
-      "maxConcurrent": 4,                     // ✅ 在这里配置
-      "subagents": { "maxConcurrent": 8 }     // ✅ 在这里配置
-    }
-  }
-}
-```
-**2. 通用配置必须放在 agents.defaults**：
-
-所有 Agent 共分享的配置项必须放在 `agents.defaults` 中，包括：
-- `compaction` - 上下文压缩策略
-- `maxConcurrent` - 最大并发布数
-- `subagents` - 子 Agent 配置
-- `models` - 额外的模型配置
-
-```json
-{
-  "defaults": {
-    "model": {
-      "primary": "default-provider/default-model"
-    },
-    "workspace": "/default/workspace",
-    "compaction": { "mode": "safeguard" },
-    "maxConcurrent": 4,
-    "subagents": { "maxConcurrent": 8 }
-  }
-}
-```
-**3. Bindings 顺序很重要**：
-
-OpenClaw 会按顺序匹配 bindings，第一个匹配的规则会被使用。
-
-```json
-"bindings": [
-  // 1. 最具体的匹配（特定用户）
-  { "agentId": "main-agent", "match": { "peer": { "id": "ou_xxx" } } },
-  // 2. 较具体的匹配（特定群组）
-  { "agentId": "tech-agent", "match": { "peer": { "kind": "group" } } },
-  // 3. 最后是默认匹配
-  { "agentId": "default-agent", "match": { "channel": "feishu" } }
-]
-```
-**4. 用户 ID 是唯一的**：
-
-每个飞书用户只能绑定到一个 Agent。
-
-### 故障排查
-
-**访问题1：配置验证失败 - agents.list 包含不支持的字段**
-
-```bash
-# 错误信息
-Config invalid
-File: ~/.openclaw/openclaw.json
-Problem:
-- agents.list.0: Unrecognized keys: "compaction", "maxConcurrent"
-- agents.list.1: Unrecognized keys: "compaction", "maxConcurrent"
-- agents.list.2: Unrecognized keys: "compaction", "maxConcurrent"
-- agents.list.3: Unrecognized keys: "compaction", "maxConcurrent"
-Run:
-openclaw update repair
-openclaw doctor
-```
-**原因**：`agents.list` 中的 Agent 配置包含了只能在 `agents.defaults` 中使用的字段。
-
-**解决方案**：
-
-```bash
-# 方法1：自动修复（推荐）
-openclaw update repair
-openclaw doctor
-
-# 方法2：手动修复
-# 编辑配置文件，将 compaction 和 maxConcurrent 从 agents.list 移到 agents.defaults
-```
-**修复前**：
-```json
-{
-  "agents": {
-    "list": [
-      {
-        "id": "main-agent",
-        "workspace": "/path",
-        "compaction": { "mode": "safeguard" },  // ❌ 错误位置
-        "maxConcurrent": 4                       // ❌ 错误位置
-      }
-    ]
-  }
-}
-```
-**修复后**：
-```json
-{
-  "agents": {
-    "list": [
-      {
-        "id": "main-agent",
-        "workspace": "/path",
-        "model": { "primary": "provider/model" }
-      }
-    ],
-    "defaults": {
-      "compaction": { "mode": "safeguard" },  // ✅ 正确位置
-      "maxConcurrent": 4                       // ✅ 正确位置
-    }
-  }
-}
-```
-**验证修复**：
-```bash
-# 验证配置
-openclaw doctor
-
-# 应该看到：
-# ✅ Config valid
-# ✅ 4 agents configured
-# ✅ 4 bindings configured
-```
-**访问题2：Bindings 不生效**
-
-```bash
-# 检查用户 ID 是否正确
-openclaw logs --follow | grep "ou_"
-
-# 查看 bindings 匹配情况
-openclaw logs --follow | grep bindings
-```
-**访问题3：找不到用户 ID**
-
-```bash
-# 使用 debug 级别日志
-openclaw logs --follow --level debug
-
-# 或查看配对请求
-openclaw pairing list feishu
-```
-**访问题4：配置修改后运行 openclaw doctor 报错**
-
-```bash
-# 错误信息
-Unknown config keys:
-- agents.list[0].compaction
-- agents.list[0].maxConcurrent
-- agents.list[1].compaction
-- agents.list[1].maxConcurrent
-...
-
-Run `openclaw update repair` and then `openclaw doctor` to remove these keys.
-```
-**解决方案**：
-```bash
-# 运行自动修复
-openclaw update repair
-openclaw doctor
-
-# 验证配置
-openclaw doctor
-
-# 重启网关
-openclaw gateway restart
-
-# 查看状态
-openclaw gateway status
-```
-**访问题5：版本不匹配警告**
-
-```bash
-# 警告信息
-Config was last written by a newer OpenClaw (2026.2.6-3); 
-current version is 2026.2.1-zh.3.
-Run `openclaw update repair` and then `openclaw doctor` to apply changes.
-```
-**说明**：这是正常的版本提示，不影响使用。如果想消除警告：
-```bash
-openclaw update repair
-openclaw doctor
-```
-### 9.1.17.6 配置对比
-
-| 特性 | 单 Agent 模式 | 多 Agent 模式 |
-|------|--------------|--------------|
-| 配置复杂度 | 简单 | 复杂 |
-| 模型选择 | 所有机器人相同 | 每个机器人不同 |
-| 工作空间 | 共分享 | 隔离 |
-| 需要 bindings | ❌ | ✅ |
-| 需要用户 ID | ❌ | ✅ |
-| 适用场景 | 简单使用 | 专业分工 |
-
-### 9.1.17.7 使用建议
-
-**推荐使用多 Agent 的场景**：
-- ✅ 需要不同机器人使用不同模型
-- ✅ 需要隔离工作空间
-- ✅ 需要独立配置和上下文
-- ✅ 专业分工明确
-
-**推荐使用单 Agent 的场景**：
-- ✅ 配置简单易维护
-- ✅ 所有机器人使用相同模型
-- ✅ 不需要隔离工作空间
-- ✅ 快速开始使用
-
----
-
-## 9.1.18 本地多 Agent 管理（无需绑定 IM 平台）
-
-> 💡 **重要提示**：多 Agent 管理不仅可以用于飞书等 IM 平台，也完全支持本地使用。如果你不需要绑定飞书机器人，可以通过 Web UI、命令行或 TUI 界面直接使用多个 Agent。
-
-![本地多Agent管理界面 - Web UI/命令行/TUI三种方式](https://upload.maynor1024.live/file/1770944487857_image-20260213090121654.png)
-
-### 本地使用方式
-
-OpenClaw 提供了多种本地使用方式，无需配置任何 IM 平台：
-
-#### 方式一：Web UI（推荐）
-
-```bash
-# 打开 Web 界面
-openclaw dashboard
-
-# 或直接访问
-http://127.0.0.1:18789/?token=你的token
-```
-**优势**：
-- ✅ 图形化界面，操作直观
-- ✅ 支持文件上传和下载
-- ✅ 实时显示 Token 消耗
-- ✅ 支持多轮对话历史
-
-#### 方式二：命令行对话
-
-```bash
-# 直接发布送消息
-openclaw agent --message "你好，帮我分析一下这个项目"
-
-# 使用管道输入
-echo "帮我总结这个文件的内内容" | openclaw agent --message
-
-# 指定输出文件（使用重定向）
-openclaw agent --message "生成项目文档" > docs.md
-```
-**优势**：
-- ✅ 快速执行单次任务
-- ✅ 适合脚本自动化
-- ✅ 可以集成到工作流中
-
-#### 方式三：TUI 终端界面
-
-```bash
-# 启动终端交互界面
-openclaw tui
-```
-**优势**：
-- ✅ 终端内交互式对话
-- ✅ 支持多轮对话
-- ✅ 适合服务器环境使用
-
-### 本地多 Agent 配置
-
-配置文件位置：`~/.openclaw/openclaw.json`
-
-**配置示例**：
+Nếu bạn chỉ muốn chạy một tiến trình Gateway duy nhất, có thể dùng cơ chế `bindings` trong tệp `openclaw.json`:
 
 ```json
 {
@@ -3616,951 +958,185 @@ openclaw tui
         "model": { "primary": "anthropic/claude-sonnet-4" }
       },
       {
-        "id": "content-agent",
-        "workspace": "/Users/username/content",
-        "model": { "primary": "anthropic/claude-sonnet-4" }
-      },
-      {
-        "id": "code-agent",
+        "id": "tech-agent",
         "workspace": "/Users/username/code",
         "model": { "primary": "deepseek/deepseek-chat" }
-      },
-      {
-        "id": "research-agent",
-        "workspace": "/Users/username/research",
-        "model": { "primary": "google/gemini-2-flash" }
       }
     ],
     "defaults": {
       "compaction": { "mode": "safeguard" },
-      "maxConcurrent": 4,
-      "subagents": { "maxConcurrent": 8 }
+      "maxConcurrent": 4
     }
-  }
-}
-```
-**配置说明**：
-
-1. **agents.list**：定义所有可用的 Agent
-   - `id`：Agent 标识符（必填）
-   - `workspace`：工作空间路径（必填）
-   - `model.primary`：使用的模型（可选）
-
-2. **agents.defaults**：所有 Agent 共分享的配置
-   - `compaction`：上下文压缩策略
-   - `maxConcurrent`：最大并发布数
-   - `subagents`：子 Agent 配置
-
-### Agent 管理命令
-
-#### 列出所有 Agent
-
-```bash
-openclaw agents list
-
-# 输出示例：
-# Available agents:
-# - main-agent (default)
-#   Workspace: /Users/username/work
-#   Model: anthropic/claude-sonnet-4
-# - content-agent
-#   Workspace: /Users/username/content
-#   Model: anthropic/claude-sonnet-4
-# - code-agent
-#   Workspace: /Users/username/code
-#   Model: deepseek/deepseek-chat
-# - research-agent
-#   Workspace: /Users/username/research
-#   Model: google/gemini-2-flash
-```
-#### 切换 Agent
-
-```bash
-# 切换到指定 Agent
-openclaw agents switch content-agent
-
-# 输出：
-# Switched to agent: content-agent
-# Workspace: /Users/username/content
-# Model: anthropic/claude-sonnet-4
-```
-#### 查看当前 Agent
-
-```bash
-# 查看当前使用的 Agent
-openclaw agents current
-
-# 输出：
-# Current agent: content-agent
-# Workspace: /Users/username/content
-# Model: anthropic/claude-sonnet-4
-```
-#### 查看 Agent 配置
-
-```bash
-# 查看指定 Agent 的配置
-openclaw agents config content-agent
-
-# 查看当前 Agent 的配置
-openclaw agents config
-```
-#### 查看 Agent 状态
-
-```bash
-# 查看所有 Agent 的状态
-openclaw doctor
-
-# 输出示例：
-# ✅ Config valid
-# ✅ 4 agents configured
-# ✅ Gateway running
-# ✅ Session store: 12 entries
-```
-### 实战案例：4个专业助手
-
-**场景**：个人开发布者，需要不同的专业助手处理不同任务。
-
-**配置步骤**：
-
-**步骤1：创建工作空间目附录**
-
-```bash
-mkdir -p ~/work/main
-mkdir -p ~/work/content
-mkdir -p ~/work/code
-mkdir -p ~/work/research
-```
-**步骤2：编辑配置文件**
-
-```bash
-# 备份现有配置
-cp ~/.openclaw/openclaw.json ~/.openclaw/openclaw.json.backup
-
-# 编辑配置
-nano ~/.openclaw/openclaw.json
-```
-将上面的配置示例粘贴进去，修改路径为你的实际路径。
-
-**步骤3：验证配置**
-
-```bash
-# 验证配置是否正确
-openclaw doctor
-
-# 应该看到：
-# ✅ Config valid
-# ✅ 4 agents configured
-```
-**步骤4：重启网关**
-
-```bash
-# 重启网关使配置生效
-openclaw gateway restart
-
-# 查看状态
-openclaw gateway status
-```
-**步骤5：使用不同的 Agent**
-
-```bash
-# 使用主助手处理通用任务
-openclaw agents switch main-agent
-openclaw agent --message "帮我整理今天的待怎么办事项"
-
-# 使用内内容助手创作文章节
-openclaw agents switch content-agent
-openclaw agent --message "帮我写一篇关于 AI 的文章节"
-
-# 使用代码助手开发布项目
-openclaw agents switch code-agent
-openclaw agent --message "帮我优化这段 Python 代码"
-
-# 使用研究助手搜集资料
-openclaw agents switch research-agent
-openclaw agent --message "帮我搜集关于量子计算的最新研究"
-```
-### 使用场景对比
-
-| 场景 | 推荐方式 | Agent 配置 | 优势 |
-|------|---------|-----------|------|
-| 个人本地使用 | Web UI + 多 Agent | 不同任务用不同 Agent | 工作空间隔离，模型灵活 |
-| 团队协作 | 飞书 + 多 Agent | 不同机器人绑定不同 Agent | 团队成员各用各的助手 |
-| 快速测试 | 命令行 + 单 Agent | 使用默认 Agent | 配置简单，快速上手 |
-| 服务器环境 | TUI + 多 Agent | 不同项目用不同 Agent | 终端内交互，资源隔离 |
-
-### 典型工作流
-
-**场景：一人公司的日常工作流**
-
-```bash
-# 早上：使用主助手查看日程
-openclaw agents switch main-agent
-openclaw agent --message "显示今天的日程安排"
-
-# 上午：使用代码助手开发布项目
-openclaw agents switch code-agent
-openclaw agent --message "帮我实现用户登录功能"
-
-# 中午：使用研究助手学习新技术
-openclaw agents switch research-agent
-openclaw agent --message "搜集 Rust 语言的学习资料"
-
-# 下午：使用内内容助手写文章节
-openclaw agents switch content-agent
-openclaw agent --message "写一篇关于今天开发布经验的博客"
-
-# 晚上：使用主助手总结一天
-openclaw agents switch main-agent
-openclaw agent --message "生成今日工作总结"
-```
-### 配置技巧
-
-**技巧1：为不同任务使用不同模型**
-
-```json
-{
-  "agents": {
-    "list": [
-      {
-        "id": "chat-agent",
-        "workspace": "/Users/username/chat",
-        "model": { "primary": "anthropic/claude-sonnet-4" }
-      },
-      {
-        "id": "code-agent",
-        "workspace": "/Users/username/code",
-        "model": { "primary": "deepseek/deepseek-chat" }
-      },
-      {
-        "id": "fast-agent",
-        "workspace": "/Users/username/fast",
-        "model": { "primary": "google/gemini-2-flash" }
-      }
-    ]
-  }
-}
-```
-**说明**：
-- Claude Sonnet 4：通用对话和复杂任务
-- DeepSeek：代码生成和技术访问题
-- Gemini Flash：快速响应和简单任务
-
-**技巧2：使用别名简化切换**
-
-```bash
-# 在 ~/.zshrc 或 ~/.bashrc 中添加别名
-alias oc-main='openclaw agents switch main-agent'
-alias oc-code='openclaw agents switch code-agent'
-alias oc-content='openclaw agents switch content-agent'
-alias oc-research='openclaw agents switch research-agent'
-
-# 使用别名快速切换
-oc-code
-openclaw agent --message "帮我写一个排序算法"
-```
-**技巧3：为每个 Agent 配置独立的 Skills**
-
-```bash
-# 为代码助手安装开发布相关的 Skills
-openclaw agents switch code-agent
-clawhub install github-integration
-clawhub install code-review
-
-# 为内内容助手安装写作相关的 Skills
-openclaw agents switch content-agent
-clawhub install grammar-check
-clawhub install seo-optimizer
-```
-### 常见访问题
-
-**访问题1：切换 Agent 后工作空间没变**
-
-```bash
-# 检查当前 Agent
-openclaw agents current
-
-# 检查配置
-openclaw agents config
-
-# 重启网关
-openclaw gateway restart
-```
-**访问题2：找不到 Agent**
-
-```bash
-# 列出所有 Agent
-openclaw agents list
-
-# 检查配置文件
-cat ~/.openclaw/openclaw.json | grep -A 5 "agents"
-```
-**访问题3：Agent 配置验证失败**
-
-```bash
-# 运行诊断
-openclaw doctor
-
-# 自动修复
-openclaw update repair
-openclaw doctor
-```
-### 最佳实践
-
-1. **工作空间隔离**
-   - 为每个 Agent 创建独立的工作空间
-   - 避免不同任务的文件混在一起
-
-2. **模型选择**
-   - 根据任务类型选择合适的模型
-   - 代码任务用 DeepSeek，通用任务用 Claude
-
-3. **定期备份**
-   - 定期备份配置文件
-   - 使用版本控制管理配置
-
-4. **命名规范**
-   - Agent ID 使用有意义的名称
-   - 工作空间路径清晰明确
-
-5. **资源管理**
-   - 合理设置 maxConcurrent
-   - 定期清理不用的会话
-
----
-
-
-## 9.12 OpenClaw Manager - 可视化管理工具
-
-> 💡 **现代化管理界面**：OpenClaw Manager 是一个基于 React + Tailwind CSS 的 Web 管理界面，用于可视化管理多个 OpenClaw Gateway 实例。
-
-### 9.12.1 为什么需要 OpenClaw Manager？
-
-当你使用多 Gateway 架构（每个飞书机器人对应一个独立的 Gateway 实例）时，传统的命令行管理方式会变得繁琐。OpenClaw Manager 提供了：
-
-**核心价值**：
-- 📊 **实时监控**：一目了然查看所有 Gateway 的运行状态
-- 🎮 **一键控制**：启动/停止/重启服务，无需记忆命令
-- ➕ **图形化创建**：通过表单创建新 Gateway，无需手动编辑配置
-- ✏️ **在线编辑**：可视化编辑 Gateway 配置和 Agent 人格
-- ⚙️ **保活配置**：一键配置 launchd 保活服务
-- 📝 **日志查看**：实时查看每个服务的运行日志
-- 💻 **美观界面**：现代化设计，响应式布局
-
-### 9.12.2 功能特性
-
-#### 1. 自动发布现 Gateway 实例 🔍
-
-系统会自动扫描 `~/.openclaw-*` 目附录，读取配置文件并显示所有 Gateway 实例。
-
-**特性**：
-- 自动读取端口、模型、Agent 信息
-- 缓存机制（1分钟 TTL）提升性能
-- 支持手动刷新发布现
-
-#### 2. 创建新 Gateway ➕
-
-通过图形界面创建新的 Gateway 实例，无需手动编辑配置文件。
-
-**配置项**：
-
-**基础信息**：
-- Profile ID：唯一标识符（如 `my-assistant`）
-- 机器人名称：显示名称（如 `我的助手`）
-- 端口号：Gateway 监听端口（建议 18789-18799）
-
-**Agent 配置**：
-- Agent ID：Agent 标识符（如 `main-agent`）
-- AI 模型：
-  - 预设模型：Claude Opus 4.6、Claude Sonnet 4.5、Gemini 2.5 Pro 等
-  - 自定义模型：输入任意模型 ID（如 `gpt-4o`, `deepseek-chat`）
-
-**飞书配置**：
-- App ID：飞书应用 ID（`cli_xxxxxxxxxxxxxxxx`）
-- App Secret：飞书应用密钥
-
-**人格设定 📝**：
-- SOUL.md 编辑器：使用 Markdown 定义 Agent 的角色、性格、专业领域、回答风格
-
-**示例 SOUL.md**：
-
-```markdown
-# 技术顾访问 Agent
-
-## 角色定位
-你是一个资深的技术顾访问，专注于软件架构和系统设计。
-
-## 性格特点
-- 严谨、专业
-- 注重细节和最佳实践
-- 善于分析复杂访问题
-
-## 专业领域
-- 微服务架构
-- 云原生技术
-- DevOps 实践
-- 性能优化
-
-## 回答风格
-- 先理解需求，再提供方案
-- 给出具体可行的建议
-- 必要时提供代码示例和架构图
-- 考虑可扩展性和维护性
-```
-#### 3. 编辑 Gateway ✏️
-
-修改现有 Gateway 的配置和人格设定。
-
-**可修改项**：
-- 机器人名称
-- 端口号
-- Agent ID
-- AI 模型（预设或自定义）
-- 飞书 App ID 和 Secret（可选）
-- SOUL.md 人格设定
-
-**注意事项**：
-- Profile ID 不可修改
-- 飞书密钥留空则不修改
-- 修改后需要重启 Gateway 才能生效
-
-#### 4. 删除 Gateway 🗑️
-
-完全移除 Gateway 实例及其所有配置。
-
-**删除内内容**：
-- Gateway 配置文件
-- Agent 配置目附录
-- SOUL.md 人格文件
-- launchd 保活配置（如果存在）
-
-⚠️ **警告**：删除操作不可恢复，建议先备份重要配置。
-
-#### 5. 服务控制 🎮
-
-**批量操作**：
-- ⚙️ 配置保活：配置 launchd 保活服务（开机自启、崩溃重启）
-- ▶️ 启动所有：启动所有 Gateway 实例
-- ⏹️ 停止所有：停止所有 Gateway 实例
-- 🔄 重启所有：重启所有 Gateway 实例
-
-**单个操作**：
-- ✏️ 编辑：编辑 Gateway 配置
-- 🗑️ 删除：删除 Gateway
-- 📝 日志：查看运行日志
-
-#### 6. 实时状态监控 📊
-
-**显示信息**：
-- 运行状态（运行中/已停止）
-- 端口号
-- 使用的 AI 模型
-- launchd 保活状态
-
-**状态指示**：
-- 🟢 绿色：运行中
-- 🔴 红色：已停止
-- ⚪ 灰色：未知
-
-**自动刷新**：每 10 秒自动刷新状态，可手动点击"刷新状态"按钮。
-
-### 9.12.3 安装和使用
-
-#### 安装步骤
-
-```bash
-# 1. 克隆项目
-git clone https://github.com/xianyu110/openclaw-manager.git
-cd openclaw-manager
-
-# 2. 安装依赖
-npm install
-
-# 3. 启动服务（前端 + 后端）
-npm start
-```
-应用将在以下地址启动：
-- 前端：http://localhost:3000
-- 后端 API：http://localhost:3001
-
-#### 首次使用
-
-1. **启动应用**
-   ```bash
-   npm start
-   ```
-
-2. **打开浏览器**
-   访问 http://localhost:3000
-
-3. **配置保活服务**
-   - 点击"⚙️ 配置保活"按钮
-   - 等待配置完成
-   - 服务将自动开机启动并在崩溃后重启
-
-#### 日常操作
-
-**查看服务状态**：
-- 界面会自动每 10 秒刷新状态
-- 点击"刷新状态"按钮手动刷新
-- 绿色指示灯表示运行中，红色表示已停止
-
-**控制服务**：
-- 启动所有：一键启动所有 Gateway
-- 停止所有：一键停止所有 Gateway
-- 重启所有：一键重启所有 Gateway
-- 单个控制：在服务卡片中点击"重启"按钮
-
-**查看日志**：
-- 点击服务卡片中的"查看日志"按钮
-- 显示最近 100 行日志
-- 支持实时刷新
-
-### 9.12.4 使用场景
-
-#### 场景 1：创建专业领域助手
-
-**需求**：创建一个专注于前端开发布的技术助手
-
-**步骤**：
-1. 点击"➕ 新建 Gateway"
-2. 填写基础信息：
-   - Profile ID: `frontend-expert`
-   - 机器人名称: `前端专家`
-   - 端口: `18793`
-3. 配置 Agent：
-   - Agent ID: `frontend-agent`
-   - 模型: `Claude Sonnet 4.5 Thinking`
-4. 展开人格编辑器，定义专业领域：
-
-```markdown
-# 前端开发布专家
-
-## 角色定位
-你是一个资深的前端开发布工程师，精通现代前端技术栈。
-
-## 专业领域
-- React / Vue / Angular
-- TypeScript
-- Webpack / Vite
-- CSS-in-JS / Tailwind CSS
-- 性能优化
-- 浏览器兼内容性
-
-## 回答风格
-- 提供最新的最佳实践
-- 给出可运行的代码示例
-- 考虑性能和可维护性
-- 推荐合适的工具和库
-```
-5. 填写飞书配置
-6. 点击"创建"
-
-#### 场景 2：使用自定义模型
-
-**需求**：使用 OpenAI 的 GPT-4o 模型
-
-**步骤**：
-1. 在创建或编辑 Gateway 时
-2. 勾选"使用自定义模型"
-3. 输入模型 ID: `gpt-4o`
-4. 确保在 OpenClaw 主配置中已设置 OpenAI API Key
-
-**支持的自定义模型**：
-- OpenAI: `gpt-4o`, `gpt-4o-mini`, `gpt-4-turbo`
-- Anthropic: `claude-3-opus-20240229`, `claude-3-sonnet-20240229`
-- Google: `gemini-2.5-pro`, `gemini-2.5-flash`
-- DeepSeek: `deepseek-chat`, `deepseek-coder`
-- 其他兼内容 OpenAI API 的模型
-
-#### 场景 3：创建多个专业助手
-
-**需求**：为不同团队创建专属助手
-
-**助手配置**：
-
-1. **产品经理助手**
-   - Profile: `product-manager`
-   - 模型: `Claude Opus 4.6`
-   - 人格: 注重用户体验、数据分析、产品规划
-
-2. **设计师助手**
-   - Profile: `designer`
-   - 模型: `Claude Sonnet 4.5`
-   - 人格: 关注视觉设计、用户界面、交互体验
-
-3. **运维工程师助手**
-   - Profile: `devops-engineer`
-   - 模型: `Claude Sonnet 4.5 Thinking`
-   - 人格: 专注系统稳定性、自动化、监控告警
-
-4. **数据分析师助手**
-   - Profile: `data-analyst`
-   - 模型: `Gemini 2.5 Pro`
-   - 人格: 擅长数据处理、可视化、统计分析
-
-### 9.12.5 高级技巧
-
-#### 1. 人格设定最佳实践
-
-**结构化定义**：
-
-```markdown
-# Agent 名称
-
-## 角色定位
-明确定义 Agent 的角色和定位
-
-## 性格特点
-- 列出 3-5 个核心性格特点
-- 保支持一致性
-
-## 专业领域
-- 列出专业技能
-- 明确擅长的领域
-
-## 回答风格
-- 描述回答的方式
-- 设定语气和风格
-
-## 工作流程
-1. 步骤化的工作方式
-2. 确保逻辑清晰
-3. 提供可操作的建议
-
-## 限制和边界
-- 明确不擅长的领域
-- 设定合理的期望
-```
-#### 2. 模型选择建议
-
-**Claude Opus 4.6**：
-- 最强推理能力
-- 适合复杂访问题分析
-- 成本较高
-
-**Claude Sonnet 4.5**：
-- 平衡性能和成本
-- 适合日常对话
-- 推荐用于大多数场景
-
-**Claude Sonnet 4.5 Thinking**：
-- 增强的思考过程
-- 适合需要深度分析的场景
-- 会显示思考步骤
-
-**Gemini 2.5 Flash**：
-- 响应速度快
-- 成本低
-- 适合简单查询和快速响应
-
-**DeepSeek Chat**：
-- 国产模型，成本极低
-- 中文能力强
-- 适合日常对话和简单任务
-
-#### 3. 端口分配建议
-
-**推荐范围**：18789-18799
-
-**示例分配**：
-- 18789: 主助理
-- 18790: 内内容创作
-- 18791: 技术开发布
-- 18792: 数据分析
-- 18793: 产品设计
-- 18794: 运维支持
-- 18795: 客户服务
-- 18796-18799: 预留
-
-### 9.12.6 故障排查
-
-#### 访问题 1：创建 Gateway 失败
-
-**可能原因**：
-- Profile ID 已存在
-- 端口已被占用
-- 缺少必填字段
-
-**解决方法**：
-1. 检查错误提示
-2. 使用不同的 Profile ID
-3. 选择未被占用的端口
-4. 确保所有必填字段已填写
-
-#### 访问题 2：Gateway 无法启动
-
-**可能原因**：
-- 配置文件格式错误
-- 飞书账号配置错误
-- 端口被其他程序占用
-
-**解决方法**：
-1. 检查配置文件语法
-2. 验证飞书 App ID 和 Secret
-3. 使用 `lsof -i :端口号` 检查端口占用
-4. 查看日志文件件排查错误
-
-#### 访问题 3：人格设定不生效
-
-**可能原因**：
-- SOUL.md 文件未保存
-- Gateway 未重启
-- Agent ID 不匹配
-
-**解决方法**：
-1. 确认 SOUL.md 已保存
-2. 重启 Gateway 服务
-3. 检查 Agent ID 是否正确
-4. 查看 `~/.openclaw-{profile}/agent-configs/{agent}/SOUL.md`
-
-#### 访问题 4：后端无法连接
-
-```bash
-# 检查端口占用
-lsof -i :3001
-
-# 手动启动后端
-npm run server
-```
-#### 访问题 5：前端无法访问
-
-```bash
-# 检查端口占用
-lsof -i :3000
-
-# 清除缓存重新启动
-rm -rf node_modules/.vite
-npm start
-```
-### 9.12.7 API 文档
-
-#### 状态查询
-
-**GET /api/status**
-
-获取所有服务的状态信息
-
-响应示例：
-```json
-{
-  "services": [
+  },
+  "bindings": [
     {
-      "id": "main-assistant",
-      "name": "主助理",
-      "port": 18789,
-      "status": "running",
-      "model": "Claude Opus 4.6",
-      "launchd": true
+      "agentId": "main-agent",
+      "match": {
+        "channel": "feishu",
+        "peer": { "kind": "dm", "id": "ou_user_1" }
+      }
+    },
+    {
+      "agentId": "tech-agent",
+      "match": {
+        "channel": "feishu",
+        "peer": { "kind": "dm", "id": "ou_user_2" }
+      }
     }
   ]
 }
 ```
 
-#### 批量操作
+---
 
-- `POST /api/start-all` - 启动所有 Gateway 服务
-- `POST /api/stop-all` - 停止所有 Gateway 服务
-- `POST /api/restart-all` - 重启所有 Gateway 服务
-- `POST /api/setup-launchd` - 配置 launchd 保活服务
+## 9.1.18 Quản lý Đa Agent Cục bộ (Không cần Liên kết Nền tảng Chat)
 
-#### 单个服务操作
+> 💡 **Điểm sáng quan trọng**: Bạn hoàn toàn có thể sử dụng sức mạnh của nhiều Agent chuyên biệt ngay trên máy tính mà không bắt buộc phải kết nối tới bất kỳ ứng dụng nhắn tin nào.
 
-- `POST /api/start/:serviceId` - 启动指定的 Gateway 服务
-- `POST /api/stop/:serviceId` - 停止指定的 Gateway 服务
-- `POST /api/restart/:serviceId` - 重启指定的 Gateway 服务
-- `GET /api/logs/:serviceId` - 获取指定服务的日志（最近 100 行）
+![Giao diện Quản lý Đa Agent Cục bộ - Web UI / CLI / TUI](https://upload.maynor1024.live/file/1770944487857_image-20260213090121654.png)
 
-#### Gateway 管理
+### Ba phương thức tương tác cục bộ:
 
-- `GET /api/gateways` - 获取所有 Gateway 配置
-- `POST /api/gateways` - 创建新的 Gateway
-- `PUT /api/gateways/:profileId` - 更新 Gateway 配置
-- `DELETE /api/gateways/:profileId` - 删除 Gateway
+1. **Giao diện Web UI (Khuyên dùng)**:
+   ```bash
+   openclaw dashboard
+   # Truy cập qua trình duyệt: http://127.0.0.1:18789/?token=YOUR_TOKEN
+   ```
 
-### 9.12.8 最佳实践
+2. **Dòng lệnh CLI (Thích hợp cho kịch bản tự động hóa)**:
+   ```bash
+   # Gửi tin nhắn trực tiếp
+   openclaw agent --message "Hãy phân tích dự án này giúp tôi"
+   
+   # Truyền dữ liệu qua đường ống pipe
+   cat data.txt | openclaw agent --message
+   
+   # Xuất kết quả ra file tài liệu
+   openclaw agent --message "Lập kế hoạch tuần" > plan.md
+   ```
 
-#### 1. 命名规范
+3. **Giao diện dòng lệnh tương tác TUI (Terminal UI)**:
+   ```bash
+   openclaw tui
+   ```
 
-**Profile ID**：
-- 使用小写字母和连字符
-- 描述性命名
-- 例如: `tech-support`, `content-writer`
+### Các lệnh quản trị Agent cục bộ:
 
-**Agent ID**：
-- 与 Profile ID 保支持一致
-- 添加 `-agent` 后缀
-- 例如: `tech-support-agent`
+```bash
+# Liệt kê tất cả Agent có sẵn
+openclaw agents list
 
-#### 2. 人格设定
+# Chuyển đổi Agent đang làm việc
+openclaw agent switch content-agent
 
-**清晰明确**：
-- 使用简洁的语言
-- 避免模糊的描述
-- 提供具体的例子
+# Xem Agent hiện tại
+openclaw agent current
 
-**保支持一致**：
-- 人格特点要统一
-- 回答风格要稳定
-- 避免矛盾的设定
-
-**定期优化**：
-- 根据使用反馈调整
-- 不断完善人格设定
-- 测试不同的配置
-
-#### 3. 安全建议
-
-**保护敏感信息**：
-- 不要在 SOUL.md 中包含密钥
-- 定期更换飞书 App Secret
-- 限制 Gateway 的网络访问
-
-**备份配置**：
-- 定期备份 `~/.openclaw-*` 目附录
-- 保存重要的 SOUL.md 文件
-- 记附录配置变更
-
-### 9.12.9 项目信息
-
-**GitHub 仓库**：https://github.com/xianyu110/openclaw-manager
-
-**技术栈**：
-- 前端：React 18 + Tailwind CSS + Vite
-- 后端：Express + Node.js
-- 状态管理：React Hooks
-- 样式：Tailwind CSS
-
-**许可证**：MIT
-
-**作者**：Maynor (@xianyu110)
-
-**贡献**：
-欢迎提交 Issue 和 Pull Request！
+# Kiểm tra trạng thái hoạt động của hệ thống
+openclaw status
+```
 
 ---
 
-## 9.13 更多 OpenClaw 可视化管理工具
+## 9.12 OpenClaw Manager - Công cụ Quản lý Trực quan
 
-除了 OpenClaw Manager，社区还有以下两款优秀的可视化工具可选：
+> 💡 **Giao diện quản trị hiện đại**: OpenClaw Manager là bảng điều khiển Web xây dựng bằng React 18 và Tailwind CSS, giúp trực quan hóa việc theo dõi và kiểm soát nhiều phiên Gateway cùng lúc.
 
----
+### 9.12.1 Các Tính năng Cốt lõi
+- 📊 **Giám sát thời gian thực**: Nắm bắt tình trạng vận hành, mức tiêu thụ tài nguyên và cổng mạng của từng Gateway.
+- 🎮 **Điều khiển một chạm**: Bật, tắt, khởi động lại toàn bộ hoặc từng Gateway chỉ bằng một cú nhấp chuột.
+- ➕ **Khởi tạo trực quan**: Tạo mới Gateway và thiết lập Bot bằng form biểu mẫu dễ hiểu, không cần gõ file JSON.
+- ✏️ **Biên tập tính cách (SOUL.md)**: Chỉnh sửa trực tiếp chân dung, phong cách trả lời và ranh giới chuyên môn của Agent.
+- 📝 **Nhật ký tích hợp**: Theo dõi log thời gian thực của từng bot ngay trên trình duyệt.
 
-### 9.13.1 ClawX —— 开源 AI 研究助手
+### 9.12.2 Cài đặt và Khởi chạy OpenClaw Manager
 
-> 项目地址：https://clawx.dev/ | GitHub：https://github.com/ValueCell-ai/ClawX
+```bash
+# 1. Clone kho mã nguồn
+git clone https://github.com/xianyu110/openclaw-manager.git
+cd openclaw-manager
 
-**ClawX** 是由 ValueCell 团队开发布的开源桌面应用，在本地运行，专注于 AI 自主任务执行和多平台通知推送。
+# 2. Cài đặt các gói phụ thuộc
+npm install
 
-**核心功能**：
-
-| 功能 | 说明 |
-|------|------|
-| 24/7 自主运行 | 支持续监控和执行任务，无需人工干预 |
-| 20+ 通讯平台通知 | 支持 WhatsApp、Telegram、Slack、Discord 等 |
-| 数据聚合 | 跨多个来源进行网页抓取和数据收集 |
-| 计划任务 | 基于 Cron 的定时监控功能 |
-| 多 AI 供应商 | 兼内容 OpenAI、Anthropic、Google 等 10+ 个提供商 |
-
-**技术特点**：
-- TypeScript + React 开发布，支持 macOS / Windows / Linux
-- 本地优先存储，数据不上云
-- 兼内容 OpenClaw 生态 55+ 扩展技能
-- MIT 开源，完全免费，只需支付 AI 提供商 API 费用
-
-**获取方式**：访问 [GitHub Releases](https://github.com/ValueCell-ai/ClawX/releases) 下载对应平台安装包。
+# 3. Khởi chạy đồng thời frontend và backend
+npm run dev
+```
+Mở trình duyệt tại `http://localhost:5173` để trải nghiệm bảng điều khiển.
 
 ---
 
-### 9.13.2 ClawPanel —— OpenClaw 可视化管理面板
+## 9.13 Các Công cụ Quản lý Trực quan Khác trong Cộng đồng
 
-> 项目地址：https://claw.qt.cool/ | GitHub：https://github.com/qingchencloud/clawpanel
-
-**ClawPanel** 是基于 Tauri v2 构建的跨平台桌面管理面板（当前版本 v0.7.0），专为 OpenClaw Gateway 和多 Agent 日常管理而设计。
-
-**核心功能**：
-
-| 功能 | 说明 |
-|------|------|
-| Dashboard 监控 | 实时查看 Gateway 状态、服务状态、Agent 数量、模型池 |
-| AI 对话界面 | 多模型流式对话，WebSocket 连接 Gateway |
-| 模型配置 | 统一管理 OpenAI、DeepSeek、Kimi 等多个 AI 服务商 |
-| 记忆管理 | 可视化编辑 Agent 工作记忆、归档、核心配置文件 |
-| 多 Agent 管理 | 创建和管理多个 Agent，工作空间隔离 |
-| 工具权限控制 | 细粒度工具权限管理，Token/密码认证 |
-| 内置 AI 助手 | 一键安装 OpenClaw、配置诊断、自动化故障排查 |
-
-**平台支持**：
-- macOS（Apple Silicon + Intel）
-- Windows（.exe / .msi）
-- Linux（AppImage / .deb）
-
-**获取方式**：访问 [GitHub Releases](https://github.com/qingchencloud/clawpanel/releases/latest) 下载，MIT 开源免费。
+Ngoài OpenClaw Manager, cộng đồng mã nguồn mở còn phát triển thêm các tiện ích quản trị xuất sắc:
 
 ---
 
-### 9.13.3 三款工具对比
+### 9.13.1 ClawX —— Trợ lý Nghiên cứu AI Mã Nguồn Mở
 
-| 工具 | 定位 | 适合场景 |
-|------|------|---------|
-| OpenClaw Manager | Web 管理界面，多 Gateway 管理 | 多飞书机器人、多 Gateway 场景 |
-| ClawX | 桌面应用，自主任务 + 多平台通知 | 定时任务、数据监控、推送通知 |
-| ClawPanel | 桌面管理面板，全功能可视化 | 日常管理 Gateway、多 Agent、模型配置 |
+> Trang chủ: https://clawx.dev/ | GitHub: https://github.com/ValueCell-ai/ClawX
 
-三款工具均免费开源，可以根据自己的使用场景选择或组合使用。
+**ClawX** là ứng dụng desktop phát triển bởi đội ngũ ValueCell, hoạt động hoàn toàn cục bộ trên máy tính, tập trung vào khả năng tự động thực thi tác vụ kéo dài 24/7 và đẩy thông báo đa nền tảng.
 
----
-
-## 📝 本章节小结
-
-通过本章节学习，你已经掌握：
-
-1. **飞书Bot配置**：完整的飞书机器人创建和配置流程
-2. **企业微信Bot**：企业微信机器人的配置方法
-3. **钉钉Bot配置**：钉钉机器人的接入步骤
-4. **QQ Bot配置**：QQ机器人的详细配置
-5. **Discord Bot**：Discord机器人的参考配置
-6. **平台对比**：各平台的功能对比和选择建议
-7. **多Agent配置**：高级的多Agent管理和配置
-8. **本地多Agent**：无需绑定IM平台的本地使用
-9. **OpenClaw Manager**：可视化管理工具的使用
-10. **ClawX / ClawPanel**：更多开源可视化管理工具选择
-
-## 🎯 实战练习
-
-1. 配置一个飞书机器人并测试基本功能
-2. 尝试配置多个Agent，为不同场景使用不同模型
-3. 使用 OpenClaw Manager创建和管理多个Gateway
-4. 为每个Agent定制专属的人格设定
-5. 配置launchd保活服务，实现开机自启
-6. 试用 ClawPanel 或 ClawX，找到最适合自己的管理方式
-
-## 💡 进阶建议
-
-1. 探索更多IM平台的集成方式
-2. 优化Agent的人格设定，提升使用体验
-3. 使用 OpenClaw Manager / ClawPanel 简化日常管理
-4. 为团队成员创建专属的AI助手
-5. 定期备份配置，避免数据丢失
+**Các tính năng nổi bật**:
+- **Tự vận hành 24/7**: Giám sát và thực thi tác vụ định kỳ liên tục không cần con người can thiệp.
+- **Hơn 20 kênh thông báo**: Hỗ trợ đẩy cảnh báo tức thì tới WhatsApp, Telegram, Slack, Discord.
+- **Thu thập dữ liệu thông minh**: Cào dữ liệu web và tổng hợp thông tin đa nguồn.
+- **Tương thích toàn diện**: Hỗ trợ các mô hình từ OpenAI, Anthropic, Google cùng hơn 55+ Skills trong hệ sinh thái OpenClaw.
 
 ---
 
-**下一章节预告**：第10章节将学习API集成，包括如何对接各种第三方服务，实现更强大的自动化功能。
+### 9.13.2 ClawPanel —— Bảng Điều khiển Trực quan Đa Nền tảng
 
-**返回目附录**：[README](../../README.md)
+> Trang chủ: https://claw.qt.cool/ | GitHub: https://github.com/qingchencloud/clawpanel
 
+**ClawPanel** là ứng dụng desktop xây dựng trên nền tảng Tauri v2 (Rust + Webview), mang lại tốc độ phản hồi cực nhanh và chiếm dụng bộ nhớ siêu nhẹ.
+
+**Tính năng cốt lõi**:
+- **Bảng điều khiển trực quan**: Giám sát trạng thái Gateway, số lượng Agent và bộ nhớ đệm.
+- **Khung chat đa mô hình**: Trò chuyện trực tiếp bằng WebSocket với các mô hình AI.
+- **Quản lý tri thức và bộ nhớ**: Chỉnh sửa trực quan bộ nhớ làm việc, tài liệu lưu trữ và file cấu hình.
+- **Phân quyền công cụ chi tiết**: Thiết lập ranh giới an toàn cho các lệnh thực thi nhạy cảm.
 
 ---
 
-## 🌐 在线阅读
+### 9.13.3 Bảng so sánh 3 công cụ quản trị trực quan
 
-📖 **想在线阅读此章节节？**
+| Tiện ích | Định dạng | Điểm mạnh nhất | Kịch bản khuyên dùng |
+|---|---|---|---|
+| **OpenClaw Manager** | Ứng dụng Web | Quản lý đa Gateway, đa Bot Lark/Feishu | Quản lý tập trung nhiều tiến trình bot trên máy chủ |
+| **ClawX** | Ứng dụng Desktop | Tác vụ tự động 24/7, đẩy thông báo đa kênh | Giám sát dữ liệu, thu thập tin tức, lập lịch trình |
+| **ClawPanel** | Ứng dụng Desktop (Tauri) | Gọn nhẹ, toàn diện, quản lý bộ nhớ trực quan | Sử dụng hàng ngày trên máy tính cá nhân (macOS/Win/Linux) |
 
-[🔗 在线阅读此章节节](https://awesome.tryopenclaw.asia/docs/03-advanced/09-multi-platform-integration/)
+---
 
-访问网站获取更好的阅读体验：
-- 📱 响应式设计，支持手机、平板、电脑
--  支持黑暗模式，保护眼睛
-- 🔍 内置搜索功能，快速定位内内容
-- 📋 目附录导航，轻松跳转章节节
+## 📝 Tóm tắt Chương
 
-[🏠 访问完整教网站](https://awesome.tryopenclaw.asia)
+Qua chương này, bạn đã làm chủ:
+
+1. **Cấu hình Bot Lark / Feishu**: Quy trình tạo ứng dụng, cấp quyền, cấu hình kết nối dài WebSocket và thiết lập bảo mật.
+2. **Cấu hình Đa nền tảng**: Tích hợp với WeCom (WeChat Doanh nghiệp), DingTalk (Alibaba), Discord, Telegram và QQ.
+3. **Mô hình Đa Bot Đa Agent**: Xây dựng đội ngũ trợ lý AI chuyên biệt, phân tách rõ ràng vai trò và mô hình.
+4. **Sử dụng Cục bộ**: Khai thác sức mạnh của nhiều Agent qua Web UI, CLI và TUI mà không cần mạng xã hội.
+5. **Công cụ Quản trị Trực quan**: Tối ưu hóa vận hành bằng OpenClaw Manager, ClawPanel và ClawX.
+
+---
+
+## 🎯 Bài tập Thực hành
+
+1. Tạo một bot trên Lark/Feishu và hoàn thành kiểm thử đối thoại cơ bản.
+2. Thử nghiệm cấu hình 2 Agent với 2 mô hình khác nhau để so sánh phong cách trả lời.
+3. Trải nghiệm bảng điều khiển cục bộ Dashboard v2 qua trình duyệt web.
+4. Tùy biến tệp `SOUL.md` để xây dựng một trợ lý có phong cách chuyên môn riêng cho công việc của bạn.
+
+---
+
+## 💡 Lời khuyên Nâng cao
+
+1. Ưu tiên sử dụng Lark/Feishu khi xây dựng trợ lý cho đội ngũ công nghệ nhờ khả năng hỗ trợ WebSocket và thẻ tương tác tuyệt vời.
+2. Định kỳ sao lưu thư mục `~/.openclaw` trước khi thay đổi các cấu hình quan trọng.
+3. Sử dụng các công cụ quản lý trực quan để giảm tải việc ghi nhớ các câu lệnh terminal phức tạp.
+
+---
+
+[🏠 Quay lại Bảng mục lục chính](../../README.md)

@@ -1,216 +1,212 @@
-# 🔍 搜索功能使用指南
+# 🔍 Hướng dẫn Sử dụng Tính năng Tìm kiếm
 
-> 本教程的搜索功能专注于标题搜索，帮助你快速找到需要的章节
-
----
-
-## 📖 搜索说明
-
-### 搜索范围
-
-本站搜索功能**仅搜索文档标题**，不搜索正文内容。这样设计的原因：
-
-- ✅ **更精准**：直接定位到章节标题
-- ✅ **更快速**：搜索速度更快
-- ✅ **更清晰**：结果更容易理解
-
-### 支持的内容
-
-搜索覆盖以下内容的标题：
-
-- 📚 **15章正文**：第1-15章的所有标题
-- 📖 **8个附录**：附录A-H的标题
-- 💡 **示例文档**：examples目录下的文档标题
-- 📄 **其他页面**：README、学习路径等
+> Tính năng tìm kiếm trên trang tài liệu này tập trung vào tìm kiếm theo tiêu đề đề mục, giúp bạn định vị nhanh chóng các chương và nội dung cần tra cứu.
 
 ---
 
-## 🎯 搜索技巧
+## 📖 Cơ chế Tìm kiếm
 
-### 1. 使用关键词
+### Phạm vi tìm kiếm
 
-**推荐做法**：
-✅ 飞书
-✅ 配置
-✅ Skills
-✅ 问题
-✅ API
+Công cụ tìm kiếm trên trang **chỉ quét tiêu đề các đề mục trong tài liệu**, không tìm kiếm toàn bộ nội dung chi tiết trong bài viết. Ưu điểm của thiết kế này:
 
+- ✅ **Chính xác hơn**: Dẫn thẳng tới đúng đề mục và chương liên quan
+- ✅ **Nhanh chóng hơn**: Tốc độ phản hồi tức thì
+- ✅ **Rõ ràng hơn**: Danh sách kết quả gọn gàng, trực quan và dễ nắm bắt
 
-**不推荐**：
-❌ 如何配置飞书Bot（太长）
-❌ 我想知道怎么安装（口语化）
+### Các nội dung được hỗ trợ
 
+Công cụ tìm kiếm bao phủ toàn bộ tiêu đề của:
 
-### 2. 中文搜索
+- 📚 **15 chương nội dung chính**: Tất cả các tiêu đề từ Chương 1 đến Chương 15
+- 📖 **Các phụ lục**: Tiêu đề của các Phụ lục từ A đến N
+- 💡 **Tài liệu ví dụ**: Tiêu đề tài liệu trong thư mục `examples/`
+- 📄 **Các trang chuyên đề khác**: README, Lộ trình học tập (LEARNING-PATH)...
 
-支持中文关键词搜索：
+---
+
+## 🎯 Mẹo Tìm kiếm Hiệu quả
+
+### 1. Sử dụng từ khóa ngắn gọn
+
+**Khuyên dùng**:
+✅ `Feishu` hoặc `Lark`  
+✅ `Cấu hình`  
+✅ `Skills`  
+✅ `Lỗi` hoặc `Sự cố`  
+✅ `API`  
+
+**Không khuyên dùng**:
+❌ `Làm thế nào để cấu hình bot Lark` (quá dài dòng)  
+❌ `Tôi muốn biết cách cài đặt` (văn phong khẩu ngữ)  
+
+### 2. Tìm kiếm bằng tiếng Việt
+
+Hỗ trợ gõ từ khóa tiếng Việt có dấu hoặc không dấu:
 
 ```text
-飞书 → 找到所有包含"飞书"的标题
-配置 → 找到所有包含"配置"的标题
-问题 → 找到所有包含"问题"的标题
+Cấu hình → Tìm tất cả các tiêu đề có chứa từ "Cấu hình"
+Lỗi → Tìm tất cả các tiêu đề có chứa từ "Lỗi"
+Bộ nhớ → Tìm tất cả các tiêu đề có chứa từ "Bộ nhớ"
 ```
 
-### 3. 英文搜索
+### 3. Tìm kiếm bằng thuật ngữ kỹ thuật tiếng Anh
 
-支持英文关键词搜索：
+Hỗ trợ đầy đủ các thuật ngữ tiếng Anh:
 
 ```text
-API → 找到所有包含"API"的标题
-Skills → 找到所有包含"Skills"的标题
-Bot → 找到所有包含"Bot"的标题
+API → Tìm tất cả các tiêu đề chứa "API"
+Skills → Tìm tất cả các tiêu đề chứa "Skills"
+Bot → Tìm tất cả các tiêu đề chứa "Bot"
+Gateway → Tìm tất cả các tiêu đề chứa "Gateway"
 ```
 
-### 4. 组合搜索
+### 4. Tìm kiếm kết hợp nhiều từ khóa
 
-使用空格分隔多个关键词：
+Dùng dấu cách giữa các từ khóa để thu hẹp kết quả:
 
 ```text
-飞书 配置 → 找到同时包含"飞书"和"配置"的标题
-API 问题 → 找到同时包含"API"和"问题"的标题
+Lark Cấu hình → Tìm các tiêu đề chứa đồng thời "Lark" và "Cấu hình"
+API Lỗi → Tìm các tiêu đề chứa cả "API" và "Lỗi"
 ```
 
-### 5. 模糊匹配
+### 5. Khớp tiền tố (Prefix Matching)
 
-搜索支持前缀匹配：
+Hỗ trợ tìm kiếm theo tiền tố của từ:
 
 ```text
-配 → 可以匹配"配置"
-问 → 可以匹配"问题"
-Ski → 可以匹配"Skills"
+Cấu → Có thể khớp với "Cấu hình"
+Ski → Có thể khớp với "Skills"
+Mem → Có thể khớp với "Memory"
 ```
 
 ---
 
-## 💡 搜索示例
+## 💡 Ví dụ Tìm kiếm Cụ thể
 
-### 示例1：查找飞书相关内容
+### Ví dụ 1: Tìm nội dung liên quan đến Lark / Feishu
 
-**搜索词**：`飞书`
+**Từ khóa**: `Feishu` hoặc `Lark`
 
-**预期结果**：
-- 第9章：多平台集成（飞书/企微/钉钉/QQ一键接入）
-- 飞书Bot配置
-- 飞书配置检查清单
-- 等等...
+**Kết quả dự kiến**:
+- Chương 9: Tích hợp Đa Nền tảng (Lark/Feishu, DingTalk, WeCom, Telegram, Discord)
+- Cấu hình Bot Lark / Feishu
+- Danh sách Kiểm tra Cấu hình Bot Lark / Feishu
+- Và các mục liên quan...
 
-### 示例2：查找配置相关内容
+### Ví dụ 2: Tìm nội dung về Cấu hình
 
-**搜索词**：`配置`
+**Từ khóa**: `Cấu hình`
 
-**预期结果**：
-- 第2章：5分钟完成部署
-- 第11章：高级配置
-- 附录H：配置文件模板
-- 等等...
+**Kết quả dự kiến**:
+- Chương 2: Cài đặt và Môi trường
+- Chương 11: Cấu hình Nâng cao
+- Phụ lục H: Mẫu Tệp Cấu hình Chuẩn
+- Hướng dẫn Cấu trúc Tệp Cấu hình...
 
-### 示例3：查找问题解决
+### Ví dụ 3: Tìm cách khắc phục sự cố
 
-**搜索词**：`问题`
+**Từ khóa**: `Lỗi` hoặc `Sự cố`
 
-**预期结果**：
-- 附录E：常见问题速查
-- 故障排查相关章节
-- 等等...
+**Kết quả dự kiến**:
+- Phụ lục E: Tra cứu Lỗi Thường gặp
+- Các mục hướng dẫn chẩn đoán và khắc phục sự cố...
 
-### 示例4：查找Skills相关
+### Ví dụ 4: Tìm nội dung về Skills
 
-**搜索词**：`Skills`
+**Từ khóa**: `Skills`
 
-**预期结果**：
-- 第8章：Skills扩展
-- 附录B：必装Skills清单
-- Skills开发示例
-- 等等...
+**Kết quả dự kiến**:
+- Chương 8: Mở rộng Skills
+- Phụ lục B: Danh mục Skills Khuyên dùng
+- Hệ sinh thái Skills của OpenClaw...
 
 ---
 
-## 🚀 高级功能
+## 🚀 Các Tính năng Nâng cao
 
-### 实时搜索
+### Tìm kiếm thời gian thực (Real-time Search)
 
-输入2个字符后，搜索会自动开始（延迟300ms），无需点击搜索按钮。
+Sau khi bạn gõ từ 2 ký tự trở lên, hệ thống sẽ tự động quét và trả về kết quả (độ trễ khoảng 300ms) mà không cần phải nhấn phím Enter.
 
-### 结果高亮
+### Đánh dấu nổi bật (Highlighting)
 
-搜索结果中，匹配的关键词会用黄色背景高亮显示。
+Trong danh sách kết quả trả về, các từ khóa khớp với nội dung tìm kiếm sẽ được làm nổi bật với nền màu vàng nhạt giúp bạn dễ nhìn thấy.
 
-### 分类标签
+### Nhãn phân loại tài liệu
 
-搜索结果会显示内容分类：
-- 📚 文档 - docs目录下的文档
-- 📖 附录 - appendix目录下的附录
-- 💡 示例 - examples目录下的示例
+Mỗi kết quả đều đi kèm nhãn danh mục nguồn:
+- 📚 Tài liệu - Các bài hướng dẫn trong thư mục `docs/`
+- 📖 Phụ lục - Các tài liệu bổ trợ trong thư mục `appendix/`
+- 💡 Ví dụ - Các file mẫu cấu hình trong thư mục `examples/`
 
-### URL参数搜索
+### Tìm kiếm trực tiếp qua tham số URL
 
-可以通过URL参数直接搜索：
+Bạn có thể tạo liên kết tìm kiếm nhanh bằng tham số query URL:
 
 ```yaml
-https://your-site.com/search?q=飞书
+https://your-site.com/search?q=Feishu
 ```
 
 ---
 
-## ❓ 常见问题
+## ❓ Câu hỏi Thường gặp
 
-### Q1：为什么搜索不到某些内容？
+### Q1: Vì sao tôi tìm một đoạn văn bản mà không thấy kết quả?
 
-**A**：搜索只匹配标题，不搜索正文内容。如果标题中没有你搜索的关键词，就不会出现在结果中。
+**Trả lời**: Hệ thống chỉ tìm kiếm trên tiêu đề đề mục, không tìm trên nội dung chi tiết từng đoạn văn bản. Nếu từ khóa không xuất hiện trong các dòng tiêu đề, kết quả sẽ không hiển thị.
 
-**解决方案**：
-- 尝试使用标题中可能出现的关键词
-- 查看目录，找到相关章节
-- 使用浏览器的页内搜索（Ctrl+F / Cmd+F）
+**Cách xử lý**:
+- Thử tìm bằng các danh từ kỹ thuật lớn có khả năng nằm ở tiêu đề
+- Xem lướt bảng mục lục chính để định vị chương phù hợp
+- Sử dụng phím tắt tìm kiếm trên trang của trình duyệt (`Ctrl+F` hoặc `Cmd+F`) khi đang ở trong bài viết
 
-### Q2：搜索结果太多怎么办？
+### Q2: Kết quả tìm kiếm trả về quá nhiều thì làm thế nào?
 
-**A**：使用更具体的关键词，或组合多个关键词。
+**Trả lời**: Hãy kết hợp từ 2 từ khóa trở lên để thu hẹp phạm vi.
 
-**示例**：
-❌ 配置 → 结果太多
-✅ 飞书 配置 → 结果更精准
+**Ví dụ**:
+❌ `Cấu hình` → Kết quả quá rộng  
+✅ `Feishu Cấu hình` → Kết quả chính xác và thu hẹp đúng nội dung cần tìm  
 
+### Q3: Không tìm thấy kết quả hoặc kết quả quá ít?
 
-### Q3：搜索结果太少或没有结果？
+**Trả lời**: Hãy thử các cách sau:
 
-**A**：尝试以下方法：
-
-1. **使用更短的关键词**
-   ```
-   ❌ 飞书Bot配置 → 可能没结果
-   ✅ 飞书 → 有结果
-   ```
-
-2. **检查拼写**
-   ```
-   ❌ Skils → 拼写错误
-   ✅ Skills → 正确
+1. **Rút ngắn từ khóa tìm kiếm**
+   ```text
+   ❌ Cách thiết lập bot feishu nhận tin nhắn → Có thể không thấy kết quả
+   ✅ Feishu → Có ngay kết quả liên quan
    ```
 
-3. **使用同义词**
+2. **Kiểm tra chính tả**
+   ```text
+   ❌ Skils → Sai chính tả
+   ✅ Skills → Chuẩn xác
    ```
-   问题 = 故障 = 错误
-   配置 = 设置
+
+3. **Dùng từ đồng nghĩa**
+   ```text
+   Sự cố = Lỗi = Vấn đề = Troubleshooting
+   Cấu hình = Thiết lập = Config
    ```
 
-### Q4：搜索速度慢？
+### Q4: Tốc độ tải tìm kiếm có bị chậm không?
 
-**A**：首次加载时需要下载搜索索引（约几KB），之后搜索会很快。如果持续慢，请：
+**Trả lời**: Ở lần tải đầu tiên, trình duyệt cần tải tệp chỉ mục tìm kiếm (chỉ khoảng vài chục KB), từ các lần tìm sau kết quả sẽ hiện ra ngay lập tức. Nếu thấy chậm bất thường:
 
-1. 刷新页面
-2. 清除浏览器缓存
-3. 检查网络连接
+1. Tải lại trang (F5 hoặc `Cmd+R`)
+2. Xóa cache trình duyệt
+3. Kiểm tra lại đường truyền mạng Internet
 
 ---
 
-## 📚 相关资源
+## 📚 Tài liệu Tham khảo Liên quan
 
-- [教程目录](../README.md#教程目录)
-- [学习路径](../LEARNING-PATH.md)
-- [常见问题](../appendix/E-common-problems.md)
+- [Bảng Mục lục Giáo trình](../README.md#mục-lục-toàn-bộ-giáo-trình)
+- [Lộ trình Học tập Toàn diện](../LEARNING-PATH.md)
+- [Tra cứu Lỗi Thường gặp](../appendix/E-common-problems.md)
 
 ---
 
-**最后更新**：2026年2月14日
+**Cập nhật lần cuối**: 14/02/2026

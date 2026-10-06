@@ -1,258 +1,264 @@
-# 飞书Bot配置检查清单
+# Danh sách Kiểm tra Cấu hình Bot Lark / Feishu
 
-> ✅ 使用本清单确保飞书Bot配置完整，避免常见问题
-
----
-
-## 📋 配置前准备
-
-- [ ] 已安装 OpenClaw（版本 2026.3.2+）
-- [ ] 已注册飞书开放平台账号
-- [ ] 已创建企业/团队（个人也可以）
-- [ ] 网络可以访问飞书开放平台
+> ✅ Sử dụng danh sách kiểm tra (checklist) này để đảm bảo bot Lark / Feishu được cấu hình đầy đủ, chuẩn xác và tránh các lỗi thường gặp trong quá trình vận hành.
 
 ---
 
-## 🔧 应用创建（飞书开放平台）
+## 📋 Chuẩn bị trước khi cấu hình
 
-### 1. 创建应用
+- [ ] Đã cài đặt OpenClaw (phiên bản 2026.3.2+ trở lên)
+- [ ] Đã đăng ký tài khoản trên Nền tảng Mở Lark / Feishu (Lark Open Platform / Feishu Open Platform)
+- [ ] Đã tạo tổ chức/doanh nghiệp (tài khoản cá nhân cũng có thể tạo tổ chức riêng để thử nghiệm)
+- [ ] Mạng Internet có thể kết nối bình thường đến máy chủ Nền tảng Mở Lark / Feishu
 
-- [ ] 登录飞书开放平台：https://open.feishu.cn
-- [ ] 点击"创建企业自建应用"
-- [ ] 填写应用信息：
-  - [ ] 应用名称（如：OpenClaw助手）
-  - [ ] 应用描述
-  - [ ] 应用图标
-- [ ] 记录 App ID 和 App Secret
+---
 
-### 2. 配置机器人
+## 🔧 Tạo ứng dụng (Trên Nền tảng Mở Lark / Feishu)
 
-- [ ] 进入"应用功能" → "机器人"
-- [ ] 启用机器人功能
-- [ ] 设置机器人名称
-- [ ] 设置机器人描述
-- [ ] 上传机器人头像
+### 1. Tạo ứng dụng mới
 
-### 3. 配置权限（⭐ 重要）
+- [ ] Đăng nhập Nền tảng Mở Feishu (https://open.feishu.cn) hoặc Lark (https://open.larksuite.com)
+- [ ] Nhấp chọn "Tạo ứng dụng tùy chỉnh cho doanh nghiệp" (Custom App)
+- [ ] Điền thông tin ứng dụng:
+  - [ ] Tên ứng dụng (Ví dụ: `Trợ lý OpenClaw`)
+  - [ ] Mô tả ứng dụng
+  - [ ] Tải lên biểu tượng (Icon) đại diện
+- [ ] Ghi lại và lưu trữ an toàn `App ID` cùng `App Secret`
 
-在"权限管理"页面，添加以下权限：
+### 2. Cấu hình tính năng Bot (Robot)
 
-#### 必需权限（缺一不可）
+- [ ] Truy cập mục "Tính năng ứng dụng" (App Features) → "Bot" (Robot)
+- [ ] Bật tính năng Bot
+- [ ] Đặt tên hiển thị cho Bot
+- [ ] Cập nhật mô tả hoạt động của Bot
+- [ ] Tải lên ảnh đại diện (Avatar) cho Bot
 
-- [ ] `im:message` - 获取与发送单聊、群组消息
-- [ ] `im:message:send_as_bot` - 以应用身份发消息
-- [ ] `contact:contact.base:readonly` - 获取通讯录基本信息 ⭐
+### 3. Cấu hình quyền hạn (⭐ CỰC KỲ QUAN TRỌNG)
 
-> ⚠️ **特别注意**：`contact:contact.base:readonly` 是最容易遗漏的权限！
+Trong trang "Quản lý quyền hạn" (Permissions), thêm đầy đủ các quyền sau:
+
+#### Quyền hạn bắt buộc (Thiếu một quyền bot sẽ không hoạt động)
+
+- [ ] `im:message` - Đọc và gửi tin nhắn trong cuộc trò chuyện 1-1 và nhóm chat
+- [ ] `im:message:send_as_bot` - Gửi tin nhắn dưới danh nghĩa ứng dụng bot
+- [ ] `contact:contact.base:readonly` - Đọc thông tin cơ bản từ danh bạ doanh nghiệp ⭐
+
+> ⚠️ **Đặc biệt lưu ý**: Quyền `contact:contact.base:readonly` là quyền thường xuyên bị bỏ sót nhất!
 > 
-> 如果缺少此权限：
-> - ❌ 机器人无法识别用户
-> - ❌ 无法响应任何消息
-> - ❌ 日志中会出现 "User not found" 错误
+> Nếu thiếu quyền này:
+> - ❌ Bot hoàn toàn không nhận diện được danh tính người gửi
+> - ❌ Không thể phản hồi bất kỳ tin nhắn nào
+> - ❌ Trong nhật ký hệ thống (logs) sẽ liên tục báo lỗi "User not found"
 
-#### 可选权限（根据需要添加）
+#### Quyền hạn tùy chọn (Bổ sung tùy theo nhu cầu thực tế)
 
-- [ ] `im:message:group_at_msg:readonly` - 获取群组中@机器人的消息
-- [ ] `im:message:group_msg:readonly` - 获取群组消息
-- [ ] `im:chat` - 获取群组信息
-- [ ] `contact:user.base:readonly` - 获取用户详细信息
+- [ ] `im:message:group_at_msg:readonly` - Đọc tin nhắn có @ nhắc đến bot trong nhóm chat
+- [ ] `im:message:group_msg:readonly` - Đọc toàn bộ tin nhắn trong nhóm chat
+- [ ] `im:chat` - Đọc thông tin chi tiết của nhóm chat
+- [ ] `contact:user.base:readonly` - Đọc thông tin chi tiết nâng cao của người dùng
 
-### 4. 配置事件订阅
+### 4. Cấu hình đăng ký sự kiện (Event Subscription)
 
-在"事件订阅"页面：
+Tại trang "Đăng ký sự kiện" (Event Subscriptions):
 
-- [ ] 选择"使用长连接接收事件"（WebSocket 模式）
-- [ ] 添加事件：`im.message.receive_v1`（接收消息）
-- [ ] 确认长连接状态显示"已连接"
+- [ ] Chọn phương thức "Sử dụng kết nối dài để nhận sự kiện" (chế độ WebSocket / Long Connection)
+- [ ] Thêm sự kiện: `im.message.receive_v1` (Nhận tin nhắn)
+- [ ] Xác nhận trạng thái kết nối dài hiển thị "Đã kết nối" (Connected)
 
-> 💡 **提示**：如果长连接无法建立，请先完成下面的 OpenClaw 配置步骤
+> 💡 **Mẹo nhỏ**: Nếu kết nối dài chưa thể thiết lập ngay, hãy hoàn thành các bước cấu hình OpenClaw phía dưới trước rồi quay lại kiểm tra.
 
-### 5. 发布应用
+### 5. Phát hành phiên bản ứng dụng
 
-- [ ] 点击"版本管理与发布"
-- [ ] 创建版本
-- [ ] 填写版本说明
-- [ ] 提交审核（企业自建应用通常自动通过）
-- [ ] 确认应用状态为"已发布"
+- [ ] Nhấp vào mục "Quản lý phiên bản và phát hành" (Version Management & Release)
+- [ ] Tạo phiên bản mới (Create a version)
+- [ ] Điền ghi chú mô tả phiên bản
+- [ ] Gửi phê duyệt (với ứng dụng nội bộ doanh nghiệp tự xây dựng, hệ thống thường tự động duyệt ngay)
+- [ ] Xác nhận trạng thái ứng dụng chuyển sang "Đã phát hành" (Published)
 
-### 6. 设置可用范围
+### 6. Cấu hình phạm vi khả dụng (Availability)
 
-- [ ] 在"可用性"页面设置可用范围
-- [ ] 添加可使用的部门或成员
-- [ ] 或选择"全员可用"
+- [ ] Trong trang "Phạm vi khả dụng" (Availability), thiết lập người dùng được phép tương tác với bot
+- [ ] Thêm các phòng ban hoặc thành viên cụ thể
+- [ ] Hoặc chọn "Toàn thể thành viên trong doanh nghiệp" (All members)
 
 ---
 
-## 💻 OpenClaw 配置
+## 💻 Cấu hình phía OpenClaw
 
-### 1. 添加飞书渠道
+### 1. Thêm kênh kết nối Lark / Feishu
 
 ```bash
-# 运行添加渠道命令
+# Chạy lệnh thêm kênh
 openclaw channels add
 
-# 选择 Feishu
-# 输入 App ID
-# 输入 App Secret
-```text
-**检查配置**：
+# Chọn Feishu (hoặc Lark)
+# Nhập App ID
+# Nhập App Secret
+```
+
+**Kiểm tra lại cấu hình**:
+
 ```bash
-# 查看渠道列表
+# Xem danh sách các kênh kết nối
 openclaw channels list
 
-# 应该看到 feishu 渠道
-```text
-### 2. 启动网关
+# Đảm bảo nhìn thấy kênh feishu trong danh sách
+```
+
+### 2. Khởi chạy Gateway
 
 ```bash
-# 启动网关
+# Khởi động Gateway
 openclaw gateway start
 
-# 检查状态
+# Kiểm tra trạng thái hoạt động
 openclaw gateway status
 
-# 应该显示 "running"
-```text
-### 3. 验证配置
+# Trạng thái cần hiển thị là "running"
+```
+
+### 3. Xác thực kết nối
 
 ```bash
-# 测试飞书连接
+# Kiểm tra kết nối tới Lark/Feishu
 openclaw channels test feishu
 
-# 应该显示连接成功
-```text
----
-
-## 🧪 测试验证
-
-### 1. 基础测试
-
-- [ ] 在飞书中搜索并添加机器人
-- [ ] 发送消息："你好"
-- [ ] 机器人应该回复
-
-### 2. 功能测试
-
-- [ ] 测试文本消息
-- [ ] 测试文件发送（如果需要）
-- [ ] 测试图片发送（如果需要）
-- [ ] 测试群组消息（需要@机器人）
-
-### 3. 权限测试
-
-- [ ] 机器人能识别用户名
-- [ ] 机器人能正常回复
-- [ ] 访问控制正常工作（如果配置了）
+# Kết quả cần hiển thị kết nối thành công (Connection successful)
+```
 
 ---
 
-## 🔍 故障排查
+## 🧪 Kiểm thử và Xác minh thực tế
 
-### 机器人不回复？
+### 1. Kiểm tra tương tác cơ bản
 
-按以下顺序检查：
+- [ ] Tìm kiếm và thêm bot vào danh bạ trên ứng dụng Lark / Feishu
+- [ ] Gửi tin nhắn thử nghiệm: "Xin chào"
+- [ ] Bot phản hồi câu trả lời bình thường
 
-1. **检查权限（最常见问题）**
+### 2. Kiểm tra tính năng nâng cao
+
+- [ ] Gửi tin nhắn dạng văn bản thông thường
+- [ ] Gửi tệp đính kèm (nếu quy trình yêu cầu xử lý file)
+- [ ] Gửi hình ảnh minh họa (nếu có dùng mô hình vision)
+- [ ] Kiểm tra tương tác trong nhóm chat (nhớ tag @ tên bot)
+
+### 3. Kiểm tra phân quyền và nhận diện
+
+- [ ] Bot nhận diện chính xác tên hiển thị của người nhắn
+- [ ] Bot phản hồi mạch lạc, đúng ngữ cảnh
+- [ ] Cơ chế kiểm soát truy cập (allowlist) hoạt động chuẩn xác (nếu bạn có bật cấu hình giới hạn)
+
+---
+
+## 🔍 Hướng dẫn Chẩn đoán và Xử lý Sự cố
+
+### Trường hợp Bot im lặng, không phản hồi tin nhắn?
+
+Hãy rà soát tuần tự theo 4 bước sau:
+
+1. **Kiểm tra quyền hạn (Nguyên nhân phổ biến nhất chiếm 90%)**
    ```text
    ✅ im:message
    ✅ im:message:send_as_bot
-   ✅ contact:contact.base:readonly ⭐ 必需
+   ✅ contact:contact.base:readonly ⭐ Bắt buộc phải có
    ```
 
-2. **检查事件订阅**
+2. **Kiểm tra cơ chế đăng ký sự kiện**
    ```text
-   ✅ 已选择"长连接"模式
-   ✅ 已添加 im.message.receive_v1
-   ✅ 长连接状态"已连接"
+   ✅ Đã chọn chế độ "Kết nối dài" (WebSocket)
+   ✅ Đã thêm đúng sự kiện im.message.receive_v1
+   ✅ Trạng thái kết nối dài báo "Đã kết nối"
    ```
 
-3. **检查应用状态**
+3. **Kiểm tra trạng thái phát hành ứng dụng**
    ```text
-   ✅ 应用已发布
-   ✅ 应用已通过审核
-   ✅ 用户在可用范围内
+   ✅ Ứng dụng đã được phát hành phiên bản mới nhất
+   ✅ Đã được duyệt thành công
+   ✅ Tài khoản của bạn nằm trong phạm vi khả dụng
    ```
 
-4. **检查 OpenClaw**
+4. **Kiểm tra dịch vụ OpenClaw**
    ```bash
-   # 检查网关状态
+   # Kiểm tra trạng thái Gateway
    openclaw gateway status
    
-   # 查看日志
+   # Theo dõi nhật ký lỗi thời gian thực
    openclaw logs --follow
    
-   # 检查渠道配置
+   # Kiểm tra danh sách kênh kết nối
    openclaw channels list
    ```
 
-### 查看详细日志
+### Cách theo dõi log chi tiết
 
 ```bash
-# 实时查看日志
+# Theo dõi toàn bộ log hệ thống theo thời gian thực
 openclaw logs --follow
 
-# 过滤飞书相关日志
+# Lọc riêng các dòng log liên quan đến Feishu/Lark
 openclaw logs --follow | grep feishu
 
-# 查看最近100行日志
+# Xem nhanh 100 dòng log gần nhất
 openclaw logs --tail 100
 ```
 
-### 常见错误及解决
+### Bảng tra cứu lỗi thường gặp và giải pháp
 
-| 错误信息 | 原因 | 解决方案 |
-|---------|------|---------|
-| `Permission denied` | 缺少权限 | 添加所有必需权限 |
-| `User not found` | 缺少通讯录权限 | 添加 `contact:contact.base:readonly` |
-| `Connection failed` | 网关未启动 | 运行 `openclaw gateway start` |
-| `Invalid app_id` | AppID错误 | 检查配置 |
-| `Long connection failed` | 长连接失败 | 确保网关已启动再配置事件订阅 |
-
----
-
-## 📚 相关文档
-
-- [第9章：多平台集成](09-multi-platform-integration.md)
-- [附录E：常见问题速查](../../appendix/E-common-problems.md#问题14飞书bot不回复)
-- [飞书开放平台文档](https://open.feishu.cn/document/)
+| Thông báo lỗi | Nguyên nhân gốc rễ | Hướng dẫn khắc phục |
+|---|---|---|
+| `Permission denied` | Ứng dụng thiếu quyền API cần thiết | Bổ sung đầy đủ các quyền bắt buộc trong trang phân quyền |
+| `User not found` | Thiếu quyền đọc danh bạ doanh nghiệp | Bổ sung ngay quyền `contact:contact.base:readonly` rồi phát hành phiên bản mới |
+| `Connection failed` | Gateway OpenClaw chưa khởi chạy | Chạy lệnh `openclaw gateway start` |
+| `Invalid app_id` | Sai thông tin `App ID` hoặc `App Secret` | Kiểm tra và cấu hình lại thông tin xác thực |
+| `Long connection failed` | Kết nối dài WebSocket bị từ chối | Khởi động Gateway OpenClaw trước, sau đó mới bật kết nối dài trên console |
 
 ---
 
-## 💡 最佳实践
+## 📚 Tài liệu tham khảo liên quan
 
-### 开发建议
-
-1. **先测试后发布**
-   - 在测试环境完成配置
-   - 充分测试后再发布到生产环境
-
-2. **权限最小化**
-   - 只添加必需的权限
-   - 定期审查权限使用情况
-
-3. **日志监控**
-   - 定期查看日志
-   - 及时发现和解决问题
-
-4. **备份配置**
-   - 定期备份 OpenClaw 配置
-   - 记录飞书应用的配置信息
-
-### 安全建议
-
-1. **保护密钥**
-   - 不要将 App Secret 提交到代码仓库
-   - 使用环境变量存储敏感信息
-
-2. **访问控制**
-   - 配置 allowlist 限制可访问用户
-   - 定期审查访问日志
-
-3. **定期更新**
-   - 保持 OpenClaw 版本最新
-   - 关注飞书平台的更新公告
+- [Chương 9: Tích hợp Đa Nền tảng](09-multi-platform-integration.md)
+- [Phụ lục E: Tra cứu Lỗi Thường gặp](../../appendix/E-common-problems.md#vấn-đề-14-bot-feishu-không-phản-hồi)
+- [Tài liệu chính thức Nền tảng Mở Feishu](https://open.feishu.cn/document/)
+- [Tài liệu Nền tảng Mở Lark](https://open.larksuite.com/document/)
 
 ---
 
-**最后更新**：2026年2月14日  
-**适用版本**：OpenClaw 2026.3.2+
+## 💡 Thực hành tối ưu (Best Practices)
+
+### Lưu ý trong quá trình phát triển
+
+1. **Thử nghiệm trước khi phát hành diện rộng**
+   - Hoàn tất mọi bước kiểm tra trong môi trường nội bộ cá nhân
+   - Sau khi chạy ổn định mới mở rộng phạm vi khả dụng cho toàn bộ công ty
+
+2. **Áp dụng nguyên tắc đặc quyền tối thiểu (Least Privilege)**
+   - Chỉ cấp đúng những quyền hạn mà bot thực sự cần dùng
+   - Định kỳ rà soát lại danh sách quyền hạn của ứng dụng
+
+3. **Giám sát nhật ký thường xuyên**
+   - Định kỳ kiểm tra log hệ thống để phát hiện các lỗi phát sinh sớm
+   - Xử lý kịp thời các cảnh báo nghẽn kết nối hoặc token hết hạn
+
+4. **Sao lưu dữ liệu cấu hình định kỳ**
+   - Luôn sao lưu thư mục cấu hình `~/.openclaw` trước khi cập nhật
+   - Lưu trữ an toàn các thông tin cấu hình của ứng dụng Lark/Feishu
+
+### Lưu ý về an toàn và bảo mật
+
+1. **Bảo vệ khóa bí mật**
+   - Tuyệt đối không commit tệp chứa `App Secret` lên GitHub hoặc kho mã nguồn công khai
+   - Ưu tiên lưu trữ khóa bí mật trong biến môi trường hoặc file bảo mật cục bộ
+
+2. **Kiểm soát truy cập chặt chẽ**
+   - Cấu hình allowlist để chỉ định các tài khoản người dùng được phép ra lệnh cho bot
+   - Thường xuyên rà soát nhật ký truy cập để phát hiện các hành vi bất thường
+
+3. **Cập nhật phiên bản định kỳ**
+   - Duy trì cập nhật các bản vá lỗi mới nhất của OpenClaw
+   - Theo dõi các thông báo cập nhật API từ phía Lark / Feishu Open Platform
+
+---
+
+**Cập nhật lần cuối**: 14/02/2026  
+**Phiên bản áp dụng**: OpenClaw 2026.3.2+

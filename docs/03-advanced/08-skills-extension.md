@@ -1,104 +1,104 @@
-> 📖 **纸质书《OpenClaw超级个体实操手册》已上市！** 清华大学出版社出版，在开源教程基础上全面重写+逐条验证。🛒 [京东专属购买链接（¥42，原价¥59.8）](https://item.jd.com/14669463.html)
+> 📖 **Giáo trình Awesome OpenClaw Tutorial** | Bản dịch tiếng Việt chính thức cho cộng đồng. Nguyên tác thuộc về tác giả [@xianyu110](https://github.com/xianyu110).
 
-# 第8章节 Skills扩展（什么时候该用、怎么查、怎么装、怎么管）
+# Chương 8: Mở rộng Skills (Khi nào nên dùng, cách tìm kiếm, cài đặt và quản lý)
 
-> 本章目标：把 Skills 放回正确位置。它仍然重要，但已经不是“所有能力的唯一入口”。你会学到：什么时候该用 Skills，什么时候该用内建能力，如何安全地搜索、安装、检查和维护 Skills。
-
----
-
-## 版本基线
-
-- **当前稳定版**：`v2026.9.3`（2026-09-08 发布）
-- 本章默认按 `v2026.9.3` 稳定版写；所有命令以官方 `openclaw skills` CLI 为准（不要默认 `clawhub install`）
+> Mục tiêu chương: Đặt Skills về đúng vị trí thực tế của nó. Skills vẫn rất quan trọng, nhưng không còn là "lối vào duy nhất cho mọi năng lực". Bạn sẽ học được: khi nào nên dùng Skills, khi nào nên tận dụng năng lực tích hợp sẵn, cùng cách tìm kiếm, cài đặt, kiểm tra và bảo trì Skills an toàn.
 
 ---
 
-## 先给小白的阅读说明
+## Mốc phiên bản chuẩn
 
-### 这一章最重要的结论
-
-现在的 OpenClaw，不是“没有 Skills 就什么都干不了”。
-
-很多能力已经有官方主线：
-
-- 模型与 provider：`openclaw models`
-- 无头能力调用：`openclaw infer`
-- 自动化：`cron / tasks / Task Flow / webhooks`
-- 记忆：`Active Memory / Memory Wiki`
-- 媒体：`image_generate / video_generate / tts / music_generate`
-
-**Skills 现在更适合做“可复用的工作方法和 SOP”**，而不是当成所有能力的默认入口。
-
-### 如果你只想先学会最实用的部分，先看这些
-
-- **想先装一个能用的 Skill**：看 `8.2`
-- **想知道 Skills 和其他能力的分工**：看 `8.1`
-- **想自己写一个本地 Skill**：看 `8.4`
-- **最担心安全问题**：看 `8.5`
-
-### 小白最容易犯的 4 个错
-
-- 看到旧教程就直接运行 `clawhub install ...`
-- 把 Skills、Tools、Plugins、MCP 混成一回事
-- 没看源码就装第三方 Skill
-- 明明该用 `infer` 或内建能力，却硬找一个 Skill 来做
+- **Phiên bản ổn định hiện tại**: `v2026.9.3` (phát hành 08/09/2026)
+- Chương này mặc định bám sát phiên bản ổn định `v2026.9.3`; mọi câu lệnh đều lấy CLI chính thức `openclaw skills` làm chuẩn (tránh dùng lệnh cũ `clawhub install`).
 
 ---
 
-## 8.1 Skills 在 2026.4 之后到底是什么？
+## Hướng dẫn định hướng nhanh cho người mới
 
-### 8.1.1 一句话理解
+### Kết luận quan trọng nhất của chương này
 
-你可以把 Skill 理解成：
+OpenClaw ngày nay không còn ở giai đoạn "không có Skills thì không làm được gì".
 
-- 一份可复用的操作说明书
-- 一套会在合适场景下按需加载的 SOP
-- 一段教 agent“遇到这类任务该怎么做”的专业经验
+Rất nhiều năng lực cốt lõi đã có giải pháp chính thức:
 
-它最适合解决的问题是：**同一类任务你会反复做，而且做法相对稳定**。
+- Mô hình và nhà cung cấp: `openclaw models`
+- Gọi năng lực không cần giao diện (headless): `openclaw infer`
+- Tự động hóa: `cron / tasks / Task Flow / webhooks`
+- Bộ nhớ: `Active Memory / Memory Wiki`
+- Đa phương tiện (Media): `image_generate / video_generate / tts / music_generate`
 
-### 8.1.2 什么场景该优先用 Skill
+**Skills hiện nay phù hợp nhất để đóng vai trò "Quy trình thao tác chuẩn (SOP) và phương pháp làm việc có thể tái sử dụng"**, thay vì bị coi là điểm khởi đầu mặc định cho mọi tính năng.
 
-适合用 Skill 的情况：
+### Nếu bạn chỉ muốn nắm phần thực dụng nhất trước, hãy đọc:
 
-- 固定写作流程
-- 固定研究流程
-- 固定交付模板
-- 固定排查步骤
-- 固定格式转换流程
+- **Muốn cài đặt nhanh một Skill dùng được ngay**: Xem mục `8.2`
+- **Muốn hiểu rõ phân công giữa Skills và các năng lực khác**: Xem mục `8.1`
+- **Muốn tự viết một Skill cục bộ**: Xem mục `8.4`
+- **Lo ngại về vấn đề an toàn bảo mật**: Xem mục `8.5`
 
-不一定要用 Skill 的情况：
+### 4 lỗi người mới dễ mắc phải nhất
 
-- 临时问答
-- 一次性 prompt
-- 单条命令就能完成的事
-- 官方已经有明确主线能力的事（如 `infer`、媒体生成、Task Flow）
-
-### 8.1.3 现在更实用的判断表
-
-| 你的需求 | 更推荐什么 |
-|----------|------------|
-| 跑一个模型命令 | `openclaw infer` |
-| 切换默认模型 | `openclaw models` |
-| 做图片/视频/语音 | 官方媒体能力 |
-| 做自动化编排 | `cron / tasks / Task Flow / webhooks` |
-| 让 agent 学会一套固定 SOP | Skill |
-| 连外部 API / 数据库 / 服务 | Plugin / MCP / Webhooks |
-
-如果你不确定，就先问自己一句：
-
-**“我现在缺的是一个功能入口，还是一套做事方法？”**
-
-- 缺功能入口：先看官方内建能力
-- 缺做事方法：再考虑 Skill
+- Đọc tài liệu cũ rồi chạy ngay lệnh `clawhub install ...`
+- Nhầm lẫn lẫn lộn giữa Skills, Tools, Plugins và MCP
+- Chưa xem mã nguồn mà đã vội cài đặt Skill bên thứ ba
+- Trường hợp rõ ràng nên dùng `infer` hoặc tính năng tích hợp, lại cố tìm một Skill để giải quyết
 
 ---
 
-## 8.2 最快上手：现在官方该怎么查、怎么装、怎么管
+## 8.1 Bản chất của Skills sau cột mốc 2026.4 là gì?
 
-官方当前推荐的 CLI 入口是 `openclaw skills`，不是旧教程里的 `clawhub install`。
+### 8.1.1 Khái niệm cốt lõi trong một câu
 
-### 8.2.1 最常用命令
+Bạn có thể hình dung Skill giống như:
+
+- Một bản hướng dẫn vận hành có thể tái sử dụng
+- Một bộ SOP chuyên biệt được tải khi cần trong ngữ cảnh thích hợp
+- Tập hợp kinh nghiệm chuyên môn hướng dẫn agent "gặp tác vụ dạng này thì cần làm như thế nào"
+
+Skill phát huy hiệu quả tối đa khi: **Bạn phải làm đi làm lại cùng một nhóm tác vụ, và quy trình xử lý tương đối ổn định**.
+
+### 8.1.2 Những tình huống nào nên ưu tiên dùng Skill?
+
+Những trường hợp phù hợp dùng Skill:
+
+- Quy trình viết lách, sáng tạo nội dung cố định
+- Quy trình nghiên cứu, tổng hợp dữ liệu cố định
+- Mẫu xuất kết quả hoặc báo cáo bàn giao chuẩn hóa
+- Các bước điều tra, xử lý sự cố cố định
+- Quy trình chuyển đổi định dạng dữ liệu có quy tắc rõ ràng
+
+Những trường hợp KHÔNG nhất thiết phải dùng Skill:
+
+- Hỏi đáp ngẫu hứng, tạm thời
+- Prompt dùng một lần duy nhất
+- Tác vụ chỉ cần một câu lệnh shell đơn giản là xong
+- Những tính năng mà OpenClaw đã hỗ trợ chính thức (như `infer`, tạo media, Task Flow)
+
+### 8.1.3 Bảng đối chiếu thực tế khi lựa chọn giải pháp
+
+| Nhu cầu của bạn | Giải pháp khuyên dùng |
+|---|---|
+| Chạy một lệnh suy luận mô hình | `openclaw infer` |
+| Đổi mô hình AI mặc định | `openclaw models` |
+| Tạo ảnh / video / giọng nói | Năng lực media tích hợp chính thức |
+| Điều phối tự động hóa | `cron / tasks / Task Flow / webhooks` |
+| Dạy agent một bộ SOP thao tác chuẩn | Skill |
+| Kết nối API bên ngoài / CSDL / dịch vụ ngoài | Plugin / MCP / Webhooks |
+
+Nếu bạn còn phân vân, hãy tự đặt câu hỏi:
+
+**"Thứ mình đang thiếu là một cổng tính năng công cụ, hay là một phương pháp làm việc?"**
+
+- Thiếu cổng tính năng: Ưu tiên xem các tính năng tích hợp sẵn của OpenClaw.
+- Thiếu phương pháp làm việc: Hãy cân nhắc tạo hoặc cài đặt Skill.
+
+---
+
+## 8.2 Bắt đầu nhanh: Tra cứu, cài đặt và quản lý chuẩn chính thức
+
+Lối vào CLI chuẩn được khuyến nghị hiện nay là `openclaw skills`, không phải cú pháp cũ `clawhub install`.
+
+### 8.2.1 Các câu lệnh thường dùng nhất
 
 ```bash
 openclaw skills search "calendar"
@@ -118,45 +118,45 @@ openclaw skills check
 openclaw skills check --json
 ```
 
-### 8.2.2 小白先记住 5 个就够了
+### 8.2.2 Người mới chỉ cần nhớ 5 lệnh trọng tâm
 
-如果你第一次用，其实先会这 5 个就够：
+Nếu mới bắt đầu, bạn chỉ cần thành thạo 5 lệnh cơ bản sau:
 
 ```bash
-openclaw skills search "写作"
+openclaw skills search "writing"
 openclaw skills install <slug>
 openclaw skills list --eligible
 openclaw skills info <name>
 openclaw skills check
 ```
 
-### 8.2.3 这些命令到底各自干什么
+### 8.2.3 Tác dụng chi tiết của từng lệnh
 
-- `search`：去找有没有合适 Skill
-- `install`：把 Skill 装到当前工作区
-- `list --eligible`：看当前工作区里哪些 Skill 真正可用
-- `info`：看某个 Skill 的详细信息
-- `check`：检查本地 Skill 有没有结构问题或可见性问题
+- `search`: Tìm kiếm xem có Skill nào phù hợp trên kho không
+- `install`: Cài đặt Skill vào không gian làm việc (workspace) hiện tại
+- `list --eligible`: Liệt kê các Skill đang thực sự khả dụng trong workspace
+- `info`: Xem thông tin chi tiết, tác giả, mô tả của một Skill cụ thể
+- `check`: Kiểm tra xem các Skill cục bộ có gặp lỗi cấu trúc hoặc vấn đề nhận diện không
 
-### 8.2.4 Skills 装到哪里
+### 8.2.4 Skills được cài đặt ở đâu?
 
-官方文档明确说明：`search / install / update` 走 ClawHub，但会把 Skill 安装到**当前活动工作区的 `skills/` 目录**。
+Tài liệu chính thức nêu rõ: các thao tác `search / install / update` kết nối qua ClawHub, nhưng sẽ cài đặt Skill trực tiếp vào **thư mục `skills/` của workspace đang hoạt động**.
 
-也就是说，对大多数用户来说，你可以直接理解成：
+Điều này đồng nghĩa với:
 
-- 当前项目里装的 Skill，会跟着这个项目走
-- 不同工作区可以有不同 Skill 组合
-- `list / info / check` 看的是当前工作区和当前配置下可见的本地 Skill
+- Skill cài trong dự án hiện tại sẽ đi liền với dự án đó
+- Các workspace khác nhau có thể sở hữu tập hợp Skills hoàn toàn khác nhau
+- Các lệnh `list / info / check` chỉ quét các Skill cục bộ nhìn thấy được trong cấu hình và workspace hiện tại
 
-### 8.2.5 看到什么算已经装成功
+### 8.2.5 Dấu hiệu nào cho thấy Skill đã cài đặt thành công?
 
-至少满足下面 3 条：
+Cần thỏa mãn tối thiểu 3 điều kiện sau:
 
-- `openclaw skills list --eligible` 能看到你刚装的 Skill
-- `openclaw skills info <name>` 能读到它的说明
-- 你在合适任务里调用它时，agent 能真正识别并使用
+- Lệnh `openclaw skills list --eligible` hiển thị Skill vừa cài đặt
+- Lệnh `openclaw skills info <name>` đọc được nội dung mô tả của Skill
+- Khi bạn giao nhiệm vụ phù hợp, agent thực sự nhận diện và kích hoạt sử dụng Skill
 
-如果只装上了，但 `eligible` 里看不到，先别急着怪模型，先跑：
+Nếu Skill đã cài nhưng không xuất hiện trong danh sách `eligible`, đừng vội đổi mô hình, hãy chạy ngay lệnh kiểm tra:
 
 ```bash
 openclaw skills check
@@ -164,32 +164,32 @@ openclaw skills check
 
 ---
 
-## 8.3 Skills、Tools、Plugins、MCP 到底怎么分
+## 8.3 Phân biệt rõ: Skills, Tools, Plugins và MCP
 
-### 8.3.1 最不容易混的理解方式
+### 8.3.1 Cách phân biệt trực quan nhất
 
-- **Skill**：一套做事方法
-- **Tool**：一个具体工具动作
-- **Plugin**：给 OpenClaw 增加一整类能力
-- **MCP**：把外部系统接入为可调用能力
+- **Skill**: Bộ phương pháp và quy trình làm việc (SOP)
+- **Tool**: Một hành động công cụ cụ thể (đọc file, tìm web, gọi shell)
+- **Plugin**: Bổ sung nguyên một nhóm năng lực mới cho OpenClaw
+- **MCP**: Kết nối hệ thống bên ngoài thành các năng lực có thể gọi được
 
-### 8.3.2 小白版例子
+### 8.3.2 Ví dụ thực tế
 
-假设你想让 OpenClaw 帮你做“技术文章改写成公众号版本”：
+Giả sử bạn muốn OpenClaw hỗ trợ "viết lại ghi chú kỹ thuật thành bài viết chuyên sâu trên blog":
 
-- Skill：告诉它这类文章应该怎么拆结构、怎么改风格、怎么出标题
-- Tool：读取文件、搜索网页、生成图片
-- Plugin / MCP：连接某个知识库、外部文档系统或发布系统
+- **Skill**: Hướng dẫn agent cách phân tích cấu trúc, đổi văn phong, đặt tiêu đề và triển khai đề mục
+- **Tool**: Đọc tệp tin, tìm kiếm web kiểm tra số liệu, sinh ảnh minh họa
+- **Plugin / MCP**: Kết nối cơ sở tri thức Notion, hệ thống CMS hoặc nền tảng xuất bản tự động
 
-所以它们不是互相替代，而是分工不同。
+Do đó, chúng không thay thế nhau mà bổ trợ nhịp nhàng theo từng tầng trách nhiệm.
 
 ---
 
-## 8.4 自己写一个最小本地 Skill
+## 8.4 Tự viết một Skill cục bộ tối giản
 
-如果你已经反复做同一类事，就可以开始写自己的 Skill。
+Khi bạn đã làm đi làm lại một dạng tác vụ nhiều lần, đó là lúc nên đóng gói thành Skill riêng.
 
-### 8.4.1 最小目录结构
+### 8.4.1 Cấu trúc thư mục tối thiểu
 
 ```text
 skills/
@@ -197,28 +197,28 @@ skills/
     └── SKILL.md
 ```
 
-### 8.4.2 最小示例
+### 8.4.2 Mẫu tệp `SKILL.md` tối giản
 
 ```markdown
 ---
 name: my-writing-helper
-description: 把技术笔记整理成公众号文章大纲
+description: Biên tập ghi chú kỹ thuật thành dàn ý bài viết chuyên sâu
 ---
 
 # my-writing-helper
 
-## 什么时候用
+## Khi nào nên dùng
 
-当用户要把技术笔记改成更适合公开发布的中文文章时使用。
+Sử dụng khi người dùng cần chuyển đổi ghi chú thô thành bài viết hoàn chỉnh, cấu trúc rõ ràng để công bố.
 
-## 步骤
+## Các bước thực hiện
 
-1. 先提取原始笔记里的核心观点
-2. 再重写成更清晰的文章结构
-3. 最后输出标题、摘要、小标题和结尾行动建议
+1. Trích xuất các luận điểm và ý tưởng cốt lõi từ ghi chú gốc.
+2. Xây dựng lại cấu trúc bài viết mạch lạc, phân lớp rõ ràng.
+3. Xuất tiêu đề đề xuất, tóm tắt nội dung, các đề mục chính và lời kêu gọi hành động ở phần kết.
 ```
 
-### 8.4.3 写完之后怎么检查
+### 8.4.3 Cách kiểm tra sau khi viết xong
 
 ```bash
 openclaw skills list --eligible
@@ -226,97 +226,97 @@ openclaw skills info my-writing-helper
 openclaw skills check
 ```
 
-### 8.4.4 什么时候值得自己写 Skill
+### 8.4.4 Khi nào thì ĐÁNG để tự viết Skill?
 
-最值得写 Skill 的情况是：
+Bạn nên viết Skill khi:
 
-- 你已经重复做过 5 次以上
-- 这件事有稳定步骤
-- 你每次都在重复解释同样要求
-- 你希望不同 agent 或不同项目都复用这套做法
+- Bạn đã lặp lại tác vụ này từ 5 lần trở lên
+- Tác vụ có các bước thực hiện tuần tự, ổn định
+- Lần nào bạn cũng phải giải thích lại cùng một loạt yêu cầu dài dòng
+- Bạn muốn nhiều agent hoặc nhiều dự án khác nhau đều tái sử dụng chung một cách làm
 
-如果只是一次性需求，先别写 Skill，直接用 prompt 更省时间。
-
----
-
-## 8.5 安全：第三方 Skill 应该怎么装才稳
-
-官方文档对这一点说得很直接：**把第三方 Skills 当成不受信任代码处理**。
-
-### 8.5.1 小白版安全规则
-
-安装前先做到这 4 件事：
-
-1. 先看 `openclaw skills info <name>`
-2. 尽量阅读源码或至少阅读 `SKILL.md`
-3. 对不熟悉的 Skill，优先在沙箱或低风险项目里试
-4. 装完先跑 `openclaw skills check`
-
-### 8.5.2 为什么不能无脑装
-
-官方文档提到：
-
-- 第三方 Skill 应该视为不受信任代码
-- Gateway 侧的依赖安装流程会做危险代码扫描
-- 但这不等于你可以不看、不判断、不复核
-
-所以更稳的习惯是：
-
-- 先装你看得懂用途的 Skill
-- 先装数量少、目标明确的 Skill
-- 一次只加一个，确认没问题再加下一个
-
-### 8.5.3 哪些信号要提高警惕
-
-- 描述很模糊，但权限要求很多
-- 需要你额外执行可疑脚本
-- 要求访问你不相关的目录或系统能力
-- 你根本不知道它为什么需要这些权限
+Nếu chỉ là nhu cầu phát sinh một lần duy nhất, bạn không cần viết Skill mà chỉ cần đưa trực tiếp vào prompt để tiết kiệm thời gian.
 
 ---
 
-## 8.6 给小白的最短落地顺序
+## 8.5 An toàn bảo mật: Cài đặt Skill bên thứ ba sao cho an tâm
 
-如果你今天只想花 15 分钟把 Skills 跑起来，按这个顺序做：
+Tài liệu chính thức đưa ra khuyến cáo thẳng thắn: **Hãy xem Skills từ bên thứ ba như đoạn mã chưa được kiểm chứng (untrusted code)**.
 
-1. `openclaw skills search "你要做的事"`
-2. 选一个最简单、用途最明确的 Skill
+### 8.5.1 Nguyên tắc an toàn cơ bản
+
+Trước khi cài đặt, hãy tuân thủ 4 bước sau:
+
+1. Chạy lệnh `openclaw skills info <name>` để xem thông tin
+2. Đọc mã nguồn hoặc tối thiểu phải đọc kỹ tệp `SKILL.md`
+3. Với Skill lạ, hãy chạy thử trước trong môi trường Sandbox hoặc dự án độc lập ít rủi ro
+4. Sau khi cài, hãy chạy ngay `openclaw skills check`
+
+### 8.5.2 Vì sao không nên cài đặt bừa bãi?
+
+Theo tài liệu chính thức:
+
+- Skill bên thứ ba cần được coi là mã nguồn tiềm ẩn rủi ro
+- Luồng cài đặt dependency ở phía Gateway có quét các đoạn mã nguy hiểm
+- Tuy nhiên điều đó không thay thế được việc bạn tự đọc, tự đánh giá và thẩm định trước khi dùng
+
+Thói quen an toàn nhất là:
+
+- Chỉ cài những Skill mà bạn hiểu rõ mục đích và hoạt động của nó
+- Giữ số lượng Skill vừa đủ, mục tiêu rõ ràng, không cài tràn lan
+- Mỗi lần chỉ thêm một Skill, kiểm tra ổn định rồi mới thêm tiếp
+
+### 8.5.3 Những dấu hiệu cảnh báo cần cảnh giác
+
+- Mô tả rất mơ hồ nhưng lại đòi hỏi quyền hạn truy cập hệ thống cao
+- Yêu cầu bạn chạy thêm các script ngoài đáng ngờ
+- Đòi quyền truy cập các thư mục nhạy cảm không liên quan đến chức năng
+- Bạn hoàn toàn không hiểu vì sao nó lại cần những quyền hạn đó
+
+---
+
+## 8.6 Trình tự triển khai nhanh nhất dành cho người mới
+
+Nếu bạn chỉ có 15 phút để làm quen và vận hành Skills, hãy làm theo đúng 7 bước này:
+
+1. `openclaw skills search "tác vụ bạn cần làm"`
+2. Chọn Skill đơn giản nhất, mục đích rõ ràng nhất
 3. `openclaw skills install <slug>`
 4. `openclaw skills list --eligible`
 5. `openclaw skills info <name>`
 6. `openclaw skills check`
-7. 在一个真实任务里试一次
+7. Thử nghiệm ngay trong một tác vụ thực tế
 
 ---
 
-## 8.7 本章最容易踩的坑
+## 8.7 Những cạm bẫy dễ mắc phải nhất trong chương này
 
-### 坑 1：把 Skills 当成所有能力的入口
+### Bẫy 1: Coi Skills là lối vào cho mọi năng lực
 
-现在很多能力已经有官方更稳定的主线，不需要先找 Skill。
+Rất nhiều tính năng hiện nay đã có giải pháp chính thức, mạnh mẽ và ổn định hơn, không cần phải tìm kiếm Skill bên ngoài.
 
-### 坑 2：直接照搬旧教程里的 `clawhub install`
+### Bẫy 2: Sao chép lệnh `clawhub install` từ tài liệu cũ
 
-当前官方命令以 `openclaw skills` 为准。旧写法不应该再作为默认主路线。
+Các câu lệnh chính thức hiện nay quy chuẩn về `openclaw skills`. Cú pháp cũ không nên dùng làm đường dẫn mặc định nữa.
 
-### 坑 3：一上来就装很多 Skill
+### Bẫy 3: Cài đặt ồ ạt quá nhiều Skill ngay từ đầu
 
-最稳的方式永远是：
+Cách làm bền vững nhất luôn là:
 
-- 先装一个
-- 先看它能不能用
-- 先确认它到底解决了什么问题
+- Cài từng cái một
+- Kiểm tra xem nó có hoạt động ổn định không
+- Xác định rõ nó giải quyết triệt để vấn đề gì cho bạn
 
-### 坑 4：明明是工作方法问题，却去换模型
+### Bẫy 4: Lỗi ở quy trình làm việc nhưng lại đổ lỗi cho mô hình AI
 
-有些问题不是模型不够强，而是你缺一套稳定 SOP。那才是 Skill 真正适合出场的时候。
+Nhiều trường hợp không phải do mô hình AI kém thông minh, mà là do bạn chưa có một bộ SOP rõ ràng, từng bước. Đó mới chính là bài toán mà Skill phát huy sức mạnh vượt trội.
 
 ---
 
-## 8.8 官方参考
+## 8.8 Tài liệu tham khảo chính thức
 
-- Skills CLI：https://docs.openclaw.ai/cli/skills
-- Skills 工具说明：https://docs.openclaw.ai/tools/skills
-- Plugins CLI：https://docs.openclaw.ai/cli/plugins
-- Hooks CLI：https://docs.openclaw.ai/cli/hooks
-- Models CLI：https://docs.openclaw.ai/cli/models
+- Skills CLI: https://docs.openclaw.ai/cli/skills
+- Hướng dẫn công cụ Skills: https://docs.openclaw.ai/tools/skills
+- Plugins CLI: https://docs.openclaw.ai/cli/plugins
+- Hooks CLI: https://docs.openclaw.ai/cli/hooks
+- Models CLI: https://docs.openclaw.ai/cli/models

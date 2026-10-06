@@ -1,63 +1,63 @@
-> 📖 **纸质书《OpenClaw超级个体实操手册》已上市！** 清华大学出版社出版，在开源教程基础上全面重写+逐条验证。🛒 [京东专属购买链接（¥42，原价¥59.8）](https://item.jd.com/14669463.html)
+> 📖 **Giáo trình Awesome OpenClaw Tutorial** | Bản dịch tiếng Việt chính thức cho cộng đồng. Nguyên tác thuộc về tác giả [@xianyu110](https://github.com/xianyu110).
 
-# 第11章节 高级配置（模型、记忆、审批与性能）
+# Chương 11: Cấu hình Nâng cao (Mô hình, Bộ nhớ, Phê duyệt & Hiệu năng)
 
-> 本章目标：把 OpenClaw 当前稳定版里最重要的高级配置讲清楚，包括模型选择、认证、媒体默认模型、Active Memory、Memory Wiki，以及执行审批与安全边界。
-
----
-
-## 版本基线
-
-- **当前稳定版**：`v2026.9.3`（2026-09-08 发布）
-- 本章默认按 `v2026.9.3` 写；遇到旧 `openai-codex/*` / OpenProse / `clawhub install …` 请先当历史参考
+> Mục tiêu chương: Làm rõ những cấu hình nâng cao cốt lõi nhất trong bản ổn định OpenClaw hiện tại, bao gồm lựa chọn mô hình, cơ chế xác thực, cấu hình mô hình media mặc định, Active Memory, Memory Wiki, cũng như quy trình phê duyệt thực thi lệnh và ranh giới bảo mật hệ thống.
 
 ---
 
-## 先给小白的阅读说明
+## Mốc phiên bản chuẩn
 
-### 这一章到底解决什么问题
-
-很多新手一看到 `openclaw.json`、`models.json`、`AGENTS.md`、provider auth，就会马上开始手改配置。结果往往是：
-
-- 不知道哪里才是当前生效值
-- 改了配置却没改到真正的默认模型
-- 认证、回退模型、媒体模型混在一起
-
-这一章就是帮你把这些东西拆开。
-
-### 如果你只想先把配置跑通，先看这几节
-
-- **先看 `11.1`**：知道推荐顺序
-- **再看 `11.2`**：把主模型、回退模型、认证配通
-- **然后看 `11.3`**：分清会话模型和媒体模型
-- **最后看 `11.6`**：知道安全边界，不要误配审批
-
-### 开始前的最低前提
-
-你不需要先懂所有 JSON 字段，但至少要满足：
-
-1. 已跑过 `openclaw onboard`
-2. 至少有一个 provider 能成功登录
-3. 愿意先用 CLI 看状态，再决定是否手改配置文件
-
-### 小白最容易犯的 3 个错
-
-- 一上来就手改 JSON，不先看 `models status`
-- 把 `imageModel` 和 `imageGenerationModel` 当成同一个东西
-- 看到配置项很多，就以为“全都配上才算完整”
+- **Phiên bản ổn định hiện tại**: `v2026.9.3` (phát hành 08/09/2026)
+- Chương này mặc định viết theo phiên bản ổn định `v2026.9.3`; các cú pháp cũ như `openai-codex/*`, OpenProse hoặc `clawhub install …` chỉ nên xem như tư liệu lịch sử.
 
 ---
 
-## 11.1 推荐配置路径：先向导，后精调
+## Hướng dẫn định hướng nhanh cho người mới
 
-OpenClaw 2026.4 之后，高级配置的推荐顺序不是“先手改 JSON”，而是：
+### Chương này giải quyết vấn đề gì?
+
+Nhiều người mới khi nhìn thấy các tệp `openclaw.json`, `models.json`, `AGENTS.md` và cơ chế provider auth thường vội vàng chỉnh sửa cấu hình thủ công ngay lập tức. Hậu quả phổ biến là:
+
+- Không nắm được giá trị cấu hình nào đang thực sự có hiệu lực
+- Chỉnh sửa file nhưng mô hình mặc định thực tế vẫn không thay đổi
+- Nhầm lẫn chồng chéo giữa xác thực (auth), mô hình dự phòng (fallbacks) và mô hình media
+
+Chương này sẽ giúp bạn bóc tách và phân định rành mạch từng phần.
+
+### Nếu bạn chỉ muốn chạy thông suốt cấu hình, hãy đọc theo thứ tự:
+
+- **Đọc mục `11.1` trước**: Nắm rõ lộ trình cấu hình chuẩn được khuyến nghị
+- **Xem tiếp mục `11.2`**: Thiết lập thông suốt mô hình chính, mô hình fallback và cơ chế xác thực
+- **Xem mục `11.3`**: Phân biệt rạch ròi giữa mô hình hội thoại và mô hình media
+- **Đọc kỹ mục `11.6`**: Hiểu rõ ranh giới an toàn, tránh cấu hình sai luồng phê duyệt lệnh
+
+### Điều kiện tiên quyết tối thiểu trước khi bắt đầu
+
+Bạn chưa cần phải hiểu hết mọi trường JSON phức tạp, nhưng cần đảm bảo:
+
+1. Đã chạy qua trình thiết lập `openclaw onboard`
+2. Tối thiểu có một provider đã đăng nhập xác thực thành công
+3. Có thói quen dùng lệnh CLI kiểm tra trạng thái trước khi quyết định can thiệp thủ công vào file cấu hình
+
+### 3 lỗi người mới dễ mắc phải nhất
+
+- Vội vàng chỉnh sửa trực tiếp tệp JSON mà không kiểm tra qua `models status` trước
+- Đánh đồng `imageModel` (mô hình nhìn ảnh) và `imageGenerationModel` (mô hình vẽ ảnh) là một
+- Thấy có quá nhiều tùy chọn cấu hình rồi nghĩ rằng "phải điền hết mới là đầy đủ"
+
+---
+
+## 11.1 Lộ trình cấu hình chuẩn: Chạy hướng dẫn trước, tinh chỉnh sau
+
+Kể từ sau cột mốc 2026.4, quy trình cấu hình nâng cao chuẩn không phải là "sửa chay file JSON", mà là:
 
 1. `openclaw onboard`
 2. `openclaw models auth add|login`
 3. `openclaw models status|list|set`
-4. 需要时再手动改 `openclaw.json` / `models.json`
+4. Chỉ can thiệp thủ công vào `openclaw.json` / `models.json` khi thật sự cần thiết
 
-最短起步命令：
+Các câu lệnh khởi động ngắn gọn nhất:
 
 ```bash
 openclaw onboard
@@ -66,111 +66,111 @@ openclaw models list
 openclaw models set openai/gpt-5.4
 ```
 
-如果你不知道当前到底配成了什么，先看状态，不要猜：
+Nếu bạn chưa rõ cấu hình hiện tại đang nhận giá trị nào, hãy chạy lệnh kiểm tra thực tế, đừng đoán mò:
 
 ```bash
 openclaw models status --probe
 openclaw status
 ```
 
-### 看到什么算当前配置已经健康
+### Dấu hiệu nhận biết cấu hình đang ở trạng thái khỏe mạnh
 
-如果你看到下面这些现象，说明配置已经进入“可继续优化”的状态：
+Nếu xuất hiện các dấu hiệu sau, cấu hình của bạn đã sẵn sàng để tối ưu sâu hơn:
 
-- `openclaw models status` 能看到 `primary` 和 `fallbacks`
-- `openclaw models status --probe` 没报 provider 不可用或 token 失效
-- `openclaw status` 没有明显的 gateway / auth 阻塞错误
+- Lệnh `openclaw models status` hiển thị rõ `primary` và danh sách `fallbacks`
+- Lệnh `openclaw models status --probe` không báo lỗi provider mất kết nối hay token hết hạn
+- Lệnh `openclaw status` không có lỗi nghiêm trọng gây nghẽn ở tầng Gateway hoặc Auth
 
-`models status --probe` 会做真实探测，可能消耗 token，但它最适合确认以下问题：
+Lệnh `models status --probe` sẽ gửi yêu cầu thăm dò thực tế (có thể tiêu tốn một lượng nhỏ token), nhưng đây là cách chuẩn xác nhất để xác nhận:
 
-- token 是不是过期了
-- provider 看起来已配置，但是否真能用
-- 当前 primary / fallbacks 最终到底解析成了什么
+- Token xác thực có còn hạn hay không
+- Provider nhìn thấy trong danh sách có thực sự gọi được không
+- Các mô hình chính và dự phòng cuối cùng phân giải (resolve) ra mã định danh nào
 
 ---
 
-## 11.2 模型与认证：当前该怎么配
+## 11.2 Cấu hình mô hình và xác thực chuẩn xác hiện nay
 
-### 11.2.1 先理解三层关系
+### 11.2.1 Hiểu rõ 3 tầng quan hệ cốt lõi
 
-OpenClaw 现在的模型配置可以简化成三层：
+Cấu hình mô hình của OpenClaw hiện nay được quy về 3 tầng rõ ràng:
 
-1. **主模型**：`agents.defaults.model.primary`
-2. **回退模型**：`agents.defaults.model.fallbacks`
-3. **认证与 provider 状态**：通过 `models auth`、环境变量和 auth profile 管理
+1. **Mô hình chính (Primary Model)**: `agents.defaults.model.primary`
+2. **Mô hình dự phòng (Fallbacks)**: `agents.defaults.model.fallbacks`
+3. **Trạng thái xác thực & Provider**: Quản lý thông qua `models auth`, biến môi trường và auth profile
 
-### 11.2.2 常用命令
+### 11.2.2 Các câu lệnh thường dùng
 
-如果你是第一次接触这些命令，可以把它们理解成下面 4 类：
+Nếu mới tiếp cận, bạn có thể nhóm các lệnh theo 4 mục đích chính:
 
-- `status` / `list`：先看现状
-- `set`：设置主模型
-- `fallbacks add`：给主模型准备兜底
-- `auth login`：解决“为什么看得到 provider 却用不了”
+- `status` / `list`: Nắm bắt hiện trạng cấu hình
+- `set`: Thiết lập mô hình chính
+- `fallbacks add`: Thêm phương án dự phòng khi mô hình chính gặp sự cố
+- `auth login`: Xử lý dứt điểm tình trạng "thấy provider nhưng không dùng được"
 
 ```bash
-# 查看当前状态
+# Xem trạng thái hiện tại
 openclaw models status
 openclaw models list
 
-# 设置主模型
+# Thiết lập mô hình chính
 openclaw models set openai/gpt-5.4
 
-# 增加回退模型
+# Bổ sung danh sách mô hình dự phòng (Fallback)
 openclaw models fallbacks add anthropic/claude-sonnet-4-5
 openclaw models fallbacks add google/gemini-2.5-pro
 
-# 设置图像理解兜底模型
+# Thiết lập mô hình dự phòng cho việc đọc hiểu hình ảnh
 openclaw models set-image openai/gpt-4.1-mini
 openclaw models image-fallbacks add google/gemini-2.5-pro
 ```
 
-### 11.2.3 当前值得注意的 provider 变化
+### 11.2.3 Những thay đổi quan trọng về Provider cần lưu ý
 
-根据官方 release notes（`2026.8.1` OpenClaw 2.0 → `v2026.9.3`）：
+Căn cứ theo ghi chú phát hành chính thức (`2026.8.1` OpenClaw 2.0 → `v2026.9.3`):
 
-- **`2026.8.1` 起**：会话/转录迁入 SQLite；升级前务必备份 `~/.openclaw`
-- **OpenAI 路由迁移（Breaking）**：旧的 `codex/*`、`openai-codex/*` 应迁移为规范的 `openai/*`；执行 `openclaw doctor --fix`
-- **OpenProse 已移除（Breaking）**：内置 OpenProse 插件与 `/prose` 已下线；清配置用 `openclaw doctor --fix`，需要时再按官方文档安装上游 Agent Skill
-- **`v2026.9.3`**：更新预演/恢复更稳；Skill Workshop 改为按 Agent 持久化集合；Node 要求提升到 **24.16+ / 26.1+**
-- 具体可选模型 ID 请以 `openclaw models list` / Control UI 目录为准，不要照抄过期型号
+- **Từ bản `2026.8.1` trở đi**: Toàn bộ phiên hội thoại và biên bản chat được chuyển sang lưu trữ bằng SQLite; hãy sao lưu thư mục `~/.openclaw` trước khi nâng cấp.
+- **Di chuyển định tuyến OpenAI (Thay đổi có tính phá vỡ - Breaking)**: Các tiền tố cũ như `codex/*`, `openai-codex/*` bắt buộc phải chuyển sang định dạng chuẩn `openai/*`; hãy chạy `openclaw doctor --fix` để tự động sửa chữa.
+- **Loại bỏ OpenProse (Breaking)**: Plugin tích hợp OpenProse và lệnh `/prose` đã bị gỡ bỏ; dọn dẹp cấu hình cũ bằng lệnh `openclaw doctor --fix`, trường hợp cần thiết hãy cài đặt Agent Skill thượng nguồn theo hướng dẫn chính thức.
+- **Bản `v2026.9.3`**: Cơ chế chạy thử (dry-run) và khôi phục khi cập nhật ổn định hơn; Skill Workshop chuyển sang lưu trữ bộ sưu tập theo từng Agent riêng biệt; yêu cầu phiên bản Node.js nâng lên **24.16+ / 26.1+**.
+- Danh mục mã định danh mô hình cụ thể nên căn cứ theo đầu ra của `openclaw models list` hoặc thư viện Control UI, tránh sao chép các mã mô hình cũ đã dừng hỗ trợ.
 
-如果你要做编程工作流，当前更推荐先走：
+Nếu bạn xây dựng quy trình làm việc chuyên về lập trình (coding workflow), các provider ưu tiên hiện nay gồm:
 
-- `openai/...`（ChatGPT/Codex 订阅或 API；用 `models auth login --provider openai`）
+- `openai/...` (Đăng ký ChatGPT/Codex hoặc gọi API trực tiếp; đăng nhập bằng `models auth login --provider openai`)
 - `anthropic/...`
 - `google/...`
 
-### 11.2.4 认证方式建议
+### 11.2.4 Lời khuyên về phương thức xác thực
 
 ```bash
-# 交互式添加 provider 认证
+# Thêm xác thực provider qua giao diện tương tác
 openclaw models auth add
 
-# 直接对某个 provider 发起登录
+# Khởi chạy đăng nhập trực tiếp cho một provider cụ thể
 openclaw models auth login --provider openai --set-default
 openclaw models auth login --provider anthropic --method cli --set-default
 ```
 
-如果你是自托管 provider 或 OpenAI-compatible endpoint，优先保证：
+Nếu bạn sử dụng provider tự host cục bộ hoặc endpoint tương thích chuẩn OpenAI, hãy đảm bảo:
 
-- `baseUrl` 可达
-- API key 已注入
-- 仅在可信私网环境里启用 `models.providers.*.request.allowPrivateNetwork`
+- `baseUrl` truy cập thông suốt
+- API key đã được truyền vào
+- Chỉ kích hoạt `models.providers.*.request.allowPrivateNetwork` trong môi trường mạng nội bộ tin cậy
 
 ---
 
-## 11.3 媒体默认模型：不要再把图片、视频、音乐混着配
+## 11.3 Cấu hình mô hình Media mặc định: Không gộp chung ảnh, video và âm nhạc
 
-官方现在把“会话模型”和“媒体生成模型”拆得很清楚。你至少要分清 5 类默认模型：
+Hệ thống của OpenClaw tách bạch rất rành mạch giữa "mô hình hội thoại" và "mô hình sinh nội dung media". Bạn cần phân biệt tối thiểu 5 cấu hình mặc định sau:
 
-- `agents.defaults.model`
-- `agents.defaults.imageModel`
-- `agents.defaults.imageGenerationModel`
-- `agents.defaults.videoGenerationModel`
-- `agents.defaults.musicGenerationModel`
+- `agents.defaults.model`: Mô hình suy luận hội thoại chính
+- `agents.defaults.imageModel`: Mô hình đọc hiểu hình ảnh (Vision)
+- `agents.defaults.imageGenerationModel`: Mô hình tạo ảnh
+- `agents.defaults.videoGenerationModel`: Mô hình tạo video
+- `agents.defaults.musicGenerationModel`: Mô hình tạo âm nhạc
 
-推荐配置示例：
+Mẫu cấu hình tham khảo chuẩn:
 
 ```json
 {
@@ -203,20 +203,20 @@ openclaw models auth login --provider anthropic --method cli --set-default
 }
 ```
 
-几点说明：
+Một số điểm cần lưu ý:
 
-1. `imageModel` 用于“主模型不能直接看图”时的图像理解兜底
-2. `imageGenerationModel` 专门给 `image_generate` 用
-3. `videoGenerationModel` 和 `musicGenerationModel` 只影响共享媒体工具
-4. 如果你没有显式配置，OpenClaw 也会尝试根据已认证 provider 自动推断默认值，但生产环境不建议完全依赖自动推断
+1. `imageModel` chỉ đóng vai trò dự phòng thị giác khi mô hình chính không thể trực tiếp xử lý hình ảnh đầu vào.
+2. `imageGenerationModel` được dành riêng cho công cụ tạo ảnh `image_generate`.
+3. `videoGenerationModel` và `musicGenerationModel` chỉ tác động lên các công cụ tạo media chia sẻ dùng chung.
+4. Nếu bạn không khai báo tường minh, OpenClaw sẽ cố gắng tự động suy đoán dựa trên các provider đã đăng nhập, tuy nhiên trong môi trường production không nên phụ thuộc hoàn toàn vào cơ chế tự suy đoán này.
 
 ---
 
-## 11.4 Active Memory：让记忆在回复前主动介入
+## 11.4 Active Memory: Cho phép bộ nhớ chủ động can thiệp trước phản hồi
 
-`v2026.4.12` 的一个核心变化，是 **Active Memory plugin** 进入主线能力：它会在主回复前先跑一次受限的记忆子代理，用 `memory_search` / `memory_get` 拉回和当前会话相关的偏好、上下文和历史事实。
+Một trong những cải tiến cốt lõi từ bản `v2026.4.12` là **plugin Active Memory** đã trở thành tính năng chủ đạo chính thức: Trước khi trả lời, hệ thống sẽ chạy một sub-agent bộ nhớ giới hạn, dùng `memory_search` / `memory_get` để kéo về các sở thích, ngữ cảnh và sự kiện lịch sử liên quan đến cuộc trò chuyện hiện tại.
 
-### 11.4.1 推荐起步配置
+### 11.4.1 Cấu hình khởi đầu chuẩn
 
 ```json
 {
@@ -241,28 +241,28 @@ openclaw models auth login --provider anthropic --method cli --set-default
 }
 ```
 
-### 11.4.2 什么时候该开，什么时候别开
+### 11.4.2 Khi nào nên bật, khi nào không nên bật?
 
-**适合开启**：
+**Nên bật trong trường hợp**:
 
-- 私聊型、长期关系型助手
-- 高频重复协作
-- 需要记住偏好、习惯、上下文的场景
+- Trợ lý cá nhân trong chat riêng tư (direct message), mối quan hệ tương tác dài hạn
+- Cộng tác với tần suất cao, lặp đi lặp lại
+- Cần ghi nhớ thói quen, phong cách làm việc và ngữ cảnh cá nhân
 
-**不适合默认开启**：
+**Không nên bật mặc định khi**:
 
-- 纯自动化 worker
-- 一次性 API 任务
-- 强确定性流水线
-- 你不希望隐藏个性化影响输出的场景
+- Worker tự động hóa hoàn toàn
+- Tác vụ gọi API một lần duy nhất
+- Pipeline xử lý dữ liệu yêu cầu tính tất định nghiêm ngặt (deterministic)
+- Tình huống không muốn ngữ cảnh cá nhân hóa ngầm làm sai lệch định dạng đầu ra
 
-### 11.4.3 调试方法
+### 11.4.3 Cách gỡ lỗi (Debugging)
 
 ```bash
 openclaw memory status --deep
 ```
 
-在聊天里可以用 `/verbose on` 看 Active Memory 的状态行。调优优先从这几个参数入手：
+Trong cuộc trò chuyện, bạn có thể gõ `/verbose on` để theo dõi dòng trạng thái của Active Memory. Khi tinh chỉnh hiệu năng, hãy bắt đầu từ các tham số trọng yếu sau:
 
 - `queryMode`
 - `promptStyle`
@@ -271,21 +271,21 @@ openclaw memory status --deep
 
 ---
 
-## 11.5 Memory Wiki：把长期记忆变成“可维护的知识层”
+## 11.5 Memory Wiki: Biến trí nhớ dài hạn thành "tầng tri thức dễ bảo trì"
 
-`memory-wiki` 是官方内建 plugin，它**不是用来替代 memory-core 的**，而是把长期记忆编译成结构化 wiki 层，适合：
+`memory-wiki` là plugin tích hợp chính thức của OpenClaw. Plugin này **không sinh ra để thay thế memory-core**, mà dùng để biên dịch bộ nhớ dài hạn thành một tầng wiki có cấu trúc, đặc biệt phù hợp cho:
 
-- 项目知识沉淀
-- 客户画像 / 产品知识整理
-- 知识冲突排查
-- 长周期研究类任务
+- Đúc kết tri thức dự án
+- Tổng hợp hồ sơ khách hàng / thông tin sản phẩm
+- Tra soát và giải quyết các điểm xung đột tri thức
+- Các tác vụ nghiên cứu kéo dài theo nhiều tuần, nhiều tháng
 
-### 11.5.1 官方推荐理解方式
+### 11.5.1 Cách hiểu chuẩn xác theo tài liệu chính thức
 
-- **memory-core / QMD / dreaming**：负责 recall、promotion、search、dreaming
-- **memory-wiki**：负责把 durable memory 编译成可导航的 wiki 页面与结构化 claim/evidence
+- **memory-core / QMD / dreaming**: Phụ trách trích xuất (recall), nâng hạng thông tin (promotion), tìm kiếm (search) và tái cấu trúc ban đêm (dreaming)
+- **memory-wiki**: Phụ trách biên dịch các ký ức bền bỉ (durable memory) thành các trang wiki có thể điều hướng, đi kèm các luận điểm và bằng chứng (claim/evidence) có cấu trúc
 
-### 11.5.2 推荐配置示例
+### 11.5.2 Mẫu cấu hình khuyên dùng
 
 ```json
 {
@@ -331,7 +331,7 @@ openclaw memory status --deep
 }
 ```
 
-### 11.5.3 常用命令
+### 11.5.3 Các câu lệnh thường dùng
 
 ```bash
 openclaw wiki init
@@ -342,26 +342,26 @@ openclaw wiki search "customer onboarding"
 openclaw wiki get entity.alpha
 ```
 
-推荐工作流：
+Quy trình làm việc chuẩn:
 
-1. 先让 memory-core 跑稳
-2. 再开 `memory-wiki`
-3. 默认优先 `isolated` 模式
-4. 如果你明确需要从现有 memory artifact 构建 wiki，再启用 `bridge`
+1. Đảm bảo memory-core chạy ổn định trước
+2. Bật plugin `memory-wiki`
+3. Mặc định ưu tiên chế độ `isolated`
+4. Chỉ bật `bridge` khi bạn thực sự có nhu cầu dựng wiki từ các artifact bộ nhớ sẵn có
 
 ---
 
-## 11.6 执行审批、安全与自托管边界
+## 11.6 Phê duyệt thực thi lệnh, An toàn & Ranh giới máy chủ riêng
 
-### 11.6.1 不要只看 `exec`，要同时看 approval 文件与 tool policy
+### 11.6.1 Không chỉ nhìn vào `exec`, phải đồng bộ file phê duyệt và tool policy
 
-`v2026.4.12` 增加了本地 `exec-policy` 命令，目标是把 `tools.exec.*` 配置和本机审批文件同步起来。但实际落地时，你仍然要同时理解三层东西：
+Từ bản `v2026.4.12`, OpenClaw bổ sung lệnh `exec-policy` cục bộ nhằm đồng bộ giữa cấu hình `tools.exec.*` và tệp phê duyệt trên máy. Tuy nhiên khi triển khai thực tế, bạn cần hiểu rõ sự phối hợp của 3 tầng:
 
-1. `tools.exec.*`
-2. `~/.openclaw/exec-approvals.json`
-3. agent 的 tool policy / allowlist
+1. Cấu hình `tools.exec.*` trong tệp cấu hình
+2. Tệp phê duyệt quyền thực thi `~/.openclaw/exec-approvals.json`
+3. Tool policy và danh sách cho phép (allowlist) của từng agent
 
-最实用的检查命令：
+Các câu lệnh kiểm tra thực tế hữu ích nhất:
 
 ```bash
 openclaw exec-policy show
@@ -369,53 +369,53 @@ openclaw approvals get
 openclaw approvals get --gateway
 ```
 
-如果你要给某些命令做 allowlist：
+Nếu bạn cần cấp quyền cố định cho một số câu lệnh an toàn vào danh sách allowlist:
 
 ```bash
 openclaw approvals allowlist add "~/Projects/**/bin/rg"
 openclaw approvals allowlist add --agent main "/usr/bin/uname"
 ```
 
-### 11.6.2 Hook / Webhook 的安全底线
+### 11.6.2 Nguyên tắc an toàn cốt lõi cho Hook và Webhook
 
-- Hook token 和 gateway token 分开
-- 不要把 hook 暴露在根路径 `/`
-- `hooks.path` 保持独立子路径
-- Webhook 路由尽量绑定最小 `sessionKey`
-- Secret 优先走 `env` / `file` / `exec`，不要写死到仓库里
+- Tách biệt rõ ràng giữa Hook token và Gateway token
+- Tuyệt đối không để lộ hook trực tiếp tại đường dẫn gốc `/`
+- Giữ `hooks.path` ở một đường dẫn con riêng biệt
+- Định tuyến Webhook chỉ nên gắn với phạm vi `sessionKey` tối thiểu cần thiết
+- Lưu trữ Secret ưu tiên qua cơ chế `env` / `file` / `exec`, không ghi cứng vào mã nguồn Git
 
-### 11.6.3 自托管 provider 的私网配置
+### 11.6.3 Cấu hình mạng riêng (Private Network) cho Provider tự lưu trữ
 
-`v2026.4.12` 官方加入了 `models.providers.*.request.allowPrivateNetwork`，用于你明确知道自己在访问可信私网 provider 时放开限制。这个开关非常有用，但也只应该用于**你完全控制的私网服务**。
+Từ bản `v2026.4.12`, hệ thống bổ sung tùy chọn `models.providers.*.request.allowPrivateNetwork` để dỡ bỏ giới hạn khi bạn cần kết nối đến các provider trong mạng nội bộ tin cậy. Tùy chọn này rất hữu ích, nhưng **chỉ nên áp dụng cho các dịch vụ mạng riêng mà bạn nắm toàn quyền kiểm soát**.
 
-适用场景：
+Trường hợp áp dụng thích hợp:
 
-- 自己的 LM Studio / OpenAI-compatible endpoint
-- 内网部署的代理层
-- VPN / Tailnet 内的推理网关
+- Máy chủ LM Studio hoặc endpoint tương thích OpenAI tự dựng trong nhà
+- Tầng proxy nội bộ trong mạng LAN công ty
+- Gateway suy luận nằm trong mạng VPN / Tailscale (Tailnet)
 
-不适用场景：
+Trường hợp KHÔNG nên sử dụng:
 
-- 公网随便开的代理地址
-- 不明来源共享网关
-- 混合代理环境里没有明确边界的 endpoint
+- Địa chỉ proxy mở tùy tiện ngoài Internet công cộng
+- Gateway chia sẻ không rõ nguồn gốc
+- Các endpoint nằm trong môi trường proxy hỗn tạp thiếu ranh giới bảo mật rõ ràng
 
 ---
 
-## 11.7 性能调优：2026.4 值得关注的点
+## 11.7 Tinh chỉnh hiệu năng: Những điểm trọng tâm cần lưu ý
 
-### 11.7.1 先做“结构性调优”，再做“参数性调优”
+### 11.7.1 Tối ưu cấu trúc trước, tinh chỉnh tham số sau
 
-最有效的顺序通常是：
+Trình tự mang lại hiệu quả cao nhất luôn là:
 
-1. 先把主模型 / 回退链配清楚
-2. 再把媒体模型单独拆开
-3. 再开 Active Memory / Memory Wiki
-4. 最后才调 thinking、context、fallback 数量
+1. Thiết lập rõ ràng mô hình chính và chuỗi dự phòng (fallbacks)
+2. Tách biệt riêng các mô hình chuyên biệt cho media
+3. Bật Active Memory và Memory Wiki khi có nhu cầu thực tế
+4. Cuối cùng mới tinh chỉnh các thông số như thinking token, context window và số lượng fallback
 
-### 11.7.2 本地模型用户的新补充
+### 11.7.2 Lưu ý dành cho người dùng mô hình cục bộ
 
-历史 `v2026.4.15-beta.1` 里曾新增过一个本地模型实验参数：
+Trong bản thử nghiệm `v2026.4.15-beta.1` từng có tùy chọn thử nghiệm cho mô hình cục bộ:
 
 ```json
 {
@@ -429,9 +429,9 @@ openclaw approvals allowlist add --agent main "/usr/bin/uname"
 }
 ```
 
-它会在弱本地模型场景下去掉一些重量级默认工具，降低提示词体积。**注意这是历史 beta 能力**，在 `v2026.9.3` 环境里请先查官方配置文档和 `openclaw config schema`，不要直接照抄到生产主环境。
+Tùy chọn này giúp lược bỏ bớt các công cụ nặng mặc định khi chạy mô hình cục bộ cấu hình yếu, giảm đáng kể độ dài của prompt. **Lưu ý đây là tính năng beta lịch sử**. Trên bản ổn định `v2026.9.3`, hãy kiểm tra kỹ tài liệu cấu hình chính thức và lệnh `openclaw config schema`, không nên sao chép bừa bãi vào môi trường sản xuất.
 
-### 11.7.3 本章推荐的检查顺序
+### 11.7.3 Trình tự kiểm tra toàn diện được khuyến nghị
 
 ```bash
 openclaw status
@@ -444,24 +444,24 @@ openclaw security audit
 
 ---
 
-## 11.8 本章实践建议
+## 11.8 Lời khuyên thực hành
 
-如果你正在配一套长期可用的 OpenClaw 环境，最稳的顺序是：
+Nếu bạn đang thiết lập một môi trường OpenClaw sử dụng lâu dài và ổn định, hãy tuân thủ trình tự sau:
 
-1. 先配好 `models auth`、主模型和回退链
-2. 再单独配图片 / 视频 / 音乐模型
-3. 需要长期关系型助手时再开 Active Memory
-4. 需要“可维护知识层”时再开 Memory Wiki
-5. 最后再收紧 exec approvals、hook token 和私网 provider 边界
+1. Cấu hình hoàn chỉnh `models auth`, mô hình chính và chuỗi dự phòng (fallbacks)
+2. Cấu hình riêng rẽ các mô hình tạo ảnh, video và âm thanh
+3. Chỉ bật Active Memory khi cần một trợ lý gắn bó và cá nhân hóa sâu
+4. Chỉ bật Memory Wiki khi cần xây dựng tầng tri thức dự án có cấu trúc
+5. Cuối cùng, thắt chặt phê duyệt lệnh thực thi (exec approvals), tách bạch token và thiết lập ranh giới mạng riêng an toàn
 
 ---
 
-## 11.9 官方参考
+## 11.9 Tài liệu tham khảo chính thức
 
-- GitHub Releases：https://github.com/openclaw/openclaw/releases
-- Models CLI：https://docs.openclaw.ai/cli/models
-- Model Concepts：https://docs.openclaw.ai/concepts/models
-- Inference CLI：https://docs.openclaw.ai/cli/infer
-- Active Memory：https://docs.openclaw.ai/concepts/active-memory
-- Memory Wiki：https://docs.openclaw.ai/plugins/memory-wiki
-- Exec Approvals：https://docs.openclaw.ai/cli/approvals
+- GitHub Releases: https://github.com/openclaw/openclaw/releases
+- Models CLI: https://docs.openclaw.ai/cli/models
+- Khái niệm về Mô hình: https://docs.openclaw.ai/concepts/models
+- Inference CLI: https://docs.openclaw.ai/cli/infer
+- Active Memory: https://docs.openclaw.ai/concepts/active-memory
+- Memory Wiki: https://docs.openclaw.ai/plugins/memory-wiki
+- Quản lý Phê duyệt Thực thi: https://docs.openclaw.ai/cli/approvals

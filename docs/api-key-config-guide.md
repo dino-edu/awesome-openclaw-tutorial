@@ -1,67 +1,68 @@
-# OpenClaw API Key 配置完整指南
+# Hướng dẫn Toàn diện về Cấu hình API Key trong OpenClaw
 
-## 📋 配置方式概览
+## 📋 Tổng quan về các Phương thức Cấu hình
 
-OpenClaw 支持多种 API Key 配置方式，每种方式都有其适用场景和优先级。
+OpenClaw hỗ trợ nhiều phương thức cấu hình API Key khác nhau. Mỗi phương thức đều có kịch bản ứng dụng tối ưu và mức độ ưu tiên riêng biệt.
 
-### 配置方式对比
+### Bảng so sánh các phương thức cấu hình
 
-| 方式 | 优先级 | 适用场景 | 持久化 | 难度 |
-|------|--------|----------|--------|------|
-| 环境变量 | ⭐⭐⭐⭐⭐ 最高 | 临时测试、Docker、CI/CD | ❌ | ⭐ 简单 |
-| Agent 专属配置 | ⭐⭐⭐⭐ 高 | 多 Agent 不同 Key | ✅ | ⭐⭐ 中等 |
-| 全局配置 | ⭐⭐⭐ 中 | 所有 Agent 共享 | ✅ | ⭐ 简单 |
-| 配置向导 | ⭐⭐ 低 | 首次安装 | ✅ | ⭐ 简单 |
+| Phương thức | Mức độ ưu tiên | Kịch bản phù hợp | Lưu bền vững (Persistent) | Độ khó |
+|---|---|---|---|---|
+| Biến môi trường (Environment Variables) | ⭐⭐⭐⭐⭐ Cao nhất | Thử nghiệm nhanh, Docker, CI/CD | ❌ Không | ⭐ Rất dễ |
+| Cấu hình riêng cho từng Agent | ⭐⭐⭐⭐ Cao | Nhiều Agent dùng các Key khác nhau | ✅ Có | ⭐⭐ Trung bình |
+| Cấu hình toàn cục (Global Config) | ⭐⭐⭐ Trung bình | Dùng chung cho tất cả Agent | ✅ Có | ⭐ Rất dễ |
+| Trình hướng dẫn cấu hình (Onboarding Wizard) | ⭐⭐ Thấp | Thiết lập lần đầu | ✅ Có | ⭐ Rất dễ |
 
 ---
 
-## 🔄 配置优先级
+## 🔄 Thứ tự Ưu tiên Cấu hình
 
-### 优先级顺序（从高到低）
+### Sơ đồ phân cấp ưu tiên (Từ cao xuống thấp)
 
 ```text
-1. 环境变量（最高优先级）
+1. Biến môi trường (Mức ưu tiên cao nhất)
    ↓
-2. Agent 专属配置
+2. Cấu hình riêng cho Agent (Agent-specific Config)
    ↓
-3. 全局配置
+3. Cấu hình toàn cục (Global Config)
    ↓
-4. 配置向导
+4. Trình hướng dẫn cấu hình (Onboarding Wizard)
    ↓
-5. 默认值（最低优先级）
+5. Giá trị mặc định của hệ thống (Mức ưu tiên thấp nhất)
 ```
 
-### 优先级示例
+### Ví dụ minh họa về độ ưu tiên
 
-假设你同时配置了：
+Giả sử bạn đồng thời thiết lập 3 nguồn:
 
 ```bash
-# 1. 环境变量
+# 1. Biến môi trường
 export ANTHROPIC_API_KEY="sk-ant-env"
 
-# 2. Agent 配置
+# 2. Cấu hình Agent
 openclaw config set models.providers.anthropic.apiKey "sk-ant-agent" --agent tech-dev
 
-# 3. 全局配置
+# 3. Cấu hình toàn cục
 openclaw config set models.providers.anthropic.apiKey "sk-ant-global"
-```text
-**实际使用**: `sk-ant-env`（环境变量优先级最高）
+```
+
+**Giá trị thực tế được sử dụng**: `sk-ant-env` (do biến môi trường luôn giữ quyền ưu tiên cao nhất).
 
 ---
 
-## 🎯 方式一：环境变量（推荐：临时测试）
+## 🎯 Phương thức 1: Biến Môi trường (Khuyên dùng cho Thử nghiệm Tạm thời)
 
-### 适用场景
+### Kịch bản phù hợp
 
-- ✅ 临时测试不同的 API Key
-- ✅ Docker 容器部署
-- ✅ CI/CD 自动化
-- ✅ 不想写入配置文件
-- ✅ 需要最高优先级
+- ✅ Thử nghiệm nhanh các API Key khác nhau mà không muốn ghi file
+- ✅ Triển khai trong container Docker
+- ✅ Tự động hóa qua luồng CI/CD
+- ✅ Không muốn lưu thông tin bí mật vào tệp cấu hình trên đĩa
+- ✅ Cần quyền ưu tiên tuyệt đối ghi đè tạm thời
 
-### 配置方法
+### Cách thiết lập
 
-#### 临时设置（当前会话）
+#### Thiết lập tạm thời (Chỉ áp dụng trong phiên terminal hiện tại)
 
 ```bash
 # Anthropic
@@ -78,85 +79,92 @@ export DEEPSEEK_API_KEY="sk-xxx"
 
 # Moonshot
 export MOONSHOT_API_KEY="sk-xxx"
-```text
-#### 永久设置（写入 Shell 配置）
+```
+
+#### Thiết lập vĩnh viễn (Ghi vào tệp cấu hình Shell)
 
 **macOS/Linux (zsh)**:
 ```bash
-# 添加到 ~/.zshrc
+# Thêm vào ~/.zshrc
 echo 'export ANTHROPIC_API_KEY="sk-ant-xxx"' >> ~/.zshrc
 source ~/.zshrc
-```text
+```
+
 **macOS/Linux (bash)**:
 ```bash
-# 添加到 ~/.bashrc
+# Thêm vào ~/.bashrc
 echo 'export ANTHROPIC_API_KEY="sk-ant-xxx"' >> ~/.bashrc
 source ~/.bashrc
-```text
+```
+
 **Windows (PowerShell)**:
 ```powershell
-# 临时设置
+# Thiết lập tạm thời
 $env:ANTHROPIC_API_KEY="sk-ant-xxx"
 
-# 永久设置（用户级）
+# Thiết lập vĩnh viễn ở cấp người dùng (User-level)
 [System.Environment]::SetEnvironmentVariable("ANTHROPIC_API_KEY", "sk-ant-xxx", "User")
-```text
-### 验证配置
+```
+
+### Kiểm tra cấu hình
 
 ```bash
-# 查看环境变量
+# Xem giá trị biến môi trường
 echo $ANTHROPIC_API_KEY
 
-# 测试连接
+# Kiểm tra danh sách mô hình
 openclaw models list
-```text
-### 优点和缺点
+```
 
-**优点**:
-- ✅ 最高优先级，覆盖所有其他配置
-- ✅ 灵活，易于切换
-- ✅ 适合 Docker 和 CI/CD
-- ✅ 不写入配置文件，更安全
+### Đánh giá ưu và nhược điểm
 
-**缺点**:
-- ❌ 临时设置重启后失效
-- ❌ 不适合多 Agent 场景
-- ❌ 需要在每个终端会话中设置
+**Ưu điểm**:
+- ✅ Ưu tiên cao nhất, lập tức ghi đè mọi cấu hình khác
+- ✅ Linh hoạt, dễ dàng chuyển đổi nhanh
+- ✅ Rất phù hợp với Docker và quy trình CI/CD
+- ✅ Không lưu vết vào file cấu hình cục bộ, an toàn hơn khi chia sẻ code
+
+**Nhược điểm**:
+- ❌ Nếu chỉ gõ tạm trong terminal thì sẽ mất khi đóng cửa sổ
+- ❌ Khó áp dụng nếu muốn mỗi Agent dùng một API Key khác nhau
+- ❌ Cần thiết lập lại nếu mở cửa sổ terminal mới mà chưa thêm vào profile
 
 ---
 
-## 🎯 方式二：Agent 专属配置（推荐：多 Agent）
+## 🎯 Phương thức 2: Cấu hình Riêng cho Từng Agent (Khuyên dùng cho Đa Agent)
 
-### 适用场景
+### Kịch bản phù hợp
 
-- ✅ 多个 Agent 使用不同的 API Key
-- ✅ 需要隔离配置
-- ✅ 长期使用
-- ✅ 需要持久化
+- ✅ Nhiều Agent phụ trách các mảng khác nhau và dùng API Key riêng biệt
+- ✅ Cần cô lập và cách ly hoàn toàn cấu hình giữa các Agent
+- ✅ Vận hành ổn định, lâu dài
+- ✅ Cần lưu cấu hình bền vững trên đĩa
 
-### 配置方法
+### Cách thiết lập
 
-#### 使用命令行
+#### Sử dụng dòng lệnh CLI
 
 ```bash
-# 为特定 Agent 配置
+# Cấu hình API Key cho một Agent cụ thể
 openclaw config set models.providers.anthropic.apiKey "sk-ant-xxx" --agent tech-dev
 
-# 为另一个 Agent 配置不同的 Key
+# Cấu hình API Key khác cho một Agent khác
 openclaw config set models.providers.openai.apiKey "sk-yyy" --agent content-writer
 
-# 验证配置
+# Kiểm tra lại cấu hình của Agent
 openclaw config get models.providers.anthropic.apiKey --agent tech-dev
-```text
-#### 直接编辑配置文件
+```
 
-**配置文件位置**: `~/.openclaw/agents/<agentId>/openclaw.json`
+#### Chỉnh sửa trực tiếp tệp cấu hình
+
+**Đường dẫn tệp**: `~/.openclaw/agents/<agentId>/openclaw.json`
 
 ```bash
-# 编辑配置文件
+# Mở tệp cấu hình bằng trình soạn thảo nano
 nano ~/.openclaw/agents/tech-dev/openclaw.json
-```text
-**配置内容**:
+```
+
+**Nội dung cấu hình**:
 ```json
 {
   "models": {
@@ -169,74 +177,79 @@ nano ~/.openclaw/agents/tech-dev/openclaw.json
     }
   }
 }
-```text
-### 验证配置
+```
+
+### Kiểm tra cấu hình
 
 ```bash
-# 查看 Agent 配置
+# Xem toàn bộ cấu hình của Agent
 openclaw config get --agent tech-dev
 
-# 测试连接
+# Gửi tin nhắn kiểm tra kết nối
 openclaw agent --message --agent tech-dev "Hello"
-```text
-### 优点和缺点
+```
 
-**优点**:
-- ✅ 每个 Agent 独立配置
-- ✅ 配置隔离，互不影响
-- ✅ 持久化存储
-- ✅ 适合多 Agent 场景
+### Đánh giá ưu và nhược điểm
 
-**缺点**:
-- ❌ 需要为每个 Agent 单独配置
-- ❌ 管理成本较高
-- ❌ 被环境变量覆盖
+**Ưu điểm**:
+- ✅ Mỗi Agent được cấu hình hoàn toàn độc lập
+- ✅ Cách ly rõ ràng, thay đổi bên Agent này không ảnh hưởng đến Agent khác
+- ✅ Lưu trữ bền vững trên đĩa
+- ✅ Cực kỳ phù hợp cho môi trường vận hành nhiều trợ lý chuyên biệt
+
+**Nhược điểm**:
+- ❌ Phải thiết lập thủ công cho từng Agent
+- ❌ Tốn công quản lý hơn khi số lượng Agent tăng lên
+- ❌ Vẫn bị biến môi trường ghi đè nếu biến môi trường có giá trị
 
 ---
 
-## 🎯 方式三：全局配置（推荐：单 Agent）
+## 🎯 Phương thức 3: Cấu hình Toàn cục (Khuyên dùng cho Cấu hình Đơn Agent)
 
-### 适用场景
+### Kịch bản phù hợp
 
-- ✅ 所有 Agent 共享同一个 API Key
-- ✅ 单 Agent 使用
-- ✅ 长期使用
-- ✅ 需要持久化
+- ✅ Tất cả Agent dùng chung một tài khoản / API Key
+- ✅ Hệ thống chỉ chạy một Agent duy nhất
+- ✅ Sử dụng ổn định lâu dài
+- ✅ Cần lưu bền vững trên đĩa
 
-### 配置方法
+### Cách thiết lập
 
-#### 方法1：交互式命令（推荐新手）
+#### Cách 1: Sử dụng lệnh tương tác (Phù hợp nhất với người mới)
 
 ```bash
-# 运行交互式命令
+# Chạy lệnh thêm xác thực dạng tương tác
 openclaw models auth add
 
-# 按提示操作：
-# 1. 选择 provider（如 anthropic）
-# 2. 输入 API Key
-# 3. 确认保存
-```text
-#### 方法2：配置命令
+# Làm theo hướng dẫn trên màn hình:
+# 1. Chọn provider (ví dụ: anthropic)
+# 2. Nhập API Key
+# 3. Xác nhận lưu cấu hình
+```
+
+#### Cách 2: Sử dụng lệnh thiết lập cấu hình trực tiếp
 
 ```bash
-# 直接设置
+# Thiết lập API Key toàn cục
 openclaw config set models.providers.anthropic.apiKey "sk-ant-xxx"
 
-# 设置默认 model
+# Thiết lập mô hình mặc định
 openclaw config set models.default "anthropic/claude-sonnet-4-5"
 
-# 验证配置
+# Kiểm tra lại giá trị
 openclaw config get models.providers.anthropic.apiKey
-```text
-#### 方法3：直接编辑配置文件
+```
 
-**配置文件位置**: `~/.openclaw/openclaw.json`
+#### Cách 3: Chỉnh sửa trực tiếp tệp cấu hình toàn cục
+
+**Đường dẫn tệp**: `~/.openclaw/openclaw.json`
 
 ```bash
-# 编辑配置文件
+# Mở tệp cấu hình toàn cục
 nano ~/.openclaw/openclaw.json
-```text
-**配置内容**:
+```
+
+**Nội dung cấu hình**:
 ```json
 {
   "models": {
@@ -251,271 +264,274 @@ nano ~/.openclaw/openclaw.json
     }
   }
 }
-```text
-### 验证配置
+```
+
+### Kiểm tra cấu hình
 
 ```bash
-# 查看全局配置
+# Xem toàn bộ cấu hình toàn cục
 openclaw config get
 
-# 测试连接
+# Kiểm tra danh sách mô hình
 openclaw models list
-```text
-### 优点和缺点
+```
 
-**优点**:
-- ✅ 配置一次，全局生效
-- ✅ 持久化存储
-- ✅ 适合大多数场景
-- ✅ 管理简单
+### Đánh giá ưu và nhược điểm
 
-**缺点**:
-- ❌ 无法区分不同 Agent
-- ❌ 被环境变量和 Agent 配置覆盖
+**Ưu điểm**:
+- ✅ Thiết lập một lần, có hiệu lực trên toàn bộ hệ thống
+- ✅ Lưu trữ bền vững trên đĩa
+- ✅ Phù hợp với đại đa số nhu cầu cơ bản
+- ✅ Quản lý dễ dàng, trực quan
+
+**Nhược điểm**:
+- ❌ Không phân tách được chìa khóa riêng cho từng Agent
+- ❌ Vẫn bị cấu hình riêng của Agent hoặc biến môi trường ghi đè
 
 ---
 
-## 🎯 方式四：配置向导（推荐：首次安装）
+## 🎯 Phương thức 4: Trình Hướng dẫn Onboarding (Khuyên dùng khi Cài đặt Mới)
 
-### 适用场景
+### Kịch bản phù hợp
 
-- ✅ 首次安装 OpenClaw
-- ✅ 不熟悉命令行
-- ✅ 需要交互式引导
+- ✅ Vừa cài đặt OpenClaw lần đầu
+- ✅ Chưa quen với các câu lệnh dòng lệnh phức tạp
+- ✅ Muốn được hệ thống dẫn dắt từng bước tương tác
 
-### 配置方法
+### Cách thiết lập
 
 ```bash
-# 运行配置向导
+# Khởi chạy wizard hướng dẫn
 openclaw onboard
 
-# 按提示操作：
-# 1. 选择 provider
-# 2. 输入 API Key
-# 3. 选择默认 model
-# 4. 完成配置
-```text
-### 验证配置
+# Thực hiện theo các bước trên màn hình:
+# 1. Chọn nhà cung cấp mô hình (provider)
+# 2. Nhập API Key tương ứng
+# 3. Chọn mô hình mặc định muốn dùng
+# 4. Hoàn tất quá trình thiết lập
+```
+
+### Kiểm tra cấu hình
 
 ```bash
-# 查看配置
+# Xem cấu hình vừa tạo
 openclaw config get
 
-# 测试连接
+# Kiểm tra trạng thái các kênh kết nối
 openclaw channels status
-```text
-### 优点和缺点
+```
 
-**优点**:
-- ✅ 交互式，不易出错
-- ✅ 适合新手
-- ✅ 一次性完成所有配置
+### Đánh giá ưu và nhược điểm
 
-**缺点**:
-- ❌ 只能配置一次
-- ❌ 修改配置需要其他方式
-- ❌ 优先级最低
+**Ưu điểm**:
+- ✅ Trực quan, giao diện hỏi đáp dễ thao tác, tránh gõ nhầm cú pháp
+- ✅ Cực kỳ thân thiện với người mới
+- ✅ Hoàn thành trọn gói cấu hình cơ bản trong một lần chạy
+
+**Nhược điểm**:
+- ❌ Chỉ tiện khi thiết lập ban đầu
+- ❌ Khi muốn sửa đổi sau này thì dùng các lệnh chuyên biệt sẽ nhanh hơn
+- ❌ Có độ ưu tiên thấp nhất trong số các phương thức lưu trữ cấu hình
 
 ---
 
-## 🔍 配置验证
+## 🔍 Kiểm tra và Xác minh Cấu hình Thực tế
 
-### 检查配置是否生效
+### Các bước kiểm tra xem cấu hình đã thực sự có hiệu lực chưa
 
 ```bash
-# 1. 查看配置
+# 1. Xem giá trị cấu hình trong file
 openclaw config get models.providers.anthropic.apiKey
 
-# 2. 查看环境变量
+# 2. Kiểm tra xem biến môi trường có đang tồn tại không
 echo $ANTHROPIC_API_KEY
 
-# 3. 测试 API 连接
+# 3. Kiểm tra khả năng kết nối gọi API thực tế
 openclaw models list
 
-# 4. 查看 Gateway 状态
+# 4. Kiểm tra trạng thái Gateway
 openclaw channels status
 
-# 5. 发送测试消息
+# 5. Gửi một tin nhắn thử nghiệm thực tế
 openclaw agent --message "Hello, test API Key"
-```text
-### 查看生效的配置
+```
+
+### Cách xem các giá trị cấu hình đang thực sự hoạt động
 
 ```bash
-# 查看当前使用的 model
+# Xem mô hình đang được dùng mặc định
 openclaw config get models.default
 
-# 查看所有 provider 配置
+# Xem toàn bộ cấu hình các provider
 openclaw config get models.providers
 
-# 以 JSON 格式输出
+# Xuất toàn bộ cấu hình ra định dạng JSON
 openclaw config get --json
-```text
+```
+
 ---
 
-## 🔧 配置故障排查
+## 🔧 Hướng dẫn Chẩn đoán và Xử lý Sự cố Cấu hình
 
-### 问题1：配置后不生效
+### Vấn đề 1: Đã điền API Key nhưng hệ thống vẫn báo chưa cấu hình
 
-**症状**: 设置了 API Key，但仍然提示未配置
+**Hiện tượng**: Bạn đã lưu API Key nhưng khi gọi lệnh vẫn nhận được thông báo lỗi thiếu khóa xác thực.
 
-**排查步骤**:
+**Các bước xử lý**:
 
-1. **检查配置优先级**
+1. **Rà soát lại thứ tự ưu tiên cấu hình**:
    ```bash
-   # 检查环境变量（最高优先级）
+   # Kiểm tra biến môi trường (Ưu tiên cao nhất)
    echo $ANTHROPIC_API_KEY
    
-   # 检查 Agent 配置
+   # Kiểm tra cấu hình riêng của Agent
    openclaw config get models.providers.anthropic.apiKey --agent tech-dev
    
-   # 检查全局配置
+   # Kiểm tra cấu hình toàn cục
    openclaw config get models.providers.anthropic.apiKey
    ```
 
-2. **重启 Gateway**
+2. **Khởi động lại Gateway để nạp cấu hình mới**:
    ```bash
    openclaw gateway restart
    ```
 
-3. **查看日志**
+3. **Xem nhật ký log để tìm nguyên nhân cụ thể**:
    ```bash
    openclaw logs --tail 50
    ```
 
-4. **验证 API Key 格式**
-   ```bash
-   # Anthropic: sk-ant-xxx
-   # OpenAI: sk-xxx
-   # Google: xxx
-   ```
+4. **Kiểm tra định dạng của API Key**:
+   - Khóa Anthropic: Bắt đầu bằng tiền tố `sk-ant-xxx`
+   - Khóa OpenAI: Bắt đầu bằng tiền tố `sk-xxx`
+   - Khóa Google: Thường là chuỗi ký tự không có tiền tố cố định
 
 ---
 
-### 问题2：多个 Agent 使用不同的 API Key
+### Vấn đề 2: Muốn phân tách nhiều Agent dùng các API Key khác nhau
 
-**场景**: 需要为不同的 Agent 配置不同的 API Key
+**Bài toán**: Bạn muốn Agent hỗ trợ kỹ thuật dùng tài khoản công ty, còn Agent viết nội dung dùng tài khoản cá nhân.
 
-**解决方案**:
+**Giải pháp**:
 
 ```bash
-# 方案1：使用 Agent 专属配置
+# Phương án 1: Cấu hình riêng biệt cho từng Agent (Bền vững)
 openclaw config set models.providers.anthropic.apiKey "sk-ant-xxx" --agent tech-dev
 openclaw config set models.providers.openai.apiKey "sk-yyy" --agent content-writer
 
-# 方案2：使用环境变量（临时切换）
+# Phương án 2: Chuyển đổi qua biến môi trường tạm thời
 export ANTHROPIC_API_KEY="sk-ant-xxx"
 openclaw agent --message --agent tech-dev "Hello"
 
 export ANTHROPIC_API_KEY="sk-ant-yyy"
 openclaw agent --message --agent content-writer "Hello"
-```text
+```
+
 ---
 
-### 问题3：如何切换 provider
+### Vấn đề 3: Làm thế nào để đổi nhanh nhà cung cấp mô hình (Provider)?
 
-**场景**: 需要在不同的 AI provider 之间切换
+**Bài toán**: Đang dùng Claude nhưng muốn chuyển qua GPT hoặc Gemini để đối chiếu kết quả.
 
-**解决方案**:
+**Giải pháp**:
 
 ```bash
-# 查看当前 provider
+# Xem mô hình mặc định hiện tại
 openclaw config get models.default
 
-# 切换到 Anthropic
+# Chuyển mô hình mặc định sang Anthropic Claude
 openclaw config set models.default "anthropic/claude-sonnet-4-5"
 
-# 切换到 OpenAI
+# Chuyển mô hình mặc định sang OpenAI GPT-4
 openclaw config set models.default "openai/gpt-4"
 
-# 切换到 Google
+# Chuyển mô hình mặc định sang Google Gemini
 openclaw config set models.default "google/gemini-pro"
 
-# 验证
+# Xác thực lại danh sách khả dụng
 openclaw models list
-```text
+```
+
 ---
 
-### 问题4：API Key 泄露了怎么办
+### Vấn đề 4: Phải làm gì khi phát hiện API Key bị lộ?
 
-**应急措施**:
+**Các bước xử lý khẩn cấp**:
 
-1. **立即撤销旧 Key**
-   - 登录 provider 控制台
-   - 撤销泄露的 API Key
+1. **Thu hồi ngay lập tức khóa bị lộ trên console**:
+   - Đăng nhập vào trang quản trị của provider (Anthropic Console, OpenAI Dashboard, v.v.)
+   - Nhấn Revoke / Delete khóa API bị rò rỉ ngay lập tức
 
-2. **生成新 Key**
-   - 在 provider 控制台生成新 Key
+2. **Khởi tạo khóa mới**:
+   - Sinh một API Key mới hoàn toàn trên bảng điều khiển của nhà cung cấp
 
-3. **更新配置**
+3. **Cập nhật lại cấu hình trong OpenClaw**:
    ```bash
-   # 更新全局配置
+   # Cập nhật trong cấu hình toàn cục
    openclaw config set models.providers.anthropic.apiKey "sk-ant-new"
    
-   # 或更新环境变量
+   # Hoặc cập nhật trong biến môi trường
    export ANTHROPIC_API_KEY="sk-ant-new"
    ```
 
-4. **清理旧配置**
+4. **Dọn sạch khóa cũ trong các file trên đĩa**:
    ```bash
-   # 检查所有配置文件
+   # Tìm kiếm xem khóa cũ còn sót ở đâu không
    grep -r "sk-ant-old" ~/.openclaw/
    
-   # 删除旧 Key
+   # Hủy cấu hình khóa cũ nếu cần
    openclaw config unset models.providers.anthropic.apiKey
    ```
 
 ---
 
-## 📋 配置最佳实践
+## 📋 Chiến lược Cấu hình Tối ưu Khuyên dùng
 
-### 推荐的配置策略
+### Dành cho người mới bắt đầu
 
-#### 新手用户
-
-1. **使用配置向导**
+1. **Sử dụng wizard hướng dẫn**:
    ```bash
    openclaw onboard
    ```
 
-2. **或使用全局配置**
+2. **Hoặc thêm xác thực toàn cục trực tiếp**:
    ```bash
    openclaw models auth add
    ```
 
-3. **验证配置**
+3. **Kiểm tra kết nối**:
    ```bash
    openclaw models list
    ```
 
-#### 进阶用户
+### Dành cho người dùng nâng cao
 
-1. **使用 Agent 专属配置**
+1. **Sử dụng cấu hình riêng cho từng Agent**:
    ```bash
    openclaw config set models.providers.anthropic.apiKey "sk-ant-xxx" --agent tech-dev
    ```
 
-2. **合理利用配置优先级**
-   - 全局配置作为默认
-   - Agent 配置作为覆盖
-   - 环境变量作为临时切换
+2. **Tận dụng linh hoạt các tầng ưu tiên**:
+   - Cấu hình toàn cục làm giá trị mặc định cho toàn hệ thống
+   - Cấu hình riêng cho Agent dùng để ghi đè theo từng nghiệp vụ chuyên biệt
+   - Biến môi trường dùng cho các trường hợp thử nghiệm nhanh hoặc trong script tạm
 
-3. **定期备份配置**
+3. **Định kỳ sao lưu thư mục cấu hình**:
    ```bash
    cp -r ~/.openclaw ~/.openclaw.backup-$(date +%Y%m%d)
    ```
 
-#### 企业用户
+### Dành cho môi trường Doanh nghiệp / Production
 
-1. **使用环境变量管理敏感信息**
-   ```bash
-   # 在 Docker Compose 中
+1. **Sử dụng biến môi trường hoặc Secret Manager để quản lý khóa nhạy cảm**:
+   ```yaml
+   # Trong tệp docker-compose.yml
    environment:
      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
    ```
 
-2. **版本控制配置模板**
-   ```bash
-   # 配置模板（不包含真实 Key）
+2. **Quản lý cấu hình mẫu qua Git (Tuyệt đối không lưu khóa thật)**:
+   ```json
    {
      "models": {
        "providers": {
@@ -527,85 +543,85 @@ openclaw models list
    }
    ```
 
-3. **自动化配置部署**
+3. **Tự động hóa triển khai qua kịch bản**:
    ```bash
-   # 使用脚本自动配置
    ./scripts/setup-config.sh
    ```
 
 ---
 
-## 🔐 安全建议
+## 🔐 Nguyên tắc Bảo mật Trọng yếu
 
-### API Key 安全管理
+### Quản lý API Key an toàn
 
-1. **不要硬编码 API Key**
-   - ❌ 不要写在代码中
-   - ❌ 不要提交到 Git
-   - ✅ 使用环境变量或配置文件
+1. **Tuyệt đối không lưu cứng (hardcode) API Key**:
+   - ❌ Không viết thẳng API Key vào mã nguồn ứng dụng
+   - ❌ Không commit file chứa Key lên Git repository
+   - ✅ Luôn truyền qua biến môi trường hoặc file cấu hình riêng được bảo vệ
 
-2. **使用 .gitignore**
+2. **Cấu hình tệp `.gitignore` chuẩn xác**:
    ```bash
-   # .gitignore
+   # Thêm vào .gitignore
    .openclaw/openclaw.json
    .openclaw/agents/*/openclaw.json
    .openclaw/credentials/
    .env
    ```
 
-3. **定期轮换 API Key**
-   - 每 3-6 个月更换一次
-   - 发现泄露立即更换
+3. **Định kỳ luân chuyển (rotate) API Key**:
+   - Thay đổi API Key mới sau mỗi 3 đến 6 tháng
+   - Lập tức đổi khóa mới nếu nghi ngờ có rò rỉ
 
-4. **使用最小权限原则**
-   - 只授予必要的权限
-   - 不同用途使用不同的 Key
+4. **Áp dụng nguyên tắc đặc quyền tối thiểu (Least Privilege)**:
+   - Chỉ cấp đúng quyền và hạn mức chi tiêu cần thiết cho từng Key
+   - Tách biệt rõ ràng giữa Key dùng cho môi trường thử nghiệm và môi trường sản xuất
 
-5. **监控 API 使用情况**
-   - 定期检查 API 调用量
-   - 发现异常立即处理
-
----
-
-## 📚 相关文档
-
-- [配置文件结构完整指南](config-file-structure.md) - 配置文件详细说明
-- [第2章：安装配置](01-basics/02-installation.md) - 基础配置教程
-- [第11章：高级配置](03-advanced/11-advanced-configuration.md) - 模型、记忆、审批与性能
+5. **Giám sát lượng tiêu thụ API thường xuyên**:
+   - Theo dõi biểu đồ gọi API trên console của nhà cung cấp
+   - Cài đặt cảnh báo hạn mức (budget alert) để tránh phát sinh cước phí ngoài ý muốn
 
 ---
 
-## 💡 常见问题 FAQ
+## 📚 Tài liệu Tham khảo Liên quan
 
-### Q1: 我应该使用哪种配置方式？
+- [Hướng dẫn Cấu trúc Tệp Cấu hình](config-file-structure.md) - Giải thích chi tiết các tệp trong thư mục `~/.openclaw`
+- [Chương 2: Cài đặt và Môi trường](01-basics/02-installation.md) - Hướng dẫn triển khai nền tảng
+- [Chương 11: Cấu hình Nâng cao](03-advanced/11-advanced-configuration.md) - Mô hình, bộ nhớ, phê duyệt và tối ưu hiệu năng
 
-**A**: 根据你的场景选择：
-- 新手：使用配置向导或全局配置
-- 多 Agent：使用 Agent 专属配置
-- 临时测试：使用环境变量
-- Docker 部署：使用环境变量
+---
 
-### Q2: 配置优先级是怎样的？
+## 💡 Câu hỏi Thường gặp (FAQ)
 
-**A**: 环境变量 > Agent 配置 > 全局配置 > 配置向导 > 默认值
+### Q1: Tôi nên lựa chọn phương thức cấu hình nào?
 
-### Q3: 如何查看当前使用的 API Key？
+**Trả lời**: Tùy theo trường hợp của bạn:
+- Người mới bắt đầu: Dùng `openclaw onboard` hoặc cấu hình toàn cục
+- Hệ thống nhiều Agent: Dùng cấu hình riêng cho từng Agent
+- Thử nghiệm nhanh: Gán biến môi trường trong terminal
+- Môi trường Docker / CI/CD: Dùng biến môi trường
 
-**A**: 
+### Q2: Thứ tự ưu tiên cấu hình chính xác là gì?
+
+**Trả lời**: `Biến môi trường` > `Cấu hình riêng của Agent` > `Cấu hình toàn cục` > `Trình hướng dẫn Onboard` > `Giá trị mặc định của hệ thống`.
+
+### Q3: Làm sao để kiểm tra API Key nào đang thực sự được dùng?
+
+**Trả lời**:
 ```bash
 openclaw config get models.providers.anthropic.apiKey
-```text
-### Q4: 配置后不生效怎么办？
+```
 
-**A**: 
-1. 检查配置优先级
-2. 重启 Gateway
-3. 查看日志
-4. 验证 API Key 格式
+### Q4: Đã lưu cấu hình nhưng OpenClaw không nhận thì xử lý sao?
 
-### Q5: 如何为不同的 Agent 配置不同的 API Key？
+**Trả lời**:
+1. Kiểm tra xem có biến môi trường nào đang ghi đè không (`echo $ANTHROPIC_API_KEY`)
+2. Khởi động lại Gateway (`openclaw gateway restart`)
+3. Xem nhật ký lỗi (`openclaw logs --tail 50`)
+4. Kiểm tra lại định dạng chuỗi ký tự của API Key
 
-**A**: 
+### Q5: Làm thế nào để mỗi Agent dùng một API Key khác nhau?
+
+**Trả lời**:
 ```bash
 openclaw config set models.providers.anthropic.apiKey "sk-ant-xxx" --agent agent1
 openclaw config set models.providers.openai.apiKey "sk-yyy" --agent agent2
@@ -613,5 +629,5 @@ openclaw config set models.providers.openai.apiKey "sk-yyy" --agent agent2
 
 ---
 
-**最后更新**: 2026-02-14  
-**适用版本**: OpenClaw 2026.3.2+
+**Cập nhật lần cuối**: 14/02/2026  
+**Phiên bản áp dụng**: OpenClaw 2026.3.2+
