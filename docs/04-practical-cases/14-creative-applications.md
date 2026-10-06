@@ -1,98 +1,100 @@
-> 📖 **纸质书《OpenClaw超级个体实操手册》已上市！** 清华大学出版社出版，在开源教程基础上全面重写+逐条验证。🛒 [京东专属购买链接（¥42，原价¥59.8）](https://item.jd.com/14669463.html)
+> 📖 **Giáo trình Awesome OpenClaw Tutorial** | Bản dịch tiếng Việt chính thức cho cộng đồng. Nguyên tác thuộc về tác giả [@xianyu110](https://github.com/xianyu110).
 
-# 第14章节 创意应用实战（图片、视频、音乐、TTS、ComfyUI）
+# Chương 14: Thực chiến Ứng dụng Sáng tạo (Hình ảnh, Video, Âm nhạc, TTS, ComfyUI)
 
-> 本章目标：把旧教程里零散的“画图 / 视频 / 语音 / 第三方 Skill”写法，收束成 OpenClaw 当前官方支持的媒体工作流。
-
----
-
-## 版本基线
-
-- **当前稳定版**：`v2026.9.3`（2026-09-08 发布）
-- 本章默认按 `v2026.9.3` 稳定版写；所有创意能力优先参考官方媒体能力矩阵
+> Mục tiêu chương này: Gom các cách làm rời rạc kiểu cũ về "vẽ tranh / video / giọng nói / Skill bên thứ ba" thành các luồng công việc media được OpenClaw hỗ trợ chính thức hiện nay.
 
 ---
 
-## 先给小白的阅读说明
+## Baseline phiên bản
 
-### 如果你只是想先做出一个结果，别整章都看
-
-- **想先出一张图**：直接看 `14.2`
-- **想先生成语音**：直接看 `14.4.2`
-- **想先试视频**：直接看 `14.3`，但要知道视频是异步任务
-- **想做本地可控工作流**：最后再看 `14.5` 的 ComfyUI
-
-### 开始前要先知道的 2 件事
-
-1. 图片和 TTS 通常是**同步返回**，比较适合新手先试
-2. 视频和音乐通常是**后台异步任务**，所以不要以为“命令没立刻吐文件就是失败”
-
-### 小白最容易误会的地方
-
-- 把“图片理解模型”当成“图片生成模型”
-- 不知道视频生成要去 `tasks` 里看状态
-- 看见 provider 很多，就误以为每个都必须配置
+- **Phiên bản ổn định hiện tại**: `v2026.9.3` (Phát hành ngày 08-09-2026)
+- Chương này mặc định viết theo phiên bản ổn định `v2026.9.3`; mọi năng lực sáng tạo ưu tiên tham chiếu ma trận năng lực media chính thức của OpenClaw
 
 ---
 
-## 14.1 先记住这张官方媒体能力图谱
+## Hướng dẫn đọc dành cho người mới bắt đầu
 
-OpenClaw 当前的媒体能力不是零散插件，而是一套共享能力层：
+### Nếu bạn chỉ muốn tạo ra một sản phẩm đầu ra trước, đừng đọc cả chương cùng lúc
 
-| 能力 | 工具 / 命令 | 常见 provider | 说明 |
-|------|-------------|---------------|------|
-| 图片生成 | `image_generate` / `openclaw infer image generate` | ComfyUI、fal、Google、MiniMax、OpenAI、Vydra | 文生图、参考图编辑 |
-| 视频生成 | `video_generate` / `openclaw infer video generate` | Alibaba、BytePlus、ComfyUI、fal、Google、MiniMax、OpenAI、Qwen、Runway、Together、Vydra、xAI | 文生视频、图生视频、视频转视频 |
-| 音乐生成 | `music_generate` | ComfyUI、Google、MiniMax | 生成音乐 / 音轨 |
-| TTS | `tts` / `openclaw infer tts convert` | ElevenLabs、Microsoft、MiniMax、OpenAI | 把文本转成语音 |
-| 媒体理解 | `image describe` / `audio transcribe` / `video describe` | 各类多模态 provider | 读图、读音频、读视频 |
+- **Muốn tạo ngay một bức ảnh**: Đọc trực tiếp mục `14.2`
+- **Muốn sinh giọng nói trước**: Đọc trực tiếp mục `14.4.2`
+- **Muốn thử làm video**: Đọc trực tiếp mục `14.3`, nhưng cần biết rằng sinh video là một tác vụ bất đồng bộ
+- **Muốn xây dựng quy trình cục bộ có thể kiểm soát cao**: Đọc phần ComfyUI ở mục `14.5` sau cùng
 
-最重要的两点：
+### 2 điều cần biết trước khi bắt đầu
 
-1. **图片和 TTS 更偏同步**
-2. **视频和音乐是异步后台任务**，会进入 task ledger，完成后再唤醒 agent 把结果发回原会话
+1. Hình ảnh và TTS thường là các thao tác **trả về đồng bộ**, rất thích hợp để người mới thử nghiệm trước
+2. Video và âm nhạc thường là các **tác vụ chạy nền bất đồng bộ**, vì vậy đừng tưởng rằng "lệnh không lập tức nhả file ra là đã bị lỗi"
+
+### Những điểm người mới dễ hiểu lầm nhất
+
+- Nhầm lẫn giữa "mô hình hiểu hình ảnh (Vision)" và "mô hình tạo hình ảnh (Image Generation)"
+- Không biết cách vào `tasks` để kiểm tra trạng thái tiến độ sinh video
+- Thấy danh sách provider quá nhiều rồi tưởng nhầm là bắt buộc phải cấu hình tất cả
 
 ---
 
-## 14.2 图片工作流：现在应该怎么做
+## 14.1 Bản đồ năng lực media chính thức
 
-### 14.2.1 命令行直出图
+Năng lực media hiện tại của OpenClaw không phải là các plugin rời rạc, mà là một tầng năng lực dùng chung thống nhất:
 
-如果你是第一次试媒体能力，强烈建议从这里开始，因为它反馈最快，也最容易判断到底是提示词问题，还是 provider 没配好。
+| Năng lực | Công cụ / Lệnh | Provider phổ biến | Mô tả |
+|----------|----------------|-------------------|-------|
+| Tạo hình ảnh | `image_generate` / `openclaw infer image generate` | ComfyUI, fal, Google, MiniMax, OpenAI, Vydra | Chuyển văn bản thành ảnh (Text-to-Image), chỉnh sửa ảnh mẫu |
+| Tạo video | `video_generate` / `openclaw infer video generate` | Alibaba, BytePlus, ComfyUI, fal, Google, MiniMax, OpenAI, Qwen, Runway, Together, Vydra, xAI | Chuyển văn bản thành video, chuyển ảnh thành video, chuyển video thành video |
+| Tạo âm nhạc | `music_generate` | ComfyUI, Google, MiniMax | Tạo đoạn nhạc / bài hát / track âm thanh |
+| TTS | `tts` / `openclaw infer tts convert` | ElevenLabs, Microsoft, MiniMax, OpenAI | Chuyển văn bản thành giọng nói |
+| Đọc hiểu media | `image describe` / `audio transcribe` / `video describe` | Các provider đa mô hình (Multimodal) | Nhận diện ảnh, chuyển âm thanh thành văn bản, phân tích video |
+
+Hai điểm mấu chốt quan trọng nhất:
+
+1. **Hình ảnh và TTS mang tính đồng bộ nhiều hơn**
+2. **Video và âm nhạc là tác vụ chạy nền bất đồng bộ**, sẽ được ghi vào sổ theo dõi tác vụ (task ledger), sau khi hoàn tất sẽ đánh thức agent để gửi kết quả về phiên hội thoại gốc
+
+---
+
+## 14.2 Luồng công việc xử lý hình ảnh: Cách làm chuẩn hiện nay
+
+### 14.2.1 Xuất ảnh trực tiếp từ dòng lệnh
+
+Nếu bạn mới thử năng lực media lần đầu, khuyến nghị bắt đầu từ đây vì tốc độ phản hồi nhanh nhất và dễ phân biệt lỗi do prompt hay do provider chưa cấu hình đúng.
 
 ```bash
-openclaw infer image generate   --prompt "一张手写白板风格的 OpenClaw 自动化架构图"   --json
+openclaw infer image generate \
+  --prompt "Một sơ đồ kiến trúc tự động hóa OpenClaw vẽ tay phong cách bảng trắng" \
+  --json
 ```
 
-适合：
+Phù hợp cho:
 
-- 教程配图
-- 封面图
-- 白板图
-- 社交媒体海报
-- 结构示意图
+- Hình minh họa cho bài hướng dẫn
+- Ảnh bìa (Cover Image)
+- Sơ đồ bảng trắng
+- Poster mạng xã hội
+- Sơ đồ minh họa cấu trúc
 
-#### 看到什么算图片能力已经跑通
+#### Dấu hiệu nhận biết năng lực tạo ảnh đã chạy thông suốt
 
-- 命令能返回 JSON 结果或文件输出信息
-- 生成效果不满意时，你知道先改提示词，而不是先怀疑整套系统坏了
-- 你已经能分清“命令行直出图”和“会话里让 agent 自动调工具”这两种方式
+- Lệnh trả về kết quả JSON hoặc đường dẫn file kết xuất
+- Khi ảnh chưa ưng ý, bạn biết điều chỉnh prompt trước thay vì vội nghi ngờ toàn bộ hệ thống bị hỏng
+- Bạn phân biệt rõ giữa hai cách: "Xuất ảnh trực tiếp bằng CLI" và "Ra lệnh trong phiên chat để agent tự gọi tool"
 
-### 14.2.2 对话里直接让 agent 生成
+### 14.2.2 Yêu cầu agent tạo ảnh trực tiếp trong hội thoại
 
 ```text
-帮我生成一张白板手写风格的配图，主题是“从 cron 到 Task Flow 的自动化升级路径”。
+Hãy tạo giúp tôi một ảnh minh họa phong cách vẽ tay trên bảng trắng, chủ đề là "Lộ trình nâng cấp tự động hóa từ cron lên Task Flow".
 ```
 
-如果 `image_generate` 已可用，agent 会自动调用对应工具。相比旧教程里的历史 Skill 名称，这才是当前默认主线。
+Nếu công cụ `image_generate` đã khả dụng, agent sẽ tự động gọi tool tương ứng. So với các tên Skill cũ trong các bài hướng dẫn trước đây, đây mới là luồng làm việc mặc định hiện nay.
 
-### 14.2.3 什么时候要单独配 `imageGenerationModel`
+### 14.2.3 Khi nào cần cấu hình riêng `imageGenerationModel`
 
-当你满足下面任一情况时，建议手动指定：
+Khuyến nghị cấu hình thủ công khi bạn thỏa mãn một trong các điều kiện sau:
 
-- 团队里统一使用某个 provider
-- 你想严格控制成本
-- 你不希望 OpenClaw 自动推断 provider
+- Nhóm của bạn quy định dùng thống nhất một provider cụ thể
+- Bạn muốn kiểm soát chi phí một cách chặt chẽ
+- Bạn không muốn OpenClaw tự động suy đoán provider
 
 ```json
 {
@@ -108,26 +110,28 @@ openclaw infer image generate   --prompt "一张手写白板风格的 OpenClaw �
 
 ---
 
-## 14.3 视频工作流：理解“异步返回”很关键
+## 14.3 Luồng công việc xử lý video: Hiểu đúng về cơ chế "trả về bất đồng bộ"
 
-### 14.3.1 最短可用示例
+### 14.3.1 Ví dụ tối thiểu chạy được
 
-视频生成比图片慢很多，所以你第一次测视频时，目标不是“直接出大片”，而是先确认任务能成功入账并最终完成。
+Sinh video chậm hơn tạo ảnh rất nhiều, do đó khi thử nghiệm lần đầu, mục tiêu không phải là "lập tức ra ngay một thước phim bom tấn", mà là xác nhận tác vụ được ghi vào sổ theo dõi và hoàn tất trọn vẹn.
 
 ```bash
-openclaw infer video generate   --prompt "一段 5 秒的电影感镜头：桌面上的 OpenClaw 仪表盘正在更新任务状态"   --json
+openclaw infer video generate \
+  --prompt "Cảnh quay điện ảnh 5 giây: Bảng điều khiển OpenClaw trên bàn làm việc đang tự động cập nhật trạng thái tác vụ" \
+  --json
 ```
 
-### 14.3.2 当前视频工作流的正确心智模型
+### 14.3.2 Tư duy đúng về quy trình tạo video hiện nay
 
-视频生成不是“一条命令马上拿到 mp4”。更准确的过程是：
+Tạo video không phải là kiểu "gõ một lệnh là nhận ngay file mp4". Quy trình thực tế diễn ra như sau:
 
-1. OpenClaw 把请求发给 provider
-2. provider 返回任务 id
-3. 任务进入 background task ledger
-4. 完成后 OpenClaw 唤醒原会话，把视频回贴回来
+1. OpenClaw gửi yêu cầu đến provider
+2. Provider trả về mã định danh tác vụ (task id)
+3. Tác vụ được ghi vào sổ theo dõi chạy nền (background task ledger)
+4. Sau khi hoàn thành, OpenClaw đánh thức phiên hội thoại ban đầu và đính kèm video vào
 
-所以你需要学会看：
+Do đó bạn cần biết cách sử dụng các lệnh kiểm tra:
 
 ```bash
 openclaw tasks list
@@ -135,13 +139,13 @@ openclaw tasks show <task-id>
 openclaw tasks audit
 ```
 
-### 14.3.3 推荐的视频默认模型写法
+### 14.3.3 Cách khai báo mô hình video mặc định khuyến nghị
 
 ```bash
 openclaw config set agents.defaults.videoGenerationModel.primary "google/veo-3.1-fast-generate-preview"
 ```
 
-如果你希望带回退链：
+Nếu bạn muốn có thêm chuỗi dự phòng (fallbacks):
 
 ```json
 {
@@ -158,25 +162,25 @@ openclaw config set agents.defaults.videoGenerationModel.primary "google/veo-3.1
 }
 ```
 
-### 14.3.4 适合 OpenClaw 做的视频场景
+### 14.3.4 Các kịch bản video phù hợp với OpenClaw
 
-- 产品演示短视频
-- 课程片头 / 社交媒体短片
-- 图生视频、视频转视频实验
-- 自动化营销素材流水线中的“中短视频生成”步骤
+- Video ngắn giới thiệu sản phẩm
+- Đoạn intro bài giảng / Video ngắn cho mạng xã hội
+- Thử nghiệm biến hình ảnh thành video hoặc chuyển phong cách video
+- Bước "tạo video ngắn" trong dây chuyền tự động hóa tài liệu marketing
 
 ---
 
-## 14.4 音乐生成与 TTS：创意产出的最后两块拼图
+## 14.4 Tạo âm nhạc và TTS: Hai mảnh ghép cuối của quy trình sáng tạo
 
-### 14.4.1 音乐生成
+### 14.4.1 Tạo âm nhạc (Music Generation)
 
-当前推荐优先通过 agent 工具 `music_generate` 使用。根据官方文档，如果你看不到这个工具，优先检查：
+Hiện tại khuyến nghị ưu tiên dùng qua công cụ agent `music_generate`. Theo tài liệu chính thức, nếu bạn không nhìn thấy công cụ này, hãy kiểm tra ưu tiên:
 
-- provider API key 是否已配置
-- `agents.defaults.musicGenerationModel` 是否已配置
+- API key của provider tương ứng đã được cấu hình chưa
+- `agents.defaults.musicGenerationModel` đã được thiết lập chưa
 
-推荐配置示例：
+Ví dụ cấu hình khuyến nghị:
 
 ```json
 {
@@ -190,110 +194,113 @@ openclaw config set agents.defaults.videoGenerationModel.primary "google/veo-3.1
 }
 ```
 
-典型 prompt：
+Prompt mẫu:
 
 ```text
-生成一段 20 秒的轻电子 synthpop 背景音乐，节奏明快，不要人声，适合做 AI 产品介绍短视频配乐。
+Tạo một đoạn nhạc nền synthpop điện tử nhẹ nhàng dài 20 giây, tiết tấu tươi vui, không có lời hát, phù hợp làm nhạc nền cho video ngắn giới thiệu sản phẩm AI.
 ```
 
-### 14.4.2 TTS：脚本里用 `infer`，会话里用 `tts`
+### 14.4.2 Chuyển văn bản thành giọng nói (TTS): Trong script dùng `infer`, trong hội thoại dùng `tts`
 
 ```bash
-openclaw infer tts convert   --text "欢迎来到今天的 OpenClaw 自动化教程。"   --output ./intro.mp3   --json
+openclaw infer tts convert \
+  --text "Chào mừng các bạn đến với bài hướng dẫn tự động hóa OpenClaw hôm nay." \
+  --output ./intro.mp3 \
+  --json
 ```
 
-适合：
+Phù hợp cho:
 
-- 视频旁白草稿
-- 日报语音播报
-- 课程试音
-- 产品播报提醒
-
----
-
-## 14.5 ComfyUI：本地 / 可控工作流的官方连接点
-
-旧教程里很多“本地媒体工作流”写法，是靠零散脚本或第三方桥接完成的。现在更推荐：
-
-- OpenClaw 继续做**调度与对话入口**
-- `ComfyUI` 负责**本地媒体图形工作流**
-- 两者通过官方 provider/plugin 接起来
-
-这套组合非常适合：
-
-- 固定模板的海报 / 封面量产
-- 统一风格的视频片头 / 片尾
-- 音乐或图像的工作流固化
-- 本地私有资产处理
-
-如果你的目标是“生产级可重复工作流”，优先考虑 ComfyUI，而不是继续在旧 Skill 名称上做兼容。
+- Bản nháp lời bình video
+- Phát thanh bản tin tóm tắt hàng ngày
+- Thử giọng đọc cho bài giảng
+- Thông báo âm thanh cảnh báo sự cố sản phẩm
 
 ---
 
-## 14.6 四类值得直接照搬的创意工作流
+## 14.5 ComfyUI: Điểm kết nối chính thức cho các luồng công việc cục bộ / kiểm soát cao
 
-### 工作流 1：教程配图流水线
+Nhiều tài liệu cũ triển khai "luồng media cục bộ" bằng các script rời rạc hoặc cầu nối bên thứ ba không ổn định. Hiện nay khuyến nghị:
 
-- `infer web fetch` 抓资料
-- 主模型整理要点
-- `infer image generate` 生成白板图
-- 保存到素材目录
+- OpenClaw tiếp tục đóng vai trò **bộ điều phối và cổng giao tiếp hội thoại**
+- `ComfyUI` đảm nhiệm **quy trình đồ họa media cục bộ chuyên sâu**
+- Hai bên kết nối thông qua provider/plugin chính thức của OpenClaw
 
-### 工作流 2：短视频脚本 + 旁白草稿
+Sự kết hợp này rất lý tưởng cho:
 
-- 主模型出脚本
-- `infer tts convert` 生成试音
-- `video_generate` 出镜头草案
-- 人工二次剪辑
+- Sản xuất hàng loạt poster / ảnh bìa theo template cố định
+- Đoạn intro / outro video đồng nhất phong cách
+- Đóng gói quy trình tạo ảnh hoặc âm nhạc thành chu trình bất biến
+- Xử lý các tài nguyên đồ họa nội bộ, đảm bảo quyền riêng tư dữ liệu
 
-### 工作流 3：品牌一致的封面批量生成
-
-- 统一 prompt 模板
-- 统一图片尺寸和构图要求
-- 指定 `imageGenerationModel`
-- 批量脚本调用 `infer image generate`
-
-### 工作流 4：音乐 / 视频异步生产
-
-- 用 agent 发起 `music_generate` / `video_generate`
-- 用 `tasks list` 看进度
-- 完成后自动回传渠道
+Nếu mục tiêu của bạn là "luồng công việc cấp sản xuất có tính lặp lại cao", hãy ưu tiên xem xét ComfyUI thay vì chắp vá các Skill cũ.
 
 ---
 
-## 14.7 本章最容易踩的坑
+## 14.6 4 luồng công việc sáng tạo tiêu biểu đáng để áp dụng ngay
 
-### 坑 1：继续把历史第三方 Skill 当默认主线
+### Luồng 1: Dây chuyền sản xuất ảnh minh họa bài hướng dẫn
 
-现在不建议把这些当教程默认入口：
+- Dùng `infer web fetch` lấy tài liệu gốc
+- Mô hình chính tổng hợp các ý chính
+- Dùng `infer image generate` tạo sơ đồ bảng trắng minh họa
+- Lưu file vào thư mục tài nguyên dự án
 
-- 历史图像 Skill 名称
-- 旧视频脚本命令
-- 旧 TTS 子命令路径
-- 零散中转站配置
+### Luồng 2: Kịch bản video ngắn + Bản nháp lời bình
 
-### 坑 2：没区分“同步”和“异步”媒体任务
+- Mô hình chính soạn kịch bản chi tiết
+- Dùng `infer tts convert` tạo file âm thanh đọc thử
+- Dùng `video_generate` tạo các cảnh quay phác thảo
+- Con người thực hiện cắt ghép và biên tập hậu kỳ
 
-- 图片、TTS：更接近同步
-- 视频、音乐：更接近异步后台任务
+### Luồng 3: Tạo hàng loạt ảnh bìa chuẩn nhận diện thương hiệu
 
-### 坑 3：没给媒体模型单独设默认值
+- Chuẩn hóa template prompt cố định
+- Quy định kích thước ảnh và bố cục khung hình thống nhất
+- Chỉ định rõ ràng `imageGenerationModel`
+- Dùng script tự động gọi hàng loạt qua `infer image generate`
 
-主模型能聊天，不代表它就是最适合图片 / 视频 / 音乐的模型。请把这些能力拆开配置。
+### Luồng 4: Sản xuất âm nhạc / video bất đồng bộ
 
-### 坑 4：直接把创意产物交付，不留人工审核
-
-当前最稳的方式仍然是：
-
-- OpenClaw 负责起草、批处理、编排
-- 你负责最终审美、品牌和法务风险判断
+- Dùng agent phát lệnh `music_generate` / `video_generate`
+- Dùng `tasks list` theo dõi tiến độ thực thi
+- Sau khi hoàn thành, tự động gửi trả file về kênh giao tiếp đã chỉ định
 
 ---
 
-## 14.8 官方参考
+## 14.7 Những cạm bẫy dễ gặp nhất trong chương này
 
-- GitHub Releases：https://github.com/openclaw/openclaw/releases
-- Media Overview：https://docs.openclaw.ai/tools/media-overview
-- Inference CLI：https://docs.openclaw.ai/cli/infer
-- Video Generation：https://docs.openclaw.ai/tools/video-generation
-- Music Generation：https://docs.openclaw.ai/tools/music-generation
+### Cạm bẫy 1: Tiếp tục xem Skill bên thứ ba kiểu cũ là luồng chính
+
+Hiện tại không khuyến nghị lấy các thành phần sau làm mặc định:
+
+- Tên các Skill tạo ảnh lịch sử cũ
+- Lệnh script sinh video cũ
+- Các đường dẫn lệnh con TTS cũ
+- Cấu hình qua các trạm trung chuyển API không chính thống
+
+### Cạm bẫy 2: Không phân biệt tác vụ media "đồng bộ" và "bất đồng bộ"
+
+- Hình ảnh, TTS: Gần với tính chất đồng bộ (chờ kết quả tức thì)
+- Video, âm nhạc: Là các tác vụ chạy nền bất đồng bộ (cần theo dõi qua sổ tác vụ)
+
+### Cạm bẫy 3: Không thiết lập giá trị mặc định riêng cho các mô hình media
+
+Một mô hình trò chuyện tốt không đồng nghĩa với việc nó là mô hình tối ưu cho việc tạo ảnh / video / âm nhạc. Hãy tách riêng cấu hình cho từng năng lực này.
+
+### Cạm bẫy 4: Bàn giao trực tiếp sản phẩm sáng tạo mà không qua con người duyệt
+
+Cách làm an toàn và hiệu quả nhất hiện nay vẫn là:
+
+- OpenClaw chịu trách nhiệm phác thảo, xử lý hàng loạt và điều phối luồng
+- Bạn chịu trách nhiệm thẩm mỹ cuối cùng, tính nhất quán thương hiệu và rà soát rủi ro pháp lý
+
+---
+
+## 14.8 Tài liệu tham khảo chính thức
+
+- GitHub Releases: https://github.com/openclaw/openclaw/releases
+- Media Overview: https://docs.openclaw.ai/tools/media-overview
+- Inference CLI: https://docs.openclaw.ai/cli/infer
+- Video Generation: https://docs.openclaw.ai/tools/video-generation
+- Music Generation: https://docs.openclaw.ai/tools/music-generation

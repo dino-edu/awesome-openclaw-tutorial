@@ -1,107 +1,117 @@
-> 📖 **纸质书《OpenClaw超级个体实操手册》已上市！** 清华大学出版社出版，在开源教程基础上全面重写+逐条验证。🛒 [京东专属购买链接（¥42，原价¥59.8）](https://item.jd.com/14669463.html)
+> 📖 **Giáo trình Awesome OpenClaw Tutorial** | Bản dịch tiếng Việt chính thức cho cộng đồng. Nguyên tác thuộc về tác giả [@xianyu110](https://github.com/xianyu110).
 
-# 第12章节 个人效率实战（知识工作、编程、创作、学习、个人运营）
+# Chương 12: Thực chiến Nâng cao Năng suất Cá nhân (Tri thức, Lập trình, Sáng tạo, Học tập, Vận hành cá nhân)
 
-> 本章目标：不再用一堆失效 Skill 名称堆案例，而是基于 OpenClaw `v2026.9.3` 的官方能力，给出 5 类高频个人效率工作流。
-
----
-
-## 版本基线
-
-- **当前稳定版**：`v2026.9.3`（2026-09-08 发布）
-- 本章默认按 `v2026.9.3` 稳定版写
+> Mục tiêu chương này: Không liệt kê một đống tên Skill đã lỗi thời, mà dựa trên các năng lực chính thức của OpenClaw bản `v2026.9.3` để cung cấp 5 luồng công việc (workflows) nâng cao hiệu suất cá nhân với tần suất sử dụng cao nhất.
 
 ---
 
-## 先给小白的阅读说明
+## Baseline phiên bản
 
-### 这一章不要整章硬啃
-
-这章不是让你把 5 类场景一次全搭完，而是让你**先选一个最贴近自己工作的身份**，先跑通一个小工作流。
-
-### 怎么选自己应该先看哪一节
-
-- 你做运营、产品、咨询、项目管理：先看 `12.1`
-- 你主要写代码：先看 `12.2`
-- 你是内容创作者：先看 `12.3`
-- 你是学生或研究者：先看 `12.4`
-- 你只是想先把系统跑稳定：先看 `12.5`
-
-### 小白第一周最推荐做的事
-
-不要一上来追求“自动化闭环”，而是先做 3 件立刻有回报的事：
-
-1. 做一个晨间 Brief
-2. 跑一次会议录音转纪要
-3. 把一份常用资料写进 Memory Wiki
-
-这样你很快就能判断：OpenClaw 到底值不值得继续投入。
+- **Phiên bản ổn định hiện tại**: `v2026.9.3` (Phát hành ngày 08-09-2026)
+- Nội dung chương này mặc định viết theo phiên bản ổn định `v2026.9.3`
 
 ---
 
-## 12.1 知识工作者：早报、资料整理、会议纪要
+## Hướng dẫn đọc dành cho người mới bắt đầu
 
-### 12.1.1 最值得先搭的不是“超大系统”，而是晨间 Brief
+### Đừng cố đọc hết toàn bộ chương này trong một lần
 
-对于咨询、运营、产品、项目管理这类工作，OpenClaw 最先带来收益的不是复杂 agent 编排，而是：
+Chương này không yêu cầu bạn phải thiết lập toàn bộ cả 5 kịch bản cùng một lúc, mà hướng dẫn bạn **chọn trước một vai trò gần gũi nhất với công việc thực tế của mình** để chạy thử một quy trình nhỏ trước.
 
-- 固定时间自动收集信息
-- 统一整理成结构化摘要
-- 通过已配置渠道投递给你
+### Cách chọn phần nên đọc trước
 
-推荐直接用 cron。对小白来说，你可以先把它理解成：**每天固定时间，让 OpenClaw 帮你发一份日报**。
+- Bạn làm vận hành, sản phẩm, tư vấn, quản lý dự án: Đọc `12.1` trước
+- Bạn chủ yếu viết mã lập trình: Đọc `12.2` trước
+- Bạn là nhà sáng tạo nội dung (Content Creator): Đọc `12.3` trước
+- Bạn là sinh viên hoặc nghiên cứu viên: Đọc `12.4` trước
+- Bạn chỉ muốn duy trì hệ thống chạy ổn định: Đọc `12.5` trước
 
-推荐直接用 cron：
+### Điều người mới nên làm nhất trong tuần đầu tiên
+
+Đừng vội theo đuổi "vòng lặp tự động hóa khép kín" ngay từ đầu, hãy bắt đầu với 3 việc đem lại giá trị tức thì:
+
+1. Thiết lập một bản tin tóm tắt buổi sáng (Morning Brief)
+2. Chạy thử một lần chuyển file ghi âm cuộc họp thành biên bản tóm tắt
+3. Lưu một tài liệu hay dùng vào Memory Wiki
+
+Nhờ đó, bạn sẽ nhanh chóng đánh giá được: Liệu OpenClaw có thực sự xứng đáng để tiếp tục đầu tư thời gian hay không.
+
+---
+
+## 12.1 Người làm việc tri thức: Báo cáo sáng, Sắp xếp tài liệu, Biên bản cuộc họp
+
+### 12.1.1 Thứ đáng dựng đầu tiên không phải "hệ thống siêu to", mà là Morning Brief
+
+Đối với công việc tư vấn, vận hành, sản phẩm, quản lý dự án, giá trị ban đầu mà OpenClaw mang lại không phải là sự phối hợp agent phức tạp, mà là:
+
+- Tự động thu thập thông tin vào khung giờ cố định
+- Tổng hợp và cấu trúc hóa thành bản tóm tắt
+- Gửi đến bạn qua các kênh giao tiếp đã cấu hình
+
+Khuyến nghị sử dụng trực tiếp cron. Đối với người mới, bạn có thể hiểu đơn giản: **Mỗi ngày vào giờ cố định, OpenClaw sẽ tự động gửi cho bạn một bản tóm tắt công việc**.
+
+Thiết lập trực tiếp bằng cron:
 
 ```bash
-openclaw cron add   --name "Morning brief"   --cron "0 7 * * *"   --tz "Asia/Shanghai"   --session isolated   --message "Summarize overnight updates, open tasks, and calendar priorities for today."   --announce
+openclaw cron add \
+  --name "Morning brief" \
+  --cron "0 7 * * *" \
+  --tz "Asia/Shanghai" \
+  --session isolated \
+  --message "Summarize overnight updates, open tasks, and calendar priorities for today." \
+  --announce
 ```
 
-配合：
+Kết hợp với:
 
 ```bash
 openclaw infer web search --query "OpenClaw v2026.9.3 release notes" --json
 openclaw infer web fetch --url https://docs.openclaw.ai/cli/infer --json
 ```
 
-### 12.1.2 会议纪要的正确打法
+### 12.1.2 Cách làm biên bản cuộc họp chuẩn xác
 
-旧教程里大量“手写模板 + 第三方 Skill”式会让读者先配一堆东西再开始。现在更简单：
+Cách tiếp cận kiểu cũ "tự viết template + Skill bên thứ ba" thường bắt người đọc cấu hình rất nhiều thứ trước khi bắt đầu. Giờ đây quy trình đơn giản hơn nhiều:
 
-1. 把音频文件丢给 `audio transcribe`
-2. 再让主模型做结构化摘要
-3. 需要长期沉淀时写入 Memory Wiki
+1. Chuyển file âm thanh cho `audio transcribe`
+2. Để mô hình chính tạo bản tóm tắt có cấu trúc
+3. Khi cần tích lũy tri thức lâu dài thì ghi vào Memory Wiki
 
 ```bash
-openclaw infer audio transcribe   --file ./meeting.m4a   --language zh   --prompt "只保留决策、负责人和截止日期"   --json
+openclaw infer audio transcribe \
+  --file ./meeting.m4a \
+  --language zh \
+  --prompt "Chỉ giữ lại quyết định, người phụ trách và hạn chót" \
+  --json
 ```
 
-#### 看到什么算这条流程跑通
+#### Dấu hiệu nhận biết quy trình này đã chạy thông suốt
 
-- 你能拿到一份完整转写结果
-- 你能再让模型把它整理成结构化纪要
-- 你知道哪些内容值得长期沉淀进 Wiki，哪些只需要临时看一眼
+- Bạn nhận được kết quả chuyển đổi văn bản (transcription) hoàn chỉnh
+- Bạn có thể yêu cầu mô hình sắp xếp lại thành biên bản có cấu trúc rõ ràng
+- Bạn phân biệt được nội dung nào đáng lưu trữ lâu dài vào Wiki, nội dung nào chỉ cần xem lướt qua một lần
 
-然后把转写结果交给 OpenClaw：
+Sau đó đưa kết quả chuyển văn bản cho OpenClaw:
 
 ```text
-请把这段会议转写整理成：背景、结论、行动项、风险点、需复盘的问题。
+Hãy tổng hợp đoạn ghi âm cuộc họp này thành: Bối cảnh, Kết luận, Đầu việc hành động (Action Items), Điểm rủi ro, và Những vấn đề cần đánh giá lại.
 ```
 
-### 12.1.3 这类人最适合开的配置
+### 12.1.3 Cấu hình phù hợp nhất cho nhóm này
 
-- `Active Memory`：开
-- `Memory Wiki`：看情况开
-- `cron`：一定要用
-- `Task Flow`：有多步骤交付流程时再上
+- `Active Memory`: Bật
+- `Memory Wiki`: Tùy nhu cầu để bật
+- `cron`: Nhất định phải dùng
+- `Task Flow`: Chỉ triển khai khi có quy trình bàn giao nhiều bước phức tạp
 
 ---
 
-## 12.2 程序员：代码协作、调试跟踪、知识沉淀
+## 12.2 Lập trình viên: Phối hợp mã nguồn, Theo dõi gỡ lỗi, Tích lũy tri thức
 
-### 12.2.1 模型建议
+### 12.2.1 Gợi ý cấu hình mô hình
 
-如果你是以“代码交付”为主，优先把编程模型路线配清楚：
+Nếu công việc chính của bạn là "chuyển giao mã nguồn", hãy cấu hình rõ ràng lộ trình mô hình chuyên cho lập trình:
 
 ```bash
 openclaw models auth login --provider openai --set-default
@@ -109,23 +119,23 @@ openclaw models set openai/gpt-5.4
 openclaw models fallbacks add anthropic/claude-sonnet-4-5
 ```
 
-### 12.2.2 日常最有价值的 3 件事
+### 12.2.2 3 việc có giá trị nhất hằng ngày
 
-如果你是程序员，不要把 OpenClaw 只当聊天机器人。更实用的方式是把它当成：
+Nếu bạn là lập trình viên, đừng chỉ xem OpenClaw như một chatbot thông thường. Cách dùng thực tế hơn là biến nó thành:
 
-- 调试信息整理器
-- 代码知识沉淀器
-- 重复任务自动化助手
+- Bộ tổng hợp và phân tích thông tin gỡ lỗi (debug)
+- Nơi tích lũy tri thức kỹ thuật của codebase
+- Trợ lý tự động hóa các tác vụ lặp đi lặp lại
 
-**1）仓库级检索与整理**
+**1) Truy vấn và tổng hợp ở cấp độ kho mã nguồn**
 
 ```text
-帮我先读 AGENTS.md、README 和 package.json，然后列出这个仓库最关键的 5 个约束。
+Hãy đọc trước các file AGENTS.md, README và package.json, sau đó liệt kê 5 ràng buộc quan trọng nhất của kho mã nguồn này.
 ```
 
-**2）长任务可追踪**
+**2) Theo dõi các tác vụ dài (Long-running Tasks)**
 
-比如测试、生成、子任务调度，这类 detached work 现在都能进入任务账本：
+Chẳng hạn như kiểm thử, sinh mã, điều phối subagent; các công việc chạy nền (detached work) kiểu này giờ đây đều được ghi nhận vào sổ theo dõi tác vụ (tasks ledger):
 
 ```bash
 openclaw tasks list
@@ -133,15 +143,15 @@ openclaw tasks audit
 openclaw tasks show <task-id>
 ```
 
-**3）知识沉淀到 Wiki**
+**3) Tích lũy tri thức vào Wiki**
 
-你会发现“已踩过的坑”比“新文档”更值钱。推荐把下面这些内容放进 wiki：
+Bạn sẽ nhận ra những "bài học xương máu / kinh nghiệm tránh lỗi" có giá trị hơn nhiều so với "tài liệu viết mới". Khuyến nghị lưu các nội dung sau vào Wiki:
 
-- 项目结构说明
-- 环境依赖
-- 常见报错和处理路径
-- 发布流程
-- 不要碰的历史包袱
+- Giải thích cấu trúc dự án
+- Yêu cầu môi trường và các gói phụ thuộc
+- Mã lỗi thường gặp và các bước xử lý
+- Quy trình phát hành (release pipeline)
+- Những di sản kỹ thuật cũ (legacy code) không được tự ý sửa đổi
 
 ```bash
 openclaw wiki init
@@ -149,87 +159,87 @@ openclaw wiki search "build pipeline"
 openclaw wiki lint
 ```
 
-### 12.2.3 推荐的程序员工作流
+### 12.2.3 Quy trình làm việc khuyến nghị cho lập trình viên
 
-- `AGENTS.md` 写清仓库约束与 review 规则
-- `cron` 跑健康检查 / 每周依赖审计
-- `tasks audit` 看长任务是否卡住
-- `wiki_apply` / `wiki_compile` 维护工程知识层
+- `AGENTS.md`: Ghi rõ các ràng buộc của kho mã nguồn và quy tắc duyệt mã (review)
+- `cron`: Chạy kiểm tra sức khỏe hệ thống / kiểm toán dependency hàng tuần
+- `tasks audit`: Kiểm tra xem các tác vụ dài có bị treo (stalled) hay không
+- `wiki_apply` / `wiki_compile`: Duy trì tầng tri thức kỹ thuật của dự án
 
 ---
 
-## 12.3 内容创作者：研究、配图、配音、版本复用
+## 12.3 Nhà sáng tạo nội dung: Nghiên cứu, Phối ảnh, Lồng tiếng, Tái sử dụng phiên bản
 
-### 12.3.1 研究不要再靠手动搜 20 个标签页
+### 12.3.1 Nghiên cứu: Đừng tìm kiếm thủ công qua 20 tab trình duyệt nữa
 
-推荐流程：
+Quy trình khuyến nghị:
 
-1. `infer web search` 抓方向
-2. `infer web fetch` 拿关键页面
-3. 让主模型输出：观点框架、内容提纲、脚本骨架
+1. `infer web search` để nắm bắt định hướng tổng quan
+2. `infer web fetch` để lấy nội dung các trang quan trọng
+3. Yêu cầu mô hình chính xuất ra: Khung luận điểm, Đề cương nội dung, Bộ khung kịch bản
 
 ```bash
 openclaw infer web search --query "OpenClaw Active Memory plugin use cases" --json
 openclaw infer web fetch --url https://docs.openclaw.ai/concepts/active-memory --json
 ```
 
-### 12.3.2 配图、视频、语音现在都走官方入口
+### 12.3.2 Tạo ảnh, video, giọng nói giờ đây đều qua cổng chính thức
 
 ```bash
-openclaw infer image generate --prompt "一张手写白板风格的知识管理工作流图" --json
-openclaw infer tts convert --text "今天的视频脚本已经完成" --output ./notify.mp3 --json
-openclaw infer video generate --prompt "5 秒产品演示镜头：桌面上的 OpenClaw 仪表盘" --json
+openclaw infer image generate --prompt "Một sơ đồ quy trình quản lý tri thức phong cách bảng trắng vẽ tay" --json
+openclaw infer tts convert --text "Kịch bản video hôm nay đã hoàn thành" --output ./notify.mp3 --json
+openclaw infer video generate --prompt "Cảnh quay demo sản phẩm 5 giây: Bảng điều khiển OpenClaw trên bàn làm việc" --json
 ```
 
-要点：
+Điểm mấu chốt:
 
-- 图片与 TTS 更适合脚本内直接调用
-- 视频通常是后台任务，适合交给 agent + tasks ledger 追踪
-- 音乐生成走 `music_generate`，不是旧教程里的零散外部脚本
+- Hình ảnh và TTS phù hợp nhất để gọi trực tiếp ngay trong script
+- Video thường là tác vụ chạy nền tốn thời gian, thích hợp bàn giao cho agent và theo dõi qua sổ tác vụ (tasks ledger)
+- Tạo nhạc sử dụng công cụ `music_generate`, không phải những script rời rạc từ bên thứ ba như trong các hướng dẫn cũ
 
-### 12.3.3 创作者最实用的配置
+### 12.3.3 Cấu hình thiết thực nhất cho người sáng tạo nội dung
 
 - `imageGenerationModel`
 - `videoGenerationModel`
 - `musicGenerationModel`
 - `tts` provider
-- `Task Flow`（当你要把“研究 → 写作 → 生成素材 → 投递”串起来时）
+- `Task Flow` (Khi bạn cần xâu chuỗi luồng: "Nghiên cứu → Viết nội dung → Tạo tư liệu media → Gửi phát hành")
 
 ---
 
-## 12.4 学生 / 研究者：论文、课程、复习、长期记忆
+## 12.4 Sinh viên / Nghiên cứu viên: Đọc bài báo khoa học, Khóa học, Ôn tập, Ghi nhớ dài hạn
 
-### 12.4.1 论文阅读的正确分层
+### 12.4.1 Phân tầng chuẩn xác khi đọc bài báo khoa học (Paper)
 
-不要一上来就追求“自动读完所有 PDF”。更稳的路径是：
+Đừng vội đặt mục tiêu "tự động đọc hết tất cả các file PDF ngay lập tức". Con đường ổn định và hiệu quả hơn là:
 
-1. 搜索与筛选
-2. 摘要与术语解释
-3. 结构化记忆沉淀
-4. 周期性回顾
+1. Tìm kiếm và sàng lọc
+2. Tóm tắt nội dung và giải thích thuật ngữ chuyên ngành
+3. Lưu giữ tri thức có cấu trúc vào bộ nhớ
+4. Định kỳ xem lại và củng cố kiến thức
 
-你可以这样做：
+Bạn có thể tiến hành như sau:
 
 ```bash
 openclaw infer web search --query "multimodal memory retrieval benchmark 2026" --json
 ```
 
-然后让 OpenClaw 输出：
+Sau đó để OpenClaw xuất ra:
 
-- 摘要
-- 方法对比
-- 值得深读的 3 篇
-- 应该记住的术语
+- Bản tóm tắt tóm lược
+- So sánh các phương pháp nghiên cứu
+- 3 bài báo tiêu biểu đáng đọc sâu nhất
+- Các thuật ngữ quan trọng cần ghi nhớ
 
-### 12.4.2 课程与项目资料怎么长期可用
+### 12.4.2 Cách lưu trữ tài liệu khóa học và dự án để dùng được lâu dài
 
-这类场景最适合 `Memory Wiki`：
+Kịch bản này thích hợp nhất với `Memory Wiki`:
 
-- `entities/` 放课程、项目、导师、数据集
-- `concepts/` 放概念、方法、术语
-- `reports/` 看低置信度、冲突、待补证据条目
+- `entities/`: Lưu thông tin khóa học, dự án, người hướng dẫn, bộ dữ liệu (dataset)
+- `concepts/`: Lưu khái niệm, phương pháp, thuật ngữ chuyên ngành
+- `reports/`: Xem các mục có độ tin cậy thấp, mâu thuẫn hoặc cần bổ sung bằng chứng kiểm chứng
 
-推荐习惯：
+Thói quen làm việc khuyến nghị:
 
 ```bash
 openclaw wiki search "transformer"
@@ -237,22 +247,22 @@ openclaw wiki get concept.transformer
 openclaw wiki lint
 ```
 
-### 12.4.3 学生场景下不建议开的东西
+### 12.4.3 Những thứ KHÔNG NÊN bật trong kịch bản sinh viên / học tập
 
-- 默认对所有会话都开 Active Memory
-- 没有边界就让 agent 自动执行 shell
-- 把作业生成当作“全自动答案系统”
+- Mặc định bật Active Memory cho tất cả các phiên trò chuyện
+- Cho phép agent tự động thực thi lệnh shell mà không có giới hạn an toàn
+- Biến tính năng sinh bài tập thành "hệ thống giải đề tự động 100%"
 
-更稳妥的方式是：
+Cách tiếp cận an toàn và lành mạnh hơn:
 
-- 用它做资料整理、理解辅助、复习计划和项目追踪
-- 高风险输出（作业、论文结论）必须人工复核
+- Sử dụng nó để tổng hợp tài liệu, hỗ trợ đọc hiểu, lập kế hoạch ôn tập và theo dõi dự án
+- Các kết quả đầu ra có rủi ro cao (bài tập lớn, kết luận luận văn) bắt buộc phải do người tự kiểm tra lại
 
 ---
 
-## 12.5 个人运营：用最少维护成本盯住系统状态
+## 12.5 Vận hành cá nhân: Giám sát trạng thái hệ thống với chi phí bảo trì tối thiểu
 
-不管你是哪种用户，最后都建议留一套“个人运维面板”：
+Dù bạn thuộc nhóm người dùng nào, cuối cùng bạn cũng nên trang bị một bộ "bảng điều khiển vận hành cá nhân":
 
 ```bash
 openclaw status
@@ -263,36 +273,36 @@ openclaw memory status --deep
 openclaw wiki status
 ```
 
-建议每周固定检查 5 件事：
+Khuyến nghị định kỳ hàng tuần kiểm tra 5 điều sau:
 
-1. 主模型和回退链是否仍可用
-2. 定时任务有没有失效或跑偏
-3. 长任务是否有 `stale_running` / `lost`
-4. 记忆搜索是否仍能命中有效信息
-5. wiki 是否出现大量 `low-confidence` / `stale-pages`
-
----
-
-## 12.6 本章落地顺序建议
-
-如果你是第一次认真把 OpenClaw 用进日常工作，推荐顺序：
-
-1. 先做一个**晨间 Brief**
-2. 再做一个**自己最痛的单点流程**（会议纪要 / 代码审查 / 资料整理）
-3. 之后再开 **Active Memory**
-4. 稳定后再上 **Memory Wiki**
-5. 真正多步骤、跨系统的时候再引入 **Task Flow**
-
-这比一开始就追求“全自动超级系统”成功率高得多。
+1. Mô hình chính và chuỗi dự phòng (fallbacks) có còn hoạt động bình thường không
+2. Các tác vụ định kỳ (cron jobs) có bị lỗi hoặc chạy lệch hướng không
+3. Các tác vụ dài có xuất hiện trạng thái `stale_running` hoặc `lost` không
+4. Tính năng tìm kiếm bộ nhớ có trả về thông tin chính xác và hữu ích không
+5. Wiki có xuất hiện nhiều trang cảnh báo `low-confidence` hoặc `stale-pages` không
 
 ---
 
-## 12.7 官方参考
+## 12.6 Lời khuyên về thứ tự triển khai trong chương này
 
-- GitHub Releases：https://github.com/openclaw/openclaw/releases
-- Scheduled Tasks：https://docs.openclaw.ai/automation/cron-jobs
-- Background Tasks：https://docs.openclaw.ai/automation/tasks
-- Task Flow：https://docs.openclaw.ai/automation/taskflow
-- Active Memory：https://docs.openclaw.ai/concepts/active-memory
-- Memory Wiki：https://docs.openclaw.ai/plugins/memory-wiki
-- Inference CLI：https://docs.openclaw.ai/cli/infer
+Nếu đây là lần đầu tiên bạn nghiêm túc áp dụng OpenClaw vào công việc hàng ngày, hãy đi theo thứ tự khuyến nghị sau:
+
+1. Bắt đầu bằng một **Morning Brief (Bản tin tóm tắt buổi sáng)**
+2. Tiếp tục với **một quy trình giải quyết đúng điểm đau lớn nhất của bạn** (Biên bản cuộc họp / Duyệt mã / Sắp xếp tài liệu)
+3. Sau đó mới kích hoạt **Active Memory**
+4. Khi hệ thống đã chạy ổn định, tiếp tục triển khai **Memory Wiki**
+5. Chỉ khi có nhu cầu thực tế nhiều bước phức tạp, liên kết xuyên hệ thống mới đưa vào **Task Flow**
+
+Lộ trình này đem lại tỷ lệ thành công cao hơn rất nhiều so với việc cố gắng xây dựng một "siêu hệ thống tự động hóa hoàn toàn" ngay từ ngày đầu.
+
+---
+
+## 12.7 Tài liệu tham khảo chính thức
+
+- GitHub Releases: https://github.com/openclaw/openclaw/releases
+- Scheduled Tasks: https://docs.openclaw.ai/automation/cron-jobs
+- Background Tasks: https://docs.openclaw.ai/automation/tasks
+- Task Flow: https://docs.openclaw.ai/automation/taskflow
+- Active Memory: https://docs.openclaw.ai/concepts/active-memory
+- Memory Wiki: https://docs.openclaw.ai/plugins/memory-wiki
+- Inference CLI: https://docs.openclaw.ai/cli/infer

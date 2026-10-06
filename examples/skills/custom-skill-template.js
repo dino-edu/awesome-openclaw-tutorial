@@ -1,56 +1,56 @@
 /**
- * OpenClaw 自定义 Skill 模板
+ * Mẫu khung phát triển Skill tùy biến OpenClaw (Custom Skill Template)
  *
- * 这是一个完整的 Skill 开发模板，包含所有必要的生命周期钩子和最佳实践。
+ * Đây là mẫu hoàn chỉnh để phát triển Skill, bao gồm tất cả các hook vòng đời cần thiết và best practices.
  *
  * @module custom-skill-template
  * @version 1.0.0
  */
 
 module.exports = {
-  // Skill 元数据
+  // Metadata của Skill
   name: 'my-custom-skill',
   version: '1.0.0',
-  description: '我的自定义技能',
+  description: 'Kỹ năng tùy biến của tôi',
   author: 'Your Name',
   category: 'utility',
 
-  // Skill 配置选项
+  // Tùy chọn cấu hình Skill
   config: {
-    // 默认配置
+    // Cấu hình mặc định
     enabled: true,
-    // 可以在 openclaw.json 中覆盖这些配置
+    // Có thể ghi đè các cấu hình này trong openclaw.json
     options: {
-      // 示例：API端点
+      // Ví dụ: Endpoint API
       apiEndpoint: 'https://api.example.com',
-      // 示例：超时设置
+      // Ví dụ: Cài đặt thời gian chờ (timeout)
       timeout: 5000
     }
   },
 
   /**
-   * Skill 初始化钩子
-   * @param {Object} context - OpenClaw 上下文对象
+   * Hook khởi tạo Skill
+   * @param {Object} context - Đối tượng ngữ cảnh OpenClaw
    */
   async init(context) {
     this.logger = context.logger;
     this.config = context.config;
-    this.logger.info('Skill 初始化成功');
+    this.logger.info('Khởi tạo Skill thành công');
   },
 
   /**
-   * 处理消息钩子
-   * @param {string} message - 用户消息
-   * @param {Object} context - 消息上下文
-   * @returns {Promise<Object>} 处理结果
+   * Hook xử lý thông điệp
+   * @param {string} message - Tin nhắn của người dùng
+   * @param {Object} context - Ngữ cảnh tin nhắn
+   * @returns {Promise<Object>} Kết quả xử lý
    */
   async handleMessage(message, context) {
-    this.logger.info('收到消息:', message);
+    this.logger.info('Đã nhận tin nhắn:', message);
 
-    // 解析用户意图
+    // Phân tích ý định người dùng
     const intent = this.parseIntent(message);
 
-    // 根据意图执行相应操作
+    // Thực thi hành động tương ứng theo ý định
     switch (intent.type) {
       case 'query':
         return await this.handleQuery(intent.params, context);
@@ -59,113 +59,113 @@ module.exports = {
       default:
         return {
           success: false,
-          message: '抱歉，我不理解这个请求'
+          message: 'Rất tiếc, tôi chưa hiểu rõ yêu cầu này'
         };
     }
   },
 
   /**
-   * 解析用户意图
-   * @param {string} message - 用户消息
-   * @returns {Object} 解析结果
+   * Phân tích ý định của người dùng
+   * @param {string} message - Tin nhắn của người dùng
+   * @returns {Object} Kết quả phân tích ý định
    */
   parseIntent(message) {
-    // 简单的关键词匹配
-    if (message.includes('查询') || message.includes('搜索')) {
+    // Khớp từ khóa đơn giản (hỗ trợ cả tiếng Việt và từ khóa phổ biến)
+    if (message.includes('tra cứu') || message.includes('tìm kiếm') || message.includes('query') || message.includes('search')) {
       return {
         type: 'query',
-        params: { query: message.replace(/查询|搜索/g, '').trim() }
+        params: { query: message.replace(/tra cứu|tìm kiếm|query|search/gi, '').trim() }
       };
-    } else if (message.includes('执行') || message.includes('运行')) {
+    } else if (message.includes('thực thi') || message.includes('chạy') || message.includes('run') || message.includes('execute')) {
       return {
         type: 'action',
-        params: { action: message.replace(/执行|运行/g, '').trim() }
+        params: { action: message.replace(/thực thi|chạy|run|execute/gi, '').trim() }
       };
     }
     return { type: 'unknown' };
   },
 
   /**
-   * 处理查询请求
-   * @param {Object} params - 查询参数
-   * @param {Object} context - 上下文
-   * @returns {Promise<Object>} 查询结果
+   * Xử lý yêu cầu truy vấn
+   * @param {Object} params - Tham số truy vấn
+   * @param {Object} context - Ngữ cảnh
+   * @returns {Promise<Object>} Kết quả truy vấn
    */
   async handleQuery(params, context) {
     try {
-      // 调用外部API或执行查询逻辑
+      // Gọi API bên ngoài hoặc thực thi logic truy vấn
       const result = await this.fetchData(params.query);
 
       return {
         success: true,
         data: result,
-        message: `查询成功：${result}`
+        message: `Truy vấn thành công: ${result}`
       };
     } catch (error) {
-      this.logger.error('查询失败:', error);
+      this.logger.error('Truy vấn thất bại:', error);
       return {
         success: false,
         error: error.message,
-        message: '查询失败，请稍后重试'
+        message: 'Truy vấn thất bại, vui lòng thử lại sau'
       };
     }
   },
 
   /**
-   * 处理动作请求
-   * @param {Object} params - 动作参数
-   * @param {Object} context - 上下文
-   * @returns {Promise<Object>} 执行结果
+   * Xử lý yêu cầu hành động
+   * @param {Object} params - Tham số hành động
+   * @param {Object} context - Ngữ cảnh
+   * @returns {Promise<Object>} Kết quả thực thi hành động
    */
   async handleAction(params, context) {
     try {
-      // 执行动作
+      // Thực thi hành động
       const result = await this.executeAction(params.action);
 
       return {
         success: true,
         data: result,
-        message: `执行成功：${result}`
+        message: `Thực thi thành công: ${result}`
       };
     } catch (error) {
-      this.logger.error('执行失败:', error);
+      this.logger.error('Thực thi thất bại:', error);
       return {
         success: false,
         error: error.message,
-        message: '执行失败，请稍后重试'
+        message: 'Thực thi thất bại, vui lòng thử lại sau'
       };
     }
   },
 
   /**
-   * 获取数据（示例方法）
-   * @param {string} query - 查询字符串
-   * @returns {Promise<string>} 查询结果
+   * Lấy dữ liệu (Phương thức mẫu)
+   * @param {string} query - Chuỗi truy vấn
+   * @returns {Promise<string>} Kết quả truy vấn
    */
   async fetchData(query) {
-    // 这里实现你的数据获取逻辑
-    // 示例：调用API
+    // Hiện thực hóa logic lấy dữ liệu của bạn tại đây
+    // Ví dụ: Gọi API
     // const response = await fetch(`${this.config.options.apiEndpoint}/query?q=${encodeURIComponent(query)}`);
     // return await response.json();
 
-    // 简单示例：返回查询内容
-    return `查询"${query}"的结果`;
+    // Ví dụ đơn giản: Trả về chuỗi kết quả
+    return `Kết quả truy vấn "${query}"`;
   },
 
   /**
-   * 执行动作（示例方法）
-   * @param {string} action - 动作描述
-   * @returns {Promise<string>} 执行结果
+   * Thực thi hành động (Phương thức mẫu)
+   * @param {string} action - Mô tả hành động
+   * @returns {Promise<string>} Kết quả thực thi
    */
   async executeAction(action) {
-    // 这里实现你的动作执行逻辑
-    return `已执行动作：${action}`;
+    // Hiện thực hóa logic thực thi hành động của bạn tại đây
+    return `Đã thực thi hành động: ${action}`;
   },
 
   /**
-   * Skill 清理钩子
+   * Hook dọn dẹp tài nguyên Skill khi dừng
    */
   async cleanup() {
-    this.logger.info('Skill 清理完成');
+    this.logger.info('Dọn dẹp Skill hoàn tất');
   }
 };

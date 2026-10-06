@@ -18,9 +18,9 @@
   ],
   "agents": [
     {
-      "name": "飞书助手",
+      "name": "Trợ lý Lark Feishu",
       "model": "deepseek-chat",
-      "systemPrompt": "你是一个飞书机器人助手，可以帮助用户处理工作事务。"
+      "systemPrompt": "Bạn là một trợ lý bot Lark/Feishu, giúp người dùng xử lý các công việc văn phòng và quản lý dự án."
     }
   ]
 }

@@ -1,57 +1,57 @@
-> 📖 **纸质书《OpenClaw超级个体实操手册》已上市！** 清华大学出版社出版，在开源教程基础上全面重写+逐条验证。🛒 [京东专属购买链接（¥42，原价¥59.8）](https://item.jd.com/14669463.html)
+> 📖 **Giáo trình Awesome OpenClaw Tutorial** | Bản dịch tiếng Việt chính thức cho cộng đồng. Nguyên tác thuộc về tác giả [@xianyu110](https://github.com/xianyu110).
 
-# 第15章节 一人公司实战（选题、交付、分发、复盘）
+# Chương 15: Thực chiến Mô hình Công ty Một người - Solopreneur (Chọn đề tài, Bàn giao, Phân phối, Đánh giá)
 
-> 本章目标：把“一个人做品牌、做产品、做分发”的工作流，改写成符合 OpenClaw 当前官方能力的版本：用 standing orders、cron、Task Flow、媒体能力和 Memory Wiki 形成闭环。
-
----
-
-## 版本基线
-
-- **当前稳定版**：`v2026.9.3`（2026-09-08 发布）
-- 本章一律按 `v2026.9.3` 稳定版主线展开，避免把历史 beta / 已移除插件写成默认商业流程
+> Mục tiêu chương này: Chuyển đổi toàn bộ quy trình "một người tự xây dựng thương hiệu, làm sản phẩm, phân phối nội dung" thành phiên bản tương thích với năng lực chính thức hiện nay của OpenClaw: sử dụng standing orders, cron, Task Flow, năng lực media và Memory Wiki để tạo thành một vòng lặp khép kín.
 
 ---
 
-## 先给小白的阅读说明
+## Baseline phiên bản
 
-### 这章不是“全自动赚钱教程”
-
-这一章更准确的定位是：**教你怎么把一个人的日常商业工作拆成可复用流程**。它不会让你完全不审稿、不确认、不复核就自动对外发布。
-
-### 谁适合先读这一章
-
-- 你已经把第 `13` 章自动化和第 `14` 章媒体能力跑通过
-- 你自己一个人做内容、产品、咨询、课程或服务交付
-- 你想把“研究、起草、产出、分发、复盘”做成半自动流水线
-
-### 小白怎么读最省力
-
-- **只想做内容系统**：先看 `15.1`
-- **只想做线索跟进**：先看 `15.2`
-- **想理解一人公司的整体操作系统**：再看 `15.3` 以后
-
-### 最重要的原则
-
-外部发布、对外报价、法律风险、品牌风险，默认都要保留人工审批。OpenClaw 擅长的是**帮你提速**，不是替你承担责任。
+- **Phiên bản ổn định hiện tại**: `v2026.9.3` (Phát hành ngày 08-09-2026)
+- Chương này hoàn toàn bám sát theo luồng chính của bản ổn định `v2026.9.3`, tránh đưa các bản beta lịch sử hoặc plugin đã bị loại bỏ vào quy trình vận hành thương mại mặc định
 
 ---
 
-## 15.1 案例一：个人品牌内容流水线
+## Hướng dẫn đọc dành cho người mới bắt đầu
 
-### 15.1.1 目标
+### Chương này không phải là "giáo trình kiếm tiền tự động hoàn toàn"
 
-一个人完成下面这条链路：
+Định vị chính xác của chương này là: **Hướng dẫn bạn cách bóc tách các công việc kinh doanh thường nhật của một cá nhân thành những quy trình có thể tái sử dụng**. Nó không khuyến khích bạn phát hành nội dung ra bên ngoài mà không qua khâu duyệt bài, xác nhận hay kiểm tra lại.
 
-1. 每天自动发现值得写的题目
-2. 快速做素材研究
-3. 产出文章 / 推文 / 视频脚本草稿
-4. 自动生成配图、试音或短视频素材
-5. 人工审核后再分发
+### Ai nên đọc chương này trước
 
-### 15.1.2 先写 Standing Orders，而不是先堆工具
+- Bạn đã chạy thông suốt phần tự động hóa ở Chương 13 và năng lực media ở Chương 14
+- Bạn đang tự mình làm nội dung, sản phẩm số, tư vấn, khóa học hoặc chuyển giao dịch vụ
+- Bạn muốn biến các khâu "nghiên cứu, soạn thảo, sản xuất tư liệu, phân phối, đánh giá" thành một dây chuyền bán tự động
 
-把 agent 的长期职责写进 `AGENTS.md`：
+### Cách đọc hiệu quả nhất cho người mới
+
+- **Chỉ muốn xây dựng hệ thống nội dung**: Đọc `15.1` trước
+- **Chỉ muốn tự động hóa theo dõi khách hàng tiềm năng (Leads)**: Đọc `15.2` trước
+- **Muốn hiểu toàn bộ hệ điều hành của một Solopreneur**: Đọc tiếp từ `15.3` trở đi
+
+### Nguyên tắc cốt lõi quan trọng nhất
+
+Mọi hoạt động phát hành ra bên ngoài, báo giá dịch vụ, rủi ro pháp lý, rủi ro thương hiệu mặc định đều phải giữ lại bước phê duyệt của con người. Thế mạnh của OpenClaw là **giúp bạn tăng tốc tối đa**, chứ không phải gánh vác trách nhiệm pháp lý thay bạn.
+
+---
+
+## 15.1 Ca thực chiến 1: Dây chuyền sản xuất nội dung thương hiệu cá nhân
+
+### 15.1.1 Mục tiêu
+
+Một người tự mình hoàn thành trọn vẹn chuỗi liên kết sau:
+
+1. Tự động tìm kiếm các chủ đề đáng viết mỗi ngày
+2. Nhanh chóng nghiên cứu và tổng hợp tư liệu
+3. Tạo bản nháp bài viết / bài đăng mạng xã hội / kịch bản video ngắn
+4. Tự động tạo ảnh minh họa, file đọc thử giọng hoặc tư liệu video ngắn
+5. Con người phê duyệt trước khi phân phối ra các kênh
+
+### 15.1.2 Thiết lập Standing Orders trước, thay vì gom góp công cụ
+
+Ghi rõ các trách nhiệm dài hạn của agent vào file `AGENTS.md`:
 
 ```md
 ## Program: Daily Content Desk
@@ -76,126 +76,135 @@
 - Do not reuse old claims when sources conflict
 ```
 
-### 15.1.3 定时触发
+### 15.1.3 Kích hoạt định kỳ bằng Cron
 
-这个例子最适合先跑，因为它能让你每天固定收到一批候选选题，你很容易判断系统有没有真正帮你省时间。
+Ví dụ này rất đáng để triển khai trước tiên, vì nó giúp bạn nhận được danh sách chủ đề đề xuất cố định vào mỗi sáng, từ đó dễ dàng đánh giá liệu hệ thống có thực sự tiết kiệm thời gian cho bạn hay không.
 
 ```bash
-openclaw cron add   --name "Daily content desk"   --cron "0 9 * * *"   --tz "Asia/Shanghai"   --session isolated   --message "Research AI/productivity topics from the last 24 hours, rank 3 angles, draft one article outline and one short-form script, then summarize what needs approval."   --announce
+openclaw cron add \
+  --name "Daily content desk" \
+  --cron "0 9 * * *" \
+  --tz "Asia/Shanghai" \
+  --session isolated \
+  --message "Research AI/productivity topics from the last 24 hours, rank 3 angles, draft one article outline and one short-form script, then summarize what needs approval." \
+  --announce
 ```
 
-### 15.1.4 素材生成
+### 15.1.4 Sản xuất tư liệu media
 
-研究阶段优先走官方搜索与抓取：
+Ở giai đoạn nghiên cứu tư liệu, ưu tiên dùng các lệnh tìm kiếm và cào dữ liệu chính thức:
 
 ```bash
 openclaw infer web search --query "OpenClaw release notes April 2026" --json
 openclaw infer web fetch --url https://github.com/openclaw/openclaw/releases --json
 ```
 
-素材阶段优先走官方媒体能力：
+Ở giai đoạn tạo tư liệu, ưu tiên dùng năng lực media chính thức:
 
 ```bash
-openclaw infer image generate --prompt "一张白板风格配图：AI 内容生产流水线" --json
-openclaw infer tts convert --text "今天的选题已经准备完成" --output ./topic-brief.mp3 --json
+openclaw infer image generate --prompt "Một ảnh minh họa phong cách vẽ bảng trắng: Dây chuyền sản xuất nội dung AI" --json
+openclaw infer tts convert --text "Các chủ đề hôm nay đã chuẩn bị xong" --output ./topic-brief.mp3 --json
 ```
 
-如果是短视频素材，则让 agent 调用 `video_generate`，并在 `tasks list` 里看进度。
+Nếu cần tư liệu video ngắn, hãy để agent gọi `video_generate` và theo dõi tiến độ qua lệnh `tasks list`.
 
-#### 看到什么算这条内容流水线已经有价值
+#### Dấu hiệu nhận biết dây chuyền nội dung đã mang lại giá trị thực tế
 
-- 你每天都能稳定拿到候选题目和草稿
-- 你不需要手动开十几个网页再拼素材
-- 你保留最终审核权，而不是让系统自动外发
+- Mỗi ngày bạn đều nhận được danh sách chủ đề ứng viên và bản nháp một cách đều đặn
+- Bạn không cần phải mở thủ công hàng chục tab trình duyệt để cóp nhặt tư liệu
+- Bạn vẫn giữ quyền kiểm duyệt cuối cùng, không để hệ thống tự tiện đăng bài ra ngoài
 
-### 15.1.5 为什么这一套比旧教程稳
+### 15.1.5 Vì sao cách làm này ổn định hơn các hướng dẫn cũ
 
-旧版一人公司案例里最大的问题，是默认把一大堆平台化发布工具、历史 Skill 名称和经验流写死在正文里。现在更稳的做法是：
+Vấn đề lớn nhất trong các hướng dẫn Solopreneur kiểu cũ là thường gắn chặt vào hàng loạt công cụ đăng bài nền tảng bên thứ ba và các tên Skill đã lỗi thời. Cách làm chuẩn và bền vững hơn hiện nay là:
 
-- OpenClaw 负责研究、起草、素材准备、状态追踪
-- 外部分发放在人工审批后进行
-- 如果确实要自动分发，走 `hooks` / `webhooks` plugin 或自家中间层，不把它写死成某个旧平台依赖
+- OpenClaw đảm nhiệm khâu nghiên cứu, soạn thảo, chuẩn bị tư liệu và theo dõi trạng thái
+- Việc phân phối ra bên ngoài chỉ diễn ra sau khi con người đã kiểm tra và duyệt
+- Nếu thực sự muốn tự động phân phối, hãy tích hợp qua plugin `hooks` / `webhooks` hoặc một tầng dịch vụ trung gian riêng, không phụ thuộc cứng vào bất kỳ nền tảng cũ nào
 
 ---
 
-## 15.2 案例二：线索收集与跟进自动化
+## 15.2 Ca thực chiến 2: Tự động hóa thu thập và theo dõi khách hàng tiềm năng (Leads)
 
-### 15.2.1 场景
+### 15.2.1 Kịch bản thực tế
 
-你有：
+Bạn có:
 
-- 官网表单
-- 邮件咨询
-- Telegram / Slack / 飞书私信
-- 产品试用申请
+- Biểu mẫu đăng ký trên website
+- Email tư vấn gửi đến
+- Tin nhắn riêng từ Telegram / Slack / Lark / Feishu
+- Yêu cầu dùng thử sản phẩm
 
-你想做到：
+Bạn muốn đạt được:
 
-1. 新线索进来立刻被识别
-2. 自动补齐基础画像
-3. 按优先级分级
-4. 生成跟进建议
-5. 需要时升级为人工处理
+1. Khi có khách hàng tiềm năng mới, hệ thống nhận diện ngay lập tức
+2. Tự động bổ sung thông tin hồ sơ cơ bản
+3. Phân loại theo mức độ ưu tiên
+4. Đưa ra gợi ý phản hồi phù hợp
+5. Nâng cấp thành ca xử lý thủ công cho con người khi cần thiết
 
-### 15.2.2 推荐架构
+### 15.2.2 Kiến trúc khuyến nghị
 
 ```text
-表单 / 邮件 / IM 事件
-  -> hooks 或 webhooks plugin
+Sự kiện từ Biểu mẫu / Email / Ứng dụng nhắn tin
+  -> Plugin hooks hoặc webhooks
   -> create_flow
-  -> run_task（资格判断 / 摘要 / 回复建议）
-  -> 写入 Memory Wiki / CRM
-  -> 人工审批是否发送正式回复
+  -> run_task (Đánh giá điều kiện / Tóm tắt nhu cầu / Gợi ý phản hồi)
+  -> Ghi vào Memory Wiki / Hệ thống CRM
+  -> Con người phê duyệt trước khi gửi phản hồi chính thức
 ```
 
-### 15.2.3 外部触发最小实现
+### 15.2.3 Triển khai tối thiểu kích hoạt từ bên ngoài
 
-轻量场景直接用 `hooks/agent`：
+Với các trường hợp gọn nhẹ, sử dụng trực tiếp endpoint `hooks/agent`:
 
 ```bash
-curl -X POST http://127.0.0.1:18789/hooks/agent   -H 'Authorization: Bearer SECRET'   -H 'Content-Type: application/json'   -d '{"message":"Classify this inbound lead, summarize intent, infer urgency, and draft a reply outline.","name":"Lead intake","model":"openai/gpt-5.4-mini"}'
+curl -X POST http://127.0.0.1:18789/hooks/agent \
+  -H 'Authorization: Bearer SECRET' \
+  -H 'Content-Type: application/json' \
+  -d '{"message":"Classify this inbound lead, summarize intent, infer urgency, and draft a reply outline.","name":"Lead intake","model":"openai/gpt-5.4-mini"}'
 ```
 
-复杂场景则用 `webhooks` plugin 创建 Task Flow：
+Với các kịch bản phức tạp, sử dụng plugin `webhooks` để khởi tạo Task Flow:
 
-- `create_flow`：建立该线索的流程对象
-- `run_task`：拆出资格判断、资料补齐、回复建议等子任务
+- `create_flow`: Tạo đối tượng luồng xử lý riêng cho lead đó
+- `run_task`: Tách thành các tác vụ con như đánh giá điều kiện, bổ sung hồ sơ, đề xuất câu trả lời
 
-### 15.2.4 为什么要把线索写进 Memory Wiki
+### 15.2.4 Vì sao nên ghi nhận khách hàng tiềm năng vào Memory Wiki
 
-因为一人公司最怕的不是“回复慢”，而是：
+Nỗi sợ lớn nhất của một Solopreneur không phải là "trả lời chậm", mà là:
 
-- 前后说法不一致
-- 客户背景记不住
-- 承诺过的事没人记得
-- 线索状态散落在多个地方
+- Trước sau nói năng không nhất quán
+- Quên bối cảnh và nhu cầu đặc thù của khách hàng
+- Quên mất những cam kết đã từng hứa
+- Trạng thái chăm sóc bị phân tán rải rác ở khắp nơi
 
-如果你把关键信息沉淀到 wiki，你会得到：
+Khi bạn kết tinh các thông tin quan trọng vào Wiki, bạn sẽ luôn nắm rõ:
 
-- 谁是这个人 / 公司
-- TA 来自哪里
-- TA 关注什么
-- 之前谈到哪一步
-- 还有哪些未决问题
+- Khách hàng / Công ty này là ai
+- Họ đến từ kênh nào
+- Họ quan tâm đến vấn đề gì nhất
+- Cuộc trao đổi trước đó đã dừng ở bước nào
+- Còn những vướng mắc nào chưa được giải quyết
 
-这对小团队极其关键。
+Điều này có ý nghĩa sống còn đối với một đội ngũ một người.
 
 ---
 
-## 15.3 一人公司的 4 层操作系统
+## 15.3 Hệ điều hành 4 tầng của Solopreneur
 
-我更推荐把 OpenClaw 在一人公司里的角色拆成 4 层：
+Tôi khuyến nghị bóc tách vai trò của OpenClaw trong mô hình Solopreneur thành 4 tầng rõ rệt:
 
-### 第一层：日常执行层
+### Tầng 1: Tầng thực thi hàng ngày (Execution Layer)
 
-负责：
+Đảm nhiệm:
 
-- 搜索资料
-- 总结信息
-- 生成图片 / 试音 / 视频素材
-- 处理日常消息和待办
+- Tìm kiếm và thu thập dữ liệu
+- Tóm tắt và phân tích thông tin
+- Tạo hình ảnh / file đọc thử / tư liệu video
+- Xử lý tin nhắn và danh sách việc cần làm (To-Do) thường nhật
 
-核心能力：
+Năng lực cốt lõi:
 
 - `infer`
 - `image_generate`
@@ -203,43 +212,43 @@ curl -X POST http://127.0.0.1:18789/hooks/agent   -H 'Authorization: Bearer SECR
 - `music_generate`
 - `tts`
 
-### 第二层：调度层
+### Tầng 2: Tầng điều phối (Orchestration Layer)
 
-负责：
+Đảm nhiệm:
 
-- 定时执行
-- 记录任务状态
-- 处理长任务
-- 跟踪多步骤流程
+- Thực thi theo lịch định kỳ
+- Ghi nhận trạng thái tác vụ
+- Xử lý và giám sát các tác vụ dài hạn
+- Theo dõi quy trình phân nhánh nhiều bước
 
-核心能力：
+Năng lực cốt lõi:
 
 - `cron`
 - `tasks`
 - `Task Flow`
 
-### 第三层：长期授权层
+### Tầng 3: Tầng ủy quyền dài hạn (Standing Authority Layer)
 
-负责：
+Đảm nhiệm:
 
-- 规定 agent 长期负责什么
-- 规定哪些事必须审批
-- 规定何时升级给你处理
+- Quy định những đầu việc agent được phụ trách lâu dài
+- Quy định những việc bắt buộc phải có con người phê duyệt
+- Quy định khi nào cần leo thang (escalate) để người dùng can thiệp
 
-核心载体：
+Vật phẩm cốt lõi:
 
 - `AGENTS.md`
-- standing orders
+- Standing orders
 
-### 第四层：知识层
+### Tầng 4: Tầng tri thức (Knowledge Layer)
 
-负责：
+Đảm nhiệm:
 
-- 沉淀客户、项目、产品、内容资产
-- 记录 claim / evidence / contradiction
-- 把经验变成可检索知识
+- Tích lũy tài sản về khách hàng, dự án, sản phẩm và nội dung
+- Ghi nhận luận điểm (claim) / bằng chứng (evidence) / mâu thuẫn (contradiction)
+- Biến kinh nghiệm thực chiến thành tri thức có thể tra cứu nhanh
 
-核心能力：
+Năng lực cốt lõi:
 
 - `memory-core`
 - `active-memory`
@@ -247,62 +256,62 @@ curl -X POST http://127.0.0.1:18789/hooks/agent   -H 'Authorization: Bearer SECR
 
 ---
 
-## 15.4 一人公司应该怎么设审批边界
+## 15.4 Cách thiết lập ranh giới phê duyệt cho Solopreneur
 
-这是本章最重要的一节。
+Đây là phần quan trọng nhất của chương này.
 
-**可以自动做**：
+**Có thể để AI tự động thực hiện hoàn toàn**:
 
-- 研究与摘要
-- 选题建议
-- 资料抓取
-- 素材初稿生成
-- 线索分级建议
-- 周报和日报草稿
+- Nghiên cứu và tóm tắt thông tin
+- Đề xuất ý tưởng và góc nhìn nội dung
+- Cào dữ liệu và tổng hợp tài liệu
+- Tạo các bản phác thảo tư liệu media ban đầu
+- Đưa ra đề xuất phân loại khách hàng tiềm năng
+- Soạn thảo bản nháp báo cáo tuần và báo cáo ngày
 
-**必须人工确认**：
+**BẮT BUỘC phải có con người xác nhận trực tiếp**:
 
-- 对外正式发布
-- 对客户作出承诺
-- 发价格、合同、结算信息
-- 处理敏感舆情和公关风险
-- 修改生产数据或关键配置
+- Phát hành bài đăng chính thức ra các kênh đối ngoại
+- Đưa ra các cam kết thỏa thuận với khách hàng
+- Gửi báo giá, hợp đồng, thông tin thanh toán tài chính
+- Xử lý các khủng hoảng truyền thông nhạy cảm
+- Chỉnh sửa dữ liệu môi trường sản xuất (production) hoặc file cấu hình cốt lõi
 
-OpenClaw 很适合做“前 80% 的准备工作”，但最后那一跳商业责任，必须保留给人。
+OpenClaw rất xuất sắc trong việc hoàn thành "80% khối lượng chuẩn bị ban đầu", nhưng bước nhảy trách nhiệm kinh doanh cuối cùng nhất định phải nằm trong tay con người.
 
 ---
 
-## 15.5 最小可落地栈（推荐）
+## 15.5 Bộ công cụ tối thiểu triển khai được ngay (Khuyến nghị)
 
-如果你就是一个人，不要一开始就搞“全家桶”。下面这套最实用：
+Nếu bạn chỉ có một mình, đừng vội xây dựng một bộ công cụ cồng kềnh ngay từ đầu. Bộ khung sau đây là thiết thực nhất:
 
-### 必备
+### Thành phần bắt buộc phải có ngay
 
 - `openclaw onboard`
-- 主模型 + 回退链
-- 一个 `cron` 日报 / 周报任务
-- 一个 `AGENTS.md` standing order
-- 一个 `hooks` 或 `webhooks` 接口
+- Mô hình chính + Chuỗi dự phòng (fallbacks)
+- Một tác vụ `cron` cho báo cáo ngày / báo cáo tuần
+- Một standing order trong `AGENTS.md`
+- Một giao diện `hooks` hoặc `webhooks`
 
-### 第二阶段再加
+### Bổ sung ở giai đoạn thứ hai
 
 - `Active Memory`
 - `Memory Wiki`
-- 图片 / 视频 / 音乐默认模型
+- Cấu hình mô hình mặc định cho ảnh / video / âm nhạc
 - `Task Flow`
 
-### 暂时别急着加
+### Tạm thời chưa nên vội đưa vào
 
-- 一堆历史 Skill 生态兼容层
-- 平台强耦合脚本
-- 没有审批边界的自动外发
-- 没有任务观测能力的多 agent 编排
+- Hàng loạt tầng tương thích sinh thái Skill cũ
+- Các đoạn script phụ thuộc cứng vào nền tảng bên thứ ba
+- Tính năng tự động đăng bài ra ngoài mà không có ranh giới phê duyệt
+- Điều phối đa agent phức tạp khi bản thân chưa nắm được cách quan sát tác vụ
 
 ---
 
-## 15.6 每周复盘清单
+## 15.6 Checklist đánh giá lại (Review) hằng tuần
 
-建议每周固定看一次：
+Khuyến nghị định kỳ mỗi tuần kiểm tra một lần:
 
 ```bash
 openclaw status
@@ -314,36 +323,36 @@ openclaw wiki status
 openclaw wiki lint
 ```
 
-重点看：
+Trọng tâm cần rà soát:
 
-1. 任务有没有堆积
-2. 哪些流程总是失败
-3. 哪些承诺没有进入知识层
-4. 哪些 standing orders 该收缩或扩权
-5. 哪些自动化还没有审批边界
-
----
-
-## 15.7 本章结论
-
-一人公司不是“让 AI 代替你”，而是：
-
-- 让 OpenClaw 接管研究、整理、调度、素材准备和状态追踪
-- 让你只把精力放在判断、选择、品牌、产品和最终责任上
-
-换句话说：
-
-**把重复劳动交给系统，把最终判断留给你自己。**
+1. Tác vụ có bị tồn đọng hoặc treo không
+2. Những quy trình nào thường xuyên gặp sự cố
+3. Những cam kết nào với khách hàng chưa được đưa vào tầng tri thức (Wiki)
+4. Những standing orders nào cần thu hẹp hoặc mở rộng quyền hạn
+5. Những luồng tự động hóa nào còn thiếu ranh giới phê duyệt của con người
 
 ---
 
-## 15.8 官方参考
+## 15.7 Kết luận chương
 
-- GitHub Releases：https://github.com/openclaw/openclaw/releases
-- Automation Overview：https://docs.openclaw.ai/automation/cron-vs-heartbeat
-- Scheduled Tasks：https://docs.openclaw.ai/automation/cron-jobs
-- Task Flow：https://docs.openclaw.ai/automation/taskflow
-- Standing Orders：https://docs.openclaw.ai/automation/standing-orders
-- Webhooks Plugin：https://docs.openclaw.ai/plugins/webhooks
-- Memory Wiki：https://docs.openclaw.ai/plugins/memory-wiki
-- Inference CLI：https://docs.openclaw.ai/cli/infer
+Xây dựng công ty một người không phải là "để AI thay thế hoàn toàn bạn", mà là:
+
+- Để OpenClaw tiếp quản công việc nghiên cứu, tổng hợp, lập lịch, chuẩn bị tư liệu và theo dõi trạng thái
+- Giúp bạn tập trung trọn vẹn trí lực vào việc ra quyết định, lựa chọn hướng đi, xây dựng thương hiệu, hoàn thiện sản phẩm và chịu trách nhiệm cuối cùng
+
+Nói cách khác:
+
+**Hãy giao các công việc lặp đi lặp lại cho hệ thống, và giữ lại quyền phán đoán tối cao cho chính bản thân bạn.**
+
+---
+
+## 15.8 Tài liệu tham khảo chính thức
+
+- GitHub Releases: https://github.com/openclaw/openclaw/releases
+- Automation Overview: https://docs.openclaw.ai/automation/cron-vs-heartbeat
+- Scheduled Tasks: https://docs.openclaw.ai/automation/cron-jobs
+- Task Flow: https://docs.openclaw.ai/automation/taskflow
+- Standing Orders: https://docs.openclaw.ai/automation/standing-orders
+- Webhooks Plugin: https://docs.openclaw.ai/plugins/webhooks
+- Memory Wiki: https://docs.openclaw.ai/plugins/memory-wiki
+- Inference CLI: https://docs.openclaw.ai/cli/infer

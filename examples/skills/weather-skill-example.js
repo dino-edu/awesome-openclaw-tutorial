@@ -1,80 +1,80 @@
 /**
- * OpenClaw 天气查询 Skill 示例
+ * Ví dụ Skill tra cứu thời tiết OpenClaw (Weather Skill Example)
  *
- * 这是一个实用的天气查询技能，展示如何创建一个完整的 Skill。
+ * Đây là ví dụ thực tế về kỹ năng tra cứu thời tiết, minh họa cách xây dựng một Skill hoàn chỉnh.
  *
  * @module weather-skill
  * @version 1.0.0
  */
 
 module.exports = {
-  // Skill 元数据
+  // Metadata của Skill
   name: 'weather-query',
   version: '1.0.0',
-  description: '天气查询助手，支持城市天气查询和预报',
+  description: 'Trợ lý tra cứu thời tiết, hỗ trợ xem thông tin thời tiết và dự báo theo thành phố',
   author: 'OpenClaw Tutorial',
   category: 'utility',
   tags: ['weather', 'query', 'utility'],
 
-  // Skill 配置
+  // Cấu hình Skill
   config: {
     enabled: true,
     options: {
-      // 默认城市
-      defaultCity: '北京',
-      // API密钥（需要在 openclaw.json 中配置）
+      // Thành phố mặc định
+      defaultCity: 'Hà Nội',
+      // API key (cần cấu hình trong openclaw.json)
       apiKey: process.env.WEATHER_API_KEY || '',
-      // API端点（示例）
+      // API endpoint (Ví dụ)
       apiEndpoint: 'https://api.weatherapi.com/v1'
     }
   },
 
   /**
-   * Skill 初始化
+   * Khởi tạo Skill
    */
   async init(context) {
     this.logger = context.logger;
     this.config = { ...this.config, ...context.config };
-    this.logger.info('天气查询 Skill 初始化成功');
+    this.logger.info('Khởi tạo Skill tra cứu thời tiết thành công');
   },
 
   /**
-   * 处理用户消息
+   * Xử lý tin nhắn người dùng
    */
   async handleMessage(message, context) {
-    // 解析城市名称
+    // Trích xuất tên thành phố
     const city = this.extractCity(message) || this.config.options.defaultCity;
 
     try {
-      // 获取天气信息
+      // Lấy thông tin thời tiết
       const weather = await this.getWeather(city);
 
-      // 格式化响应
+      // Định dạng phản hồi
       return {
         success: true,
         message: this.formatWeather(weather),
         data: weather
       };
     } catch (error) {
-      this.logger.error('获取天气失败:', error);
+      this.logger.error('Lấy thông tin thời tiết thất bại:', error);
       return {
         success: false,
-        message: `获取${city}天气失败：${error.message}`
+        message: `Lấy thông tin thời tiết cho ${city} thất bại: ${error.message}`
       };
     }
   },
 
   /**
-   * 提取城市名称
-   * @param {string} message - 用户消息
-   * @returns {string|null} 城市名称
+   * Trích xuất tên thành phố từ câu hỏi
+   * @param {string} message - Tin nhắn người dùng
+   * @returns {string|null} Tên thành phố
    */
   extractCity(message) {
-    // 匹配"天气"关键词后面的城市名
+    // Khớp mẫu câu hỏi thời tiết tiếng Việt và tiếng Anh
     const patterns = [
-      /(?:查询|查看|获取)?(?:今天|明天)?(.{2,4})的天气/,
-      /(.{2,4})(?:市)?天气/,
-      /weather\s+(?:in\s+)?(.{2,10})/i
+      /(?:thời tiết|dự báo thời tiết)(?:\s+(?:tại|ở|cho))?\s+([A-Za-zÀ-ỹ\s0-9]{2,20})/i,
+      /(?:tra cứu|xem|kiểm tra)?\s*thời tiết\s+([A-Za-zÀ-ỹ\s0-9]{2,20})/i,
+      /weather\s+(?:in\s+)?([A-Za-z\s0-9]{2,20})/i
     ];
 
     for (const pattern of patterns) {
@@ -88,71 +88,71 @@ module.exports = {
   },
 
   /**
-   * 获取天气信息
-   * @param {string} city - 城市名称
-   * @returns {Promise<Object>} 天气数据
+   * Lấy dữ liệu thời tiết
+   * @param {string} city - Tên thành phố
+   * @returns {Promise<Object>} Dữ liệu thời tiết
    */
   async getWeather(city) {
-    // 检查API密钥
+    // Kiểm tra API key
     if (!this.config.options.apiKey) {
-      // 返回模拟数据（用于演示）
+      // Trả về dữ liệu giả lập (dùng cho demo)
       return this.getMockWeather(city);
     }
 
     try {
-      // 调用真实API（示例）
+      // Gọi API thực tế (Ví dụ)
       // const url = `${this.config.options.apiEndpoint}/current.json?key=${this.config.options.apiKey}&q=${encodeURIComponent(city)}`;
       // const response = await fetch(url);
       // const data = await response.json();
       // return this.parseWeatherData(data);
 
-      // 这里使用模拟数据
+      // Tại đây sử dụng dữ liệu giả lập
       return this.getMockWeather(city);
     } catch (error) {
-      throw new Error(`API调用失败: ${error.message}`);
+      throw new Error(`Gọi API thất bại: ${error.message}`);
     }
   },
 
   /**
-   * 获取模拟天气数据
-   * @param {string} city - 城市名称
-   * @returns {Object} 模拟天气数据
+   * Tạo dữ liệu thời tiết giả lập
+   * @param {string} city - Tên thành phố
+   * @returns {Object} Dữ liệu thời tiết giả lập
    */
   getMockWeather(city) {
-    const conditions = ['晴', '多云', '阴', '小雨', '大雨', '雪'];
+    const conditions = ['Nắng ráo', 'Nhiều mây', 'Âm u', 'Mưa nhỏ', 'Mưa rào', 'Có giông'];
     const randomCondition = conditions[Math.floor(Math.random() * conditions.length)];
-    const randomTemp = Math.floor(Math.random() * 30) + 5; // 5-35度
+    const randomTemp = Math.floor(Math.random() * 15) + 20; // 20-35 độ C
 
     return {
       city: city,
       condition: randomCondition,
       temperature: randomTemp,
-      humidity: Math.floor(Math.random() * 50) + 30, // 30-80%
-      wind: Math.floor(Math.random() * 10) + 1, // 1-10级
-      updateTime: new Date().toLocaleString('zh-CN')
+      humidity: Math.floor(Math.random() * 40) + 50, // 50-90%
+      wind: Math.floor(Math.random() * 5) + 1, // Cấp 1-5
+      updateTime: new Date().toLocaleString('vi-VN')
     };
   },
 
   /**
-   * 格式化天气信息
-   * @param {Object} weather - 天气数据
-   * @returns {string} 格式化的天气信息
+   * Định dạng thông tin thời tiết hiển thị
+   * @param {Object} weather - Dữ liệu thời tiết
+   * @returns {string} Chuỗi hiển thị định dạng
    */
   formatWeather(weather) {
-    return `📍 ${weather.city}天气
+    return `📍 Thời tiết tại ${weather.city}
 
-🌡️ 温度：${weather.temperature}°C
-☁️ 天气：${weather.condition}
-💧 湿度：${weather.humidity}%
-💨 风力：${weather.wind}级
+🌡️ Nhiệt độ: ${weather.temperature}°C
+☁️ Trạng thái: ${weather.condition}
+💧 Độ ẩm: ${weather.humidity}%
+💨 Cấp gió: Cấp ${weather.wind}
 
-🕐 更新时间：${weather.updateTime}`;
+🕐 Thời gian cập nhật: ${weather.updateTime}`;
   },
 
   /**
-   * 解析API返回的天气数据
-   * @param {Object} data - API返回数据
-   * @returns {Object} 解析后的天气数据
+   * Phân tích dữ liệu phản hồi từ API
+   * @param {Object} data - Dữ liệu trả về từ API
+   * @returns {Object} Dữ liệu thời tiết chuẩn hóa
    */
   parseWeatherData(data) {
     return {
@@ -161,31 +161,31 @@ module.exports = {
       temperature: data.current.temp_c,
       humidity: data.current.humidity,
       wind: data.current.wind_kph,
-      updateTime: new Date().toLocaleString('zh-CN')
+      updateTime: new Date().toLocaleString('vi-VN')
     };
   },
 
   /**
-   * Skill 帮助信息
+   * Hướng dẫn sử dụng Skill
    */
   getHelp() {
-    return `天气查询助手使用指南：
+    return `Hướng dẫn sử dụng Trợ lý Tra cứu Thời tiết:
 
-📌 支持的查询方式：
-• "北京今天天气怎么样？"
-• "查询上海的天气"
-• "明天深圳天气"
+📌 Các mẫu câu truy vấn hỗ trợ:
+• "Thời tiết Hà Nội hôm nay thế nào?"
+• "Dự báo thời tiết ở Đà Nẵng"
+• "Thời tiết TP.HCM ngày mai"
 • "weather in Tokyo"
 
-📌 返回信息：
-• 当前温度
-• 天气状况
-• 湿度
-• 风力等级
-• 更���时间
+📌 Thông tin trả về:
+• Nhiệt độ hiện tại
+• Trạng thái bầu trời (nắng, mưa, mây...)
+• Độ ẩm không khí
+• Cấp độ gió
+• Thời gian cập nhật
 
-📌 配置说明：
-在 openclaw.json 中配置 API Key：
+📌 Cấu hình chi tiết:
+Khai báo API Key trong tệp openclaw.json:
 {
   "skills": {
     "weather-query": {
@@ -196,9 +196,9 @@ module.exports = {
   },
 
   /**
-   * Skill 清理
+   * Dọn dẹp tài nguyên Skill khi dừng
    */
   async cleanup() {
-    this.logger.info('天气查询 Skill 清理完成');
+    this.logger.info('Dọn dẹp Skill tra cứu thời tiết hoàn tất');
   }
 };

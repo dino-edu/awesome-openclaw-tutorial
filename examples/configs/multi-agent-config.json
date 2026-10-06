@@ -7,27 +7,27 @@
   },
   "agents": [
     {
-      "name": "工作助手",
+      "name": "Trợ lý công việc",
       "model": "deepseek-chat",
-      "systemPrompt": "你是一个专业的职场助手，擅长处理文档、会议记录和项目管理。",
+      "systemPrompt": "Bạn là một trợ lý công việc chuyên nghiệp, thành thạo xử lý tài liệu, biên bản cuộc họp và quản lý dự án.",
       "workspace": "work"
     },
     {
-      "name": "个人助手",
+      "name": "Trợ lý cá nhân",
       "model": "deepseek-chat",
-      "systemPrompt": "你是一个友好的个人助手，擅长日常对话和娱乐。",
+      "systemPrompt": "Bạn là một trợ lý cá nhân thân thiện, hỗ trợ hội thoại hằng ngày và giải trí.",
       "workspace": "personal"
     },
     {
-      "name": "代码助手",
+      "name": "Trợ lý lập trình",
       "model": "gpt-4",
-      "systemPrompt": "你是一个专业的编程助手，擅长代码生成、调试和审查。",
+      "systemPrompt": "Bạn là một trợ lý lập trình chuyên nghiệp, hỗ trợ sinh mã, gỡ lỗi và kiểm tra rà soát mã nguồn.",
       "workspace": "coding"
     },
     {
-      "name": "内容助手",
+      "name": "Trợ lý nội dung",
       "model": "kimi",
-      "systemPrompt": "你是一个创意写作助手，擅长文章创作和内容优化。",
+      "systemPrompt": "Bạn là một trợ lý viết lách sáng tạo, thành thạo biên soạn bài viết và tối ưu hóa nội dung.",
       "workspace": "content"
     }
   ]
