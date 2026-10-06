@@ -1,498 +1,536 @@
-# 附录A 命令速查表
+# Phụ lục A: Bảng Tra Cứu Nhanh Lệnh CLI
 
-> 💡 **本附录目标**：提供OpenClaw常用命令的快速参考。所有命令均基于官方CLI文档（https://docs.openclaw.ai/cli）验证，适用于v2026.3.7+版本。
+> 💡 **Mục tiêu của phụ lục này**: Cung cấp bảng tra cứu nhanh toàn diện các câu lệnh thường dùng trong OpenClaw. Tất cả các lệnh đều được kiểm chứng dựa trên tài liệu CLI chính thức (https://docs.openclaw.ai/cli), áp dụng cho phiên bản v2026.3.7 trở lên.
 
-## 📋 目录
+## 📋 Mục lục
 
--   A.1 安装与初始化
--   A.2 配置管理（config）
--   A.3 Gateway与守护进程（daemon）
--   A.4 状态与诊断
--   A.5 通道管理（channels）
--   A.6 模型管理（models）
--   A.7 Skills管理
--   A.8 插件管理（plugins）
--   A.9 日志与会话
--   A.10 定时任务（cron）
--   A.11 消息发送（message）
--   A.12 安全与备份
--   A.13 重置与卸载
--   A.14 常用场景组合
--   A.15 配置文件路径
+- A.1 Cài đặt và Khởi tạo
+- A.2 Quản lý Cấu hình (config)
+- A.3 Gateway và Tiến trình Nền (daemon)
+- A.4 Trạng thái và Chẩn đoán Lỗi
+- A.5 Quản lý Kênh Kết nối (channels)
+- A.6 Quản lý Mô hình AI (models)
+- A.7 Quản lý Kỹ năng (skills)
+- A.8 Quản lý Plugin (plugins)
+- A.9 Nhật ký và Phiên làm việc (logs & sessions)
+- A.10 Lập lịch Định kỳ (cron)
+- A.11 Gửi và Tương tác Tin nhắn (message)
+- A.12 An ninh Bảo mật và Sao lưu (security & backup)
+- A.13 Đặt lại và Gỡ cài đặt (reset & uninstall)
+- A.14 Chuỗi Lệnh Kịch bản Thực chiến Phổ biến
+- A.15 Đường dẫn Tệp Cấu hình và Dữ liệu
 
-## A.1 安装与初始化
+## A.1 Cài đặt và Khởi tạo
 
-    # 全局安装OpenClaw
-    npm install -g openclaw@latest
+```bash
+# Cài đặt OpenClaw toàn cục qua npm
+npm install -g openclaw@latest
 
-    # 首次引导向导（推荐）
-    openclaw onboard
+# Trình hướng dẫn thiết lập lần đầu (Khuyến nghị cho người mới)
+openclaw onboard
 
-    # 引导向导（高级模式，完整控制每个步骤）
-    openclaw onboard --advanced
+# Trình hướng dẫn nâng cao (Kiểm soát chi tiết từng bước cấu hình)
+openclaw onboard --advanced
 
-    # 重新运行引导向导（重置配置+凭据+会话）
-    openclaw onboard --reset
+# Chạy lại trình hướng dẫn thiết lập (Đặt lại cấu hình + thông tin xác thực + phiên)
+openclaw onboard --reset
 
-    # 交互式配置向导（已安装后修改配置）
-    openclaw configure
+# Trình cấu hình tương tác (Sửa đổi cấu hình sau khi đã cài đặt)
+openclaw configure
 
-    # 查看版本
-    openclaw --version
+# Kiểm tra phiên bản hiện tại
+openclaw --version
 
-    # 查看帮助
-    openclaw --help
+# Xem hướng dẫn trợ giúp chung
+openclaw --help
 
-    # 查看子命令帮助
-    openclaw config --help
+# Xem trợ giúp cho lệnh con cụ thể
+openclaw config --help
+```
 
-## A.2 配置管理（config）
+## A.2 Quản lý Cấu hình (config)
 
-> ⚠️ `openclaw config` 不带子命令等同于 `openclaw configure`（打开交互式向导）。
-> config 仅支持 `get`、`set`、`unset`、`file`、`validate` 五个子命令。
+> ⚠️ Lệnh `openclaw config` khi chạy không kèm lệnh con sẽ tương đương với `openclaw configure` (mở trình hướng dẫn cấu hình tương tác).  
+> Lệnh `config` chỉ hỗ trợ đúng 5 lệnh con hợp lệ: `get`, `set`, `unset`, `file`, `validate`.
 
-    # 查看特定配置项
-    openclaw config get <path>
-    openclaw config get gateway.port
-    openclaw config get agents.defaults.workspace
-    openclaw config get agents.list[0].id
+```bash
+# Xem giá trị của một mục cấu hình cụ thể
+openclaw config get <path>
+openclaw config get gateway.port
+openclaw config get agents.defaults.workspace
+openclaw config get agents.list[0].id
 
-    # 设置配置项（值自动解析为JSON5，否则视为字符串）
-    openclaw config set <path> <value>
-    openclaw config set gateway.port 19001 --strict-json
-    openclaw config set agents.defaults.heartbeat.every "2h"
-    openclaw config set channels.whatsapp.groups '["*"]' --strict-json
+# Thiết lập giá trị cấu hình (Giá trị tự động parse thành JSON5, nếu không sẽ coi là chuỗi)
+openclaw config set <path> <value>
+openclaw config set gateway.port 19001 --strict-json
+openclaw config set agents.defaults.heartbeat.every "2h"
+openclaw config set channels.whatsapp.groups '["*"]' --strict-json
 
-    # 删除配置项
-    openclaw config unset <path>
-    openclaw config unset tools.web.search.apiKey
+# Xóa một mục cấu hình
+openclaw config unset <path>
+openclaw config unset tools.web.search.apiKey
 
-    # 查看配置文件路径
-    openclaw config file
+# Xem đường dẫn tệp cấu hình đang sử dụng
+openclaw config file
 
-    # 校验配置文件
-    openclaw config validate
+# Kiểm tra tính hợp lệ của tệp cấu hình
+openclaw config validate
+```
 
-> ⚠️ **不存在的命令**：`config list`、`config reset`、`config export`、`config import`、`config delete` 均不是有效子命令。查看全部配置请直接打开配置文件：`openclaw config file`。重置配置请使用 `openclaw reset`。
+> ⚠️ **Các lệnh KHÔNG tồn tại**: `config list`, `config reset`, `config export`, `config import`, `config delete` đều không phải là lệnh con hợp lệ. Để xem toàn bộ cấu hình, hãy mở trực tiếp tệp cấu hình bằng lệnh: `openclaw config file`. Để đặt lại toàn bộ cấu hình, vui lòng dùng `openclaw reset`.
 
-## A.3 Gateway与守护进程（daemon）
+## A.3 Gateway và Tiến trình Nền (daemon)
 
-> ⚠️ Gateway的启停通过 `daemon` 命令管理，而非 `gateway start/stop`。
+> ⚠️ Việc khởi động và dừng Gateway trong hệ thống được quản lý thông qua lệnh `daemon`, không phải qua `gateway start/stop`.
 
-    # 安装系统服务（macOS: LaunchAgent / Linux: systemd）
-    openclaw daemon install
+```bash
+# Cài đặt dịch vụ hệ thống (macOS: LaunchAgent / Linux: systemd)
+openclaw daemon install
 
-    # 启动守护进程
-    openclaw daemon start
+# Khởi động tiến trình chạy nền (daemon)
+openclaw daemon start
 
-    # 停止守护进程
-    openclaw daemon stop
+# Dừng tiến trình chạy nền
+openclaw daemon stop
 
-    # 重启守护进程（配置变更后执行）
-    openclaw daemon restart
+# Khởi động lại tiến trình nền (thực hiện sau khi thay đổi cấu hình)
+openclaw daemon restart
 
-    # 查看守护进程状态
-    openclaw daemon status
+# Xem trạng thái hoạt động của tiến trình nền
+openclaw daemon status
 
-    # 卸载系统服务
-    openclaw daemon uninstall
+# Gỡ bỏ dịch vụ hệ thống
+openclaw daemon uninstall
 
-    # 查看守护进程日志
-    openclaw daemon logs
+# Xem nhật ký của tiến trình nền
+openclaw daemon logs
 
-    # 直接运行Gateway（前台模式，适合调试）
-    openclaw gateway
+# Chạy trực tiếp Gateway ở chế độ foreground (Phù hợp để debug)
+openclaw gateway
 
-    # Gateway运行参数
-    openclaw gateway --port 18789 --verbose
+# Tham số khởi chạy Gateway
+openclaw gateway --port 18789 --verbose
 
-    # 查询运行中的Gateway健康状态
-    openclaw gateway health
+# Kiểm tra trạng thái sức khỏe (health) của Gateway đang chạy
+openclaw gateway health
 
-    # 查询Gateway详细状态
-    openclaw gateway status
+# Truy vấn thông tin trạng thái chi tiết của Gateway
+openclaw gateway status
 
-    # 探测Gateway（附加检查）
-    openclaw gateway probe
+# Dò quét Gateway (Kiểm tra mở rộng)
+openclaw gateway probe
 
-    # 发现局域网内的Gateway（Bonjour/mDNS）
-    openclaw gateway discover
+# Tự động phát hiện Gateway trong mạng cục bộ LAN (Bonjour / mDNS)
+openclaw gateway discover
 
-    # 调用Gateway RPC方法
-    openclaw gateway call <method>
+# Gọi phương thức RPC của Gateway
+openclaw gateway call <method>
 
-    # 打开控制面板（Web UI）
-    openclaw dashboard
+# Mở giao diện điều khiển Control Dashboard (Web UI)
+openclaw dashboard
+```
 
-## A.4 状态与诊断
+## A.4 Trạng thái và Chẩn đoán Lỗi
 
-    # 查看整体运行状态
-    openclaw status
+```bash
+# Xem trạng thái vận hành tổng thể
+openclaw status
 
-    # 健康检查
-    openclaw health
+# Kiểm tra sức khỏe toàn diện
+openclaw health
 
-    # 综合诊断与修复建议
-    openclaw doctor
+# Chẩn đoán sự cố tổng hợp và gợi ý hướng khắc phục
+openclaw doctor
 
-    # 自动执行修复
-    openclaw doctor --yes
+# Tự động thực thi sửa lỗi được đề xuất
+openclaw doctor --yes
 
-    # 非交互模式诊断
-    openclaw doctor --non-interactive
+# Chẩn đoán ở chế độ không tương tác (phù hợp cho script CI/CD)
+openclaw doctor --non-interactive
 
-    # 深度扫描（检查系统服务等）
-    openclaw doctor --deep
+# Quét sâu (Kiểm tra dịch vụ hệ thống, quyền hạn tệp...)
+openclaw doctor --deep
 
-    # 启动TUI终端界面
-    openclaw tui
+# Khởi động giao diện dòng lệnh dạng bảng điều khiển (TUI terminal)
+openclaw tui
 
-    # 搜索官方文档
-    openclaw docs <关键词>
+# Tìm kiếm trực tiếp trong tài liệu chính thức
+openclaw docs <từ-khóa>
+```
 
-## A.5 通道管理（channels）
+## A.5 Quản lý Kênh Kết nối (channels)
 
-    # 列出已配置的通道
-    openclaw channels list
+```bash
+# Liệt kê các kênh giao tiếp đã cấu hình
+openclaw channels list
 
-    # 查看通道状态（含连接健康检查）
-    openclaw channels status
+# Xem trạng thái chi tiết của các kênh (Kèm kiểm tra kết nối)
+openclaw channels status
 
-    # 通道状态（附加探测）
-    openclaw channels status --probe
+# Dò quét kiểm tra kết nối kênh chuyên sâu
+openclaw channels status --probe
 
-    # 添加通道
-    openclaw channels add <channel>
+# Thêm một kênh kết nối mới
+openclaw channels add <channel>
 
-    # 移除通道
-    openclaw channels remove <channel>
+# Xóa một kênh kết nối
+openclaw channels remove <channel>
 
-    # 通道登录
-    openclaw channels login <channel>
+# Đăng nhập xác thực kênh
+openclaw channels login <channel>
 
-    # 通道登出
-    openclaw channels logout <channel>
+# Đăng xuất khỏi kênh
+openclaw channels logout <channel>
 
-    # 配对管理（WhatsApp/Telegram DM配对）
-    openclaw pairing list <channel>
-    openclaw pairing approve <channel> <code>
+# Quản lý ghép nối (Ghép nối DM trên WhatsApp / Telegram)
+openclaw pairing list <channel>
+openclaw pairing approve <channel> <code>
+```
 
-## A.6 模型管理（models）
+## A.6 Quản lý Mô hình AI (models)
 
-    # 列出已配置的模型
-    openclaw models list
+```bash
+# Liệt kê danh sách các mô hình đã được cấu hình
+openclaw models list
 
-    # 查看模型状态
-    openclaw models status
+# Xem trạng thái kết nối của các mô hình
+openclaw models status
 
-    # 切换默认模型
-    openclaw models set <model>
-    openclaw models set anthropic/claude-sonnet-4-5
+# Chuyển đổi mô hình mặc định
+openclaw models set <model>
+openclaw models set anthropic/claude-sonnet-4-5
 
-    # 设置图片模型
-    openclaw models set-image <model>
+# Chỉ định mô hình chuyên xử lý hình ảnh
+openclaw models set-image <model>
 
-    # 添加认证（API Key / OAuth / setup-token）
-    openclaw models auth add
-    openclaw models auth login --provider openai --set-default
+# Thêm thông tin xác thực (API Key / OAuth / setup-token)
+openclaw models auth add
+openclaw models auth login --provider openai --set-default
 
-    # 模型别名管理
-    openclaw models aliases list
-    openclaw models aliases add <alias> <model>
-    openclaw models aliases remove <alias>
+# Quản lý định danh bí danh mô hình (Aliases)
+openclaw models aliases list
+openclaw models aliases add <alias> <model>
+openclaw models aliases remove <alias>
 
-    # 备用模型管理
-    openclaw models fallbacks list
-    openclaw models fallbacks add <model>
-    openclaw models fallbacks remove <model>
-    openclaw models fallbacks clear
+# Quản lý danh sách mô hình dự phòng (Fallbacks)
+openclaw models fallbacks list
+openclaw models fallbacks add <model>
+openclaw models fallbacks remove <model>
+openclaw models fallbacks clear
 
-    # 图片模型备用
-    openclaw models image-fallbacks list
-    openclaw models image-fallbacks add <model>
-    openclaw models image-fallbacks remove <model>
+# Quản lý mô hình dự phòng cho tác vụ hình ảnh
+openclaw models image-fallbacks list
+openclaw models image-fallbacks add <model>
+openclaw models image-fallbacks remove <model>
 
-    # 扫描可用模型
-    openclaw models scan
+# Quét và phát hiện các mô hình khả dụng từ nhà cung cấp
+openclaw models scan
 
-    # 认证优先级
-    openclaw models auth order get
-    openclaw models auth order set <providers...>
+# Xem và thiết lập thứ tự ưu tiên xác thực
+openclaw models auth order get
+openclaw models auth order set <providers...>
+```
 
-## A.7 Skills管理
+## A.7 Quản lý Kỹ năng (skills)
 
-> ⚠️ **2026.9 主线**：优先使用 `openclaw skills` 查看/检查/管理；`clawhub install …` 仅作历史参考，不要默认照抄。
+> ⚠️ **Khuyến nghị chuẩn 2026.9**: Luôn ưu tiên sử dụng `openclaw skills` để liệt kê / kiểm tra / quản lý; cú pháp `clawhub install …` được giữ lại phục vụ tra cứu lịch sử.
 
-### openclaw skills（查看与检查）
+### openclaw skills (Xem và Kiểm tra)
 
-    # 列出所有Skills（内置+工作区+托管）
-    openclaw skills list
+```bash
+# Liệt kê toàn bộ Skills (Tích hợp sẵn + Workspace + Managed)
+openclaw skills list
 
-    # 仅列出符合条件可加载的Skills
-    openclaw skills list --eligible
+# Chỉ liệt kê các Skills đủ điều kiện để kích hoạt
+openclaw skills list --eligible
 
-    # 查看Skills详情
-    openclaw skills info <skill-name>
+# Xem thông tin chi tiết của một Skill
+openclaw skills info <skill-name>
 
-    # 检查Skills依赖是否满足
-    openclaw skills check
+# Kiểm tra các thư viện phụ thuộc của Skills đã đáp ứng đủ chưa
+openclaw skills check
+```
 
-### clawhub（历史参考：安装/卸载/更新/搜索）
+### clawhub (Tra cứu lịch sử: Cài đặt / Gỡ bỏ / Cập nhật / Tìm kiếm)
 
-    # 全局安装ClawHub CLI
-    npm install -g clawhub
+```bash
+# Cài đặt ClawHub CLI toàn cục
+npm install -g clawhub
 
-    # 搜索Skills
-    clawhub search <关键词>
-    clawhub search browser
-    clawhub search --sort downloads
+# Tìm kiếm Skills trên chợ
+clawhub search <từ-khóa>
+clawhub search browser
+clawhub search --sort downloads
 
-    # 安装Skills
-    # 历史参考（非 2026.9 默认推荐）：clawhub install <slug>
-    # clawhub install brave-search  # 历史参考
+# Cài đặt Skills (Tham chiếu lịch sử)
+# clawhub install <slug>
+# clawhub install brave-search
 
-    # 安装到指定目录
-    # 历史参考（非 2026.9 默认推荐）：clawhub install <slug> --dir /path/to/skills
+# Cài đặt vào thư mục chỉ định
+# clawhub install <slug> --dir /path/to/skills
 
-    # 查看Skills详情（不安装）
-    clawhub inspect <slug>
+# Xem chi tiết thông tin Skill trước khi cài
+clawhub inspect <slug>
 
-    # 列出已安装Skills
-    clawhub list
+# Liệt kê danh sách Skills đã cài đặt qua ClawHub
+clawhub list
 
-    # 更新单个Skills
-    clawhub update <slug>
+# Cập nhật một Skill cụ thể
+clawhub update <slug>
 
-    # 更新所有Skills
-    clawhub update --all
+# Cập nhật tất cả Skills
+clawhub update --all
 
-    # 卸载Skills
-    clawhub uninstall <slug>
+# Gỡ bỏ một Skill
+clawhub uninstall <slug>
 
-    # 同步Skills
-    clawhub sync
+# Đồng bộ hóa danh mục Skills
+clawhub sync
+```
 
-## A.8 插件管理（plugins）
+## A.8 Quản lý Plugin (plugins)
 
-    # 列出插件
-    openclaw plugins list
+```bash
+# Liệt kê danh sách các plugin hiện có
+openclaw plugins list
 
-    # 查看插件详情
-    openclaw plugins info <id>
+# Xem thông tin chi tiết của một plugin
+openclaw plugins info <id>
 
-    # 安装插件
-    openclaw plugins install <id>
+# Cài đặt một plugin mới
+openclaw plugins install <id>
 
-    # 启用插件（需重启Gateway）
-    openclaw plugins enable <id>
+# Kích hoạt plugin (Cần khởi động lại Gateway sau khi bật)
+openclaw plugins enable <id>
 
-    # 禁用插件
-    openclaw plugins disable <id>
+# Vô hiệu hóa một plugin
+openclaw plugins disable <id>
 
-    # 插件诊断
-    openclaw plugins doctor
+# Chẩn đoán trạng thái hoạt động của plugin
+openclaw plugins doctor
+```
 
-## A.9 日志与会话
+## A.9 Nhật ký và Phiên làm việc (logs & sessions)
 
-    # 查看日志
-    openclaw logs
+```bash
+# Xem tệp nhật ký hệ thống
+openclaw logs
 
-    # 实时跟踪日志
-    openclaw logs --follow
+# Theo dõi luồng nhật ký theo thời gian thực (stream logs)
+openclaw logs --follow
 
-    # JSON格式日志
-    openclaw logs --json
+# Xem định dạng nhật ký dưới dạng cấu trúc JSON
+openclaw logs --json
 
-    # 纯文本日志
-    openclaw logs --plain
+# Xem nhật ký dưới dạng văn bản thuần túy (plain text)
+openclaw logs --plain
 
-    # 限制日志行数
-    openclaw logs --limit 100
+# Giới hạn số dòng nhật ký hiển thị gần nhất
+openclaw logs --limit 100
 
-    # 查看会话信息
-    openclaw sessions
+# Xem danh sách và trạng thái các phiên làm việc (sessions)
+openclaw sessions
+```
 
-## A.10 定时任务（cron）
+## A.10 Lập lịch Định kỳ (cron)
 
-    # 添加一次性定时任务
-    openclaw cron add \
-      --name "发送提醒" \
-      --at "2026-03-15T18:00:00Z" \
-      --session main \
-      --system-event "提醒：提交费用报告"
+```bash
+# Tạo tác vụ định kỳ chạy một lần duy nhất tại thời điểm cụ thể
+openclaw cron add \
+  --name "Gửi lời nhắc" \
+  --at "2026-03-15T18:00:00Z" \
+  --session main \
+  --system-event "Nhắc nhở: Nộp báo cáo chi phí tuần"
 
-    # 添加循环定时任务
-    openclaw cron add \
-      --name "早间状态" \
-      --cron "0 7 * * *" \
-      --tz "Asia/Shanghai" \
-      --session isolated \
-      --message "总结今天的收件箱和日历" \
-      --deliver \
-      --channel whatsapp
+# Tạo tác vụ định kỳ lặp lại theo biểu thức cron
+openclaw cron add \
+  --name "Bản tin buổi sáng" \
+  --cron "0 7 * * *" \
+  --tz "Asia/Ho_Chi_Minh" \
+  --session isolated \
+  --message "Tóm tắt email trong hộp thư đến và lịch trình hôm nay" \
+  --deliver \
+  --channel whatsapp
 
-    # 列出定时任务
-    openclaw cron list
+# Liệt kê các tác vụ cron đang hoạt động
+openclaw cron list
 
-    # 删除定时任务
-    openclaw cron remove <job-id>
+# Xóa một tác vụ định kỳ theo ID
+openclaw cron remove <job-id>
+```
 
-## A.11 消息发送（message）
+## A.11 Gửi và Tương tác Tin nhắn (message)
 
-    # 发送消息
-    openclaw message send --channel <channel> --target <target> "消息内容"
+```bash
+# Gửi tin nhắn chủ động tới một kênh đích cụ thể
+openclaw message send --channel <channel> --target <target> "Nội dung tin nhắn cần gửi"
 
-    # 发送投票
-    openclaw message poll --channel discord --target channel:123 \
-      --poll-question "今晚吃什么？" --poll-option 火锅 --poll-option 烧烤
+# Tạo cuộc thăm dò ý kiến (Poll)
+openclaw message poll --channel discord --target channel:123 \
+  --poll-question "Tối nay ăn gì?" --poll-option "Lẩu nướng" --poll-option "Cơm niêu"
 
-    # 其他消息操作
-    openclaw message react
-    openclaw message edit
-    openclaw message delete
-    openclaw message pin
-    openclaw message search
+# Các tác vụ tin nhắn nâng cao khác
+openclaw message react
+openclaw message edit
+openclaw message delete
+openclaw message pin
+openclaw message search
 
-    # 运行单次Agent对话
-    openclaw agent --message "你好"
+# Kích hoạt một lượt trò chuyện đơn lẻ với Agent qua dòng lệnh
+openclaw agent --message "Xin chào"
+```
 
-## A.12 安全与备份
+## A.12 An ninh Bảo mật và Sao lưu (security & backup)
 
-    # 安全审计
-    openclaw security audit
+```bash
+# Kiểm toán an ninh hệ thống
+openclaw security audit
 
-    # 深度安全审计
-    openclaw security audit --deep
+# Kiểm toán an ninh chuyên sâu
+openclaw security audit --deep
 
-    # 创建备份
-    openclaw backup create
+# Tạo bản sao lưu toàn diện
+openclaw backup create
 
-    # 仅备份配置
-    openclaw backup create --only-config
+# Chỉ sao lưu tệp cấu hình
+openclaw backup create --only-config
 
-    # 校验备份
-    openclaw backup verify <backup-id或路径>
+# Kiểm tra tính toàn vẹn của tệp sao lưu
+openclaw backup verify <backup-id-hoặc-đường-dẫn>
 
-    # 列出备份
-    openclaw backup list
+# Xem danh sách các bản sao lưu hiện có
+openclaw backup list
 
-    # 恢复备份
-    openclaw backup restore <文件路径>
+# Phục hồi dữ liệu từ bản sao lưu
+openclaw backup restore <đường-dẫn-tệp-sao-lưu>
 
-    # 管理密钥
-    openclaw secrets
+# Quản lý khóa bảo mật bí mật (secrets)
+openclaw secrets
+```
 
-## A.13 重置与卸载
+## A.13 Đặt lại và Gỡ cài đặt (reset & uninstall)
 
-    # 重置（配置+凭据+会话）
-    openclaw reset
+```bash
+# Đặt lại hệ thống về trạng thái ban đầu (Cấu hình + Thông tin xác thực + Phiên làm việc)
+openclaw reset
 
-    # 卸载
-    openclaw uninstall
+# Gỡ cài đặt OpenClaw thông thường
+openclaw uninstall
 
-    # 全自动卸载
-    openclaw uninstall --all --yes --non-interactive
+# Gỡ cài đặt hoàn toàn tự động (xóa toàn bộ dữ liệu, không hỏi lại)
+openclaw uninstall --all --yes --non-interactive
 
-    # 模拟卸载（仅显示结果）
-    openclaw uninstall --dry-run
+# Chạy thử nghiệm gỡ cài đặt (Dry-run, chỉ hiển thị kết quả dự kiến)
+openclaw uninstall --dry-run
 
-    # 软件更新
-    openclaw update
+# Cập nhật OpenClaw lên bản mới nhất
+openclaw update
 
-    # 查看更新状态
-    openclaw update status
+# Kiểm tra trạng thái và thông tin cập nhật
+openclaw update status
 
-    # 更新到指定版本
-    openclaw update --tag <版本号>
+# Cập nhật tới một phiên bản chỉ định cụ thể
+openclaw update --tag <số-phiên-bản>
 
-    # 更新到指定通道
-    openclaw update --channel stable
-    openclaw update --channel beta
+# Chuyển kênh cập nhật phần mềm
+openclaw update --channel stable
+openclaw update --channel beta
+```
 
-## A.14 常用场景组合
+## A.14 Chuỗi Lệnh Kịch bản Thực chiến Phổ biến
 
-### 场景1：初次安装后的配置
+### Kịch bản 1: Cấu hình ngay sau khi hoàn tất cài đặt lần đầu
 
-    # 1. 运行引导向导
-    openclaw onboard
+```bash
+# 1. Chạy trình hướng dẫn thiết lập
+openclaw onboard
 
-    # 2. 安装守护进程
-    openclaw daemon install
+# 2. Cài đặt dịch vụ nền hệ thống
+openclaw daemon install
 
-    # 3. 启动
-    openclaw daemon start
+# 3. Khởi động tiến trình nền
+openclaw daemon start
 
-    # 4. 打开控制面板
-    openclaw dashboard
+# 4. Mở giao diện bảng điều khiển Web
+openclaw dashboard
+```
 
-### 场景2：切换模型
+### Kịch bản 2: Thay đổi mô hình AI đang sử dụng
 
-    # 1. 查看可用模型
-    openclaw models list
+```bash
+# 1. Kiểm tra danh sách mô hình khả dụng
+openclaw models list
 
-    # 2. 切换模型
-    openclaw models set anthropic/claude-sonnet-4-5
+# 2. Đổi mô hình chính sang Claude Sonnet
+openclaw models set anthropic/claude-sonnet-4-5
 
-    # 3. 重启守护进程
-    openclaw daemon restart
+# 3. Khởi động lại dịch vụ daemon để cập nhật
+openclaw daemon restart
+```
 
-### 场景3：安装新Skills
+### Kịch bản 3: Cài đặt và kích hoạt thêm Skill mới
 
-    # 1. 搜索Skills
-    clawhub search 截图
+```bash
+# 1. Tìm kiếm Skill mong muốn
+clawhub search screenshot
 
-    # 2. 安装Skills
-    # clawhub install peekaboo  # 历史参考
+# 2. Cài đặt Skill tương ứng (tham chiếu lịch sử)
+# clawhub install peekaboo
 
-    # 3. 确认已安装
-    openclaw skills list
+# 3. Xác nhận Skill đã sẵn sàng trong hệ thống
+openclaw skills list
 
-    # 4. 重启守护进程
-    openclaw daemon restart
+# 4. Khởi động lại daemon
+openclaw daemon restart
+```
 
-### 场景4：故障排查
+### Kịch bản 4: Quy trình chẩn đoán sự cố toàn diện
 
-    # 1. 查看运行状态
-    openclaw status
+```bash
+# 1. Kiểm tra trạng thái vận hành tổng quát
+openclaw status
 
-    # 2. 综合诊断
-    openclaw doctor
+# 2. Kích hoạt bác sĩ chẩn đoán tự động
+openclaw doctor
 
-    # 3. 查看日志
-    openclaw logs --follow
+# 3. Theo dõi luồng nhật ký lỗi trực tiếp
+openclaw logs --follow
 
-    # 4. Gateway健康检查
-    openclaw gateway health
+# 4. Kiểm tra sức khỏe kết nối Gateway
+openclaw gateway health
 
-    # 5. 安全审计
-    openclaw security audit
+# 5. Rà soát lại an ninh hệ thống
+openclaw security audit
+```
 
-## A.15 配置文件路径
+## A.15 Đường dẫn Tệp Cấu hình và Dữ liệu
 
-    # 查看配置文件路径
-    openclaw config file
+```bash
+# Xem đường dẫn tệp cấu hình thực tế
+openclaw config file
 
-    # 主配置文件（默认位置）
-    ~/.openclaw/openclaw.json
+# Tệp cấu hình chính (Vị trí mặc định)
+~/.openclaw/openclaw.json
 
-    # Skills目录（工作区级）
-    <workspace>/skills/
+# Thư mục chứa Skills cấp không gian làm việc (Workspace level)
+<workspace>/skills/
 
-    # Skills目录（全局级）
-    ~/.openclaw/skills/
+# Thư mục chứa Skills cấp toàn cục (Global level)
+~/.openclaw/skills/
 
-    # 人设文件
-    ~/clawd/SOUL.md
-    ~/clawd/USER.md
-    ~/clawd/AGENTS.md
+# Các tệp định nghĩa nhân cách và hành vi Agent
+~/clawd/SOUL.md
+~/clawd/USER.md
+~/clawd/AGENTS.md
 
-    # 记忆目录
-    ~/clawd/memory/
+# Thư mục lưu trữ bộ nhớ và ngữ cảnh
+~/clawd/memory/
+```
 
-## 📚 相关资源
+## 📚 Tài liệu tham khảo liên quan
 
--   OpenClaw CLI完整参考：https://docs.openclaw.ai/cli
--   ClawHub CLI文档：https://docs.openclaw.ai/tools/clawhub
--   配置参考：https://docs.openclaw.ai/gateway/configuration
+- Tra cứu đầy đủ các lệnh OpenClaw CLI: https://docs.openclaw.ai/cli
+- Tài liệu công cụ ClawHub CLI: https://docs.openclaw.ai/tools/clawhub
+- Tham khảo toàn bộ trường cấu hình: https://docs.openclaw.ai/gateway/configuration
 
-**提示**：本速查表基于v2026.3.7+版本验证。命令可能随版本更新而变化，遇到报错请先运行 `openclaw update` 更新到最新版本，或查阅官方文档。
+**Ghi chú**: Bảng tra cứu này đã được xác thực trên phiên bản OpenClaw v2026.3.7 trở lên. Danh mục lệnh có thể được bổ sung hoặc tinh chỉnh theo từng bản phát hành mới. Nếu gặp lỗi cú pháp, bạn hãy chạy `openclaw update` để cập nhật bản mới nhất hoặc đối chiếu tài liệu chính thức.

@@ -1,56 +1,55 @@
-# OpenClaw 配置文件结构完整指南
+# Phụ lục L: Hướng dẫn Toàn diện về Cấu trúc Tệp Cấu hình OpenClaw
 
-## 📁 配置文件目录结构
+## 📁 Cấu trúc Thư mục Tệp Cấu hình
 
-### 全局配置目录
+### Thư mục Cấu hình Toàn cục
 
 ```text
-~/.openclaw/                          # 全局配置根目录
-├── openclaw.json                     # 全局配置（所有 Agent 共享）
-├── credentials/                      # 认证凭据目录
-│   └── oauth.json                   # OAuth 凭据
-├── agents/                           # Agent 配置目录
-│   ├── main-assistant/               # 主助理 Agent
-│   │   ├── openclaw.json            # Agent 专属配置
+~/.openclaw/                          # Thư mục gốc cấu hình toàn cục
+├── openclaw.json                     # Cấu hình toàn cục (áp dụng chung cho mọi Agent)
+├── credentials/                      # Thư mục chứa thông tin xác thực
+│   └── oauth.json                   # Thông tin xác thực OAuth
+├── agents/                           # Thư mục cấu hình từng Agent
+│   ├── main-assistant/               # Agent trợ lý chính
+│   │   ├── openclaw.json            # Cấu hình riêng biệt của Agent
 │   │   ├── agent/
-│   │   │   └── auth-profiles.json   # 认证配置
-│   │   └── sessions/                # 会话记录
+│   │   │   └── auth-profiles.json   # Hồ sơ xác thực tài khoản
+│   │   └── sessions/                # Nhật ký các phiên làm việc
 │   │       └── *.jsonl
-│   └── tech-dev/                     # 技术开发 Agent
+│   └── tech-dev/                     # Agent chuyên trách kỹ thuật & code
 │       ├── openclaw.json
 │       └── agent/
 │           └── auth-profiles.json
-├── skills/                           # 用户级 Skills
+├── skills/                           # Thư mục Skills ở cấp người dùng
 │   └── custom-skill/
 │       └── SKILL.md
-└── logs/                             # 日志文件
+└── logs/                             # Nhật ký hoạt động hệ thống
     └── openclaw.log
 ```
 
-### 旧版配置目录（已废弃）
+### Thư mục cấu hình cũ (Đã ngừng sử dụng)
 
 ```text
-~/.openclaw-main-assistant/           # 旧版配置目录
-└── openclaw.json                     # 不再使用，已迁移到新结构
+~/.openclaw-main-assistant/           # Thư mục cấu hình phiên bản cũ
+└── openclaw.json                     # Không còn sử dụng, đã chuyển sang cấu trúc mới
 ```
 
-⚠️ **注意**: 如果你的系统中还有 `~/.openclaw-*` 目录，建议运行 `openclaw doctor` 进行迁移。
+⚠️ **Lưu ý**: Nếu trên hệ thống của bạn vẫn còn tồn tại các thư mục dạng `~/.openclaw-*`, hãy chạy lệnh `openclaw doctor` để hệ thống tự động di chuyển dữ liệu sang cấu trúc mới.
 
 ---
 
-## 📝 配置文件详解
+## 📝 Chi tiết Từng Tệp Cấu hình
 
-### 1. 全局配置文件
+### 1. Tệp Cấu hình Toàn cục (Global Config)
 
-**路径**: `~/.openclaw/openclaw.json`
+**Đường dẫn**: `~/.openclaw/openclaw.json`
 
-**用途**: 所有 Agent 共享的全局配置
+**Mục đích**: Chứa các cấu hình mặc định dùng chung cho toàn bộ các Agent.
 
-**优先级**: 低于 Agent 专属配置
+**Mức ưu tiên**: Thấp hơn cấu hình riêng của từng Agent.
 
-**示例内容**:
-
-````json
+**Nội dung mẫu**:
+```json
 {
   "models": {
     "default": "anthropic/claude-sonnet-4-5",
@@ -65,29 +64,31 @@
     "port": 18789
   }
 }
-```text
-**查看命令**:
+```
+
+**Các lệnh kiểm tra**:
 ```bash
-# 查看全局配置
+# Xem toàn bộ cấu hình toàn cục
 openclaw config get
 
-# 查看特定配置项
+# Xem một trường cấu hình cụ thể
 openclaw config get models.default
 
-# 编辑配置文件
+# Mở tệp cấu hình bằng nano
 nano ~/.openclaw/openclaw.json
-```text
+```
+
 ---
 
-### 2. Agent 专属配置
+### 2. Tệp Cấu hình Riêng cho Agent (Agent-specific Config)
 
-**路径**: `~/.openclaw/agents/<agentId>/openclaw.json`
+**Đường dẫn**: `~/.openclaw/agents/<agentId>/openclaw.json`
 
-**用途**: 特定 Agent 的专属配置
+**Mục đích**: Cấu hình chuyên biệt dành riêng cho một Agent cụ thể (định nghĩa tính cách, mô hình riêng, workspace riêng).
 
-**优先级**: 高于全局配置
+**Mức ưu tiên**: Cao hơn cấu hình toàn cục.
 
-**示例内容**:
+**Nội dung mẫu**:
 ```json
 {
   "models": {
@@ -99,33 +100,35 @@ nano ~/.openclaw/openclaw.json
     }
   },
   "persona": {
-    "name": "技术开发助手",
-    "role": "专注于代码开发和技术问题"
+    "name": "Trợ lý Phát triển Kỹ thuật",
+    "role": "Chuyên trách viết mã và giải quyết các bài toán kỹ thuật"
   }
 }
-```text
-**查看命令**:
+```
+
+**Các lệnh quản trị**:
 ```bash
-# 查看 Agent 配置
-openclaw config get agents.tech-dev
+# Xem cấu hình của Agent cụ thể
+openclaw config get --agent tech-dev
 
-# 设置 Agent 配置
-openclaw config set agents.tech-dev.models.default "openai/gpt-4"
+# Đặt cấu hình cho Agent
+openclaw config set models.default "openai/gpt-4" --agent tech-dev
 
-# 编辑配置文件
+# Mở tệp cấu hình của Agent
 nano ~/.openclaw/agents/tech-dev/openclaw.json
-```text
+```
+
 ---
 
-### 3. 认证配置文件
+### 3. Tệp Hồ sơ Xác thực (Auth Profiles)
 
-**路径**: `~/.openclaw/agents/<agentId>/agent/auth-profiles.json`
+**Đường dẫn**: `~/.openclaw/agents/<agentId>/agent/auth-profiles.json`
 
-**用途**: 存储 API Key 等认证信息
+**Mục đích**: Lưu trữ thông tin định danh và các API Key của Agent.
 
-**优先级**: 最高（覆盖其他配置）
+**Mức ưu tiên**: Ưu tiên cao nhất trong quá trình xác thực provider.
 
-**示例内容**:
+**Nội dung mẫu**:
 ```json
 {
   "profiles": [
@@ -141,29 +144,31 @@ nano ~/.openclaw/agents/tech-dev/openclaw.json
     }
   ]
 }
-```text
-**管理命令**:
+```
+
+**Các lệnh thao tác**:
 ```bash
-# 添加认证（交互式）
+# Thêm xác thực mới qua giao diện tương tác
 openclaw models auth add
 
-# 查看认证配置
+# Xem tệp hồ sơ xác thực
 cat ~/.openclaw/agents/main-assistant/agent/auth-profiles.json
 
-# 删除认证
+# Xóa tệp hồ sơ xác thực khi cần đặt lại
 rm ~/.openclaw/agents/main-assistant/agent/auth-profiles.json
-```text
+```
+
 ---
 
-### 4. OAuth 凭据文件
+### 4. Tệp Thông tin Xác thực OAuth
 
-**路径**: `~/.openclaw/credentials/oauth.json`
+**Đường dẫn**: `~/.openclaw/credentials/oauth.json`
 
-**用途**: 存储 OAuth 登录凭据（旧版）
+**Mục đích**: Lưu trữ token xác thực OAuth khi đăng nhập qua trình duyệt.
 
-**优先级**: 低（建议使用 auth-profiles.json）
+**Mức ưu tiên**: Thấp hơn (khuyến khích ưu tiên dùng `auth-profiles.json`).
 
-**示例内容**:
+**Nội dung mẫu**:
 ```json
 {
   "google": {
@@ -172,37 +177,36 @@ rm ~/.openclaw/agents/main-assistant/agent/auth-profiles.json
     "expiresAt": "2026-02-14T11:00:00Z"
   }
 }
-```text
-**说明**: 这是旧版的认证方式，新版本建议使用 `auth-profiles.json`。
+```
+
+**Ghi chú**: Đây là phương thức lưu trữ OAuth thế hệ trước, các phiên bản mới của OpenClaw ưu tiên sử dụng `auth-profiles.json` đồng bộ với `openclaw models auth`.
 
 ---
 
-## 🔄 配置优先级
+## 🔄 Thứ tự Ưu tiên Cấu hình
 
-### 优先级顺序（从高到低）
+### Phân cấp từ cao xuống thấp
 
-````
-
-1. 环境变量（最高优先级）
+```text
+1. Biến môi trường (Environment Variables) - Cao nhất
    ↓
-2. Agent 专属配置 (~/.openclaw/agents/<agentId>/openclaw.json)
+2. Cấu hình riêng của Agent (~/.openclaw/agents/<agentId>/openclaw.json)
    ↓
-3. 全局配置 (~/.openclaw/openclaw.json)
+3. Cấu hình toàn cục (~/.openclaw/openclaw.json)
    ↓
-4. 默认值（最低优先级）
-
-`
+4. Giá trị mặc định của hệ thống (Defaults) - Thấp nhất
 ```
 
-### 示例说明
+### Ví dụ minh họa
 
-假设你有以下配置：
+Giả sử bạn thiết lập đồng thời:
 
-**环境变量**:
+**Biến môi trường**:
 ```bash
 export ANTHROPIC_API_KEY="sk-ant-env"
-```text
-**Agent 配置** (`~/.openclaw/agents/tech-dev/openclaw.json`):
+```
+
+**Cấu hình Agent** (`~/.openclaw/agents/tech-dev/openclaw.json`):
 ```json
 {
   "models": {
@@ -213,8 +217,9 @@ export ANTHROPIC_API_KEY="sk-ant-env"
     }
   }
 }
-```text
-**全局配置** (`~/.openclaw/openclaw.json`):
+```
+
+**Cấu hình toàn cục** (`~/.openclaw/openclaw.json`):
 ```json
 {
   "models": {
@@ -225,187 +230,194 @@ export ANTHROPIC_API_KEY="sk-ant-env"
     }
   }
 }
-```text
-**实际使用的 API Key**: `sk-ant-env`（环境变量优先级最高）
+```
+
+**API Key thực tế được chọn**: `sk-ant-env` (vì biến môi trường luôn đứng đầu bảng ưu tiên).
 
 ---
 
-## 🔍 配置查看命令
+## 🔍 Các Lệnh Tra cứu Cấu hình
 
-### 查看配置文件位置
-
-```bash
-# 查看全局配置文件路径
-echo ~/.openclaw/openclaw.json
-
-# 查看 Agent 配置文件路径
-echo ~/.openclaw/agents/tech-dev/openclaw.json
-```text
-### 查看配置内容
+### Xem đường dẫn tệp cấu hình
 
 ```bash
-# 查看所有配置
+# Xem đường dẫn tệp cấu hình toàn cục
+openclaw config path
+
+# Xem đường dẫn tệp cấu hình của Agent cụ thể
+openclaw config path --agent tech-dev
+```
+
+### Xem nội dung cấu hình chi tiết
+
+```bash
+# Xem toàn bộ cấu hình đang áp dụng
 openclaw config get
 
-# 查看特定配置项
+# Xem một trường cấu hình nhất định
 openclaw config get models.providers.anthropic.apiKey
 
-# 查看 Agent 配置
-openclaw config get agents.tech-dev
+# Xem cấu hình của một Agent
+openclaw config get --agent tech-dev
 
-# 以 JSON 格式输出
+# Xuất toàn bộ cấu hình ra định dạng JSON
 openclaw config get --json
-```text
-### 查看生效的配置
+```
+
+### Xem trạng thái cấu hình đang hoạt động trên hệ thống
 
 ```bash
-# 查看当前使用的 model
+# Xem danh sách các mô hình khả dụng
 openclaw models list
 
-# 查看 Gateway 状态
+# Xem trạng thái hoạt động của Gateway
 openclaw gateway status
 
-# 查看所有 Agent
+# Liệt kê tất cả các Agent đang có
 openclaw agents list
-```text
+```
+
 ---
 
-## ⚙️ 配置修改命令
+## ⚙️ Các Lệnh Chỉnh sửa Cấu hình
 
-### 设置配置
+### Thiết lập giá trị mới
 
 ```bash
-# 设置全局配置
+# Thiết lập cấu hình toàn cục
 openclaw config set models.default "anthropic/claude-sonnet-4-5"
 
-# 设置 Agent 配置
-openclaw config set agents.tech-dev.models.default "openai/gpt-4"
+# Thiết lập cấu hình cho một Agent riêng biệt
+openclaw config set models.default "openai/gpt-4" --agent tech-dev
 
-# 设置 API Key
+# Thiết lập API Key cho provider
 openclaw config set models.providers.anthropic.apiKey "sk-ant-xxx"
-```text
-### 删除配置
+```
+
+### Xóa trường cấu hình
 
 ```bash
-# 删除配置项
+# Xóa một trường trong cấu hình toàn cục
 openclaw config unset models.providers.anthropic.apiKey
 
-# 删除 Agent 配置
-openclaw config unset agents.tech-dev.models.default
-```text
-### 重置配置
+# Xóa một trường trong cấu hình của Agent
+openclaw config unset models.default --agent tech-dev
+```
+
+### Đặt lại cấu hình (Reset)
 
 ```bash
-# 重置全局配置
-openclaw reset
+# Khôi phục cấu hình toàn cục về mặc định
+openclaw config reset
 
-# 重置 Agent 配置
-openclaw reset --scope config
-```text
+# Khôi phục cấu hình của Agent về mặc định
+openclaw config reset --agent tech-dev
+```
+
 ---
 
-## 🛠️ 常见配置场景
+## 🛠️ Các Tình huống Thực tế Phổ biến
 
-### 场景1：单个 Agent，使用全局配置
+### Tình huống 1: Chỉ chạy một Agent duy nhất, dùng cấu hình toàn cục
 
-**配置方式**:
+**Cách thiết lập**:
 ```bash
-# 在全局配置中设置 API Key
+# Thiết lập API Key trực tiếp trong cấu hình toàn cục
 openclaw config set models.providers.anthropic.apiKey "sk-ant-xxx"
-```text
-**优点**:
-- ✅ 配置一次，全局生效
-- ✅ 管理简单
+```
 
-**缺点**:
-- ❌ 所有 Agent 使用相同配置
+**Ưu điểm**:
+- ✅ Cấu hình một lần duy nhất, áp dụng toàn hệ thống
+- ✅ Quản lý cực kỳ gọn nhẹ
 
----
-
-### 场景2：多个 Agent，使用不同配置
-
-**配置方式**:
-```bash
-# 为每个 Agent 单独配置
-openclaw config set agents.tech-dev.models.providers.anthropic.apiKey "sk-ant-xxx"
-openclaw config set agents.content-writer.models.providers.openai.apiKey "sk-yyy"
-```text
-**优点**:
-- ✅ 每个 Agent 独立配置
-- ✅ 灵活性高
-
-**缺点**:
-- ❌ 管理成本较高
+**Nhược điểm**:
+- ❌ Mọi tác vụ đều chia sẻ chung một tài khoản và mô hình
 
 ---
 
-### 场景3：使用环境变量（临时测试）
+### Tình huống 2: Nhiều Agent độc lập, cấu hình chuyên biệt từng người
 
-**配置方式**:
+**Cách thiết lập**:
 ```bash
-# 临时设置（当前会话）
+# Cấu hình riêng cho từng Agent
+openclaw config set models.providers.anthropic.apiKey "sk-ant-xxx" --agent tech-dev
+openclaw config set models.providers.openai.apiKey "sk-yyy" --agent content-writer
+```
+
+**Ưu điểm**:
+- ✅ Mỗi Agent hoàn toàn độc lập về mô hình và chìa khóa
+- ✅ Tính linh hoạt rất cao, đáp ứng đúng từng chuyên môn
+
+**Nhược điểm**:
+- ❌ Cần quản lý cấu hình ở nhiều tệp khác nhau
+
+---
+
+### Tình huống 3: Dùng biến môi trường (Phục vụ thử nghiệm nhanh)
+
+**Cách thiết lập**:
+```bash
+# Thiết lập tạm thời trong terminal hiện tại
 export ANTHROPIC_API_KEY="sk-ant-xxx"
 
-# 永久设置（添加到 ~/.zshrc）
+# Hoặc thiết lập vĩnh viễn trong ~/.zshrc
 echo 'export ANTHROPIC_API_KEY="sk-ant-xxx"' >> ~/.zshrc
 source ~/.zshrc
-```text
-**优点**:
-- ✅ 最高优先级
-- ✅ 适合 Docker 和 CI/CD
-- ✅ 不写入配置文件
+```
 
-**缺点**:
-- ❌ 重启后失效（除非写入 shell 配置）
+**Ưu điểm**:
+- ✅ Mức ưu tiên cao nhất, lập tức ghi đè cấu hình trên đĩa
+- ✅ Rất lý tưởng cho Docker và CI/CD
+- ✅ Không lưu vết khóa nhạy cảm vào tệp cấu hình JSON
+
+**Nhược điểm**:
+- ❌ Mất hiệu lực khi đóng phiên terminal (nếu không ghi vào file shell profile)
 
 ---
 
-## 🔧 配置故障排查
+## 🔧 Chẩn đoán và Xử lý Sự cố Thường gặp
 
-### 问题1：配置后不生效
+### Vấn đề 1: Đổi cấu hình nhưng hệ thống không nhận
 
-**排查步骤**:
+**Trình tự kiểm tra**:
 
-1. **检查配置优先级**
+1. **Rà soát lại thứ tự ưu tiên**:
    ```bash
-   # 检查环境变量
+   # Kiểm tra biến môi trường có đang ghi đè không
    echo $ANTHROPIC_API_KEY
-
-   # 查看生效的配置
+   
+   # Xem giá trị cấu hình đang thực sự có hiệu lực
    openclaw config get models.providers.anthropic.apiKey
-````
+   ```
 
-2. **重启 Gateway**
-
+2. **Khởi động lại Gateway**:
    ```bash
    openclaw gateway restart
    ```
 
-3. **查看日志**
+3. **Xem nhật ký hệ thống**:
    ```bash
-   openclaw logs --limit 50
+   openclaw logs --tail 50
    ```
 
 ---
 
-### 问题2：找不到配置文件
+### Vấn đề 2: Không tìm thấy tệp cấu hình trên máy
 
-**排查步骤**:
+**Trình tự kiểm tra**:
 
-1. **检查配置文件是否存在**
-
+1. **Kiểm tra xem tệp có tồn tại trên đĩa không**:
    ```bash
    ls -la ~/.openclaw/openclaw.json
    ls -la ~/.openclaw/agents/*/openclaw.json
    ```
 
-2. **运行 doctor 命令**
-
+2. **Chạy lệnh tự chẩn đoán và sửa lỗi của OpenClaw**:
    ```bash
    openclaw doctor
    ```
 
-3. **手动创建配置文件**
+3. **Tự khởi tạo tệp cấu hình tối thiểu nếu bị mất**:
    ```bash
    mkdir -p ~/.openclaw
    echo '{}' > ~/.openclaw/openclaw.json
@@ -413,34 +425,32 @@ source ~/.zshrc
 
 ---
 
-### 问题3：多个 Agent 配置混乱
+### Vấn đề 3: Cấu hình giữa các Agent bị lẫn lộn
 
-**解决方案**:
+**Cách xử lý**:
 
-1. **查看所有 Agent**
-
+1. **Liệt kê lại toàn bộ Agent hiện có**:
    ```bash
    openclaw agents list
    ```
 
-2. **查看每个 Agent 的配置**
-
+2. **Kiểm tra rà soát cấu hình của từng Agent**:
    ```bash
-   openclaw config get agents.main-assistant
-   openclaw config get agents.tech-dev
+   openclaw config get --agent main-assistant
+   openclaw config get --agent tech-dev
    ```
 
-3. **统一管理**
-   - 使用全局配置 + Agent 覆盖
-   - 或者每个 Agent 完全独立配置
+3. **Chuẩn hóa lại phương thức quản lý**:
+   - Sử dụng cấu hình toàn cục làm nền tảng chung + ghi đè ở Agent khi cần
+   - Hoặc tách riêng biệt hoàn toàn cấu hình ở mỗi Agent
 
 ---
 
-## 📋 配置文件模板
+## 📋 Mẫu Tệp Cấu hình Tham khảo
 
-### 最小配置模板
+### Mẫu cấu hình tối giản (Minimal Template)
 
-````json
+```json
 {
   "models": {
     "default": "anthropic/claude-sonnet-4-5",
@@ -451,8 +461,9 @@ source ~/.zshrc
     }
   }
 }
-```text
-### 完整配置模板
+```
+
+### Mẫu cấu hình đầy đủ tính năng (Full Template)
 
 ```json
 {
@@ -492,71 +503,68 @@ source ~/.zshrc
     ]
   }
 }
-````
+```
 
 ---
 
-## 🔗 相关文档
+## 🔗 Liên kết Tham khảo Liên quan
 
-- [第2章：安装配置](../docs/01-basics/02-installation.md) - 基础配置教程
-- [第11章：高级配置](../docs/03-advanced/11-advanced-configuration.md) - 模型、记忆、审批与性能
-- [配置文件模板](../appendix/H-config-templates.md) - 更多配置模板
+- [Chương 2: Cài đặt và Môi trường](01-basics/02-installation.md) - Hướng dẫn triển khai OpenClaw
+- [Chương 11: Cấu hình Nâng cao](03-advanced/11-advanced-configuration.md) - Tối ưu mô hình, bộ nhớ, phê duyệt và hiệu năng
+- [Mẫu Tệp Cấu hình Chuẩn](../appendix/H-config-templates.md) - Bộ sưu tập các mẫu cấu hình cho nhiều kịch bản
 
 ---
 
-## 💡 最佳实践
+## 💡 Thực hành Tối ưu
 
-### 推荐的配置方式
+### Lời khuyên theo từng đối tượng
 
-1. **新手用户**:
-   - 使用全局配置
-   - 通过 `openclaw config set` 命令设置
-   - 避免直接编辑 JSON 文件
+1. **Người mới bắt đầu**:
+   - Ưu tiên dùng cấu hình toàn cục
+   - Thay đổi thông số qua lệnh CLI `openclaw config set`
+   - Hạn chế sửa thủ công file JSON để tránh lỗi cú pháp dấu phẩy hoặc ngoặc
 
-2. **进阶用户**:
-   - 使用 Agent 专属配置
-   - 合理利用配置优先级
-   - 定期备份配置文件
+2. **Người dùng nâng cao**:
+   - Sử dụng cấu hình riêng cho từng Agent chuyên trách
+   - Nắm vững và tận dụng các tầng ưu tiên cấu hình
+   - Thường xuyên sao lưu thư mục `~/.openclaw`
 
-3. **企业用户**:
-   - 使用环境变量管理敏感信息
-   - 版本控制配置模板
-   - 自动化配置部署
+3. **Môi trường Doanh nghiệp**:
+   - Sử dụng biến môi trường hoặc Secret Manager để quản lý khóa nhạy cảm
+   - Lưu trữ các mẫu tệp cấu hình (template) vào Git, không chứa khóa thật
+   - Triển khai cấu hình tự động thông qua CI/CD và Docker
 
-### 配置管理建议
+### Nguyên tắc bảo trì cấu hình
 
-1. **定期备份**:
-
+1. **Sao lưu định kỳ**:
    ```bash
    cp -r ~/.openclaw ~/.openclaw.backup-$(date +%Y%m%d)
    ```
 
-2. **版本控制**:
-   - 将配置模板加入 Git
-   - 使用 `.gitignore` 排除敏感信息
+2. **Quản lý phiên bản an toàn**:
+   - Đưa cấu hình mẫu không chứa secret vào Git
+   - Đảm bảo file `.gitignore` loại trừ toàn bộ khóa bí mật và thông tin nhạy cảm
 
-3. **文档记录**:
-   - 记录每个配置项的用途
-   - 记录修改历史和原因
-
----
-
-**最后更新**: 2026-02-14  
-**适用版本**: OpenClaw 2026.2.9+
-
+3. **Ghi chú rõ ràng**:
+   - Lưu lại mục đích sử dụng của các Agent
+   - Ghi chú lịch sử thay đổi để thuận tiện truy vết khi phát sinh sự cố
 
 ---
 
-## 🌐 在线阅读
+**Cập nhật lần cuối**: 14/02/2026  
+**Phiên bản áp dụng**: OpenClaw 2026.3.2+
+---
 
-📖 **想在线阅读此附录？**
+## 🌐 Đọc trực tuyến
 
-[🔗 在线阅读此附录](https://awesome.tryopenclaw.asia/appendix/L-config-file-structure/)
+📖 **Bạn muốn đọc phụ lục này trực tuyến?**
 
-访问网站获取更好的阅读体验：
-- 📱 响应式设计，支持手机、平板、电脑
-- 🌙 支持黑暗模式，保护眼睛
-- 🔍 内置搜索功能，快速定位内容
-- 📋 目录导航，轻松跳转章节
+[🔗 Đọc trực tuyến phụ lục này](https://awesome.tryopenclaw.asia/appendix/L-config-file-structure/)
 
-[🏠 访问完整教程网站](https://awesome.tryopenclaw.asia)
+Truy cập website để có trải nghiệm đọc tối ưu nhất:
+- 📱 Thiết kế tương thích hoàn hảo cho điện thoại, máy tính bảng và máy tính để bàn
+- 🌙 Hỗ trợ chế độ nền tối (Dark mode) bảo vệ thị lực
+- 🔍 Tích hợp sẵn công cụ tìm kiếm, nhanh chóng tra cứu nội dung
+- 📋 Điều hướng mục lục linh hoạt, dễ dàng chuyển đổi qua lại giữa các chương
+
+[🏠 Truy cập trang web giáo trình hoàn chỉnh](https://awesome.tryopenclaw.asia)

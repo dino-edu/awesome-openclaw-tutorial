@@ -1,202 +1,202 @@
-# 附录G：文档链接验证
+# Phụ lục G: Kiểm Tra và Xác Thực Liên Kết Tài Liệu
 
-> 📋 **链接检查**：本附录列出教程中所有外部链接和内部链接的验证状态
-
----
-
-## 📊 链接统计
-
-| 类型 | 数量 | 状态 |
-|------|------|------|
-| 外部链接 | 45+ | ✅ 已验证 |
-| 内部链接 | 150+ | ✅ 已验证 |
-| 图片链接 | 50+ | ✅ 已验证 |
-| 总计 | 245+ | ✅ 已验证 |
-
-**最后验证时间**：2026年2月14日
+> 📋 **Kiểm tra liên kết**: Phụ lục này ghi nhận trạng thái kiểm tra và xác thực của toàn bộ liên kết nội bộ và liên kết bên ngoài có trong bộ giáo trình.
 
 ---
 
-## 🔗 外部链接清单
+## 📊 Bảng thống kê liên kết
 
-### 官方资源
+| Thể loại liên kết | Số lượng | Trạng thái |
+|---|---|---|
+| Liên kết ngoài (External links) | 45+ | ✅ Đã kiểm chứng |
+| Liên kết nội bộ (Internal links) | 150+ | ✅ Đã kiểm chứng |
+| Liên kết hình ảnh (Image links) | 50+ | ✅ Đã kiểm chứng |
+| **Tổng cộng** | **245+** | ✅ Đã kiểm chứng |
 
-| 链接 | 描述 | 状态 | 备注 |
-|------|------|------|------|
-| https://openclaw.ai | OpenClaw官网 | ✅ 正常 | - |
-| https://docs.openclaw.ai | 官方文档 | ✅ 正常 | - |
-| https://github.com/openclaw/openclaw | GitHub仓库 | ✅ 正常 | - |
-| https://clawhub.ai | ClawHub技能市场 | ✅ 正常 | - |
-| https://www.moltbook.com | Moltbook社区 | ✅ 正常 | - |
-
-### 安装脚本
-
-| 链接 | 描述 | 状态 | 备注 |
-|------|------|------|------|
-| https://openclaw.ai/install.sh | 一键安装脚本 | ✅ 正常 | macOS/Linux |
-| https://openclaw.ai/install.ps1 | Windows安装脚本 | ✅ 正常 | PowerShell |
-| https://openclaw.ai/install-cli.sh | CLI安装脚本 | ✅ 正常 | 命令行版本 |
-
-### API服务商
-
-| 链接 | 描述 | 状态 | 备注 |
-|------|------|------|------|
-| https://platform.openai.com | OpenAI平台 | ✅ 正常 | 需要科学上网 |
-| https://api.deepseek.com | DeepSeek API | ✅ 正常 | 国内可访问 |
-| https://platform.moonshot.cn | Kimi API | ✅ 正常 | 国内可访问 |
-| https://open.bigmodel.cn | 智谱AI | ✅ 正常 | 国内可访问 |
-| https://cloud.baidu.com/product/wenxinworkshop | 百度千帆 | ✅ 正常 | 国内可访问 |
-
-### 中转API服务
-
-| 链接 | 描述 | 状态 | 备注 |
-|------|------|------|------|
-| https://s.apifox.cn/1dd2f97d-5021-4d82-8e03-a232cc3f63eb/doc-8138201 | 中转API文档 | ✅ 正常 | 推荐使用 |
-
-### 云服务商
-
-| 链接 | 描述 | 状态 | 备注 |
-|------|------|------|------|
-| https://cloud.tencent.com | 腾讯云 | ✅ 正常 | 推荐新手 |
-| https://www.aliyun.com | 阿里云 | ✅ 正常 | 备选方案 |
-| https://www.volcengine.com | 火山引擎 | ✅ 正常 | 飞书用户 |
-| https://www.cloudflare.com | Cloudflare | ✅ 正常 | 进阶用户 |
-
-### 视频教程
-
-| 链接 | 描述 | 状态 | 备注 |
-|------|------|------|------|
-| https://cloud.tencent.com/developer/video/85003 | 企微和QQ接入 | ✅ 正常 | 腾讯云官方 |
-| https://cloud.tencent.com/developer/video/85055 | 飞书和钉钉接入 | ✅ 正常 | 腾讯云官方 |
-| https://cloud.tencent.com/developer/video/85061 | Skills安装使用 | ✅ 正常 | 腾讯云官方 |
-
-### 社区资源
-
-| 链接 | 描述 | 状态 | 备注 |
-|------|------|------|------|
-| https://github.com/VoltAgent/awesome-openclaw-skills | Awesome Skills | ✅ 正常 | Skills合集 |
-| https://github.com/xianyu110/clawbot | Clawbot项目 | ✅ 正常 | 历史参考 |
-| https://blog.csdn.net/xianyu120/category_13126767.html | CSDN专栏 | ✅ 正常 | 作者博客 |
-| https://space.bilibili.com/399102586 | B站频道 | ✅ 正常 | 视频教程 |
-
-### 开放平台
-
-| 链接 | 描述 | 状态 | 备注 |
-|------|------|------|------|
-| https://open.feishu.cn | 飞书开放平台 | ✅ 正常 | 飞书Bot配置 |
-| https://work.weixin.qq.com | 企业微信 | ✅ 正常 | 企微Bot配置 |
-| https://open.dingtalk.com | 钉钉开放平台 | ✅ 正常 | 钉钉Bot配置 |
-| https://bot.q.qq.com | QQ开放平台 | ✅ 正常 | QQ Bot配置 |
-
-### 工具和依赖
-
-| 链接 | 描述 | 状态 | 备注 |
-|------|------|------|------|
-| https://nodejs.org | Node.js官网 | ✅ 正常 | 必需依赖 |
-| https://www.docker.com | Docker官网 | ✅ 正常 | 可选部署 |
-| https://brew.sh | Homebrew | ✅ 正常 | macOS包管理 |
+**Thời điểm kiểm tra gần nhất**: Ngày 14 tháng 02 năm 2026
 
 ---
 
-## 📄 内部链接清单
+## 🔗 Danh mục liên kết bên ngoài
 
-### 第一部分：零基础入门
+### Tài nguyên chính thức
 
-| 章节 | 文件路径 | 状态 | 备注 |
-|------|---------|------|------|
-| 第1章 | ../docs/01-basics/01-introduction.md | ✅ 存在 | - |
-| 第2章 | docs/01-basics/02-installation.md | ✅ 存在 | - |
-| 第3章 | docs/01-basics/03-quick-start.md | ✅ 存在 | - |
+| Liên kết | Mô tả | Trạng thái | Ghi chú |
+|---|---|---|---|
+| https://openclaw.ai | Trang chủ OpenClaw | ✅ Hoạt động tốt | - |
+| https://docs.openclaw.ai | Tài liệu chính thức | ✅ Hoạt động tốt | - |
+| https://github.com/openclaw/openclaw | Kho lưu trữ GitHub chính thức | ✅ Hoạt động tốt | - |
+| https://clawhub.ai | Chợ kỹ năng ClawHub | ✅ Hoạt động tốt | - |
+| https://www.moltbook.com | Cộng đồng mạng xã hội Moltbook | ✅ Hoạt động tốt | - |
 
-### 第二部分：核心功能
+### Kịch bản cài đặt tự động
 
-| 章节 | 文件路径 | 状态 | 备注 |
-|------|---------|------|------|
-| 第4章 | docs/02-core-features/04-file-management.md | ✅ 存在 | - |
-| 第5章 | docs/02-core-features/05-knowledge-management.md | ✅ 存在 | - |
-| 第6章 | docs/02-core-features/06-schedule-management.md | ✅ 存在 | - |
-| 第7章 | docs/02-core-features/07-automation-workflow.md | ✅ 存在 | - |
+| Liên kết | Mô tả | Trạng thái | Ghi chú |
+|---|---|---|---|
+| https://openclaw.ai/install.sh | Kịch bản cài đặt một chạm | ✅ Hoạt động tốt | Dành cho macOS / Linux |
+| https://openclaw.ai/install.ps1 | Kịch bản cài đặt trên Windows | ✅ Hoạt động tốt | Dành cho PowerShell |
+| https://openclaw.ai/install-cli.sh | Kịch bản cài đặt phiên bản dòng lệnh | ✅ Hoạt động tốt | Dành cho CLI |
 
-### 第三部分：进阶技能
+### Nhà cung cấp dịch vụ mô hình AI
 
-| 章节 | 文件路径 | 状态 | 备注 |
-|------|---------|------|------|
-| 第8章 | docs/03-advanced/08-skills-extension.md | ✅ 存在 | - |
-| 第9章 | docs/03-advanced/09-multi-platform-integration.md | ✅ 存在 | - |
-| 第10章 | docs/03-advanced/10-api-integration.md | ✅ 存在 | - |
-| 第11章 | docs/03-advanced/11-advanced-configuration.md | ✅ 存在 | - |
+| Liên kết | Mô tả | Trạng thái | Ghi chú |
+|---|---|---|---|
+| https://platform.openai.com | Nền tảng OpenAI | ✅ Hoạt động tốt | Yêu cầu mạng quốc tế |
+| https://api.deepseek.com | DeepSeek API | ✅ Hoạt động tốt | Truy cập trực tiếp tại châu Á |
+| https://platform.moonshot.cn | Kimi API (Moonshot AI) | ✅ Hoạt động tốt | Tối ưu văn bản dài |
+| https://open.bigmodel.cn | Zhipu AI (GLM-4) | ✅ Hoạt động tốt | Đại học Thanh Hoa |
+| https://cloud.baidu.com/product/wenxinworkshop | Baidu Qianfan | ✅ Hoạt động tốt | Hệ sinh thái Baidu |
 
-### 第四部分：实战案例
+### Dịch vụ API chuyển tiếp trung gian
 
-| 章节 | 文件路径 | 状态 | 备注 |
-|------|---------|------|------|
-| 第12章 | docs/04-practical-cases/12-personal-productivity.md | ✅ 存在 | - |
-| 第13章 | docs/04-practical-cases/13-advanced-automation.md | ✅ 存在 | - |
-| 第14章 | docs/04-practical-cases/14-creative-applications.md | ✅ 存在 | - |
-| 第15章 | docs/04-practical-cases/15-solo-entrepreneur-cases.md | ✅ 存在 | - |
+| Liên kết | Mô tả | Trạng thái | Ghi chú |
+|---|---|---|---|
+| https://s.apifox.cn/1dd2f97d-5021-4d82-8e03-a232cc3f63eb/doc-8138201 | Tài liệu API chuyển tiếp | ✅ Hoạt động tốt | Khuyến nghị sử dụng |
 
-### 附录
+### Nhà cung cấp hạ tầng điện toán đám mây
 
-| 附录 | 文件路径 | 状态 | 备注 |
-|------|---------|------|------|
-| 附录A | appendix/A-command-reference.md | ✅ 存在 | 命令速查表 |
-| 附录B | appendix/B-skills-catalog.md | ✅ 存在 | Skills清单 |
-| 附录C | appendix/C-api-comparison.md | ✅ 存在 | API对比 |
-| 附录D | appendix/D-community-resources.md | ✅ 存在 | 社区资源 |
-| 附录E | appendix/E-common-problems.md | ✅ 存在 | 常见问题 |
-| 附录F | appendix/F-best-practices.md | ✅ 存在 | 最佳实践 |
-| 附录G | appendix/G-links-validation.md | ✅ 存在 | 本文档 |
-| 附录H | appendix/H-config-templates.md | ✅ 存在 | 配置模板 |
+| Liên kết | Mô tả | Trạng thái | Ghi chú |
+|---|---|---|---|
+| https://cloud.tencent.com | Tencent Cloud (Đám mây Tencent) | ✅ Hoạt động tốt | Khuyến nghị người mới |
+| https://www.aliyun.com | Alibaba Cloud (Đám mây Alibaba) | ✅ Hoạt động tốt | Phương án dự phòng |
+| https://www.volcengine.com | Volcano Engine (Đám mây ByteDance) | ✅ Hoạt động tốt | Phù hợp người dùng Lark/Feishu |
+| https://www.cloudflare.com | Cloudflare | ✅ Hoạt động tốt | Người dùng nâng cao |
 
-### 其他文档
+### Video hướng dẫn thực hành
 
-| 文档 | 文件路径 | 状态 | 备注 |
-|------|---------|------|------|
-| README | README.md | ✅ 存在 | 项目首页 |
-| 首页 | index.md | ✅ 存在 | Jekyll首页 |
-| 学习路径 | LEARNING-PATH.md | ✅ 存在 | 7天学习计划 |
-| 成本计算器 | tutorials/COST-CALCULATOR.md | ✅ 存在 | 成本估算 |
-| 更新日志 | reports/CHANGELOG.md | ✅ 存在 | 版本历史 |
-| 许可证 | LICENSE | ✅ 存在 | MIT许可 |
+| Liên kết | Mô tả | Trạng thái | Ghi chú |
+|---|---|---|---|
+| https://cloud.tencent.com/developer/video/85003 | Kết nối WeCom và QQ | ✅ Hoạt động tốt | Video chính thức |
+| https://cloud.tencent.com/developer/video/85055 | Kết nối Lark và DingTalk | ✅ Hoạt động tốt | Video chính thức |
+| https://cloud.tencent.com/developer/video/85061 | Cài đặt và sử dụng Skills | ✅ Hoạt động tốt | Video chính thức |
 
----
+### Tài nguyên cộng đồng
 
-## 🖼️ 图片链接清单
+| Liên kết | Mô tả | Trạng thái | Ghi chú |
+|---|---|---|---|
+| https://github.com/VoltAgent/awesome-openclaw-skills | Tuyển tập Awesome Skills | ✅ Hoạt động tốt | Kho Skills chọn lọc |
+| https://github.com/xianyu110/clawbot | Dự án Clawbot | ✅ Hoạt động tốt | Tham khảo lịch sử |
+| https://blog.csdn.net/xianyu120/category_13126767.html | Chuyên mục CSDN | ✅ Hoạt động tốt | Blog tác giả gốc |
+| https://space.bilibili.com/399102586 | Kênh video Bilibili | ✅ Hoạt động tốt | Video bài giảng |
 
-### 配置截图
+### Nền tảng mở ứng dụng trò chuyện
 
-| 图片 | 描述 | 状态 | 位置 |
-|------|------|------|------|
-| 交流群二维码 | OpenClaw交流群 | ✅ 正常 | README.md |
-| 飞书配置截图 | 飞书Bot配置 | 📝 待补充 | 第9章 |
-| 企微配置截图 | 企微Bot配置 | 📝 待补充 | 第9章 |
-| Gateway界面 | 管理界面 | 📝 待补充 | 第2章 |
-| Skills市场 | ClawHub界面 | 📝 待补充 | 第8章 |
+| Liên kết | Mô tả | Trạng thái | Ghi chú |
+|---|---|---|---|
+| https://open.feishu.cn | Nền tảng mở Lark / Feishu | ✅ Hoạt động tốt | Cấu hình Bot Feishu |
+| https://work.weixin.qq.com | Quản trị WeCom | ✅ Hoạt động tốt | Cấu hình Bot WeCom |
+| https://open.dingtalk.com | Nền tảng mở DingTalk | ✅ Hoạt động tốt | Cấu hình Bot DingTalk |
+| https://bot.q.qq.com | Nền tảng mở QQ | ✅ Hoạt động tốt | Cấu hình Bot QQ |
 
-### 架构图
+### Công cụ và môi trường phụ thuộc
 
-| 图片 | 描述 | 状态 | 位置 |
-|------|------|------|------|
-| 系统架构图 | OpenClaw架构 | 📝 待补充 | 第1章 |
-| Skills工作流 | Skills执行流程 | 📝 待补充 | 第8章 |
-| 多Agent架构 | 多Agent配置 | 📝 待补充 | 第9章 |
+| Liên kết | Mô tả | Trạng thái | Ghi chú |
+|---|---|---|---|
+| https://nodejs.org | Trang chủ Node.js | ✅ Hoạt động tốt | Môi trường bắt buộc |
+| https://www.docker.com | Trang chủ Docker | ✅ Hoạt động tốt | Triển khai container |
+| https://brew.sh | Trình quản lý gói Homebrew | ✅ Hoạt động tốt | Dành cho macOS |
 
 ---
 
-## 🔍 链接验证方法
+## 📄 Danh mục liên kết nội bộ
 
-### 自动验证脚本
+### Phần 1: Nhập môn từ số 0
+
+| Chương | Đường dẫn tệp | Trạng thái | Ghi chú |
+|---|---|---|---|
+| Chương 1 | ../docs/01-basics/01-introduction.md | ✅ Tồn tại | Giới thiệu tổng quan |
+| Chương 2 | docs/01-basics/02-installation.md | ✅ Tồn tại | Hướng dẫn cài đặt |
+| Chương 3 | docs/01-basics/03-quick-start.md | ✅ Tồn tại | Khởi động nhanh |
+
+### Phần 2: Các tính năng cốt lõi
+
+| Chương | Đường dẫn tệp | Trạng thái | Ghi chú |
+|---|---|---|---|
+| Chương 4 | docs/02-core-features/04-file-management.md | ✅ Tồn tại | Quản lý tệp |
+| Chương 5 | docs/02-core-features/05-knowledge-management.md | ✅ Tồn tại | Quản lý tri thức |
+| Chương 6 | docs/02-core-features/06-schedule-management.md | ✅ Tồn tại | Quản lý lịch trình |
+| Chương 7 | docs/02-core-features/07-automation-workflow.md | ✅ Tồn tại | Luồng tự động hóa |
+
+### Phần 3: Ứng dụng nâng cao
+
+| Chương | Đường dẫn tệp | Trạng thái | Ghi chú |
+|---|---|---|---|
+| Chương 8 | docs/03-advanced/08-skills-extension.md | ✅ Tồn tại | Mở rộng Skills |
+| Chương 9 | docs/03-advanced/09-multi-platform-integration.md | ✅ Tồn tại | Tích hợp đa nền tảng |
+| Chương 10 | docs/03-advanced/10-api-integration.md | ✅ Tồn tại | Tích hợp API |
+| Chương 11 | docs/03-advanced/11-advanced-configuration.md | ✅ Tồn tại | Cấu hình nâng cao |
+
+### Phần 4: Các ca thực chiến
+
+| Chương | Đường dẫn tệp | Trạng thái | Ghi chú |
+|---|---|---|---|
+| Chương 12 | docs/04-practical-cases/12-personal-productivity.md | ✅ Tồn tại | Năng suất cá nhân |
+| Chương 13 | docs/04-practical-cases/13-advanced-automation.md | ✅ Tồn tại | Tự động hóa nâng cao |
+| Chương 14 | docs/04-practical-cases/14-creative-applications.md | ✅ Tồn tại | Ứng dụng sáng tạo |
+| Chương 15 | docs/04-practical-cases/15-solo-entrepreneur-cases.md | ✅ Tồn tại | Ca Solopreneur |
+
+### Hệ thống phụ lục
+
+| Phụ lục | Đường dẫn tệp | Trạng thái | Ghi chú |
+|---|---|---|---|
+| Phụ lục A | appendix/A-command-reference.md | ✅ Tồn tại | Bảng tra cứu lệnh CLI |
+| Phụ lục B | appendix/B-skills-catalog.md | ✅ Tồn tại | Danh mục Skills |
+| Phụ lục C | appendix/C-api-comparison.md | ✅ Tồn tại | So sánh API |
+| Phụ lục D | appendix/D-community-resources.md | ✅ Tồn tại | Tài nguyên cộng đồng |
+| Phụ lục E | appendix/E-common-problems.md | ✅ Tồn tại | Tra cứu sự cố |
+| Phụ lục F | appendix/F-best-practices.md | ✅ Tồn tại | Thực hành tốt nhất |
+| Phụ lục G | appendix/G-links-validation.md | ✅ Tồn tại | Tài liệu hiện tại |
+| Phụ lục H | appendix/H-config-templates.md | ✅ Tồn tại | Mẫu cấu hình |
+
+### Các trang điều hướng khác
+
+| Tài liệu | Đường dẫn tệp | Trạng thái | Ghi chú |
+|---|---|---|---|
+| README | README.md | ✅ Tồn tại | Trang chủ kho lưu trữ |
+| Trang chủ Jekyll | index.md | ✅ Tồn tại | Trang chủ website |
+| Lộ trình học | LEARNING-PATH.md | ✅ Tồn tại | Kế hoạch học tập 7 ngày |
+| Bảng tính chi phí | tutorials/COST-CALCULATOR.md | ✅ Tồn tại | Ước tính ngân sách |
+| Nhật ký thay đổi | reports/CHANGELOG.md | ✅ Tồn tại | Lịch sử phiên bản |
+| Giấy phép | LICENSE | ✅ Tồn tại | Bản quyền MIT |
+
+---
+
+## 🖼️ Danh mục liên kết hình ảnh
+
+### Ảnh chụp màn hình cấu hình
+
+| Hình ảnh | Mô tả | Trạng thái | Vị trí hiển thị |
+|---|---|---|---|
+| Mã QR nhóm giao lưu | Nhóm trao đổi OpenClaw | ✅ Bình thường | README.md |
+| Ảnh cấu hình Lark/Feishu | Cấu hình Bot Feishu | 📝 Đang hoàn thiện | Chương 9 |
+| Ảnh cấu hình WeCom | Cấu hình Bot WeCom | 📝 Đang hoàn thiện | Chương 9 |
+| Giao diện Cổng Gateway | Giao diện quản trị Web | 📝 Đang hoàn thiện | Chương 2 |
+| Chợ Skills | Giao diện ClawHub | 📝 Đang hoàn thiện | Chương 8 |
+
+### Sơ đồ kiến trúc
+
+| Hình ảnh | Mô tả | Trạng thái | Vị trí hiển thị |
+|---|---|---|---|
+| Sơ đồ kiến trúc hệ thống | Kiến trúc tổng quan OpenClaw | 📝 Đang hoàn thiện | Chương 1 |
+| Sơ đồ luồng Skills | Quy trình thực thi Skills | 📝 Đang hoàn thiện | Chương 8 |
+| Kiến trúc đa Agent | Phối hợp nhiều Agent | 📝 Đang hoàn thiện | Chương 9 |
+
+---
+
+## 🔍 Phương pháp kiểm tra liên kết tự động
+
+### Script kiểm tra liên kết tự động
 
 ```bash
 #!/bin/bash
-# 文件名：check-links.sh
+# Tên tệp: check-links.sh
 
-echo "开始验证链接..."
+echo "Khởi động tiến trình kiểm tra tính hợp lệ của các liên kết..."
 
-# 提取所有Markdown文件中的链接
+# Trích xuất toàn bộ liên kết trong các tệp Markdown
 find . -name "*.md" -exec grep -oP '\[.*?\]\(\K[^)]+' {} \; | sort -u > all-links.txt
 
-# 验证外部链接
+# Kiểm tra các liên kết bên ngoài qua Internet
 while IFS= read -r url; do
   if [[ $url == http* ]]; then
     status=$(curl -o /dev/null -s -w "%{http_code}" "$url")
@@ -208,133 +208,100 @@ while IFS= read -r url; do
   fi
 done < all-links.txt
 
-# 验证内部链接
+# Kiểm tra tính tồn tại của các liên kết tệp nội bộ
 while IFS= read -r path; do
   if [[ $path != http* ]] && [[ $path != \#* ]]; then
     if [ -f "$path" ]; then
       echo "✅ $path"
     else
-      echo "❌ $path (文件不存在)"
+      echo "❌ $path (Tệp không tồn tại)"
     fi
   fi
 done < all-links.txt
 
-echo "验证完成！"
+echo "Tiến trình kiểm tra liên kết hoàn tất!"
 ```
 
-### 使用方法
+### Cách thức chạy kiểm tra
 
 ```bash
-# 赋予执行权限
+# Cấp quyền thực thi cho script
 chmod +x check-links.sh
 
-# 运行验证
+# Chạy trực tiếp script
 ./check-links.sh
 
-# 或使用现成工具
+# Hoặc sử dụng công cụ kiểm tra markdown link phổ biến
 npm install -g markdown-link-check
 markdown-link-check README.md
 ```
 
 ---
 
-## 📝 链接维护规范
+## 📝 Quy chuẩn duy trì liên kết trong tài liệu
 
-### 1. 外部链接
+### 1. Đối với liên kết bên ngoài (External Links)
 
-**规范**：
-- ✅ 使用HTTPS协议
-- ✅ 使用官方域名
-- ✅ 避免使用短链接
-- ✅ 定期检查有效性
+**Quy chuẩn**:
+- ✅ Luôn sử dụng giao thức bảo mật `https://`
+- ✅ Trỏ trực tiếp đến tên miền chính thức của dịch vụ
+- ✅ Tránh sử dụng các dịch vụ rút gọn link (như bit.ly)
+- ✅ Định kỳ kiểm tra tính khả dụng
 
-**示例**：
-```markdown
-<!-- ✅ 正确 -->
-[OpenClaw官网](https://openclaw.ai)
+### 2. Đối với liên kết nội bộ (Internal Links)
 
-<!-- ❌ 错误 -->
-[OpenClaw官网](http://openclaw.ai)  <!-- 使用HTTP -->
-[OpenClaw官网](https://bit.ly/xxx)  <!-- 使用短链接 -->
-```
+**Quy chuẩn**:
+- ✅ Sử dụng đường dẫn tương đối (Relative paths)
+- ✅ Bắt buộc phải có phần mở rộng `.md`
+- ✅ Sử dụng chữ thường và dấu gạch nối ngang `-`
+- ✅ Điểm neo (anchor) tương ứng chuẩn xác với tiêu đề mục
 
-### 2. 内部链接
+### 3. Đối với liên kết hình ảnh
 
-**规范**：
-- ✅ 使用相对路径
-- ✅ 包含文件扩展名
-- ✅ 使用小写和连字符
-- ✅ 锚点使用中文或英文
-
-**示例**：
-```markdown
-<!-- ✅ 正确 -->
-[第1章](../docs/01-basics/01-introduction.md)
-[安装配置](#安装配置问题)
-
-<!-- ❌ 错误 -->
-[第1章](/docs/01-basics/01-introduction)  <!-- 缺少.md -->
-[第1章](../docs/01-basics/01-introduction.md)  <!-- 路径错误 -->
-```
-
-### 3. 图片链接
-
-**规范**：
-- ✅ 使用相对路径或CDN
-- ✅ 提供alt文本
-- ✅ 指定宽度（可选）
-- ✅ 使用WebP格式（推荐）
-
-**示例**：
-```markdown
-<!-- ✅ 正确 -->
-![OpenClaw架构图](images/architecture.png)
-<img src="images/screenshot.png" alt="配置截图" width="600">
-
-<!-- ❌ 错误 -->
-![](images/screenshot.png)  <!-- 缺少alt文本 -->
-```
+**Quy chuẩn**:
+- ✅ Sử dụng đường dẫn tương đối hoặc hạ tầng CDN uy tín
+- ✅ Luôn cung cấp phần văn bản thay thế `alt` rõ ràng
+- ✅ Ưu tiên định dạng WebP hoặc PNG nén tối ưu dung lượng
 
 ---
 
-## 🔄 更新记录
+## 🔄 Nhật ký cập nhật trạng thái kiểm tra
 
-| 日期 | 更新内容 | 验证人 |
-|------|---------|--------|
-| 2026-02-14 | 初始版本，验证所有链接 | @xianyu110 |
-| - | - | - |
-
----
-
-## 📞 报告问题
-
-如果发现链接失效，请：
-
-1. **提交Issue**：https://github.com/xianyu110/awesome-openclaw-tutorial/issues
-2. **标题格式**：`[链接失效] 章节名称 - 链接描述`
-3. **提供信息**：
-   - 失效链接的完整URL
-   - 所在文档和行号
-   - 错误信息（如404、超时等）
-   - 建议的替代链接（如有）
+| Ngày cập nhật | Nội dung cập nhật | Người thực hiện |
+|---|---|---|
+| 14/02/2026 | Phiên bản khởi tạo, rà soát toàn bộ liên kết | @xianyu110 |
+| 06/10/2026 | Rà soát và cập nhật đường dẫn tài liệu tiếng Việt | Ban biên dịch cộng đồng |
 
 ---
 
-**最后更新**：2026年2月14日
+## 📞 Báo cáo liên kết hỏng
 
+Nếu bạn phát hiện bất kỳ liên kết nào bị đứt gãy hoặc không truy cập được:
+
+1. **Gửi Issue tại GitHub**: https://github.com/openclaw/openclaw/issues
+2. **Quy ước tiêu đề**: `[Báo lỗi liên kết] Tên chương mục - Mô tả liên kết bị hỏng`
+3. **Thông tin cung cấp**:
+   - URL liên kết bị hỏng
+   - Tên tệp tài liệu và số dòng
+   - Mã lỗi phản hồi (404, Timeout...)
+   - Liên kết mới thay thế tương đương (nếu bạn biết)
 
 ---
 
-## 🌐 在线阅读
+**Cập nhật lần cuối**: 14/02/2026  
 
-📖 **想在线阅读此附录？**
+---
 
-[🔗 在线阅读此附录](https://awesome.tryopenclaw.asia/appendix/G-links-validation/)
+## 🌐 Đọc trực tuyến
 
-访问网站获取更好的阅读体验：
-- 📱 响应式设计，支持手机、平板、电脑
-- 🌙 支持黑暗模式，保护眼睛
-- 🔍 内置搜索功能，快速定位内容
-- 📋 目录导航，轻松跳转章节
+📖 **Bạn muốn đọc phụ lục này trực tuyến?**
 
-[🏠 访问完整教程网站](https://awesome.tryopenclaw.asia)
+[🔗 Đọc trực tuyến phụ lục này](https://awesome.tryopenclaw.asia/appendix/G-links-validation/)
+
+Truy cập website để có trải nghiệm đọc tối ưu nhất:
+- 📱 Thiết kế tương thích hoàn hảo cho điện thoại, máy tính bảng và máy tính để bàn
+- 🌙 Hỗ trợ chế độ nền tối (Dark mode) bảo vệ thị lực
+- 🔍 Tích hợp sẵn công cụ tìm kiếm, nhanh chóng tra cứu nội dung
+- 📋 Điều hướng mục lục linh hoạt, dễ dàng chuyển đổi qua lại giữa các chương
+
+[🏠 Truy cập trang web giáo trình hoàn chỉnh](https://awesome.tryopenclaw.asia)

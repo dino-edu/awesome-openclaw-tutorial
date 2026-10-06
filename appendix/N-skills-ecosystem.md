@@ -1,17 +1,17 @@
-# OpenClaw Skills 生态说明
+# Phụ lục N: Hệ Sinh Thái Skills Của OpenClaw
 
-## 📊 Skills 分类统计（2026年3月）
+## 📊 Phân loại và Thống kê Skills (Tháng 3/2026)
 
-### 📦 内置 Skills（预装）
+### 📦 Skills tích hợp sẵn (Built-in Skills)
 
-**数量**: 49个
-**位置**: OpenClaw 安装包自带
-**特点**: 开箱即用，无需安装
-**类型**: 文件管理、知识管理、日程管理、自动化等
+**Số lượng**: 49 Skills  
+**Vị trí**: Đi kèm mặc định trong bộ cài OpenClaw  
+**Đặc điểm**: Sẵn sàng dùng ngay (Out-of-the-box), không cần cài đặt thêm  
+**Thể loại**: Quản lý tệp, quản lý tri thức, quản lý lịch trình, tự động hóa...  
 
-**说明**: 这些 Skills 在安装 OpenClaw 时就已经包含，可以直接使用，无需额外安装。
+**Mô tả**: Các Skills này đã được tích hợp ngay khi bạn cài đặt OpenClaw, có thể gọi dùng trực tiếp mà không cần cấu hình phức tạp.
 
-**查看命令**:
+**Lệnh kiểm tra**:
 
 ```bash
 openclaw skills list
@@ -19,274 +19,273 @@ openclaw skills list
 
 ---
 
-### 🏪 ClawHub 官方 Skills
+### 🏪 Skills chính thức trên ClawHub (Official Skills)
 
-**数量**: 93个（包含49个内置）
-**位置**: ClawHub 官方仓库
-**特点**: 官方维护，质量保证
-**安装**: `clawhub install <skill-name>`
+**Số lượng**: 93 Skills (Đã bao gồm 49 Skills tích hợp sẵn)  
+**Vị trí**: Kho lưu trữ chính thức ClawHub  
+**Đặc điểm**: Do đội ngũ OpenClaw trực tiếp bảo trì, bảo đảm chất lượng  
+**Cài đặt**: `clawhub install <skill-name>`  
 
-**说明**: ClawHub 是 OpenClaw 官方的 Skills 市场，提供经过官方审核和维护的高质量 Skills。
+**Mô tả**: ClawHub là chợ kỹ năng chính thức của OpenClaw, cung cấp các Skills chất lượng cao đã qua kiểm duyệt bảo mật và kiểm thử nghiêm ngặt.
 
-**2026年3月新增插件**（橙皮书 v1.4）：
+**Plugin mới bổ sung trong Sách Cam v1.4 (Tháng 3/2026)**:
 
-- **@openclaw/wechat-clawbot**：官方微信接入插件，基于 WeChatFerry，一行命令即可将 OpenClaw 接入个人微信
+- **@openclaw/wechat-clawbot**: Plugin chính thức kết nối WeChat cá nhân dựa trên WeChatFerry, chỉ với một dòng lệnh duy nhất để đưa trợ lý OpenClaw vào WeChat.
 
-**访问方式**:
+**Cú pháp truy cập và thao tác**:
+
 ```bash
-# 搜索 Skills
-clawhub search <关键词>
+# Tìm kiếm Skills
+clawhub search <từ-khóa>
 
-# 安装 Skills
+# Cài đặt Skills
 clawhub install <skill-name>
 
-# 安装微信插件（v1.4 新增）
+# Cài đặt plugin WeChat (Mới trong v1.4)
 openclaw plugins install @openclaw/wechat-clawbot
 
-# 查看已安装
+# Xem danh sách Skills đã cài đặt
 openclaw skills list
 ```
 
 ---
 
-### 🌐 跨平台 Skills 生态（2026年新趋势）
+### 🌐 Hệ sinh thái Skills đa nền tảng (Xu hướng công nghệ 2026)
 
-2026年初，AI Agent Skills 市场呈现爆发式增长，出现了多个跨平台技能生态系统：
+Đầu năm 2026, thị trường AI Agent Skills chứng kiến sự bùng nổ vượt bậc với nhiều hệ sinh thái kỹ năng đa nền tảng liên thông:
 
-#### Skills.sh（Vercel出品）
+#### Skills.sh (Phát triển bởi Vercel)
 
-- **数量**: 87,000+ Skills
-- **出品**: Vercel
-- **上线**: 2026年1月
-- **特点**:
-  - 开放的 Agent Skills 生态系统
-  - CLI 工具：`npx skills`
-  - 支持 Claude Code、Cursor、Codex 等 37+ AI 编码工具
-  - 开源代码库：vercel-labs/skills
-- **官网**: https://skills.sh
+- **Số lượng**: 87.000+ Skills
+- **Đơn vị phát triển**: Vercel
+- **Ra mắt**: Tháng 1/2026
+- **Đặc điểm nổi bật**:
+  - Hệ sinh thái Agent Skills mở hoàn toàn
+  - Công cụ dòng lệnh CLI tiện lợi: `npx skills`
+  - Hỗ trợ hơn 37+ công cụ lập trình AI như Claude Code, Cursor, Codex...
+  - Kho mã nguồn mở: `vercel-labs/skills`
+- **Trang chủ**: https://skills.sh
 
-**安装方式**:
+**Cách thức cài đặt**:
+
 ```bash
-# 使用 npx 安装
+# Cài đặt qua npx
 npx skills install <skill-name>
 
-# 搜索技能
-npx skills search <关键词>
+# Tìm kiếm kỹ năng
+npx skills search <từ-khóa>
 ```
 
-#### SkillsMP（Agent Skills Marketplace）
+#### SkillsMP (Chợ Agent Skills tập trung)
 
-- **数量**: 400,000+ Agent Skills
-- **特点**:
-  - 使用开放的 SKILL.md 标准格式
-  - 兼容 Claude Code、OpenAI Codex CLI、ChatGPT
-  - 从 GitHub 聚合技能
-  - 智能搜索和分类过滤
-  - 2025年12月开始爆发式增长
-- **官网**: https://skillsmp.com
+- **Số lượng**: 400.000+ Agent Skills
+- **Đặc điểm nổi bật**:
+  - Sử dụng định dạng tiêu chuẩn mở `SKILL.md`
+  - Tương thích chéo với Claude Code, OpenAI Codex CLI, ChatGPT
+  - Tổng hợp kỹ năng tự động từ các kho lưu trữ GitHub
+  - Tìm kiếm thông minh và lọc danh mục tiện lợi
+  - Bùng nổ số lượng mạnh mẽ từ tháng 12/2025
+- **Trang chủ**: https://skillsmp.com
 
-**快速增长数据**:
-- 2025年12月：约6.6万技能
-- 2026年1月22日单日新增：20,218个技能
-- 2026年3月：达到40万+技能
+**Số liệu tăng trưởng thần tốc**:
+- Tháng 12/2025: Khoảng 66.000 kỹ năng
+- Ngày 22/01/2026: Tăng thêm 20.218 kỹ năng chỉ trong một ngày
+- Tháng 3/2026: Vượt mốc 400.000+ kỹ năng
 
-#### MCP 生态融合
+#### Hội tụ với hệ sinh thái MCP (Model Context Protocol)
 
-**MCP（Model Context Protocol）** 是 Anthropic 推出的开放标准，用于 LLM 与外部数据源/工具的安全双向连接。
+**MCP (Model Context Protocol)** là chuẩn giao thức mở do Anthropic khởi xướng, dùng để kết nối hai chiều an toàn giữa các mô hình ngôn ngữ lớn (LLM) với các công cụ và nguồn dữ liệu bên ngoài.
 
-**MCP Server 目录**:
+**Thư mục máy chủ MCP Server**:
 
-| 平台 | MCP Server 数量 | 特点 |
-|------|----------------|------|
-| AI Agents List | 593+ | 按类型、语言、范围分类 |
-| API Tracker | 110 | 官方集成和参考实现 |
-| mcp.so | 1,800+ | MiniMax 出品，TTS/图像/视频生成 |
-| GitHub 官方仓库 | 参考实现 | 社区贡献的服务器集合 |
+| Nền tảng | Số lượng MCP Server | Đặc điểm nổi bật |
+|---|---|---|
+| AI Agents List | 593+ | Phân loại theo thể loại, ngôn ngữ, phạm vi |
+| API Tracker | 110 | Tích hợp chính thức và triển khai mẫu tham khảo |
+| mcp.so | 1.800+ | Do MiniMax phát triển, tập trung vào TTS, tạo ảnh, sinh video |
+| Kho GitHub chính thức | Bản mẫu tham khảo | Bộ sưu tập server do cộng đồng đóng góp |
 
-**MCP 与 Skills 的融合**:
-- MCP Server 可以被封装为 Skill
-- Skills 可以调用 MCP 协议的工具
-- 两个生态正在快速融合
+**Sự hội tụ giữa MCP và Skills**:
+- Các MCP Server có thể được đóng gói trực tiếp thành Skills của OpenClaw
+- Các Skills có thể gọi trực tiếp công cụ chuẩn giao thức MCP
+- Hai hệ sinh thái đang nhanh chóng tích hợp chặt chẽ với nhau
 
-**资源链接**:
-- MCP 官方仓库：https://github.com/modelcontextprotocol/servers
-- AI Agents List：https://aiagentslist.com/mcp-servers
+**Liên kết tài nguyên**:
+- Kho chính thức MCP: https://github.com/modelcontextprotocol/servers
+- AI Agents List: https://aiagentslist.com/mcp-servers
 
 ---
 
-### 🌐 社区 Skills（扩展）
+### 🌐 Skills cộng đồng (Mở rộng)
 
-**数量**: 1715+个
-**位置**: GitHub 社区贡献
-**特点**: 功能丰富，需要筛选
-**安装**: 手动安装或通过 GitHub
+**Số lượng**: 1.715+ Skills  
+**Vị trí**: Đóng góp trên cộng đồng GitHub  
+**Đặc điểm**: Tính năng đa dạng, phong phú nhưng cần chọn lọc  
+**Cài đặt**: Cài đặt thủ công hoặc clone từ GitHub  
 
-**说明**: 社区开发者贡献的 Skills，涵盖各种场景和需求。质量参差不齐，使用前建议查看评价和文档。
+**Mô tả**: Do cộng đồng lập trình viên toàn cầu đóng góp, bao quát mọi nhu cầu và tình huống sử dụng thực tế. Chất lượng giữa các bản có sự chênh lệch, bạn nên xem kỹ đánh giá và tài liệu trước khi kích hoạt.
 
-**安装方式**:
+**Cú pháp cài đặt**:
+
 ```bash
-# 从 GitHub 克隆
+# Clone trực tiếp từ GitHub
 git clone https://github.com/user/skill-name ~/.openclaw/skills/skill-name
 
-# 或使用 clawhub（如果已发布）
+# Hoặc cài qua clawhub (nếu tác giả đã phát hành lên sàn)
 clawhub install community/skill-name
 ```
 
 ---
 
-### 🏢 企业级 Skills（百度千帆）
+### 🏢 Skills cấp doanh nghiệp (Baidu Qianfan)
 
-**数量**: 1715个
-**位置**: 百度千帆平台
-**特点**: 企业级质量，覆盖20+行业
-**适用**: 企业用户、行业应用
+**Số lượng**: 1.715 Skills  
+**Vị trí**: Nền tảng Baidu Qianfan  
+**Đặc điểm**: Chất lượng chuẩn doanh nghiệp, phủ rộng trên 20+ lĩnh vực  
+**Đối tượng phù hợp**: Khách hàng doanh nghiệp, ứng dụng chuyên ngành  
 
-**说明**: 百度千帆提供的企业级 Skills 生态，专为企业场景设计，包含行业解决方案。
+**Mô tả**: Hệ sinh thái Skills cấp doanh nghiệp do Baidu Qianfan cung cấp, thiết kế riêng cho các kịch bản kinh doanh và giải pháp chuyên biệt theo ngành nghề.
 
-**行业覆盖**:
-
-- 金融、医疗、教育、零售
-- 制造、物流、客服、营销
-- 等 20+ 行业
-
----
-
-### 🤖 Agent 社交网络
-
-#### InStreet 实例街（中国版 Agent 社交网络）
-
-- **上线时间**: 2026年3月9日
-- **开发团队**: 字节跳动旗下扣子（Coze）团队
-- **定位**: 全球首个专为 AI Agent 设计的中文社交网络
-- **官网**: https://instreet.coze.site
-
-**核心数据（上线3天）**:
-- 17,000+ Agent
-- 22,000+ 帖子
-- 120,000+ 点赞
-
-**核心特点**:
-1. **纯 AI 社交生态**
-   - 只允许 AI 智能体发帖、互动
-   - 人类用户只能旁观，不能直接参与
-   - 活跃用户是被称为"电子龙虾"的 AI Agent
-
-2. **功能板块**
-   - Skill 分享区
-   - 打工圣体
-   - 思辨大讲坛
-   - 多个专业论坛板块
-
-3. **接入方式**
-   - 任何 Agent 都可以接入
-   - 开放注册
-   - 支持 OpenClaw 智能体
-
-**产业背景**:
-- 2026年初全民"养虾"热潮兴起
-- 深圳龙岗区发布"龙虾十条"政策
-- 券商分析师集体分享"养龙虾"教程
-- AI 智能体实现从交互到主动执行的突破
+**Các ngành bao phủ tiêu biểu**:
+- Tài chính, y tế, giáo dục, bán lẻ
+- Sản xuất, logistics, chăm sóc khách hàng, tiếp thị truyền thông
+- Và hơn 20+ phân ngành khác
 
 ---
 
-## 📈 总计
+### 🤖 Mạng xã hội dành riêng cho AI Agent
 
-| 类型 | 数量 | 质量 | 推荐度 |
-|------|------|------|--------|
-| 内置 Skills | 49个 | ⭐⭐⭐⭐⭐ | 必用 |
-| ClawHub 官方 | 93个 | ⭐⭐⭐⭐⭐ | 强烈推荐 |
-| Skills.sh | 87,000+ | ⭐⭐⭐⭐ | 跨平台推荐 |
-| SkillsMP | 400,000+ | ⭐⭐⭐ | 按需选择 |
-| MCP Server | 1,800+ | ⭐⭐⭐⭐ | 扩展能力强 |
-| 社区 Skills | 1,715+个 | ⭐⭐⭐ | 按需选择 |
-| 企业级 Skills | 1,715个 | ⭐⭐⭐⭐⭐ | 企业推荐 |
-| **总计** | **~492,000+** | - | - |
+#### InStreet (Thực thể phố - Mạng xã hội Agent)
 
----
+- **Thời gian ra mắt**: Ngày 09/03/2026
+- **Đội ngũ phát triển**: Đội ngũ Coze (thuộc ByteDance)
+- **Định vị**: Mạng xã hội tiếng Hoa đầu tiên trên thế giới thiết kế riêng cho các AI Agent
+- **Trang chủ**: https://instreet.coze.site
 
-## 🎯 推荐安装
+**Số liệu ấn tượng sau 3 ngày ra mắt**:
+- 17.000+ AI Agent tham gia
+- 22.000+ bài viết đăng tải
+- 120.000+ lượt thích (like)
 
-### Top 20 必装 Skills
+**Đặc điểm nổi bật**:
+1. **Hệ sinh thái giao tiếp thuần AI**
+   - Chỉ cho phép các AI Agent đăng bài, bình luận và tương tác với nhau
+   - Người dùng con người chỉ được theo dõi quan sát (read-only), không thể can thiệp trực tiếp
+   - Thành viên hoạt động tích cực được gọi thân mật là các "chú tôm điện tử" (AI Agent)
+2. **Các chuyên mục chức năng**
+   - Khu vực chia sẻ Skill
+   - Thảo luận hiệu suất làm việc
+   - Diễn đàn tranh biện tư duy logic
+   - Nhiều phân khu diễn đàn chuyên môn khác
+3. **Phương thức kết nối**
+   - Bất kỳ Agent nào cũng có thể kết nối tham gia
+   - Mở đăng ký tự do qua API
+   - Hỗ trợ đầy đủ các tác tử OpenClaw
 
-详见 [第8章：Skills扩展](../docs/03-advanced/08-skills-extension.md)
-
-### 新手推荐
-
-1. **从内置 Skills 开始** - 熟悉基本功能
-2. **安装 Top 5 核心 Skills** - 扩展核心能力
-3. **根据需求选择社区 Skills** - 满足特定场景
-4. **探索 MCP Server** - 获取更多扩展能力
-
----
-
-## 💡 使用建议
-
-### 选择 Skills 的原则
-
-1. **优先使用内置 Skills** - 稳定可靠
-2. **官方 Skills 次之** - 质量保证
-3. **跨平台 Skills 考虑兼容性** - Skills.sh、SkillsMP 等
-4. **MCP Server 用于扩展** - 特定功能集成
-5. **社区 Skills 谨慎选择** - 查看评价和文档
-6. **企业用户考虑企业级 Skills** - 专业支持
-
-### 跨平台 Skills 的优势
-
-- **通用性**: 一个 Skill 可以在多个 Agent 平台使用
-- **可移植性**: 方便在不同工具间迁移
-- **社区活跃**: 更新频繁，问题解决快速
-- **标准化**: 使用统一的 SKILL.md 格式
-
-### 避免过度安装
-
-- ❌ 不要一次性安装太多 Skills
-- ✅ 按需安装，逐步扩展
-- ✅ 定期清理不用的 Skills
-- ✅ 关注 Skills 更新
-- ✅ 优先使用跨平台标准格式的 Skills
-
-### 安全注意事项
-
-**重要**: 2026年1月发生了 [ClawHavoc 供应链攻击事件](../docs/03-advanced/08-skills-extension.md#clawhavoc供应链攻击)，ClawHub 约20%的 Skills 被确认为恶意。
-
-- ✅ 安装前审查源码
-- ✅ 使用精选列表（如 awesome-openclaw-skills）
-- ✅ 定期检查 SOUL.md 和 MEMORY.md 是否被篡改
-- ✅ 使用 SecureClaw 等安全工具扫描
-- ❌ 不要盲目安装不明来源的 Skills
+**Bối cảnh công nghệ**:
+- Đầu năm 2026 bùng nổ làn sóng xây dựng và vận hành AI Agent cá nhân
+- Chính quyền các đô thị công nghệ ban hành chính sách hỗ trợ phát triển Agent
+- Giới phân tích tài chính và công nghệ phổ cập các giáo trình huấn luyện Agent
+- Đánh dấu bước nhảy vọt của AI từ vai trò phản hồi tương tác sang tự chủ thực thi hành động
 
 ---
 
-## 🔗 相关链接
+## 📈 Bảng tổng hợp số liệu
 
-- [第8章：Skills扩展](../docs/03-advanced/08-skills-extension.md) - 详细的 Skills 使用指南
-- [安全指南：Skills安全](../docs/03-advanced/08-skills-extension.md#skills安全) - Skills 安全最佳实践
-- [ClawHub 市场](https://clawhub.com) - 官方 Skills 市场
-- [Skills.sh](https://skills.sh) - Vercel 出品的跨平台 Skills 生态
-- [SkillsMP](https://skillsmp.com) - 40万+ Agent Skills 市场
-- [MCP 官方仓库](https://github.com/modelcontextprotocol/servers) - Model Context Protocol 服务器
-- [InStreet 实例街](https://instreet.coze.site) - 中国版 Agent 社交网络
-- [Skills 开发文档](https://docs.openclaw.ai/skills) - 开发自己的 Skills
-
----
-
-**最后更新**: 2026年4月4日
-**数据来源**: OpenClaw 官方统计、Skills.sh、SkillsMP、MCP 官方仓库
-
+| Thể loại | Số lượng | Mức độ chất lượng | Mức độ khuyến nghị |
+|---|---|---|---|
+| Skills tích hợp sẵn | 49 | ⭐⭐⭐⭐⭐ | Bắt buộc dùng |
+| Skills chính thức ClawHub | 93 | ⭐⭐⭐⭐⭐ | Rất khuyến nghị |
+| Skills.sh | 87.000+ | ⭐⭐⭐⭐ | Khuyến nghị đa nền tảng |
+| SkillsMP | 400.000+ | ⭐⭐⭐ | Chọn lọc theo nhu cầu |
+| MCP Server | 1.800+ | ⭐⭐⭐⭐ | Khả năng mở rộng mạnh |
+| Skills cộng đồng | 1.715+ | ⭐⭐⭐ | Chọn lọc theo nhu cầu |
+| Skills cấp doanh nghiệp | 1.715 | ⭐⭐⭐⭐⭐ | Khuyến nghị cho doanh nghiệp |
+| **Tổng cộng** | **~492.000+** | - | - |
 
 ---
 
-## 🌐 在线阅读
+## 🎯 Gợi ý cài đặt cho người dùng
 
-📖 **想在线阅读此附录？**
+### Top 20 Skills thiết yếu
 
-[🔗 在线阅读此附录](https://awesome.tryopenclaw.asia/appendix/N-skills-ecosystem/)
+Xem chi tiết tại [Chương 8: Mở rộng Skills](../docs/03-advanced/08-skills-extension.md).
 
-访问网站获取更好的阅读体验：
-- 📱 响应式设计，支持手机、平板、电脑
-- 🌙 支持黑暗模式，保护眼睛
-- 🔍 内置搜索功能，快速定位内容
-- 📋 目录导航，轻松跳转章节
+### Lời khuyên cho người mới bắt đầu
 
-[🏠 访问完整教程网站](https://awesome.tryopenclaw.asia)
+1. **Khởi đầu từ các Skills tích hợp sẵn** - Làm quen với các tính năng cơ bản
+2. **Cài đặt Top 5 Skills cốt lõi** - Mở rộng năng lực xử lý tự động
+3. **Chọn lựa Skills cộng đồng khi phát sinh nhu cầu** - Giải quyết các kịch bản cụ thể
+4. **Khám phá MCP Server** - Mở rộng kết nối đến các công cụ và cơ sở dữ liệu chuyên sâu
+
+---
+
+## 💡 Lời khuyên khi vận hành thực tế
+
+### Nguyên tắc lựa chọn Skills
+
+1. **Ưu tiên Skills tích hợp sẵn**: Luôn ổn định và tương thích tuyệt đối
+2. **Kế đến là Skills chính thức trên ClawHub**: Đảm bảo chất lượng và được cập nhật thường xuyên
+3. **Cân nhắc tính tương thích của Skills đa nền tảng**: Đánh giá định dạng tương thích với Skills.sh, SkillsMP
+4. **Tận dụng MCP Server để mở rộng**: Tích hợp các giao thức và nguồn dữ liệu đặc thù
+5. **Cẩn trọng khi dùng Skills cộng đồng**: Luôn đọc kỹ phần đánh giá và kiểm tra mã nguồn
+6. **Người dùng doanh nghiệp nên dùng Skills chuyên ngành**: Nhận được sự bảo chứng và hỗ trợ kỹ thuật dài hạn
+
+### Lợi thế của Skills định dạng đa nền tảng
+
+- **Tính phổ quát**: Một Skill có thể kích hoạt trên nhiều nền tảng Agent khác nhau
+- **Dễ dàng di chuyển**: Thuận tiện chuyển đổi giữa các công cụ lập trình AI
+- **Cộng đồng sôi động**: Được vá lỗi và nâng cấp tính năng rất nhanh
+- **Quy chuẩn hóa**: Sử dụng cấu trúc định dạng chuẩn `SKILL.md`
+
+### Tránh cài đặt quá nhiều kỹ năng dư thừa
+
+- ❌ Tránh cài đặt ồ ạt hàng loạt Skills cùng lúc
+- ✅ Chỉ cài đặt theo nhu cầu thực tế, mở rộng dần từng bước
+- ✅ Định kỳ dọn dẹp và gỡ bỏ các Skills không còn sử dụng
+- ✅ Chú ý theo dõi các phiên bản cập nhật bảo mật của Skills
+- ✅ Ưu tiên các Skills tuân thủ định dạng chuẩn công nghiệp
+
+### Lưu ý an ninh bảo mật
+
+**Quan trọng**: Tháng 1/2026 đã từng xảy ra sự cố [Tấn công chuỗi cung ứng ClawHavoc](../docs/03-advanced/08-skills-extension.md#tấn-công-chuỗi-cung-ứng-clawhavoc), khi khoảng 20% Skills trên ClawHub bị phát hiện chứa mã độc hại.
+
+- ✅ Luôn kiểm tra mã nguồn trước khi cho phép cài đặt vào môi trường sản xuất
+- ✅ Ưu tiên tham khảo danh sách kiểm duyệt uy tín (như awesome-openclaw-skills)
+- ✅ Định kỳ kiểm tra xem tệp `SOUL.md` và `MEMORY.md` có bị can thiệp trái phép hay không
+- ✅ Sử dụng công cụ kiểm toán như SecureClaw hoặc Skill Vetter để quét mã nguồn
+- ❌ Tuyệt đối không cài đặt các Skills trôi nổi không rõ nguồn gốc
+
+---
+
+## 🔗 Liên kết tài nguyên liên quan
+
+- [Chương 8: Mở rộng Skills](../docs/03-advanced/08-skills-extension.md) - Hướng dẫn chi tiết cách dùng và tạo Skills
+- [Bảo mật hệ thống: An toàn Skills](../docs/03-advanced/08-skills-extension.md#bảo-mật-skills) - Thực hành an toàn khi vận hành Skills
+- [Chợ kỹ năng ClawHub](https://clawhub.com) - Chợ Skills chính thức của OpenClaw
+- [Skills.sh](https://skills.sh) - Hệ sinh thái Agent Skills đa nền tảng từ Vercel
+- [SkillsMP](https://skillsmp.com) - Chợ 400.000+ Agent Skills
+- [Kho lưu trữ MCP chính thức](https://github.com/modelcontextprotocol/servers) - Máy chủ Model Context Protocol
+- [Mạng xã hội InStreet](https://instreet.coze.site) - Mạng xã hội đầu tiên dành riêng cho AI Agent
+- [Tài liệu phát triển Skills](https://docs.openclaw.ai/skills) - Tự xây dựng Skills cho riêng bạn
+
+---
+
+**Cập nhật lần cuối**: 04/04/2026  
+**Nguồn dữ liệu**: Thống kê chính thức OpenClaw, Skills.sh, SkillsMP, Kho MCP chính thức  
+
+---
+
+## 🌐 Đọc trực tuyến
+
+📖 **Bạn muốn đọc phụ lục này trực tuyến?**
+
+[🔗 Đọc trực tuyến phụ lục này](https://awesome.tryopenclaw.asia/appendix/N-skills-ecosystem/)
+
+Truy cập website để có trải nghiệm đọc tối ưu nhất:
+- 📱 Thiết kế tương thích cho điện thoại, máy tính bảng và máy tính để bàn
+- 🌙 Hỗ trợ chế độ nền tối (Dark mode) bảo vệ thị lực
+- 🔍 Tích hợp công cụ tìm kiếm, nhanh chóng tra cứu nội dung
+- 📋 Điều hướng mục lục linh hoạt, dễ dàng chuyển đổi các chương
+
+[🏠 Truy cập trang web giáo trình hoàn chỉnh](https://awesome.tryopenclaw.asia)

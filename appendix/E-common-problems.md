@@ -1,126 +1,126 @@
-# 附录E：常见访问题速查
+# Phụ lục E: Tra Cứu Nhanh Các Sự Cố Thường Gặp
 
-> 💡 **快速定位访问题**：本附录汇总了OpenClaw使用过程中最常见的各类访问题及解决方案，帮助你快速排查和解决访问题。
+> 💡 **Định vị nhanh sự cố**: Phụ lục này tổng hợp các vấn đề thường gặp nhất trong quá trình cài đặt và vận hành OpenClaw kèm theo giải pháp xử lý chi tiết, giúp bạn nhanh chóng khắc phục và khôi phục hệ thống.
 
-## 📋 目附录
+## 📋 Mục lục
 
-- [安装配置访问题](#安装配置访问题)
-- [API连接访问题](#api连接访问题)
-- [Gateway访问题](#gateway访问题)
-- [Skills访问题](#skills访问题)
-- [平台集成访问题](#平台集成访问题)
-- [性能访问题](#性能访问题)
+- [Sự cố cài đặt và cấu hình](#sự-cố-cài-đặt-và-cấu-hình)
+- [Sự cố kết nối API](#sự-cố-kết-nối-api)
+- [Sự cố Gateway](#sự-cố-gateway)
+- [Sự cố Skills](#sự-cố-skills)
+- [Sự cố tích hợp nền tảng chat](#sự-cố-tích-hợp-nền-tảng-chat)
+- [Sự cố hiệu năng và tài nguyên](#sự-cố-hiệu-năng-và-tài-nguyên)
 
 ---
 
-## 安装配置访问题
+## Sự cố cài đặt và cấu hình
 
-### Q1: 安装失败怎么怎么办？
+### Q1: Cài đặt thất bại thì xử lý thế nào?
 
-**症状**：执行安装命令时报错
+**Triệu chứng**: Xuất hiện thông báo lỗi khi thực thi lệnh cài đặt
 
-**解决方案**：
+**Giải pháp**:
 
-1. **检查Node.js版本**
+1. **Kiểm tra phiên bản Node.js**
 ```bash
-node --version  # 需要v22.14.0或更高版本（macOS 需要 v22.16.0+）
+node --version  # Yêu cầu v22.14.0 trở lên (riêng macOS yêu cầu v22.16.0+)
 ```
 
-2. **使用官方中文安装脚本**
+2. **Sử dụng script cài đặt chính thức**
 ```bash
 curl -fsSL https://openclaw.ai/install.sh | bash
 ```
 
-3. **使用npm直接安装**
+3. **Cài đặt trực tiếp qua npm**
 ```bash
 npm install -g openclaw
 ```
 
-4. **检查网络连接**
-- 如果在国内，建议使用镜像源或中转API
+4. **Kiểm tra kết nối mạng**
+- Nếu đường truyền quốc tế bị bóp băng thông, hãy cân nhắc sử dụng proxy hoặc mirror thích hợp
 
-### Q2: 权限错误怎么怎么办？
+### Q2: Gặp lỗi phân quyền (Permission denied)?
 
-**症状**：安装或运行时提示权限不足
+**Triệu chứng**: Báo lỗi không đủ thẩm quyền khi cài đặt hoặc khởi chạy
 
-**解决方案**：
+**Giải pháp**:
 
 ```bash
 # macOS/Linux
 sudo npm install -g openclaw
 
-# 或者使用nvm（推荐）
+# Hoặc sử dụng nvm để quản lý phiên bản Node (Khuyến nghị)
 nvm install node
 nvm use node
 npm install -g openclaw
 ```
 
-### Q3: 网络超时怎么怎么办？
+### Q3: Kết nối mạng bị hết thời gian chờ (Timeout)?
 
-**症状**：安装或更新时网络连接超时
+**Triệu chứng**: Quá trình tải gói cài đặt hoặc cập nhật bị treo hoặc timeout
 
-**解决方案**：
+**Giải pháp**:
 
-1. **使用国内镜像源**
+1. **Sử dụng mirror npm uy tín**
 ```bash
-npm config set registry https://registry.npmmirror.com
+npm config set registry https://registry.npmjs.org/
 ```
 
-2. **设置代理**
+2. **Thiết lập proxy cho npm**
 ```bash
 npm config set proxy http://proxy-server:port
 npm config set https-proxy http://proxy-server:port
 ```
 
-3. **使用离线安装**
+3. **Cài đặt ngoại tuyến từ gói tải về**
 ```bash
-# 下载安装包后本地安装
+# Tải gói tarball về máy rồi cài cục bộ
 npm install -g ./openclaw-*.tgz
 ```
 
-### Q4: WSL/Linux 安装后提示缺少 UI 资产怎么办？（v2026.3.22 已知问题）
+### Q4: Môi trường WSL / Linux sau khi cài đặt báo thiếu tài nguyên Control UI? (Lỗi đã biết trên bản v2026.3.22)
 
-**症状**：通过 `npm install -g openclaw` 安装后启动时报错：
+**Triệu chứng**: Sau khi cài đặt bằng `npm install -g openclaw`, lúc khởi động xuất hiện thông báo:
 
-```
+```text
 Missing Control UI assets. You can build them yourself with: pnpm ui:build
 ```
 
-或执行 `pnpm ui:build` 时又报错：
+Hoặc khi thực thi `pnpm ui:build` lại báo tiếp:
 
-```
+```text
 Cannot find module '.../scripts/ui.js'
 ```
 
-**原因**：`openclaw@2026.3.22` 的 npm 包打包时遗漏了 `scripts/ui.js` 和预构建的 UI 资产文件，**不是用户操作问题**。
+**Nguyên nhân**: Khi đóng gói bản `openclaw@2026.3.22` lên npm, nhà phát triển đã bỏ sót tệp `scripts/ui.js` và các tài nguyên UI đã biên dịch sẵn, **đây không phải lỗi do thao tác của người dùng**.
 
-**解决方案**：
+**Giải pháp**:
 
-**方法一：升级到最新版（推荐）**
+**Cách 1: Nâng cấp lên phiên bản mới nhất (Khuyến nghị)**
 
 ```bash
 npm install -g openclaw@latest
-openclaw --version  # 确认版本为 2026.3.24 或更新
+openclaw --version  # Xác nhận phiên bản từ 2026.3.24 trở lên
 ```
 
-**方法二：确认 Node 版本是否符合要求**
+**Cách 2: Xác nhận phiên bản Node.js có đáp ứng yêu cầu hay không**
 
 ```bash
 node --version
-# Linux/WSL 需要 >= 22.14.0
-# macOS 需要 >= 22.16.0
+# Môi trường Linux/WSL yêu cầu >= 22.14.0
+# Môi trường macOS yêu cầu >= 22.16.0
 ```
 
-如果版本不符合，先升级 Node：
+Nếu phiên bản không đạt chuẩn, hãy nâng cấp Node trước:
 
 ```bash
-# 使用 nvm 升级
+# Nâng cấp thông qua nvm
 nvm install 22
 nvm use 22
 npm install -g openclaw@latest
 ```
 
-**方法三：仍报错则从源码构建（临时方案）**
+**Cách 3: Tạm thời biên dịch thủ công từ mã nguồn nếu vẫn gặp lỗi**
 
 ```bash
 git clone https://github.com/openclaw/openclaw.git
@@ -130,49 +130,49 @@ pnpm ui:build
 pnpm build
 ```
 
-> ⚠️ **注意**：WSL 环境下建议优先使用方法一，升级到 v2026.3.24+ 后该问题已修复。
+> ⚠️ **Lưu ý**: Đối với môi trường WSL, khuyến nghị ưu tiên Cách 1. Lỗi này đã được khắc phục hoàn toàn từ phiên bản v2026.3.24+.
 
 ---
 
-## API连接访问题
+## Sự cố kết nối API
 
-### Q4: API连接失败怎么怎么办？
+### Q4: Kết nối API thất bại hoặc bị timeout?
 
-**症状**：提示API连接错误或超时
+**Triệu chứng**: Hệ thống báo lỗi kết nối API hoặc hết hạn chờ phản hồi
 
-**解决方案**：
+**Giải pháp**:
 
-1. **检查API Key是否正确**
+1. **Kiểm tra xem API Key đã cấu hình đúng chưa**
 ```bash
 openclaw config get env | grep API_KEY
 ```
 
-2. **测试API连接**
+2. **Kiểm tra kết nối trực tiếp đến endpoint API**
 ```bash
 curl -H "Authorization: Bearer YOUR_API_KEY" \
   https://api.anthropic.com/v1/messages
 ```
 
-3. **检查网络**
+3. **Kiểm tra độ thông mạng**
 ```bash
 ping api.anthropic.com
 ```
 
-4. **使用中转API（国内推荐）**
-- 参考附录C：API服务商对比
+4. **Sử dụng dịch vụ chuyển tiếp API (Proxy Relay)**
+- Tham khảo Phụ lục C: So sánh các nhà cung cấp dịch vụ API
 
-### Q5: API费用太高怎么怎么办？
+### Q5: Chi phí gọi API quá cao so với dự kiến?
 
-**症状**：API使用成本超出预算
+**Triệu chứng**: Ngân sách API bị cạn kiệt nhanh chóng
 
-**解决方案**：
+**Giải pháp**:
 
-1. **使用国产模型**
-- DeepSeek：成本降低95%
-- Kimi：长文档处理优惠
-- GLM-4：中文友好
+1. **Sử dụng các mô hình tiết kiệm chi phí**
+- DeepSeek: Tiết kiệm tới 95% chi phí suy luận
+- Kimi: Chi phí rất tối ưu cho tài liệu ngữ cảnh dài
+- Qwen / GLM-4: Hiệu năng mạnh mẽ với mức giá hợp lý
 
-2. **多模型组合**
+2. **Kết hợp linh hoạt nhiều mô hình**
 ```json
 {
   "env": {
@@ -192,161 +192,161 @@ ping api.anthropic.com
 }
 ```
 
-3. **设置工具权限**
+3. **Thu hẹp hồ sơ quyền hạn của công cụ**
 ```bash
-openclaw config set tools.profile "coding"  # 限制工具使用
+openclaw config set tools.profile "coding"  # Giới hạn phạm vi kích hoạt công cụ để tránh tốn token dư thừa
 ```
 
 ---
 
-## Gateway访问题
+## Sự cố Gateway
 
-### Q6: Gateway启动失败怎么怎么办？
+### Q6: Cổng Gateway khởi động thất bại?
 
-**症状**：执行`openclaw daemon start`后Gateway无法启动
+**Triệu chứng**: Thực thi `openclaw daemon start` hoặc `openclaw gateway start` nhưng Gateway không thể kích hoạt
 
-**解决方案**：
+**Giải pháp**:
 
-1. **检查配置文件**
+1. **Chẩn đoán cấu hình hệ thống**
 ```bash
-openclaw doctor  # 诊断配置访问题
+openclaw doctor  # Tự động quét và phát hiện các điểm bất thường trong cấu hình
 ```
 
-2. **检查端口占用**
+2. **Kiểm tra xem cổng mạng (port) có bị ứng dụng khác chiếm dụng không**
 ```bash
-lsof -i :18789  # macOS/Linux
-netstat -ano | findstr :18789  # Windows
+lsof -i :18789  # Trên macOS/Linux
+netstat -ano | findstr :18789  # Trên Windows
 ```
 
-3. **查看日志**
+3. **Xem tệp nhật ký ghi lỗi**
 ```bash
 tail -f ~/.openclaw/logs/gateway.log
 ```
 
-4. **重启Gateway**
+4. **Khởi động lại tiến trình Gateway**
 ```bash
 openclaw daemon stop
 openclaw daemon start
 ```
 
-### Q7: Gateway认证配置错误（v2026.3.7+）
+### Q7: Lỗi xác thực Gateway (Từ bản v2026.3.7 trở lên)?
 
-**症状**：升级后Gateway拒绝启动，提示需要配置认证
+**Triệu chứng**: Sau khi nâng cấp, Gateway từ chối khởi động và yêu cầu phải cấu hình cơ chế xác thực an toàn
 
-**解决方案**：
+**Giải pháp**:
 
 ```bash
-# 设置token认证
+# Thiết lập xác thực bằng token an toàn
 openclaw config set gateway.auth.mode "token"
 openclaw config set gateway.auth.token "$(openssl rand -hex 32)"
 
-# 重启Gateway
+# Khởi động lại dịch vụ Gateway
 openclaw daemon restart
 ```
 
-### Q8: 端口被占用怎么办？
+### Q8: Cổng kết nối bị chiếm dụng (Port conflict)?
 
-**症状**：提示18789端口已被占用
+**Triệu chứng**: Báo lỗi cổng 18789 đã được sử dụng bởi một tiến trình khác
 
-**解决方案**：
+**Giải pháp**:
 
-1. **更改端口**
+1. **Đổi sang một cổng khả dụng khác**
 ```bash
 openclaw config set gateway.port 18790
 ```
 
-2. **停止占用端口的进程**
+2. **Dừng tiến trình đang chiếm cổng**
 ```bash
-# 查找并停止占用进程
+# Tìm và chấm dứt tiến trình đang chiếm cổng 18789
 lsof -ti :18789 | xargs kill -9
 ```
 
 ---
 
-## Skills访问题
+## Sự cố Skills
 
-### Q9: Skills安装失败怎么怎么办？
+### Q9: Cài đặt Skills thất bại?
 
-**症状**：`clawhub install`命令执行失败
+**Triệu chứng**: Lệnh `clawhub install` báo lỗi không thể hoàn tất
 
-**解决方案**：
+**Giải pháp**:
 
-1. **检查网络连接**
+1. **Kiểm tra kết nối tới máy chủ ClawHub**
 ```bash
 ping clawhub.ai
 ```
 
-2. **使用ClawHub镜像（如有）**
+2. **Sử dụng registry dự phòng nếu có**
 ```bash
 clawhub install skill-name --registry https://mirror.clawhub.ai
 ```
 
-3. **手动安装**
+3. **Cài đặt thủ công từ kho Git**
 ```bash
-# 下载Skill源码
+# Tải mã nguồn của Skill
 git clone https://github.com/user/skill-repo.git
 
-# 安装依赖
+# Cài đặt các thư viện phụ thuộc
 cd skill-repo
 npm install
 
-# 复制到Skills目附录
+# Sao chép vào thư mục Skills của OpenClaw
 cp -r . ~/.openclaw/skills/skill-name
 ```
 
-### Q10: Skills不生效怎么怎么办？
+### Q10: Skill đã cài đặt nhưng không hoạt động?
 
-**症状**：安装Skill后功能无法使用
+**Triệu chứng**: Đã cài đặt Skill thành công nhưng Agent không gọi được chức năng
 
-**解决方案**：
+**Giải pháp**:
 
-1. **检查Skill配置**
+1. **Kiểm tra tệp định nghĩa của Skill**
 ```bash
 cat ~/.openclaw/skills/skill-name/SKILL.md
 ```
 
-2. **重启Gateway**
+2. **Khởi động lại Gateway để nạp lại danh sách công cụ**
 ```bash
 openclaw daemon restart
 ```
 
-3. **检查Skill权限**
+3. **Kiểm tra danh sách quyền cho phép (allowlist)**
 ```bash
 openclaw config get skills.allowlist
 ```
 
-4. **查看错误日志**
+4. **Theo dõi nhật ký lỗi riêng của Skills**
 ```bash
 tail -f ~/.openclaw/logs/skills.log
 ```
 
-### Q11: 如何卸载Skills？
+### Q11: Làm thế nào để gỡ bỏ (uninstall) một Skill?
 
-**解决方案**：
+**Giải pháp**:
 
 ```bash
-# 使用clawhub卸载
+# Gỡ bỏ thông qua lệnh clawhub
 clawhub uninstall skill-name
 
-# 手动删除
+# Hoặc xóa thư mục thủ công
 rm -rf ~/.openclaw/skills/skill-name
 
-# 重启Gateway
+# Khởi động lại Gateway
 openclaw daemon restart
 ```
 
-### Q12: Skills冲突怎么怎么办？
+### Q12: Xuất hiện xung đột giữa nhiều Skills?
 
-**症状**：多个Skills功能冲突
+**Triệu chứng**: Các Skills can thiệp lẫn nhau hoặc trùng lặp định nghĩa lệnh
 
-**解决方案**：
+**Giải pháp**:
 
-1. **检查Skills列表**
+1. **Kiểm tra danh sách toàn bộ Skills đang kích hoạt**
 ```bash
 clawhub list
 ```
 
-2. **禁用冲突Skills**
+2. **Thêm Skill gây xung đột vào danh sách cấm (denylist)**
 ```json
 {
   "skills": {
@@ -355,177 +355,177 @@ clawhub list
 }
 ```
 
-3. **使用版本管理**
+3. **Ghim phiên bản ổn định cho từng Skill**
 ```bash
 clawhub install skill-name@version
 ```
 
 ---
 
-## 平台集成访问题
+## Sự cố tích hợp nền tảng chat
 
-### Q13: 飞书Bot不回复怎么怎么办？
+### Q13: Bot Lark / Feishu không phản hồi tin nhắn?
 
-**症状**：给飞书Bot发布送消息无响应
+**Triệu chứng**: Gửi tin nhắn cho bot trong Lark / Feishu nhưng bot im lặng hoàn toàn
 
-**解决方案**：
+**Giải pháp**:
 
-1. **检查Bot状态**
+1. **Kiểm tra trạng thái bot**
 ```bash
 openclaw status
 ```
 
-2. **检查飞书配置**
+2. **Kiểm tra cấu hình kênh Feishu**
 ```bash
 openclaw config get channels.feishu
 ```
 
-3. **验证Webhook**
+3. **Xác thực kết nối Webhook**
 ```bash
 curl -X POST https://open.feishu.cn/open-apis/bot/v2/hook/xxx \
   -H "Content-Type: application/json" \
-  -d '{"msg_type":"text","content":{"text":"测试"}}'
+  -d '{"msg_type":"text","content":{"text":"Kiểm tra kết nối"}}'
 ```
 
-4. **使用飞书配置检查清单**
-- 参考：附录J：飞书配置检查清单
+4. **Sử dụng danh sách kiểm tra cấu hình**
+- Tham khảo: [Phụ lục J: Danh sách kiểm tra cấu hình Bot Lark / Feishu](J-feishu-checklist.md)
 
-### Q14: 企业微信Bot配置失败？
+### Q14: Cấu hình Bot WeCom (WeChat Doanh nghiệp) thất bại?
 
-**症状**：企业微信Bot无法接入
+**Triệu chứng**: Bot WeCom không thể kết nối hoặc báo lỗi URL xác thực
 
-**解决方案**：
+**Giải pháp**:
 
-1. **检查应用Secret**
-2. **验证回调URL**
-3. **检查通讯附录权限**
-4. **参考第9章节配置步骤**
+1. Kiểm tra lại CorpID và Secret của ứng dụng
+2. Xác thực cấu hình Token và EncodingAESKey tại trang quản trị WeCom
+3. Đảm bảo ứng dụng có đủ quyền truy cập danh bạ nhân sự
+4. Thực hiện tuần tự theo hướng dẫn tại Chương 9
 
-### Q15: 能接入微信吗？
+### Q15: Có thể kết nối trực tiếp vào WeChat cá nhân không?
 
-**症状**：想在微信中使用 OpenClaw 智能体
+**Triệu chứng**: Người dùng muốn tương tác với OpenClaw Agent trực tiếp trên ứng dụng WeChat cá nhân
 
-**解决方案**：
+**Giải pháp**:
 
-OpenClaw 提供了**官方微信接入方案 ClawBot**（橙皮书 v1.4 新增）：
+OpenClaw cung cấp giải pháp **kết nối WeChat chính thức thông qua ClawBot** (Bổ sung từ Sách Cam v1.4):
 
-1. **安装官方插件**：
+1. **Cài đặt plugin chính thức**:
    ```bash
    openclaw plugins install @openclaw/wechat-clawbot
    ```
 
-2. **启用微信渠道**：
+2. **Kích hoạt kênh WeChat**:
    ```bash
    openclaw config set channels.wechat.enabled true
    ```
 
-3. **重启 Gateway**：
+3. **Khởi động lại Gateway**:
    ```bash
    openclaw gateway restart
    ```
 
-**注意事项**：
-- ClawBot 基于 WeChatFerry，目前仅支持 Windows
-- **强烈建议使用小号**，有封号风险
-- 详见 [第9章 9.5 微信接入](../docs/03-advanced/09-multi-platform-integration.md)
+**Lưu ý quan trọng**:
+- Plugin ClawBot hoạt động dựa trên WeChatFerry, hiện tại chủ yếu hỗ trợ môi trường Windows
+- **Khuyến nghị mạnh mẽ sử dụng tài khoản phụ (nick phụ)** do WeChat kiểm soát nghiêm ngặt nguy cơ khóa tài khoản
+- Xem chi tiết tại [Chương 9: Mục 9.5 Kết nối WeChat](../docs/03-advanced/09-multi-platform-integration.md)
 
-### Q16: Telegram Bot无响应？
+### Q16: Bot Telegram không phản hồi?
 
-**症状**：Telegram Bot不回复消息
+**Triệu chứng**: Gửi tin nhắn trên Telegram nhưng bot không có tín hiệu trả lời
 
-**解决方案**：
+**Giải pháp**:
 
-1. **检查Bot Token**
+1. **Kiểm tra mã Bot Token**
 ```bash
 openclaw config get channels.telegram.botToken
 ```
 
-2. **与Bot发布起对话**
+2. **Kiểm tra tính hợp lệ của Token với máy chủ Telegram**
 ```bash
 curl https://api.telegram.org/bot<TOKEN>/getMe
 ```
 
-3. **检查Webhook设置**
+3. **Kiểm tra cấu hình Webhook hiện tại**
 ```bash
 curl https://api.telegram.org/bot<TOKEN>/getWebhookInfo
 ```
 
 ---
 
-## 性能访问题
+## Sự cố hiệu năng và tài nguyên
 
-### Q17: 响应速度慢怎么怎么办？
+### Q17: Tốc độ phản hồi của hệ thống bị chậm?
 
-**解决方案**：
+**Giải pháp**:
 
-1. **使用更快的模型**
-- DeepSeek：国内访问快
-- Claude 3.5 Sonnet：平衡速度和质量
+1. **Chuyển sang sử dụng các mô hình có độ trễ thấp**
+- DeepSeek: Tốc độ phản hồi cực nhanh, hạ tầng tối ưu
+- Claude 3.5 Sonnet / Claude 3 Haiku: Cân bằng xuất sắc giữa tốc độ và độ chuẩn xác
 
-2. **减少上下文**
+2. **Cắt giảm bớt độ dài ngữ cảnh lịch sử**
 ```bash
-# 定期清理会话历史
+# Xóa lịch sử trò chuyện đã cũ
 openclaw chat clear
 ```
 
-3. **优化配置**
+3. **Tinh chỉnh các tham số sinh văn bản**
 ```json
 {
   "agents": [{
-    "maxTokens": 4096,  # 减少输出长度
+    "maxTokens": 4096,
     "temperature": 0.7
   }]
 }
 ```
 
-### Q18: 内存占用过高？
+### Q18: Mức chiếm dụng bộ nhớ RAM quá cao?
 
-**解决方案**：
+**Giải pháp**:
 
-1. **限制会话数量**
+1. **Giới hạn số lượng phiên trò chuyện đồng thời**
 ```bash
 openclaw config set sessions.max 10
 ```
 
-2. **定期重启Gateway**
+2. **Định kỳ khởi động lại Gateway để giải phóng RAM**
 ```bash
 openclaw daemon restart
 ```
 
-3. **使用Docker部署**
+3. **Triển khai cô lập thông qua Docker kèm giới hạn tài nguyên**
 ```bash
 docker run -d --memory="2g" openclaw/openclaw
 ```
 
-### Q19: 磁盘空间不足？
+### Q19: Dung lượng ổ đĩa bị đầy?
 
-**解决方案**：
+**Giải pháp**:
 
-1. **清理日志文件**
+1. **Dọn dẹp các tệp nhật ký dung lượng lớn**
 ```bash
 rm -rf ~/.openclaw/logs/*.log
 ```
 
-2. **清理缓存**
+2. **Xóa bộ nhớ đệm tạm thời**
 ```bash
 rm -rf ~/.openclaw/cache/*
 ```
 
-3. **清理旧会话**
+3. **Tự động dọn dẹp các phiên trò chuyện cũ**
 ```bash
 openclaw session prune --days 30
 ```
 
 ---
 
-## 🔍 更多资源
+## 🔍 Tài nguyên tham khảo chuyên sâu
 
-- [第2章节：安装部署](../docs/01-basics/02-installation.md) - 完整安装指南
-- [第8章节：Skills扩展](../docs/03-advanced/08-skills-extension.md) - Skills使用管理
-- [第9章节：多平台集成](../docs/03-advanced/09-multi-platform-integration.md) - 平台接入配置
-- [第11章节：高级配置](../docs/03-advanced/11-advanced-configuration.md) - 模型、记忆、审批与性能
+- [Chương 2: Cài đặt và triển khai](../docs/01-basics/02-installation.md) - Hướng dẫn cài đặt trọn vẹn
+- [Chương 8: Mở rộng Skills](../docs/03-advanced/08-skills-extension.md) - Quản lý và phát triển Skills
+- [Chương 9: Tích hợp đa nền tảng](../docs/03-advanced/09-multi-platform-integration.md) - Thiết lập kết nối các kênh chat
+- [Chương 11: Cấu hình nâng cao](../docs/03-advanced/11-advanced-configuration.md) - Tối ưu mô hình, bộ nhớ và hiệu năng
 
 ---
 
-**最后更新**：2026年3月27日
-**适用版本**：OpenClaw v2026.3.7+（Q4 适用 v2026.3.22+）
+**Cập nhật lần cuối**: 27/03/2026  
+**Phiên bản áp dụng**: OpenClaw v2026.3.7+ (Câu hỏi Q4 áp dụng từ v2026.3.22+)

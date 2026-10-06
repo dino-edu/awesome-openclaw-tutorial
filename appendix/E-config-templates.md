@@ -1,558 +1,598 @@
-# 附录C 配置模板与自定义参考
+# Phụ lục E: Mẫu Tệp Cấu Hình và Hướng Dẫn Tùy Biến
 
-> 💡 **本附录目标**：提供 openclaw.json 的常用配置片段，供你在引导向导完成后按需自定义。所有模板均基于官方文档（https://docs.openclaw.ai/gateway/configuration-examples）验证，适用于v2026.3.7+版本。
+> 💡 **Mục tiêu của phụ lục này**: Cung cấp các đoạn cấu hình mẫu chuẩn xác cho `openclaw.json`, giúp bạn tùy biến hệ thống theo nhu cầu sau khi hoàn thành trình hướng dẫn thiết lập. Toàn bộ các mẫu đều được kiểm chứng dựa trên tài liệu chính thức (https://docs.openclaw.ai/gateway/configuration-examples), áp dụng cho phiên bản OpenClaw v2026.3.7 trở lên.
 >
-> ⚠️ **新手请注意**：你不需要手动编辑配置文件即可上手使用OpenClaw。直接运行引导向导，它会交互式引导你完成全部配置并自动生成配置文件。本附录的模板适用于向导完成后的进一步自定义。
+> ⚠️ **Lưu ý quan trọng cho người mới bắt đầu**: Bạn không cần phải chỉnh sửa tệp cấu hình thủ công để bắt đầu sử dụng OpenClaw. Hãy chạy trực tiếp trình hướng dẫn thiết lập `openclaw onboard`, hệ thống sẽ tương tác từng bước và tự động tạo tệp cấu hình hoàn chỉnh. Các mẫu trong phụ lục này phục vụ cho việc tùy biến chuyên sâu sau này.
 >
-> 配置文件路径：~/.openclaw/openclaw.json（JSON5格式，支持注释和尾逗号）
-
-## 📋 目录
-
--   C.1 新手上手（推荐方式）
--   C.2 多模型配置
--   C.3 多平台集成配置
--   C.4 Skills配置
--   C.5 定时任务（Cron）
--   C.6 多Agent配置
--   C.7 安全配置
--   C.8 完整示例：超级个体配置
--   C.9 快速部署脚本
-
-## C.1 新手上手（推荐方式）
+> Đường dẫn tệp cấu hình: `~/.openclaw/openclaw.json` (Định dạng JSON5, hỗ trợ chú thích dòng `//` và dấu phẩy ở cuối dòng).
 
-### 1. 最快上手：直接运行引导向导（强烈推荐）
-
-> ⚠️ **新手不要手动编辑配置文件。** OpenClaw采用严格的配置校验，一个字段名拼错或结构不对，Gateway就会拒绝启动。引导向导会自动生成正确的配置文件。
+## 📋 Mục lục
 
-    # 第1步：运行引导向导（会引导你选择模型、输入API Key、配置通道等）
-    openclaw onboard
+- E.1 Dành cho người mới bắt đầu (Phương thức khuyến nghị)
+- E.2 Cấu hình đa mô hình AI (Multi-model Configuration)
+- E.3 Cấu hình tích hợp đa nền tảng trò chuyện
+- E.4 Cấu hình Skills và Biến môi trường
+- E.5 Lập lịch tác vụ định kỳ (Cron Jobs)
+- E.6 Cấu hình đa tác tử (Multi-Agent Architecture)
+- E.7 Cấu hình an ninh bảo mật và cô lập Sandbox
+- E.8 Ví dụ hoàn chỉnh: Cấu hình cho Cá nhân Độc lập (Solopreneur)
+- E.9 Script tự động hóa triển khai siêu tốc
 
-    # 第2步：安装并启动守护进程
-    openclaw daemon install
-    openclaw daemon start
+---
 
-    # 第3步：打开控制面板，开始使用
-    openclaw dashboard
+## E.1 Dành cho người mới bắt đầu (Phương thức khuyến nghị)
 
-向导会引导你完成以下全部配置：
-- 模型选择与API Key输入（支持Anthropic/OpenAI/DeepSeek/Kimi等）
-- 通道配置（WhatsApp/Telegram等）
-- Gateway认证Token生成
-- 工具权限设置
-- Skills推荐安装
+### 1. Cách tiếp cận nhanh nhất: Chạy trình hướng dẫn thiết lập (Rất khuyến nghị)
 
-向导完成后，配置文件自动保存在 `~/.openclaw/openclaw.json`。如需进一步自定义，可使用以下方式修改：
-
-    # 方式1：交互式配置向导（推荐）
-    openclaw configure
-
-    # 方式2：命令行单项修改
-    openclaw config set agents.defaults.heartbeat.every "30m"
-    openclaw config set session.reset.atHour 4
-
-    # 方式3：打开配置文件直接编辑
-    openclaw config file   # 显示配置文件路径，用编辑器打开即可
-
-    # 方式4：通过控制面板Web UI修改
-    openclaw dashboard     # 打开后在 Config 标签页可视化编辑
-
-### 2. 向导完成后的常用自定义
-
-以下是向导完成后，你可能想要额外调整的常见配置项。使用 `openclaw config set` 命令逐项修改即可，无需手动编辑JSON文件：
-
-    # 设置中文身份
-    openclaw config set identity.name "小龙虾"
-    openclaw config set identity.theme "专业高效的AI助手"
-    openclaw config set identity.emoji "🦞"
-
-    # 开启心跳（每30分钟主动检查一次）
-    openclaw config set agents.defaults.heartbeat.every "30m"
-    openclaw config set agents.defaults.heartbeat.target "last"
-
-    # 设置会话每日自动重置（凌晨4点，闲置2小时后）
-    openclaw config set session.dmScope "per-channel-peer"
-    openclaw config set session.reset.mode "daily"
-    openclaw config set session.reset.atHour 4
-    openclaw config set session.reset.idleMinutes 120
-
-    # 确保工具权限为完整模式（否则只能聊天不能干活）
-    openclaw config set agents.defaults.tools.profile "full"
-
-    # 修改后重启生效
-    openclaw daemon restart
-
-## C.2 多模型配置
-
-### 1. 国产模型组合（省钱方案）
-
-> ⚠️ 模型认证通过 `openclaw models auth add` 命令交互式配置，API Key 不直接写在配置文件中。以下配置设置模型选择和备用策略。
-
-    {
-      agents: {
-        defaults: {
-          model: {
-            // 主模型：DeepSeek（最便宜）
-            primary: "deepseek/deepseek-chat",
-            // 备用模型：Kimi长文档 → GLM兜底
-            fallbacks: [
-              "moonshot/moonshot-v1-128k",
-              "zhipu/glm-4-flash",
-            ],
-          },
-          models: {
-            "deepseek/deepseek-chat": { alias: "ds" },
-            "moonshot/moonshot-v1-128k": { alias: "kimi" },
-            "zhipu/glm-4-flash": { alias: "glm" },
-          },
-        },
-      },
-    }
-
-**配置API Key（命令行执行）**：
-
-    # 添加DeepSeek认证
-    openclaw models auth add
-    # 选择 deepseek → 输入 API Key
-
-    # 添加Kimi认证
-    openclaw models auth add
-    # 选择 moonshot → 输入 API Key
-
-    # 添加智谱GLM认证
-    openclaw models auth add
-    # 选择 zhipu → 输入 API Key
-
-**在对话中切换模型**：
-
-    /model ds      # 切换到DeepSeek
-    /model kimi    # 切换到Kimi
-    /model glm     # 切换到GLM
-
-**成本估算**：
-- 日常对话：DeepSeek（约0.001元/1K tokens）
-- 长文档：Kimi 128K（约0.012元/1K tokens）
-- 月均成本：5-30元
-
-### 2. 国际模型配置
-
-    {
-      agents: {
-        defaults: {
-          model: {
-            primary: "anthropic/claude-sonnet-4-5",
-            fallbacks: [
-              "openai/gpt-5.2",
-              "anthropic/claude-opus-4-6",
-            ],
-          },
-          imageModel: {
-            primary: "anthropic/claude-sonnet-4-5",
-          },
-          models: {
-            "anthropic/claude-opus-4-6": { alias: "opus" },
-            "anthropic/claude-sonnet-4-5": { alias: "sonnet" },
-            "openai/gpt-5.2": { alias: "gpt" },
-          },
-        },
-      },
-    }
-
-### 3. 中转API配置
-
-> 中转API使用OpenAI兼容格式，通过环境变量设置Key和BaseURL。
-
-    {
-      env: {
-        vars: {
-          OPENAI_API_KEY: "your-relay-api-key",
-          OPENAI_BASE_URL: "https://tryallapi.com/v1",
-        },
-      },
-      agents: {
-        defaults: {
-          model: {
-            primary: "openai/gpt-4o-mini",
-            fallbacks: ["openai/gpt-4o"],
-          },
-        },
-      },
-    }
-
-**优势**：
-- ✅ 一个API密钥访问多个模型
-- ✅ 国内访问速度快
-- ✅ 成本更低
-
-### 4. 本地模型（完全免费）
-
-    {
-      agents: {
-        defaults: {
-          model: {
-            primary: "ollama/qwen2.5:32b",
-            fallbacks: ["ollama/llama3.1:8b"],
-          },
-        },
-      },
-    }
-
-**前提**：需先安装Ollama并拉取模型：
-
-    curl -fsSL https://ollama.ai/install.sh | sh
-    ollama pull qwen2.5:32b
-
-## C.3 多平台集成配置
-
-### 1. 飞书Bot
-
-    {
-      channels: {
-        feishu: {
-          enabled: true,
-          appId: "cli_your_app_id",
-          appSecret: "your_app_secret",
-          dmPolicy: "pairing",
-        },
-      },
-    }
-
-> 飞书接入需安装插件：`openclaw plugins install @m1heng-clawd/feishu`，详见本书第12章。
-
-### 2. 企业微信Bot
-
-    {
-      channels: {
-        wework: {
-          enabled: true,
-          corpId: "ww_your_corp_id",
-          agentSecret: "your_agent_secret",
-          dmPolicy: "pairing",
-        },
-      },
-    }
-
-> 企业微信接入需安装插件：`openclaw plugins install @m1heng-clawd/wework`，详见本书第13章。
-
-### 3. 钉钉Bot
-
-    {
-      channels: {
-        dingtalk: {
-          enabled: true,
-          appKey: "your_app_key",
-          appSecret: "your_app_secret",
-          dmPolicy: "pairing",
-        },
-      },
-    }
-
-> 详见本书第13章。
-
-### 4. Telegram Bot
-
-    {
-      channels: {
-        telegram: {
-          enabled: true,
-          botToken: "1234567890:ABCdefGHIjklMNOpqrsTUVwxyz",
-          dmPolicy: "pairing",
-          allowFrom: ["your_telegram_user_id"],
-          groups: { "*": { requireMention: true } },
-        },
-      },
-    }
-
-### 5. 多平台同时接入
-
-    {
-      channels: {
-        telegram: {
-          enabled: true,
-          botToken: "your_telegram_token",
-          dmPolicy: "pairing",
-          groups: { "*": { requireMention: true } },
-        },
-        whatsapp: {
-          dmPolicy: "pairing",
-          allowFrom: ["+86138xxxxxxxx"],
-          groups: { "*": { requireMention: true } },
-        },
-        discord: {
-          enabled: true,
-          token: "your_discord_token",
-          dm: { enabled: true },
-        },
-      },
-    }
-
-## C.4 Skills配置
-
-> ⚠️ Skills通过 `clawhub install <slug>` 安装，不在配置文件中列出安装列表。配置文件中只对已安装的Skills进行个性化配置（如API Key、启停等）。
-
-    {
-      skills: {
-        entries: {
-          "nano-banana-pro": {
-            enabled: true,
-            env: {
-              GEMINI_API_KEY: "your-gemini-key",
-            },
-          },
-          "brave-search": {
-            enabled: true,
-            env: {
-              BRAVE_API_KEY: "your-brave-key",
-            },
-          },
-          "tavily-search": {
-            enabled: true,
-            env: {
-              TAVILY_API_KEY: "your-tavily-key",
-            },
-          },
-        },
-      },
-    }
-
-**安装Skills（命令行执行）**：
-
-    clawhub install brave-search nano-banana-pro summarize \
-      find-skills self-improving proactive-agent skill-vetter
-
-    # 查看已安装Skills
-    openclaw skills list
-
-## C.5 定时任务（Cron）
-
-> ⚠️ 定时任务通过 `openclaw cron add` 命令创建，不在配置文件中定义任务列表。配置文件中只设置Cron的全局参数。
-
-**配置文件中的Cron全局设置**：
-
-    {
-      cron: {
-        enabled: true,
-        maxConcurrentRuns: 2,
-        sessionRetention: "24h",
-      },
-    }
-
-**创建定时任务（命令行执行）**：
-
-    # 每天早上9点推送AI行业日报
-    openclaw cron add \
-      --name "daily-ai-report" \
-      --cron "0 9 * * *" \
-      --tz "Asia/Shanghai" \
-      --session isolated \
-      --message "生成今天的AI行业日报" \
-      --deliver --channel feishu
-
-    # 每周五18点生成周报
-    openclaw cron add \
-      --name "weekly-summary" \
-      --cron "0 18 * * 5" \
-      --tz "Asia/Shanghai" \
-      --session isolated \
-      --message "总结本周工作，生成周报" \
-      --deliver --channel feishu
-
-    # 查看/删除定时任务
-    openclaw cron list
-    openclaw cron remove <job-id>
-
-**Cron表达式速查**：
-- `0 9 * * *` — 每天9:00
-- `0 18 * * 5` — 每周五18:00
-- `0 */2 * * *` — 每2小时
-- `*/30 * * * *` — 每30分钟
-- `0 9 * * 1-5` — 工作日每天9:00
-
-## C.6 多Agent配置
-
-    {
-      agents: {
-        defaults: {
-          workspace: "~/.openclaw/workspace",
-          model: {
-            primary: "anthropic/claude-sonnet-4-5",
-          },
-        },
-        list: [
-          {
-            id: "main",
-            default: true,
-            workspace: "~/.openclaw/workspace-main",
-          },
-          {
-            id: "content",
-            workspace: "~/.openclaw/workspace-content",
-            model: {
-              primary: "anthropic/claude-opus-4-6",
-            },
-          },
-          {
-            id: "code",
-            workspace: "~/.openclaw/workspace-code",
-            model: {
-              primary: "deepseek/deepseek-coder",
-            },
-          },
+> ⚠️ **Người mới tuyệt đối không nên chỉnh sửa tệp cấu hình bằng tay ngay từ đầu.** OpenClaw áp dụng cơ chế xác thực schema nghiêm ngặt: chỉ cần sai một tên trường hoặc cấu trúc sai lệch, Cổng Gateway sẽ từ chối khởi động. Trình hướng dẫn thiết lập sẽ tự động sinh tệp chuẩn xác 100%.
+
+```bash
+# Bước 1: Chạy trình hướng dẫn thiết lập (Lựa chọn mô hình, nhập API Key, cấu hình kênh...)
+openclaw onboard
+
+# Bước 2: Cài đặt và khởi chạy tiến trình nền daemon
+openclaw daemon install
+openclaw daemon start
+
+# Bước 3: Mở bảng điều khiển Control Dashboard trên trình duyệt
+openclaw dashboard
+```
+
+Trình hướng dẫn sẽ dắt tay bạn hoàn thành đầy đủ các khâu:
+- Chọn nhà cung cấp mô hình AI và cấu hình API Key (Anthropic, OpenAI, DeepSeek, Kimi...)
+- Cấu hình kênh liên lạc (Lark / Feishu, Telegram, WhatsApp...)
+- Tạo token xác thực an toàn cho Gateway
+- Phân quyền hồ sơ công cụ (Tools profile)
+- Gợi ý cài đặt các Skills thiết yếu
+
+Sau khi kết thúc, tệp cấu hình sẽ tự động lưu tại `~/.openclaw/openclaw.json`. Khi cần tinh chỉnh thêm, bạn có thể lựa chọn các phương thức sau:
+
+```bash
+# Cách 1: Sử dụng trình hướng dẫn tương tác (Khuyến nghị)
+openclaw configure
+
+# Cách 2: Sử dụng dòng lệnh để sửa từng trường giá trị cụ thể
+openclaw config set agents.defaults.heartbeat.every "30m"
+openclaw config set session.reset.atHour 4
+
+# Cách 3: Mở trực tiếp tệp cấu hình bằng trình soạn thảo
+openclaw config file   # Hiển thị đường dẫn tệp cấu hình để bạn mở trực tiếp
+
+# Cách 4: Tinh chỉnh trực quan trên giao diện Web Dashboard
+openclaw dashboard     # Mở trang quản trị, vào tab Config để chỉnh sửa trực quan
+```
+
+### 2. Các tùy biến phổ biến sau khi thiết lập xong
+
+Dưới đây là các tham số bạn có thể muốn điều chỉnh thêm bằng lệnh `openclaw config set` mà không cần sửa thủ công tệp JSON:
+
+```bash
+# Thiết lập định danh nhân cách cho AI
+openclaw config set identity.name "Tôm Càng Xanh"
+openclaw config set identity.theme "Trợ lý AI chuyên nghiệp và tận tụy"
+openclaw config set identity.emoji "🦞"
+
+# Kích hoạt nhịp tim chủ động (Cứ mỗi 30 phút tự kiểm tra tác vụ nền một lần)
+openclaw config set agents.defaults.heartbeat.every "30m"
+openclaw config set agents.defaults.heartbeat.target "last"
+
+# Tự động làm mới phiên hội thoại mỗi ngày (Lúc 4 giờ sáng, sau 2 giờ không hoạt động)
+openclaw config set session.dmScope "per-channel-peer"
+openclaw config set session.reset.mode "daily"
+openclaw config set session.reset.atHour 4
+openclaw config set session.reset.idleMinutes 120
+
+# Đảm bảo phân quyền công cụ ở chế độ toàn diện (full) để Agent có thể thực thi tác vụ
+openclaw config set agents.defaults.tools.profile "full"
+
+# Khởi động lại dịch vụ daemon để cấu hình mới có hiệu lực
+openclaw daemon restart
+```
+
+---
+
+## E.2 Cấu hình đa mô hình AI (Multi-model Configuration)
+
+### 1. Phối hợp các mô hình chi phí tối ưu (Tiết kiệm ngân sách)
+
+> ⚠️ Việc xác thực API Key được thực hiện thông qua lệnh tương tác `openclaw models auth add`, không lưu cứng trực tiếp API Key vào tệp cấu hình. Cấu hình bên dưới thiết lập cơ chế định tuyến và dự phòng (fallback).
+
+```json5
+{
+  agents: {
+    defaults: {
+      model: {
+        // Mô hình chính: DeepSeek (Chi phí suy luận cực rẻ)
+        primary: "deepseek/deepseek-chat",
+        // Danh sách dự phòng: Kimi cho tài liệu dài → GLM-4 Flash làm chốt chặn cuối
+        fallbacks: [
+          "moonshot/moonshot-v1-128k",
+          "zhipu/glm-4-flash",
         ],
       },
-      bindings: [
-        { agentId: "content", match: { channel: "telegram" } },
-        { agentId: "code", match: { channel: "discord" } },
-      ],
-    }
+      models: {
+        "deepseek/deepseek-chat": { alias: "ds" },
+        "moonshot/moonshot-v1-128k": { alias: "kimi" },
+        "zhipu/glm-4-flash": { alias: "glm" },
+      },
+    },
+  },
+}
+```
 
-## C.7 安全配置
+**Thêm thông tin xác thực API Key (Thực thi qua terminal)**:
 
-### Gateway认证（v2026.3.7+必须配置）
+```bash
+# Thêm xác thực cho DeepSeek
+openclaw models auth add
+# Chọn deepseek → Nhập API Key tương ứng
 
-    {
-      gateway: {
-        port: 18789,
-        auth: {
-          mode: "token",
-          token: "your-secret-token-here",
+# Thêm xác thực cho Kimi (Moonshot)
+openclaw models auth add
+# Chọn moonshot → Nhập API Key tương ứng
+
+# Thêm xác thực cho Zhipu GLM
+openclaw models auth add
+# Chọn zhipu → Nhập API Key tương ứng
+```
+
+**Chuyển đổi nhanh mô hình ngay trong cuộc trò chuyện**:
+
+```text
+/model ds      # Chuyển tức thì sang DeepSeek
+/model kimi    # Chuyển tức thì sang Kimi
+/model glm     # Chuyển tức thì sang GLM-4
+```
+
+---
+
+### 2. Cấu hình các mô hình quốc tế cao cấp
+
+```json5
+{
+  agents: {
+    defaults: {
+      model: {
+        primary: "anthropic/claude-sonnet-4-5",
+        fallbacks: [
+          "openai/gpt-5.2",
+          "anthropic/claude-opus-4-6",
+        ],
+      },
+      imageModel: {
+        primary: "anthropic/claude-sonnet-4-5",
+      },
+      models: {
+        "anthropic/claude-opus-4-6": { alias: "opus" },
+        "anthropic/claude-sonnet-4-5": { alias: "sonnet" },
+        "openai/gpt-5.2": { alias: "gpt" },
+      },
+    },
+  },
+}
+```
+
+---
+
+### 3. Cấu hình thông qua API trung gian chuyển tiếp (Relay API)
+
+> Các nhà cung cấp trung gian sử dụng định dạng tương thích OpenAI, định cấu hình thông qua biến môi trường BaseURL và API Key.
+
+```json5
+{
+  env: {
+    vars: {
+      OPENAI_API_KEY: "your-relay-api-key",
+      OPENAI_BASE_URL: "https://tryallapi.com/v1",
+    },
+  },
+  agents: {
+    defaults: {
+      model: {
+        primary: "openai/gpt-4o-mini",
+        fallbacks: ["openai/gpt-4o"],
+      },
+    },
+  },
+}
+```
+
+---
+
+### 4. Sử dụng mô hình chạy cục bộ hoàn toàn miễn phí (Ollama)
+
+```json5
+{
+  agents: {
+    defaults: {
+      model: {
+        primary: "ollama/qwen2.5:32b",
+        fallbacks: ["ollama/llama3.1:8b"],
+      },
+    },
+  },
+}
+```
+
+**Điều kiện tiên quyết**: Cần cài đặt Ollama và tải mô hình về máy trước:
+
+```bash
+curl -fsSL https://ollama.ai/install.sh | sh
+ollama pull qwen2.5:32b
+```
+
+---
+
+## E.3 Cấu hình tích hợp đa nền tảng trò chuyện
+
+### 1. Bot Lark / Feishu
+
+```json5
+{
+  channels: {
+    feishu: {
+      enabled: true,
+      appId: "cli_your_app_id",
+      appSecret: "your_app_secret",
+      dmPolicy: "pairing",
+    },
+  },
+}
+```
+
+### 2. Bot WeCom (WeChat Doanh nghiệp)
+
+```json5
+{
+  channels: {
+    wework: {
+      enabled: true,
+      corpId: "ww_your_corp_id",
+      agentSecret: "your_agent_secret",
+      dmPolicy: "pairing",
+    },
+  },
+}
+```
+
+### 3. Bot DingTalk
+
+```json5
+{
+  channels: {
+    dingtalk: {
+      enabled: true,
+      appKey: "your_app_key",
+      appSecret: "your_app_secret",
+      dmPolicy: "pairing",
+    },
+  },
+}
+```
+
+### 4. Bot Telegram
+
+```json5
+{
+  channels: {
+    telegram: {
+      enabled: true,
+      botToken: "1234567890:ABCdefGHIjklMNOpqrsTUVwxyz",
+      dmPolicy: "pairing",
+      allowFrom: ["your_telegram_user_id"],
+      groups: { "*": { requireMention: true } },
+    },
+  },
+}
+```
+
+### 5. Kết nối đồng thời nhiều nền tảng
+
+```json5
+{
+  channels: {
+    telegram: {
+      enabled: true,
+      botToken: "your_telegram_token",
+      dmPolicy: "pairing",
+      groups: { "*": { requireMention: true } },
+    },
+    whatsapp: {
+      dmPolicy: "pairing",
+      allowFrom: ["+84912345678"],
+      groups: { "*": { requireMention: true } },
+    },
+    discord: {
+      enabled: true,
+      token: "your_discord_token",
+      dm: { enabled: true },
+    },
+  },
+}
+```
+
+---
+
+## E.4 Cấu hình Skills và Biến môi trường
+
+> ⚠️ Các Skills được cài đặt thông qua lệnh `clawhub install <slug>`. Trong tệp cấu hình `openclaw.json`, bạn chỉ cần khai báo thông số tùy biến hoặc truyền biến môi trường (như API Key của công cụ ngoài) cho các Skills đó.
+
+```json5
+{
+  skills: {
+    entries: {
+      "nano-banana-pro": {
+        enabled: true,
+        env: {
+          GEMINI_API_KEY: "your-gemini-key",
         },
       },
-    }
-
-**生成安全Token**：
-
-    openssl rand -hex 32
-
-> ⚠️ 从v2026.3.7起，Gateway认证为强制要求。
-
-### 沙箱配置（Docker隔离）
-
-    {
-      agents: {
-        defaults: {
-          sandbox: {
-            mode: "non-main",
-            scope: "agent",
-          },
+      "brave-search": {
+        enabled: true,
+        env: {
+          BRAVE_API_KEY: "your-brave-key",
         },
       },
-    }
-
-### 工具权限控制
-
-    {
-      agents: {
-        defaults: {
-          tools: {
-            profile: "full",     // full | coding | messaging
-          },
+      "tavily-search": {
+        enabled: true,
+        env: {
+          TAVILY_API_KEY: "your-tavily-key",
         },
       },
-    }
+    },
+  },
+}
+```
 
-## C.8 完整示例：超级个体配置
+**Cài đặt các Skills qua dòng lệnh**:
 
-    // ~/.openclaw/openclaw.json
-    {
-      identity: {
-        name: "小龙虾",
-        theme: "专业高效的AI超级个体助手",
-        emoji: "🦞",
+```bash
+clawhub install brave-search nano-banana-pro summarize \
+  find-skills self-improving proactive-agent skill-vetter
+
+# Kiểm tra danh sách kỹ năng đã cài
+openclaw skills list
+```
+
+---
+
+## E.5 Lập lịch tác vụ định kỳ (Cron Jobs)
+
+> ⚠️ Các tác vụ cụ thể được tạo qua lệnh `openclaw cron add`. Tệp cấu hình chỉ chứa thiết lập quản trị chung cho tiến trình Cron.
+
+**Thiết lập chung trong `openclaw.json`**:
+
+```json5
+{
+  cron: {
+    enabled: true,
+    maxConcurrentRuns: 2,
+    sessionRetention: "24h",
+  },
+}
+```
+
+**Thêm tác vụ định kỳ qua dòng lệnh**:
+
+```bash
+# Gửi bản tin thị trường AI vào 9:00 sáng mỗi ngày qua Feishu
+openclaw cron add \
+  --name "daily-ai-report" \
+  --cron "0 9 * * *" \
+  --tz "Asia/Ho_Chi_Minh" \
+  --session isolated \
+  --message "Tạo bản tin tổng hợp ngành AI hôm nay" \
+  --deliver --channel feishu
+
+# Tự động lập báo cáo tổng kết tuần vào lúc 18:00 mỗi thứ Sáu
+openclaw cron add \
+  --name "weekly-summary" \
+  --cron "0 18 * * 5" \
+  --tz "Asia/Ho_Chi_Minh" \
+  --session isolated \
+  --message "Tổng kết các đầu việc tuần qua và lên kế hoạch tuần tới" \
+  --deliver --channel feishu
+
+# Xem danh sách hoặc xóa tác vụ cron
+openclaw cron list
+openclaw cron remove <job-id>
+```
+
+---
+
+## E.6 Cấu hình đa tác tử (Multi-Agent Architecture)
+
+```json5
+{
+  agents: {
+    defaults: {
+      workspace: "~/.openclaw/workspace",
+      model: {
+        primary: "anthropic/claude-sonnet-4-5",
       },
-      gateway: {
-        port: 18789,
-        auth: { mode: "token", token: "替换为你的随机Token" },
+    },
+    list: [
+      {
+        id: "main",
+        default: true,
+        workspace: "~/.openclaw/workspace-main",
       },
-      agents: {
-        defaults: {
-          workspace: "~/.openclaw/workspace",
-          userTimezone: "Asia/Shanghai",
-          model: {
-            primary: "deepseek/deepseek-chat",
-            fallbacks: ["moonshot/moonshot-v1-128k", "zhipu/glm-4-flash"],
-          },
-          models: {
-            "deepseek/deepseek-chat": { alias: "ds" },
-            "moonshot/moonshot-v1-128k": { alias: "kimi" },
-            "zhipu/glm-4-flash": { alias: "glm" },
-          },
-          heartbeat: { every: "30m", target: "last" },
-          tools: { profile: "full" },
+      {
+        id: "content",
+        workspace: "~/.openclaw/workspace-content",
+        model: {
+          primary: "anthropic/claude-opus-4-6",
         },
       },
-      channels: {
-        feishu: {
-          enabled: true,
-          appId: "cli_your_app_id",
-          appSecret: "your_app_secret",
-          dmPolicy: "pairing",
+      {
+        id: "code",
+        workspace: "~/.openclaw/workspace-code",
+        model: {
+          primary: "deepseek/deepseek-coder",
         },
       },
-      skills: {
-        entries: {
-          "brave-search": {
-            enabled: true,
-            env: { BRAVE_API_KEY: "your-brave-key" },
-          },
-        },
+    ],
+  },
+  bindings: [
+    { agentId: "content", match: { channel: "telegram" } },
+    { agentId: "code", match: { channel: "discord" } },
+  ],
+}
+```
+
+---
+
+## E.7 Cấu hình an ninh bảo mật và cô lập Sandbox
+
+### Xác thực Gateway bắt buộc (Từ v2026.3.7 trở lên)
+
+```json5
+{
+  gateway: {
+    port: 18789,
+    auth: {
+      mode: "token",
+      token: "your-secret-token-here",
+    },
+  },
+}
+```
+
+**Tạo chuỗi Token bảo mật ngẫu nhiên**:
+
+```bash
+openssl rand -hex 32
+```
+
+### Cơ chế cô lập Sandbox (Sử dụng Docker)
+
+```json5
+{
+  agents: {
+    defaults: {
+      sandbox: {
+        mode: "non-main",
+        scope: "agent",
       },
-      session: {
-        dmScope: "per-channel-peer",
-        reset: { mode: "daily", atHour: 4, idleMinutes: 120 },
+    },
+  },
+}
+```
+
+### Kiểm soát hồ sơ quyền hạn của công cụ (Tool Profile)
+
+```json5
+{
+  agents: {
+    defaults: {
+      tools: {
+        profile: "full",     // Các chế độ: full | coding | messaging
       },
-      cron: { enabled: true, maxConcurrentRuns: 2 },
-    }
+    },
+  },
+}
+```
 
-**配置完成后执行**：
+---
 
-    openclaw models auth add
-    clawhub install skill-vetter find-skills self-improving proactive-agent \
-      brave-search summarize nano-banana-pro
-    openclaw cron add --name "daily-report" --cron "0 9 * * *" \
-      --tz "Asia/Shanghai" --session isolated \
-      --message "生成今日AI行业日报" --deliver --channel feishu
-    openclaw daemon start
-    openclaw dashboard
+## E.8 Ví dụ hoàn chỉnh: Cấu hình cho Cá nhân Độc lập (Solopreneur)
 
-## C.9 快速部署脚本
-
-### 一键配置脚本（Mac/Linux）
-
-    #!/bin/bash
-    set -e
-    echo "🦞 OpenClaw 快速配置开始..."
-    mkdir -p ~/.openclaw/workspace
-    TOKEN=$(openssl rand -hex 32)
-
-    cat > ~/.openclaw/openclaw.json << EOF
-    {
-      gateway: { port: 18789, auth: { mode: "token", token: "$TOKEN" } },
-      identity: { name: "小龙虾", theme: "专业高效的AI助手", emoji: "🦞" },
-      agents: {
-        defaults: {
-          workspace: "~/.openclaw/workspace",
-          userTimezone: "Asia/Shanghai",
-          tools: { profile: "full" },
-        },
+```json5
+// ~/.openclaw/openclaw.json
+{
+  identity: {
+    name: "Tôm Càng Xanh",
+    theme: "Trợ lý AI đắc lực cho cá nhân độc lập",
+    emoji: "🦞",
+  },
+  gateway: {
+    port: 18789,
+    auth: { mode: "token", token: "Thay-bang-Token-ngau-nhien-cua-ban" },
+  },
+  agents: {
+    defaults: {
+      workspace: "~/.openclaw/workspace",
+      userTimezone: "Asia/Ho_Chi_Minh",
+      model: {
+        primary: "deepseek/deepseek-chat",
+        fallbacks: ["moonshot/moonshot-v1-128k", "zhipu/glm-4-flash"],
       },
-      session: { dmScope: "per-channel-peer", reset: { mode: "daily", atHour: 4 } },
-      cron: { enabled: true },
-    }
-    EOF
+      models: {
+        "deepseek/deepseek-chat": { alias: "ds" },
+        "moonshot/moonshot-v1-128k": { alias: "kimi" },
+        "zhipu/glm-4-flash": { alias: "glm" },
+      },
+      heartbeat: { every: "30m", target: "last" },
+      tools: { profile: "full" },
+    },
+  },
+  channels: {
+    feishu: {
+      enabled: true,
+      appId: "cli_your_app_id",
+      appSecret: "your_app_secret",
+      dmPolicy: "pairing",
+    },
+  },
+  skills: {
+    entries: {
+      "brave-search": {
+        enabled: true,
+        env: { BRAVE_API_KEY: "your-brave-key" },
+      },
+    },
+  },
+  session: {
+    dmScope: "per-channel-peer",
+    reset: { mode: "daily", atHour: 4, idleMinutes: 120 },
+  },
+  cron: { enabled: true, maxConcurrentRuns: 2 },
+}
+```
 
-    echo "✅ 配置文件已生成（Token: $TOKEN）"
-    openclaw onboard
-    clawhub install skill-vetter find-skills self-improving proactive-agent
-    openclaw daemon install
-    openclaw daemon start
-    echo "✅ 完成！运行 openclaw dashboard 打开控制面板"
+---
 
-## 📚 相关资源
+## E.9 Script tự động hóa triển khai siêu tốc
 
--   官方配置文档：https://docs.openclaw.ai/gateway/configuration
--   官方配置示例：https://docs.openclaw.ai/gateway/configuration-examples
--   官方配置字段参考：https://docs.openclaw.ai/gateway/configuration-reference
--   本书第2-4章：安装部署与配置详解
--   附录A：命令速查表
+### Script cấu hình một chạm (Dành cho macOS / Linux)
 
-**提示**：本模板基于v2026.3.7+版本验证。OpenClaw配置采用严格校验，未知字段会导致Gateway拒绝启动。如遇启动失败，运行 `openclaw doctor` 查看具体问题。
+```bash
+#!/bin/bash
+set -e
+echo "🦞 Khởi động quy trình triển khai siêu tốc OpenClaw..."
+mkdir -p ~/.openclaw/workspace
+TOKEN=$(openssl rand -hex 32)
+
+cat > ~/.openclaw/openclaw.json << EOF
+{
+  gateway: { port: 18789, auth: { mode: "token", token: "$TOKEN" } },
+  identity: { name: "Tôm Càng Xanh", theme: "Trợ lý AI hiệu suất cao", emoji: "🦞" },
+  agents: {
+    defaults: {
+      workspace: "~/.openclaw/workspace",
+      userTimezone: "Asia/Ho_Chi_Minh",
+      tools: { profile: "full" },
+    },
+  },
+  session: { dmScope: "per-channel-peer", reset: { mode: "daily", atHour: 4 } },
+  cron: { enabled: true },
+}
+EOF
+
+echo "✅ Tệp cấu hình đã được tạo thành công (Token: $TOKEN)"
+openclaw onboard
+clawhub install skill-vetter find-skills self-improving proactive-agent
+openclaw daemon install
+openclaw daemon start
+echo "✅ Hoàn tất! Hãy chạy 'openclaw dashboard' để mở giao diện điều khiển."
+```
+
+## 📚 Tài nguyên tham khảo liên quan
+
+- Tài liệu cấu hình chính thức: https://docs.openclaw.ai/gateway/configuration
+- Các ví dụ cấu hình mẫu từ tài liệu gốc: https://docs.openclaw.ai/gateway/configuration-examples
+- Danh mục tra cứu trường cấu hình chi tiết: https://docs.openclaw.ai/gateway/configuration-reference
+- [Phụ lục A: Bảng tra cứu nhanh lệnh CLI](A-command-reference.md)
+- [Phụ lục H: Mẫu tệp cấu hình và ví dụ mở rộng](H-config-templates.md)
+
+**Lời khuyên hữu ích**: Hệ thống OpenClaw áp dụng kiểm tra cấu hình nghiêm ngặt; mọi trường lạ hoặc sai kiểu dữ liệu đều có thể khiến Gateway từ chối khởi động. Nếu gặp sự cố, bạn chỉ cần chạy `openclaw doctor` để tự động kiểm tra và chẩn đoán nguyên nhân.

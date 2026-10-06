@@ -1,795 +1,427 @@
-# 附录C API服务商对比
+# Phụ lục C: Bảng So Sánh Các Nhà Cung Cấp Dịch Vụ API
 
-> 💡 **本附录目标**：提供OpenClaw可用的各类API服务商详细对比，包括国际主流API、国产大模型API、第三方API服务商和独享账号方案，帮助你选择最适合的API服务。
+> 💡 **Mục tiêu của phụ lục này**: Cung cấp bức tranh toàn cảnh và so sánh chi tiết các nhà cung cấp API khả dụng cho OpenClaw, bao gồm các dịch vụ quốc tế chủ lưu, các mô hình nội địa hiệu năng cao, dịch vụ trung gian chuyển tiếp (relay proxy) bên thứ ba và giải pháp tài khoản chuyên dụng, giúp bạn lựa chọn giải pháp API tối ưu nhất cho bài toán của mình.
 
-## 📋 目录
+## 📋 Mục lục
 
-- C.1 国际主流API
-- C.2 国产大模型API
-- C.3 第三方API服务商
-- C.4 独享账号方案
+- C.1 Các dịch vụ API quốc tế chủ lưu
+- C.2 Các mô hình AI nội địa & chi phí tối ưu
+- C.3 Nhà cung cấp API chuyển tiếp bên thứ ba (Relay Providers)
+- C.4 Giải pháp tài khoản chuyên dụng (Dedicated Accounts)
+- Bảng tổng hợp so sánh chi phí & năng lực
+- Gợi ý lựa chọn theo từng tình huống thực tế
 
 ---
 
-## C.1 国际主流API
+## C.1 Các dịch vụ API quốc tế chủ lưu
 
 ### C.1.1 Anthropic Claude API
 
-#### 基本信息
+#### Thông tin cơ bản
 
-**官网**：https://www.anthropic.com  
-**API文档**：https://docs.anthropic.com  
-**支持模型**：
-- Claude Opus 4（最强）
-- Claude Sonnet 4（推荐）
-- Claude Haiku 4（最快）
+**Trang chủ**: https://www.anthropic.com  
+**Tài liệu API**: https://docs.anthropic.com  
+**Các mô hình hỗ trợ**:
+- Claude Opus 4 (Năng lực mạnh nhất)
+- Claude Sonnet 4 / 3.7 Sonnet (Khuyến nghị sử dụng, cân bằng hoàn hảo)
+- Claude Haiku 4 (Tốc độ phản hồi nhanh nhất)
 
-#### 价格信息
+#### Bảng giá tham khảo
 
-| 模型 | 输入价格 | 输出价格 | 上下文长度 |
-|------|---------|---------|-----------|
-| Claude Opus 4 | $15/M tokens | $75/M tokens | 200K |
-| Claude Sonnet 4 | $3/M tokens | $15/M tokens | 200K |
-| Claude Haiku 4 | $0.25/M tokens | $1.25/M tokens | 200K |
+| Mô hình | Giá Token đầu vào (Input) | Giá Token đầu ra (Output) | Độ dài ngữ cảnh (Context) |
+|---|---|---|---|
+| Claude Opus 4 | $15 / 1M tokens | $75 / 1M tokens | 200K |
+| Claude Sonnet 4 | $3 / 1M tokens | $15 / 1M tokens | 200K |
+| Claude Haiku 4 | $0.25 / 1M tokens | $1.25 / 1M tokens | 200K |
 
-#### 免费额度
+#### Hạn mức dùng thử miễn phí
 
-- 新用户赠送$5额度
-- 约可使用170万Token（Sonnet模型）
+- Tặng $5 tín dụng ban đầu cho tài khoản đăng ký mới
+- Tương đương khoảng 1,7 triệu Token (với mô hình Sonnet)
 
-#### 优势
+#### Ưu điểm nổi bật
 
-1. **代码能力最强**：特别适合编程场景
-2. **长上下文**：支持200K上下文
-3. **安全可靠**：输出质量高，很少出现幻觉
-4. **API稳定**：服务稳定性好
+1. **Khả năng lập trình xuất sắc nhất**: Rất mạnh trong sinh mã, rà soát lỗi và tư duy kiến trúc
+2. **Ngữ cảnh siêu dài**: Hỗ trợ cửa sổ ngữ cảnh 200K mượt mà
+3. **An toàn và tin cậy cao**: Chất lượng đầu ra chặt chẽ, tỷ lệ ảo giác (hallucination) cực thấp
+4. **Hạ tầng API ổn định**: Độ sẵn sàng dịch vụ cao
 
-#### 劣势
+#### Nhược điểm
 
-1. **价格较高**：比国产模型贵10-30倍
-2. **需要代理**：国内访问需要配置代理
-3. **注册门槛**：需要国外手机号验证
+1. **Chi phí khá cao**: Đắt hơn các mô hình tối ưu như DeepSeek từ 10 đến 30 lần
+2. **Yêu cầu môi trường mạng quốc tế**: Cần cấu hình mạng thông thoáng
+3. **Rào cản đăng ký**: Cần số điện thoại quốc tế và thẻ thanh toán hợp lệ
 
-#### 适用场景
+#### Tình huống ứng dụng tối ưu
 
-- 编程开发（代码生成、代码审查）
-- 复杂推理任务
-- 需要高质量输出的场景
-- 预算充足的企业用户
+- Phát triển phần mềm chuyên nghiệp (viết code, code review, debug)
+- Các tác vụ suy luận logic phức tạp và chuỗi hành động dài
+- Doanh nghiệp có ngân sách dồi dào đòi hỏi chất lượng đầu ra khắt khe
 
-#### 获取方式
+#### Quy trình đăng ký
 
-1. 访问 https://console.anthropic.com
-2. 注册账号（需要国外手机号）
-3. 创建API Key
-4. 配置到OpenClaw
+1. Truy cập https://console.anthropic.com
+2. Đăng ký tài khoản nhà phát triển
+3. Tạo API Key tại mục Settings
+4. Cấu hình vào OpenClaw thông qua `openclaw models auth add`
 
 ---
 
 ### C.1.2 OpenAI GPT API
 
-#### 基本信息
+#### Thông tin cơ bản
 
-**官网**：https://openai.com  
-**API文档**：https://platform.openai.com/docs  
-**支持模型**：
-- GPT-4 Turbo（最强）
-- GPT-4（标准版）
-- GPT-3.5 Turbo（经济版）
+**Trang chủ**: https://openai.com  
+**Tài liệu API**: https://platform.openai.com/docs  
+**Các mô hình hỗ trợ**:
+- GPT-4o / GPT-4 Turbo (Toàn năng, mạnh mẽ)
+- GPT-4o-mini (Kinh tế, phản hồi nhanh)
+- GPT-3.5 Turbo (Bản tiêu chuẩn cũ)
 
-#### 价格信息
+#### Bảng giá tham khảo
 
-| 模型 | 输入价格 | 输出价格 | 上下文长度 |
-|------|---------|---------|-----------|
-| GPT-4 Turbo | $10/M tokens | $30/M tokens | 128K |
-| GPT-4 | $30/M tokens | $60/M tokens | 8K |
-| GPT-3.5 Turbo | $0.5/M tokens | $1.5/M tokens | 16K |
+| Mô hình | Giá Token đầu vào | Giá Token đầu ra | Độ dài ngữ cảnh |
+|---|---|---|---|
+| GPT-4 Turbo | $10 / 1M tokens | $30 / 1M tokens | 128K |
+| GPT-4o | $2.5 / 1M tokens | $10 / 1M tokens | 128K |
+| GPT-4o-mini | $0.15 / 1M tokens | $0.6 / 1M tokens | 128K |
 
-#### 免费额度
+#### Hạn mức dùng thử miễn phí
 
-- 新用户赠送$5额度
-- 约可使用50万Token（GPT-4 Turbo）
+- Tài khoản mới nhận $5 hạn mức thử nghiệm ban đầu trong thời hạn nhất định
 
-#### 优势
+#### Ưu điểm nổi bật
 
-1. **功能全面**：支持文本、图片、语音等多模态
-2. **生态完善**：工具和插件丰富
-3. **知名度高**：用户基数大，社区活跃
-4. **API稳定**：服务稳定性好
+1. **Đa phương thức toàn diện (Multimodal)**: Hỗ trợ văn bản, thị giác máy tính, âm thanh
+2. **Hệ sinh thái phong phú**: Tài liệu, SDK và cộng đồng hỗ trợ lớn nhất thế giới
+3. **Tương thích cao**: Hầu như mọi thư viện Agent đều hỗ trợ sẵn chuẩn định dạng OpenAI
+4. **Hạ tầng phân phối toàn cầu**: Mạng lưới máy chủ phân tán rộng rãi
 
-#### 劣势
+#### Nhược điểm
 
-1. **价格较高**：比国产模型贵5-20倍
-2. **需要代理**：国内访问需要配置代理
-3. **注册门槛**：需要国外手机号验证
-4. **审查严格**：对某些内容有限制
+1. **Chi phí đáng kể**: Bản cao cấp vẫn có chi phí cao nếu gọi liên tục
+2. **Kiểm duyệt nội dung gắt gao**: Hệ thống lọc từ khóa đôi khi từ chối xử lý văn bản chuyên ngành
 
-#### 适用场景
+#### Tình huống ứng dụng tối ưu
 
-- 多模态应用（文本+图片+语音）
-- 需要使用GPT生态工具
-- 预算充足的企业用户
-
-#### 获取方式
-
-1. 访问 https://platform.openai.com
-2. 注册账号（需要国外手机号）
-3. 创建API Key
-4. 配置到OpenClaw
+- Ứng dụng xử lý đa phương thức (văn bản kết hợp hình ảnh)
+- Ứng dụng cần tích hợp tương thích chuẩn OpenAI
+- Doanh nghiệp đa quốc gia
 
 ---
 
 ### C.1.3 Google Gemini API
 
-#### 基本信息
+#### Thông tin cơ bản
 
-**官网**：https://ai.google.dev  
-**API文档**：https://ai.google.dev/docs  
-**支持模型**：
-- Gemini 2.5 Pro（最强）
-- Gemini 2.0 Flash（推荐）
-- Gemini 1.5 Pro（标准版）
+**Trang chủ**: https://ai.google.dev  
+**Tài liệu API**: https://ai.google.dev/docs  
+**Các mô hình hỗ trợ**:
+- Gemini 2.5 Pro (Suy luận sâu sắc)
+- Gemini 2.0 Flash (Khuyến nghị, tốc độ chớp nhoáng)
+- Gemini 1.5 Pro (Cửa sổ ngữ cảnh khổng lồ 2M)
 
-#### 价格信息
+#### Bảng giá tham khảo
 
-| 模型 | 输入价格 | 输出价格 | 上下文长度 |
-|------|---------|---------|-----------|
-| Gemini 2.5 Pro | $1.25/M tokens | $5/M tokens | 1M |
-| Gemini 2.0 Flash | $0.075/M tokens | $0.3/M tokens | 1M |
-| Gemini 1.5 Pro | $1.25/M tokens | $5/M tokens | 2M |
+| Mô hình | Giá Token đầu vào | Giá Token đầu ra | Độ dài ngữ cảnh |
+|---|---|---|---|
+| Gemini 2.5 Pro | $1.25 / 1M tokens | $5 / 1M tokens | 1M |
+| Gemini 2.0 Flash | $0.075 / 1M tokens | $0.3 / 1M tokens | 1M |
+| Gemini 1.5 Pro | $1.25 / 1M tokens | $5 / 1M tokens | 2M |
 
-#### 免费额度
+#### Hạn mức dùng thử miễn phí
 
-- **超大免费额度**：每天1500次请求
-- 每分钟15次请求
-- 约可使用1000万Token/天
+- **Hạn mức miễn phí cực hào phóng**: Lên tới 1.500 yêu cầu mỗi ngày (giới hạn 15 RPM)
+- Phù hợp cho việc thử nghiệm hoàn toàn miễn phí
 
-#### 优势
+#### Ưu điểm nổi bật
 
-1. **免费额度超大**：适合个人用户和学生
-2. **超长上下文**：支持1M-2M上下文
-3. **多模态能力强**：支持文本、图片、视频、音频
-4. **价格低廉**：付费价格也很便宜
+1. **Hạn mức miễn phí rất lớn**: Lý tưởng cho người dùng cá nhân và nghiên cứu
+2. **Ngữ cảnh cực đại**: Hỗ trợ từ 1 triệu đến 2 triệu token, nuốt trọn toàn bộ kho sách hoặc codebase
+3. **Xử lý đa phương thức xuất sắc**: Đọc trực tiếp video dài, audio và hình ảnh độ phân giải cao
+4. **Chi phí phiên bản Flash siêu rẻ**: Chỉ từ $0.075 / 1M token đầu vào
 
-#### 劣势
+#### Nhược điểm
 
-1. **需要代理**：国内访问需要配置代理
-2. **中文能力一般**：不如国产模型
-3. **API限制**：免费版有速率限制
+1. Cần cấu hình mạng quốc tế ổn định
+2. Bản miễn phí có giới hạn tần suất yêu cầu trên phút (Rate limit)
 
-#### 适用场景
+#### Tình huống ứng dụng tối ưu
 
-- 个人用户和学生（免费额度大）
-- 需要处理超长文本（1M-2M上下文）
-- 多模态应用
-- 预算有限的用户
-
-#### 获取方式
-
-1. 访问 https://aistudio.google.com
-2. 注册Google账号
-3. 创建API Key
-4. 配置到OpenClaw
+- Người dùng cá nhân, sinh viên muốn dùng AI mạnh mẽ không tốn phí
+- Phân tích và tra cứu codebase hoặc sách tài liệu có độ dài hàng trăm nghìn dòng
+- Phân tích video và file âm thanh nguyên bản
 
 ---
 
-## C.2 国产大模型API
+## C.2 Các mô hình AI nội địa & chi phí tối ưu
 
-### C.2.1 Kimi k2.5（强烈推荐）
+### C.2.1 Kimi k2.5 (Moonshot AI — Rất khuyến nghị)
 
-#### 基本信息
+#### Thông tin cơ bản
 
-**官网**：https://www.moonshot.cn  
-**API文档**：https://platform.moonshot.cn/docs  
-**开发公司**：月之暗面  
-**支持模型**：
-- Kimi k2.5（最新版）
-- Kimi k1.5（标准版）
+**Trang chủ**: https://www.moonshot.cn  
+**Tài liệu API**: https://platform.moonshot.cn/docs  
+**Công ty phát triển**: Moonshot AI (Nguyệt Chi Ám Diện)  
+**Mô hình hỗ trợ**:
+- Kimi k2.5 (Bản mới nhất)
+- Kimi k1.5 (Bản tiêu chuẩn)
 
-#### 价格信息
+#### Bảng giá tham khảo
 
-| 模型 | 输入价格 | 输出价格 | 上下文长度 |
-|------|---------|---------|-----------|
-| Kimi k2.5 | ¥0.5/M tokens | ¥2/M tokens | 200K |
-| Kimi k1.5 | ¥0.3/M tokens | ¥1.2/M tokens | 128K |
+| Mô hình | Giá Token đầu vào | Giá Token đầu ra | Độ dài ngữ cảnh |
+|---|---|---|---|
+| Kimi k2.5 | ¥0.5 / 1M tokens | ¥2 / 1M tokens | 200K |
+| Kimi k1.5 | ¥0.3 / 1M tokens | ¥1.2 / 1M tokens | 128K |
 
-#### 免费额度
+#### Hạn mức dùng thử
 
-- 新用户赠送¥15额度
-- 约可使用300万Token
+- Tặng ¥15 tín dụng cho người dùng mới, tương đương khoảng 3 triệu token
 
-#### 优势
+#### Ưu điểm nổi bật
 
-1. **性价比极高**：价格仅为Claude的1/6
-2. **中文能力强**：专为中文优化
-3. **长上下文**：支持200K上下文
-4. **无需代理**：国内直连，速度快
-5. **API稳定**：服务稳定性好
+1. **Tỷ suất hiệu năng trên giá thành (P/P) cực cao**: Giá chỉ bằng 1/6 so với Claude
+2. **Xử lý tài liệu ngữ cảnh dài mượt mà**: 200K token với độ chính xác truy hồi cao
+3. **Kết nối trực tiếp không cần proxy**: Tốc độ phản hồi tại châu Á cực nhanh
+4. **Hệ thống API ổn định**: Độ sẵn sàng dịch vụ ấn tượng
 
-#### 劣势
+#### Nhược điểm
 
-1. **代码能力**：略逊于Claude和GPT-4
-2. **知名度**：相对较新，社区较小
+1. Năng lực sinh code ở các framework ngách có phần sau Claude và GPT-4 một chút
 
-#### 适用场景
+#### Tình huống ứng dụng tối ưu
 
-- 中文场景（文档处理、知识管理）
-- 个人用户和中小企业
-- 需要长上下文的场景
-- 预算有限的用户
-
-#### 获取方式
-
-1. 访问 https://platform.moonshot.cn
-2. 注册账号（手机号验证）
-3. 创建API Key
-4. 配置到OpenClaw
-
-#### 实战案例
-
-某内容创作者使用Kimi k2.5处理文章，每月处理约1000万Token，费用仅为¥5-10元，而使用Claude需要$30-50（约¥200-350元），节省95%成本。
+- Xử lý văn bản, tóm tắt tài liệu, quản lý cơ sở tri thức cá nhân
+- Doanh nghiệp vừa và nhỏ cần tối ưu ngân sách
+- Trợ lý viết lách và tổng hợp tin tức tự động
 
 ---
 
-### C.2.2 DeepSeek-V3（最便宜）
+### C.2.2 DeepSeek-V3 / DeepSeek-R1 (Chi phí suy luận rẻ nhất)
 
-#### 基本信息
+#### Thông tin cơ bản
 
-**官网**：https://www.deepseek.com  
-**API文档**：https://platform.deepseek.com/docs  
-**开发公司**：深度求索  
-**支持模型**：
-- DeepSeek-V3（最新版）
-- DeepSeek-Chat（标准版）
-- DeepSeek-Coder（代码专用）
+**Trang chủ**: https://www.deepseek.com  
+**Tài liệu API**: https://platform.deepseek.com/docs  
+**Công ty phát triển**: DeepSeek (Hàng Châu)  
+**Mô hình hỗ trợ**:
+- DeepSeek-V3 (Mô hình nền tảng tổng quát đa nhiệm)
+- DeepSeek-R1 (Mô hình lý luận logic chuyên sâu theo chuỗi tư duy)
+- DeepSeek-Coder (Tối ưu hóa lập trình)
 
-#### 价格信息
+#### Bảng giá tham khảo
 
-| 模型 | 输入价格 | 输出价格 | 上下文长度 |
-|------|---------|---------|-----------|
-| DeepSeek-V3 | ¥0.1/M tokens | ¥0.4/M tokens | 64K |
-| DeepSeek-Chat | ¥0.1/M tokens | ¥0.4/M tokens | 32K |
-| DeepSeek-Coder | ¥0.1/M tokens | ¥0.4/M tokens | 16K |
+| Mô hình | Giá Token đầu vào | Giá Token đầu ra | Độ dài ngữ cảnh |
+|---|---|---|---|
+| DeepSeek-V3 | ¥0.1 / 1M tokens (khoảng 0.014$) | ¥0.4 / 1M tokens (khoảng 0.056$) | 64K |
+| DeepSeek-Chat | ¥0.1 / 1M tokens | ¥0.4 / 1M tokens | 32K |
+| DeepSeek-Coder | ¥0.1 / 1M tokens | ¥0.4 / 1M tokens | 16K |
 
-#### 免费额度
+#### Hạn mức dùng thử
 
-- 新用户赠送500万Token
-- 约可免费使用1-2个月
+- Tặng 5 triệu token cho tài khoản mới đăng ký
 
-#### 优势
+#### Ưu điểm nổi bật
 
-1. **价格最低**：比Claude便宜30倍
-2. **代码能力强**：DeepSeek-Coder专为编程优化
-3. **无需代理**：国内直连，速度快
-4. **开源友好**：支持开源社区
+1. **Mức giá phá vỡ giới hạn ngành**: Rẻ hơn Claude tới 30 lần, tiết kiệm tới 95% chi phí
+2. **Khả năng lập trình và toán học cực kỳ ấn tượng**: Vượt trội so với tầm giá
+3. **Hỗ trợ định dạng tương thích hoàn toàn chuẩn OpenAI**: Tích hợp vào OpenClaw cực kỳ dễ dàng
+4. **Hỗ trợ mạnh mẽ phong trào mã nguồn mở**: Trọng lượng mô hình mở công khai
 
-#### 劣势
+#### Nhược điểm
 
-1. **上下文较短**：最长64K
-2. **输出质量**：略逊于Claude和GPT-4
-3. **API限制**：免费版有速率限制
+1. Cửa sổ ngữ cảnh ở mức 64K
+2. Trong những đợt cao điểm nhu cầu toàn cầu, API đôi lúc gặp hiện tượng nghẽn mạng ngắn hạn
 
-#### 适用场景
+#### Tình huống ứng dụng tối ưu
 
-- 编程开发（使用DeepSeek-Coder）
-- 大量文本处理（成本敏感）
-- 个人用户和学生
-- 预算极其有限的场景
-
-#### 获取方式
-
-1. 访问 https://platform.deepseek.com
-2. 注册账号（手机号验证）
-3. 创建API Key
-4. 配置到OpenClaw
-
-#### 实战案例
-
-某程序员使用DeepSeek-Coder辅助编程，每月处理约2000万Token，费用仅为¥2-4元，而使用Claude需要$60-100（约¥420-700元），节省99%成本。
+- Làm mô hình chính chạy 24/7 cho các tác vụ cron tự động hóa
+- Lập trình viên muốn trợ lý code đồng hành liên tục với chi phí gần như bằng không
+- Xử lý khối lượng văn bản lớn hàng chục triệu token mỗi tháng
 
 ---
 
-### C.2.3 GLM-4（智谱AI）
+### C.2.3 GLM-4 (Zhipu AI)
 
-#### 基本信息
+#### Thông tin cơ bản
 
-**官网**：https://www.zhipuai.cn  
-**API文档**：https://open.bigmodel.cn/dev/api  
-**开发公司**：智谱AI（清华系）  
-**支持模型**：
-- GLM-4 Plus（最强）
-- GLM-4（标准版）
-- GLM-4 Flash（经济版）
+**Trang chủ**: https://www.zhipuai.cn  
+**Tài liệu API**: https://open.bigmodel.cn/dev/api  
+**Đơn vị phát triển**: Zhipu AI (Đội ngũ xuất thân từ Đại học Thanh Hoa)  
+**Mô hình hỗ trợ**:
+- GLM-4 Plus (Bản cao cấp nhất)
+- GLM-4 (Bản tiêu chuẩn)
+- GLM-4 Flash (Phiên bản siêu kinh tế, miễn phí hoặc cực rẻ)
 
-#### 价格信息
+#### Bảng giá tham khảo
 
-| 模型 | 输入价格 | 输出价格 | 上下文长度 |
-|------|---------|---------|-----------|
-| GLM-4 Plus | ¥0.5/M tokens | ¥2/M tokens | 128K |
-| GLM-4 | ¥0.1/M tokens | ¥0.4/M tokens | 128K |
-| GLM-4 Flash | ¥0.01/M tokens | ¥0.04/M tokens | 128K |
+| Mô hình | Giá Token đầu vào | Giá Token đầu ra | Độ dài ngữ cảnh |
+|---|---|---|---|
+| GLM-4 Plus | ¥0.5 / 1M tokens | ¥2 / 1M tokens | 128K |
+| GLM-4 | ¥0.1 / 1M tokens | ¥0.4 / 1M tokens | 128K |
+| GLM-4 Flash | ¥0.01 / 1M tokens | ¥0.04 / 1M tokens | 128K |
 
-#### 免费额度
+#### Hạn mức dùng thử
 
-- 新用户赠送¥100额度
-- 约可使用2000万Token
+- Tài khoản mới nhận gói hạn mức dùng thử lớn
+- Bản Flash có chính sách miễn phí gọi API rất rộng rãi
 
-#### 优势
+#### Ưu điểm nổi bật
 
-1. **中文能力强**：清华系，中文优化好
-2. **价格低廉**：Flash版本极便宜
-3. **免费额度大**：新用户¥100额度
-4. **无需代理**：国内直连，速度快
-5. **学术背景**：清华大学技术支持
-
-#### 劣势
-
-1. **代码能力**：略逊于Claude和DeepSeek
-2. **知名度**：相对较新
-
-#### 适用场景
-
-- 中文场景（文档处理、知识管理）
-- 学术研究
-- 个人用户和学生
-- 需要大量免费额度的场景
-
-#### 获取方式
-
-1. 访问 https://open.bigmodel.cn
-2. 注册账号（手机号验证）
-3. 创建API Key
-4. 配置到OpenClaw
+1. Nền tảng học thuật vững chắc từ Đại học Thanh Hoa, khả năng hiểu ngôn ngữ tự nhiên sâu sắc
+2. Bản Flash có chi phí gần như tượng trưng, phù hợp làm bộ phân loại tác vụ (router)
+3. Hỗ trợ đầy đủ Function Calling và định dạng JSON có cấu trúc
 
 ---
 
-### C.2.4 文心一言（百度）
+### C.2.4 Qwen — Thông Nghĩa Thiên Vấn (Alibaba Cloud)
 
-#### 基本信息
+#### Thông tin cơ bản
 
-**官网**：https://yiyan.baidu.com  
-**API文档**：https://cloud.baidu.com/doc/WENXINWORKSHOP  
-**开发公司**：百度  
-**支持模型**：
-- ERNIE 4.0（最强）
-- ERNIE 3.5（标准版）
-- ERNIE Speed（经济版）
+**Trang chủ**: https://tongyi.aliyun.com  
+**Tài liệu API**: https://help.aliyun.com/zh/dashscope  
+**Đơn vị phát triển**: Alibaba Cloud  
+**Mô hình hỗ trợ**: Qwen-Max, Qwen-Plus, Qwen-Turbo, Qwen-2.5-Coder
 
-#### 价格信息
+#### Bảng giá tham khảo
 
-| 模型 | 输入价格 | 输出价格 | 上下文长度 |
-|------|---------|---------|-----------|
-| ERNIE 4.0 | ¥1.2/M tokens | ¥4.8/M tokens | 8K |
-| ERNIE 3.5 | ¥0.12/M tokens | ¥0.48/M tokens | 8K |
-| ERNIE Speed | ¥0.04/M tokens | ¥0.08/M tokens | 8K |
+| Mô hình | Giá Token đầu vào | Giá Token đầu ra | Độ dài ngữ cảnh |
+|---|---|---|---|
+| Qwen-Max | ¥0.4 / 1M tokens | ¥1.2 / 1M tokens | 8K - 32K |
+| Qwen-Plus | ¥0.08 / 1M tokens | ¥0.24 / 1M tokens | 32K - 128K |
+| Qwen-Turbo | ¥0.03 / 1M tokens | ¥0.06 / 1M tokens | 8K - 128K |
 
-#### 免费额度
+#### Ưu điểm nổi bật
 
-- 新用户赠送¥100额度
-- 约可使用2000万Token（Speed版）
-
-#### 优势
-
-1. **中文能力强**：百度搜索技术加持
-2. **免费额度大**：新用户¥100额度
-3. **无需代理**：国内直连，速度快
-4. **生态完善**：与百度云服务集成
-
-#### 劣势
-
-1. **上下文较短**：最长8K
-2. **代码能力**：略逊于Claude和DeepSeek
-3. **API复杂**：配置相对复杂
-
-#### 适用场景
-
-- 中文场景（搜索、问答）
-- 百度云用户
-- 需要大量免费额度的场景
-
-#### 获取方式
-
-1. 访问 https://cloud.baidu.com
-2. 注册账号（手机号验证）
-3. 创建应用并获取API Key
-4. 配置到OpenClaw
+1. Tối ưu cực mạnh cho các nghiệp vụ thương mại điện tử, chăm sóc khách hàng và lập trình (Qwen-Coder)
+2. Hệ sinh thái mã nguồn mở Qwen 2.5 rất mạnh mẽ, được cộng đồng AI toàn cầu đánh giá rất cao
+3. Tích hợp trực tiếp với hạ tầng điện toán đám mây của Alibaba
 
 ---
 
-### C.2.5 通义千问（阿里云）
+## C.3 Nhà cung cấp API chuyển tiếp bên thứ ba (Relay Providers)
 
-#### 基本信息
+### C.3.1 Bản chất của nhà cung cấp API chuyển tiếp
 
-**官网**：https://tongyi.aliyun.com  
-**API文档**：https://help.aliyun.com/zh/dashscope  
-**开发公司**：阿里云  
-**支持模型**：
-- Qwen-Max（最强）
-- Qwen-Plus（标准版）
-- Qwen-Turbo（经济版）
+Nhà cung cấp trung gian (Relay/Aggregator) là các đơn vị tập hợp nhiều API của các nhà phát triển lớn (OpenAI, Anthropic, Google, Meta...) vào một endpoint duy nhất. Người dùng chỉ cần đăng ký một tài khoản và nạp tiền một lần là có thể gọi luân phiên hàng trăm mô hình khác nhau.
 
-#### 价格信息
+#### Ưu điểm
 
-| 模型 | 输入价格 | 输出价格 | 上下文长度 |
-|------|---------|---------|-----------|
-| Qwen-Max | ¥0.4/M tokens | ¥1.2/M tokens | 8K |
-| Qwen-Plus | ¥0.08/M tokens | ¥0.24/M tokens | 32K |
-| Qwen-Turbo | ¥0.03/M tokens | ¥0.06/M tokens | 8K |
+1. **Quản lý tập trung một cửa (All-in-one)**: Quản trị chi phí và API Key tại một nơi duy nhất
+2. **Không lo thanh toán quốc tế**: Hỗ trợ nhiều cổng thanh toán nội địa và thẻ phổ thông
+3. **Kết nối tối ưu**: Có máy chủ relay định tuyến trung gian, giảm độ trễ khi kết nối quốc tế
+4. **Mức giá cạnh tranh**: Nhờ mua gói dung lượng lớn (bulk purchase), giá thường thấp hơn hoặc tương đương mua lẻ
 
-#### 免费额度
+#### Nhược điểm cần cân nhắc
 
-- 新用户赠送¥100额度
-- 约可使用3000万Token（Turbo版）
-
-#### 优势
-
-1. **中文能力强**：阿里电商场景优化
-2. **免费额度大**：新用户¥100额度
-3. **无需代理**：国内直连，速度快
-4. **生态完善**：与阿里云服务集成
-
-#### 劣势
-
-1. **上下文较短**：Max版仅8K
-2. **代码能力**：略逊于Claude和DeepSeek
-3. **API复杂**：配置相对复杂
-
-#### 适用场景
-
-- 中文场景（电商、客服）
-- 阿里云用户
-- 需要大量免费额度的场景
-
-#### 获取方式
-
-1. 访问 https://dashscope.console.aliyun.com
-2. 注册账号（手机号验证）
-3. 创建API Key
-4. 配置到OpenClaw
+1. Cần chọn đơn vị uy tín để tránh nguy cơ gián đoạn dịch vụ đột xuất
+2. Cần lưu ý về chính sách bảo mật dữ liệu riêng tư
 
 ---
 
-### C.2.6 腾讯混元（腾讯云）
+### C.3.2 Một số nhà cung cấp uy tín phổ biến
 
-#### 基本信息
+#### 1. OpenRouter (Khuyến nghị hàng đầu toàn cầu)
+- **Trang chủ**: https://openrouter.ai
+- **Đặc điểm**: Hỗ trợ hơn 200+ mô hình lớn nhỏ trên toàn cầu, tự động định tuyến dự phòng (fallback) nếu một nhà cung cấp bị sập, hiển thị giá minh bạch từng mili-cent.
+- **Tương thích**: Chuẩn OpenAI API 100%, cấu hình vào OpenClaw cực kỳ tiện lợi.
 
-**官网**：https://cloud.tencent.com/product/hunyuan  
-**API文档**：https://cloud.tencent.com/document/product/1729  
-**开发公司**：腾讯云  
-**支持模型**：
-- Hunyuan-Pro（最强）
-- Hunyuan-Standard（标准版）
-- Hunyuan-Lite（经济版）
+#### 2. AnyRouter
+- **Trang chủ**: https://anyrouter.ai
+- **Đặc điểm**: Tối ưu định tuyến cho khu vực châu Á, hỗ trợ đa dạng phương thức nạp tiền, giá cả minh bạch không phụ phí ẩn.
 
-#### 价格信息
-
-| 模型 | 输入价格 | 输出价格 | 上下文长度 |
-|------|---------|---------|-----------|
-| Hunyuan-Pro | ¥0.3/M tokens | ¥1.2/M tokens | 32K |
-| Hunyuan-Standard | ¥0.045/M tokens | ¥0.18/M tokens | 16K |
-| Hunyuan-Lite | ¥0.015/M tokens | ¥0.06/M tokens | 8K |
-
-#### 免费额度
-
-- 新用户赠送¥100额度
-- 约可使用3000万Token（Lite版）
-
-#### 优势
-
-1. **中文能力强**：腾讯社交场景优化
-2. **免费额度大**：新用户¥100额度
-3. **无需代理**：国内直连，速度快
-4. **生态完善**：与腾讯云服务集成
-5. **云端部署优势**：腾讯云Lighthouse用户优先
-
-#### 劣势
-
-1. **上下文较短**：Pro版仅32K
-2. **代码能力**：略逊于Claude和DeepSeek
-3. **知名度**：相对较新
-
-#### 适用场景
-
-- 中文场景（社交、游戏）
-- 腾讯云用户
-- 云端部署OpenClaw的用户
-- 需要大量免费额度的场景
-
-#### 获取方式
-
-1. 访问 https://console.cloud.tencent.com/hunyuan
-2. 注册账号（手机号验证）
-3. 创建应用并获取API Key
-4. 配置到OpenClaw
+#### 3. API2D
+- **Trang chủ**: https://api2d.com
+- **Đặc điểm**: Đơn vị cung cấp giải pháp chuyển tiếp thâm niên, tích hợp hướng dẫn chi tiết cho người mới.
 
 ---
 
-## C.3 第三方API服务商
+## C.4 Giải pháp tài khoản chuyên dụng (Dedicated Accounts)
 
-### C.3.1 什么是第三方API服务商
+### C.4.1 Tổng quan về giải pháp tài khoản trả phí cố định
 
-第三方API服务商是指提供多个大模型API统一接入的服务商，用户只需注册一个账号，即可使用多个大模型。
+Thay vì trả phí theo lượng token tiêu thụ (Pay-as-you-go), người dùng đăng ký các gói thuê bao tháng của nhà cung cấp như ChatGPT Plus ($20/tháng), Claude Pro ($20/tháng) hoặc GitHub Copilot.
 
-#### 优势
+#### Bảng so sánh kinh tế học
 
-1. **一站式服务**：统一管理多个模型
-2. **价格优惠**：通常比官方便宜10-30%
-3. **无需代理**：国内直连，速度快
-4. **支付方便**：支持支付宝、微信支付
+Giả định một Solopreneur sử dụng khoảng 10 triệu Token văn bản chất lượng cao mỗi tháng:
+- Nếu dùng Claude 3.5 Sonnet qua API: 10M × ~$9 = ~$90/tháng
+- Nếu dùng gói thuê bao Claude Pro hoặc gói định mức: Cố định $20/tháng
 
-#### 劣势
-
-1. **稳定性**：可能不如官方稳定
-2. **安全性**：需要选择可信赖的服务商
-3. **功能限制**：可能不支持所有功能
+**Quy tắc rút ra**:
+- Nếu khối lượng sử dụng mỗi tháng vượt quá 3 - 5 triệu token cao cấp, hình thức thuê bao trọn gói có lợi thế về chi phí.
+- Tuy nhiên, hình thức API truyền thống mang lại sự tự do tuyệt đối về tự động hóa ngầm, không bị giới hạn cửa sổ phiên và độ trễ phản hồi thấp.
 
 ---
 
-### C.3.2 推荐的第三方服务商
+## 📊 Bảng Tổng Hợp So Sánh Toàn Diện
 
-#### 1. API2D
+### So sánh chi phí (Quy đổi ước tính trên 1 triệu Token)
 
-**官网**：https://api2d.com  
-**支持模型**：Claude、GPT、Gemini、国产模型  
-**价格**：比官方便宜10-20%  
-**特点**：
-- 老牌服务商，稳定性好
-- 支持多种支付方式
-- 提供详细的使用文档
+| Nhà cung cấp | Mô hình đại diện | Giá Token vào | Giá Token ra | Chi phí tổng thể | Đánh giá P/P |
+|---|---|---|---|---|---|
+| DeepSeek | V3 / R1 | ~¥0.1 | ~¥0.4 | ~¥0.5 (~$0.07) | ⭐⭐⭐⭐⭐ (Vô địch về giá) |
+| Zhipu AI | GLM-4 Flash | ~¥0.01 | ~¥0.04 | ~¥0.05 (~$0.007) | ⭐⭐⭐⭐⭐ (Gần như miễn phí) |
+| Alibaba | Qwen-Turbo | ~¥0.03 | ~¥0.06 | ~¥0.09 (~$0.013) | ⭐⭐⭐⭐⭐ (Rất kinh tế) |
+| Moonshot | Kimi k2.5 | ~¥0.5 | ~¥2.0 | ~¥2.5 (~$0.35) | ⭐⭐⭐⭐⭐ (Xuất sắc) |
+| Google | Gemini 2.0 Flash | $0.075 | $0.30 | $0.375 | ⭐⭐⭐⭐ (Có tier miễn phí lớn) |
+| Anthropic | Claude 3.5 Sonnet | $3.00 | $15.00 | $18.00 | ⭐⭐⭐⭐ (Đắt nhưng chất lượng đỉnh cao) |
+| OpenAI | GPT-4o | $2.50 | $10.00 | $12.50 | ⭐⭐⭐ (Mạnh mẽ, toàn diện) |
 
-#### 2. CloseAI
+### So sánh năng lực chuyên môn
 
-**官网**：https://closeai.biz  
-**支持模型**：Claude、GPT、Gemini  
-**价格**：比官方便宜15-25%  
-**特点**：
-- 价格优惠
-- 国内直连，速度快
-- 支持支付宝、微信支付
-
-#### 3. OpenRouter
-
-**官网**：https://openrouter.ai  
-**支持模型**：100+种模型  
-**价格**：与官方持平或略贵  
-**特点**：
-- 支持模型最多
-- 自动选择最优模型
-- 国际知名度高
-
-#### 4. AnyRouter（推荐）
-
-**官网**：https://anyrouter.ai  
-**支持模型**：Claude、GPT、Gemini、国产模型  
-**价格**：比官方便宜10-20%  
-**特点**：
-- 国内团队开发
-- 支持国产模型
-- 价格透明，无隐藏费用
-- 支持支付宝、微信支付
+| Nhà cung cấp | Khả năng lập trình | Khả năng suy luận | Ngữ cảnh | Tốc độ | Mức độ ổn định |
+|---|---|---|---|---|---|
+| DeepSeek (V3/R1) | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | 64K | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ |
+| Claude 3.5 Sonnet | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | 200K | ⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
+| Kimi k2.5 | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ | 200K | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
+| Gemini 2.0 Flash | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ | 1M | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ |
+| GPT-4o | ⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | 128K | ⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
+| GLM-4 | ⭐⭐⭐ | ⭐⭐⭐⭐ | 128K | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ |
 
 ---
 
-### C.3.3 如何选择第三方服务商
+## 💡 Gợi Ý Lựa Chọn Phối Hợp Cho Từng Đối Tượng
 
-#### 选择标准
+### 1. Người dùng cá nhân & Solopreneur (Tối ưu hóa ngân sách tối đa)
+- **Mô hình tác chiến chính (Default Agent)**: DeepSeek-V3 hoặc Qwen-Plus (Chi phí dưới 10.000 VNĐ / ngày)
+- **Mô hình lập trình chuyên sâu**: DeepSeek-Coder hoặc DeepSeek-R1
+- **Mô hình xử lý tài liệu dài**: Kimi k2.5 hoặc Gemini 2.0 Flash (Tận dụng gói miễn phí)
+- **Tổng ngân sách hàng tháng**: Dưới 50.000 - 100.000 VNĐ
 
-1. **稳定性**：查看服务商的运营时间和用户评价
-2. **价格**：对比多个服务商的价格
-3. **支持模型**：确认支持你需要的模型
-4. **支付方式**：确认支持你方便的支付方式
-5. **客服支持**：确认有良好的客服支持
+### 2. Doanh nghiệp & Nhóm làm việc chuyên nghiệp (Ưu tiên chất lượng & độ tin cậy)
+- **Mô hình điều phối & hội thoại tiêu chuẩn**: Kimi k2.5 hoặc GPT-4o-mini
+- **Mô hình giải quyết bài toán phức tạp & Code review**: Claude 3.5 Sonnet
+- **Mô hình dự phòng**: Cấu hình fallback tự động sang DeepSeek qua OpenRouter
+- **Tổng ngân sách hàng tháng**: Khoảng 300.000 - 1.500.000 VNĐ tùy quy mô sử dụng
 
-#### 风险提示
-
-1. **数据安全**：第三方服务商可能记录你的对话内容
-2. **服务稳定性**：可能不如官方稳定
-3. **账号风险**：服务商可能随时关闭服务
-
-#### 推荐策略
-
-1. **重要场景**：使用官方API
-2. **一般场景**：可以使用第三方服务商
-3. **测试场景**：优先使用第三方服务商（成本低）
+### 3. Lập trình viên chuyên trách (Software Engineer)
+- **Cấu hình khuyên dùng**: Thiết lập Claude Sonnet làm Agent chính để kiến trúc hệ thống và rà soát bug, kết hợp DeepSeek chạy nền để sinh mã kiểm thử và viết tài liệu kỹ thuật.
 
 ---
 
-## C.4 独享账号方案
+## 📚 Tài liệu tham khảo liên quan
 
-### C.4.1 什么是独享账号
-
-独享账号是指购买官方账号的订阅服务，如ChatGPT Plus、Claude Pro等，然后通过API方式使用。
-
-#### 优势
-
-1. **无限制使用**：不限Token数量
-2. **成本可控**：固定月费
-3. **官方服务**：稳定性和安全性最好
-
-#### 劣势
-
-1. **价格较高**：通常$20-30/月
-2. **需要代理**：国内访问需要配置代理
-3. **注册门槛**：需要国外手机号和支付方式
+- Hướng dẫn cấu hình API Key trong OpenClaw: [Phụ lục K: Hướng dẫn cấu hình API Key](K-api-key-config-guide.md)
+- Mẫu tệp cấu hình đa mô hình: [Phụ lục H: Mẫu tệp cấu hình và ví dụ](H-config-templates.md)
+- Tài liệu chính thức về quản lý Token: https://docs.openclaw.ai/reference/token-use-and-costs
 
 ---
 
-### C.4.2 ChatGPT Plus方案
-
-#### 基本信息
-
-**价格**：$20/月  
-**包含内容**：
-- GPT-4 Turbo无限使用
-- GPT-4o无限使用
-- DALL-E 3图片生成
-- 高级数据分析
-
-#### 适用场景
-
-- 重度使用（每天使用超过1000万Token）
-- 需要使用GPT-4o的场景
-- 需要图片生成功能
-
-#### 成本对比
-
-假设每月使用1000万Token：
-- 使用API：1000万 × $10/M = $100
-- 使用Plus：$20/月
-
-**结论**：如果每月使用超过200万Token，Plus更划算。
+**Ghi chú**: Bảng giá và thông số kỹ thuật được cập nhật theo mặt bằng công nghệ năm 2026. Do thị trường AI phát triển nhanh chóng, các nhà cung cấp có thể điều chỉnh giá cước hoặc nâng cấp mô hình mới theo thời gian.
 
 ---
 
-### C.4.3 Claude Pro方案
+## 🌐 Đọc trực tuyến
 
-#### 基本信息
+📖 **Bạn muốn đọc phụ lục này trực tuyến?**
 
-**价格**：$20/月  
-**包含内容**：
-- Claude Opus无限使用
-- Claude Sonnet无限使用
-- 优先访问新功能
+[🔗 Đọc trực tuyến phụ lục này](https://awesome.tryopenclaw.asia/appendix/C-api-comparison/)
 
-#### 适用场景
+Truy cập website để có trải nghiệm đọc tối ưu nhất:
+- 📱 Thiết kế tương thích hoàn hảo cho điện thoại, máy tính bảng và máy tính để bàn
+- 🌙 Hỗ trợ chế độ nền tối (Dark mode) bảo vệ thị lực
+- 🔍 Tích hợp sẵn công cụ tìm kiếm, nhanh chóng tra cứu nội dung
+- 📋 Điều hướng mục lục linh hoạt, dễ dàng chuyển đổi qua lại giữa các chương
 
-- 重度使用（每天使用超过500万Token）
-- 需要使用Claude Opus的场景
-- 编程开发场景
-
-#### 成本对比
-
-假设每月使用500万Token：
-- 使用API：500万 × $3/M = $15
-- 使用Pro：$20/月
-
-**结论**：如果每月使用超过700万Token，Pro更划算。
-
----
-
-### C.4.4 如何将订阅账号转为API使用
-
-#### 方法1：使用第三方工具
-
-有一些第三方工具可以将ChatGPT Plus或Claude Pro转为API使用，如：
-- ChatGPT-to-API
-- Claude-to-API
-
-**风险提示**：使用第三方工具可能违反服务条款，账号可能被封禁。
-
-#### 方法2：使用官方API
-
-如果你已经有Plus或Pro订阅，可以额外购买API额度，享受订阅用户的优惠价格。
-
----
-
-## 📊 综合对比表
-
-### 价格对比（按100万Token计算）
-
-| 服务商 | 模型 | 输入价格 | 输出价格 | 总成本 | 性价比 |
-|--------|------|---------|---------|--------|--------|
-| DeepSeek | V3 | ¥0.1 | ¥0.4 | ¥0.5 | ⭐⭐⭐⭐⭐ |
-| GLM | 4 Flash | ¥0.01 | ¥0.04 | ¥0.05 | ⭐⭐⭐⭐⭐ |
-| Kimi | k2.5 | ¥0.5 | ¥2 | ¥2.5 | ⭐⭐⭐⭐⭐ |
-| 通义千问 | Turbo | ¥0.03 | ¥0.06 | ¥0.09 | ⭐⭐⭐⭐⭐ |
-| 文心一言 | Speed | ¥0.04 | ¥0.08 | ¥0.12 | ⭐⭐⭐⭐ |
-| 腾讯混元 | Lite | ¥0.015 | ¥0.06 | ¥0.075 | ⭐⭐⭐⭐⭐ |
-| Gemini | 2.0 Flash | $0.075 | $0.3 | $0.375 (¥2.6) | ⭐⭐⭐⭐ |
-| Claude | Sonnet 4 | $3 | $15 | $18 (¥126) | ⭐⭐⭐ |
-| GPT | 4 Turbo | $10 | $30 | $40 (¥280) | ⭐⭐ |
-
-### 功能对比
-
-| 服务商 | 中文能力 | 代码能力 | 上下文 | 速度 | 稳定性 |
-|--------|---------|---------|--------|------|--------|
-| Kimi | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | 200K | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
-| DeepSeek | ⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | 64K | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ |
-| GLM-4 | ⭐⭐⭐⭐⭐ | ⭐⭐⭐ | 128K | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ |
-| Claude | ⭐⭐⭐ | ⭐⭐⭐⭐⭐ | 200K | ⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
-| GPT-4 | ⭐⭐⭐ | ⭐⭐⭐⭐ | 128K | ⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
-| Gemini | ⭐⭐⭐ | ⭐⭐⭐⭐ | 1M | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ |
-
----
-
-## 💡 选择建议
-
-### 按场景选择
-
-#### 1. 个人用户（预算有限）
-
-**推荐方案**：
-- 主力模型：DeepSeek-V3 或 GLM-4 Flash
-- 备用模型：Kimi k2.5
-- 月成本：¥5-20元
-
-**理由**：
-- 价格极低，适合大量使用
-- 中文能力强
-- 无需代理，速度快
-
-#### 2. 企业用户（注重质量）
-
-**推荐方案**：
-- 主力模型：Kimi k2.5
-- 高质量场景：Claude Sonnet 4
-- 月成本：¥100-500元
-
-**理由**：
-- Kimi性价比高，适合日常使用
-- Claude质量高，适合重要场景
-- 成本可控
-
-#### 3. 开发者（编程场景）
-
-**推荐方案**：
-- 主力模型：DeepSeek-Coder
-- 复杂场景：Claude Sonnet 4
-- 月成本：¥50-200元
-
-**理由**：
-- DeepSeek-Coder代码能力强，价格低
-- Claude适合复杂编程任务
-- 成本可控
-
-#### 4. 学生（免费额度优先）
-
-**推荐方案**：
-- 主力模型：Gemini 2.0 Flash（免费额度大）
-- 备用模型：GLM-4（¥100免费额度）
-- 月成本：¥0-10元
-
-**理由**：
-- Gemini免费额度超大
-- GLM-4新用户¥100额度
-- 基本可以免费使用
-
----
-
-## 📚 相关资源
-
-- OpenClaw官方文档：https://docs.openclaw.ai/
-- API配置教程：https://docs.openclaw.ai/api-config
-- 成本优化指南：https://docs.openclaw.ai/cost-optimization
-- 社区论坛：https://community.openclaw.ai/
-
----
-
-**提示**：本对比表会随着API价格和功能的变化而更新，建议定期查看以获取最新信息。
-
-
----
-
-## 🌐 在线阅读
-
-📖 **想在线阅读此附录？**
-
-[🔗 在线阅读此附录](https://awesome.tryopenclaw.asia/appendix/C-api-comparison/)
-
-访问网站获取更好的阅读体验：
-- 📱 响应式设计，支持手机、平板、电脑
-- 🌙 支持黑暗模式，保护眼睛
-- 🔍 内置搜索功能，快速定位内容
-- 📋 目录导航，轻松跳转章节
-
-[🏠 访问完整教程网站](https://awesome.tryopenclaw.asia)
+[🏠 Truy cập trang web giáo trình hoàn chỉnh](https://awesome.tryopenclaw.asia)

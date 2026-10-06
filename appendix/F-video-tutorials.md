@@ -1,82 +1,73 @@
-# 🔥🔥🔥云上OpenClaw实操视频教程合集
+# Phụ lục F: 🔥 Tuyển Tập Video Hướng Dẫn Thực Hành OpenClaw Trên Điện Toán Đám Mây
 
-## 📋 概述
+## 📋 Tổng quan
 
-OpenClaw（原Clawdbot）实操视频教程合集，包含一键部署、多平台接入等完整视频教程。
+Tuyển tập các video hướng dẫn thực hành OpenClaw (tên cũ là Clawdbot), bao gồm các video hướng dẫn đầy đủ từ triển khai một chạm (one-click deployment) đến kết nối đa nền tảng.
 
-## 🎬 部署教程视频
+## 🎬 Video hướng dẫn triển khai
 
-### 云上OpenClaw一键秒级部署指南
+### Hướng dẫn triển khai OpenClaw một chạm trong vài giây trên đám mây
 
-**视频链接**: https://cloud.tencent.com/developer/video/85161
+**Liên kết video**: https://cloud.tencent.com/developer/video/85161
 
-适合初次上手用户，手把手教您完成OpenClaw的一键部署。
+Phù hợp cho người dùng mới bắt đầu, cầm tay chỉ việc hướng dẫn bạn hoàn thành triển khai OpenClaw một chạm.
 
-## 📱 聊天应用接入视频教程
+## 📱 Video hướng dẫn kết nối ứng dụng trò chuyện
 
-### QQ接入教程
+### Hướng dẫn kết nối QQ
 
-**视频链接**: https://cloud.tencent.com/developer/video/85148
+**Liên kết video**: https://cloud.tencent.com/developer/video/85148
 
-快速将OpenClaw接入QQ，打造QQ智能机器人。
+Kết nối nhanh OpenClaw vào QQ, tạo bot thông minh trên QQ.
 
-### 企业微信接入教程
+### Hướng dẫn kết nối WeCom (WeChat Doanh nghiệp)
 
-**视频链接**: https://cloud.tencent.com/developer/video/85147
+**Liên kết video**: https://cloud.tencent.com/developer/video/85147
 
-学习如何将OpenClaw接入企业微信，构建企业级AI助手。
+Tìm hiểu cách kết nối OpenClaw vào WeCom, xây dựng trợ lý AI cấp doanh nghiệp.
 
-### 飞书接入教程
+### Hướng dẫn kết nối Lark / Feishu
 
-**视频链接**: https://cloud.tencent.com/developer/video/85124
+**Liên kết video**: https://cloud.tencent.com/developer/video/85124
 
-完整演示OpenClaw接入飞书的步骤和配置。
+Minh họa đầy đủ các bước thao tác và cấu hình kết nối OpenClaw vào Lark / Feishu.
 
-### 钉钉接入教程
+### Hướng dẫn kết nối DingTalk
 
-**视频链接**: https://cloud.tencent.com/developer/video/85146
+**Liên kết video**: https://cloud.tencent.com/developer/video/85146
 
-快速接入钉钉，实现钉钉智能办公自动化。
+Kết nối nhanh vào DingTalk, hiện thực hóa tự động hóa văn phòng thông minh trên DingTalk.
 
-## 🛠️ Skills使用视频教程
+## 🛠️ Video hướng dẫn sử dụng Skills
 
-### OpenClaw安装并使用Skills
+### Cài đặt và sử dụng Skills trong OpenClaw
 
-**视频链接**: https://cloud.tencent.com/developer/video/85076
+**Liên kết video**: https://cloud.tencent.com/developer/video/85076
 
-学习如何为OpenClaw安装和使用Skills，扩展功能。
+Tìm hiểu cách cài đặt và sử dụng Skills cho OpenClaw nhằm mở rộng tính năng.
 
-## ⚙️ 高级配置视频教程
+## ⚙️ Video hướng dẫn cấu hình nâng cao
 
-### 第三方中转API配置教程
+### Hướng dẫn cấu hình API trung gian bên thứ ba
 
-**视频链接**: https://www.bilibili.com/video/BV1RYNTzrEUY
+**Liên kết video**: https://www.bilibili.com/video/BV1RYNTzrEUY
 
-学习如何配置第三方中转API，优化API调用成本和稳定性。
+Tìm hiểu cách cấu hình API trung gian (proxy relay) bên thứ ba để tối ưu chi phí gọi API và tăng độ ổn định.
 
-## 📚 视频教程汇总
+## 📚 Bảng tổng hợp video hướng dẫn
 
-  -------------------------------------------------------------------------------------
-  教程类型                            视频链接
-  ----------------------------------- -------------------------------------------------
-  一键部署                            https://cloud.tencent.com/developer/video/85161
+| Thể loại hướng dẫn | Liên kết video |
+|---|---|
+| Triển khai một chạm | https://cloud.tencent.com/developer/video/85161 |
+| Kết nối QQ | https://cloud.tencent.com/developer/video/85148 |
+| Kết nối WeCom | https://cloud.tencent.com/developer/video/85147 |
+| Kết nối Lark / Feishu | https://cloud.tencent.com/developer/video/85124 |
+| Kết nối DingTalk | https://cloud.tencent.com/developer/video/85146 |
+| Sử dụng Skills | https://cloud.tencent.com/developer/video/85076 |
+| Cấu hình API trung gian bên thứ ba | https://www.bilibili.com/video/BV1RYNTzrEUY |
 
-  QQ接入                              https://cloud.tencent.com/developer/video/85148
+## 💡 Lời khuyên hữu ích
 
-  企业微信接入                        https://cloud.tencent.com/developer/video/85147
-
-  飞书接入                            https://cloud.tencent.com/developer/video/85124
-
-  钉钉接入                            https://cloud.tencent.com/developer/video/85146
-
-  Skills使用                          https://cloud.tencent.com/developer/video/85076
-
-  第三方中转API配置                   https://www.bilibili.com/video/BV1RYNTzrEUY
-  -------------------------------------------------------------------------------------
-
-## 💡 温馨提示
-
--   建议按顺序观看：部署 → 接入 → 进阶
--   视频可以暂停、回放，跟随操作
--   遇到问题可查看对应的图文教程
-
+- Nên theo dõi theo thứ tự: Triển khai → Kết nối nền tảng → Cấu hình nâng cao
+- Bạn có thể tạm dừng, tua lại video để thao tác từng bước theo hướng dẫn
+- Khi gặp lỗi hoặc vướng mắc, hãy tham khảo thêm các bài viết hướng dẫn bằng văn bản và hình ảnh tương ứng

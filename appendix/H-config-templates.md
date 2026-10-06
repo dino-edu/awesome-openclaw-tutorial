@@ -1,25 +1,27 @@
-# 附录H：配置文件模板和示例
+# Phụ lục H: Mẫu Tệp Cấu Hình và Ví Dụ Thực Tế
 
-> 📝 **开箱即用**：复制这些配置模板，快速开始使用OpenClaw
-
----
-
-## 📋 目录
-
-- [基础配置模板](#基础配置模板)
-- [API配置模板](#api配置模板)
-- [多平台集成配置](#多平台集成配置)
-- [Skills配置模板](#skills配置模板)
-- [自动化配置模板](#自动化配置模板)
-- [高级配置模板](#高级配置模板)
+> 📝 **Sẵn sàng sử dụng ngay**: Bạn có thể sao chép trực tiếp các mẫu cấu hình này để nhanh chóng thiết lập và vận hành OpenClaw.
 
 ---
 
-## 🎯 基础配置模板
+## 📋 Mục lục
 
-### 1. 最小配置（新手推荐）
+- [Mẫu cấu hình cơ bản](#mẫu-cấu-hình-cơ-bản)
+- [Mẫu cấu hình API](#mẫu-cấu-hình-api)
+- [Mẫu cấu hình tích hợp đa nền tảng](#mẫu-cấu-hình-tích-hợp-đa-nền-tảng)
+- [Mẫu cấu hình Skills](#mẫu-cấu-hình-skills)
+- [Mẫu cấu hình tự động hóa](#mẫu-cấu-hình-tự-động-hóa)
+- [Mẫu cấu hình nâng cao & tối ưu](#mẫu-cấu-hình-nâng-cao--tối-ưu)
+- [Cấu hình hoàn chỉnh cho môi trường sản xuất](#cấu-hình-hoàn-chỉnh-cho-môi-trường-sản-xuất)
+- [Công cụ hỗ trợ kiểm tra và sinh cấu hình](#công-cụ-hỗ-trợ-kiểm-tra-và-sinh-cấu-hình)
 
-**文件位置**：`~/.openclaw/config.json`
+---
+
+## 🎯 Mẫu cấu hình cơ bản
+
+### 1. Cấu hình tối giản (Khuyên dùng cho người mới)
+
+**Đường dẫn tệp**: `~/.openclaw/config.json`
 
 ```json
 {
@@ -43,14 +45,14 @@
 }
 ```
 
-**使用说明**：
-1. 替换 `YOUR_DEEPSEEK_API_KEY` 为你的API密钥
-2. 保存到 `~/.openclaw/config.json`
-3. 运行 `openclaw gateway run`
+**Hướng dẫn sử dụng**:
+1. Thay thế `YOUR_DEEPSEEK_API_KEY` bằng API Key thực tế của bạn
+2. Lưu vào tệp `~/.openclaw/config.json`
+3. Khởi chạy Gateway bằng lệnh `openclaw gateway run` hoặc `openclaw daemon start`
 
 ---
 
-### 2. 完整基础配置
+### 2. Cấu hình cơ bản đầy đủ
 
 ```json
 {
@@ -116,9 +118,9 @@
 
 ---
 
-## 🔑 API配置模板
+## 🔑 Mẫu cấu hình API
 
-### 1. 单一API配置（DeepSeek）
+### 1. Cấu hình API đơn lẻ (DeepSeek)
 
 ```json
 {
@@ -146,7 +148,7 @@
 
 ---
 
-### 2. 多API配置（推荐）
+### 2. Cấu hình đa API kết hợp (Khuyến nghị)
 
 ```json
 {
@@ -197,7 +199,7 @@
 
 ---
 
-### 3. 中转API配置
+### 3. Cấu hình dịch vụ API chuyển tiếp trung gian (Relay API)
 
 ```json
 {
@@ -229,7 +231,7 @@
 
 ---
 
-### 4. 智能路由配置
+### 4. Định tuyến mô hình thông minh (Smart Model Routing)
 
 ```json
 {
@@ -240,27 +242,27 @@
         {
           "condition": "tokens < 500",
           "model": "deepseek-chat",
-          "description": "简单任务"
+          "description": "Tác vụ ngắn đơn giản"
         },
         {
           "condition": "tokens >= 500 && tokens < 2000",
           "model": "gpt-3.5-turbo",
-          "description": "中等任务"
+          "description": "Tác vụ mức trung bình"
         },
         {
           "condition": "tokens >= 2000",
           "model": "gpt-4",
-          "description": "复杂任务"
+          "description": "Tác vụ suy luận phức tạp"
         },
         {
           "condition": "hasImage",
           "model": "gpt-4-vision",
-          "description": "图片理解"
+          "description": "Thấu cảm và phân tích hình ảnh"
         },
         {
           "condition": "isCode",
           "model": "deepseek-coder",
-          "description": "代码生成"
+          "description": "Viết và gỡ lỗi mã nguồn"
         }
       ]
     }
@@ -270,9 +272,9 @@
 
 ---
 
-## 📱 多平台集成配置
+## 📱 Mẫu cấu hình tích hợp đa nền tảng
 
-### 1. 飞书Bot配置
+### 1. Cấu hình Bot Lark / Feishu
 
 ```json
 {
@@ -291,8 +293,8 @@
       },
       "filters": {
         "onlyMentions": true,
-        "ignoreGroups": ["闲聊群"],
-        "keywords": ["openclaw", "帮助"]
+        "ignoreGroups": ["Nhóm buôn chuyện"],
+        "keywords": ["openclaw", "trợ giúp"]
       }
     }
   }
@@ -301,7 +303,7 @@
 
 ---
 
-### 2. 企业微信Bot配置
+### 2. Cấu hình Bot WeCom (WeChat Doanh nghiệp)
 
 ```json
 {
@@ -325,7 +327,7 @@
 
 ---
 
-### 3. 钉钉Bot配置
+### 3. Cấu hình Bot DingTalk
 
 ```json
 {
@@ -346,7 +348,7 @@
 
 ---
 
-### 4. Telegram Bot配置
+### 4. Cấu hình Bot Telegram
 
 ```json
 {
@@ -371,17 +373,17 @@
 
 ---
 
-### 5. 多Agent配置
+### 5. Cấu hình đa Agent phân công theo nhiệm vụ
 
 ```json
 {
   "agents": {
     "work": {
-      "name": "工作助手",
+      "name": "Trợ lý Công việc",
       "model": "gpt-4",
       "workspace": "~/Documents/Work",
       "channels": ["feishu"],
-      "systemPrompt": "你是一个专业的工作助手，帮助处理工作相关的任务。",
+      "systemPrompt": "Bạn là một trợ lý công việc chuyên nghiệp, chịu trách nhiệm xử lý các tác vụ nghiệp vụ văn phòng.",
       "skills": [
         "@openclaw/skill-file-search",
         "@openclaw/skill-calendar",
@@ -389,11 +391,11 @@
       ]
     },
     "personal": {
-      "name": "个人助手",
+      "name": "Trợ lý Cá nhân",
       "model": "deepseek-chat",
       "workspace": "~/Documents/Personal",
       "channels": ["telegram"],
-      "systemPrompt": "你是一个友好的个人助手，帮助处理日常生活中的各种问题。",
+      "systemPrompt": "Bạn là người bạn trợ lý cá nhân thân thiện, hỗ trợ giải quyết các vấn đề trong đời sống hàng ngày.",
       "skills": [
         "@openclaw/skill-web-search",
         "@openclaw/skill-weather",
@@ -401,11 +403,11 @@
       ]
     },
     "code": {
-      "name": "代码助手",
+      "name": "Trợ lý Lập trình",
       "model": "deepseek-coder",
       "workspace": "~/Projects",
       "channels": ["telegram"],
-      "systemPrompt": "你是一个专业的编程助手，精通多种编程语言。",
+      "systemPrompt": "Bạn là một kỹ sư phần mềm cao cấp, thành thạo nhiều ngôn ngữ lập trình và kiến trúc hệ thống.",
       "skills": [
         "@openclaw/skill-github",
         "@openclaw/skill-code-review",
@@ -418,9 +420,9 @@
 
 ---
 
-## 🧩 Skills配置模板
+## 🧩 Mẫu cấu hình Skills
 
-### 1. 基础Skills配置
+### 1. Cấu hình Skills cơ bản
 
 ```json
 {
@@ -444,7 +446,7 @@
 
 ---
 
-### 2. Skills详细配置
+### 2. Cấu hình Skills chi tiết kèm tham số
 
 ```json
 {
@@ -459,7 +461,7 @@
         "enabled": true,
         "config": {
           "provider": "apple",
-          "defaultCalendar": "工作"
+          "defaultCalendar": "Công việc"
         }
       }
     }
@@ -469,9 +471,9 @@
 
 ---
 
-## 🔄 自动化配置模板
+## 🔄 Mẫu cấu hình tự động hóa
 
-### 1. 定时任务配置
+### 1. Cấu hình tác vụ định kỳ (Cron Automation)
 
 ```json
 {
@@ -479,25 +481,25 @@
     "enabled": true,
     "tasks": [
       {
-        "name": "每日AI日报",
+        "name": "Bản tin AI hàng ngày",
         "schedule": "0 9 * * *",
         "action": "sendMessage",
         "params": {
           "channel": "feishu",
-          "message": "请生成今天的AI行业日报"
+          "message": "Vui lòng tổng hợp bản tin thị trường AI hôm nay"
         }
       },
       {
-        "name": "每周工作总结",
+        "name": "Báo cáo tổng kết tuần",
         "schedule": "0 18 * * 5",
         "action": "sendMessage",
         "params": {
           "channel": "feishu",
-          "message": "请生成本周的工作总结"
+          "message": "Vui lòng lập báo cáo tổng kết công việc tuần này"
         }
       },
       {
-        "name": "定时备份",
+        "name": "Sao lưu định kỳ",
         "schedule": "0 2 * * *",
         "action": "runCommand",
         "params": {
@@ -511,7 +513,7 @@
 
 ---
 
-### 2. 网站监控配置
+### 2. Giám sát website tự động (Website Monitor)
 
 ```json
 {
@@ -519,23 +521,23 @@
     "enabled": true,
     "sites": [
       {
-        "name": "OpenClaw官网",
+        "name": "Trang chủ OpenClaw",
         "url": "https://openclaw.ai",
         "interval": 3600,
         "selector": ".version",
         "notify": {
           "channel": "feishu",
-          "message": "OpenClaw官网有更新：{content}"
+          "message": "Trang chủ OpenClaw vừa có cập nhật mới: {content}"
         }
       },
       {
-        "name": "Claude API",
+        "name": "Tin tức Claude API",
         "url": "https://www.anthropic.com/news",
         "interval": 7200,
         "selector": "article:first-child",
         "notify": {
           "channel": "telegram",
-          "message": "Claude有新动态：{title}"
+          "message": "Claude vừa có thông báo mới: {title}"
         }
       }
     ]
@@ -545,7 +547,7 @@
 
 ---
 
-### 3. 文件监控配置
+### 3. Giám sát hệ thống tệp cục bộ (File Watcher)
 
 ```json
 {
@@ -558,7 +560,7 @@
         "action": "processInvoice",
         "notify": {
           "channel": "feishu",
-          "message": "新发票已处理：{filename}"
+          "message": "Hóa đơn mới đã được xử lý: {filename}"
         }
       },
       {
@@ -574,9 +576,9 @@
 
 ---
 
-## ⚙️ 高级配置模板
+## ⚙️ Mẫu cấu hình nâng cao & tối ưu
 
-### 1. 性能优化配置
+### 1. Tối ưu hóa hiệu năng (Caching & Queue)
 
 ```json
 {
@@ -609,7 +611,7 @@
 
 ---
 
-### 2. 安全配置
+### 2. Cấu hình an ninh chuyên sâu
 
 ```json
 {
@@ -654,7 +656,7 @@
 
 ---
 
-### 3. 监控和日志配置
+### 3. Cấu hình giám sát số liệu và cảnh báo (Prometheus Metrics)
 
 ```json
 {
@@ -678,19 +680,19 @@
           "metric": "cpu_usage",
           "threshold": 80,
           "duration": 300,
-          "message": "CPU使用率超过80%"
+          "message": "Mức sử dụng CPU vượt quá 80%"
         },
         {
           "metric": "memory_usage",
           "threshold": 90,
           "duration": 300,
-          "message": "内存使用率超过90%"
+          "message": "Mức chiếm dụng bộ nhớ RAM vượt quá 90%"
         },
         {
           "metric": "error_rate",
           "threshold": 5,
           "duration": 60,
-          "message": "错误率过高"
+          "message": "Tỷ lệ lỗi hệ thống tăng bất thường"
         }
       ]
     }
@@ -719,7 +721,7 @@
 
 ---
 
-### 4. 备份和恢复配置
+### 4. Sao lưu và phục hồi dữ liệu tự động
 
 ```json
 {
@@ -753,7 +755,7 @@
       "enabled": false,
       "type": "s3",
       "bucket": "openclaw-backups",
-      "region": "us-east-1",
+      "region": "ap-southeast-1",
       "accessKeyId": "xxx",
       "secretAccessKey": "xxx"
     }
@@ -763,9 +765,7 @@
 
 ---
 
-## 📦 完整配置示例
-
-### 生产环境配置
+## 📦 Cấu hình hoàn chỉnh cho môi trường sản xuất
 
 ```json
 {
@@ -858,12 +858,12 @@
     "enabled": true,
     "tasks": [
       {
-        "name": "每日日报",
+        "name": "Bản tin tổng hợp ngày",
         "schedule": "0 9 * * *",
         "action": "sendMessage",
         "params": {
           "channel": "feishu",
-          "message": "生成今日AI日报"
+          "message": "Tổng hợp bản tin ngành AI hôm nay"
         }
       }
     ]
@@ -929,65 +929,69 @@
 
 ---
 
-## 🔧 配置工具
+## 🔧 Công cụ hỗ trợ kiểm tra và sinh cấu hình
 
-### 配置验证脚本
+### Script kiểm tra tính hợp lệ của tệp cấu hình
 
 ```bash
 #!/bin/bash
-# 文件名：validate-config.sh
+# Tên tệp: validate-config.sh
 
 CONFIG_FILE="$HOME/.openclaw/config.json"
 
-echo "验证配置文件：$CONFIG_FILE"
+echo "Đang kiểm tra tệp cấu hình: $CONFIG_FILE"
 
-# 检查文件是否存在
+# 1. Kiểm tra sự tồn tại của tệp
 if [ ! -f "$CONFIG_FILE" ]; then
-  echo "❌ 配置文件不存在"
+  echo "❌ Tệp cấu hình không tồn tại!"
   exit 1
 fi
 
-# 验证JSON格式
+# 2. Kiểm tra tính hợp lệ của định dạng JSON
 if ! jq empty "$CONFIG_FILE" 2>/dev/null; then
-  echo "❌ JSON格式错误"
+  echo "❌ Lỗi định dạng cú pháp JSON!"
   exit 1
 fi
 
-echo "✅ JSON格式正确"
+echo "✅ Cú pháp JSON hoàn toàn hợp lệ."
 
-# 检查必需字段
+# 3. Kiểm tra các trường bắt buộc
 required_fields=("gateway" "models" "workspace")
 for field in "${required_fields[@]}"; do
   if ! jq -e ".$field" "$CONFIG_FILE" >/dev/null 2>&1; then
-    echo "❌ 缺少必需字段：$field"
+    echo "❌ Thiếu trường bắt buộc: $field"
     exit 1
   fi
-  echo "✅ 字段存在：$field"
+  echo "✅ Trường hợp lệ: $field"
 done
 
-echo "✅ 配置验证通过"
+echo "✅ Kiểm tra cấu hình thành công! Sẵn sàng khởi chạy."
 ```
 
-### 配置生成器
+### Script hỗ trợ sinh cấu hình tương tác
 
 ```bash
 #!/bin/bash
-# 文件名：generate-config.sh
+# Tên tệp: generate-config.sh
 
-echo "OpenClaw 配置生成器"
-echo "===================="
+echo "======================================"
+echo "    Trình Sinh Cấu Hình OpenClaw      "
+echo "======================================"
 
-# 询问基本信息
-read -p "选择部署模式 (local/cloud): " mode
-read -p "Gateway端口 (默认18789): " port
+# Nhập các thông tin cơ bản
+read -p "Chọn chế độ triển khai (local/cloud): " mode
+mode=${mode:-local}
+
+read -p "Cổng kết nối Gateway (mặc định 18789): " port
 port=${port:-18789}
 
-read -p "选择默认模型 (deepseek-chat/gpt-3.5-turbo): " model
+read -p "Chọn mô hình mặc định (deepseek-chat/gpt-3.5-turbo): " model
 model=${model:-deepseek-chat}
 
-read -p "输入API密钥: " api_key
+read -p "Nhập API Key tương ứng: " api_key
 
-# 生成配置
+# Tự động tạo tệp cấu hình JSON
+mkdir -p ~/.openclaw
 cat > ~/.openclaw/config.json << EOF
 {
   "gateway": {
@@ -1010,18 +1014,18 @@ cat > ~/.openclaw/config.json << EOF
 }
 EOF
 
-echo "✅ 配置文件已生成：~/.openclaw/config.json"
+echo "✅ Đã tạo thành công tệp cấu hình tại: ~/.openclaw/config.json"
 ```
 
 ---
 
-## 📚 相关资源
+## 📚 Tài liệu tham khảo liên quan
 
-- [第2章：环境搭建](../docs/01-basics/02-installation.md)
-- [第11章：高级配置](../docs/03-advanced/11-advanced-configuration.md)
-- [附录E：常见问题](E-common-problems.md)
-- [附录F：最佳实践](F-best-practices.md)
+- [Chương 2: Thiết lập môi trường](../docs/01-basics/02-installation.md)
+- [Chương 11: Cấu hình nâng cao](../docs/03-advanced/11-advanced-configuration.md)
+- [Phụ lục E: Tra cứu nhanh các sự cố thường gặp](E-common-problems.md)
+- [Phụ lục F: Kinh nghiệm tránh lỗi và thực hành tốt nhất](F-best-practices.md)
 
 ---
 
-**最后更新**：2026年2月14日
+**Cập nhật lần cuối**: 14/02/2026

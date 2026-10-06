@@ -1,89 +1,90 @@
-# 第17章：避坑指南与最佳实践
+# Phụ lục F: Kinh Nghiệm Tránh Lỗi và Thực Hành Tốt Nhất
 
-> 💡 **前人经验**：这些是社区总结的最佳实践，帮你避开常见的坑
-
----
-
-## 📋 目录
-
-- [新手常犯的10个错误](#新手常犯的10个错误)
-- [模型选择避坑](#模型选择避坑)
-- [成本控制避坑](#成本控制避坑)
-- [安全隐私注意事项](#安全隐私注意事项)
-- [性能优化最佳实践](#性能优化最佳实践)
-- [Skills使用最佳实践](#skills使用最佳实践)
-- [多平台集成最佳实践](#多平台集成最佳实践)
-- [自动化工作流最佳实践](#自动化工作流最佳实践)
+> 💡 **Kinh nghiệm từ thực chiến**: Đây là tập hợp các bài học và thực hành tốt nhất được đúc kết từ cộng đồng, giúp bạn né tránh những "cạm bẫy" phổ biến khi vận hành OpenClaw.
 
 ---
 
-## ❌ 新手常犯的10个错误
+## 📋 Mục lục
 
-### 错误1：不看文档就开始用
-
-**问题**：
-- 不了解基本概念就开始配置
-- 遇到问题不知道如何解决
-- 浪费大量时间试错
-
-**正确做法**：
-1. ✅ 先阅读[第1章：认识OpenClaw](../docs/01-basics/01-introduction.md)
-2. ✅ 按照[快速上手指南](../docs/01-basics/03-quick-start.md)操作
-3. ✅ 遇到问题先查[常见问题](E-common-problems.md)
-
-**时间节省**：至少节省2-3小时的试错时间
+- [10 sai lầm phổ biến nhất của người mới](#10-sai-lầm-phổ-biến-nhất-của-người-mới)
+- [Kinh nghiệm lựa chọn mô hình AI](#kinh-nghiệm-lựa-chọn-mô-hình-ai)
+- [Chiến lược tối ưu hóa chi phí](#chiến-lược-tối-ưu-hóa-chi-phí)
+- [Lưu ý quan trọng về an toàn và bảo mật](#lưu-ý-quan-trọng-về-an-toàn-và-bảo-mật)
+- [Thực hành tốt nhất về tối ưu hiệu năng](#thực-hành-tốt-nhất-về-tối-ưu-hiệu-năng)
+- [Thực hành tốt nhất khi sử dụng Skills](#thực-hành-tốt-nhất-khi-sử-dụng-skills)
+- [Thực hành tốt nhất khi tích hợp đa nền tảng](#thực-hành-tốt-nhất-khi-tích-hợp-đa-nền-tảng)
+- [Thực hành tốt nhất cho quy trình tự động hóa](#thực-hành-tốt-nhất-cho-quy-trình-tự-động-hóa)
+- [Lưu ý tránh lỗi khi nâng cấp phiên bản](#lưu-ý-tránh-lỗi-khi-nâng-cấp-phiên-bản)
 
 ---
 
-### 错误2：使用最贵的模型做所有事情
+## ❌ 10 sai lầm phổ biến nhất của người mới
 
-**问题**：
+### Sai lầm 1: Chưa đọc tài liệu đã vội vàng cấu hình
+
+**Vấn đề**:
+- Không nắm rõ kiến trúc cơ bản dẫn đến cấu hình sai lệch
+- Khi gặp lỗi không biết cách định vị nguyên nhân
+- Lãng phí nhiều giờ đồng hồ để thử - sai mò mẫm
+
+**Cách làm chuẩn xác**:
+1. ✅ Đọc kỹ [Chương 1: Làm quen với OpenClaw](../docs/01-basics/01-introduction.md)
+2. ✅ Thực hiện tuần tự theo [Hướng dẫn bắt đầu nhanh](../docs/01-basics/03-quick-start.md)
+3. ✅ Khi phát sinh sự cố, tra cứu ngay tại [Phụ lục E: Tra cứu nhanh các sự cố thường gặp](E-common-problems.md)
+
+**Hiệu quả**: Tiết kiệm ít nhất 2 đến 3 giờ loay hoay xử lý lỗi cơ bản.
+
+---
+
+### Sai lầm 2: Sử dụng mô hình đắt nhất cho mọi tác vụ
+
+**Vấn đề**:
 ```bash
-# ❌ 错误：用GPT-4做简单任务
+# ❌ Sai lầm: Sử dụng GPT-4 hoặc Claude Opus cho cả việc chào hỏi, tìm kiếm file
 openclaw config set models.default "gpt-4"
 
-# 结果：月费用500+元
+# Kết quả: Chi phí API lên tới hàng triệu VNĐ mỗi tháng
 ```
 
-**正确做法**：
+**Cách làm chuẩn xác**:
 ```bash
-# ✅ 正确：根据任务选择模型
-# 简单任务用DeepSeek
+# ✅ Đúng đắn: Phân tầng mô hình theo độ phức tạp của tác vụ
+# Tác vụ cơ bản dùng DeepSeek
 openclaw config set models.default "deepseek-chat"
 
-# 复杂任务用GPT-4
+# Tác vụ lập trình hoặc suy luận phức tạp dùng Claude / GPT-4
 openclaw config set models.complex "gpt-4"
 
-# 结果：月费用30-50元，节省90%
+# Kết quả: Chi phí giảm 90%, chỉ còn vài chục nghìn VNĐ mỗi tháng
 ```
 
-**成本对比**：
+**Bảng so sánh chi phí**:
 
-| 任务类型 | 错误选择 | 正确选择 | 成本差异 |
-|---------|---------|---------|---------|
-| 文件搜索 | GPT-4 ($0.03/1K) | DeepSeek ($0.001/1K) | 30倍 |
-| 简单问答 | GPT-4 | DeepSeek | 30倍 |
-| 代码生成 | GPT-4 | DeepSeek | 30倍 |
-| 复杂推理 | GPT-4 | GPT-4 | 相同 |
+| Thể loại tác vụ | Lựa chọn sai lầm | Lựa chọn tối ưu | Mức chênh lệch chi phí |
+|---|---|---|---|
+| Tìm kiếm tệp | GPT-4 ($0.03/1K) | DeepSeek ($0.001/1K) | Tiết kiệm 30 lần |
+| Hỏi đáp đơn giản | GPT-4 | DeepSeek / Kimi | Tiết kiệm 30 lần |
+| Sinh mã thông thường | GPT-4 | DeepSeek-Coder | Tiết kiệm 30 lần |
+| Suy luận kiến trúc phức tạp | GPT-4 | GPT-4 / Claude Sonnet | Ngang nhau (xứng đáng) |
 
 ---
 
-### 错误3：不配置工作目录
+### Sai lầm 3: Không giới hạn không gian thư mục làm việc (Workspace)
 
-**问题**：
-- OpenClaw可以访问所有文件
-- 误删除重要文件的风险
-- 隐私泄露风险
+**Vấn đề**:
+- OpenClaw có quyền truy cập vào toàn bộ ổ cứng
+- Nguy cơ xóa nhầm hoặc ghi đè lên các tệp tài liệu quan trọng của hệ thống
+- Rủi ro rò rỉ thông tin cá nhân và dữ liệu nhạy cảm
 
-**正确做法**：
+**Cách làm chuẩn xác**:
 ```bash
-# ✅ 配置专门的工作目录
+# ✅ Chỉ định không gian làm việc chuyên biệt
 openclaw config set workspace.path "~/Documents/OpenClaw"
 
-# ✅ 限制访问范围
+# ✅ Giới hạn phạm vi tìm kiếm tệp hợp lệ
 openclaw config set files.searchPaths '["~/Documents/OpenClaw", "~/Desktop"]'
 
-# ✅ 排除敏感目录
+# ✅ Đưa các thư mục nhạy cảm vào danh sách loại trừ tuyệt đối
 openclaw config set files.excludePaths '[
   "~/.ssh",
   "~/Documents/Private",
@@ -93,986 +94,359 @@ openclaw config set files.excludePaths '[
 
 ---
 
-### 错误4：API密钥明文存储
+### Sai lầm 4: Lưu trữ API Key dưới dạng văn bản thuần (Plain text)
 
-**问题**：
-```bash
-# ❌ 错误：在配置文件中明文存储
+**Vấn đề**:
+```json
+// ❌ Sai lầm: Lưu cứng chuỗi API Key vào tệp cấu hình
 {
   "models": {
     "providers": {
       "openai": {
-        "apiKey": "sk-1234567890abcdef"  // 明文！
+        "apiKey": "sk-1234567890abcdef"  // Nguy cơ rò rỉ cực cao!
       }
     }
   }
 }
 ```
 
-**正确做法**：
+**Cách làm chuẩn xác**:
 ```bash
-# ✅ 使用环境变量
+# ✅ Khai báo thông qua biến môi trường hệ thống
 export OPENAI_API_KEY="sk-xxx"
 export DEEPSEEK_API_KEY="sk-xxx"
 
-# ✅ 或使用密钥管理工具
+# ✅ Hoặc cấu hình OpenClaw đọc trực tiếp từ biến môi trường
 openclaw config set models.providers.openai.apiKey --from-env OPENAI_API_KEY
 
-# ✅ 设置文件权限
-chmod 600 ~/.openclaw/config.json
+# ✅ Phân quyền chặt chẽ cho tệp cấu hình (chỉ user hiện tại có quyền đọc/ghi)
+chmod 600 ~/.openclaw/openclaw.json
 ```
 
 ---
 
-### 错误5：不定期清理缓存
+### Sai lầm 5: Không định kỳ dọn dẹp bộ nhớ đệm (Cache)
 
-**问题**：
-- 缓存占用大量磁盘空间
-- 内存占用越来越高
-- 响应速度变慢
+**Vấn đề**:
+- Cache phình to chiếm dụng hàng gigabyte dung lượng ổ cứng
+- Mức chiếm dụng RAM tăng dần theo thời gian vận hành
+- Tốc độ phản hồi của Cổng Gateway trở nên ì ạch
 
-**正确做法**：
+**Cách làm chuẩn xác**:
 ```bash
-# ✅ 定期清理缓存（每周一次）
+# ✅ Chủ động dọn dẹp cache (định kỳ mỗi tuần một lần)
 openclaw cache clear --history
 openclaw cache clear --index
 
-# ✅ 配置自动清理
+# ✅ Bật cơ chế tự động dọn dẹp trong cấu hình
 openclaw config set cache.autoClean true
-openclaw config set cache.maxAge 7  # 7天
+openclaw config set cache.maxAge 7  # Dọn dẹp tệp cũ sau 7 ngày
 
-# ✅ 限制缓存大小
-openclaw config set cache.maxSize 1000  # MB
+# ✅ Đặt giới hạn dung lượng cache tối đa
+openclaw config set cache.maxSize 1000  # Giới hạn 1000 MB
 ```
 
 ---
 
-### 错误6：忽略版本更新
+### Sai lầm 6: Phớt lờ các bản cập nhật phiên bản
 
-**问题**：
-- 错过重要功能更新
-- 错过安全补丁
-- 遇到已修复的bug
+**Vấn đề**:
+- Bỏ lỡ các tính năng mới giúp nâng cao năng suất
+- Bỏ lỡ các bản vá bảo mật quan trọng
+- Tiếp tục gặp phải các lỗi mà cộng đồng đã giải quyết xong
 
-**正确做法**：
+**Cách làm chuẩn xác**:
 ```bash
-# ✅ 定期检查更新（每月一次）
+# ✅ Định kỳ kiểm tra cập nhật mới
 openclaw update check
 
-# ✅ 查看更新日志
+# ✅ Xem nhật ký thay đổi phiên bản
 openclaw changelog
 
-# ✅ 更新到最新版本
+# ✅ Cập nhật lên bản mới nhất
 openclaw update
 
-# ✅ 订阅更新通知
-# 关注GitHub Release: https://github.com/openclaw/openclaw/releases
+# ✅ Theo dõi thông báo phát hành trên GitHub
+# https://github.com/openclaw/openclaw/releases
 ```
-
-> ⚠️ **v2026.3.24 升级注意事项**：详见本附录末尾「版本升级避坑」章节。
 
 ---
 
-### 错误7：不备份配置
+### Sai lầm 7: Không sao lưu tệp cấu hình
 
-**问题**：
-- 配置丢失后需要重新设置
-- 无法恢复到之前的工作状态
-- 浪费大量时间
+**Vấn đề**:
+- Khi máy gặp sự cố hoặc cài lại hệ điều hành, toàn bộ cấu hình mất trắng
+- Mất hàng giờ thiết lập lại từ đầu các kênh chat, mô hình, bot prompt
 
-**正确做法**：
+**Cách làm chuẩn xác**:
 ```bash
-# ✅ 定期备份配置
-# 方案1：手动备份
+# ✅ Phương án 1: Sao lưu thủ công định kỳ
 cp -r ~/.openclaw ~/.openclaw.backup.$(date +%Y%m%d)
 
-# 方案2：使用Git管理
+# ✅ Phương án 2: Quản lý thư mục cấu hình bằng Git cục bộ
 cd ~/.openclaw
 git init
 git add .
-git commit -m "backup config"
+git commit -m "Sao lưu cấu hình OpenClaw"
 
-# 方案3：自动备份脚本
+# ✅ Phương án 3: Lập script tự động sao lưu
 cat > ~/backup-openclaw.sh << 'EOF'
 #!/bin/bash
 BACKUP_DIR=~/openclaw-backups
 mkdir -p $BACKUP_DIR
 tar -czf $BACKUP_DIR/openclaw-$(date +%Y%m%d-%H%M%S).tar.gz ~/.openclaw
-# 保留最近7天的备份
+# Tự động dọn dẹp các bản sao lưu cũ hơn 7 ngày
 find $BACKUP_DIR -name "openclaw-*.tar.gz" -mtime +7 -delete
 EOF
 
 chmod +x ~/backup-openclaw.sh
 
-# 添加到crontab（每天备份）
+# Cấu hình crontab để sao lưu tự động vào 2h sáng hàng ngày
 # 0 2 * * * ~/backup-openclaw.sh
 ```
 
 ---
 
-### 错误8：在生产环境测试新功能
+### Sai lầm 8: Thử nghiệm tính năng mới trực tiếp trên môi trường làm việc chính
 
-**问题**：
-- 新功能可能不稳定
-- 影响正常工作
-- 数据可能损坏
+**Vấn đề**:
+- Tính năng thử nghiệm chưa ổn định có thể làm gián đoạn bot đang phục vụ công việc
+- Dữ liệu lịch sử trò chuyện hoặc cơ sở tri thức có thể bị hỏng
 
-**正确做法**：
+**Cách làm chuẩn xác**:
 ```bash
-# ✅ 使用测试环境
-# 方案1：创建测试配置
+# ✅ Phương án 1: Khởi tạo thư mục cấu hình riêng cho môi trường thử nghiệm
 cp -r ~/.openclaw ~/.openclaw-test
 export OPENCLAW_CONFIG_DIR=~/.openclaw-test
 
-# 方案2：使用Docker
+# ✅ Phương án 2: Triển khai thử nghiệm qua Docker cô lập
 docker run -it openclaw/openclaw:latest
 
-# 方案3：使用不同端口
+# ✅ Phương án 3: Mở một cổng Gateway thử nghiệm riêng biệt
 openclaw gateway run --port 18790 --config ~/.openclaw-test/config.json
 ```
 
 ---
 
-### 错误9：不监控API使用量
+### Sai lầm 9: Không giám sát và cảnh báo lượng tiêu thụ Token
 
-**问题**：
-- API费用突然暴增
-- 不知道哪里消耗了额度
-- 预算超支
+**Vấn đề**:
+- Một script chạy lặp vô tận có thể đốt cạn hạn mức thẻ tín dụng
+- Không kiểm soát được phòng ban hoặc tác vụ nào đang tốn nhiều chi phí nhất
 
-**正确做法**：
+**Cách làm chuẩn xác**:
 ```bash
-# ✅ 启用使用量监控
+# ✅ Kích hoạt tính năng giám sát định mức tiêu thụ
 openclaw config set monitoring.enabled true
 
-# ✅ 设置预算警告
-openclaw config set monitoring.budget.daily 10  # 每天10元
-openclaw config set monitoring.budget.monthly 300  # 每月300元
+# ✅ Thiết lập ngưỡng cảnh báo ngân sách
+openclaw config set monitoring.budget.daily 10     # Cảnh báo khi vượt ngưỡng theo ngày
+openclaw config set monitoring.budget.monthly 300  # Ngưỡng ngân sách theo tháng
 
-# ✅ 查看使用统计
+# ✅ Tra cứu thống kê lượng dùng
 openclaw stats usage --daily
 openclaw stats usage --monthly
 
-# ✅ 设置通知
+# ✅ Cấu hình nhận thông báo khi chạm ngưỡng 80%
 openclaw config set monitoring.alerts.email "your@email.com"
-openclaw config set monitoring.alerts.threshold 0.8  # 80%时警告
+openclaw config set monitoring.alerts.threshold 0.8
 ```
 
 ---
 
-### 错误10：不使用Skills
+### Sai lầm 10: Tự viết lại code từ đầu thay vì tận dụng Skills có sẵn
 
-**问题**：
-- 手动实现已有的功能
-- 浪费时间重复造轮子
-- 功能不如专业Skills完善
+**Vấn đề**:
+- Lãng phí thời gian "phát minh lại chiếc bánh xe"
+- Tự viết công cụ thường thiếu các cơ chế xử lý lỗi biên mà cộng đồng đã giải quyết
 
-**正确做法**：
+**Cách làm chuẩn xác**:
 ```bash
-# ✅ 先搜索是否有现成的Skills
+# ✅ Luôn tìm kiếm trên chợ kỹ năng trước
 openclaw skills search "file search"
 
-# ✅ 安装必备Skills
+# ✅ Cài đặt các Skills chuẩn hóa đã qua kiểm chứng
 clawhub install @openclaw/skill-file-search
 clawhub install @openclaw/skill-web-search
 clawhub install @openclaw/skill-calendar
 
-# ✅ 定期浏览ClawHub
-# 访问：https://clawhub.ai
+# ✅ Thường xuyên khám phá các kỹ năng mới trên ClawHub: https://clawhub.ai
 ```
 
 ---
 
-## 🎯 模型选择避坑
+## 🎯 Kinh nghiệm lựa chọn mô hình AI
 
-### 场景1：日常对话
+### 1. Trò chuyện & công việc hàng ngày
+- **Không khuyến nghị**: GPT-4 nguyên bản (vừa tốn kém vừa có độ trễ cao cho các tác vụ chào hỏi)
+- **Khuyến nghị hàng đầu**:
+  1. **DeepSeek-Chat**: Cân bằng hiệu năng trên giá thành vô đối
+  2. **Kimi k2.5**: Rất mượt mà và tự nhiên trong ngữ cảnh văn bản
+  3. **GLM-4 Flash / Qwen-Plus**: Tốc độ phản hồi cực nhanh, giá siêu rẻ
 
-**❌ 错误选择**：GPT-4（贵且慢）
+### 2. Viết mã và lập trình chuyên sâu
+- **Khuyến nghị hàng đầu**:
+  1. **Claude 3.5 Sonnet**: Khả năng suy luận ngữ cảnh và sinh kiến trúc mã nguồn đỉnh cao nhất
+  2. **DeepSeek-Coder / DeepSeek-R1**: Tối ưu hóa sâu cho thuật toán và cú pháp, chi phí hạt dẻ
+  3. **GPT-4o**: Rất mạnh mẽ trong việc giải thích logic phức tạp
 
-**✅ 推荐选择**：
-1. DeepSeek-Chat（性价比最高）
-2. Kimi（中文友好）
-3. GLM-4（国产稳定）
-
-**配置示例**：
-```json
-{
-  "models": {
-    "default": "deepseek-chat",
-    "providers": {
-      "deepseek": {
-        "apiKey": "sk-xxx",
-        "models": {
-          "deepseek-chat": {
-            "maxTokens": 4000,
-            "temperature": 0.7
-          }
-        }
-      }
-    }
-  }
-}
-```
+### 3. Phân tích tài liệu dài & Sách chuyên ngành
+- **Khuyến nghị hàng đầu**:
+  1. **Gemini 2.0 Flash / 1.5 Pro**: Hỗ trợ cửa sổ ngữ cảnh khổng lồ 1M - 2M tokens
+  2. **Kimi k2.5**: Khả năng tra cứu thông tin chính xác trong tài liệu 200K tokens
 
 ---
 
-### 场景2：代码生成
+## 💰 Chiến lược tối ưu hóa chi phí
 
-**❌ 错误选择**：通用对话模型
+### 1. Phân tầng định tuyến thông minh (Smart Routing)
+- Lệnh ngắn, tra cứu nhanh (< 500 tokens): Định tuyến sang DeepSeek hoặc GLM-4 Flash
+- Lập trình và kiến trúc hệ thống: Định tuyến sang Claude Sonnet
+- Tiết kiệm tổng thể từ **60% đến 80%** chi phí gọi API hàng tháng.
 
-**✅ 推荐选择**：
-1. DeepSeek-Coder（专业代码模型）
-2. Claude-3.5-Sonnet（代码能力强）
-3. GPT-4（复杂逻辑）
+### 2. Tận dụng bộ nhớ đệm kết quả (Semantic Caching)
+- Khi người dùng hỏi các câu tương tự hoặc lặp lại thông tin tra cứu, trả về từ cache thay vì gọi lại mô hình AI. Tiết kiệm thêm **30% - 50%** chi phí.
 
-**配置示例**：
-```json
-{
-  "models": {
-    "code": "deepseek-coder",
-    "providers": {
-      "deepseek": {
-        "models": {
-          "deepseek-coder": {
-            "maxTokens": 8000,
-            "temperature": 0.2  // 代码生成用低温度
-          }
-        }
-      }
-    }
-  }
-}
-```
+### 3. Gom cụm tác vụ (Batch Processing)
+- Thay vì gọi 10 lần API để xử lý 10 tệp tin nhỏ lẻ, hãy gom chung vào một phiên làm việc duy nhất để tối ưu chi phí token mở đầu phiên (system prompt tokens).
 
 ---
 
-### 场景3：长文档处理
+## 🔒 Lưu ý quan trọng về an toàn và bảo mật
 
-**❌ 错误选择**：短上下文模型
+### 1. An toàn khóa bí mật (API Keys)
+- Tuyệt đối không commit tệp cấu hình chứa key lên GitHub công khai
+- Cấu hình file `.gitignore` để bỏ qua `openclaw.json` và các tệp môi trường `.env`
+- Phân quyền tệp cấu hình nghiêm ngặt (`chmod 600`)
 
-**✅ 推荐选择**：
-1. Kimi（200K上下文）
-2. Claude-3-Opus（200K上下文）
-3. GPT-4-Turbo（128K上下文）
+### 2. Kiểm soát dữ liệu riêng tư
+- Sử dụng các quy tắc tự động làm mờ (masking) đối với số điện thoại, số CCCD/CMND và thông tin thẻ tín dụng trước khi gửi lên API đám mây
+- Thiết lập danh sách cấm truy cập (`denyPaths`) đối với các thư mục tài chính, dữ liệu y tế cá nhân
 
-**配置示例**：
-```json
-{
-  "models": {
-    "longContext": "kimi",
-    "providers": {
-      "moonshot": {
-        "apiKey": "sk-xxx",
-        "models": {
-          "kimi": {
-            "maxTokens": 200000
-          }
-        }
-      }
-    }
-  }
-}
-```
+### 3. Bảo vệ Cổng Gateway khi mở ra Internet
+- Bắt buộc kích hoạt xác thực Token (`gateway.auth.mode: "token"`)
+- Luôn sử dụng HTTPS / SSL khi kết nối từ xa
+- Thiết lập tường lửa giới hạn danh sách địa chỉ IP được phép truy cập (IP Whitelist)
 
 ---
 
-### 场景4：多模态（图片理解）
+## ⚡ Thực hành tốt nhất về tối ưu hiệu năng
 
-**❌ 错误选择**：纯文本模型
-
-**✅ 推荐选择**：
-1. GPT-4-Vision
-2. Claude-3-Opus
-3. Gemini-Pro-Vision
-
-**配置示例**：
-```json
-{
-  "models": {
-    "vision": "gpt-4-vision",
-    "providers": {
-      "openai": {
-        "models": {
-          "gpt-4-vision": {
-            "maxTokens": 4000
-          }
-        }
-      }
-    }
-  }
-}
-```
+1. **Bật chế độ Streaming (Truyền luồng dữ liệu)**: Giúp người dùng nhìn thấy từng chữ xuất hiện ngay tức thì, giảm cảm giác phải chờ đợi phản hồi.
+2. **Khai thác Redis làm bộ nhớ đệm**: Khi triển khai cho nhóm làm việc hoặc môi trường nhiều người dùng, Redis giúp giảm tải đáng kể cho Gateway.
+3. **Định kỳ lập chỉ mục tệp (File Indexing)**: Thiết lập tiến trình quét tệp vào lúc nửa đêm (2h sáng) để việc tìm kiếm tài liệu ban ngày diễn ra chớp nhoáng.
 
 ---
 
-## 💰 成本控制避坑
+## 🧩 Thực hành tốt nhất khi sử dụng Skills
 
-### 策略1：分层使用模型
-
-**原则**：简单任务用便宜模型，复杂任务用贵模型
-
-**实施方案**：
-```json
-{
-  "models": {
-    "routing": {
-      "enabled": true,
-      "rules": [
-        {
-          "condition": "tokens < 500",
-          "model": "deepseek-chat"  // 简单任务
-        },
-        {
-          "condition": "tokens >= 500 && tokens < 2000",
-          "model": "gpt-3.5-turbo"  // 中等任务
-        },
-        {
-          "condition": "tokens >= 2000",
-          "model": "gpt-4"  // 复杂任务
-        }
-      ]
-    }
-  }
-}
-```
-
-**成本节省**：60-80%
+1. **Chỉ cài đặt các Skills thực sự cần thiết**: Cài quá nhiều kỹ năng dư thừa sẽ làm tốn dung lượng RAM và kéo dài thời gian phân giải công cụ của Agent.
+2. **Luôn kiểm toán an ninh bằng Skill Vetter**: Trước khi kích hoạt bất kỳ kỹ năng mới nào, hãy để Skill Vetter quét mã nguồn nhằm loại trừ rủi ro mã độc tấn công chuỗi cung ứng.
+3. **Thiết lập độ ưu tiên cho Skills**: Sắp xếp thứ tự ưu tiên cho các kỹ năng hay dùng để tránh xung đột định nghĩa công cụ giữa các package.
 
 ---
 
-### 策略2：使用缓存
+## 📱 Thực hành tốt nhất khi tích hợp đa nền tảng
 
-**原则**：相同问题不重复调用API
-
-**实施方案**：
-```json
-{
-  "cache": {
-    "enabled": true,
-    "ttl": 3600,  // 1小时
-    "maxSize": 1000,  // 最多缓存1000条
-    "strategy": "lru"  // 最近最少使用
-  }
-}
-```
-
-**成本节省**：30-50%
+1. **Tách biệt không gian giữa Công việc và Đời sống**: Cấu hình Agent riêng cho Lark/Feishu để xử lý công việc văn phòng, và một Agent riêng trên Telegram cho đời sống cá nhân.
+2. **Lọc thông báo thông minh trong nhóm chat**: Chỉ cho phép bot phản hồi khi được gắn thẻ nhắc tên (@mention), tránh việc bot chen ngang các cuộc trò chuyện tự nhiên của thành viên.
+3. **Thiết lập khung giờ làm việc**: Cấu hình tin nhắn phản hồi tự động ngoài giờ làm việc để tránh làm phiền ngoài giờ hành chính.
 
 ---
 
-### 策略3：批量处理
+## 🔄 Thực hành tốt nhất cho quy trình tự động hóa
 
-**原则**：合并多个小请求为一个大请求
-
-**❌ 错误做法**：
-```javascript
-// 发送10次请求
-for (let i = 0; i < 10; i++) {
-  await openclaw.ask(`处理文件${i}`);
-}
-// 成本：10次API调用
-```
-
-**✅ 正确做法**：
-```javascript
-// 合并为1次请求
-const files = Array.from({length: 10}, (_, i) => `文件${i}`);
-await openclaw.ask(`批量处理这些文件：${files.join(', ')}`);
-// 成本：1次API调用
-```
-
-**成本节省**：90%
+1. **Đảm bảo tính lũy thỏa (Idempotency)**: Đảm bảo rằng một tác vụ nếu bị chạy lại 2 lần do mạng chập chờn thì cũng không tạo ra dữ liệu trùng lặp.
+2. **Cơ chế thử lại có khoảng chờ tăng dần (Exponential Backoff)**: Khi kết nối mạng gián đoạn, tự động thử lại sau 1s, 2s, 4s thay vì dồn dập gửi request.
+3. **Ghi nhật ký chi tiết**: Luôn lưu vết nhật ký của các luồng công việc để dễ dàng tra cứu khi có bước bị đứt gãy.
 
 ---
 
-### 策略4：设置预算限制
+## 🚀 Lưu ý tránh lỗi khi nâng cấp phiên bản
 
-**实施方案**：
-```bash
-# 设置每日预算
-openclaw config set budget.daily 10  # 10元/天
+### Lưu ý quan trọng khi nâng cấp lên v2026.3.24 trở lên
 
-# 设置每月预算
-openclaw config set budget.monthly 300  # 300元/月
+> Đây là phiên bản ổn định quan trọng với nhiều bản vá bảo mật then chốt, khuyến nghị toàn bộ người dùng nên nâng cấp.
 
-# 超出预算时的行为
-openclaw config set budget.onExceed "notify"  # 通知
-# 或
-openclaw config set budget.onExceed "stop"  # 停止服务
-```
+#### ⚠️ Yêu cầu tối thiểu về phiên bản Node.js đã được nâng cấp
 
----
+Phiên bản v2026.3.24 điều chỉnh yêu cầu Node.js như sau:
 
-### 策略5：使用独享账号
-
-**适用场景**：重度使用（每月>1000次调用）
-
-**成本对比**：
-
-| 方案 | 月调用次数 | 按次付费 | 独享账号 | 节省 |
-|------|-----------|---------|---------|------|
-| 轻度使用 | 100 | ¥30 | ¥200 | -170 |
-| 中度使用 | 500 | ¥150 | ¥200 | -50 |
-| 重度使用 | 2000 | ¥600 | ¥200 | +400 |
-| 超重度 | 5000 | ¥1500 | ¥200 | +1300 |
-
-**结论**：月调用>1000次时，独享账号更划算
-
----
-
-## 🔒 安全隐私注意事项
-
-### 1. API密钥安全
-
-**必须做到**：
-```bash
-# ✅ 使用环境变量
-export OPENAI_API_KEY="sk-xxx"
-
-# ✅ 设置文件权限
-chmod 600 ~/.openclaw/config.json
-
-# ✅ 不要提交到Git
-echo ".openclaw/config.json" >> .gitignore
-
-# ✅ 定期轮换密钥
-# 每3个月更换一次API密钥
-```
-
-**绝对不要**：
-```bash
-# ❌ 明文存储在代码中
-const apiKey = "sk-1234567890abcdef";
-
-# ❌ 提交到公开仓库
-git add config.json
-git push
-
-# ❌ 分享配置文件
-# 不要把包含API密钥的配置文件发给别人
-```
-
----
-
-### 2. 数据隐私
-
-**敏感数据处理**：
-```json
-{
-  "privacy": {
-    "enabled": true,
-    "rules": [
-      {
-        "type": "phone",
-        "action": "mask",  // 脱敏
-        "pattern": "\\d{11}"
-      },
-      {
-        "type": "email",
-        "action": "mask"
-      },
-      {
-        "type": "idcard",
-        "action": "block"  // 阻止发送
-      }
-    ]
-  }
-}
-```
-
-**文件访问控制**：
-```json
-{
-  "files": {
-    "allowPaths": [
-      "~/Documents/OpenClaw",
-      "~/Desktop"
-    ],
-    "denyPaths": [
-      "~/.ssh",
-      "~/Documents/Private",
-      "~/Documents/Finance",
-      "~/Documents/Medical"
-    ]
-  }
-}
-```
-
----
-
-### 3. 网络安全
-
-**使用HTTPS**：
-```json
-{
-  "gateway": {
-    "ssl": {
-      "enabled": true,
-      "cert": "/path/to/cert.pem",
-      "key": "/path/to/key.pem"
-    }
-  }
-}
-```
-
-**IP白名单**：
-```json
-{
-  "gateway": {
-    "allowIPs": [
-      "127.0.0.1",
-      "192.168.1.0/24"
-    ]
-  }
-}
-```
-
----
-
-### 4. 审计日志
-
-**启用审计**：
-```json
-{
-  "audit": {
-    "enabled": true,
-    "logLevel": "info",
-    "logFile": "~/.openclaw/logs/audit.log",
-    "retention": 90  // 保留90天
-  }
-}
-```
-
-**定期检查**：
-```bash
-# 查看最近的操作
-tail -n 100 ~/.openclaw/logs/audit.log
-
-# 搜索敏感操作
-grep "delete" ~/.openclaw/logs/audit.log
-grep "upload" ~/.openclaw/logs/audit.log
-```
-
----
-
-## ⚡ 性能优化最佳实践
-
-### 1. 启用流式输出
-
-**配置**：
-```json
-{
-  "models": {
-    "streaming": true,
-    "streamingDelay": 50  // ms
-  }
-}
-```
-
-**效果**：
-- 响应速度提升：50-70%
-- 用户体验更好：边生成边显示
-
----
-
-### 2. 使用本地缓存
-
-**配置**：
-```json
-{
-  "cache": {
-    "enabled": true,
-    "type": "redis",  // 或 "memory"
-    "redis": {
-      "host": "localhost",
-      "port": 6379
-    }
-  }
-}
-```
-
-**效果**：
-- 响应速度提升：80-90%
-- API调用减少：30-50%
-
----
-
-### 3. 优化文件索引
-
-**配置**：
-```json
-{
-  "files": {
-    "index": {
-      "enabled": true,
-      "incremental": true,  // 增量索引
-      "schedule": "0 2 * * *",  // 每天凌晨2点
-      "excludePatterns": [
-        "node_modules",
-        ".git",
-        "*.log"
-      ]
-    }
-  }
-}
-```
-
-**效果**：
-- 搜索速度提升：90%+
-- 磁盘占用减少：50%
-
----
-
-### 4. 使用CDN加速
-
-**适用场景**：云端部署
-
-**配置**：
-```json
-{
-  "cdn": {
-    "enabled": true,
-    "provider": "cloudflare",
-    "domain": "openclaw.yourdomain.com"
-  }
-}
-```
-
-**效果**：
-- 全球访问速度提升：60-80%
-- 服务器负载降低：40%
-
----
-
-## 🧩 Skills使用最佳实践
-
-### 1. 只安装需要的Skills
-
-**❌ 错误做法**：
-```bash
-# 安装所有Skills
-clawhub install --all
-```
-
-**✅ 正确做法**：
-```bash
-# 只安装需要的Skills
-clawhub install @openclaw/skill-file-search
-clawhub install @openclaw/skill-web-search
-clawhub install @openclaw/skill-calendar
-```
-
-**原因**：
-- 减少内存占用
-- 提升启动速度
-- 降低冲突风险
-
----
-
-### 2. 定期更新Skills
-
-**配置自动更新**：
-```json
-{
-  "skills": {
-    "autoUpdate": true,
-    "updateSchedule": "0 3 * * 0"  // 每周日凌晨3点
-  }
-}
-```
-
-**手动更新**：
-```bash
-# 检查更新
-openclaw skills outdated
-
-# 更新所有Skills
-openclaw skills update --all
-
-# 更新特定Skills
-openclaw skills update @openclaw/skill-file-search
-```
-
----
-
-### 3. 配置Skills优先级
-
-**配置**：
-```json
-{
-  "skills": {
-    "priority": [
-      "@openclaw/skill-file-search",  // 高优先级
-      "@openclaw/skill-web-search",
-      "@openclaw/skill-calendar"      // 低优先级
-    ]
-  }
-}
-```
-
-**效果**：
-- 提升响应速度
-- 减少冲突
-- 更精准的结果
-
----
-
-## 📱 多平台集成最佳实践
-
-### 1. 分离工作和个人
-
-**配置多个Agent**：
-```json
-{
-  "agents": {
-    "work": {
-      "model": "gpt-4",
-      "workspace": "~/Documents/Work",
-      "channels": ["feishu"]
-    },
-    "personal": {
-      "model": "deepseek-chat",
-      "workspace": "~/Documents/Personal",
-      "channels": ["telegram"]
-    }
-  }
-}
-```
-
----
-
-### 2. 配置消息过滤
-
-**避免信息过载**：
-```json
-{
-  "channels": {
-    "feishu": {
-      "filters": {
-        "ignoreGroups": ["闲聊群", "通知群"],
-        "onlyMentions": true,  // 只响应@消息
-        "keywords": ["openclaw", "帮助"]
-      }
-    }
-  }
-}
-```
-
----
-
-### 3. 设置工作时间
-
-**配置**：
-```json
-{
-  "schedule": {
-    "workHours": {
-      "enabled": true,
-      "timezone": "Asia/Shanghai",
-      "hours": {
-        "monday": ["09:00-18:00"],
-        "tuesday": ["09:00-18:00"],
-        "wednesday": ["09:00-18:00"],
-        "thursday": ["09:00-18:00"],
-        "friday": ["09:00-18:00"]
-      }
-    },
-    "outOfHoursMessage": "我现在不在工作时间，紧急事项请发邮件"
-  }
-}
-```
-
----
-
-## 🔄 自动化工作流最佳实践
-
-### 1. 使用幂等操作
-
-**原则**：确保重复执行不会产生副作用
-
-**❌ 错误示例**：
-```javascript
-// 每次执行都创建新文件
-await createFile('report.txt', content);
-```
-
-**✅ 正确示例**：
-```javascript
-// 检查文件是否存在
-if (!await fileExists('report.txt')) {
-  await createFile('report.txt', content);
-} else {
-  await updateFile('report.txt', content);
-}
-```
-
----
-
-### 2. 添加错误处理
-
-**配置**：
-```json
-{
-  "automation": {
-    "errorHandling": {
-      "retry": {
-        "enabled": true,
-        "maxAttempts": 3,
-        "backoff": "exponential"
-      },
-      "notification": {
-        "enabled": true,
-        "channels": ["email", "feishu"]
-      }
-    }
-  }
-}
-```
-
----
-
-### 3. 记录执行日志
-
-**配置**：
-```json
-{
-  "automation": {
-    "logging": {
-      "enabled": true,
-      "level": "info",
-      "file": "~/.openclaw/logs/automation.log",
-      "rotation": {
-        "maxSize": "10M",
-        "maxFiles": 10
-      }
-    }
-  }
-}
-```
-
----
-
-## 🚀 版本升级避坑
-
-### v2026.3.24 升级注意事项（2026年3月）
-
-> 这是目前最新稳定版，包含重要安全修复，建议所有用户升级。
-
-**升级前必读**：
-
-#### ⚠️ Node.js 版本要求已提升
-
-v2026.3.24 对 Node.js 最低版本要求做了调整：
-
-| 系统 | 最低要求 |
-|------|---------|
+| Hệ điều hành | Yêu cầu tối thiểu |
+|---|---|
 | macOS | >= 22.16.0 |
 | Linux / WSL | >= 22.14.0 |
 | Windows | >= 22.14.0 |
 
-**升级前请先检查**：
+**Kiểm tra phiên bản trước khi cập nhật**:
 ```bash
 node --version
 ```
 
-如果版本不满足，先升级 Node：
+Nếu phiên bản hiện tại chưa đạt chuẩn, hãy dùng `nvm` nâng cấp trước:
 ```bash
-# 使用 nvm（推荐）
 nvm install 22
 nvm use 22
 nvm alias default 22
-
-# 验证
-node --version
 ```
 
-#### 升级步骤
+#### Các bước nâng cấp an toàn
 
 ```bash
-# 第一步：升级 OpenClaw
+# Bước 1: Nâng cấp gói OpenClaw toàn cục
 npm install -g openclaw@latest
 
-# 第二步：确认版本
-openclaw --version  # 应显示 2026.3.24
+# Bước 2: Xác nhận phiên bản mới
+openclaw --version  # Kết quả phải hiển thị từ 2026.3.24 trở lên
 
-# 第三步：重启 Gateway
+# Bước 3: Khởi động lại dịch vụ Gateway
 openclaw gateway restart
 
-# 第四步：验证正常运行
+# Bước 4: Kiểm tra trạng thái hệ thống
 openclaw status
 ```
 
-#### 已知问题与修复
+#### Bảng tổng hợp các sự cố đã được vá dứt điểm
 
-| 问题 | 受影响版本 | 状态 |
-|------|-----------|------|
-| WSL/Linux 安装后缺少 UI 资产（`scripts/ui.js` 缺失） | v2026.3.22 | ✅ 升级到 v2026.3.24 修复 |
-| Windows gateway 重启时弹出控制台黑窗口 | v2026.3.12 及以前 | ✅ v2026.3.13 已修复 |
-| Dashboard 工具密集型运行时 UI 卡死 | v2026.3.12 及以前 | ✅ v2026.3.13 已修复 |
-| setup code 可被重放攻击 | v2026.3.12 及以前 | ✅ v2026.3.13 已修复 |
+| Hiện tượng lỗi | Phiên bản ảnh hưởng | Trạng thái khắc phục |
+|---|---|---|
+| Môi trường WSL/Linux thiếu tài nguyên UI sau khi cài đặt (`scripts/ui.js`) | v2026.3.22 | ✅ Đã khắc phục hoàn toàn trên v2026.3.24 |
+| Trên Windows khi khởi động lại Gateway bị nhảy cửa sổ đen console | v2026.3.12 trở về trước | ✅ Đã khắc phục từ bản v2026.3.13 |
+| Giao diện Dashboard bị đơ khi chạy tác vụ gọi công cụ dồn dập | v2026.3.12 trở về trước | ✅ Đã khắc phục từ bản v2026.3.13 |
+| Lỗ hổng cho phép tấn công phát lại mã thiết lập (setup code replay) | v2026.3.12 trở về trước | ✅ Đã khắc phục từ bản v2026.3.13 |
 
-#### v2026.3.12 重要安全修复（如从更早版本升级请注意）
+#### Các bản vá an ninh quan trọng trong v2026.3.12
 
-v2026.3.12 修复了多个高危安全漏洞，**强烈建议**跨版本升级时了解：
-
-- 跨站 WebSocket 劫持路径已修复
-- workspace plugin 隐式自动加载（恶意代码执行风险）已修复
-- `/config`、`/debug` 接口权限绕过已修复
-- 共享 token 范围自我提权已修复
-
-如果你长期未升级（仍在使用 v2026.3.7 或更早版本），建议直接升级到最新版并重新审查配置。
-
-#### v2026.3.13~v2026.3.24 安全事件（橙皮书 v1.3/v1.4 追加）
-
-**WebSocket 0Day 漏洞**（360安全团队发现）：
-
-- 360 安全团队在 OpenClaw WebSocket 通信中发现 0Day 漏洞
-- 该漏洞可被利用进行跨站 WebSocket 劫持（CSWSH）
-- 已在 v2026.3.13 中紧急修复
-- 如果你使用 v2026.3.12 或更早版本，请**立即升级**
-
-**CNNVD 漏洞统计**：
-
-截至 2026年3月24日（橙皮书 v1.4 发布），OpenClaw 累计被收录的 CNNVD 漏洞数量：
-
-| 时间节点 | 累计漏洞数 | 说明 |
-|---------|-----------|------|
-| v2026.3.12 | 78个 | v2026.3.12 修复了多个高危漏洞 |
-| v2026.3.24 | **82个** | 新增4个漏洞，已全部修复 |
-
-**安全建议**：
-
-- **始终使用最新版本**：安全修复只包含在最新版中
-- **定期检查更新**：`openclaw update` 或关注官方 Release
-- **审查配置权限**：升级后重新检查 `/config`、`/debug` 等接口的访问权限
-- **启用认证**：确保 Gateway 启用了 token 认证，避免暴露到公网
-- **关注安全公告**：关注 [OpenClaw GitHub Security](https://github.com/nicepkg/gpt-runner/security) 获取最新安全信息
+Phiên bản v2026.3.12 đã vá các lỗ hổng an ninh cấp độ nguy hiểm cao:
+- Triệt tiêu đường dẫn tấn công chiếm quyền điều khiển WebSocket liên trang (CSWSH)
+- Ngăn chặn cơ chế tự động tải ngầm plugin trong workspace (nguy cơ thực thi mã từ xa)
+- Khắc phục lỗ hổng vượt qua kiểm tra phân quyền tại các endpoint `/config` và `/debug`
+- Khắc phục nguy cơ leo thang đặc quyền từ token dùng chung
 
 ---
 
-## 📚 相关资源
+## 📚 Tài nguyên tham khảo liên quan
 
-- [第16章：常见问题速查](E-common-problems.md)
-- [附录A：命令速查表](A-command-reference.md)
-- [附录C：API服务商对比](C-api-comparison.md)
-
----
-
-**最后更新**：2026年3月27日
-
+- [Phụ lục E: Tra cứu nhanh các sự cố thường gặp](E-common-problems.md)
+- [Phụ lục A: Bảng tra cứu nhanh lệnh CLI](A-command-reference.md)
+- [Phụ lục C: Bảng so sánh các nhà cung cấp dịch vụ API](C-api-comparison.md)
 
 ---
 
-## 🌐 在线阅读
+**Cập nhật lần cuối**: 27/03/2026  
 
-📖 **想在线阅读此附录？**
+---
 
-[🔗 在线阅读此附录](https://awesome.tryopenclaw.asia/appendix/F-best-practices/)
+## 🌐 Đọc trực tuyến
 
-访问网站获取更好的阅读体验：
-- 📱 响应式设计，支持手机、平板、电脑
-- 🌙 支持黑暗模式，保护眼睛
-- 🔍 内置搜索功能，快速定位内容
-- 📋 目录导航，轻松跳转章节
+📖 **Bạn muốn đọc phụ lục này trực tuyến?**
 
-[🏠 访问完整教程网站](https://awesome.tryopenclaw.asia)
+[🔗 Đọc trực tuyến phụ lục này](https://awesome.tryopenclaw.asia/appendix/F-best-practices/)
+
+Truy cập website để có trải nghiệm đọc tối ưu nhất:
+- 📱 Thiết kế tương thích hoàn hảo cho điện thoại, máy tính bảng và máy tính để bàn
+- 🌙 Hỗ trợ chế độ nền tối (Dark mode) bảo vệ thị lực
+- 🔍 Tích hợp sẵn công cụ tìm kiếm, nhanh chóng tra cứu nội dung
+- 📋 Điều hướng mục lục linh hoạt, dễ dàng chuyển đổi qua lại giữa các chương
+
+[🏠 Truy cập trang web giáo trình hoàn chỉnh](https://awesome.tryopenclaw.asia)

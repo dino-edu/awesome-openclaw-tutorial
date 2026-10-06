@@ -1,718 +1,570 @@
-# 附录B 常用Skills清单
+# Phụ lục B: Danh Mục Skills Thiết Yếu
 
-> 💡
-> **本附录目标**：提供OpenClaw常用Skills的详细清单，所有Skills均经过实战验证，确保可以正常安装使用。
+> 💡 **Mục tiêu của phụ lục này**: Cung cấp danh mục chi tiết các Skills thường dùng và đáng tin cậy trong OpenClaw. Toàn bộ Skills đều đã qua kiểm nghiệm thực tế, đảm bảo tương thích và hoạt động ổn định.
 
-## 📋 目录
+## 📋 Mục lục
 
--   B.0 四大必装Skills（安全与智能基础）
--   B.1 核心必装Skills（Top 10）
--   B.2 平台集成类Skills
--   B.3 开发工具类Skills
--   B.4 自动化类Skills
--   B.5 百度千帆系列Skills
--   B.7 进阶推荐Skills（15个深度解析）
--   B.8 Skills组合推荐
+- B.0 Bốn Skills Bắt Buộc Cài Đặt Đầu Tiên (Nền tảng an toàn & thông minh)
+- B.1 Top 10 Skills Cốt Lõi Khuyên Dùng
+- B.2 Nhóm Skills Tích Hợp Nền Tảng Trò Chuyện
+- B.3 Nhóm Skills Công Cụ Dành Cho Lập Trình Viên
+- B.4 Nhóm Skills Tự Động Hóa Quy Trình
+- B.5 Nhóm Skills Hệ Sinh Thái Baidu Qianfan
+- B.7 15 Skills Nâng Cao Đáng Giá Nhất (Phân tích chuyên sâu)
+- B.8 Gợi Ý Gói Kết Hợp Skills Theo Nhu Cầu Thực Tế
 
-## B.0 三大必装Skills（安全与智能基础）⚡
+## B.0 Bốn Skills Bắt Buộc Cài Đặt Đầu Tiên (Nền tảng an toàn & thông minh) ⚡
 
-> ⚠️
-> **重要提示**：以下是使用OpenClaw时**最先应该安装**的三个Skills，它们提供了安全保护和智能增强，是所有其他Skills的基础。
+> ⚠️ **Lưu ý đặc biệt quan trọng**: Dưới đây là 4 Skills bạn **phải cài đặt trước tiên** khi bắt đầu với OpenClaw. Chúng thiết lập lá chắn bảo vệ an ninh và tăng cường trí tuệ liên tục, làm nền tảng vững chắc cho mọi kỹ năng cài thêm sau này.
 
-### 1. Skill Vetter------Skills安全审查工具 🛡️
+### 1. Skill Vetter — Công cụ kiểm toán an ninh Skills 🛡️
 
-**核心作用**：
-在安装任何Skill之前，先帮你把那个Skill审查一遍，生成安全报告，告诉你这东西能不能装。类似于电脑时代的杀毒软件或安全管家。
+**Vai trò cốt lõi**:  
+Trước khi cài đặt bất kỳ Skill nào, công cụ này sẽ tự động rà soát toàn bộ mã nguồn của Skill đó, tạo báo cáo an ninh chi tiết và đưa ra kết luận rõ ràng xem có an toàn để cài đặt hay không. Cơ chế này tương tự như một phần mềm diệt virus hoặc chuyên gia bảo mật túc trực bên bạn.
 
-**功能特点**： - ✅ 自动扫描Skill代码，检测潜在恶意逻辑 - ✅
-分析Skill权限要求，识别过度权限申请 - ✅
-检查Skill依赖项，发现不安全的第三方库 - ✅
-生成详细的安全报告，给出安装建议 - ✅ 防止ClawHavoc类供应链攻击
+**Tính năng nổi bật**:
+- ✅ Tự động quét mã nguồn của Skill, phát hiện các logic độc hại tiềm ẩn
+- ✅ Phân tích yêu cầu phân quyền, cảnh báo việc xin quyền hạn vượt mức cần thiết
+- ✅ Kiểm tra các thư viện phụ thuộc (dependencies), phát hiện lỗ hổng bên thứ ba
+- ✅ Tạo báo cáo an ninh trực quan kèm theo khuyến nghị cài đặt cụ thể
+- ✅ Ngăn chặn hữu hiệu các cuộc tấn công chuỗi cung ứng kiểu ClawHavoc
 
-**安装**：
+**Cách cài đặt**:
 
-    # 通过ClawHub安装
-    clawhub install skill-vetter
+```bash
+# Cài đặt qua ClawHub
+clawhub install skill-vetter
 
-    # 或直接使用URL
-    帮我安装这个Skill：https://clawhub.ai/spclaudehome/skill-vetter
+# Hoặc yêu cầu trực tiếp qua Agent bằng liên kết
+Hãy cài đặt Skill này cho tôi: https://clawhub.ai/spclaudehome/skill-vetter
+```
 
-**使用示例**：
+**Ví dụ sử dụng thực tế**:
 
-    你：帮我检查一下nano-banana-pro这个Skill是否安全
+```text
+Bạn: Hãy kiểm tra giúp tôi xem Skill nano-banana-pro này có an toàn không.
 
-    Skill Vetter：正在扫描 nano-banana-pro...
-    ✅ 代码审查通过
-    ✅ 权限要求正常
-    ✅ 依赖项安全
-    ✅ 无恶意行为
+Skill Vetter: Đang quét nano-banana-pro...
+✅ Rà soát mã nguồn: Đạt chuẩn an toàn
+✅ Yêu cầu phân quyền: Hợp lý, không vượt quyền
+✅ Thư viện phụ thuộc: An toàn
+✅ Hành vi độc hại: Không phát hiện
 
-    安全评分：9.5/10
-    建议：可以安全安装
+Điểm an toàn: 9.5/10
+Khuyến nghị: An toàn, có thể tiến hành cài đặt.
+```
 
-**推荐指数**：⭐⭐⭐⭐⭐（必装！必装！必装！）
+**Mức độ khuyến nghị**: ⭐⭐⭐⭐⭐ (Bắt buộc phải cài đặt!)
 
-**为什么是必装第一优先级**： \>
-"任何朋友问我怎么把控安全问题，或者要装什么skills，我永远推荐的第一个必备的Skills。大家绝对不要迷信各种所谓的下载量。一定要清楚，下载量大
-≠ 非恶意。所以，进行一遍安全审查，是绝对有必要的。"
+**Tại sao đây là ưu tiên số một**:  
+> "Bất kỳ người bạn nào hỏi tôi làm sao để kiểm soát an ninh hoặc nên cài Skill gì trước, tôi luôn luôn khuyến nghị Skill Vetter đầu tiên. Mọi người tuyệt đối đừng mù quáng tin vào số lượt tải về. Phải luôn nhớ rằng: lượt tải cao KHÔNG đồng nghĩa với việc không chứa mã độc. Do đó, việc tự động kiểm toán an ninh trước khi nạp vào hệ thống là điều bắt buộc."
 
-**核心价值**： - 🛡️ **安全第一**：防止恶意Skill破坏系统 - 🔍
-**全面审查**：从代码到权限的完整检查 - 📊
-**清晰报告**：易懂的评分和建议 - ⚡ **快速响应**：秒级完成扫描 - 🎯
-**精准识别**：基于最新威胁情报
+**Giá trị cốt lõi**:
+- 🛡️ **An ninh là trên hết**: Ngăn chặn mã độc phá hoại hệ thống và tệp dữ liệu cá nhân
+- 🔍 **Rà soát toàn diện**: Từ mã nguồn đến phân quyền và các module bên thứ ba
+- 📊 **Báo cáo rõ ràng**: Đánh giá bằng thang điểm và khuyến nghị dễ hiểu
+- ⚡ **Tốc độ nhanh chóng**: Quét xong chỉ trong vài giây
+- 🎯 **Nhận diện chuẩn xác**: Cập nhật theo các thông tin tình báo mối đe dọa mới nhất
 
-**为什么不能只看下载量**：
+**Vì sao không nên chỉ nhìn vào số lượt tải về**:
 
-    ❌ 错误认知：下载量高 = 安全
-       - 攻击者可以刷下载量
-       - 恶意Skill可能伪装成热门工具
-       - 早期用户可能未发现问题
+```text
+❌ Nhận thức sai lầm: Lượt tải về nhiều = Chắc chắn an toàn
+   - Kẻ tấn công hoàn toàn có thể dùng bot cày lượt tải ảo
+   - Mã độc có thể ngụy trang dưới dạng công cụ bắt mắt, theo xu hướng
+   - Những người dùng sớm có thể chưa kịp phát hiện ra hành vi đánh cắp dữ liệu
 
-    ✅ 正确做法：使用Skill Vetter审查
-       - 基于代码实际分析
-       - 不受人气影响
-       - 客观的安全评估
+✅ Cách làm chuẩn xác: Luôn dùng Skill Vetter kiểm toán
+   - Phân tích trực tiếp dựa trên mã thực tế
+   - Không bị thao túng bởi độ phổ biến hay lượt tải
+   - Đánh giá mức độ an toàn hoàn toàn khách quan
+```
 
-**使用建议**： 1. ✅ 安装OpenClaw后第一个安装的Skill 2. ✅
-安装任何其他Skill前先审查 3. ✅ 定期扫描已安装的Skills 4. ✅
-关注安全评分更新 5. ✅ 分享安全报告给社区
+**Địa chỉ trên ClawHub**: https://clawhub.ai/spclaudehome/skill-vetter
 
-**ClawHub地址**：https://clawhub.ai/spclaudehome/skill-vetter
+---
 
-### 2. find-skills------智能技能发现 🔍
+### 2. find-skills — Tìm kiếm và khám phá kỹ năng thông minh 🔍
 
-**核心作用**：
-当OpenClaw无法完成某个任务时，自动搜索并推荐合适的Skills，让AI帮你找工具。
+**Vai trò cốt lõi**:  
+Khi OpenClaw gặp phải một yêu cầu nằm ngoài khả năng hiện tại, Skill này sẽ tự động tìm kiếm trên kho kỹ năng và đề xuất các Skills phù hợp nhất, biến AI thành trợ lý tự đi tìm công cụ cho chính mình.
 
-**功能特点**： - ✅ 自动识别任务需求 - ✅ 搜索ClawHub上的相关Skills - ✅
-推荐最匹配的Skills - ✅ 提供安装建议 - ✅ 节省手动搜索时间
+**Tính năng nổi bật**:
+- ✅ Tự động phân tích nhu cầu thực tế của tác vụ
+- ✅ Tìm kiếm thông minh trên ClawHub các Skills liên quan
+- ✅ Đề xuất phương án tối ưu nhất kèm đánh giá cộng đồng
+- ✅ Cung cấp lệnh cài đặt tức thì, tiết kiệm thời gian tìm kiếm thủ công
 
-**安装**：
+**Cách cài đặt**:
 
-    clawhub install find-skills
+```bash
+clawhub install find-skills
+```
 
-**使用示例**：
+**Ví dụ sử dụng thực tế**:
 
-    你：帮我把这个视频转成GIF动图
+```text
+Bạn: Hãy chuyển đổi đoạn video này thành ảnh động GIF giúp tôi.
 
-    OpenClaw：[检测到无法完成]
-    正在搜索相关Skills...
-    找到了：video-to-gif
-    评分：4.8/5.0
-    功能：视频转GIF，支持格式转换、压缩、调帧率
-    是否安装？[Y/n]
+OpenClaw: [Phát hiện chưa có công cụ xử lý trực tiếp]
+Đang tìm kiếm Skills tương ứng trên kho lưu trữ...
+Đã tìm thấy: video-to-gif
+Đánh giá: 4.8/5.0
+Tính năng: Chuyển đổi video sang GIF, hỗ trợ nén, chỉnh tốc độ khung hình.
+Bạn có muốn tôi cài đặt Skill này không? [Y/n]
+```
 
-**推荐指数**：⭐⭐⭐⭐⭐（必装！）
+**Mức độ khuyến nghị**: ⭐⭐⭐⭐⭐ (Bắt buộc phải cài đặt!)
 
-**GitHub**:
-https://github.com/vercel-labs/skills/tree/main/skills/find-skills
+**Kho lưu trữ GitHub**: https://github.com/vercel-labs/skills/tree/main/skills/find-skills
 
-### 3. self-improving——自我反思与持续学习 🧠
+---
 
-**核心作用**：
-具备自我反思、自我批评、自我学习和自我组织记忆的能力，能够评估自身工作、发现错误并永久改进。
+### 3. self-improving — Tự soi chiếu và học tập liên tục 🧠
 
-**功能特点**：
-- ✅ 自我反思：评估自己的工作质量
-- ✅ 自我批评：发现错误并改进
-- ✅ 自我学习：从用户反馈中学习
-- ✅ 记忆管理：在 ~/self-improving/ 目录中维护分层记忆结构
-- ✅ 长期固化：定期将学习内容固化到 AGENTS.md 等永久记忆文件
+**Vai trò cốt lõi**:  
+Trang bị cho AI năng lực tự phản tư (self-reflection), tự phê bình, học tập từ sai sót và tự tổ chức lại hệ thống bộ nhớ. AI sẽ tự đánh giá chất lượng sản phẩm công việc của mình, phát hiện điểm chưa tốt và hoàn thiện bền vững qua thời gian.
 
-**安装**：
+**Tính năng nổi bật**:
+- ✅ Tự soi chiếu: Tự đánh giá mức độ hoàn thiện của công việc vừa làm
+- ✅ Tự sửa sai: Nhận diện lỗi ngữ pháp, cú pháp lệnh hoặc logic để khắc phục
+- ✅ Học tập thích ứng: Ghi nhận sâu sắc các góp ý và sở thích từ phản hồi của người dùng
+- ✅ Quản lý bộ nhớ phân tầng: Duy trì cấu trúc ghi nhớ chuyên biệt tại thư mục `~/self-improving/`
+- ✅ Khắc sâu dài hạn: Định kỳ hợp nhất tri thức đã học vào các tệp vĩnh viễn như `AGENTS.md`
 
-    clawhub install self-improving
+**Cách cài đặt**:
 
-**技术信息**：
-- **名称**：self-improving
-- **作者**：@ivangdavila
-- **下载量**：67,500+
-- **依赖**：无外部依赖
-- **支持系统**：Linux、macOS、Windows
+```bash
+clawhub install self-improving
+```
 
-**使用示例**：
+**Thông tin kỹ thuật**:
+- **Tên**: self-improving
+- **Tác giả**: @ivangdavila
+- **Lượt tải**: 67.500+
+- **Phụ thuộc**: Không phụ thuộc thư viện ngoài
+- **Hệ điều hành hỗ trợ**: Linux, macOS, Windows
 
-    # 场景：自我反思和改进
-    self-improving：我反思了一下上次的工作，发现有几个地方可以改进：
-    1. 代码格式不够统一
-    2. 缺少错误处理
-    3. 没有考虑边界情况
-    我已经更新了我的工作方式，下次会做得更好。
+**Ví dụ vận hành**:
 
-**推荐指数**：⭐⭐⭐⭐⭐（必装！）
+```text
+self-improving: Tôi vừa tự soi chiếu lại kết quả xử lý công việc vừa rồi và nhận thấy một số điểm cần cải thiện:
+1. Định dạng code chưa thực sự đồng nhất
+2. Còn thiếu các khối bắt lỗi ngoại lệ chi tiết
+3. Chưa bao quát hết các trường hợp dữ liệu biên (edge cases)
+Tôi đã cập nhật quy trình làm việc của mình vào bộ nhớ để lần sau thực hiện chuẩn xác hơn.
+```
 
-**ClawHub**：https://clawhub.ai/ivangdavila/self-improving
+**Mức độ khuyến nghị**: ⭐⭐⭐⭐⭐ (Bắt buộc phải cài đặt!)
 
-### 4. proactive-agent——主动预测与自救机制 🦞
+**Địa chỉ ClawHub**: https://clawhub.ai/ivangdavila/self-improving
 
-**核心作用**：
-打破传统AI"拨一下动一下"的被动模式，引入WAL协议防止上下文丢失，观察使用习惯后主动提出自动化建议。
+---
 
-**功能特点**：
-- ✅ WAL协议：先记录细节再响应，防止上下文丢失
-- ✅ 自动记录：上下文占用超60%时自动保存交互
-- ✅ 自救机制：任务失败时尝试10种自救方法
-- ✅ 主动预测：观察使用习惯后主动建议自动化
+### 4. proactive-agent — Dự đoán chủ động và cơ chế tự phục hồi 🦞
 
-**安装**：
+**Vai trò cốt lõi**:  
+Xóa bỏ hoàn toàn cơ chế thụ động kiểu cũ "gọi dạ bảo vâng, bảo đâu đánh đó". Ứng dụng giao thức ghi log WAL (Write-Ahead Logging) để chống mất ngữ cảnh, đồng thời quan sát thói quen làm việc hàng ngày của bạn để chủ động đề xuất tự động hóa quy trình.
 
-    clawhub install proactive-agent
+**Tính năng nổi bật**:
+- ✅ Giao thức WAL: Ghi chép chi tiết trước khi gửi phản hồi, triệt tiêu rủi ro đứt đoạn ngữ cảnh
+- ✅ Tự động lưu trữ: Khi ngữ cảnh phiên vượt quá 60%, tự động lưu vết tương tác quan trọng
+- ✅ Cơ chế tự phục hồi (Self-rescue): Khi tác vụ thất bại, thử nghiệm tuần tự 10 phương pháp tự giải cứu
+- ✅ Dự đoán chủ động: Phân tích các thao tác lặp lại và chủ động đề xuất kịch bản tự động hóa
 
-**使用示例**：
+**Cách cài đặt**:
 
-    # 场景：主动建议自动化
-    你：帮我把这个日报转成HTML格式
-    [几天后，又做了同样的操作]
+```bash
+clawhub install proactive-agent
+```
 
-    proactive-agent：我注意到你经常需要将日报转成HTML格式。
-    要不要我帮你自动化这个流程？
+**Ví dụ vận hành**:
 
-**推荐指数**：⭐⭐⭐⭐⭐（必装！）
+```text
+Bạn: Hãy xuất báo cáo hàng ngày này sang định dạng HTML giúp tôi.
+[Vài ngày sau, bạn lại yêu cầu thao tác tương tự]
 
-**GitHub**：https://github.com/leomariga/ProactiveAgent
+proactive-agent: Tôi nhận thấy bạn thường xuyên cần chuyển đổi báo cáo ngày sang HTML vào giờ này.
+Tôi có thể thiết lập quy trình tự động hóa thao tác này cho bạn mỗi ngày không?
+```
 
-**安全提示**：proactive-agent安装时可能显示VirusTotal警告（因包含外部API调用），这是正常的，可以安全使用。
+**Mức độ khuyến nghị**: ⭐⭐⭐⭐⭐ (Bắt buộc phải cài đặt!)
 
-> ⚠️ **注意区分**：self-improving（@ivangdavila）侧重自我反思与记忆管理，proactive-agent（@leomariga）侧重主动预测与自救机制，两者功能互补，建议同时安装。
+**Kho lưu trữ GitHub**: https://github.com/leomariga/ProactiveAgent
 
-### 三大必装Skills一键安装
+> ⚠️ **Phân biệt hai kỹ năng**: `self-improving` (@ivangdavila) tập trung vào tự phản tư và củng cố tri thức bộ nhớ, còn `proactive-agent` (@leomariga) nghiêng về khả năng dự đoán chủ động và tự giải cứu lỗi. Hai kỹ năng bổ trợ lẫn nhau hoàn hảo, khuyến nghị cài đặt song song cả hai.
 
-    # 一键安装三大必装Skills
-    clawhub install skill-vetter find-skills self-improving proactive-agent
+---
 
-**安装顺序建议**：
-1. **skill-vetter** → 先安装，用于审查后续所有Skills
-2. **find-skills** → 帮你自动发现需要的Skills
-3. **self-improving** → 让AI持续学习和改进
-4. **proactive-agent** → 让AI主动预测需求并自救
+### Lệnh cài đặt nhanh bộ 4 Skills nền tảng
 
-## B.1 核心必装Skills（Top 10）
+```bash
+clawhub install skill-vetter find-skills self-improving proactive-agent
+```
 
-### 1. McPorter------跨平台连接基石 🏗️
+**Thứ tự ưu tiên cài đặt khuyến nghị**:
+1. **skill-vetter** → Cài đầu tiên, dùng để thẩm định an ninh cho mọi Skill cài sau đó
+2. **find-skills** → Hỗ trợ tìm kiếm thông minh khi cần mở rộng công cụ
+3. **self-improving** → Giúp AI liên tục ghi nhớ bài học và nâng cao năng lực
+4. **proactive-agent** → Đưa AI sang chế độ chủ động đề xuất và xử lý sự cố
 
-**核心作用**： 让OpenClaw支持MCP（Model Context
-Protocol）协议，无需编写胶水代码，直接连接成千上万个现成的MCP Server。
+---
 
-**支持平台**： - PostgreSQL数据库 - GitHub - Slack - Notion -
-其他主流平台
+## B.1 Top 10 Skills Cốt Lõi Khuyên Dùng
 
-**安装**：
+### 1. McPorter — Cầu nối giao thức MCP đa nền tảng 🏗️
 
-    clawhub install mcporter
+**Vai trò cốt lõi**: Giúp OpenClaw hỗ trợ giao thức chuẩn MCP (Model Context Protocol). Không cần viết code kết nối thủ công, tương tác trực tiếp với hàng ngàn máy chủ MCP Server có sẵn.
 
-**配置示例**：
+**Hỗ trợ nền tảng**: CSDL PostgreSQL, GitHub, Slack, Notion và nhiều dịch vụ khác.
 
-    # 配置MCP服务器（以连接本地文件为例）
-    openclaw mcp add --transport stdio local-files npx -y @modelcontextprotocol/server-filesystem /root/Documents
+**Cài đặt**:
+```bash
+clawhub install mcporter
+```
 
-**使用场景**： - "读取Notion中的项目文档，整理成Markdown" -
-"把GitHub上的最新代码提交记录同步到本地"
+**Cấu hình mẫu**:
+```bash
+# Thêm một MCP server (ví dụ kết nối hệ thống tệp cục bộ)
+openclaw mcp add --transport stdio local-files npx -y @modelcontextprotocol/server-filesystem /root/Documents
+```
 
-**推荐指数**：⭐⭐⭐⭐⭐
+**Mức độ khuyến nghị**: ⭐⭐⭐⭐⭐
 
-### 2. Brave Search------实时信息检索 🔍
+---
 
-**核心作用**： 解决传统AI
-Agent"数据过时"的问题，让OpenClaw能进行实时全网搜索，获取最新的GitHub
-Issue、StackOverflow解答、行业资讯。
+### 2. Brave Search — Tra cứu dữ liệu thời gian thực trên Internet 🔍
 
-**安装**：
+**Vai trò cốt lõi**: Khắc phục triệt để hạn chế dữ liệu quá hạn của mô hình ngôn ngữ lớn, cho phép OpenClaw tìm kiếm toàn mạng theo thời gian thực để tra cứu Issue trên GitHub, câu trả lời mới nhất trên StackOverflow hay tin tức công nghệ nóng hổi.
 
-    clawhub install brave-search
+**Cài đặt**:
+```bash
+clawhub install brave-search
+```
 
-**使用场景**： -
-**代码报错排查**："帮我排查这个Python报错的原因，找最新的解决方案" -
-**竞品调研**："查一下某产品最新功能的实现方式，附代码片段"
+**Mức độ khuyến nghị**: ⭐⭐⭐⭐⭐
 
-**推荐指数**：⭐⭐⭐⭐⭐
+---
 
-### 3. summarize------内容摘要与视频知识提取 🎥
+### 3. summarize — Tóm tắt nội dung và trích xuất tri thức video 🎥
 
-**核心作用**：
-支持URL、网页、PDF、图片、音频和YouTube视频的摘要与字幕提取，由OpenClaw创始人@steipete开发的官方内置Skill。
+**Vai trò cốt lõi**: Hỗ trợ tóm tắt cực nhanh nội dung từ URL trang web, tệp tài liệu PDF, hình ảnh, âm thanh và tự động bóc tách phụ đề video YouTube. Kỹ năng do chính tác giả @steipete của OpenClaw phát triển.
 
-**安装**：
+**Cài đặt**:
+```bash
+clawhub install summarize
+```
 
-    clawhub install summarize
+**Mức độ khuyến nghị**: ⭐⭐⭐⭐
 
-> ⚠️ **说明**：原推荐的summarize未在ClawHub验证到，YouTube字幕提取功能已内置于summarize中。
+---
 
-**使用场景**：
-"提取这个2小时Next.js教程视频的核心代码逻辑，按章节整理成学习笔记"
+### 4. Công cụ tệp hệ thống (Tích hợp sẵn) — Thao tác tệp cục bộ 💾
 
-**推荐指数**：⭐⭐⭐⭐
+**Vai trò cốt lõi**: Cung cấp cho OpenClaw quyền đọc, ghi, chỉnh sửa, tái cấu trúc mã nguồn trên máy cục bộ, hỗ trợ sửa lỗi cú pháp hàng loạt và tự động commit Git.
 
-### 4. 文件系统工具（内置）------本地文件处理 💾
+**Cách thức kích hoạt**:
+```bash
+# Thao tác tệp là công cụ tích hợp sẵn (read/write/edit/exec), không cần cài đặt qua ClawHub
+# Chỉ cần đảm bảo đã kích hoạt quyền tương ứng trong cấu hình:
+openclaw config set tools.profile full
 
-**核心作用**：
-赋予OpenClaw本地文件的读写、修改、重构权限，支持批量修改代码、修复语法错误、自动提交Git。
+# Giới hạn thư mục được phép thao tác an toàn (tránh can thiệp nhầm toàn bộ ổ cứng)
+openclaw config set fs.allow-path /root/Projects
+```
 
-**安装方式**：
+**Mức độ khuyến nghị**: ⭐⭐⭐⭐⭐
 
-    # 文件系统操作为OpenClaw内置Tool（read/write/edit/exec），无需额外安装Skill
-    # 只需确保在配置中启用相应权限：
-    openclaw config set tools.profile full
+---
 
-**安全配置**：
+### 5. agent-browser — Tự động hóa trình duyệt web 🤖
 
-    # 配置授权目录（仅开放工作目录，避免全硬盘访问）
-    openclaw config set fs.allow-path /root/Projects
+**Vai trò cốt lõi**: Mô phỏng hành vi duyệt web y như người thật, bao gồm nhấp chuột, điền form, chụp ảnh màn hình, gửi biểu mẫu, hỗ trợ tương tác với các trang web cũ không có sẵn API.
 
-> ⚠️ **说明**：文件操作是OpenClaw的内置Tool，非ClawHub上的独立Skill。
+**Cài đặt**:
+```bash
+clawhub install agent-browser
+```
 
-**使用场景**： - "帮我重构这个React组件，优化代码结构并修复ESLint报错" -
-"将本地Markdown文件转为PDF，保存到指定目录"
+**Mức độ khuyến nghị**: ⭐⭐⭐⭐
 
-**推荐指数**：⭐⭐⭐⭐⭐
+---
 
-**注意**：该技能是双刃剑，需严格控制访问目录，避免误操作。
+### 6. Design-Doc-Mermaid — Tự động vẽ biểu đồ trực quan 📊
 
-### 5. agent-browser------浏览器自动化 🤖
+**Vai trò cốt lõi**: Chuyển đổi mô tả ngôn ngữ tự nhiên thành mã Mermaid, tự động hiển thị sơ đồ kiến trúc hệ thống, biểu đồ tuần tự (sequence diagram) và lưu đồ quy trình (flowchart).
 
-**核心作用**：
-模拟真实人类的浏览器操作，支持点击、输入、截图、表单提交，针对无API的老旧网站实现自动化操作。
+**Cài đặt**:
+```bash
+clawhub install design-doc-mermaid
+```
 
-**安装**：
+**Mức độ khuyến nghị**: ⭐⭐⭐⭐
 
-    clawhub install agent-browser
+---
 
-**使用场景**： - "每天早上8点自动登录公司抢票系统，帮我预约车票" -
-"定时截图某政府网站的公告，有更新就保存并提醒"
+### 7. Tích hợp Google Workspace — Tự động hóa văn phòng đám mây 📧
 
-**推荐指数**：⭐⭐⭐⭐
+**Vai trò cốt lõi**: Kết nối mượt mà với Gmail, Google Calendar, Google Docs để tự động xử lý email, đồng bộ lịch họp và tạo tài liệu văn phòng.
 
-**注意**：该功能过于强大，需合规使用，避免违反平台规则。
+**Cài đặt**:
+```bash
+clawhub install gog
 
-### 6. Design-Doc-Mermaid------图表自动生成 📊
+# Xác thực tài khoản Google theo hướng dẫn trên terminal
+openclaw auth google
+```
 
-**核心作用**：
-通过自然语言指令生成Mermaid代码，自动渲染架构图、时序图、流程图。
+**Mức độ khuyến nghị**: ⭐⭐⭐⭐⭐
 
-**安装**：
+---
 
-    clawhub install design-doc-mermaid
+### 8. find-skills — Tìm kiếm kỹ năng thông minh 🌟
 
-**使用场景**： "帮我画1个用户注册的时序图，包含前端、后端、数据库交互"
+*(Xem chi tiết tại Mục B.0, mục 2)*  
+**Lệnh cài đặt**: `clawhub install find-skills`  
+**Mức độ khuyến nghị**: ⭐⭐⭐⭐⭐
 
-**推荐指数**：⭐⭐⭐⭐
+---
 
-### 7. Google Workspace集成------办公自动化 📧
+### 9. proactive-agent — Dự đoán nhu cầu chủ động 🌟
 
-**核心作用**： 无缝连接Gmail、Google Calendar、Google
-Docs，实现邮件整理、日程同步、文档自动生成。
+*(Xem chi tiết tại Mục B.0, mục 4)*  
+**Lệnh cài đặt**: `clawhub install proactive-agent`  
+**Mức độ khuyến nghị**: ⭐⭐⭐⭐⭐
 
-**安装**：
+---
 
-    clawhub install gog
+### 10. Banana (nano-banana-pro) — Công cụ sáng tạo hình ảnh AI 🎨
 
-**授权配置**：
+**Vai trò cốt lõi**: Tạo hình ảnh sống động thông qua câu lệnh prompt, hỗ trợ chỉnh sửa ảnh sẵn có (thay nền, chèn chữ, đổi phong cách nghệ thuật).
 
-    # 授权Google账号（按终端提示完成浏览器认证）
-    openclaw auth google
+**Cài đặt**:
+```bash
+clawhub install nano-banana-pro
+```
 
-**使用场景**： -
-"查一下我这周的Gmail邮件和Calendar日程，生成一份简洁的周报，发给老板" -
-"根据会议纪要，自动创建Google Calendar日程，邀请参会人员"
+**Mức độ khuyến nghị**: ⭐⭐⭐⭐⭐
 
-**推荐指数**：⭐⭐⭐⭐⭐
+---
 
-### 8. find-skills------智能技能发现 🌟
+## B.2 Nhóm Skills Tích Hợp Nền Tảng Trò Chuyện
 
-> 详见B.0第2项。安装命令：`clawhub install find-skills`
+### Tích hợp Lark / Feishu
+- **Chức năng**: Gửi tin nhắn, tạo tài liệu Lark Doc / Wiki, quản lý lịch làm việc, thông báo sự kiện
+- **Mô tả**: OpenClaw đã hỗ trợ sẵn plugin Lark/Feishu từ lõi, bạn chỉ cần thiết lập cấu hình ứng dụng là có thể dùng ngay
+- **Tham khảo**: [Cấu hình tích hợp Lark / Feishu](../docs/03-advanced/09-multi-platform-integration.md)
 
-**推荐指数**：⭐⭐⭐⭐⭐
+### Tích hợp DingTalk
+- **Chức năng**: Gửi tin nhắn, tạo danh sách việc cần làm (Todo), quản lý phê duyệt, gửi cảnh báo tự động
+- **Tham khảo**: [Cấu hình tích hợp DingTalk](../docs/03-advanced/09-multi-platform-integration.md)
 
-### 9. proactive-agent------主动预测需求 🌟
+### Tích hợp WeCom (WeChat Doanh nghiệp)
+- **Chức năng**: Gửi tin nhắn, tạo nhóm chat nội bộ, tra cứu danh bạ nhân sự, đồng bộ thông báo
+- **Tham khảo**: [Cấu hình tích hợp WeCom](../docs/03-advanced/09-multi-platform-integration.md)
 
-> 详见B.0第4项。安装命令：`clawhub install proactive-agent`
+---
 
-**推荐指数**：⭐⭐⭐⭐⭐
+## B.3 Nhóm Skills Công Cụ Dành Cho Lập Trình Viên
 
-### 10. Banana------AI绘画工具 🎨
+### Công cụ tìm kiếm tệp
+- **Chức năng**: Tìm kiếm siêu tốc trong tệp cục bộ theo tên tệp, nội dung chuỗi, biểu thức chính quy (Regex)
+- **Mô tả**: Tích hợp sẵn trong công cụ hệ thống tệp của OpenClaw
 
-**核心作用**：
-通过自然语言生成图片，支持编辑现有图片（换背景、加文字、改风格）。
+### Trợ lý lập trình chuyên sâu
+- **Chức năng**: Sinh mã nguồn (code generation), rà soát mã (code review), giải thích thuật toán, refactor tối ưu mã
+- **Mô tả**: Sử dụng năng lực suy luận mạnh mẽ của các mô hình hàng đầu (Claude 3.5 Sonnet, DeepSeek) kết hợp với công cụ tệp
 
-**安装**：
+---
 
-    clawhub install nano-banana-pro
+## B.4 Nhóm Skills Tự Động Hóa Quy Trình
 
-**使用场景**： - "帮我画一个可爱的小龙虾" - "帮我把这张图片转成卡通风格"
+### Tự động hóa trình duyệt
+- **Chức năng**: Duyệt web tự động, điền biểu mẫu, chạy cron định kỳ, cào dữ liệu web
+- **Skill tương ứng**: `agent-browser`
 
-**推荐指数**：⭐⭐⭐⭐⭐
+### Tự động hóa sản xuất nội dung
+- **Chức năng**: Soạn thảo bài viết tự động, chuyển đổi định dạng, phân phối đa kênh, tối ưu hóa SEO
+- **Mô tả**: Kết hợp linh hoạt nhiều Skills để tạo thành đường ống sản xuất nội dung hoàn chỉnh
 
-## B.2 平台集成类Skills
+---
 
-### 飞书集成（Feishu）
+## B.5 Nhóm Skills Hệ Sinh Thái Baidu Qianfan
 
-**功能**： - 发送消息 - 创建文档 - 管理日历 - 发送通知
+1. **Baidu Search**: Tìm kiếm tin tức và dữ liệu tối ưu cho ngữ cảnh tiếng Trung
+   - Cài đặt: `clawhub install baidu-search`
+2. **Baidu Baike**: Tra cứu thông tin bách khoa toàn thư
+3. **Baidu Scholar**: Tìm kiếm tài liệu và trích dẫn nghiên cứu học thuật
+4. **Baidu Smart PPT**: Tự động dàn trang, tạo slide thuyết trình thông minh từ nội dung tài liệu
 
-**说明**：
-OpenClaw已内置飞书插件支持，无需单独安装Skill。只需配置飞书应用即可使用。
+---
 
-**配置指南**：
-参见[飞书集成配置](../docs/03-advanced/09-multi-platform-integration.md)
+## B.7 15 Skills Nâng Cao Đáng Giá Nhất (Phân tích chuyên sâu)
 
-### 钉钉集成
+> 💡 **Mục tiêu của phần này**: Tuyển chọn 15 Skills chất lượng cao đã qua thực chứng từ cộng đồng, trải dài từ tự động hóa trình duyệt, quản lý tri thức, kiểm toán an ninh cho đến tinh chỉnh nội dung.
 
-**功能**： - 发送消息 - 创建待办 - 管理审批 - 发送通知
+### 1. agent-browser — Đôi tay và đôi mắt của AI trên trình duyệt 🌐
+- Công cụ tự động hóa trình duyệt không giao diện (headless browser) viết bằng Rust
+- Hỗ trợ ra lệnh có cấu trúc để điều khiển trang, cơ chế fallback bằng Node.js
+- **Cài đặt**: `clawhub install agent-browser` | **Khuyến nghị**: ⭐⭐⭐⭐
 
-**说明**： OpenClaw支持钉钉集成，通过配置钉钉机器人实现。
+### 2. automation-workflows — Cố vấn tự động hóa cho Solopreneur 🤖
+- Chuyên nhận diện các cơ hội tự động hóa và thiết kế quy trình khép kín
+- Tự động tính toán chỉ số hoàn vốn đầu tư (ROI) xem quy trình có đáng để tự động hóa không
+- **Cài đặt**: `clawhub install automation-workflows` | **Khuyến nghị**: ⭐⭐⭐⭐
 
-**配置指南**：
-参见[钉钉集成配置](../docs/03-advanced/09-multi-platform-integration.md)
+### 3. brave-search — Vũ khí tra cứu sự kiện nhanh gọn 🔍
+- Lấy thông tin mới nhất trên Internet qua API mà không cần mở trình duyệt nặng nề
+- Yêu cầu cấu hình biến môi trường `BRAVE_API_KEY`
+- **Cài đặt**: `clawhub install brave-search` | **Khuyến nghị**: ⭐⭐⭐⭐⭐
 
-### 企业微信集成
+### 4. data-analyst — Chuyên gia phân tích dữ liệu 24/7 📊
+- Chuyển đổi dữ liệu CSV, Excel hoặc bảng SQL thành báo cáo phân tích trực quan
+- Hỗ trợ làm sạch dữ liệu và vẽ biểu đồ bằng Matplotlib / Seaborn
+- **Cài đặt**: `clawhub install data-analyst` | **Khuyến nghị**: ⭐⭐⭐⭐
 
-**功能**： - 发送消息 - 创建群聊 - 管理通讯录 - 发送通知
+### 5. feishu-doc — Cầu nối tài liệu đám mây đa nền tảng 📄
+- Chuyển đổi tài liệu Lark/Feishu Doc, Wiki, Bitable sang Markdown và ngược lại
+- Cần cung cấp `FEISHU_APP_ID` và `FEISHU_APP_SECRET`
+- **Cài đặt**: `clawhub install feishu-doc` | **Khuyến nghị**: ⭐⭐⭐⭐⭐
 
-**说明**： OpenClaw支持企业微信集成，详见相关文档。
+### 6. find-skills — Người hướng dẫn thông minh trong kho kỹ năng 🔎
+- Tự động tìm kiếm công cụ, mẫu kịch bản phù hợp khi bạn cần giải quyết vấn đề mới
+- **Cài đặt**: `clawhub install find-skills` | **Khuyến nghị**: ⭐⭐⭐⭐⭐
 
-## B.3 开发工具类Skills
+### 7. humanizer — Chuyên gia gọt giũa xóa bỏ văn phong AI ✍️
+- Nhận diện và chỉnh sửa hơn 20 mẫu câu mang nặng "mùi dịch máy" hoặc văn phong AI gượng gạo
+- Thổi hồn cảm xúc và giọng điệu tự nhiên, chân thực vào nội dung
+- **Cài đặt**: `clawhub install humanizer` | **Khuyến nghị**: ⭐⭐⭐⭐
 
-### 文件搜索工具
+### 8. obsidian — Quản lý kho ghi chú liên kết Obsidian 💎
+- Tìm kiếm, tạo mới, di chuyển và đổi tên các tệp Markdown trong kho ghi chú Obsidian
+- **Cài đặt**: `clawhub install obsidian` | **Khuyến nghị**: ⭐⭐⭐⭐
 
-**功能**： - 快速搜索本地文件 - 按文件名、内容、类型搜索 -
-支持正则表达式
+### 9. playwright-scraper — Công cụ cào dữ liệu web ngụy trang cao cấp 🕷️
+- Tận dụng plugin Stealth của Playwright để vượt qua các lớp bảo vệ chống bot
+- Thực thi JavaScript hoàn chỉnh, giả lập User-Agent và viewport y hệt người dùng thật
+- **Cài đặt**: `clawhub install playwright-scraper` | **Khuyến nghị**: ⭐⭐⭐⭐
 
-**说明**： File System Manager技能已包含文件搜索功能。
+### 10. proactive-agent — Chuyển dịch từ bị động sang chủ động cộng tác 🦞
+- Giao thức WAL chống mất ngữ cảnh, cơ chế 10 bước tự giải cứu lỗi
+- **Cài đặt**: `clawhub install proactive-agent` | **Khuyến nghị**: ⭐⭐⭐⭐⭐
 
-### 代码助手
+### 11. self-improving-agent — Trợ lý AI liên tục học hỏi và rút kinh nghiệm 📈
+- Tự động ghi chép lệnh lỗi và thông tin chỉnh sửa từ người dùng vào `.learnings/`
+- Định kỳ tổng hợp và khắc sâu vào bộ nhớ dài hạn
+- **Cài đặt**: `clawhub install self-improving-agent` | **Khuyến nghị**: ⭐⭐⭐⭐⭐
 
-**功能**： - 代码生成 - 代码审查 - 代码解释 - 代码优化
+### 12. skill-vetter — Chuyên gia kiểm toán an ninh nghiêm ngặt 🔒
+- Quy trình kiểm toán 4 bước chuẩn mực: Nguồn gốc → Mã nguồn → Phân quyền → Phân loại rủi ro
+- **Cài đặt**: `clawhub install skill-vetter` | **Khuyến nghị**: ⭐⭐⭐⭐⭐
 
-**说明**： OpenClaw内置强大的代码处理能力，配合File System
-Manager可实现代码重构和优化。
+### 13. summarize — Máy cô đọng tài liệu và đa phương tiện 🧾
+- Tóm tắt tức thì URL, tệp PDF, ảnh và video YouTube
+- **Cài đặt**: `clawhub install summarize` | **Khuyến nghị**: ⭐⭐⭐⭐
 
-## B.4 自动化类Skills
+### 14. task-status — Thanh tiến trình cho các tác vụ dài hơi 📣
+- Gửi thông báo cập nhật tiến độ ngắn gọn trong suốt quá trình thực thi nhiều bước
+- **Cài đặt**: `clawhub install task-status` | **Khuyến nghị**: ⭐⭐⭐⭐
 
-### 浏览器自动化
+### 15. tavily-search — Công cụ tìm kiếm chuyên dụng cho AI 🔍
+- Tối ưu hóa đặc biệt cho AI Agent, trả về kết quả súc tích, độ liên quan cao và sạch nhiễu
+- Yêu cầu cấu hình `TAVILY_API_KEY`
+- **Cài đặt**: `clawhub install tavily-search` | **Khuyến nghị**: ⭐⭐⭐⭐⭐
 
-**功能**： - 网页自动操作 - 表单自动填写 - 定时任务 - 数据抓取
+### Lệnh cài đặt nhanh toàn bộ 15 Skills nâng cao:
 
-**Skill**：agent-browser
+```bash
+clawhub install agent-browser automation-workflows brave-search \
+  data-analyst feishu-doc find-skills humanizer obsidian \
+  playwright-scraper proactive-agent self-improving-agent \
+  skill-vetter summarize task-status tavily-search
+```
 
-### 内容创作自动化
+---
 
-**功能**： - 文章自动生成 - 格式转换 - 内容分发 - SEO优化
+## B.8 Gợi Ý Gói Kết Hợp Skills Theo Nhu Cầu Thực Tế
 
-**说明**： 可结合多个Skills构建完整的内容创作自动化流程。
+### Gói 1: Bộ cơ bản khởi đầu (Bắt buộc dùng)
 
-## B.5 百度千帆系列Skills
+```bash
+clawhub install mcporter brave-search summarize find-skills proactive-agent
+```
+**Kịch bản phù hợp**: Người mới bắt đầu, công việc văn phòng hàng ngày, tự động hóa cơ bản.
 
-### 1. 百度搜索（Baidu Search）
+### Gói 2: Bộ toàn năng nâng cao (Rất khuyến nghị)
 
-**功能**： - 实时网页搜索 - 中文内容优化 - 本地化搜索结果
+```bash
+clawhub install mcporter brave-search summarize agent-browser \
+  design-doc-mermaid gog find-skills proactive-agent nano-banana-pro
+```
+**Kịch bản phù hợp**: Chuyên gia kỹ thuật, lập trình viên, người sáng tạo nội dung số.
 
-**安装**：
+### Gói 3: Bộ chuyên biệt cho Lập trình viên
 
-    clawhub install baidu-search
+```bash
+clawhub install mcporter brave-search summarize design-doc-mermaid find-skills
+```
+**Kịch bản phù hợp**: Phát triển phần mềm, tái cấu trúc mã nguồn, viết tài liệu kiến trúc kỹ thuật.
 
-**适用场景**： - "搜索最新的AI技术文章" - "查找中文资料"
+### Gói 4: Bộ chuyên sáng tạo nội dung
 
-### 2. 百度百科（Baidu Baike）
+```bash
+clawhub install brave-search summarize design-doc-mermaid nano-banana-pro
+```
+**Kịch bản phù hợp**: Biên tập bài viết, sản xuất video, thiết kế đồ họa minh họa.
 
-**功能**： - 百科词条查询 - 相关词条推荐 - 知识点解释
+### Gói 5: Bộ tự động hóa văn phòng doanh nghiệp
 
-**使用场景**： - "查询某个概念的详细解释" - "获取相关词条推荐"
+```bash
+clawhub install summarize gog agent-browser find-skills proactive-agent
+```
+**Kịch bản phù hợp**: Xử lý hòm thư email, sắp xếp lịch họp, quản lý công việc và báo cáo tự động.
 
-### 3. 百度学术（Baidu Scholar）
+---
 
-**功能**： - 学术文献搜索 - 引用格式生成 - 相关研究推荐
+## 📚 Hướng Dẫn Thao Tác Nhanh
 
-**使用场景**： - "查找某篇论文的相关研究" - "生成学术引用"
+```bash
+# Xem danh sách các Skills đã cài đặt
+npx clawhub@latest list
 
-### 4. 百度智能PPT（Baidu Smart PPT）
+# Cập nhật một Skill cụ thể
+npx clawhub@latest update <skill-name>
 
-**功能**： - PPT自动生成 - 配图推荐 - 模板应用
+# Cập nhật tất cả Skills lên bản mới nhất
+npx clawhub@latest update --all
 
-**使用场景**： - "根据文章内容生成PPT" - "自动美化PPT"
+# Gỡ bỏ một Skill
+npx clawhub@latest uninstall <skill-name>
+```
 
+## ⚠️ Lưu Ý An Ninh Trọng Yếu
 
+**Cực kỳ quan trọng**: Vào tháng 1/2026 đã từng diễn ra sự cố tấn công chuỗi cung ứng ClawHavoc, khiến khoảng 20% Skills trôi nổi trên ClawHub bị phát hiện chứa mã độc hại.
 
-## B.7 进阶推荐Skills（15个深度解析）
+- ✅ Luôn kiểm tra kỹ mã nguồn trước khi cài đặt hoặc để Skill Vetter quét tự động
+- ✅ Ưu tiên sử dụng danh sách Skills được chứng nhận trong tài liệu này
+- ✅ Định kỳ kiểm tra cập nhật và rà soát quyền hạn
+- ✅ Thường xuyên theo dõi các thông báo an ninh từ trang chủ OpenClaw
+- ❌ Tuyệt đối không cài đặt bừa bãi các Skills từ tác giả vô danh
 
-> 💡 **本节目标**：精选15个经过社区验证的高质量Skills，从浏览器自动化到知识管理、从安全审计到内容优化，覆盖进阶用户的核心需求。
+---
 
-### 1. agent-browser——赋予AI浏览器的"手"和"眼" 🌐
+**Cập nhật lần cuối**: 15/03/2026  
 
-**核心作用**：基于Rust开发的无头浏览器自动化工具，赋予AI代理导航、点击、输入和截图的能力。
+---
 
-**功能特点**：
-- ✅ 支持结构化命令控制页面
-- ✅ 具备Node.js回退机制
-- ✅ 适用于网页表单填写、UI测试、复杂网页数据提取
+## 🌐 Đọc trực tuyến
 
-**安装**：
+📖 **Bạn muốn đọc phụ lục này trực tuyến?**
 
-    clawhub install agent-browser
+[🔗 Đọc trực tuyến phụ lục này](https://awesome.tryopenclaw.asia/appendix/B-skills-catalog/)
 
-**推荐指数**：⭐⭐⭐⭐
+Truy cập website để có trải nghiệm đọc tối ưu nhất:
+- 📱 Thiết kế tương thích hoàn hảo cho điện thoại, máy tính bảng và máy tính để bàn
+- 🌙 Hỗ trợ chế độ nền tối (Dark mode) bảo vệ thị lực
+- 🔍 Tích hợp sẵn công cụ tìm kiếm, nhanh chóng tra cứu nội dung
+- 📋 Điều hướng mục lục linh hoạt, dễ dàng chuyển đổi qua lại giữa các chương
 
-### 2. automation-workflows——独立创业者的自动化顾问 🤖
-
-**核心作用**：专注于识别自动化机会并设计完整的工作流，涵盖从触发器到错误处理的全流程。
-
-**功能特点**：
-- ✅ ROI计算，判断自动化投入是否值得
-- ✅ 常见触发词："自动化"、"减少手动工作"、"节省时间"
-
-**安装**：
-
-    clawhub install automation-workflows
-
-**推荐指数**：⭐⭐⭐⭐
-
-### 3. brave-search——轻量级事实检索利器 🔍
-
-**核心作用**：无需启动浏览器，通过API获取最新互联网信息，专注于内容提取和事实查找。
-
-**配置需求**：需申请 `BRAVE_API_KEY` 环境变量。
-
-**安装**：
-
-    clawhub install brave-search
-
-**推荐指数**：⭐⭐⭐⭐⭐
-
-### 4. data-analyst——24小时在线数据专家 📊
-
-**核心作用**：将CSV、Excel或SQL数据转化为清晰的洞察和报告。
-
-**功能特点**：
-- ✅ 支持SQL模板查询（如漏斗分析）
-- ✅ 数据清洗（处理缺失值）
-- ✅ 使用Matplotlib/Seaborn生成可视化图表
-
-**安装**：
-
-    clawhub install data-analyst
-
-**推荐指数**：⭐⭐⭐⭐
-
-### 5. feishu-doc——跨平台文档搬运工 📄
-
-**核心作用**：实现OpenClaw与飞书（Lark）生态的完美对接，自动将飞书文档、Wiki或多维表格内容转换为Markdown格式，或反向写入飞书。
-
-**配置需求**：需设置 `FEISHU_APP_ID` 和 `FEISHU_APP_SECRET`。
-
-**安装**：
-
-    clawhub install feishu-doc
-
-**推荐指数**：⭐⭐⭐⭐⭐（国内用户必备）
-
-### 6. find-skills——技能库的智能导购 🔎
-
-**核心作用**：当用户询问"如何做某事"时，主动搜索现有的工具、模板或工作流并推荐。
-
-**安装**：
-
-    clawhub install find-skills
-
-**推荐指数**：⭐⭐⭐⭐⭐
-
-### 7. humanizer——告别"AI味"的文字润色师 ✍️
-
-**核心作用**：基于维基百科"AI写作迹象"指南开发，识别并修复超过20种典型AI写作模式。
-
-**功能特点**：
-- ✅ 修复过度强调、肤浅分析语气等问题
-- ✅ 在保留原意基础上注入个性和自然语气
-
-**安装**：
-
-    clawhub install humanizer
-
-**推荐指数**：⭐⭐⭐⭐（内容创作者刚需）
-
-### 8. obsidian——知识管理系统的自动化补完 💎
-
-**核心作用**：通过obsidian-cli实现搜索、创建、移动或重命名Markdown笔记，让OpenClaw直接管理本地双链笔记库。
-
-**安装**：
-
-    clawhub install obsidian
-
-**推荐指数**：⭐⭐⭐⭐（Obsidian用户必装）
-
-### 9. playwright-scraper——硬核隐蔽爬虫 🕷️
-
-**核心作用**：利用Playwright的Stealth插件绕过反爬机制，支持完整JavaScript执行、伪造User-Agent和视口，模拟真实人类行为。
-
-**安装**：
-
-    clawhub install playwright-scraper
-
-**推荐指数**：⭐⭐⭐⭐
-
-**注意**：请合规使用，避免违反目标网站的使用条款。
-
-### 10. proactive-agent——从被动执行到主动协作 🦞
-
-**核心作用**：引入WAL协议防止上下文丢失；上下文占用超60%时自动记录交互；任务失败时尝试10种自救方法。
-
-**安装**：
-
-    clawhub install proactive-agent
-
-**推荐指数**：⭐⭐⭐⭐⭐
-
-### 11. self-improving-agent——会自我复盘的AI 📈
-
-**核心作用**：具备学习能力，自动记录失败命令或用户更正信息到 `.learnings/` 目录，定期将学习内容固化到永久记忆文件中。
-
-**安装**：
-
-    clawhub install self-improving-agent
-
-**推荐指数**：⭐⭐⭐⭐⭐
-
-### 12. skill-vetter——安全至上的技能审计员 🔒
-
-**核心作用**：提供四步审核流程（来源检查→代码审查→权限评估→风险分类），能检测20多项危险信号。
-
-**安装**：
-
-    clawhub install skill-vetter
-
-**推荐指数**：⭐⭐⭐⭐⭐（必装！）
-
-### 13. summarize——长文档的"脱水机" 🧾
-
-**核心作用**：支持URL、网页、PDF、图片和YouTube视频的快速总结。
-
-**配置需求**：需配置对应模型（OpenAI/Claude/Google等）的API密钥。
-
-**安装**：
-
-    clawhub install summarize
-
-**推荐指数**：⭐⭐⭐⭐
-
-### 14. task-status——长时间任务的"进度条" 📣
-
-**核心作用**：在多步操作期间发送简短状态更新，包括阶段性完成确认或失败通知。
-
-**安装**：
-
-    clawhub install task-status
-
-**推荐指数**：⭐⭐⭐⭐
-
-### 15. tavily-search——AI时代的专业搜索引擎 🔍
-
-**核心作用**：专为AI代理优化的搜索API，返回结果更简洁、更具相关性，噪音极小。
-
-**配置需求**：需要 `TAVILY_API_KEY`（提供免费配额）。
-
-**安装**：
-
-    clawhub install tavily-search
-
-**推荐指数**：⭐⭐⭐⭐⭐
-
-### B.7 一键安装全部15个进阶Skills
-
-    clawhub install agent-browser automation-workflows brave-search \
-      data-analyst feishu-doc find-skills humanizer obsidian \
-      playwright-scraper proactive-agent self-improving-agent \
-      skill-vetter summarize task-status tavily-search
-
-
-## B.8 Skills组合推荐
-
-### 组合1：基础套装（必装）
-
-    clawhub install mcporter brave-search summarize \
-      summarize find-skills proactive-agent
-
-**适用场景**： - 新手入门 - 日常办公 - 基础自动化
-
-### 组合2：进阶套装（推荐）
-
-    clawhub install mcporter brave-search summarize \
-      summarize agent-browser design-doc-mermaid gog \
-      find-skills proactive-agent nano-banana-pro
-
-**适用场景**： - 高级用户 - 开发者 - 内容创作者
-
-### 组合3：开发者套装
-
-    clawhub install mcporter brave-search summarize \
-      design-doc-mermaid find-skills
-
-**适用场景**： - 软件开发 - 代码重构 - 技术文档编写
-
-### 组合4：内容创作套装
-
-    clawhub install brave-search summarize \
-      design-doc-mermaid nano-banana-pro
-
-**适用场景**： - 文章写作 - 视频制作 - 创意设计
-
-### 组合5：办公自动化套装
-
-    clawhub install summarize gog \
-      agent-browser find-skills proactive-agent
-
-**适用场景**： - 日常办公 - 邮件处理 - 日程管理
-
-## 📚 快速安装指南
-
-### 一键安装所有核心Skills
-
-    clawhub install mcporter brave-search summarize \
-      summarize agent-browser design-doc-mermaid gog \
-      find-skills proactive-agent nano-banana-pro
-
-### 查看已安装Skills
-
-    npx clawhub@latest list
-
-### 更新Skills
-
-    # 更新特定Skill
-    npx clawhub@latest update <skill-name>
-
-    # 更新所有Skills
-    npx clawhub@latest update --all
-
-### 卸载Skills
-
-    npx clawhub@latest uninstall <skill-name>
-
-## 🔗 相关资源
-
--   ClawHub市场：https://clawhub.ai
--   Skills开发文档：https://docs.openclaw.ai/skills
--   GitHub仓库：https://github.com/openclaw/clawhub
--   第8章：Skills扩展详解：../../docs/03-advanced/08-skills-extension.md
--   Skills生态说明：./N-skills-ecosystem.md
-
-## ⚠️ 安全提示
-
-**重要**：2026年1月发生了ClawHavoc供应链攻击事件，ClawHub约20%的Skills被确认为恶意。
-
--   ✅ 安装前审查源码
--   ✅ 使用本文档推荐的Skills
--   ✅ 定期检查更新
--   ✅ 关注官方安全公告
--   ❌ 不要盲目安装不明来源的Skills
-
-**提示**：本清单基于实战验证的Skills，所有命令均经过测试。如有问题，请访问ClawHub官网查询最新信息。
-
-**最后更新**: 2026年3月15日
-
-## 🌐 在线阅读
-
-📖 **想在线阅读此附录？**
-
-[🔗
-在线阅读此附录](https://awesome.tryopenclaw.asia/appendix/B-skills-catalog/)
-
-访问网站获取更好的阅读体验： - 📱 响应式设计，支持手机、平板、电脑 - 🌙
-支持黑暗模式，保护眼睛 - 🔍 内置搜索功能，快速定位内容 - 📋
-目录导航，轻松跳转章节
-
-[🏠 访问完整教程网站](https://awesome.tryopenclaw.asia)
+[🏠 Truy cập trang web giáo trình hoàn chỉnh](https://awesome.tryopenclaw.asia)
