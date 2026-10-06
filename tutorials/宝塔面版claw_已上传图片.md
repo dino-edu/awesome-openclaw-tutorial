@@ -1,163 +1,145 @@
-年前我们上线了 OpenClaw 一键部署，不过那一版是基于Docker的，使用起来可能会感到存在很多的限制。
-这一次，我们在宝塔面板里上线了一版新的 **OpenClaw 插件**：**宿主机安装、面板内管理、打开即可使用。**
+Trước Tết, chúng tôi đã cho ra mắt phiên bản triển khai OpenClaw 1-click, tuy nhiên phiên bản đó hoạt động dựa trên Docker, nên trong quá trình sử dụng người dùng có thể cảm thấy còn nhiều điểm hạn chế.
+Lần này, chúng tôi tiếp tục phát hành một phiên bản **Plugin OpenClaw** hoàn toàn mới ngay trong bảng điều khiển Pagoda (aaPanel / Baota Panel): **Cài đặt trực tiếp trên hệ điều hành máy chủ (Host OS), quản trị trực quan ngay trong Panel, mở ra là dùng được ngay.**
 
-简单来说，这次不只是把 OpenClaw 跑起来，而是把 **AI 对话、角色管理、模型管理、技能安装、消息平台接入、服务管理、WebUI** 这些常用能力，直接整合进了面板里。
+Nói một cách ngắn gọn, lần này không chỉ đơn thuần là làm cho OpenClaw chạy được, mà toàn bộ các khả năng thường dùng như **Trò chuyện AI, Quản lý Nhân vật (Role/Persona), Quản lý Mô hình, Cài đặt Kỹ năng (Skills), Tích hợp Nền tảng Nhắn tin, Quản lý Dịch vụ và WebUI** đều đã được tích hợp đồng bộ trực tiếp vào giao diện quản trị của Panel.
 
-对于想体验 AI Agent 的用户来说，上手会直接很多；对于已经接触过 OpenClaw 的用户来说，这一版也会更接近日常可用的状态。
+Đối với những người dùng mới muốn trải nghiệm AI Agent, việc làm quen và thao tác sẽ trở nên trực quan hơn rất nhiều; còn đối với những ai đã từng tiếp xúc với OpenClaw trước đây, phiên bản này cũng sẽ đáp ứng sát hơn với nhu cầu sử dụng thực tế hàng ngày.
 
-![图片](https://upload.maynor1024.live/file/1773799216343_image_1.bin)
+![Hình ảnh](https://upload.maynor1024.live/file/1773799216343_image_1.bin)
 
-而且插件还支持接管已经在机器部署的OpenClaw（**不支持Docker部署的版本**）如果你之前已经在服务器上自行部署过 OpenClaw，也可以直接通过插件接入到面板里统一管理。
+Đặc biệt, plugin còn hỗ trợ tiếp quản các phiên bản OpenClaw đã được triển khai trước đó trên máy chủ (**không hỗ trợ các phiên bản triển khai qua Docker**). Nếu trước đây bạn đã tự cài đặt OpenClaw thủ công trên máy chủ của mình, bạn hoàn toàn có thể kết nối trực tiếp thông qua plugin này để đưa về quản trị tập trung trong Panel.
 
-![图片](https://upload.maynor1024.live/file/1773799214017_image_2.bin)
+![Hình ảnh](https://upload.maynor1024.live/file/1773799214017_image_2.bin)
 
-**不用再从部署开始了**
+**Không còn phải bắt đầu lại từ các bước triển khai phức tạp**
 
+Trước đây, khi triển khai OpenClaw, ngay cả khi sử dụng script cài đặt chính thức, người dùng vẫn thường xuyên gặp phải nhiều sự cố về mạng, lại còn phải đối mặt với các thao tác khởi tạo phức tạp trong terminal dòng lệnh. Lần này, giải pháp của chúng tôi là tích hợp nó thành một plugin của Panel, giúp rút ngắn tối đa đường dẫn thao tác của người dùng.
 
+![Hình ảnh](https://upload.maynor1024.live/file/1773799220838_image_3.bin)
 
-以前部署 OpenClaw，哪怕使用官方脚本直接安装，也经常碰到各种网络问题，还要面对复杂的终端初始化，而这次我们做的，是把它作为面板插件直接接进来，让整个使用路径更短一些。
+*Nếu tìm kiếm chưa thấy, vui lòng bấm nút cập nhật danh sách phần mềm ở góc trên bên phải của App Store trong Panel.*
 
-![图片](https://upload.maynor1024.live/file/1773799220838_image_3.bin)
+Sau khi cài đặt hoàn tất, ngay trong giao diện plugin bạn sẽ thấy các module cốt lõi: Trò chuyện AI, Quản lý Nhân vật, Quản lý Mô hình, Kỹ năng (Skills), Nền tảng Tin nhắn, Quản trị Dịch vụ. Nói cách khác, chúng tôi không chỉ cung cấp một lối vào khởi chạy, mà quy hoạch toàn bộ các năng lực thường dùng của OpenClaw về chung một giao diện trực quan.
 
-如果搜索不到请先在软件商店右上角更新软件列表。
+Đối với người dùng, sự thay đổi này rất rõ ràng: bớt một bước loay hoay cấu hình, thêm một bước mở ra là dùng được ngay.
 
-安装完成后，在插件里就可以直接看到几个核心模块：AI 对话、角色、模型管理、技能、消息平台、服务管理。也就是说，这次我们不是只提供一个运行入口，而是把 OpenClaw 常用的几块能力，一起整理到了同一个界面里。
+![Hình ảnh](https://upload.maynor1024.live/file/1773799224133_image_4.bin)
 
-对大家来说，变化其实很直观：少一步折腾，多一步直接开用。
+**Mở ra là có thể trải nghiệm trực tiếp**
 
-![图片](https://upload.maynor1024.live/file/1773799224133_image_4.bin)
+Trong phiên bản plugin này, trang Trò chuyện AI đã được tích hợp sẵn.
 
-**打开就能直接体验**
+Khi truy cập vào, bạn có thể bắt đầu phiên đối thoại ngay lập tức, chuyển đổi nhân vật hoặc tạo phiên hội thoại mới. Trang giao diện cũng gợi ý sẵn một số câu hỏi mẫu, giúp người dùng mới dễ dàng bắt đầu nhanh chóng.
 
+Đồng thời, thông tin mô hình đang sử dụng và hạn mức token khả dụng cũng được hiển thị trực tiếp trên giao diện. Toàn bộ quy trình trở nên vô cùng mạch lạc: Mở plugin -> Vào giao diện trò chuyện -> Chọn nhân vật -> Bắt đầu sử dụng.
 
+**Giúp người dùng sau khi cài đặt xong là có thể lập tức đưa vào sử dụng thực tế.**
 
-这次插件里已经直接集成了 AI 对话页。
+![Hình ảnh](https://upload.maynor1024.live/file/1773799231258_image_5.bin)
 
-进入后可以直接发起对话，也可以切换角色、新建会话。
-页面里也给了一些示例问题，方便第一次使用时快速开始。
+![Hình ảnh](https://upload.maynor1024.live/file/1773799231348_image_6.bin)
 
-同时，当前使用模型和额度信息也都直接展示在界面里，
-整个路径会更清晰一点：打开插件、进入对话、选择角色、直接开始使用。
+**Phân tách trợ lý linh hoạt theo từng kịch bản**
 
-**让用户装完之后，真的能马上用起来。**
+Trong plugin OpenClaw lần này, cấu hình Nhân vật (Role/Persona) không còn bị giấu kín trong các file cấu hình phức tạp nữa, mà đã được tách riêng thành một module quản lý trực quan. Các thao tác hiện hỗ trợ gồm: Tạo mới nhân vật, Chỉnh sửa nhân vật, Xem danh sách nhân vật, Truy cập phiên trò chuyện trực tiếp từ nhân vật.
 
-![图片](https://upload.maynor1024.live/file/1773799231258_image_5.bin)
+![Hình ảnh](https://upload.maynor1024.live/file/1773799238744_image_7.bin)
 
-![图片](https://upload.maynor1024.live/file/1773799231348_image_6.bin)
+Từ trang chỉnh sửa có thể thấy, việc cấu hình nhân vật lần này không chỉ đơn thuần là đổi tên gọi, mà hỗ trợ thiết lập chuyên sâu xoay quanh danh tính, định nghĩa vai trò, phong cách tính cách và câu lệnh định hình hành vi.
 
-**可以按场景拆分不同助手**
+![Hình ảnh](https://upload.maynor1024.live/file/1773799245290_image_8.bin)
 
+Lợi ích của thiết kế này vô cùng thiết thực:
 
+Cùng một mô hình nền tảng, nhưng dưới các vai trò nhân vật khác nhau, phản hồi đầu ra và trải nghiệm sử dụng có thể hoàn toàn khác biệt. Bạn có thể chia tách các kịch bản như lập kế hoạch du lịch, sắp xếp lịch trình làm việc, hỏi đáp kiến thức tổng quát thành từng nhân vật riêng biệt. Khi cần dùng chỉ việc chuyển đổi linh hoạt, không cần mỗi lần đều phải gõ lại lời nhắc định hình danh tính cho AI từ đầu.
 
-这版 OpenClaw 插件里，角色不是藏在配置里的东西了，而是被单独放出来做成了可管理的模块。现在支持的操作包括：新建角色、编辑角色、查看角色列表、从角色直接进入对话
+Đối với sản phẩm thuộc định hướng Agent như OpenClaw, hệ thống nhân vật càng rõ ràng bao nhiêu thì trải nghiệm sử dụng về sau sẽ càng mượt mà bấy nhiêu.
 
-![图片](https://upload.maynor1024.live/file/1773799238744_image_7.bin)
+![Hình ảnh](https://upload.maynor1024.live/file/1773799252544_image_9.bin)
 
-从编辑页也能看到，这次角色配置不只是名称修改，而是支持围绕身份、定义、性格等内容做更细的设定。
+**Thay đổi và bảo trì mô hình trực quan hơn**
 
-![图片](https://upload.maynor1024.live/file/1773799245290_image_8.bin)
+Bên cạnh nhân vật, phần quản lý mô hình (Model Management) cũng được tách thành trang riêng biệt.
 
-这样做的好处很直接：
+Tại trang quản lý mô hình, bạn có thể theo dõi trực tiếp:
 
-同一个模型，不同角色下，最终的表现和使用体验可以完全不一样。你可以把旅行规划、日程整理、通用问答这些场景拆成不同角色，后续直接切换使用，不用每次重新给 AI 设定一遍身份。
+- Tên mô hình
+- Nhà cung cấp dịch vụ (Provider)
+- Đánh dấu mô hình mặc định
+- Các thao tác chỉnh sửa, xóa, cấu hình API Key
 
-对于 OpenClaw 这种 Agent 方向的产品来说，角色系统越清晰，后面的使用体验就越顺。
+Trong giao diện mặc định, mô hình hiển thị là **qwen3.5-plus**. Phần này tuy giao diện nhìn không quá cầu kỳ, nhưng lại cực kỳ cần thiết cho quá trình vận hành thực tế.
 
-![图片](https://upload.maynor1024.live/file/1773799252544_image_9.bin)
+![Hình ảnh](https://upload.maynor1024.live/file/1773799250901_image_10.bin)
 
-**更换和维护会更直观**
+Bởi vì thông thường, nếu việc cấu hình mô hình chỉ dừng lại ở các tệp config thô (JSON/YAML), chi phí tìm hiểu và bảo trì của người dùng sẽ khá cao. Giờ đây khi được chuyển thành giao diện trực quan, người dùng sẽ nắm bắt ngay được mô hình mặc định là gì, hệ thống đang dùng model nào, và việc chuyển đổi sau này cũng thuận tiện hơn rất nhiều.
 
+![Hình ảnh](https://upload.maynor1024.live/file/1773799260604_image_11.bin)
 
+**Hệ sinh thái Kỹ năng (Skills) cũng được tích hợp đồng bộ**
 
-除了角色之外，这次模型管理也被单独整理出来了。
+Nếu như trò chuyện, nhân vật và mô hình là những năng lực cơ bản, thì Kỹ năng (Skills) chính là phần giá trị mở rộng đáng chú ý nhất của OpenClaw. Trong plugin này, kỹ năng được chia làm 2 phần:
 
-在模型管理页里，可以直接看到：
+- Đã cài đặt (Installed)
+- Chợ kỹ năng (Skill Market)
 
-- 模型名称
-- 供应商
-- 默认模型标记
-- 编辑、删除等操作
+![Hình ảnh](https://upload.maynor1024.live/file/1773799264312_image_12.bin)
 
-当前展示里默认模型为 **qwen3.5-plus**。
-这部分虽然页面看起来不复杂，但对实际使用来说很有必要。
+Tại Chợ kỹ năng, người dùng đã có thể tìm thấy rất nhiều kỹ năng hữu ích với quy trình cài đặt trực quan. Đối với người dùng muốn trải nghiệm nhanh, bạn chỉ việc Tìm kiếm -> Cài đặt -> Bật kích hoạt; còn đối với các nhà phát triển muốn mở rộng tùy biến sâu hơn, hệ thống vẫn duy trì cơ chế kết nối kỹ năng thông qua thư mục cục bộ trên máy chủ.
 
-![图片](https://upload.maynor1024.live/file/1773799250901_image_10.bin)
+![Hình ảnh](https://upload.maynor1024.live/file/1773799268132_image_13.bin)
 
-因为很多时候，模型配置如果一直停留在配置文件层面，用户理解和维护成本都会比较高。现在单独做成页面之后，至少默认模型是什么、当前在用什么、后续要不要调整，都更直观了。
+Khả năng này đóng vai trò then chốt. Điểm hấp dẫn thực sự của OpenClaw không chỉ nằm ở chỗ "biết trò chuyện", mà là khả năng không ngừng mở rộng biên giới hành động nhờ các kỹ năng (skills), từng bước biến một khung chat thông thường thành một nền tảng Agent có thể giải quyết các tác vụ cụ thể trong đời sống và công việc.
 
-![图片](https://upload.maynor1024.live/file/1773799260604_image_11.bin)
+![Hình ảnh](https://upload.maynor1024.live/file/1773799273227_image_14.bin)
 
-**技能这块，这次也一起整理进来了**
+**Kết nối linh hoạt tới nhiều nền tảng nhắn tin**
 
+Trong bản cập nhật này, tính năng kết nối nền tảng tin nhắn (IM Platforms) cũng đã được tích hợp sẵn.
 
-
-如果说对话、角色、模型是基础能力，那技能就是 OpenClaw 更值得展开的一部分。这次插件里已经把技能拆成了两个部分：
-
-- 已安装
-- 技能市场
-
-![图片](https://upload.maynor1024.live/file/1773799264312_image_12.bin)
-
-而且技能市场里已经能搜到不少内容，安装路径也做得比较直接。对于想快速体验的用户来说，可以直接搜、装、开；对于想继续扩展的用户来说，也保留了通过本地目录接入技能的方式。
-
-![图片](https://upload.maynor1024.live/file/1773799268132_image_13.bin)
-
-这部分能力其实很关键。因为 OpenClaw 真正有意思的地方，不只是“能对话”，而是它可以围绕技能不断扩展边界，逐步从一个对话入口，变成一个可以做更多具体事情的 Agent 平台。
-
-![图片](https://upload.maynor1024.live/file/1773799273227_image_14.bin)
-
-**后续可以往更多场景里接**
-
-
-
-这次插件里，消息平台接入也一起做进来了。
-
-目前已经支持（如果官方支持这里没有，大家也可以去命令行执行命令开启）：
+Hiện tại plugin hỗ trợ sẵn các nền tảng sau (nếu có nền tảng nào bản chính thức hỗ trợ nhưng giao diện chưa hiển thị, bạn hoàn toàn có thể dùng dòng lệnh CLI để kích hoạt):
 
 - QQ
-- 飞书
-- 钉钉
-- 企业微信
+- Lark / Feishu
+- DingTalk
+- WeCom (WeChat Doanh nghiệp)
 
-![图片](https://upload.maynor1024.live/file/1773799275865_image_15.bin)
+![Hình ảnh](https://upload.maynor1024.live/file/1773799275865_image_15.bin)
 
-每个平台都提供了配置入口和启用开关。这也意味着，OpenClaw 不只是能在面板里使用，后续也可以继续往外接，进入更多实际场景。
+Mỗi nền tảng đều có trang cấu hình thông số và công tắc kích hoạt riêng. Điều này đồng nghĩa với việc bạn không chỉ tương tác với OpenClaw trong giao diện Panel, mà còn có thể đưa nó ra bên ngoài để phục vụ trong các kịch bản thực tế.
 
-这一层能力的意义其实很明确：面板内解决的是“把 OpenClaw 用起来”，消息平台解决的是“把 OpenClaw 接出去”。
+Ý nghĩa của tầng năng lực này rất rõ ràng: Giao diện Panel giải quyết việc *"Làm sao để dùng được OpenClaw"*, còn nền tảng tin nhắn giải quyết việc *"Làm sao để đưa OpenClaw ra ngoài phục vụ"*.
 
-对很多用户来说，这一步会直接关系到后面能不能接进团队通知、机器人推送或者日常协作场景。
+Đối với nhiều người dùng, bước này quyết định trực tiếp tới khả năng tích hợp bot vào hệ thống thông báo đội nhóm, bot đẩy tin tự động hoặc các luồng làm việc cộng tác hàng ngày.
 
-![图片](https://upload.maynor1024.live/file/1773799281570_image_16.bin)
+![Hình ảnh](https://upload.maynor1024.live/file/1773799281570_image_16.bin)
 
-**运行状态、端口、日志都能直接看**
+**Theo dõi trực tiếp trạng thái vận hành, cổng kết nối (Port) và Logs**
 
+Vì đây là dạng cài đặt trực tiếp trên hệ điều hành máy chủ (Host OS), nên trang Quản lý Dịch vụ chắc chắn không thể thiếu. Bạn có thể theo dõi trạng thái dịch vụ, Dừng / Khởi động lại, xem Logs hệ thống, đổi cổng lắng nghe (port), xem đường dẫn tệp cấu hình và thông tin phiên bản hiện tại.
 
+Phần này rất thực dụng. Bởi đối với đa số người dùng Pagoda / aaPanel, điều họ cần không phải là các chi tiết kỹ thuật quá phức tạp bên dưới, mà là: Dịch vụ có đang chạy bình thường không, gặp lỗi thì xem log ở đâu, muốn chỉnh config thì sửa chỗ nào.
 
-既然这次是宿主机安装形态，那服务管理这一页肯定也少不了。服务运行状态、停止 / 重启、日志查看、端口修改、配置文件路径、前版本信息
+Các thông tin này giờ đây được hiển thị trực tiếp trong Panel, giúp quy trình quản trị trở nên đơn giản hơn nhiều và phù hợp với thói quen sử dụng hàng ngày của người quản trị máy chủ.
 
-这部分其实也很实用。因为对于很多宝塔用户来说，最需要的不是底层细节有多复杂，而是：服务有没有正常运行、出了问题去哪看、配置在哪改。
+![Hình ảnh](https://upload.maynor1024.live/file/1773799283904_image_17.bin)
 
-这些内容现在都直接放到了面板里，整个管理路径会简单很多，也更符合插件场景下的使用习惯。
+![Hình ảnh](https://upload.maynor1024.live/file/1773799286704_image_18.bin)
 
-![图片](https://upload.maynor1024.live/file/1773799283904_image_17.bin)
+**Quản lý WebUI riêng biệt**
 
-![图片](https://upload.maynor1024.live/file/1773799286704_image_18.bin)
+Giờ đây trong plugin, bạn có thể kiểm tra trực tiếp trạng thái kích hoạt của WebUI và địa chỉ truy cập, đồng thời có nút 1-click để truy cập vào giao diện web ngay lập tức. So với việc đặt chung các mục này trong phần Quản lý Dịch vụ, việc tách riêng thành một mục độc lập giúp lối vào rõ ràng hơn và việc tìm kiếm thuận tiện hơn.
 
-**Web UI 单独管理**
+Đối với người dùng, sự điều chỉnh này dù không lớn nhưng khi thao tác thực tế sẽ thuận tay hơn rất nhiều:
+- Khi muốn mở WebUI, vào thẳng mục WebUI;
+- Khi cần kiểm tra trạng thái vận hành, xem logs, đổi port và chỉnh cấu hình, truy cập vào mục Quản lý Dịch vụ.
 
+Ranh giới chức năng rõ ràng hơn, cấu trúc của plugin nhờ thế cũng gọn gàng và ngăn nắp hơn.
 
+![Hình ảnh](https://upload.maynor1024.live/file/1773799290182_image_19.bin)
 
-## 现在在插件里，可以直接查看 WebUI 的启用状态和访问地址，也可以一键进入访问。 相比把这些内容放在服务管理里，单独拆出来之后，入口会更清晰，查找也更直接。
+Nếu chỉ tóm gọn lại trong một câu, lần cập nhật này mang ý nghĩa:
 
-对用户来说，这种调整虽然不算大改动，但实际使用时会顺手很多。
-想打开 WebUI，就直接进 WebUI；
-想看运行状态、日志、端口和配置，再去服务管理。
-功能边界更清楚，整个插件结构也更规整一些。
+**OpenClaw hiện đã hỗ trợ cài đặt và quản lý trực tiếp trên hệ điều hành máy chủ thông qua Baota Panel (aaPanel).**
 
-![图片](https://upload.maynor1024.live/file/1773799290182_image_19.bin)
-
-如果只用一句话总结，这次当然可以说是：
-
-**OpenClaw 现在支持在宝塔面板里以宿主机方式安装和管理了。**
-
-但如果把整套界面和功能串起来看，这次更新真正想解决的，其实不只是“怎么装”，而是“装完之后怎么更顺地用”。
+Nhưng nếu nhìn tổng thể toàn bộ giao diện và các tính năng liên kết với nhau, mục tiêu thực sự của bản cập nhật này không dừng lại ở câu hỏi *"Làm thế nào để cài đặt"*, mà là *"Sau khi cài đặt xong làm thế nào để sử dụng một cách mượt mà và hiệu quả nhất"*.

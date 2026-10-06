@@ -1,108 +1,108 @@
-# 🍪 CSDN Cookie 获取详细教程
+# 🍪 Hướng Dẫn Chi Tiết Cách Lấy CSDN Cookie
 
-## 📸 图文教程
+## 📸 Hướng Dẫn Kèm Hình Ảnh
 
-### 步骤 1：登录 CSDN
-1. 打开浏览器，访问：https://www.csdn.net
-2. 点击右上角「登录」
-3. 使用你的账号密码登录
+### Bước 1: Đăng nhập vào CSDN
+1. Mở trình duyệt web, truy cập: https://www.csdn.net
+2. Nhấp vào nút "Đăng nhập" ở góc trên bên phải
+3. Sử dụng tài khoản và mật khẩu của bạn để đăng nhập
 
-### 步骤 2：打开开发者工具
-1. **按 F12** 键
-2. 或者：右键点击页面 → 选择「检查」
+### Bước 2: Mở Công cụ Dành cho Nhà phát triển (Developer Tools)
+1. **Nhấn phím F12** trên bàn phím
+2. Hoặc: Nhấp chuột phải vào bất kỳ vị trí nào trên trang → Chọn "Kiểm tra" (Inspect)
 
-### 步骤 3：切换到 Application 标签
-1. 在顶部工具栏找到 **"Application"**
-2. 点击进入
+### Bước 3: Chuyển sang tab Application
+1. Trên thanh công cụ trên cùng của DevTools, tìm thẻ **"Application"**
+2. Nhấp vào để mở
 
-### 步骤 4：找到 Cookies
-1. 在左侧边栏找到 **"Storage"**
-2. 展开找到 **"Cookies"**
-3. 点击 **https://www.csdn.net**
+### Bước 4: Điều hướng đến mục Cookies
+1. Ở thanh menu bên trái, tìm mục **"Storage"**
+2. Mở rộng danh mục và tìm **"Cookies"**
+3. Nhấp chọn tên miền **https://www.csdn.net**
 
-### 步骤 5：复制关键 Cookie
-查找并复制以下值：
+### Bước 5: Sao chép các Cookie quan trọng
+Tìm kiếm và sao chép các giá trị tương ứng sau:
 
-#### 🔑 重要 Cookie 列表：
+#### 🔑 Danh sách Cookie trọng yếu:
 
-| Cookie 名称 | 作用 | 是否必需 |
-|------------|------|----------|
-| `SESSION` | 会话ID | ✅ 必需 |
-| `token` | 认证令牌 | ✅ 必需 |
-| `UserInfo` | 用户信息 | ⭕ 可选 |
-| `UserName` | 用户名 | ⭕ 可选 |
-| `UserToken` | 用户令牌 | ⭕ 可选 |
+| Tên Cookie | Tác dụng | Mức độ bắt buộc |
+|------------|----------|-----------------|
+| `SESSION` | ID phiên làm việc (Session ID) | ✅ Bắt buộc |
+| `token` | Token xác thực đăng nhập | ✅ Bắt buộc |
+| `UserInfo` | Thông tin người dùng | ⭕ Tùy chọn |
+| `UserName` | Tên đăng nhập | ⭕ Tùy chọn |
+| `UserToken` | Token phân quyền người dùng | ⭕ Tùy chọn |
 
-### 步骤 6：复制 Cookie 值
+### Bước 6: Sao chép giá trị Cookie
 
-**方法 A：单个复制**
-1. 点击某个 cookie（如 SESSION）
-2. 在右侧 "Value" 字段中
-3. 复制整个值
+**Cách A: Sao chép thủ công từng mục**
+1. Nhấp vào cookie cần lấy (ví dụ `SESSION`)
+2. Trong cột "Value" ở khung bên phải
+3. Sao chép toàn bộ chuỗi giá trị
 
-**方法 B：全部导出**
-1. 在 "Cookies" https://www.csdn.net 上右键
-2. 选择 "Export"
-3. 保存为 JSON 文件
+**Cách B: Xuất toàn bộ cookie**
+1. Nhấp chuột phải vào dòng "https://www.csdn.net" trong danh sách Cookies
+2. Chọn "Export"
+3. Lưu về máy dưới dạng tệp JSON
 
 ---
 
-## 📝 快速复制格式
+## 📝 Định Dạng Sao Chép Nhanh
 
-### 格式 1：JSON 格式（推荐）
+### Định dạng 1: Cấu trúc JSON (Khuyên dùng)
 
-复制所有需要的 cookie 后，按这个格式整理：
+Sau khi sao chép các cookie cần thiết, sắp xếp theo định dạng JSON như sau:
 
 ```json
 {
-  "SESSION": "你复制的SESSION值",
-  "token": "你复制的token值"
+  "SESSION": "giá_trị_SESSION_bạn_đã_sao_chép",
+  "token": "giá_trị_token_bạn_đã_sao_chép"
 }
 ```
 
-### 格式 2：单行格式
+### Định dạng 2: Chuỗi một dòng
 
 ```
-SESSION=你的SESSION值; token=你的token值
+SESSION=giá_trị_SESSION_của_bạn; token=giá_trị_token_của_bạn
 ```
 
 ---
 
-## 🎯 完成后
+## 🎯 Sau Khi Hoàn Thành
 
-将复制好的 cookie 粘贴给我，格式可以是：
+Dán chuỗi cookie đã sao chép cho bot / agent, định dạng có thể là:
 
 ```
 SESSION=xxxxxx; token=xxxxxx
 ```
 
-或者直接复制每个值告诉我：
+Hoặc gửi riêng từng giá trị:
 
 ```
 SESSION: xxxxxx
 token: xxxxxx
 ```
 
-我会帮你配置到 agent-browser 中！
+Hệ thống sẽ giúp bạn cấu hình vào agent-browser!
 
 ---
 
-## ⚠️ 注意事项
+## ⚠️ Lưu Ý Quan Trọng
 
-1. **安全性**：Cookie 包含你的登录信息，不要分享给他人
-2. **有效期**：Cookie 通常会过期，如果失效需要重新获取
-3. **只复制必需的**：SESSION 和 token 通常就够用了
+1. **Bảo mật**: Cookie chứa toàn bộ phiên đăng nhập của bạn, tuyệt đối không chia sẻ cho người lạ hoặc công khai trên mạng.
+2. **Thời hạn sử dụng**: Cookie sẽ hết hạn sau một khoảng thời gian nhất định, nếu mất hiệu lực bạn cần thao tác lấy lại.
+3. **Chỉ sao chép mục cần thiết**: Thông thường chỉ cần `SESSION` và `token` là đã đủ đáp ứng yêu cầu.
 
 ---
 
-## 🚀 下一步
+## 🚀 Các Bước Tiếp Theo
 
-获取到 cookie 后，告诉我：
-- "cookie 已获取好了"
-- 粘贴 cookie 值
+Sau khi lấy được cookie, bạn chỉ cần:
+1. Gửi thông báo xác nhận: "Đã lấy xong cookie"
+2. Dán giá trị cookie
 
-我会帮你：
-1. 配置到浏览器
-2. 打开 CSDN 发布页面
-3. 填写文章内容
-4. 等你点击发布按钮
+Hệ thống Agent sẽ tự động hỗ trợ bạn:
+1. Cấu hình vào trình duyệt tự động
+2. Mở trang xuất bản bài viết của CSDN
+3. Tự động điền nội dung bài viết
+4. Chờ bạn kiểm duyệt lần cuối và bấm nút xuất bản
