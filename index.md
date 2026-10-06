@@ -1,204 +1,189 @@
 ---
 layout: default
-title: 首页
+title: Trang chủ
 ---
 # 🦞 Awesome OpenClaw Tutorial
-# 🦞 一本书玩转 OpenClaw：超级个体实战指南
+# 🦞 Giáo trình OpenClaw toàn diện cho cá nhân độc lập
 
-> 从零开始打造你的 AI 工作助手——最全面的中文教程，涵盖安装、配置、实战案例和避坑指南
+> Xây dựng trợ lý làm việc AI của bạn từ con số không: Giáo trình tiếng Việt toàn diện nhất, bao gồm cài đặt, cấu hình, ca thực chiến và kinh nghiệm tránh lỗi.
 
 [![GitHub stars](https://img.shields.io/github/stars/xianyu110/awesome-openclaw-tutorial?style=social)](https://github.com/xianyu110/awesome-openclaw-tutorial)
 [![GitHub forks](https://img.shields.io/github/forks/xianyu110/awesome-openclaw-tutorial?style=social)](https://github.com/xianyu110/awesome-openclaw-tutorial)
 [![License](https://img.shields.io/badge/license-GPL--3.0-blue.svg)](LICENSE)
 [![Version](https://img.shields.io/badge/version-v2026.9.3-green.svg)](https://github.com/xianyu110/awesome-openclaw-tutorial)
-[![Status](https://img.shields.io/badge/status-完成-success.svg)](reports/PROJECT-SUMMARY.md)
-[![CSDN](https://img.shields.io/badge/CSDN-博客-c32136?style=for-the-badge&logo=csdn)](https://blog.csdn.net/xianyu120)
+[![Status](https://img.shields.io/badge/status-hoàn%20thành-success.svg)](reports/PROJECT-SUMMARY.md)
+[![CSDN](https://img.shields.io/badge/CSDN-Blog-c32136?style=for-the-badge&logo=csdn)](https://blog.csdn.net/xianyu120)
 [![Bilibili](https://img.shields.io/badge/Bilibili-B站-fb7299?style=for-the-badge&logo=bilibili)](https://space.bilibili.com/399102586)
-[![微信公众号](https://img.shields.io/badge/微信公众号-MaynorAI-07C160?style=for-the-badge&logo=wechat)](https://upload.may.maynor1024.live/file/1773461955906_qrcode_for_gh_c749803541de_1280.jpg)
+[![WeChat](https://img.shields.io/badge/WeChat-MaynorAI-07C160?style=for-the-badge&logo=wechat)](https://upload.may.maynor1024.live/file/1773461955906_qrcode_for_gh_c749803541de_1280.jpg)
 [![YouTube](https://img.shields.io/badge/YouTube-Profile-red?style=for-the-badge&logo=youtube)](https://www.youtube.com/@buguniao537)
 [![X](https://img.shields.io/badge/X-Profile-000000?style=for-the-badge&logo=x&logoColor=white)](https://x.com/Nikitka_aktikiN)
 
-> 📖 **纸质书《OpenClaw超级个体实操手册》已上市！** 清华大学出版社出版，在开源教程基础上全面重写+逐条验证。🛒 [京东专属购买链接（¥42，原价¥59.8）](https://item.jd.com/14669463.html)
+---
 
-> 🔄 **2026-09-10 更新说明**：本仓库当前按 **OpenClaw v2026.9.3（稳定版，2026-09-08 发布）** 校对；详见 [`updates/2026-09-10-v2026.9.3.md`](updates/2026-09-10-v2026.9.3.md)。第 `1/2/5/7/8/10~15` 章已同步 2026.9 主线。
+> 🇻🇳 **Lời giới thiệu bản dịch tiếng Việt & Tri ân nguyên tác**:
+> Bản dịch tiếng Việt của **Awesome OpenClaw Tutorial** cung cấp tài liệu hướng dẫn thực chiến, cập nhật nhất về OpenClaw cho các cá nhân độc lập (solopreneurs), nhà sáng tạo nội dung và lập trình viên Việt Nam.
+> Toàn bộ nội dung nguyên tác thuộc về tác giả [@xianyu110](https://github.com/xianyu110) cùng cộng đồng OpenClaw mã nguồn mở. Chúng tôi xin chân thành cảm ơn tác giả đã đóng góp kho tri thức thực tiễn quý giá này.
+
+> 🔄 **Lưu ý cập nhật (10/09/2026)**: Kho tài liệu hiện được đối chiếu theo **OpenClaw v2026.9.3 (Bản ổn định, phát hành 08/09/2026)**; xem chi tiết tại [`updates/2026-09-10-v2026.9.3.md`](updates/2026-09-10-v2026.9.3.md). Các chương `1/2/5/7/8/10~15` đã được đồng bộ với nhánh chính 2026.9.
 
 ---
 
-## 📖 纸质书：《OpenClaw超级个体实操手册》
+## 🚀 Lựa chọn nhanh trong 30 giây: Phương án triển khai nào phù hợp với bạn?
 
-⚠️ **当前说明**：开源教程的第 `1/2/5/7/8/10~15` 章已按 `v2026.9.3` 主线修订；纸质书仍然是更系统的重写版，适合需要完整、稳定、逐条验证内容的读者。
-
-**纸质书已全面修正，现已上市！**
-
-清华大学出版社出版《OpenClaw超级个体实操手册》，在开源教程基础上做了**全面重写+逐条验证**：
-
-- 🔍 **144条CLI命令**对照官方文档逐条核对（教程中约60%已删除或修正）
-- ✅ **9套配置模板**全部在v2026.3.7+实际跑通
-- 🛡️ **新增安全防护指南** + 国产Claw全景指南
-- 📦 **7份随书附赠**电子资料
-
-🛒 **购买链接**：[京东专属链接（¥42，原价¥59.8）](https://item.jd.com/14669463.html)
-
-📦 **本地一键部署安装包**：[https://tryopenclaw.asia/](https://tryopenclaw.asia/)
-
----
-
-## 🚀 30秒快速选择：哪种部署方式适合你？
-
-| 你的情况 | 推荐方案 | 为什么 | 开始时间 |
+| Trường hợp của bạn | Phương án đề xuất | Lý do | Thời gian bắt đầu |
 |---------|---------|------|---------|
-| **完全小白，想最快体验** | [**飞书妙搭**](tutorials/Openclaw史上最简单教程，小白一键部署.md#1飞书妙搭-openclaw--强烈推荐) ⭐ | **免费** + **1分钟完成** + **每日100万Tokens** | → 立即开始 |
-| **有服务器，想可视化管理** | [**宝塔面板**](tutorials/Openclaw史上最简单教程，小白一键部署.md#11宝塔面板-openclaw) | **免费插件** + **面板管理** + **一键安装** | → 3分钟搞定 |
-| **企业级，需要高安全性** | [**JVSClaw**](tutorials/Openclaw史上最简单教程，小白一键部署.md#10jvsclaw阿里云无影) | **14天免费** + **6核12GB** + **端到端加密** | → 需邀请码 |
-| **想用浏览器操控** | [Kimi Claw](tutorials/Openclaw史上最简单教程，小白一键部署.md#3kimi-openclaw) | **Kimi K2.5** + **浏览器控制** | → 200元/月 |
-| **量化交易/多IM** | [腾讯 WorkBuddy](tutorials/Openclaw史上最简单教程，小白一键部署.md#4腾讯-openclawworkbuddy) | **桌面端Agent** + **多IM支持** | → 送5000积分 |
-| **macOS原生体验** | [QClaw](tutorials/Openclaw史上最简单教程，小白一键部署.md#5qclaw) | **腾讯官方桌面客户端** + **全量公测** | → 免费 |
-| **Agent生态丰富** | [扣子 OpenClaw](tutorials/Openclaw史上最简单教程，小白一键部署.md#2扣子-openclaw) | **1800+Skills** | → 99元/月起 |
+| **Người mới hoàn toàn, muốn trải nghiệm nhanh nhất** | [**Lark / Feishu Miaoda**](tutorials/Openclaw史上最简单教程，小白一键部署.md#1飞书妙搭-openclaw--强烈推荐) ⭐ | **Miễn phí** + **Hoàn thành trong 1 phút** + **1 triệu Tokens/ngày** | → Bắt đầu ngay |
+| **Có VPS/Server riêng, muốn quản lý giao diện trực quan** | [**BaoTa Panel (aaPanel)**](tutorials/Openclaw史上最简单教程，小白一键部署.md#11宝塔面板-openclaw) | **Plugin miễn phí** + **Quản trị trực quan** + **Cài đặt 1 click** | → Xong trong 3 phút |
+| **Cấp doanh nghiệp, đòi hỏi bảo mật cao** | [**JVSClaw**](tutorials/Openclaw史上最简单教程，小白一键部署.md#10jvsclaw阿里云无影) | **Miễn phí 14 ngày** + **6 Core 12GB** + **Mã hóa đầu cuối** | → Cần mã mời |
+| **Muốn thao tác tự động hóa qua trình duyệt** | [Kimi Claw](tutorials/Openclaw史上最简单教程，小白一键部署.md#3kimi-openclaw) | **Kimi K2.5** + **Điều khiển trình duyệt** | → ~200 tệ/tháng |
+| **Giao dịch định lượng / Đa kênh IM** | [Tencent WorkBuddy](tutorials/Openclaw史上最简单教程，小白一键部署.md#4腾讯-openclawworkbuddy) | **Desktop Agent** + **Hỗ trợ đa nền tảng IM** | → Tặng 5.000 điểm |
+| **Trải nghiệm ứng dụng bản địa macOS** | [QClaw](tutorials/Openclaw史上最简单教程，小白一键部署.md#5qclaw) | **Desktop Client chính thức từ Tencent** + **Public Beta** | → Miễn phí |
+| **Hệ sinh thái AI Agent phong phú** | [Coze OpenClaw](tutorials/Openclaw史上最简单教程，小白一键部署.md#2扣子-openclaw) | **Hơn 1.800 Skills** | → Từ 99 tệ/tháng |
 
-📖 **[查看完整一键部署教程 →](tutorials/Openclaw史上最简单教程，小白一键部署.md)**
-
----
-
-## 📊 教程导航（按学习路径）
-
-### 🎯 零基础入门（必读）
-- 📖 [第1章：认识OpenClaw](docs/01-basics/01-introduction.md) - 5分钟了解核心价值
-- 🚀 [第2章：快速部署](docs/01-basics/02-installation.md) - 选择适合你的部署方式
-- 💬 [第3章：快速上手](docs/01-basics/03-quick-start.md) - 发送第一条消息
-
-### 🔥 核心功能（实战）
-- 📁 [第4章：文件管理](docs/02-core-features/04-file-management.md) - 效率提升81%
-- 🧠 [第5章：知识库](docs/02-core-features/05-knowledge-management.md) - 第二大脑系统 + Active Memory / Dreaming 补充
-- 📅 [第6章：日程管理](docs/02-core-features/06-schedule-management.md) - AI自动创建日程
-- ⚙️ [第7章：自动化](docs/02-core-features/07-automation-workflow.md) - 定时任务 + Task Flow / Webhooks 更新
-
-### 💎 进阶技能（提升）
-- 🔌 [第8章：Skills扩展](docs/03-advanced/08-skills-extension.md) - 1800+技能
-- 🤖 [第9章：多平台集成](docs/03-advanced/09-multi-platform-integration.md) - 飞书/企微/钉钉/QQ/微信
-- 🔗 [第10章：API 与外部能力集成](docs/03-advanced/10-api-integration.md) - infer / webhooks / 媒体工作流
-- ⚙️ [第11章：高级配置](docs/03-advanced/11-advanced-configuration.md) - 模型 / 记忆 / 审批 / 性能
-
-### 🎯 实战案例（直接套用）
-- 👔 [第12章：个人效率实战](docs/04-practical-cases/12-personal-productivity.md) - 知识工作 / 编程 / 创作 / 学习 / 个人运营
-- 🔗 [第13章：高级自动化](docs/04-practical-cases/13-advanced-automation.md) - cron / tasks / Task Flow / hooks / standing orders
-- 🎨 [第14章：创意应用](docs/04-practical-cases/14-creative-applications.md) - 图片 / 视频 / 音乐 / TTS / ComfyUI
-- 🚀 [第15章：一人公司实战](docs/04-practical-cases/15-solo-entrepreneur-cases.md) - 选题 / 交付 / 分发 / 复盘
-
-### 📚 附录工具（速查）
-- [命令速查表](appendix/A-command-reference.md) | [必装Skills](appendix/B-skills-catalog.md)
-- [常见问题](appendix/E-common-problems.md) | [API对比](appendix/C-api-comparison.md)
-- [配置模板](appendix/H-config-templates.md) | [避坑指南](appendix/F-best-practices.md)
+📖 **[Xem bài hướng dẫn triển khai một chạm chi tiết →](tutorials/Openclaw史上最简单教程，小白一键部署.md)**
 
 ---
 
-## 🆘 遇到问题？快速解决
+## 📊 Điều hướng giáo trình (Theo lộ trình học tập)
+
+### 🎯 Nhập môn từ số 0 (Bắt buộc đọc)
+- 📖 [Chương 1: Làm quen với OpenClaw](docs/01-basics/01-introduction.md) - 5 phút nắm bắt giá trị cốt lõi
+- 🚀 [Chương 2: Triển khai nhanh](docs/01-basics/02-installation.md) - Lựa chọn cách cài đặt phù hợp với bạn
+- 💬 [Chương 3: Khởi động nhanh](docs/01-basics/03-quick-start.md) - Gửi thông điệp đầu tiên
+
+### 🔥 Tính năng cốt lõi (Thực chiến)
+- 📁 [Chương 4: Quản lý tệp cục bộ](docs/02-core-features/04-file-management.md) - Nâng cao 81% hiệu suất công việc
+- 🧠 [Chương 5: Cơ sở tri thức cá nhân](docs/02-core-features/05-knowledge-management.md) - Hệ thống bộ não thứ hai + Active Memory / Dreaming
+- 📅 [Chương 6: Quản lý lịch trình](docs/02-core-features/06-schedule-management.md) - AI tự động thiết lập thời gian biểu
+- ⚙️ [Chương 7: Luồng công việc tự động hóa](docs/02-core-features/07-automation-workflow.md) - Tác vụ định kỳ Cron + Task Flow / Webhooks
+
+### 💎 Kỹ năng nâng cao (Tối ưu hóa)
+- 🔌 [Chương 8: Mở rộng Skills](docs/03-advanced/08-skills-extension.md) - Kho 1.800+ kỹ năng mở rộng
+- 🤖 [Chương 9: Tích hợp đa nền tảng](docs/03-advanced/09-multi-platform-integration.md) - Lark/Feishu, WeCom, DingTalk, Telegram, Discord
+- 🔗 [Chương 10: Tích hợp API và năng lực bên ngoài](docs/03-advanced/10-api-integration.md) - infer / webhooks / quy trình xử lý media
+- ⚙️ [Chương 11: Cấu hình nâng cao](docs/03-advanced/11-advanced-configuration.md) - Mô hình / Bộ nhớ / Phê duyệt / Hiệu năng
+
+### 🎯 Ca thực chiến (Áp dụng trực tiếp)
+- 👔 [Chương 12: Tối ưu năng suất cá nhân](docs/04-practical-cases/12-personal-productivity.md) - Công việc tri thức / Lập trình / Viết lách / Học tập / Vận hành cá nhân
+- 🔗 [Chương 13: Tự động hóa nâng cao](docs/04-practical-cases/13-advanced-automation.md) - Cron / Tasks / Task Flow / Hooks / Standing orders
+- 🎨 [Chương 14: Ứng dụng sáng tạo & Media](docs/04-practical-cases/14-creative-applications.md) - Hình ảnh / Video / Âm nhạc / TTS / ComfyUI
+- 🚀 [Chương 15: Thực chiến cá nhân độc lập (Solopreneur)](docs/04-practical-cases/15-solo-entrepreneur-cases.md) - Nghiên cứu chủ đề / Bàn giao / Phân phối / Đánh giá tổng kết
+
+### 📚 Hệ thống phụ lục & Công cụ (Tra cứu nhanh)
+- [Bảng tra cứu câu lệnh CLI](appendix/A-command-reference.md) | [Danh mục Skills cần cài đặt](appendix/B-skills-catalog.md)
+- [Xử lý sự cố thường gặp](appendix/E-common-problems.md) | [So sánh các API & Nhà cung cấp](appendix/C-api-comparison.md)
+- [Mẫu cấu hình chuẩn](appendix/H-config-templates.md) | [Kinh nghiệm thực tiễn & Tránh lỗi](appendix/F-best-practices.md)
+
+---
+
+## 🆘 Gặp sự cố? Giải quyết nhanh
 
 <details>
-<summary><b>🔧 常见问题速查（点击展开）</b></summary>
+<summary><b>🔧 Tra cứu nhanh lỗi thường gặp (Bấm để mở rộng)</b></summary>
 
-### 安装配置问题
-- [安装失败怎么办？](appendix/E-common-problems.md#安装配置问题)
-- [API连接失败？](appendix/E-common-problems.md#api连接问题)
-- [飞书Bot不回复？](docs/03-advanced/09-multi-platform-integration.md#常见问题)
+### Vấn đề cài đặt và cấu hình
+- [Cài đặt thất bại xử lý thế nào?](appendix/E-common-problems.md#安装配置问题)
+- [Kết nối API thất bại?](appendix/E-common-problems.md#api连接问题)
+- [Bot Lark/Feishu không phản hồi?](docs/03-advanced/09-multi-platform-integration.md#常见问题)
 
-### 使用问题
-- [AI变"哑巴"了？](#🔧-202632-版本ai变哑巴了) → 切换到 `full` profile
-- [Gateway启动失败？](appendix/E-common-problems.md#gateway问题) → 检查认证配置
+### Vấn đề trong quá trình sử dụng
+- [AI trở nên "im lặng", không chịu thao tác?](#🔧-phiên-bản-202632-ai-không-thực-hiện-lệnh-hoặc-im-lặng) → Chuyển sang profile `full`
+- [Khởi động Gateway thất bại?](appendix/E-common-problems.md#gateway问题) → Kiểm tra cấu hình xác thực (auth)
 
-### 成本优化
-- [API费用太高？](docs/03-advanced/11-advanced-configuration.md)
-- [如何省钱？](appendix/F-best-practices.md) - 使用国产模型节省95%
+### Tối ưu chi phí sử dụng
+- [Chi phí gọi API quá cao?](docs/03-advanced/11-advanced-configuration.md)
+- [Làm sao để tiết kiệm chi phí?](appendix/F-best-practices.md) - Sử dụng các mô hình nội địa chất lượng cao giúp tiết kiệm đến 95%
 
 </details>
 
-**找不到答案？**
-- 📖 [完整FAQ](appendix/E-common-problems.md)
-- 💬 [提交问题](https://github.com/xianyu110/awesome-openclaw-tutorial/issues)
+**Chưa tìm thấy câu trả lời?**
+- 📖 [Xem toàn bộ FAQ](appendix/E-common-problems.md)
+- 💬 [Tạo yêu cầu hỗ trợ (Issue)](https://github.com/xianyu110/awesome-openclaw-tutorial/issues)
 
 ---
 
-## 🚨 重要版本提示
+## 🚨 Lưu ý quan trọng theo từng phiên bản
 
-### ⚠️ 2026.3.7版本：Gateway认证要求（Breaking Change）
+### ⚠️ Phiên bản 2026.3.7: Yêu cầu xác thực Gateway (Breaking Change)
 
-Gateway认证现在**必须显式设置** `gateway.auth.mode`（`token` 或 `password`）
+Xác thực Gateway hiện **bắt buộc phải được thiết lập tường minh** qua `gateway.auth.mode` (`token` hoặc `password`).
 
-**快速修复**：
+**Khắc phục nhanh**:
 ```bash
 openclaw config set gateway.auth.mode token
 openclaw config set gateway.auth.token "your-secret-token"
 openclaw gateway restart
 ```
 
-### 🔧 2026.3.2版本：AI变"哑巴"了？
+### 🔧 Phiên bản 2026.3.2: AI không thực hiện lệnh hoặc "im lặng"?
 
-**症状**：只能聊天不能干活（文件管理、命令执行失效）
-**原因**：默认profile改为 `messaging`（纯聊天模式）
-**修复**：切换到 `full` profile
+**Hiện tượng**: AI chỉ trò chuyện được thông thường nhưng không thực hiện công việc (thao tác tệp, thực thi lệnh bị vô hiệu hóa).  
+**Nguyên nhân**: Profile mặc định được chuyển sang `messaging` (chế độ thuần chat).  
+**Khắc phục**: Chuyển cấu hình sang profile `full`.
 
 ```bash
 openclaw config set tools.profile full
 openclaw gateway restart
 ```
 
-**5种Profile说明**：
+**Mô tả 5 loại Profile**:
 
-| Profile | 功能说明 |
+| Profile | Chức năng chi tiết |
 |---------|---------|
-| `messaging` | 只能发布消息、管理会话 |
-| `default` | 默认工具集（不含命令执行） |
-| `coding` | 编程相关工具 |
-| **`full`** | **完整工具集，包含命令执行（推荐）** |
-| `all` | 所有工具全开 |
+| `messaging` | Chỉ có thể gửi tin nhắn và quản lý phiên hội thoại |
+| `default` | Bộ công cụ mặc định (không bao gồm thực thi dòng lệnh) |
+| `coding` | Các công cụ chuyên sâu về lập trình |
+| **`full`** | **Bộ công cụ đầy đủ, bao gồm thực thi dòng lệnh (Khuyến nghị)** |
+| `all` | Kích hoạt toàn bộ tất cả công cụ |
 
 ---
 
-### 🆕 v2026.3.12 重大更新（2026年3月）
+### 🆕 Cập nhật quan trọng v2026.3.12 (Tháng 03/2026)
 
-> 建议所有用户升级，包含大量安全修复
+> Khuyến nghị tất cả người dùng nâng cấp vì có chứa nhiều bản vá bảo mật quan trọng.
 
-**新功能**
-- **Control UI 全面重设计**：模块化 Dashboard，含概览/聊天/配置/Agent/Session 视图，支持命令面板、移动端底部 Tab、slash 命令、消息导出和消息置顶
-- **`/fast` 快速模式开关**：支持切换 OpenAI / Anthropic 的 fast tier，更省钱更快
-- **Kubernetes 支持**：新增 K8s 安装路径（支持 Kind 和 raw manifests）
-- **`sessions_yield` 工具**：Agent 可立即结束当前轮次并携带后续载荷，流程控制更灵活
-- **Slack Block Kit**：Slack 频道消息支持 Block Kit 富文本格式
+**Tính năng mới**:
+- **Thiết kế lại toàn diện giao diện Control UI**: Dashboard mô-đun hóa với các khung nhìn Tổng quan / Chat / Cấu hình / Agent / Phiên làm việc; hỗ trợ Command Palette, thanh Tab đáy trên di động, lệnh slash, xuất tin nhắn và ghim tin nhắn.
+- **Công tắc chế độ nhanh `/fast`**: Hỗ trợ chuyển đổi nhanh gói fast tier của OpenAI / Anthropic giúp tiết kiệm chi phí và tăng tốc độ phản hồi.
+- **Hỗ trợ Kubernetes**: Bổ sung tài liệu triển khai trên K8s (hỗ trợ cả Kind và manifest gốc).
+- **Công cụ `sessions_yield`**: Cho phép AI Agent chủ động kết thúc lượt hiện tại kèm payload tiếp theo, giúp điều phối luồng linh hoạt hơn.
+- **Slack Block Kit**: Hỗ trợ định dạng tin nhắn phong phú Block Kit trên kênh Slack.
 
-**重要安全修复**（建议立即升级）
-- 修复跨站 WebSocket 劫持路径
-- 修复 workspace plugin 隐式自动加载（防止恶意代码执行）
-- 修复 `/config`、`/debug` 权限绕过
-- 修复共享 token 范围自我提权
-- 多处 exec 审批绕过修复
-
----
-
-### 🆕 v2026.3.13 更新（2026年3月中旬）
-
-**新功能**
-- **Chrome DevTools MCP attach 模式**：可直接连接已登录的 Chrome 浏览器进行自动化操作，无需重新登录
-- **Ollama 一键安装引导**：支持 Local 和 Cloud+Local 混合模式，本地模型更好用
-- **多模态记忆索引**：图片/音频内容可用 Gemini Embedding 进行语义检索
-- **Docker 时区支持**：新增 `OPENCLAW_TZ` 环境变量
-- **iOS 首次运行引导页**：新用户体验大幅提升
-
-**Bug 修复**
-- 修复工具密集型运行时 Dashboard UI 卡死/重渲染风暴
-- 修复 Windows 下 gateway 重启时弹出控制台黑窗口
-- 修复 setup code 可被重放攻击的安全漏洞
-- 插件 SDK 去重，修复约 2 倍内存膨胀问题
+**Bản vá bảo mật trọng yếu** (Khuyến nghị nâng cấp ngay):
+- Vá lỗ hổng tấn công chiếm quyền WebSocket qua Cross-site.
+- Ngăn chặn nạp ngầm tự động plugin không an toàn trong workspace (chống thực thi mã độc).
+- Sửa lỗi vượt quyền xác thực tại `/config` và `/debug`.
+- Sửa lỗi tự nâng quyền phạm vi thông qua token chia sẻ.
+- Vá nhiều điểm bỏ qua kiểm duyệt phê duyệt lệnh thực thi (exec).
 
 ---
 
-### 🆕 v2026.9.3 稳定版更新（2026年9月8日）
+### 🆕 Cập nhật v2026.3.13 (Giữa tháng 03/2026)
 
-**当前基线**
-- **稳定版**：`v2026.9.3`
-- **推荐运行时**：`Node 26`（或 `Node 24.16+`）；`Node 22` 已不再支持
-- **校验方式**：`npm view openclaw version` 应返回 `2026.9.3`
-- **跳变说明**：[`updates/2026-09-10-v2026.9.3.md`](updates/2026-09-10-v2026.9.3.md)
+**Tính năng mới**:
+- **Chế độ Chrome DevTools MCP attach**: Cho phép kết nối trực tiếp vào trình duyệt Chrome đã đăng nhập để tự động hóa mà không cần đăng nhập lại từ đầu.
+- **Trình hướng dẫn cài đặt Ollama một chạm**: Hỗ trợ cả chế độ Local lẫn mô hình kết hợp Cloud + Local.
+- **Lập chỉ mục bộ nhớ đa phương thức (Multimodal Memory)**: Hỗ trợ tìm kiếm ngữ nghĩa nội dung hình ảnh/âm thanh qua Gemini Embedding.
+- **Hỗ trợ múi giờ trong Docker**: Bổ sung biến môi trường `OPENCLAW_TZ`.
+- **Màn hình hướng dẫn khởi động lần đầu trên iOS**: Cải thiện đáng kể trải nghiệm người dùng mới.
 
-**升级命令**：
+**Sửa lỗi**:
+- Khắc phục hiện tượng lag và giật giao diện Dashboard khi chạy nhiều công cụ đồng thời.
+- Sửa lỗi cửa sổ console màu đen bật lên trên Windows khi khởi động lại gateway.
+- Vá lỗ hổng mã xác lập (setup code) bị tấn công phát lại (replay attack).
+- Khử trùng lặp plugin SDK, giải quyết vấn đề phình bộ nhớ gấp ~2 lần.
+
+---
+
+### 🆕 Cập nhật bản ổn định v2026.9.3 (08/09/2026)
+
+**Nền tảng hiện tại**:
+- **Phiên bản ổn định**: `v2026.9.3`
+- **Môi trường khuyến nghị**: `Node 26` (hoặc `Node 24.16+`); `Node 22` đã không còn được hỗ trợ
+- **Kiểm tra phiên bản**: `npm view openclaw version` sẽ trả về `2026.9.3`
+- **Tài liệu hướng dẫn di chuyển đầy đủ**: [`updates/2026-09-10-v2026.9.3.md`](updates/2026-09-10-v2026.9.3.md)
+
+**Lệnh nâng cấp**:
 ```bash
 openclaw update --tag 2026.9.3 --yes
 openclaw update repair
@@ -206,185 +191,185 @@ openclaw doctor --fix
 openclaw --version
 ```
 
-> ⚠️ **新手建议**：优先使用 `v2026.9.3`。跨版本升级务必备份并执行 `openclaw doctor --fix`（OpenAI 路由迁移、OpenProse 清理、会话 SQLite 相关修复）。
+> ⚠️ **Lời khuyên cho người mới**: Để đảm bảo trải nghiệm ổn định và bám sát giáo trình nhất, hãy ưu tiên dùng `v2026.9.3`. Khi nâng cấp xuyên phiên bản, bắt buộc sao lưu dữ liệu và chạy `openclaw doctor --fix` (để tự động di chuyển định tuyến OpenAI, làm sạch OpenProse và cấu trúc SQLite của phiên).
 
 ---
 
-## 📖 关于本教程
+## 📖 Về giáo trình này
 
-### 🎯 教程特色
+### 🎯 Điểm nổi bật của giáo trình
 
-1. **超级个体定位** - 一个人+OpenClaw=无限可能，效率提升10倍
-2. **云端部署优先** - 降低技术门槛，手机随时使用
-3. **国产模型为主** - 成本低、速度快、中文友好
-4. **实战案例丰富** - 70+完整工作流，可直接应用
-5. **中国本土化** - 企业微信/钉钉/飞书深度集成
-6. **完整资源导航** - 官方资源、社区资源、学习路径
+1. **Định vị cho Cá nhân Độc lập (Solopreneur)** - Một người + OpenClaw = Tiềm năng vô hạn, tăng gấp 10 lần hiệu suất làm việc.
+2. **Ưu tiên triển khai Cloud** - Hạ thấp rào cản kỹ thuật, có thể sử dụng linh hoạt mọi lúc mọi nơi từ điện thoại.
+3. **Tận dụng tối đa các mô hình kinh tế & mạnh mẽ** - Chi phí rẻ, tốc độ xử lý nhanh (DeepSeek, Qwen, Kimi, GLM cùng OpenAI, Claude, Gemini).
+4. **Hệ thống ca thực chiến phong phú** - Hơn 70 quy trình làm việc hoàn chỉnh, áp dụng được ngay vào thực tế.
+5. **Tích hợp đa kênh giao tiếp** - Hỗ trợ sâu rộng Telegram, Discord, Lark/Feishu, WeCom, DingTalk.
+6. **Bản đồ tài nguyên hoàn chỉnh** - Tài nguyên chính thức, tài nguyên cộng đồng và lộ trình học tập chi tiết.
 
-### 📊 教程规模
+### 📊 Quy mô giáo trình
 
-- ✅ **15章节正文**：约267,000字
-- ✅ **15个附录**：约141,000字
-- ✅ **总字数**：408,000字
-- ✅ **70+实战案例**：可直接应用
-- ✅ **完整配图**：50+张配置截图
+- ✅ **15 chương chính khóa**: Khoảng 267.000 từ
+- ✅ **15 phụ lục chuyên sâu**: Khoảng 141.000 từ
+- ✅ **Tổng dung lượng nội dung**: Hơn 408.000 từ
+- ✅ **70+ ca thực chiến**: Có thể sao chép và áp dụng ngay
+- ✅ **Minh họa trực quan**: Hơn 50 ảnh chụp màn hình cấu hình chi tiết
 
-### 🎯 适合人群
+### 🎯 Đối tượng độc giả phù hợp
 
-- 🚀 **超级个体**：想要一个人顶一个团队，实现个人价值最大化
-- 🔰 **完全新手**：从零开始，手把手教你安装配置
-- 💼 **知识工作者**：学习如何用OpenClaw提升10倍个人效率
-- 👨‍💻 **开发者**：深入了解Skills开发和API集成
-- ✍️ **内容创作者**：探索自动化工作流和高级应用
-
----
-
-## 📚 完整教程目录
-
-### 第一部分：零基础入门（3章节）
-- [第1章：OpenClaw是什么？](docs/01-basics/01-introduction.md)
-- [第2章：5分钟完成部署](docs/01-basics/02-installation.md)
-- [第3章：发送第一条消息](docs/01-basics/03-quick-start.md)
-
-### 第二部分：核心功能（4章节）
-- [第4章：本地文件管理](docs/02-core-features/04-file-management.md)
-- [第5章：个人知识库](docs/02-core-features/05-knowledge-management.md)
-- [第6章：日程管理](docs/02-core-features/06-schedule-management.md)
-- [第7章：自动化工作流](docs/02-core-features/07-automation-workflow.md)
-
-### 第三部分：进阶技能（4章节）
-- [第8章：Skills扩展](docs/03-advanced/08-skills-extension.md)
-- [第9章：多平台集成](docs/03-advanced/09-multi-platform-integration.md)
-- [第10章：API 与外部能力集成](docs/03-advanced/10-api-integration.md)
-- [第11章：高级配置（模型、记忆、审批与性能）](docs/03-advanced/11-advanced-configuration.md)
-
-### 第四部分：实战案例（4章节）
-- [第12章：个人效率实战](docs/04-practical-cases/12-personal-productivity.md)
-- [第13章：高级自动化工作流](docs/04-practical-cases/13-advanced-automation.md)
-- [第14章：创意应用实战](docs/04-practical-cases/14-creative-applications.md)
-- [第15章：一人公司实战](docs/04-practical-cases/15-solo-entrepreneur-cases.md)
+- 🚀 **Cá nhân độc lập (Solopreneurs)**: Muốn một mình vận hành bằng cả một đội ngũ, tối đa hóa giá trị cá nhân.
+- 🔰 **Người mới bắt đầu**: Đi từ con số không, hướng dẫn từng bước cài đặt và cấu hình.
+- 💼 **Nhân sự làm việc tri thức**: Học cách ứng dụng OpenClaw để bứt phá hiệu năng làm việc hàng ngày.
+- 👨‍💻 **Lập trình viên & Kỹ sư**: Tìm hiểu sâu về phát triển Skills tùy biến và tích hợp API hệ thống.
+- ✍️ **Nhà sáng tạo nội dung**: Khám phá các luồng tự động hóa sáng tạo nội dung đa phương tiện.
 
 ---
 
-## 🔗 官方资源
+## 📚 Mục lục toàn bộ giáo trình
 
-- **OpenClaw官方网站**：https://openclaw.ai
-- **OpenClaw官方文档**：https://docs.openclaw.ai
-- **GitHub仓库**：https://github.com/openclaw/openclaw
-- **ClawHub技能广场**：https://clawhub.ai
-- **Awesome Skills合集**：https://github.com/VoltAgent/awesome-openclaw-skills
+### Phần 1: Nhập môn từ số 0 (3 chương)
+- [Chương 1: OpenClaw là gì?](docs/01-basics/01-introduction.md)
+- [Chương 2: Hoàn thành triển khai trong 5 phút](docs/01-basics/02-installation.md)
+- [Chương 3: Gửi tin nhắn đầu tiên](docs/01-basics/03-quick-start.md)
 
-## 💡 实战案例精选
+### Phần 2: Tính năng cốt lõi (4 chương)
+- [Chương 4: Quản lý tệp cục bộ](docs/02-core-features/04-file-management.md)
+- [Chương 5: Cơ sở tri thức cá nhân](docs/02-core-features/05-knowledge-management.md)
+- [Chương 6: Quản lý lịch trình](docs/02-core-features/06-schedule-management.md)
+- [Chương 7: Luồng công việc tự động hóa](docs/02-core-features/07-automation-workflow.md)
 
-### 📦 配置示例（开箱即用）
+### Phần 3: Kỹ năng nâng cao (4 chương)
+- [Chương 8: Mở rộng Skills](docs/03-advanced/08-skills-extension.md)
+- [Chương 9: Tích hợp đa nền tảng](docs/03-advanced/09-multi-platform-integration.md)
+- [Chương 10: Tích hợp API và năng lực bên ngoài](docs/03-advanced/10-api-integration.md)
+- [Chương 11: Cấu hình nâng cao (Mô hình, Bộ nhớ, Phê duyệt và Hiệu năng)](docs/03-advanced/11-advanced-configuration.md)
 
-- [基础配置](examples/configs/basic-config.json)
-- [多模型配置](examples/configs/multi-model-config.json)
-- [多Agent配置](examples/configs/multi-agent-config.json)
-- [飞书Bot配置](examples/configs/feishu-config.json)
-
-### 🎬 实战场景
-
-- [文件管理：找发票](docs/02-core-features/04-file-management.md)
-- [知识管理：网页存档](docs/02-core-features/05-knowledge-management.md)
-- [日程管理：截图识别](docs/02-core-features/06-schedule-management.md)
-- [自动化：网站监控](docs/02-core-features/07-automation-workflow.md)
+### Phần 4: Ca thực chiến (4 chương)
+- [Chương 12: Thực chiến tối ưu năng suất cá nhân](docs/04-practical-cases/12-personal-productivity.md)
+- [Chương 13: Quy trình tự động hóa nâng cao](docs/04-practical-cases/13-advanced-automation.md)
+- [Chương 14: Thực chiến ứng dụng sáng tạo](docs/04-practical-cases/14-creative-applications.md)
+- [Chương 15: Thực chiến vận hành công ty một người (Solopreneur)](docs/04-practical-cases/15-solo-entrepreneur-cases.md)
 
 ---
 
-## 📊 成本对比
+## 🔗 Tài nguyên chính thức
 
-| 方案 | 月费用 | 适用场景 |
+- **Trang chủ OpenClaw**: https://openclaw.ai
+- **Tài liệu chính thức OpenClaw**: https://docs.openclaw.ai
+- **GitHub Repository**: https://github.com/openclaw/openclaw
+- **Quảng trường Kỹ năng ClawHub**: https://clawhub.ai
+- **Tuyển tập Awesome Skills**: https://github.com/VoltAgent/awesome-openclaw-skills
+
+## 💡 Tuyển tập ca thực chiến tiêu biểu
+
+### 📦 Mẫu cấu hình (Sẵn sàng sử dụng)
+
+- [Cấu hình cơ bản](examples/configs/basic-config.json)
+- [Cấu hình đa mô hình](examples/configs/multi-model-config.json)
+- [Cấu hình đa Agent](examples/configs/multi-agent-config.json)
+- [Cấu hình Bot Lark/Feishu](examples/configs/feishu-config.json)
+
+### 🎬 Các tình huống thực tế
+
+- [Quản lý tệp: Tìm hóa đơn thất lạc](docs/02-core-features/04-file-management.md)
+- [Quản lý tri thức: Lưu trữ và tóm tắt bài viết web](docs/02-core-features/05-knowledge-management.md)
+- [Quản lý lịch trình: Nhận diện ảnh chụp màn hình tạo sự kiện](docs/02-core-features/06-schedule-management.md)
+- [Tự động hóa: Giám sát thay đổi trang web](docs/02-core-features/07-automation-workflow.md)
+
+---
+
+## 📊 So sánh chi phí giải pháp
+
+| Phương án | Chi phí ước tính hàng tháng | Tình huống phù hợp |
 |------|--------|----------|
-| 飞书妙搭 | **免费** | 新手推荐（限时） |
-| 云端部署 | 20-50元 | 无Mac/24小时运行 |
-| 本地部署 | 0元 | 有Mac电脑 |
-| API费用（DeepSeek） | 5-30元 | 日常使用 |
-| API费用（Kimi） | 10-50元 | 长文档处理 |
+| Lark / Feishu Miaoda | **Miễn phí** | Khuyến nghị cho người mới |
+| Triển khai Cloud (VPS) | ~70.000đ - 180.000đ | Không có máy tính chạy liên tục 24/7 |
+| Triển khai máy cục bộ | 0đ | Đã có sẵn máy tính cá nhân |
+| Chi phí API (DeepSeek) | ~20.000đ - 100.000đ | Nhu cầu sử dụng thông thường hàng ngày |
+| Chi phí API (Kimi / Qwen) | ~35.000đ - 180.000đ | Xử lý tài liệu và ngữ cảnh dài |
 
-💡 **省钱技巧**：使用国产大模型（DeepSeek、Kimi）节省**50%-70%**成本
+💡 **Mẹo tiết kiệm chi phí**: Tận dụng các mô hình AI tối ưu về chi phí như DeepSeek hoặc Qwen để tiết kiệm từ **50% đến 70%** ngân sách so với các gói thương mại thông thường.
 
 ---
 
-## 🤝 贡献指南
+## 🤝 Hướng dẫn đóng góp
 
-欢迎贡献你的经验和案例！
+Chúng tôi luôn chào đón mọi đóng góp về kinh nghiệm, sửa lỗi bản dịch và bổ sung ca thực hành từ cộng đồng!
 
-1. Fork本仓库
-2. 创建你的分支 (`git checkout -b feature/AmazingFeature`)
-3. 提交你的修改 (`git commit -m 'Add some AmazingFeature'`)
-4. 推送到分支 (`git push origin feature/AmazingFeature`)
-5. 提交Pull Request
+1. Fork kho tài liệu này
+2. Tạo nhánh tính năng mới (`git checkout -b feature/AmazingFeature`)
+3. Commit các thay đổi (`git commit -m 'Add some AmazingFeature'`)
+4. Đẩy lên nhánh của bạn (`git push origin feature/AmazingFeature`)
+5. Tạo Pull Request
 
-## 📮 联系方式
+## 📮 Thông tin tác giả & Kênh liên hệ nguyên tác
 
-### 社交媒体
+### Mạng xã hội của tác giả nguyên tác
 - **GitHub**: [@xianyu110](https://github.com/xianyu110)
-- **CSDN专栏**: [OpenClaw从入门到精通](https://blog.csdn.net/xianyu120)
-- **B站**: [@MaynorAI](https://space.bilibili.com/399102586)
+- **Chuyên mục CSDN**: [OpenClaw từ nhập môn đến tinh thông](https://blog.csdn.net/xianyu120)
+- **Kênh Bilibili**: [@MaynorAI](https://space.bilibili.com/399102586)
 - **YouTube**: [@buguniao537](https://www.youtube.com/@buguniao537)
 - **X (Twitter)**: [@Nikitka_aktikiN](https://x.com/Nikitka_aktikiN)
 
-### 项目链接
-- **Clawbot项目**: [700+ Stars](https://github.com/xianyu110/clawbot)
-- **两万人AI社区主理人**
+### Dự án liên quan
+- **Dự án Clawbot**: [700+ Stars](https://github.com/xianyu110/clawbot)
+- **Cộng đồng AI hơn 20.000 thành viên**
 
 ---
 
-## 👥 交流群
+## 👥 Nhóm cộng đồng trao đổi
 
-欢迎加入OpenClaw交流群，与更多开发者一起交流学习！备注：小龙虾
+Chào mừng bạn tham gia cộng đồng trao đổi OpenClaw để cùng học tập, thảo luận với các nhà phát triển!
 
 <div align="center">
-  <img src="https://upload.maynor1024.live/file/1772695436136_20260305152343578.jpg" alt="OpenClaw交流群二维码" width="300">
-  <p>扫码加入OpenClaw交流群</p>
+  <img src="https://upload.maynor1024.live/file/1772695436136_20260305152343578.jpg" alt="Mã QR nhóm cộng đồng OpenClaw" width="300">
+  <p>Quét mã để tham gia nhóm trao đổi OpenClaw</p>
 </div>
 
 ---
 
-## 💖 支持项目
+## 💖 Ủng hộ dự án
 
-如果这个教程对你有帮助：
-- ⭐ 给项目点个 Star
-- 🔄 分享给需要的人
-- 💬 提交 Issue 反馈问题
-- 🤝 贡献你的经验和案例
-
----
-
-## 📈 项目进度
-
-- ✅ **v1.6**（2026-03-18）：新增一键部署教程（8个平台）
-- ✅ **v1.12**（2026-09-10）：同步 OpenClaw `v2026.9.3`
-- ✅ **v1.10**（2026-04-16）：第 `10~15` 章按 OpenClaw `v2026.4.14` 稳定版主线重写，并同步 README / 章节入口 / 纸书推荐文案
-- ✅ **v1.9**（2026-04-04）：同步橙皮书 v1.3~v1.4 更新——ClawBot 改为微信官方插件（iLink 协议）、新增 Chrome DevTools 附着模式、Dashboard v2 详解、腾讯全家桶、GLM-5-Turbo、安全漏洞统计、Skills 数据更新（55内置/13,700+ ClawHub）
-- 🔄 **v1.11**（进行中）：继续清理第 `1~9` 章旧口径与历史案例
+Nếu giáo trình này mang lại giá trị cho bạn:
+- ⭐ Tặng một Star cho repository
+- 🔄 Chia sẻ đến những người bạn cần tìm hiểu
+- 💬 Gửi phản hồi và câu hỏi qua mục Issue
+- 🤝 Đóng góp bài học kinh nghiệm và quy trình thực chiến của bạn
 
 ---
 
-## 📄 许可证
+## 📈 Lịch sử phiên bản & Tiến độ cập nhật
 
-本项目采用 [GPL-3.0 License](LICENSE)
+- ✅ **v1.6** (18/03/2026): Bổ sung hướng dẫn triển khai một chạm trên 8 nền tảng.
+- ✅ **v1.9** (04/04/2026): Cập nhật tích hợp WeChat ClawBot qua giao thức iLink, thêm chế độ Chrome DevTools attach, Dashboard v2, Tencent suite, GLM-5-Turbo, thống kê bảo mật, số liệu Skills (55 tích hợp sẵn / 13.700+ ClawHub).
+- ✅ **v1.10** (16/04/2026): Viết lại các chương `10~15` theo phiên bản ổn định OpenClaw `v2026.4.14`.
+- ✅ **v1.12** (10/09/2026): Đồng bộ phiên bản OpenClaw `v2026.9.3`.
+- 🔄 **Hiện tại**: Bản địa hóa toàn diện tiếng Việt cho tài liệu và tối ưu cho cộng đồng người dùng Việt Nam.
 
-### ⚠️ 重要声明：禁止倒卖
+---
 
-- ❌ **严禁倒卖**：禁止将本教程打包后进行商业售卖
-- ❌ **严禁闭源商用**：任何基于本项目的衍生作品必须同样开源
-- ✅ **允许学习**：欢迎个人学习和使用
-- ✅ **允许分享**：欢迎分享给更多需要的人
-- ✅ **允许修改**：可以修改并分享，但必须保持开源
+## 📄 Giấy phép mã nguồn
+
+Dự án này được phát hành theo giấy phép [GPL-3.0 License](LICENSE).
+
+### ⚠️ Tuyên bố bản quyền & Nguyên tắc chia sẻ
+
+- ❌ **Nghiêm cấm thương mại hóa đóng gói**: Không được phép đóng gói tài liệu này để bán lại dưới bất kỳ hình thức nào.
+- ❌ **Nghiêm cấm đóng mã nguồn**: Mọi sản phẩm phái sinh phát triển dựa trên dự án này đều bắt buộc phải được mở mã nguồn công khai theo chuẩn GPL-3.0.
+- ✅ **Khuyến khích học tập**: Hoan nghênh mọi cá nhân học tập, nghiên cứu và áp dụng vào công việc.
+- ✅ **Tự do chia sẻ**: Khuyến khích chia sẻ rộng rãi đến cộng đồng kèm trích dẫn nguồn tác giả và nhóm dịch.
+- ✅ **Chỉnh sửa đóng góp**: Được phép sửa đổi, bổ sung và hoàn thiện với điều kiện giữ nguyên tính chất mã nguồn mở.
 
 ---
 
 <div align="center">
 
-**最后更新**：2026年4月4日
-**教程版本**：v1.9
-**总字数**：408,000字（15章节 + 15附录）
-**适用OpenClaw版本**：2026.9.3（稳定版）
+**Cập nhật lần cuối**: Tháng 10/2026  
+**Phiên bản tài liệu**: v1.12  
+**Quy mô**: 408.000 từ (15 chương + 15 phụ lục)  
+**Phiên bản OpenClaw áp dụng**: 2026.9.3 (Bản ổn định)  
 
-🎉 **教程已完成 | 支持续优化 | 完全免费** 🎉
-🚀 **一个人 + OpenClaw = 无限可能** 🚀
-⭐ **如果觉得有用，请给个Star支持一下** ⭐
+🎉 **Tài liệu hoàn chỉnh | Cập nhật liên tục | Hoàn toàn miễn phí** 🎉  
+🚀 **Một cá nhân + OpenClaw = Tiềm năng vô hạn** 🚀  
+⭐ **Nếu thấy hữu ích, hãy ủng hộ một Star trên GitHub nhé!** ⭐  
 
 </div>
