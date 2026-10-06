@@ -1,396 +1,395 @@
-> 📖 **纸质书《OpenClaw超级个体实操手册》已上市！** 清华大学出版社出版，在开源教程基础上全面重写+逐条验证。🛒 [京东专属购买链接（¥42，原价¥59.8）](https://item.jd.com/14669463.html)
+> 📖 **Giáo trình Awesome OpenClaw Tutorial** | Bản dịch tiếng Việt chính thức cho cộng đồng. Nguyên tác thuộc về tác giả [@xianyu110](https://github.com/xianyu110).
 
-# 第2章节：环境搭建
+# Chương 2: Thiết lập môi trường
 
-> 本章节将手把手教你安装 OpenClaw。
+> Chương này sẽ hướng dẫn bạn từng bước cài đặt và vận hành OpenClaw.
 
-> ⚠️ **当前基线**：截至 **2026-09-10**，本教程推荐使用 **OpenClaw v2026.9.3（稳定版，2026-09-08 发布）**。运行时要求 **Node 24.16+** 或 **Node 26.1+**（推荐 Node 26）；Node 22 / 旧 24.x 已不再支持。
+> ⚠️ **Phiên bản chuẩn**: Tính đến **10/09/2026**, giáo trình khuyến nghị sử dụng **OpenClaw v2026.9.3 (Bản ổn định, phát hành 08/09/2026)**. Yêu cầu môi trường runtime **Node 24.16+** hoặc **Node 26.1+** (khuyên dùng Node 26); Node 22 và các bản 24.x cũ không còn được hỗ trợ.
 
-![OpenClaw 安装界面](https://upload.maynor1024.live/file/1771085321300_installation-interface.png)
+![Giao diện cài đặt OpenClaw](https://upload.maynor1024.live/file/1771085321300_installation-interface.png)
 
+## 📋 Điều kiện tiên quyết & Cấu hình đề xuất
 
+### Cấu hình đề xuất
 
-## 📋 前提条件与推荐配置
+Để có trải nghiệm tối ưu nhất, chúng tôi đề xuất:
 
-### 推荐配置
+**Hệ điều hành**:
+- 🍎 **Mac (Khuyến nghị cao nhất)**: Khả năng tương thích tự nhiên tốt nhất, điều khiển được lịch hẹn (Calendar), ghi chú (Notes), chụp màn hình và các tính năng sâu của hệ thống
+- 🪟 Windows: Hoạt động hoàn toàn ổn định qua WSL2, nhưng một số tích hợp sâu bị giới hạn
+- 🐧 Linux: Rất phù hợp cho lập trình viên, cấu hình linh hoạt trên máy chủ
 
-为了获得最佳体验，我们推荐：
+**Nền tảng ứng dụng nhắn tin (IM)**:
+- 🌍 **Người dùng quốc tế**: Khuyên dùng **Telegram** hoặc **Discord** (hỗ trợ bot tốt nhất, tính năng trọn vẹn)
+- 🚀 **Doanh nghiệp & Đội ngũ**: Khuyên dùng **Lark / Feishu** (hiện đại, thân thiện với lập trình viên, hỗ trợ rich text mạnh mẽ)
+- Lựa chọn thay thế: WeCom (WeChat Doanh nghiệp), DingTalk, QQ, WhatsApp
 
-**操作系统**：
-- 🍎 **Mac（强烈推荐）**：原生支持最完善，可操作日历、备忘附录、截图等系统功能
-- 🪟 Windows：完全可用，但部分系统集成功能受限
-- 🐧 Linux：适合开发布者，配置灵活
+**Phương thức triển khai**:
+- 💻 **Có máy Mac**: Khuyên dùng triển khai cục bộ (trải nghiệm mượt mà, tính năng đầy đủ nhất)
+- ☁️ **Không có Mac hoặc muốn chạy 24/7**: Khuyên dùng triển khai đám mây (VPS chi phí thấp, ổn định không phụ thuộc máy cá nhân)
 
-**IM工具选择**：
-- 🌍 **国外用户**：推荐 **Telegram**（适配度最好，功能最完整）
-- 🇨🇳 **国内用户**：推荐 **飞书**（现代化、开发布友好、功能丰富）
-- 备选：企业微信、钉钉、QQ
+### Vì sao nên ưu tiên Mac?
 
-**部署方式**：
-- 💻 **有Mac电脑**：推荐本地部署（体验最好，功能最全）
-- ☁️ **无Mac或想24小时运行**：推荐云端部署（成本低，稳定可靠）
+OpenClaw mang lại trải nghiệm tuyệt vời nhất trên macOS bởi:
+- ✅ Tương thích tự nhiên, mức độ tích hợp hệ thống cao nhất
+- ✅ Thao tác mượt mà với Apple Calendar, Apple Notes, Reminders
+- ✅ Tính năng chụp màn hình tự động hoàn hảo
+- ✅ Đồng bộ hóa liền mạch với iPhone, iPad
+- ✅ Quản lý tệp tin thông minh
+- ✅ Môi trường phát triển tinh gọn, dễ cấu hình
 
-### 为什么推荐Mac？
+### Vì sao nên chọn Lark / Feishu?
 
-OpenClaw在Mac上体验最好，因为：
-- ✅ 原生支持最完善，系统集成度高
-- ✅ 可以操作Mac日历、备忘附录、提醒事项
-- ✅ 截图功能完美支持
-- ✅ 与iPhone、iPad无缝同步
-- ✅ 文件管理更智能
-- ✅ 开发布环境配置简单
+- ✅ Thiết kế hiện đại, trải nghiệm người dùng vượt trội
+- ✅ Thân thiện với lập trình viên, hệ thống Open API hoàn chỉnh
+- ✅ Hỗ trợ định dạng văn bản giàu tính năng (Rich Text), bảng tính, tài liệu
+- ✅ Đẩy thông báo tức thì, ổn định
+- ✅ Bản miễn phí cung cấp đầy đủ tính năng cần thiết
 
-### 为什么推荐飞书（国内）？
+### Vì sao nên chọn Telegram?
 
-- ✅ 现代化设计，用户体验好
-- ✅ 开发布者友好，API完善
-- ✅ 支持富文本、文档、表格
-- ✅ 消息推送稳定
-- ✅ 免费版功能丰富
+- ✅ Lượng người dùng toàn cầu đông đảo
+- ✅ Hệ sinh thái Bot API hoàn thiện và mạnh mẽ nhất
+- ✅ Tốc độ gửi và nhận tin nhắn theo thời gian thực
+- ✅ Bảo vệ quyền riêng tư cá nhân xuất sắc
 
-### 为什么推荐Telegram（国外）？
+## Điều hướng nhanh
 
-- ✅ 全球用户基础大
-- ✅ API最完善，功能最强
-- ✅ 支持Bot功能丰富
-- ✅ 消息推送实时
-- ✅ 隐私保护好
+**Lộ trình khuyến nghị**:
+- 🍎 **Có máy Mac** → [Triển khai cục bộ trên Mac](#mac-triển-khai-cục-bộ-khuyến-nghị) + [Cấu hình Bot](../03-advanced/09-multi-platform-integration.md)
+- ☁️ **Không có Mac / Cần chạy 24/7** → [Triển khai một chạm trên đám mây](#triển-khai-một-chạm-trên-đám-mây) + [Cấu hình Bot](../03-advanced/09-multi-platform-integration.md)
 
-## 快速导航
+**Tất cả phương thức triển khai**:
+- 🍎 [Triển khai cục bộ trên Mac (Khuyến nghị)](#mac-triển-khai-cục-bộ-khuyến-nghị)
+- 🪟 [Triển khai cục bộ trên Windows](#windows-triển-khai-cục-bộ)
+- 🐧 [Triển khai cục bộ trên Linux](#linux-triển-khai-cục-bộ)
+- 🚀 [Triển khai một chạm trên đám mây](#triển-khai-một-chạm-trên-đám-mây)
+- 🇨🇳 [Cài đặt nhanh qua script](#cài-đặt-nhanh-qua-script-nội-địa-khuyến-nghị)
+- ☁️ [Triển khai Cloudflare Workers (Nâng cao)](#triển-khai-cloudflare-workers-nâng-cao)
+- 🐳 [Triển khai Docker (Tùy chọn)](#triển-khai-docker-tùy-chọn)
 
-**推荐路径**：
-- 🍎 **有Mac** → [Mac本地部署](#mac本地部署推荐) + [飞书配置](../03-advanced/09-multi-platform-integration.md#91-飞书bot配置)
-- ☁️ **无Mac/想24小时运行** → [云端一键部署](#云端一键部署) + [飞书配置](../03-advanced/09-multi-platform-integration.md#91-飞书bot配置)
-
-**所有部署方式**：
-- 🍎 [Mac本地部署（推荐）](#mac本地部署推荐)
-- 🪟 [Windows本地部署](#windows本地部署)
-- 🐧 [Linux本地部署](#linux本地部署)
-- 🚀 [云端一键部署](#云端一键部署)
-- 🇨🇳 [国内一键安装](#国内一键安装推荐)
-- ☁️ [Cloudflare Workers 部署（进阶）](#cloudflare-workers-部署进阶)
-- 🐳 [Docker 部署（可选）](#docker-部署可选)
-
-**配置指南**：
-- 🔑 [API配置指南](#api配置指南)
-- 🔄 [版本升级指南](#2x-版本升级指南)
-- ❓ [常见访问题解决](#常见访问题解决)
+**Hướng dẫn cấu hình**:
+- 🔑 [Hướng dẫn cấu hình API](#hướng-dẫn-cấu-hình-api)
+- 🔄 [Hướng dẫn nâng cấp phiên bản 2.X](#hướng-dẫn-nâng-cấp-phiên-bản-2x)
+- ❓ [Xử lý các sự cố thường gặp](#xử-lý-các-sự-cố-thường-gặp)
 
 ---
 
-## Mac本地部署（推荐）
+## Mac triển khai cục bộ (Khuyến nghị)
 
-> 🍎 **最佳体验**：如果你有Mac电脑，强烈推荐本地部署，体验最好、功能最全！
+> 🍎 **Trải nghiệm tối ưu**: Nếu bạn sở hữu máy Mac, chúng tôi nhiệt liệt khuyến nghị cài đặt trực tiếp trên máy cục bộ để tận hưởng trải nghiệm mượt mà và tính năng phong phú nhất!
 
-### 为什么选择Mac本地部署？
+### Vì sao nên chọn triển khai cục bộ trên Mac?
 
-**优势**：
-- ✅ **系统集成**：可操作日历、备忘附录、文件系统
-- ✅ **隐私安全**：数据完全本地，不上传云端
-- ✅ **响应速度快**：本地运行，无网络延迟
-- ✅ **功能最全**：支持所有高级功能
-- ✅ **成本低**：无需购买云服务器
-- ✅ **开发布友好**：方便调试和自定义
+**Ưu thế**:
+- ✅ **Tích hợp sâu hệ thống**: Tương tác trực tiếp với Lịch, Ghi chú, Lời nhắc, hệ thống tệp
+- ✅ **Bảo mật & Quyền riêng tư**: Dữ liệu lưu hoàn toàn trên máy bạn, không gửi lên cloud bên thứ ba
+- ✅ **Tốc độ phản hồi cực nhanh**: Chạy trực tiếp trên máy, không chịu độ trễ mạng
+- ✅ **Tính năng toàn diện nhất**: Hỗ trợ đầy đủ tất cả tính năng nâng cao
+- ✅ **Không tốn chi phí máy chủ**: Không cần thuê thêm máy chủ đám mây VPS
+- ✅ **Thân thiện với lập trình viên**: Dễ dàng gỡ lỗi và tùy biến mã nguồn
 
-**适合人群**：
-- 有Mac电脑的用户
-- 注重隐私的用户
-- 需要系统集成功能的用户
-- 开发布者和技术爱好者
+**Đối tượng phù hợp**:
+- Người dùng máy tính Mac (MacBook, Mac Mini, Mac Studio, iMac)
+- Người đặc biệt đề cao sự riêng tư của dữ liệu cá nhân
+- Người cần tự động hóa các thao tác ứng dụng trên macOS
+- Lập trình viên và người đam mê công nghệ
 
-### 系统要求
+### Yêu cầu hệ thống
 
-**硬件要求**：
-- CPU：M系列芯片或Intel i5以上
-- 内存：8GB以上（推荐16GB）
-- 硬盘：10GB以上空闲空间
+**Yêu cầu phần cứng**:
+- CPU: Chip Apple Silicon (M1/M2/M3/M4) hoặc Intel Core i5 trở lên
+- RAM: Tối thiểu 8GB (khuyên dùng 16GB trở lên)
+- Ổ cứng: Tối thiểu 10GB dung lượng trống
 
-**系统版本**：
-- macOS 12 Monterey 或更高版本
-- 推荐 macOS 14 Sonoma 或 macOS 15 Sequoia
+**Phiên bản hệ điều hành**:
+- macOS 12 Monterey trở lên
+- Khuyên dùng macOS 14 Sonoma hoặc macOS 15 Sequoia
 
-**前置软件**：
-- Node.js 24（推荐）/ 22.16+（兼容路径，会自动安装）
-- Homebrew（可选，用于安装依赖）
+**Phần mềm tiên quyết**:
+- Node.js 26 (khuyên dùng) hoặc Node 24.16+ (sẽ được tự động cài đặt nếu thiếu)
+- Homebrew (tùy chọn, dùng để quản lý các gói phụ trợ)
 
-### 安装步骤
+### Các bước cài đặt
 
-#### 第一步：打开终端
+#### Bước 1: Mở ứng dụng Terminal
 
-1. 按 `Command + 空格` 打开 Spotlight
-2. 输入 `Terminal` 或`终端`
-3. 按回车打开终端
+1. Nhấn tổ hợp phím `Command + Space` để mở Spotlight
+2. Nhập `Terminal`
+3. Nhấn `Enter` để mở cửa sổ dòng lệnh
 
-![Mac终端打开方式 - 通过Spotlight搜索Terminal](https://upload.maynor1024.live/file/1770742238798_07-select-quickstart.png)
+![Cách mở Terminal trên Mac - Tìm kiếm Spotlight](https://upload.maynor1024.live/file/1770742238798_07-select-quickstart.png)
 
-#### 第二步：安装 OpenClaw
+#### Bước 2: Cài đặt OpenClaw
 
-在终端中执行以下命令：
+Chạy dòng lệnh sau trong Terminal:
 
 ```bash
 curl -fsSL https://openclaw.ai/install.sh | bash
 ```
-安装过程会自动：
-- 检测系统环境
-- 安装Node.js（如果未安装）
-- 下载OpenClaw
-- 配置环境变量
 
-**预计时间**：2-5分钟
+Quá trình cài đặt sẽ tự động:
+- Kiểm tra môi trường hệ thống
+- Tự động cài đặt Node.js (nếu máy chưa có)
+- Tải về phiên bản OpenClaw mới nhất
+- Cấu hình các biến môi trường cần thiết
 
-#### 第三步：验证安装
+**Thời gian dự kiến**: 2 - 5 phút
 
-安装完成后，执行以下命令验证：
+#### Bước 3: Xác minh cài đặt
+
+Sau khi cài đặt xong, hãy kiểm tra phiên bản:
 
 ```bash
 openclaw --version
 ```
-如果显示版本号（如 `2026.9.3`），说明安装成功！
 
-#### 第四步：初始化配置
+Nếu màn hình hiển thị số phiên bản (ví dụ: `2026.9.3`), bạn đã cài đặt thành công!
 
-运行配置向导：
+#### Bước 4: Khởi tạo cấu hình ban đầu
+
+Khởi chạy trình hướng dẫn cấu hình:
 
 ```bash
 openclaw onboard
 ```
 
-**配置流程**：
+**Quy trình cấu hình chi tiết**:
 
-**1. 接受风险提示**：
+**1. Chấp nhận cảnh báo rủi ro**:
 
-选择 `Yes` 继续
+Chọn `Yes` để tiếp tục.
 
-![安装向导 - 接受风险提示](https://upload.maynor1024.live/file/1770742238798_07-select-quickstart.png)
+![Trình hướng dẫn cài đặt - Chấp nhận cảnh báo rủi ro](https://upload.maynor1024.live/file/1770742238798_07-select-quickstart.png)
 
-**2. 选择启动模式**：
+**2. Chọn chế độ khởi động**:
 
-推荐选择 `QuickStart` 快速启动：
+Khuyên chọn `QuickStart` (Khởi động nhanh):
 
-![安装向导 - 选择QuickStart快速启动模式](https://upload.maynor1024.live/file/1770742238798_07-select-quickstart.png)
+![Trình hướng dẫn cài đặt - Chọn chế độ QuickStart](https://upload.maynor1024.live/file/1770742238798_07-select-quickstart.png)
 
-**3. 选择AI模型**：
+**3. Chọn nhà cung cấp mô hình AI**:
 
-选择你的AI供应商（支持国内外主流模型）：
+Chọn nhà cung cấp bạn muốn sử dụng (hỗ trợ đầy đủ các mô hình quốc tế và nội địa):
 
-![安装向导 - 选择AI模型供应商](https://upload.maynor1024.live/file/1770742221938_03-select-ai-provider.png)
+![Trình hướng dẫn cài đặt - Chọn nhà cung cấp mô hình AI](https://upload.maynor1024.live/file/1770742221938_03-select-ai-provider.png)
 
-国内推荐：
-- **Kimi（Moonshot AI）**：长文本专家，200万字上下文
-- **DeepSeek**：性价比之王，推理能力强
-- **智谱GLM**：中文理解好，多模态支持
+Các gợi ý tiêu biểu:
+- **Claude (Anthropic)**: Năng lực suy luận và lập trình xuất sắc nhất
+- **DeepSeek**: Chi phí siêu rẻ, năng lực suy luận mạnh
+- **Kimi (Moonshot AI)**: Xử lý ngữ cảnh văn bản siêu dài lên tới 2 triệu từ
+- **Zhipu GLM**: Xử lý đa phương thức và ngôn ngữ tự nhiên tốt
 
-**4. 输入API Key**：
+**4. Nhập API Key**:
 
-根据选择的模型，输入对应的API Key（参见[API配置指南](#api配置指南)）
+Dán khóa API tương ứng với nhà cung cấp bạn vừa chọn (xem thêm tại [Hướng dẫn cấu hình API](#hướng-dẫn-cấu-hình-api))
 
-**5. 选择聊天工具**：
+**5. Chọn nền tảng nhắn tin**:
 
-- 如果要接入飞书/Telegram，选择对应选项
-- 如果暂时不接入，选择 `None`（后续可配置）
+- Nếu muốn kết nối với Lark / Feishu, WeCom, DingTalk, Telegram: chọn mục tương ứng
+- Nếu tạm thời chưa muốn kết nối, chọn `None` (có thể cấu hình bổ sung bất cứ lúc nào)
 
-![安装向导 - 选择聊天平台（飞书/企微/QQ等）](https://upload.maynor1024.live/file/1770742247561_08-select-chat-tool.png)
+![Trình hướng dẫn cài đặt - Chọn nền tảng nhắn tin](https://upload.maynor1024.live/file/1770742247561_08-select-chat-tool.png)
 
-**6. Gateway端口设置**：
+**6. Thiết lập cổng Gateway**:
 
-默认 `18789` 即可：
+Giữ nguyên cổng mặc định `18789`:
 
-![安装向导 - Gateway端口配置（默认18789）](https://upload.maynor1024.live/file/1770742247410_09-port-setting.png)
+![Trình hướng dẫn cài đặt - Thiết lập cổng Gateway mặc định 18789](https://upload.maynor1024.live/file/1770742247410_09-port-setting.png)
 
-**7. 选择Skills**：
+**7. Chọn các Skills**:
 
-使用空格键选择你需要的技能，也可以直接跳过：
+Dùng phím cách (Space) để chọn các kỹ năng bạn muốn cài đặt, hoặc nhấn Enter để tạm bỏ qua:
 
-![安装向导 - 选择需要安装的技能包](https://upload.maynor1024.live/file/1770742255849_10-select-skills.png)
+![Trình hướng dẫn cài đặt - Chọn gói kỹ năng Skills cần cài đặt](https://upload.maynor1024.live/file/1770742255849_10-select-skills.png)
 
-**8. API Key配置**：
+**8. Cấu hình API Key bổ sung**:
 
-没有的可以选择 `no` 跳过：
+Nếu chưa có, chọn `no` để bỏ qua:
 
-![安装向导 - 配置AI模型API 密钥](https://upload.maynor1024.live/file/1770742264976_11-api-key-config.png)
+![Trình hướng dẫn cài đặt - Cấu hình khóa API bổ sung](https://upload.maynor1024.live/file/1770742264976_11-api-key-config.png)
 
-**9. 启用Hooks**：
+**9. Bật các Hooks tự động hóa**:
 
-推荐启用这三个钩子（用于内内容引导、日志和会话记附录）：
+Khuyên dùng kích hoạt 3 hooks mặc định (hỗ trợ điều hướng ngữ cảnh, ghi log và theo dõi phiên):
 
-![安装向导 - 启用自动化钩子功能](https://upload.maynor1024.live/file/1770742261487_12-enable-hooks.png)
+![Trình hướng dẫn cài đặt - Kích hoạt tính năng Hooks tự động hóa](https://upload.maynor1024.live/file/1770742261487_12-enable-hooks.png)
 
-**10. 完成配置**：
+**10. Hoàn tất cấu hình**:
 
-配置完成后，会自动启动Gateway服务并打开Web UI（`http://127.0.0.1:18789/chat`）
+Sau khi thiết lập hoàn tất, hệ thống sẽ tự động khởi chạy dịch vụ Gateway và mở giao diện Web UI tại địa chỉ `http://127.0.0.1:18789/chat`.
 
-#### 第五步：验证安装
+#### Bước 5: Xác minh dịch vụ Gateway
 
 ```bash
-# 检查Gateway状态
+# Kiểm tra trạng thái kết nối Gateway
 openclaw channels status
 
-# 应该显示：
+# Màn hình sẽ hiển thị:
 # Gateway reachable.
 ```
 
-### 日常使用
+### Sử dụng hàng ngày
 
-**启动OpenClaw**：
+**Khởi động OpenClaw**:
 
 ```bash
-# 启动Gateway服务
+# Khởi động dịch vụ Gateway
 openclaw gateway start
 
-# 或使用systemd（推荐，开机自启）
+# Hoặc thiết lập tự khởi động cùng hệ thống (Khuyên dùng)
 openclaw gateway enable
 ```
 
-**访问Web UI**：
+**Truy cập Web UI**:
 
-打开浏览器访问：`http://127.0.0.1:18789/chat`
+Mở trình duyệt web và truy cập: `http://127.0.0.1:18789/chat`
 
-**停止服务**：
+**Dừng dịch vụ**:
 
 ```bash
 openclaw gateway stop
 ```
 
-### 接入飞书（推荐）
+### Kết nối với Lark / Feishu (Khuyến nghị)
 
-Mac本地部署后，强烈推荐接入飞书，获得最佳体验：
+Sau khi cài đặt xong trên Mac, chúng tôi khuyên bạn nên kết nối với bot Lark / Feishu để có trải nghiệm thuận tiện nhất:
 
-1. 参考 [第9章节：飞书Bot配置](../03-advanced/09-multi-platform-integration.md#91-飞书bot配置)
-2. 配置完成后，可以在飞书中随时与OpenClaw对话
-3. 支持文本、图片、文件等多种消息类型
+1. Tham khảo hướng dẫn chi tiết tại [Chương 9: Tích hợp đa nền tảng](../03-advanced/09-multi-platform-integration.md#91-cấu-hình-feishu-bot)
+2. Sau khi hoàn tất cấu hình, bạn có thể trò chuyện với OpenClaw trực tiếp từ điện thoại hoặc máy tính
+3. Hỗ trợ đầy đủ tin nhắn văn bản, hình ảnh, tài liệu và tập tin đa phương tiện
 
-### 常见访问题
+### Các câu hỏi thường gặp
 
-**Q1：安装时提示权限不足？**
+**Q1: Quá trình cài đặt báo lỗi thiếu quyền (permission denied)?**
 
 ```bash
-# 使用sudo安装
+# Dùng sudo để cấp quyền chạy script cài đặt
 curl -fsSL https://openclaw.ai/install.sh | sudo bash
 ```
 
-**Q2：如何更新OpenClaw？**
+**Q2: Làm thế nào để cập nhật OpenClaw lên bản mới nhất?**
 
 ```bash
 openclaw update
 ```
 
-**Q3：如何卸载？**
+**Q3: Làm thế nào để gỡ cài đặt hoàn toàn?**
 
 ```bash
 openclaw uninstall
 ```
----
-
-## Windows本地部署
-
-> 🪟 **Windows用户**：完全可用，但部分系统集成功能受限。
-
-![Windows系统部署架构 - WSL2+Ubuntu方案](https://upload.maynor1024.live/file/1770963301031_attachment_531c0e90-e8a2-469c-b6ec-b9811a55edfa_image.png)
-
-### 系统要求
-
-**硬件要求**：
-- CPU：2核以上
-- 内存：4GB以上（推荐8GB）
-- 硬盘：10GB以上空闲空间
-
-**操作系统**：
-- Windows 10 或 Windows 11
-
-**前置软件**：
-- Node.js 24（推荐）/ 22.16+（兼容路径）
-
-### 部署方式选择
-
-Windows有两种部署方式：
-
-1. **WSL2 + Ubuntu（强烈推荐）**：官方推荐方式，提供完整Linux环境支持
-2. **PowerShell原生部署**：纯Windows环境，适合不想使用WSL2的用户
 
 ---
 
-### 方式一：WSL2 + Ubuntu部署（强烈推荐）
+## Windows triển khai cục bộ
 
-这是官方推荐的Windows部署方式，提供最完整的Linux环境支持。
+> 🪟 **Dành cho người dùng Windows**: Bạn hoàn toàn có thể chạy OpenClaw trên Windows, tuy nhiên một số tính năng thao tác hệ thống sâu sẽ bị giới hạn so với macOS.
 
-#### 第一步：启用WSL2
+![Kiến trúc triển khai trên Windows - Phương án WSL2+Ubuntu](https://upload.maynor1024.live/file/1770963301031_attachment_531c0e90-e8a2-469c-b6ec-b9811a55edfa_image.png)
 
-**以管理员身份打开PowerShell**，执行：
+### Yêu cầu hệ thống
+
+**Phần cứng**:
+- CPU: 2 nhân trở lên
+- RAM: Tối thiểu 4GB (khuyên dùng 8GB trở lên)
+- Ổ cứng: Tối thiểu 10GB dung lượng trống
+
+**Hệ điều hành**:
+- Windows 10 (bản 2004 trở lên) hoặc Windows 11
+
+**Phần mềm tiên quyết**:
+- Node.js 26 (khuyên dùng) hoặc Node 24.16+
+
+### Lựa chọn phương thức triển khai
+
+Trên Windows có hai phương thức chính:
+
+1. **WSL2 + Ubuntu (Khuyến nghị cao nhất)**: Phương thức chính thức được khuyên dùng, cung cấp môi trường Linux hoàn chỉnh và độ ổn định cao nhất.
+2. **PowerShell gốc (Native PowerShell)**: Chạy trực tiếp trong Windows, phù hợp cho người không muốn cài đặt máy ảo WSL2.
+
+---
+
+### Phương án 1: Triển khai qua WSL2 + Ubuntu (Khuyến nghị cao nhất)
+
+Đây là phương thức tối ưu nhất cho môi trường Windows, đảm bảo tính tương thích và ổn định tuyệt đối với các thư viện mã nguồn mở.
+
+#### Bước 1: Kích hoạt WSL2
+
+**Mở PowerShell với quyền Quản trị viên (Run as Administrator)** và thực thi các lệnh:
 
 ```powershell
-# 启用WSL功能
+# Bật tính năng WSL trên Windows
 dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
 dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
 
-# 设置WSL 2为默认版本
+# Thiết lập WSL 2 làm phiên bản mặc định
 wsl --set-default-version 2
 ```
 
-**重启计算机**。
+**Khởi động lại máy tính** để áp dụng thay đổi.
 
-#### 第二步：安装Ubuntu
+#### Bước 2: Cài đặt bản phân phối Ubuntu
 
-**方法一：Microsoft Store安装（推荐）**
+**Cách 1: Cài đặt từ Microsoft Store (Khuyên dùng)**
 
-1. 打开Microsoft Store
-2. 搜索「Ubuntu 22.04 LTS」或「Ubuntu 24.04 LTS」
-3. 点击「获取」并安装
-4. 首次启动设置用户名和密码
+1. Mở Microsoft Store
+2. Tìm kiếm từ khóa "Ubuntu 22.04 LTS" hoặc "Ubuntu 24.04 LTS"
+3. Nhấp "Get" (Nhận) để tải về và cài đặt
+4. Khởi chạy Ubuntu lần đầu, thiết lập tên tài khoản và mật khẩu người dùng theo hướng dẫn trên màn hình
 
-安装完成后会自动打开Ubuntu终端，按提示设置用户名和密码。
+#### Bước 3: Cập nhật hệ thống Ubuntu
 
-#### 第三步：更新Ubuntu系统
-
-在Ubuntu终端中执行：
+Trong cửa sổ dòng lệnh Ubuntu WSL2, chạy các lệnh sau:
 
 ```bash
-# 更新软件包列表
+# Cập nhật danh sách gói phần mềm
 sudo apt update && sudo apt upgrade -y
 
-# 安装基础工具
+# Cài đặt các công cụ cơ bản
 sudo apt install -y curl git wget build-essential
 ```
 
-#### 第四步：安装Node.js 24（推荐）
+#### Bước 4: Cài đặt Node.js
 
 ```bash
-# 添加NodeSource仓库
+# Thêm kho lưu trữ NodeSource (khuyên dùng Node 24 hoặc Node 26)
 curl -fsSL https://deb.nodesource.com/setup_24.x | sudo -E bash -
 
-# 安装Node.js
+# Cài đặt Node.js
 sudo apt install -y nodejs
 
-# 验证版本（推荐 v24.x）
+# Xác minh phiên bản
 node -v
 npm -v
 ```
 
-#### 第五步：安装 OpenClaw
+#### Bước 5: Cài đặt OpenClaw
 
-**方法A：一键脚本安装**
+Chạy script cài đặt tự động:
 
 ```bash
 curl -fsSL https://openclaw.ai/install.sh | bash
 ```
 
-#### 第六步：验证安装
+#### Bước 6: Xác minh cài đặt
 
 ```bash
-# 查看版本
+# Kiểm tra phiên bản
 openclaw --version
 
-# 查看帮助
+# Xem hướng dẫn trợ giúp
 openclaw --help
 
-# 查看系统状态
+# Kiểm tra trạng thái hệ thống
 openclaw status
 ```
 
-#### 第七步：配置Windows访问WSL2服务
+#### Bước 7: Cấu hình truy cập dịch vụ WSL2 từ Windows
 
-由于OpenClaw运行在WSL2中，需要配置端口转发布以便Windows访问。
+Vì OpenClaw chạy bên trong WSL2, bạn có thể dễ dàng truy cập giao diện Web từ trình duyệt Windows.
 
-**创建启动脚本** `start-openclaw.bat`：
+**Tạo script khởi động nhanh** `start-openclaw.bat`:
 
 ```batch
 @echo off
@@ -399,1349 +398,1021 @@ wsl -d Ubuntu-22.04 -u root service openclaw start
 timeout /t 3
 start http://localhost:18789
 ```
-或直接在WSL2中启动：
+
+Hoặc khởi chạy thủ công ngay trong cửa sổ WSL2:
 
 ```bash
-# 在WSL2 Ubuntu终端中
+# Trong cửa sổ terminal WSL2 Ubuntu
 openclaw gateway run --port 18789
 ```
-然后在Windows浏览器访问 `http://localhost:18789`
+
+Sau đó, mở trình duyệt trên Windows và truy cập địa chỉ `http://localhost:18789`.
 
 ---
 
-### 方式二：PowerShell原生部署
+### Phương án 2: Triển khai trực tiếp qua PowerShell (Native)
 
-适合不想使用WSL2的纯Windows用户。
+Phương án này dành cho người dùng muốn chạy trực tiếp trên môi trường Windows mà không cài đặt WSL2.
 
-#### 第一步：安装Node.js 24（推荐）
+#### Bước 1: Cài đặt Node.js
 
-**方法一：官网下载安装**
+1. Truy cập trang chủ Node.js: https://nodejs.org/
+2. Tải về bản cài đặt Windows (LTS - Node 24 hoặc Node 26)
+3. Chạy trình cài đặt, tích chọn ô "Automatically install the necessary tools"
 
-1. 访问 https://nodejs.org/zh-cn
-2. 下载Windows安装包（推荐 24.x 版本）
-3. 运行安装程序，勾选「自动安装必要的工具」
+#### Bước 2: Xác minh cài đặt Node.js
 
-#### 第二步：验证Node.js安装
+Mở PowerShell và kiểm tra:
 
 ```powershell
-# 打开PowerShell
 node -v
 npm -v
 ```
 
-#### 第三步：以管理员身份安装 OpenClaw
+#### Bước 3: Cài đặt OpenClaw với quyền Quản trị viên
 
-**重要**：必须以**管理员身份**运行PowerShell。
+**Lưu ý quan trọng**: Bắt buộc phải mở PowerShell bằng quyền **Run as Administrator**.
 
 ```powershell
-# 安装最新稳定版
+# Cài đặt phiên bản ổn định mới nhất
 npm install -g openclaw@latest --allow-scripts=openclaw
 
-# 或安装汉化版
+# Hoặc cài đặt bản gói quốc tế / nội địa hóa
 npm install -g @qingchencloud/openclaw-zh@latest
 ```
 
-#### 第四步：解决安装权限访问题
+#### Bước 4: Xử lý quyền thực thi tập lệnh trên PowerShell
 
-如果遇到权限错误：
+Nếu gặp lỗi về chính sách bảo mật thực thi tập lệnh (Execution Policy):
 
 ```powershell
-# 方法A：启用PowerShell脚本执行
+# Phương án A: Cho phép thực thi script cho người dùng hiện tại
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 
-# 方法B：修改npm安装目附录
-npm config set prefix "C:\npm"
-npm config set cache "C:\npm-cache"
+# Phương án B: Đổi đường dẫn cài đặt npm toàn cục
+npm config set prefix "C:
+pm"
+npm config set cache "C:
+pm-cache"
 
-# 将目附录添加到PATH
-[Environment]::SetEnvironmentVariable("Path", $env:Path + ";C:\npm", "User")
+# Thêm đường dẫn vào biến môi trường PATH
+[Environment]::SetEnvironmentVariable("Path", $env:Path + ";C:
+pm", "User")
 ```
 
-#### 第五步：验证安装
+#### Bước 5: Xác minh cài đặt
 
 ```powershell
 openclaw --version
 openclaw --help
 ```
 
-#### 第六步：解决常见访问题
+#### Bước 6: Xử lý các lỗi thường gặp trên Windows
 
-**访问题：sharp模块加载失败**
+**Sự cố: Lỗi tải mô-đun sharp**
 
 ```powershell
-# 清理npm缓存
+# Xóa sạch bộ nhớ đệm của npm
 npm cache clean --force
 
-# 重新安装
+# Cài đặt lại với cờ force
 npm install -g openclaw@latest --allow-scripts=openclaw --force
 ```
 
-**访问题：Windows Defender阻止**
+**Sự cố: Windows Defender chặn hoạt động**
 
-将OpenClaw安装目附录添加到Windows Defender排除项：
+Thêm các đường dẫn cài đặt của OpenClaw vào danh sách loại trừ (Exclusions) của Windows Defender:
 
 ```
-C:\Users\你的用户名\AppData\Roaming\npm
-C:\Users\你的用户名\.openclaw
+C:\Users\Tên_Người_Dùng\AppData\Roaming\npm
+C:\Users\Tên_Người_Dùng\.openclaw
 ```
+
 ---
 
-### 初始化配置
+### Khởi tạo cấu hình ban đầu
 
-安装完成后，需要运行初始化向导。
+Sau khi cài đặt xong, hãy chạy trình hướng dẫn khởi tạo:
 
-#### 启动初始化向导
+#### Chạy trình hướng dẫn khởi tạo
 
 ```bash
 openclaw onboard --install-daemon
 ```
 
-#### 配置AI模型提供商
+#### Cấu hình nhà cung cấp mô hình AI
 
-OpenClaw需要对接AI模型才能工作。
+OpenClaw cần kết nối với mô hình AI để xử lý thông tin.
 
-**以配置Anthropic Claude（推荐）为例：**
+**Ví dụ cấu hình Anthropic Claude (Khuyên dùng):**
 
-> 📖 **详细说明**: 完整的 API Key 配置方式和优先级说明请参考 [API Key 配置完整指南](../api-key-config-guide.md)
+> 📖 **Xem thêm**: Hướng dẫn chi tiết về thứ tự ưu tiên và cách thiết lập khóa tại [Hướng dẫn đầy đủ về cấu hình API Key](../api-key-config-guide.md).
 
 ```bash
-# WSL2或PowerShell
+# Chạy trong WSL2 hoặc PowerShell
 openclaw models auth add
-# 按提示选择 anthropic
-# 输入 API Key: sk-ant-xxx
+# Chọn nhà cung cấp: anthropic
+# Nhập khóa xác thực: sk-ant-xxx
 ```
 
-#### 绑定消息渠道
+#### Liên kết kênh nhắn tin
 
 **1. Telegram**
 
-创建Bot：
-1. 在Telegram搜索 `@BotFather`
-2. 发布送 `/newbot` 创建机器人
-3. 保存Bot Token
+Tạo Bot:
+1. Mở ứng dụng Telegram, tìm tài khoản `@BotFather`
+2. Gửi lệnh `/newbot` để tạo bot mới
+3. Lưu lại mã Bot Token được cấp
 
-配置：
+Cấu hình vào OpenClaw:
 
 ```bash
 openclaw channels add telegram
-openclaw config set channels.telegram.botToken "your-bot-token"
+openclaw config set channels.telegram.botToken "YOUR_BOT_TOKEN"
 openclaw gateway restart
 ```
 
 **2. WhatsApp**
 
 ```bash
-# 登录WhatsApp（显示二维码）
+# Đăng nhập WhatsApp (hiển thị mã QR)
 openclaw channels login whatsapp
 
-# 用手机WhatsApp扫码
+# Dùng ứng dụng WhatsApp trên điện thoại quét mã QR
 ```
 
-**3. 企业微信（国内推荐）**
+**3. WeCom (WeChat Doanh nghiệp)**
 
 ```bash
-# 安装企业微信插件
+# Cài đặt tiện ích WeCom
 openclaw plugins install @m1heng-clawd/wework
 
-# 配置
+# Cấu hình thông số ứng dụng
 openclaw config set channels.wework '{"enabled":true,"corpId":"xxx","agentSecret":"xxx"}' --json
 ```
 
-**4. 飞书（国内推荐）**
+**4. Lark / Feishu**
 
 ```bash
-# 安装飞书插件
+# Cài đặt tiện ích Feishu
 openclaw plugins install @m1heng-clawd/feishu
 
-# 配置
+# Cấu hình App ID và App Secret
 openclaw config set channels.feishu '{"enabled":true,"appId":"cli_xxx","appSecret":"xxx"}' --json
 ```
 
-### Windows常用命令速查
+### Bảng tra cứu lệnh thông dụng trên Windows
 
-**系统管理**：
+**Quản trị hệ thống**:
 
-| 命令 | 功能 |
+| Lệnh | Chức năng |
 |------|------|
-| `openclaw --version` | 查看版本 |
-| `openclaw status` | 查看系统状态 |
-| `openclaw health` | 健康检查 |
-| `openclaw update` | 更新OpenClaw |
-| `openclaw doctor` | 诊断系统访问题 |
+| `openclaw --version` | Kiểm tra phiên bản |
+| `openclaw status` | Kiểm tra trạng thái hệ thống |
+| `openclaw health` | Kiểm tra sức khỏe dịch vụ (Health Check) |
+| `openclaw update` | Nâng cấp OpenClaw |
+| `openclaw doctor` | Chẩn đoán và phát hiện sự cố |
 
-**配置管理**：
+**Quản lý cấu hình**:
 
-| 命令 | 功能 |
+| Lệnh | Chức năng |
 |------|------|
-| `openclaw onboard` | 初始化向导 |
-| `openclaw configure` | 交互式配置 |
-| `openclaw config get <key>` | 查看配置项 |
-| `openclaw config set <key> <value>` | 修改配置项 |
-| `openclaw config unset <key>` | 删除配置项 |
+| `openclaw onboard` | Trình hướng dẫn cấu hình ban đầu |
+| `openclaw configure` | Giao diện cấu hình tương tác |
+| `openclaw config get <key>` | Xem giá trị một mục cấu hình |
+| `openclaw config set <key> <value>` | Thiết lập giá trị cấu hình |
+| `openclaw config unset <key>` | Xóa mục cấu hình |
 
 ---
 
-## Linux本地部署
+## Linux triển khai cục bộ
 
-> 🐧 **Linux用户**：适合开发布者，配置灵活。
+> 🐧 **Dành cho người dùng Linux**: Lựa chọn hoàn hảo cho lập trình viên và máy chủ riêng, cấu hình tùy biến linh hoạt cao.
 
-### 系统要求
+### Yêu cầu hệ thống
 
-**推荐发布行版**：
-- Ubuntu 20.04+
-- Debian 11+
-- CentOS 8+
+**Các bản phân phối khuyến nghị**:
+- Ubuntu 20.04 LTS / 22.04 LTS / 24.04 LTS
+- Debian 11 / 12
+- CentOS Stream 8 / 9, Rocky Linux, AlmaLinux
 
-### 安装步骤
+### Các bước cài đặt
 
-#### 第一步：安装Node.js
+#### Bước 1: Cài đặt Node.js
 
 ```bash
 # Ubuntu/Debian
 curl -fsSL https://deb.nodesource.com/setup_24.x | sudo -E bash -
 sudo apt-get install -y nodejs
 
-# 验证安装
+# Xác minh cài đặt
 node --version
 ```
 
-#### 第二步：安装 OpenClaw
+#### Bước 2: Cài đặt OpenClaw
 
 ```bash
 curl -fsSL https://openclaw.ai/install.sh | bash
 ```
 
-#### 第三步：验证安装
+#### Bước 3: Xác minh cài đặt
 
 ```bash
 openclaw --version
 ```
 
-#### 第四步：初始化配置
+#### Bước 4: Khởi tạo cấu hình ban đầu
 
 ```bash
 openclaw onboard
 ```
+
 ---
 
-## 2.1 系统要求与准备
+## 2.1 Yêu cầu hệ thống & Chuẩn bị
 
-### 云端部署要求
+### Điều kiện để triển khai trên đám mây
 
-如果选择云端部署，**无需任何本地环境**，只需要：
-- ✅ 一个浏览器
-- ✅ 20元/月预算
-- ✅ 10分钟时间
+Nếu lựa chọn triển khai trên máy chủ đám mây (Cloud VPS), bạn **không cần cài đặt gì trên máy tính cá nhân**, chỉ cần:
+- ✅ Một trình duyệt web bất kỳ
+- ✅ Chi phí khoảng 70.000 - 150.000 VNĐ/tháng cho VPS
+- ✅ Khoảng 10 phút thao tác
 
-## 云端一键部署
+## Triển khai một chạm trên đám mây
 
-> 🔥 **适合场景**：无Mac电脑、需要24小时运行、多设备访问。
+> 🔥 **Ngữ cảnh phù hợp**: Không có máy Mac, cần bot hoạt động 24/7 không gián đoạn, truy cập từ nhiều thiết bị khác nhau.
 
-### 为什么选择云端部署？
+### Vì sao nên chọn triển khai trên đám mây?
 
-云端部署相比本地部署具有多项优势，如表 2-1 所示。
+So với cài đặt trên máy tính cá nhân, việc triển khai trên máy chủ đám mây mang lại nhiều ưu điểm rõ rệt, như thể hiện trong Bảng 2-1.
 
-**表 2-1 云端部署优势**
+**Bảng 2-1 Lợi thế của việc triển khai trên đám mây**
 
-| 优势 | 说明 |
+| Lợi thế | Mô tả |
 |------|------|
-| ⚡ **秒级部署** | 点几下鼠标就完成，无需配置环境 |
-| 💰 **成本低** | 20元/月起，比买Mac Mini便宜太多 |
-| 📱 **手机可用** | 通过QQ、企微、飞书随时随地访问 |
-| 🔒 **稳定可靠** | 24小时运行，不用担心电脑关机 |
-| 🎥 **视频教程** | 官方视频手把手教学 |
+| ⚡ **Triển khai siêu tốc** | Chỉ với vài cú click chuột, không cần thiết lập môi trường máy cục bộ |
+| 💰 **Chi phí hợp lý** | Chỉ từ ~70.000 VNĐ/tháng, rẻ hơn rất nhiều so với đầu tư máy tính chuyên dụng |
+| 📱 **Truy cập mọi lúc mọi nơi** | Nhắn tin tương tác qua Telegram, Lark / Feishu, WeCom từ điện thoại |
+| 🔒 **Hoạt động liên tục 24/7** | Vận hành bền bỉ trên máy chủ, không lo bị gián đoạn khi tắt máy tính |
+| 🎥 **Tài liệu trực quan** | Có sẵn các video và tài liệu hướng dẫn từng bước chi tiết |
 
-### 方案对比
+### So sánh các gói máy chủ đám mây phổ biến
 
-目前主流的云端部署方案对比如表 2-2 所示。
+Dưới đây là bảng đối chiếu giữa các nhà cung cấp máy chủ nhẹ (Lighthouse/ECS) phổ biến:
 
-**表 2-2 云端部署方案对比**
+**Bảng 2-2 So sánh các phương án máy chủ đám mây**
 
-| 方案 | 价格 | 带宽 | 推荐场景 |
+| Nhà cung cấp | Mức giá tham khảo | Băng thông | Ngữ cảnh khuyến nghị |
 |------|------|------|----------|
-| 腾讯云Lighthouse | 20元/月，99元/年 | 20M | QQ、企微用户 |
-| 火山引擎 | 9.9元/月，58元/年 | 5M | 飞书用户 |
+| Tencent Cloud Lighthouse | ~70.000 VNĐ/tháng (20 tệ) | 20 Mbps | Phù hợp người dùng Telegram, WeCom, QQ |
+| Volcengine (ByteDance) | ~35.000 VNĐ/tháng (9.9 tệ) | 5 Mbps | Phù hợp người dùng Lark / Feishu |
+| Baidu AI Cloud | Gói thử nghiệm ưu đãi | 3-5 Mbps | Phù hợp thử nghiệm ngắn hạn |
+| Alibaba Cloud | Tương đương thị trường | 5-10 Mbps | Hạ tầng đám mây toàn cầu ổn định |
 
-### 腾讯云Lighthouse部署（推荐）
+### Triển khai trên Tencent Cloud Lighthouse (Khuyến nghị)
 
-#### 第一步：购买服务器
+#### Bước 1: Đăng ký mua máy chủ
 
-1. **访问活动页面**：
+1. **Truy cập trang chương trình**:
    ```
    https://cloud.tencent.com/act/pro/lighthouse-moltbot
    ```
 
-2. **选择配置**：
-   - 配置：2核2G
-   - 带宽：20M
-   - 地域：建议选择**硅谷**（国外地域访问AI模型更稳定）
-   - 价格：20元/月 或 99元/年
+2. **Lựa chọn thông số cấu hình**:
+   - Cấu hình: 2 Core CPU, 2GB RAM
+   - Băng thông: 20 Mbps
+   - Khu vực (Region): Khuyên chọn **Silicon Valley (Mỹ)** hoặc **Singapore / Tokyo** (truy cập các API AI quốc tế như OpenAI, Claude ổn định nhất)
+   - Thời hạn: Nên mua 1 tháng để trải nghiệm trước
 
-3. **实名认证**：
-   - 首次使用需要实名认证
-   - 选择个人认证即可
-   - 按提示完成认证
+3. **Xác minh danh tính**:
+   - Hoàn tất xác minh tài khoản cá nhân theo hướng dẫn
 
-4. **完成购买**：
-   - 点击"立即购买"
-   - 支付20元（建议先买1个月试用）
-   - 等待服务器创建完成
-   - **可选**：关闭自动续费
+4. **Hoàn tất thanh toán**:
+   - Nhấn "Mua ngay" và hoàn tất thanh toán
+   - Chờ hệ thống tự động khởi tạo máy chủ trong khoảng 1 - 2 phút
 
-5. **获取服务器信息**：
-   - 购买完成后，点击头像 → "站内信"
-   - 查看并记附录：
-     - 公网IP地址
-     - 默认用户名（通常是 `lighthouse`）
-     - 初始密码
+5. **Lấy thông tin kết nối máy chủ**:
+   - Truy cập trang quản trị máy chủ Lighthouse
+   - Ghi lại các thông tin: Địa chỉ IP công cộng (Public IP), Tên người dùng mặc định (`lighthouse`), Mật khẩu quản trị
 
-![腾讯云Lighthouse控制台 - 创建实例界面](https://upload.maynor1024.live/file/1770742212222_01-tencent-cloud-server.png)
+![Giao diện quản trị Tencent Cloud Lighthouse - Tạo máy chủ](https://upload.maynor1024.live/file/1770742212222_01-tencent-cloud-server.png)
 
-#### 💡 免费白嫖方案（可选）
+#### 💡 Chương trình trải nghiệm máy chủ miễn phí (Tùy chọn)
 
-> 如果你想免费试用3个月，可以通过 CodeBuddy 活动获取免费服务器。
+> Nếu muốn trải nghiệm thử 1-3 tháng miễn phí, bạn có thể tham gia chương trình tài trợ thông qua đối tác CodeBuddy.
 
-**步骤**：
+**Các bước thực hiện**:
 
-1. **注册 CodeBuddy**：
-   - 国际版：https://www.codebuddy.ai/promotion/?ref=lweelxalgm（谷歌/GitHub账户）
-   - 国内版：https://www.codebuddy.cn/promotion/?ref=7zucxaz7zvqi（手机号）
-   - 建议使用新账号注册
+1. **Đăng ký tài khoản CodeBuddy**:
+   - Bản quốc tế: `https://www.codebuddy.ai/` (đăng nhập bằng Google / GitHub)
+   - Bản nội địa: `https://www.codebuddy.cn/` (đăng nhập bằng số điện thoại)
 
-2. **领取奖励**：
-   - 登录后点击"实战礼" → "立刻领奖"
-   - 获得1个月免费使用权
-   - **累计活跃7日可再延长2个月**（每天在CodeBuddy中访问候即可）
+2. **Nhận quà tặng máy chủ**:
+   - Sau khi đăng nhập, vào mục nhận quà trải nghiệm máy chủ 1 tháng
+   - Tích lũy hoạt động điểm danh đủ 7 ngày để được gia hạn thêm 2 tháng
 
-3. **重装系统为OpenClaw**：
-   - 登录腾讯云控制台：https://console.cloud.tencent.com/
-   - 进入"轻量应用服务器"
-   - 点击"重装系统"
-   - 选择"使用应用模板" → "OpenClaw"
-   - 选择"无需备份"，点击"确定"
+3. **Cài lại hệ điều hành thành mẫu OpenClaw**:
+   - Đăng nhập bảng điều khiển máy chủ: `https://console.cloud.tencent.com/`
+   - Vào mục máy chủ Lighthouse
+   - Chọn "Cài lại hệ điều hành" (Reinstall OS)
+   - Chọn mục mẫu ứng dụng (Application Template) → Tìm "OpenClaw"
+   - Nhấn xác nhận để tự động hoàn tất
 
-4. **后续操作**：
-   - 重装完成后，按照下面的步骤继续配置
+#### Bước 2: Kết nối vào máy chủ
 
-#### 第二步：连接服务器
+1. **Sử dụng ứng dụng SSH client (Khuyên dùng)**:
+   - Tải các ứng dụng SSH thông dụng (như Termius, Xterminal, FinalShell, PuTTY)
+   - Tạo kết nối SSH mới:
+     - Host: Địa chỉ IP công cộng của máy chủ
+     - Port: 22
+     - Username: `lighthouse`
+     - Password: Mật khẩu bạn đã thiết lập
 
-1. **使用SSH客户端连接**：
-   
-   **方式一：使用SSH客户端（推荐）**
-   - 下载SSH客户端（如 Xterminal、Termius、FinalShell）
-   - 新建SSH连接：
-     - 名称：随便取
-     - 地址：公网IP地址
-     - 端口：22
-     - 用户名：lighthouse（或站内信中的用户名）
-     - 密码：购买时设置的密码
-   
-   **方式二：使用网页终端**
-   - 在腾讯云控制台，点击实例卡片
-   - 点击"登录"按钮
-   - 直接在浏览器中打开终端
+   **Hoặc sử dụng terminal nền web**:
+   - Nhấp vào nút "Đăng nhập" (Login) trực tiếp trên trang quản trị đám mây để mở terminal trong trình duyệt
 
-2. **验证OpenClaw安装**：
+2. **Xác minh OpenClaw đã được cài đặt**:
    ```bash
    openclaw --version
    ```
+   Nếu hiển thị phiên bản (ví dụ `2026.9.3`), OpenClaw đã sẵn sàng hoạt động!
+
+![Hình ảnh OpenClaw image](https://upload.maynor1024.live/file/1770742213992_02-openclaw-image.png)
+
+#### Bước 3: Cấu hình mô hình ngôn ngữ lớn (LLM)
+
+1. **Truy cập phần quản lý ứng dụng**:
+   - Nhấp vào máy chủ của bạn
+   - Chuyển sang tab "Application Management" (Quản lý ứng dụng)
+
+2. **Lựa chọn mô hình**:
+   - Khuyên dùng **Kimi k2.5** hoặc **DeepSeek V3 / R1** (hiệu năng cao, chi phí tối ưu)
+   - Hoặc các mô hình quốc tế như Claude, OpenAI
+
+![Chọn nhà cung cấp AI](https://upload.maynor1024.live/file/1770742221938_03-select-ai-provider.png)
+
+3. **Lấy API Key**:
    
-   如果显示版本号（如 `2026.9.3`），说明OpenClaw已预装成功。
-
-![OpenClaw镜像](https://upload.maynor1024.live/file/1770742213992_02-openclaw-image.png)
-
-#### 第三步：配置大模型
-
-1. **进入应用管理**：
-   - 点击服务器卡片
-   - 切换到"应用管理"标签
-
-2. **选择模型**：
-   - 推荐使用 **Kimi k2.5**（性价比最高）
-   - 也可以选择其他国产大模型
-
-![选择AI供应商](https://upload.maynor1024.live/file/1770742221938_03-select-ai-provider.png)
-
-3. **获取API Key**：
-   
-   **Kimi k2.5配置**（推荐）：
+   **Ví dụ với Moonshot AI (Kimi)**:
    ```
-   1. 访问：https://platform.moonshot.cn/
-   2. 注册账号并登录
-   3. 进入"API管理"
-   4. 点击"创建API Key"
-   5. 复制API Key（格式：sk-xxx）
+   1. Truy cập nền tảng mở: https://platform.moonshot.cn/
+   2. Đăng ký / Đăng nhập tài khoản
+   3. Vào mục Quản lý API (API Keys)
+   4. Tạo API Key mới và sao chép mã khóa (định dạng sk-xxx)
    ```
 
-4. **填入配置**：
-   - 将API Key粘贴到配置框
-   - 点击"保存"
-   - 等待配置生效
+4. **Lưu cấu hình**:
+   - Dán API Key vào ô cấu hình
+   - Nhấn "Lưu" (Save) và chờ hệ thống cập nhật
 
-#### 第四步：测试连接
+#### Bước 4: Kiểm tra kết nối
 
-1. **访问WebUI**：
-   - 使用控制台提供的访问地址
-   - 格式：`http://你的服务器IP:18789/?token=xxx`
+1. **Truy cập Web UI**:
+   - Mở liên kết được cung cấp trên bảng điều khiển
+   - Định dạng: `http://IP_MÁY_CHỦ:18789/?token=xxx`
 
-2. **发布送测试消息**：
+2. **Gửi tin nhắn thử nghiệm**:
    ```
-   你好，能听到我说话吗？
+   Xin chào, bạn có nghe rõ tôi nói không?
    ```
 
-![测试对话](https://upload.maynor1024.live/file/1770742223389_04-test-chat.png)
+![Kiểm tra đối thoại](https://upload.maynor1024.live/file/1770742223389_04-test-chat.png)
 
-3. **验证成功**：
-   - 如果收到AI回复，说明配置成功
-   - 右上角会显示使用的模型名称
+3. **Xác nhận thành công**:
+   - Nếu nhận được câu trả lời từ AI, hệ thống đã vận hành hoàn hảo
+   - Góc trên bên phải hiển thị tên mô hình đang sử dụng
 
-### 腾讯龙虾产品矩阵（2026年新增）
+### Ma trận sản phẩm hệ sinh thái Tencent (Cập nhật 2026)
 
-> 💡 2026年3月，腾讯推出了「龙虾全家桶」系列产品，围绕 OpenClaw 构建了完整的产品矩阵。以下是各产品的关系和定位：
+> 💡 Vào tháng 3/2026, Tencent đã giới thiệu hệ sinh thái toàn diện xoay quanh OpenClaw. Dưới đây là định vị từng sản phẩm:
 
-| 产品 | 类型 | 平台 | 状态 | 定位 |
+| Sản phẩm | Thể loại | Nền tảng | Trạng thái | Định vị |
 |------|------|------|------|------|
-| **Lighthouse** | 云服务器 | 全平台 | ✅ 稳定 | 轻量云服务器，适合部署 OpenClaw 后端 |
-| **QClaw** | 桌面客户端 | macOS | ✅ 全量公测 | 腾讯官方 OpenClaw 桌面客户端，开箱即用 |
-| **WorkBuddy** | 桌面Agent | Windows/macOS | ✅ 公测 | 桌面端AI助手，支持多IM（微信、QQ、飞书等） |
-| **ClawBot** | 微信插件 | 全平台 | ✅ 公测 | 官方微信接入方案，基于 WeChatFerry |
+| **Lighthouse** | Máy chủ Cloud | Đa nền tảng | ✅ Ổn định | Máy chủ đám mây nhẹ, tối ưu triển khai backend OpenClaw |
+| **QClaw** | Ứng dụng Desktop | macOS | ✅ Public Beta | Ứng dụng desktop OpenClaw chính thức, cài đặt dùng ngay |
+| **WorkBuddy** | Desktop Agent | Windows/macOS | ✅ Thử nghiệm | Trợ lý AI desktop, kết nối đa nền tảng chat đồng thời |
+| **ClawBot** | Tiện ích kết nối | Đa nền tảng | ✅ Thử nghiệm | Giải pháp kết nối mở rộng cho ứng dụng chat |
 
-**各产品关系**：
+**Mô hình quan hệ giữa các sản phẩm**:
 
 ```
 ┌─────────────────────────────────────────┐
-│           腾讯龙虾产品矩阵               │
+│        Ma trận hệ sinh thái mở rộng      │
 ├──────────┬──────────┬───────────────────┤
 │  Lighthouse │  QClaw  │    WorkBuddy      │
-│ (云服务器)  │ (桌面端) │   (多IM Agent)    │
-│   ↓部署    │  ↓内置   │      ↓集成         │
-│  OpenClaw后端 ───────→ OpenClaw核心     │
+│(Máy chủ VPS)│(Desktop)│ (Agent đa kênh)   │
+│   ↓ Triển khai ↓ Tích hợp   ↓ Tích hợp    │
+│  Backend OpenClaw ───→ Nhân OpenClaw Core │
 │              ↑                          │
-│         ClawBot (微信插件)              │
+│         ClawBot (Plugin kết nối)        │
 └──────────┴──────────┴───────────────────┘
 ```
 
-**使用建议**：
+**Gợi ý lựa chọn**:
+- **Người dùng cá nhân trên macOS**: Thử nghiệm QClaw để cài nhanh không cần cấu hình máy chủ
+- **Cần kết nối đồng thời nhiều kênh nhắn tin**: Chọn WorkBuddy
+- **Cần hệ thống chạy 24/7 ổn định**: Chọn máy chủ đám mây Lighthouse
 
-- **个人用户 / macOS**：优先试用 QClaw，一键安装无需折腾服务器
-- **需要多IM接入**：选择 WorkBuddy，支持微信、QQ、飞书等同时在线
-- **微信深度用户**：搭配 ClawBot 插件实现微信消息收发
-- **需要服务器部署**：选择 Lighthouse，20元/月性价比极高
+### Triển khai trên Volcengine (ByteDance)
 
-> ⚠️ QClaw 于 2026-03-20 从内测转为全量公测，目前仅支持 macOS。Windows 版本正在开发中。
+Nếu bạn chủ yếu sử dụng nền tảng Lark / Feishu, Volcengine là giải pháp tối ưu chi phí:
 
-### 火山引擎部署（更便宜）
-
-如果你是飞书重度用户，推荐使用火山引擎：
-
-1. **访问活动页面**：
+1. **Truy cập trang sự kiện**:
    ```
    https://www.volcengine.com/activity/clawdbot
    ```
 
-2. **价格优势**：
-   - 9.9元/月
-   - 58元/年
-   - 比腾讯云便宜10元
+2. **Lợi thế chi phí**:
+   - Khoảng ~35.000 VNĐ/tháng (9.9 tệ/tháng)
+   - Cấu hình 2 Core CPU, 2GB RAM, băng thông 5 Mbps
+   - Quy trình thao tác tương tự các nền tảng đám mây khác
 
-3. **配置对比**：
-   - 2核2G（相同）
-   - 5M带宽（腾讯云20M）
-   - 适合飞书用户
+### Triển khai trên Baidu AI Cloud (Gói dùng thử)
 
-4. **部署流程**：
-   - 与腾讯云类似
-   - 按照页面提示操作即可
-
-### 百度智能云部署（0.01元试用）
-
-> 💰 **超值试用**：百度智能云提供0.01元/月的特惠活动，适合想要低成本试用的用户。
-
-#### 活动信息
-
-1. **访问活动页面**：
+1. **Truy cập trang khuyến mãi**:
    ```
    https://cloud.baidu.com/product/BCC/moltbot.html
    ```
 
-2. **活动规则**：
-   - 首月仅需 **0.01元**
-   - 需要注册并绑定个人身份证
-   - 每个账号限购一次
+2. **Đặc điểm**:
+   - Chi phí khởi điểm cực thấp cho tháng đầu
+   - Cung cấp sẵn các mô hình ERNIE / Qianfan
+   - Phù hợp cho mục đích nghiên cứu ngắn hạn
 
-#### 部署步骤
+### Triển khai trên Alibaba Cloud (Tùy chọn)
 
-**第一步：购买服务器**
-
-1. 注册百度智能云账号
-2. 完成个人实名认证（绑定身份证）
-3. 抢购特惠LS实例（0.01元/月）
-4. 如果售罄，可以原价购买轻量应用服务器
-
-**第二步：创建实例**
-
-1. 进入轻量应用服务器LS控制台
-2. 点击"创建实例"：
-   - 名称：随机生成或自定义
-   - 密码：**务必记住**，后续登录需要
-3. 等待实例创建完成
-
-**第三步：一键配置 OpenClaw**
-
-1. **进入实例详情页**：
-   - 点击实例卡片
-   - 进入"应用管理"标签
-
-2. **应用配置**：
-   - 点击"一键开通"
-   - 点击"一键放行"（开放防火墙端口）
-   - 等待显示"已放行"
-
-3. **模型配置**：
-   - 下拉选择模型（如：文心一言、千帆大模型）
-   - 点击"应用模型配置"
-   - 系统会自动创建千帆API Key并配置
-
-4. **接入方式配置**（可选）：
-   - 支持接入：飞书、钉钉、企业微信、QQ
-   - 选择你常用的通讯工具
-   - 按照提示完成配置（详见后续章节节）
-
-5. **Skills 配置**（可选）：
-   - 默认提供：百度搜索、百度百科
-   - 可以按需选择并点击"应用"
-   - 更多Skills可访问OpenClaw官网获取
-
-**第四步：访问WebUI**
-
-1. 点击"获取网站地址"
-2. 复制访问链接
-3. 在浏览器中打开，即可与OpenClaw对话
-
-#### 优势与限制
-
-**优势**：
-- ✅ 价格极低（首月0.01元）
-- ✅ 一键配置，无需手动安装
-- ✅ 集成百度千帆大模型
-- ✅ 自动配置APIKey
-
-**限制**：
-- ⚠️ 仅限首月优惠
-- ⚠️ 需要实名认证
-- ⚠️ 活动可能售罄
-
-### 阿里云部署（可选）
-
-阿里云也提供了OpenClaw一键部署方案：
-
-1. **访问活动页面**：
+1. **Truy cập trang triển khai**:
    ```
    https://www.aliyun.com/activity/ecs/clawdbot
    ```
 
-2. **选择轻量应用服务器**：
-   - 使用 OpenClaw镜像
-   - 一键安装配置
+2. **Thao tác**:
+   - Chọn máy chủ Simple Application Server (SAS)
+   - Chọn hình ảnh hệ thống OpenClaw và tạo phiên bản
 
-![阿里云轻量服务器](https://upload.maynor1024.live/file/1770742237148_05-aliyun-server.png)
+![Alibaba Cloud Server](https://upload.maynor1024.live/file/1770742237148_05-aliyun-server.png)
 
-3. **价格参考**：
-   - 与腾讯云类似
-   - 具体以活动页面为准
+### Video hướng dẫn chính thức
 
-### 官方视频教程（强烈推荐）
+Các hướng dẫn bằng video trực quan:
+- **Triển khai OpenClaw một chạm và tích hợp WeCom / QQ**: https://cloud.tencent.com/developer/video/85003 (Thời lượng: ~10 phút)
+- **Triển khai OpenClaw và kết nối Feishu / DingTalk**: https://cloud.tencent.com/developer/video/85055 (Thời lượng: ~10 phút)
 
-腾讯云提供了详细的视频教程，跟着视频操作更简单：
+### Triển khai trên máy chủ sẵn có của bạn
 
-1. **云上OpenClaw一键部署并接入企微和QQ**
-   - 视频地址：https://cloud.tencent.com/developer/video/85003
-   - 时长：约10分钟
-   - 内内容：从购买到配置完成
+Nếu bạn đã có sẵn máy chủ Linux (Ubuntu/Debian):
+- Thực hiện chạy script cài đặt tự động tương tự phần [Linux triển khai cục bộ](#linux-triển-khai-cục-bộ).
 
-2. **云上OpenClaw一键部署并接入飞书和钉钉**
-   - 视频地址：https://cloud.tencent.com/developer/video/85055
-   - 时长：约10分钟
-   - 内内容：飞书和钉钉接入全流程
+### Các câu hỏi thường gặp về triển khai đám mây
 
-### 存量服务器部署
+**Q1: Dữ liệu trên máy chủ đám mây có an toàn không?**
+- ✅ Dữ liệu được lưu trữ trên phiên bản máy chủ riêng biệt của bạn
+- ✅ Chỉ có bạn nắm giữ khóa SSH và mật khẩu quản trị
+- ✅ Bạn có thể đặt mật khẩu mã hóa truy cập Web UI
 
-如果你已经有轻量服务器，可以使用AI助手对话式部署：
+**Q2: Tôi có thể hủy dịch vụ bất cứ lúc nào không?**
+- ✅ Hoàn toàn chủ động; bạn có thể xóa hoặc tắt máy chủ bất cứ lúc nào mà không bị ràng buộc
 
-- **官方教程**：https://cloud.tencent.com/developer/article/2625605
-- **适用场景**：已有轻量服务器
-- **部署方式**：通过AI对话完成配置
-- **优势**：更灵活，可自定义
+**Q3: Làm thế nào để điều khiển từ điện thoại?**
+- Kết nối bot với Telegram, Lark / Feishu hoặc Discord để nhận và gửi thông tin mọi lúc mọi nơi
 
-### 云端部署常见访问题
+---
 
-**Q1: 云端部署安全吗？**
-- ✅ 数据存储在你的服务器上
-- ✅ 只有你能访问
-- ✅ 可以设置访问密码
+## Cài đặt nhanh qua script nội địa (Khuyến nghị)
 
-**Q2: 可以随时停止吗？**
-- ✅ 可以随时删除服务器
-- ✅ 按使用时长计费
-- ✅ 不用了就删除，不浪费钱
+> 🇨🇳 **Dành cho người dùng cần tốc độ cao**: Sử dụng script cài đặt tự động với máy chủ gương (mirror), tối ưu tốc độ mạng và đi kèm giao diện thân thiện.
 
-**Q3: 手机怎么访问？**
-- 通过QQ、企微、飞书等平台
-- 详见[第9章节：多平台集成](../03-advanced/09-multi-platform-integration.md)
+### Lợi thế của bộ cài đặt nhanh
 
-## 国内一键安装（推荐）
+Bộ cài đặt này sở hữu các ưu thế nổi bật như trình bày trong Bảng 2-3.
 
-> 🇨🇳 **国内用户推荐**：使用官方中文版一键安装脚本，速度快、配置简单。
+**Bảng 2-3 Ưu thế của bộ cài đặt nhanh**
 
-### 为什么选择国内版？
-
-国内版相比国际版具有多项本地化优势，如表 2-3 所示。
-
-**表 2-3 国内版优势**
-
-| 优势 | 说明 |
+| Ưu thế | Mô tả |
 |------|------|
-| ⚡ **速度快** | 使用国内镜像源，下载速度快 |
-| 🇨🇳 **中文友好** | 完整中文界面和提示 |
-| 📦 **一键安装** | 自动配置所有依赖 |
-| 🎯 **开箱即用** | 预配置国内常用服务 |
-| 💰 **成本优化** | 默认配置国产模型 |
+| ⚡ **Tốc độ cao** | Sử dụng các cụm máy chủ gương, tải gói cực nhanh |
+| 🌐 **Đa ngôn ngữ** | Hỗ trợ đầy đủ giao diện tiếng Anh, tiếng Trung và hướng dẫn chi tiết |
+| 📦 **Một chạm tự động** | Tự động tải và thiết lập toàn bộ các gói phụ thuộc |
+| 🎯 **Dùng được ngay** | Đi kèm cấu hình định tuyến cho các nhà cung cấp phổ biến |
+| 💰 **Tối ưu chi phí** | Thiết lập mặc định hướng tới các mô hình chi phí thấp |
 
 ![image-20260213122830687](https://upload.maynor1024.live/file/1770956917086_image-20260213122830687.png)
 
-### 前置要求
+### Điều kiện tiên quyết
 
-**必需环境**：
-- Node.js 24（推荐）/ 22.16+（兼容路径）（必需）
-- pnpm（可选，推荐用于源码构建）
+**Môi trường bắt buộc**:
+- Node.js 26 (khuyên dùng) hoặc Node 24.16+ (bắt buộc)
+- pnpm (tùy chọn, khuyến nghị nếu muốn biên dịch từ mã nguồn)
 
-**推荐配置**：
-- Brave Search API 密钥（用于网络搜索）
-- 可通过 `openclaw-cn configure --section web` 配置
+**Cấu hình khuyến nghị**:
+- Khóa tìm kiếm Brave Search API (dùng cho tính năng duyệt web tự động)
+- Có thể cấu hình sau qua lệnh `openclaw configure --section web`
 
-**系统要求**：
-- macOS：需要 Xcode / Command Line Tools（仅 CLI + Gateway 需要 Node.js）
-- Windows：强烈推荐使用 WSL2（Ubuntu），原生 Windows 未经测试
-- Linux：Ubuntu 20.04+、Debian、CentOS
+**Hệ điều hành**:
+- macOS: Cần cài đặt Xcode Command Line Tools (`xcode-select --install`)
+- Windows: Bắt buộc sử dụng WSL2 (Ubuntu), không nên dùng CMD trực tiếp
+- Linux: Ubuntu 20.04+, Debian 11+, CentOS Stream 8+
 
-### 快速开始
+### Bắt đầu nhanh
 
-#### macOS/Linux 安装
+#### Cài đặt trên macOS / Linux
 
 ```bash
-# 使用国内官方安装脚本
+# Sử dụng script cài đặt chính thức
 curl -fsSL https://clawd.org.cn/install.sh | bash
 ```
 
-#### Windows 安装
+#### Cài đặt trên Windows
 
-使用 PowerShell（管理员权限）：
+Mở PowerShell với quyền Administrator:
 
 ```powershell
-# 使用国内官方安装脚本
+# Sử dụng script cài đặt PowerShell
 iwr -useb https://clawd.org.cn/install.ps1 | iex
 ```
-> ⚠️ **Windows 用户注意**：强烈推荐使用 WSL2（Ubuntu），原生 Windows 支持有限。
 
-**WSL2 安装步骤**：
+> ⚠️ **Lưu ý cho người dùng Windows**: Khuyến nghị cài đặt WSL2 (Ubuntu) để đảm bảo độ tương thích tốt nhất.
+
+**Các bước cài đặt qua WSL2**:
 ```powershell
-# 1. 安装 WSL2
+# 1. Cài đặt WSL2
 wsl --install
 
-# 2. 重启电脑
+# 2. Khởi động lại máy tính
 
-# 3. 在 WSL2 中运行 Linux 安装命令
+# 3. Mở cửa sổ WSL2 Ubuntu và chạy lệnh cài đặt của Linux
 curl -fsSL https://clawd.org.cn/install.sh | bash
 ```
 
-#### 全局安装（替代方案）
+#### Cài đặt toàn cục qua trình quản lý gói (Phương án thay thế)
 
-如果一键脚本失败，可以使用 npm 全局安装：
+Nếu việc chạy script tự động bị lỗi mạng, bạn có thể cài đặt toàn cục qua npm hoặc pnpm:
 
 ```bash
-# 使用 npm
+# Cài đặt qua npm
 npm install -g openclaw-cn@latest
 
-# 或使用 pnpm（推荐）
+# Hoặc cài đặt qua pnpm (Khuyên dùng)
 pnpm add -g openclaw-cn@latest
 ```
 
-### 运行入门向导
+### Chạy trình hướng dẫn thiết lập
 
-安装完成后，运行配置向导：
+Sau khi cài đặt xong, hãy khởi chạy trình hướng dẫn:
 
 ```bash
-# 运行入门向导并安装后台服务
+# Khởi chạy trình hướng dẫn và cài đặt dịch vụ nền (daemon)
 openclaw-cn onboard --install-daemon
 ```
 
-### 配置向导流程
+### Quy trình các bước của trình hướng dẫn
 
-向导会引导你完成以下配置：
+Trình hướng dẫn sẽ dẫn dắt bạn qua các lựa chọn:
 
-**1. 选择网关模式**：
-- 本地网关（推荐）：Gateway 运行在本机
-- 远程网关：Gateway 运行在服务器
+**1. Chọn chế độ Gateway**:
+- Local Gateway (Khuyên dùng): Dịch vụ Gateway chạy trực tiếp trên máy của bạn
+- Remote Gateway: Kết nối tới Gateway chạy trên máy chủ đám mây
 
-**2. 配置认证**：
-- OpenAI Code（Codex）订阅（OAuth）
-- API 密钥（推荐用于 Anthropic）
-- 也支持 `claude setup-token`
+**2. Cấu hình xác thực (Authentication)**:
+- Đăng nhập tài khoản API Key cho nhà cung cấp mô hình (OpenAI, Anthropic, Google, DeepSeek...)
+- Hỗ trợ thiết lập khóa API lưu trữ an toàn
 
-**3. 选择 AI 提供商**：
-- 推荐：Kimi、DeepSeek、GLM-4（国产模型）
-- 可选：Claude、GPT（需要 API key）
+**3. Lựa chọn nhà cung cấp AI**:
+- Khuyên dùng: DeepSeek, Kimi, GLM-4, Qwen (chi phí cực rẻ)
+- Lựa chọn cao cấp: Claude 3.5 Sonnet, GPT-4o / GPT-5
 
-**4. 配置聊天平台**（可选）：
-- WhatsApp：QR 扫码登录
-- Telegram：输入 Bot Token
-- Discord：输入 Bot Token
-- Mattermost：插件令牌
-- 飞书/企微/钉钉：输入应用凭证
+**4. Cấu hình nền tảng nhắn tin** (Tùy chọn):
+- WhatsApp: Quét mã QR để liên kết
+- Telegram: Nhập mã Bot Token từ BotFather
+- Discord: Nhập mã Bot Token
+- Lark / Feishu, WeCom, DingTalk: Nhập App ID và App Secret tương ứng
 
-**5. 安装后台服务**（推荐）：
-- macOS：使用 launchd
-- Linux：使用 systemd
-- WSL2：使用 systemd
-- 运行时：Node（推荐，WhatsApp/Telegram 必需）
+**5. Cài đặt dịch vụ nền tự khởi động (Daemon)** (Khuyên dùng):
+- macOS: Quản lý bởi launchd
+- Linux / WSL2: Quản lý bởi systemd
+- Môi trường runtime: Node.js (khuyên dùng cho WhatsApp / Telegram)
 
-**6. 网关令牌**：
-- 向导默认生成一个令牌
-- 存储在 `gateway.auth.token` 中
-- 即使在回环地址上也会生成
+**6. Khóa Token Gateway**:
+- Trình hướng dẫn sẽ tự động tạo một chuỗi mã xác thực (Token) an toàn
+- Lưu trữ trong mục `gateway.auth.token` để bảo vệ kết nối Web UI
 
-### 认证配置说明
+### Lưu ý về vị trí lưu trữ xác thực
 
-**认证存储位置**（重要）：
+- **Đường dẫn Anthropic / Custom**: Khóa API được lưu trữ tập trung
+- Hồ sơ xác thực: `~/.openclaw/agents/<agentId>/agent/auth-profiles.json`
+- Thông tin OAuth (nếu dùng): `~/.openclaw/credentials/oauth.json`
 
-- **推荐的 Anthropic 路径**：设置 API 密钥（向导可存储）
-- OAuth 凭据（旧版导入）：`~/.openclaw/credentials/oauth.json`
-- 认证配置文件：`~/.openclaw/agents/<agentId>/agent/auth-profiles.json`
+### Khởi động dịch vụ Gateway
 
-**无头/服务器提示**：
-- 先在普通机器上完成 OAuth
-- 然后将 `oauth.json` 复制到网关主机
-
-### 启动 Gateway
-
-如果安装了后台服务，Gateway 应该已经在运行：
+Nếu đã đăng ký dịch vụ chạy nền, Gateway sẽ tự khởi chạy:
 
 ```bash
-# 检查 Gateway 状态
+# Kiểm tra trạng thái hoạt động của Gateway
 openclaw-cn gateway status
 ```
 
-**手动运行（前台）**：
+**Khởi chạy thủ công ở chế độ foreground (xem log trực tiếp)**:
 
 ```bash
-# 在前台运行，查看实时日志
+# Chạy ở tiền cảnh và hiển thị chi tiết log
 openclaw-cn gateway --port 18789 --verbose
 ```
 
-**Dashboard 访问**：
+**Truy cập Dashboard**:
 
-本地回环地址：`http://127.0.0.1:18789/`
+Địa chỉ cục bộ: `http://127.0.0.1:18789/`
 
-如果配置了令牌，需要将其粘贴到控制界面设置中（存储为 `connect.params.auth.token`）。
+Nếu có cấu hình Token bảo vệ, hãy nhập mã token vào trang cài đặt giao diện điều khiển (lưu dưới dạng `connect.params.auth.token`).
 
-> ⚠️ **Bun 警告（WhatsApp + Telegram）**：Bun 在这些渠道上有已知访问题。如果使用 WhatsApp 或 Telegram，请使用 Node 运行网关。
-
-### 快速验证（2分钟）
+### Xác minh nhanh trong 2 phút
 
 ```bash
-# 检查状态
+# Kiểm tra trạng thái chung
 openclaw-cn status
 
-# 健康检查
+# Kiểm tra sức khỏe dịch vụ
 openclaw-cn health
 ```
 
-### 配对 + 连接聊天界面
+### Ghép đôi & Kết nối giao diện chat
 
-#### WhatsApp（二维码登录）
+#### WhatsApp (Đăng nhập qua mã QR)
 
 ```bash
-# 登录 WhatsApp
+# Đăng nhập WhatsApp
 openclaw-cn channels login
 ```
-通过 WhatsApp → 设置 → 已连接的设备 扫描二维码。
+Mở ứng dụng WhatsApp trên điện thoại → Cài đặt (Settings) → Thiết bị đã liên kết (Linked Devices) → Quét mã QR hiển thị trên màn hình terminal.
 
-#### Telegram / Discord / 其他
+#### Telegram / Discord / Kênh khác
 
-向导可以为你写入令牌/配置。如果手动配置：
+Thêm kênh thủ công nếu không qua trình hướng dẫn:
 
-**Telegram**：
+**Telegram**:
 ```bash
 openclaw-cn channels add \
   --channel telegram \
   --token "YOUR_BOT_TOKEN"
 ```
 
-**Discord**：
+**Discord**:
 ```bash
 openclaw-cn channels add \
   --channel discord \
   --token "YOUR_BOT_TOKEN"
 ```
-> 💡 **Telegram 私信提示**：首次私信会返回配对码，需要批准后机器人才会响应。
 
-### 私信安全（配对审批）
+### Cơ chế phê duyệt tin nhắn riêng (Pairing Approval)
 
-默认策略：未知私信会收到短代码，消息在获得批准前不会被处理。
+Chính sách bảo mật mặc định: Người lạ gửi tin nhắn riêng (DM) lần đầu sẽ nhận được mã số ghép đôi (pairing code). Bot sẽ tạm thời không trả lời cho đến khi quản trị viên phê duyệt.
 
-如果首次私信没有得到回复，需要批准配对：
+Để phê duyệt:
 
 ```bash
-# 查看配对列表
+# Xem danh sách yêu cầu ghép đôi đang chờ
 openclaw-cn pairing list whatsapp
 
-# 批准配对
+# Phê duyệt mã ghép đôi
 openclaw-cn pairing approve whatsapp <code>
 ```
 
-### 从源码运行（开发布）
+### Chạy từ mã nguồn (Dành cho nhà phát triển)
 
-如果需要修改 OpenClaw 本身，可以从源码运行：
+Nếu bạn muốn tùy biến mã nguồn OpenClaw:
 
 ```bash
-# 克隆仓库
+# Clone kho lưu trữ
 git clone https://github.com/clawdbot/clawdbot.git
 cd clawdbot
 
-# 安装依赖
+# Cài đặt phụ thuộc
 pnpm install
 
-# 构建 UI（首次运行时自动安装 UI 依赖）
+# Build giao diện UI (tự cài đặt phụ thuộc UI ở lần đầu)
 pnpm ui:build
 
-# 构建项目
+# Biên dịch toàn bộ dự án
 pnpm build
 
-# 运行入门向导
+# Khởi chạy trình hướng dẫn thiết lập
 openclaw-cn onboard --install-daemon
 ```
-如果还没有全局安装，可以从仓库中通过 `pnpm openclaw-cn ...` 运行命令。
 
-**从源码运行 Gateway**：
+### Xác minh từ đầu đến cuối (End-to-End Verification)
 
-```bash
-node dist/entry.js gateway --port 18789 --verbose
-```
-
-### 端到端验证
-
-在新终端中，发布送测试消息：
+Mở một cửa sổ dòng lệnh mới và gửi tin nhắn kiểm tra:
 
 ```bash
-# 发布送测试消息
+# Gửi tin nhắn thử nghiệm
 openclaw-cn message send --target +15555550123 --message "Hello from OpenClaw"
 ```
-如果 `openclaw-cn health` 显示 "no auth configured"，需要返回向导设置 OAuth/密钥认证。
 
-**调试提示**：
-- `openclaw-cn status --all`：最佳的只读调试报告
-- `openclaw-cn health`：向运行中的网关请求健康快照
-- `openclaw-cn status --deep`：深度状态检查
+**Mẹo gỡ lỗi hữu ích**:
+- `openclaw-cn status --all`: Xuất báo cáo tổng quan chi tiết nhất
+- `openclaw-cn health`: Lấy snapshot tình trạng sức khỏe từ Gateway
+- `openclaw-cn status --deep`: Kiểm tra chuyên sâu các thành phần
 
-### 配置文件位置
+### Vị trí các tệp cấu hình quan trọng
 
-> 📖 **详细说明**: 完整的配置文件结构和使用指南请参考 [配置文件结构完整指南](../config-file-structure.md)
+> 📖 **Xem thêm**: Cấu trúc chi tiết được trình bày tại [Hướng dẫn đầy đủ về cấu trúc tệp cấu hình](../config-file-structure.md).
 
 ```bash
-# 主配置文件
+# Tệp cấu hình chính
 ~/.openclaw/openclaw.json
 
-# 认证配置
+# Cấu hình hồ sơ xác thực
 ~/.openclaw/agents/<agentId>/agent/auth-profiles.json
 
-# OAuth 凭据（旧版）
+# Thông tin chứng chỉ OAuth cũ
 ~/.openclaw/credentials/oauth.json
 
-# 日志文件件
+# Tệp nhật ký ghi log
 ~/.openclaw/logs/gateway.log
 ```
 
-### 国内版特色功能
+### Các sự cố thường gặp
 
-**1. 预配置国产模型**：
-- Kimi（月之暗面）
-- DeepSeek（深度求索）
-- GLM-4（智谱 AI）
-- 通义千访问（阿里）
-- 文心一言（百度）
-
-**2. 国内平台集成**：
-- 飞书（字节跳动）
-- 企业微信（腾讯）
-- 钉钉（阿里）
-- QQ（腾讯）
-
-**3. 优化的网络配置**：
-- 使用国内镜像源
-- 优化 API 访问速度
-- 支持代理配置
-
-### 常见访问题
-
-**Q1: 安装失败怎么怎么办？**
+**Q1: Cài đặt thất bại do phiên bản Node.js?**
 
 ```bash
-# 检查 Node.js 版本（需要 22+）
+# Kiểm tra phiên bản Node (yêu cầu Node 24.16+ hoặc 26+)
 node --version
 
-# 如果版本过低，使用 nvm 升级
-nvm install 22
-nvm use 22
+# Nâng cấp nhanh qua nvm
+nvm install 24
+nvm use 24
 ```
 
-**Q2: 如何更新到最新版本？**
+**Q2: Làm sao để cập nhật bản mới nhất?**
 
 ```bash
-# 重新运行安装脚本
+# Chạy lại script cài đặt tự động
 curl -fsSL https://clawd.org.cn/install.sh | bash
 ```
 
-**Q3: 如何卸载？**
+**Q3: Gỡ cài đặt hoàn toàn ra sao?**
 
 ```bash
-# 停止服务
+# Dừng dịch vụ đang chạy
 openclaw-cn gateway stop
 
-# 卸载
+# Gỡ bỏ gói npm toàn cục
 npm uninstall -g openclaw-cn
 
-# 删除配置（可选）
+# Xóa toàn bộ dữ liệu cấu hình (Tùy chọn)
 rm -rf ~/.openclaw
 ```
 
-**Q4: 支持哪些系统？**
-
-- ✅ macOS 12+
-- ✅ Linux（Ubuntu 20.04+、Debian、CentOS）
-- ✅ Windows 10/11（通过 WSL2）
-
-**Q5: 配置向导卡住怎么怎么办？**
-
-```bash
-# 按 Ctrl+C 中断
-
-# 检查网关是否运行
-openclaw-cn gateway status
-
-# 重新启动网关并重试
-openclaw-cn gateway restart
-openclaw-cn onboard
-```
-
-**Q6: 健康检查显示 "no auth configured"**
-
-需要配置认证：
-```bash
-# 重新运行向导
-openclaw-cn onboard
-
-# 或手动配置 API 密钥
-openclaw-cn configure --section auth
-```
-
-### 下一步（可选，但很棒）
-
-- macOS 菜单栏应用 + 语音唤醒：[macOS 应用](https://docs.openclaw.ai/platforms/macos.html)
-- iOS/Android 节点（Canvas/摄像头/语音）：[节点](https://docs.openclaw.ai/nodes.html)
-- 远程访问（SSH 隧道 / Tailscale 服务）：[远程访问](https://docs.openclaw.ai/gateway/remote.html)
-- 始终在线 / VPN 设置：[Tailscale](https://docs.openclaw.ai/gateway/tailscale.html)
-
-### 下一步
-
-安装完成后，可以：
-
-1. 配置 AI 模型（见下文"API配置指南"）
-2. 连接聊天平台（见[第9章节：多平台集成](../03-advanced/09-multi-platform-integration.md)）
-3. 安装 Skills（见[第8章节：Skills扩展](../03-advanced/08-skills-extension.md)）
-4. 开始使用（见[第3章节：快速上手](03-quick-start.md))
-
 ---
 
-## Cloudflare Workers 部署（进阶）
+## Triển khai Cloudflare Workers (Nâng cao)
 
-> ☁️ **全球 CDN 加速**：使用 Cloudflare Workers 部署 OpenClaw，分享受全球边缘网络加速。
+> ☁️ **Tăng tốc mạng biên toàn cầu**: Triển khai OpenClaw thông qua Cloudflare Workers để tận hưởng mạng phân phối biên toàn cầu.
 
-### 为什么选择 Cloudflare Workers？
+### Vì sao nên chọn Cloudflare Workers?
 
-Cloudflare Workers 提供全球边缘网络部署能力，如表 2-4 所示。
+Mô hình Serverless trên Cloudflare Workers mang lại các lợi thế được tóm tắt trong Bảng 2-4.
 
-**表 2-4 Cloudflare Workers 优势**
+**Bảng 2-4 Lợi thế của Cloudflare Workers**
 
-| 优势 | 说明 |
+| Lợi thế | Mô tả |
 |------|------|
-| 🌍 **全球加速** | 部署在 Cloudflare 全球边缘网络 |
-| 💰 **成本可控** | 5美元/月起步，24小时在线 |
-| 🔒 **安全可靠** | 内置 Zero Trust 安全认证 |
-| ⚡ **快速部署** | 一键部署，10分钟完成 |
-| 📦 **无需服务器** | Serverless 架构，无需维护 |
+| 🌍 **Tăng tốc toàn cầu** | Vận hành trên mạng lưới biên của Cloudflare trải rộng hơn 300 thành phố |
+| 💰 **Chi phí kiểm soát** | Bắt đầu từ $5/tháng với gói Workers Paid, hoạt động 24/7 |
+| 🔒 **Bảo mật chuẩn doanh nghiệp** | Tích hợp sẵn xác thực Cloudflare Zero Trust (Access) |
+| ⚡ **Triển khai tự động** | Dùng template một chạm, hoàn thành trong 10 phút |
+| 📦 **Không cần bảo trì máy chủ** | Kiến trúc không máy chủ (Serverless), không lo vá lỗi OS |
 
-### 前置要求
+### Điều kiện chuẩn bị
 
-**必需条件**：
-- Cloudflare 账号
-- Workers Paid 计划（5美元/月）
-- 信用卡（用于订阅付费计划）
+**Yêu cầu bắt buộc**:
+- Tài khoản Cloudflare hoạt động bình thường
+- Gói dịch vụ Cloudflare Workers Paid ($5/tháng)
+- Thẻ thanh toán quốc tế (Visa / Mastercard) để kích hoạt gói dịch vụ
 
-**成本说明**：
-- 基础费用：5美元/月（起步价）
-- 高频使用可能产生额外费用
-- 作为 24 小时在线的 AI 服务，月成本在可接受范围内
+> 💡 **Tham khảo chi phí thực tế**: Xem chi tiết tại [Thảo luận GitHub: What's the cost running it 24/7 for a month](https://github.com/cloudflare/moltworker/issues/76).
 
-> 💡 **成本参考**：详见 [GitHub 讨论：What's the cost running it 24/7 for a month](https://github.com/cloudflare/moltworker/issues/76)
+### Các bước triển khai
 
-### 部署流程
+#### Bước 1: Triển khai Moltworker bằng nút một chạm
 
-#### 第一步：一键部署 Moltworker
-
-1. **点击部署按钮**：
+1. **Truy cập đường dẫn triển khai**:
    ```
    https://deploy.workers.cloudflare.com/?url=https://github.com/cloudflare/moltworker
    ```
 
-2. **配置 Gateway Token**：
-   - 务必修改并妥善保存 `MOLTBOT_GATEWAY_TOKEN`
-   - 这是后续进入管理后台的唯一凭证
-   - 建议使用强密码生成器
+2. **Thiết lập mã khóa Gateway Token**:
+   - Bắt buộc phải thay đổi và lưu trữ an toàn biến `MOLTBOT_GATEWAY_TOKEN`
+   - Đây là mã khóa duy nhất để đăng nhập trang quản trị sau này
 
-![Cloudflare Workers 部署](https://upload.maynor1024.live/file/1770956993044_webp)
+![Triển khai Cloudflare Workers](https://upload.maynor1024.live/file/1770956993044_webp)
 
-#### 第二步：等待构建
+#### Bước 2: Chờ quá trình biên dịch (Build) hoàn tất
 
-- 部署过程约需 10 分钟
-- 可点击「继续处理项目」跳过等待页面
-- 构建完成后会自动跳转到项目页面
+- Thời gian biên dịch thường mất khoảng 5 - 10 phút
+- Sau khi hoàn thành, hệ thống sẽ tự động chuyển hướng về trang dự án
 
-![构建过程](https://upload.maynor1024.live/file/1770956995188_webp-20260213122951843)
+![Quá trình build](https://upload.maynor1024.live/file/1770956995188_webp-20260213122951843)
 
-#### 第三步：配置 Access（Zero Trust）
+#### Bước 3: Cấu hình Zero Trust Access
 
-访问网页界面需要配置 `CF_ACCESS_AUD` 和 `CF_ACCESS_TEAM_DOMAIN` 两个变量。
+Để truy cập giao diện quản trị an toàn, bạn cần cấu hình hai biến: `CF_ACCESS_AUD` và `CF_ACCESS_TEAM_DOMAIN`.
 
-**1. 创建应用**：
-- 进入 Zero Trust → Access → Applications
-- 添加一个 Self-hosted 应用
+1. **Tạo ứng dụng trong Zero Trust**:
+   - Điều hướng tới `Zero Trust` → `Access` → `Applications`
+   - Chọn loại ứng dụng "Self-hosted"
 
-![创建应用](https://upload.maynor1024.live/file/1770957006656_1770956995941_webp-20260213122946760)
+![Tạo ứng dụng Access](https://upload.maynor1024.live/file/1770957006656_1770956995941_webp-20260213122946760)
 
-**2. 设置域名**：
-- 子域默认为 `moltbot-sandbox`
-- 域名可使用 Cloudflare 分配的 Worker 域名或自定义域名
-- Session Duration（会话时间）建议设置长一些，避免频繁登录
+2. **Cấu hình tên miền và phiên làm việc**:
+   - Đặt tên miền phụ theo ý muốn hoặc dùng tên miền mặc định của Worker
+   - Thiết lập Session Duration dài (ví dụ 1 tháng) để tránh phải đăng nhập lại liên tục
 
-**3. 配置策略**：
-- 系统会自动创建 `moltbot-sandbox - Production` 策略
-- 默认通过邮箱验证码登录
+3. **Lấy các giá trị biến cấu hình**:
+   - `CF_ACCESS_AUD`: Lấy trong phần Application Audience (AUD) sau khi lưu ứng dụng
+   - `CF_ACCESS_TEAM_DOMAIN`: Trong phần Cài đặt của Zero Trust, định dạng `xxxxxx.cloudflareaccess.com`
 
-**4. 获取配置变量**：
+#### Bước 4: Cấu hình kho lưu trữ đối tượng Cloudflare R2
 
-**CF_ACCESS_AUD**：
-- 保存应用后，点击右侧「⋮」编辑
-- 在应用程序受众（AUD）标签页找到 Application Audience (AUD)
-
-**CF_ACCESS_TEAM_DOMAIN**：
-- 进入 Zero Trust → Settings
-- 团队域名格式：`xxxxxx.cloudflareaccess.com`
-
-#### 第四步：配置 R2 对象存储
-
-OpenClaw 需要 R2 来存储状态，需配置以下三个变量：
+OpenClaw cần kho R2 để duy trì trạng thái dữ liệu lâu dài. Bạn cần cấu hình 3 biến:
 - `CF_ACCOUNT_ID`
 - `R2_ACCESS_KEY_ID`
 - `R2_SECRET_ACCESS_KEY`
 
-**操作步骤**：
+1. **Lấy Account ID**:
+   - Truy cập mục R2 → Overview trên thanh bên Cloudflare
+   - Sao chép Account ID ở khung thông tin bên phải
 
-**1. 获取 Account ID**：
-- 在 Cloudflare 侧边栏进入 R2 → Overview
-- 右侧 Account Details 中的 Account ID 即为 `CF_ACCOUNT_ID`
+![Lấy Account ID](https://upload.maynor1024.live/file/1770957013012_webp-20260213123002670)
 
-![获取 Account ID](https://upload.maynor1024.live/file/1770957013012_webp-20260213123002670)
+2. **Tạo mã khóa API R2 Token**:
+   - Nhấp vào "Manage R2 API Tokens" → Chọn "Create API Token"
+   - Phân quyền: Object Read & Write (Đọc & Ghi đối tượng)
 
-**2. 创建 API 令牌**：
-- 点击 Manage R2 API Tokens
-- 选择 Create API Token
+![Phân quyền R2 Token](https://upload.maynor1024.live/file/1770957013719_webp-20260213123006410)
 
-**3. 设置权限**：
-- 权限选择 Object Read & Write
-- 建议范围通过 Specific Bucket 限制在 `moltbot-data`
+3. **Lưu trữ cặp khóa**:
+   - Ghi lại cẩn thận Access Key ID và Secret Access Key
 
-![设置权限](https://upload.maynor1024.live/file/1770957013719_webp-20260213123006410)
+![Lưu trữ khóa bí mật](https://upload.maynor1024.live/file/1770957016450_webp-20260213123010373)
 
-**4. 保存密钥**：
-- 创建成功后，记附录 Access Key ID 和 Secret Access Key
+#### Bước 5: Thêm biến môi trường và triển khai lại
 
-![保存密钥](https://upload.maynor1024.live/file/1770957016450_webp-20260213123010373)
+1. Vào `Workers` → `Settings` → `Variables and Secrets`
+2. Nhập đầy đủ 6 biến:
+   - `MOLTBOT_GATEWAY_TOKEN`
+   - `CF_ACCESS_AUD`
+   - `CF_ACCESS_TEAM_DOMAIN`
+   - `CF_ACCOUNT_ID`
+   - `R2_ACCESS_KEY_ID`
+   - `R2_SECRET_ACCESS_KEY`
+3. Nhấn "Deploy" để tái triển khai và áp dụng cấu hình
 
-> ⚠️ **重要提示**：修改 Token 时请务必核对变量名称。如果不慎修改了 Build Token，会导致 Worker 构建失败。
+![Thêm biến môi trường](https://upload.maynor1024.live/file/1770957030499_webp-20260213123020335)
 
-#### 第五步：注入变量并重启
+### Truy cập và quản trị
 
-1. **进入设置**：
-   - Workers → Settings → Variables and Secrets
+Sau khi triển khai xong, bạn có thể truy cập qua:
 
-2. **填入变量**：
-   - `MOLTBOT_GATEWAY_TOKEN`（第一步设置的）
-   - `CF_ACCESS_AUD`（第三步获取的）
-   - `CF_ACCESS_TEAM_DOMAIN`（第三步获取的）
-   - `CF_ACCOUNT_ID`（第四步获取的）
-   - `R2_ACCESS_KEY_ID`（第四步获取的）
-   - `R2_SECRET_ACCESS_KEY`（第四步获取的）
-
-3. **重新部署**：
-   - 点击 Deploy 重新部署
-   - 等待部署完成
-
-![注入变量](https://upload.maynor1024.live/file/1770957030499_webp-20260213123020335)
-
-### 访问与管理
-
-部署完成后，可通过以下地址访问：
-
-**访问 Worker**（需要 token）：
+**Địa chỉ Worker** (Kèm token):
 ```
 https://moltbot-sandbox.xxxxxxxx.workers.dev?token=MOLTBOT_GATEWAY_TOKEN
 ```
 
-**管理后台**（需要邮箱验证）：
-
+**Bảng quản trị Admin**:
 ```
 https://moltbot-sandbox.xxxxxxxx.workers.dev/_admin/
 ```
-通过 Cloudflare Access 的邮箱验证码验证后，即可进入管理后台并接受 Pairing Requests。
 
-![管理后台](https://upload.maynor1024.live/file/1770957055794_webp-20260213123047239)
+![Trang quản trị Admin](https://upload.maynor1024.live/file/1770957055794_webp-20260213123047239)
 
-### 基础使用
-
-#### 查看或切换模型
+### Các thao tác cơ bản
 
 ```bash
-# 查看当前模型
+# Xem mô hình đang dùng
 /model
 
-# 切换模型
+# Đổi sang mô hình khác
 /model minimax/MiniMax-M2.1
-```
 
-#### 设置开机自启命令
-
-为了避免 Worker 重启后模型被重置，建议设置开机自启命令：
-
-```bash
+# Đặt lệnh tự khởi động khi Worker bật
 set model minimax/MiniMax-M2.1
-```
 
-#### 远程终端连接
-
-```bash
-# 登录到 Gateway
+# Kết nối terminal từ xa tới Gateway
 openclaw gateway login --url https://moltbot-sandbox.xxxxxxxx.workers.dev
-
-# 配置 Skills
-openclaw configure --section skills
 ```
 
-### 避坑指南
+### Kinh nghiệm phòng tránh lỗi (Troubleshooting)
 
-**访问题 1：模型配置报错**
-
-**症状**：通过配置文件修改默认模型后报错
-
-**原因**：国内 AI 服务商通常区分国内与海外端点，Cloudflare Workers 环境下配置文件修改内容易出错
-
-**解决方案**：
-- 直接通过开机命令强制指定模型
-- 不要依赖配置文件或后台 UI
-- 使用 `set model` 命令设置开机自启
-
-**访问题 2：Worker 构建失败**
-
-**症状**：部署后 Worker 无法启动
-
-**原因**：不慎修改了 Build Token
-
-**解决方案**：
-- 检查所有变量名称是否正确
-- 确保没有修改 Build Token
-- 重新部署
-
-**访问题 3：无法访问管理后台**
-
-**症状**：访问 `/_admin/` 时无法登录
-
-**原因**：Zero Trust 配置不正确
-
-**解决方案**：
-- 检查 `CF_ACCESS_AUD` 和 `CF_ACCESS_TEAM_DOMAIN` 是否正确
-- 确认邮箱验证码是否正确
-- 检查 Session Duration 设置
-
-### 成本估算
-
-| 项目 | 费用 | 说明 |
-|------|------|------|
-| Workers Paid 计划 | 5美元/月 | 基础费用 |
-| 额外请求费用 | 按量计费 | 高频使用时产生 |
-| R2 存储 | 免费额度内 | 通常不会超出 |
-| 总计 | 5-10美元/月 | 取决于使用频率 |
-
-### 适用场景
-
-**推荐使用**：
-- ✅ 想低成本尝试 OpenClaw
-- ✅ 已有 Cloudflare 付费订阅
-- ✅ 需要全球 CDN 加速
-- ✅ 不想维护服务器
-
-**不推荐使用**：
-- ❌ 期望开箱即用
-- ❌ 没有技术背景
-- ❌ 需要复杂的自动化流程
-- ❌ 预算非常有限
-
-### 总结
-
-Cloudflare Workers + OpenClaw 是一个低成本的尝鲜方案，适合：
-- 未体验过 Agent 自动化，想低成本试手
-- 已有 Cloudflare 付费订阅，资源闲置
-- 需要全球 CDN 加速的场景
-
-但需要注意：
-- OpenClaw 目前还不是一个能「即刻提升效率」的工具
-- 更像是一个为 AI 自动化搭建的系统底座
-- 如果没有明确的、可标准化的长流程需求，可能只会带来维护成本
-
-**下一步**：
-- 配置 AI 模型（见下文"API配置指南"）
-- 配置通讯渠道（见[第9章节：多平台集成](../03-advanced/09-multi-platform-integration.md)）
-- 安装 Skills（见[第8章节：Skills扩展](../03-advanced/08-skills-extension.md)）
+- **Lỗi đổi mô hình trong tệp json không có tác dụng**: Trên môi trường Cloudflare Workers, hãy dùng lệnh `set model <tên-mô-hình>` trực tiếp trong khung chat thay vì cố sửa tệp json.
+- **Worker bị lỗi build**: Tuyệt đối không thay đổi biến hệ thống `Build Token` nội bộ của Cloudflare.
+- **Không vào được trang `/_admin/`**: Kiểm tra lại cấu hình Zero Trust Access và giá trị biến `CF_ACCESS_AUD`.
 
 ---
 
-## Docker 部署（可选）
+## Triển khai Docker (Tùy chọn)
 
-> 🐳 **开发布者选项**：Docker 部署适合需要环境隔离的场景。
+> 🐳 **Lựa chọn cho lập trình viên**: Triển khai qua Docker mang lại môi trường hoàn toàn cô lập, sạch sẽ và dễ dàng di chuyển giữa các máy chủ.
 
-### 为什么选择 Docker？
+### Vì sao nên chọn Docker?
 
-Docker 部署提供环境隔离和便捷管理，如表 2-5 所示。
+Những ưu điểm nổi bật của phương thức triển khai Docker được thể hiện trong Bảng 2-5.
 
-**表 2-5 Docker 部署优势**
+**Bảng 2-5 Lợi thế khi triển khai bằng Docker**
 
-| 优势 | 说明 |
+| Lợi thế | Mô tả |
 |------|------|
-| 🔒 **环境隔离** | 不影响系统环境，干净整洁 |
-| 📦 **一键部署** | 无需配置依赖，开箱即用 |
-| 🔄 **易于更新** | 一条命令完成更新 |
-| 🌐 **跨平台** | Windows/macOS/Linux 统一方案 |
-| 🚀 **快速启动** | 5分钟完成部署 |
+| 🔒 **Môi trường cô lập** | Không ảnh hưởng đến các phần mềm khác trên máy tính của bạn |
+| 📦 **Cài đặt trọn gói** | Tích hợp sẵn Node.js và mọi thư viện cần thiết bên trong container |
+| 🔄 **Nâng cấp đơn giản** | Chỉ cần một câu lệnh để tải phiên bản mới nhất và khởi động lại |
+| 🌐 **Đa nền tảng** | Cấu hình chạy đồng nhất trên Windows, macOS và máy chủ Linux |
+| 🚀 **Khởi chạy tức thì** | Vận hành toàn bộ hệ thống chỉ trong vòng 5 phút |
 
-### 前置要求
+### Điều kiện tiên quyết: Cài đặt Docker
 
-**安装 Docker**：
-
-**macOS**：
+**macOS**:
 ```bash
-# 下载 Docker Desktop
-# 访问：https://www.docker.com/products/docker-desktop
+# Tải Docker Desktop từ trang chủ:
+# https://www.docker.com/products/docker-desktop
 
-# 或使用 Homebrew
+# Hoặc cài đặt qua Homebrew:
 brew install --cask docker
 ```
 
-**Windows**：
+**Windows**:
 ```bash
-# 下载 Docker Desktop
-# 访问：https://www.docker.com/products/docker-desktop
+# Tải Docker Desktop từ trang chủ:
+# https://www.docker.com/products/docker-desktop
 
-# 安装 WSL2（如果还没安装）
+# Kích hoạt WSL2 nếu chưa bật:
 wsl --install
 ```
 
-**Linux (Ubuntu)**：
+**Linux (Ubuntu)**:
 ```bash
-# 安装 Docker
+# Cài đặt Docker bằng script chính thức
 curl -fsSL https://get.docker.com | sh
 
-# 启动 Docker 服务
+# Khởi động dịch vụ Docker
 sudo systemctl start docker
 sudo systemctl enable docker
 
-# 添加当前用户到 docker 组
+# Thêm người dùng hiện tại vào nhóm docker để chạy không cần sudo
 sudo usermod -aG docker $USER
 ```
 
-**验证安装**：
+**Xác minh cài đặt Docker**:
 ```bash
 docker --version
-# 应显示：Docker version 24.x.x
+# Màn hình sẽ hiển thị: Docker version 24.x.x hoặc cao hơn
 ```
 
-### 快速开始
+### Bắt đầu nhanh
 
-#### 方式一：一键脚本部署（推荐新手）
+#### Cách 1: Sử dụng script cài đặt tự động (Khuyên dùng cho người mới)
 
-最简单的方式，一条命令搞定所有配置！
+Chỉ một dòng lệnh duy nhất để tải và thiết lập toàn bộ môi trường container:
 
 ```bash
 curl -fsSL https://clawd.org.cn/install.sh | bash
 ```
 
-**这个脚本会自动：**
-- ✅ 检查 Docker 环境
-- ✅ 下载镜像（使用国内镜像：`jiulingyun803/openclaw-cn:latest`）
-- ✅ 配置环境变量
-- ✅ 启动内容器
-- ✅ 运行配置向导
-- ✅ 生成网关令牌
+Sau khi hoàn tất, mở trình duyệt truy cập: `http://127.0.0.1:18789/` để sử dụng.
 
-完成后，在浏览器打开 `http://127.0.0.1:18789/` 即可使用。
+#### Cách 2: Triển khai thủ công bằng Docker Compose (Dành cho người dùng nâng cao)
 
-**脚本后续操作**：
-- 按照提示输入渠道信息（可选）
-- 将生成的令牌复制到 Web UI 登录
-
-#### 方式二：手动 Docker Compose 部署（适合进阶用户）
-
-如果一键脚本不适用，或需要自定义配置，按以下步骤操作。
-
-**步骤 1：创建工作目附录**
+**Bước 1: Tạo thư mục làm việc**
 
 ```bash
 mkdir -p ~/openclaw-docker
 cd ~/openclaw-docker
 ```
 
-**步骤 2：创建 `.env` 环境文件**
+**Bước 2: Tạo tệp biến môi trường `.env`**
 
 ```bash
 cat > .env << 'EOF'
-# 镜像配置（使用国内镜像）
+# Cấu hình hình ảnh container (Image)
 OPENCLAW_IMAGE=jiulingyun803/openclaw-cn:latest
 
-# 数据目附录
+# Thư mục lưu trữ dữ liệu bền vững
 OPENCLAW_CONFIG_DIR=./data/.openclaw
 OPENCLAW_WORKSPACE_DIR=./data/clawd
 
-# 网关配置
+# Cổng mạng Gateway
 OPENCLAW_GATEWAY_PORT=18789
 OPENCLAW_BRIDGE_PORT=18790
 OPENCLAW_GATEWAY_BIND=lan
 OPENCLAW_GATEWAY_TOKEN=your-secure-token-here
 
-# Claude 集成（可选）
+# Tích hợp Claude (Tùy chọn)
 CLAUDE_AI_SESSION_KEY=
 CLAUDE_WEB_SESSION_KEY=
 CLAUDE_WEB_COOKIE=
 EOF
 ```
 
-**步骤 3：创建 `docker-compose.yml` 文件**
+**Bước 3: Tạo tệp `docker-compose.yml`**
 
 ```yaml
 services:
@@ -1793,732 +1464,210 @@ services:
     entrypoint: ["node", "dist/index.js"]
 ```
 
-**步骤 4：启动内容器**
+**Bước 4: Khởi động container**
 
 ```bash
-# 拉取最新镜像
+# Tải image mới nhất
 docker compose pull
 
-# 启动网关（后台运行）
+# Khởi động dịch vụ Gateway chạy nền
 docker compose up -d openclaw-cn-gateway
 
-# 查看日志（可选）
+# Theo dõi nhật ký log (Tùy chọn)
 docker compose logs -f openclaw-cn-gateway
 ```
 
-**步骤 5：运行配置向导**
+**Bước 5: Chạy trình hướng dẫn cấu hình qua CLI**
 
 ```bash
 docker compose run --rm openclaw-cn-cli onboard
 ```
-配置向导会提示你：
-- 选择网关后端（Claude、Gemini 等）
-- 配置 Feishu、Telegram 等渠道
-- 生成和保存配置
 
-**步骤 6：访问 Web UI**
+**Bước 6: Truy cập Web UI**
 
-打开浏览器访问：`http://127.0.0.1:18789/`
+Mở trình duyệt truy cập: `http://127.0.0.1:18789/` và nhập mã token để bắt đầu sử dụng.
 
-将配置向导生成的令牌复制到登录页面即可。
+### Giải thích chi tiết các biến môi trường
 
-### 环境变量详解
+Ý nghĩa các biến môi trường trong Docker được mô tả chi tiết tại Bảng 2-6.
 
-| 变量 | 含义 | 默认值 | 必需 | 说明 |
+| Biến môi trường | Ý nghĩa | Giá trị mặc định | Bắt buộc | Ghi chú |
 |------|------|--------|------|------|
-| OPENCLAW_IMAGE | Docker 镜像名称 | jiulingyun803/openclaw-cn:latest | ❌ | 使用国内镜像，也可指定版本号 |
-| OPENCLAW_CONFIG_DIR | 配置文件目附录 | ./data/.openclaw | ❌ | OpenClaw 配置和凭证存储位置 |
-| OPENCLAW_WORKSPACE_DIR | 工作空间目附录 | ./data/clawd | ❌ | 代理工作文件存储位置 |
-| OPENCLAW_GATEWAY_PORT | 网关端口号 | 18789 | ❌ | 访问 Web UI 的端口 |
-| OPENCLAW_BRIDGE_PORT | 桥接端口号 | 18790 | ❌ | 用于客户端连接的端口 |
-| OPENCLAW_GATEWAY_BIND | 网关绑定地址 | lan | ❌ | localhost（仅本机）/ lan（局域网）/ 0.0.0.0（公网，⚠️ 谨慎使用） |
-| OPENCLAW_GATEWAY_TOKEN | 网关认证令牌 | 自动生成 | ❌ | Web UI 登录令牌（可自定义或留空自动生成） |
-| CLAUDE_AI_SESSION_KEY | Claude.ai 会话密钥 | 空 | ❌ | ⚠️ 仅使用 Claude AI 作为后端时填写 |
-| CLAUDE_WEB_SESSION_KEY | Claude Web 会话密钥 | 空 | ❌ | ⚠️ 仅使用 Claude Web 版时填写 |
-| CLAUDE_WEB_COOKIE | Claude Web Cookie | 空 | ❌ | ⚠️ 仅使用 Claude Web 版时填写 |
+| `OPENCLAW_IMAGE` | Tên image Docker | `jiulingyun803/openclaw-cn:latest` | ❌ | Có thể chỉ định tag phiên bản cụ thể |
+| `OPENCLAW_CONFIG_DIR` | Thư mục lưu cấu hình | `./data/.openclaw` | ❌ | Nơi lưu cấu hình và chứng chỉ bảo mật |
+| `OPENCLAW_WORKSPACE_DIR` | Thư mục không gian làm việc | `./data/clawd` | ❌ | Nơi lưu các tệp tin do Agent thao tác |
+| `OPENCLAW_GATEWAY_PORT` | Cổng dịch vụ Gateway | `18789` | ❌ | Cổng dùng để truy cập giao diện Web UI |
+| `OPENCLAW_BRIDGE_PORT` | Cổng dịch vụ Bridge | `18790` | ❌ | Cổng kết nối trung gian cho client |
+| `OPENCLAW_GATEWAY_BIND` | Địa chỉ mạng liên kết | `lan` | ❌ | `localhost` (chỉ máy này) / `lan` (mạng nội bộ) / `0.0.0.0` (toàn mạng) |
+| `OPENCLAW_GATEWAY_TOKEN` | Mã token xác thực Gateway | Tự động sinh | ❌ | Khóa bảo vệ giao diện Web UI |
 
-**环境变量设置方式**：
-
-**方式 A：编辑 `.env` 文件（推荐）**
-```bash
-# 编辑 .env 文件
-nano .env
-
-# docker compose 会自动读取
-docker compose up -d
-```
-
-**方式 B：命令行设置**
-```bash
-export OPENCLAW_GATEWAY_PORT=18789
-docker compose up -d
-```
-
-**方式 C：命令行临时覆盖**
-```bash
-docker compose -e OPENCLAW_GATEWAY_PORT=8080 up -d
-```
-
-### 常用操作
-
-#### 查看网关状态
+### Các thao tác thường dùng với Docker
 
 ```bash
-# 检查内容器是否运行
+# Kiểm tra container đang chạy
 docker compose ps
 
-# 查看网关日志
-docker compose logs openclaw-cn-gateway
-
-# 实时查看日志（支持续跟踪）
+# Xem log trực tiếp
 docker compose logs -f openclaw-cn-gateway
-```
 
-#### 配置渠道
-
-通过 CLI 内容器配置各类渠道：
-
-**Telegram（需要机器人令牌）**：
-```bash
-docker compose run --rm openclaw-cn-cli channels add \
-  --channel telegram \
-  --token "YOUR_BOT_TOKEN"
-```
-
-**Discord（需要机器人令牌）**：
-```bash
-docker compose run --rm openclaw-cn-cli channels add \
-  --channel discord \
-  --token "YOUR_BOT_TOKEN"
-```
-
-**WhatsApp（QR 扫码）**：
-```bash
-docker compose run --rm openclaw-cn-cli channels login
-```
-
-**Feishu（需要 App ID 和 Secret）**：
-```bash
-docker compose run --rm openclaw-cn-cli onboard
-# 按提示输入信息
-```
-
-#### 重新配置
-
-```bash
-# 重新运行配置向导
-docker compose run --rm openclaw-cn-cli onboard
-
-# 查看当前配置
-docker compose run --rm openclaw-cn-cli config get
-```
-
-#### 重启网关
-
-```bash
-# 重启网关内容器
+# Khởi động lại Gateway
 docker compose restart openclaw-cn-gateway
 
-# 停止网关
+# Tạm dừng toàn bộ dịch vụ
 docker compose down
 
-# 重新启动
-docker compose up -d openclaw-cn-gateway
-```
-
-#### 更新到最新版本
-
-```bash
-# 拉取最新镜像
+# Cập nhật phiên bản mới nhất
 docker compose pull
-
-# 重启内容器（自动使用新镜像）
 docker compose up -d openclaw-cn-gateway
 ```
 
-#### 清理数据（谨慎操作）
+### Sao lưu và khôi phục dữ liệu (Data Persistence)
+
+Toàn bộ dữ liệu được gắn kết an toàn vào thư mục `./data/` trên máy chủ:
 
 ```bash
-# 停止并删除内容器
-docker compose down
-
-# 删除本地数据目附录
-rm -rf ./data/
-
-# 删除本地镜像（可选）
-docker rmi jiulingyun803/openclaw-cn:latest
-```
-
-### 数据支持久化
-
-Docker 内容器的数据存储在工作目附录的 `data` 文件夹：
-
-```bash
-~/openclaw-docker/data/
-├── .openclaw/         # 配置文件
-│   ├── openclaw.json  # 主配置
-│   └── logs/          # 日志文件件
-└── clawd/             # 工作空间
-    └── workspace/     # 代理工作文件
-```
-
-**备份数据**：
-```bash
-# 备份配置和数据
+# Sao lưu toàn bộ dữ liệu ra tệp nén
 tar -czf openclaw-backup-$(date +%Y%m%d).tar.gz ./data
 
-# 恢复数据
+# Khôi phục dữ liệu từ tệp nén
 tar -xzf openclaw-backup-20260210.tar.gz
 ```
 
-### Docker 部署常见访问题
+### Xử lý các sự cố Docker thường gặp
 
-#### 访问题 1：内容器无法启动
-
-**症状**：`docker compose up` 后内容器立即退出
-
-**解决方案**：
-```bash
-# 查看详细错误日志
-docker compose logs openclaw-cn-gateway
-
-# 检查端口是否被占用
-sudo netstat -ltnp | grep 18789
-# macOS 使用：lsof -i :18789
-
-# 如果被占用，修改 OPENCLAW_GATEWAY_PORT
-# 编辑 .env，将端口改为其他（如 18790）
-nano .env
-```
-
-#### 访问题 2：权限拒绝（Permission Denied）
-
-**症状**：`Error: EACCES: permission denied, mkdir ...`
-
-**解决方案**：
-```bash
-# 确保数据目附录存在且权限正确
-mkdir -p ./data/.openclaw ./data/clawd
-chmod 755 ./data/.openclaw ./data/clawd
-
-# 如果使用了宿主机路径，确保目附录可写
-chmod 777 ./data
-```
-
-#### 访问题 3：无法访问 Web UI
-
-**症状**：浏览器访问 `http://127.0.0.1:18789` 无响应
-
-**解决方案**：
-```bash
-# 检查内容器是否运行
-docker compose ps
-
-# 检查网关日志
-docker compose logs openclaw-cn-gateway
-
-# 验证端口是否正确
-# 如果 OPENCLAW_GATEWAY_PORT=18789，则访问 :18789
-# 如果改了端口，访问对应的新端口
-
-# 检查防火墙设置
-# macOS
-sudo pfctl -d  # 临时关闭防火墙测试
-
-# Linux
-sudo ufw status
-sudo ufw allow 18789
-```
-
-#### 访问题 4：配置向导卡住
-
-**症状**：`docker compose run --rm openclaw-cn-cli onboard` 无反应
-
-**解决方案**：
-```bash
-# 按 Ctrl+C 中断
-
-# 检查网关是否运行
-docker compose logs openclaw-cn-gateway
-
-# 重新启动网关并重试
-docker compose restart openclaw-cn-gateway
-docker compose run --rm openclaw-cn-cli onboard
-```
-
-#### 访问题 5：镜像拉取失败（403 错误）
-
-**症状**：`docker pull openclaw/openclaw:latest` 返回 403 错误
-
-**解决方案**：
-```bash
-# 使用国内镜像（推荐）
-docker pull jiulingyun803/openclaw-cn:latest
-
-# 或在 .env 文件中指定国内镜像
-echo "OPENCLAW_IMAGE=jiulingyun803/openclaw-cn:latest" >> .env
-
-# 重新拉取
-docker compose pull
-```
-
-#### 访问题 6：网络超时
-
-**症状**：拉取镜像或访问 API 时网络超时
-
-**解决方案**：
-```bash
-# 配置 Docker 镜像加速（国内用户）
-# 编辑 Docker 配置
-sudo nano /etc/docker/daemon.json
-
-# 添加镜像加速器
-{
-  "registry-mirrors": [
-    "https://docker.mirrors.ustc.edu.cn",
-    "https://hub-mirror.c.163.com"
-  ]
-}
-
-# 重启 Docker
-sudo systemctl restart docker
-
-# macOS 用户在 Docker Desktop 设置中添加镜像加速器
-```
-
-#### 访问题 7：数据丢失
-
-**症状**：重启内容器后配置和数据丢失
-
-**解决方案**：
-```bash
-# 确保使用了数据卷挂载
-# 检查 docker-compose.yml 中的 volumes 配置
-
-# 查看数据是否存在
-ls -la ./data/.openclaw
-ls -la ./data/clawd
-
-# 如果数据丢失，从备份恢复
-tar -xzf openclaw-backup-20260210.tar.gz
-```
-
-#### 访问题 8：性能访问题
-
-**症状**：内容器运行缓慢或占用资源过高
-
-**解决方案**：
-```bash
-# 限制资源使用（编辑 docker-compose.yml）
-services:
-  openclaw-cn-gateway:
-    # ... 其他配置
-    deploy:
-      resources:
-        limits:
-          cpus: '2'
-          memory: 2G
-        reservations:
-          cpus: '1'
-          memory: 1G
-
-# 重启内容器
-docker compose up -d openclaw-cn-gateway
-```
-
-### 从一键脚本迁移到手动配置
-
-如果想从一键脚本切换到手动配置（或反之）：
-
-```bash
-# 停止现有内容器
-docker compose down
-
-# 备份现有配置
-cp -r ~/.openclaw ~/.openclaw.backup
-
-# 更新 .env 和 docker-compose.yml
-
-# 重新启动
-docker compose up -d openclaw-cn-gateway
-```
-配置会自动保留在数据目附录中，无需重新设置。
-
-### Docker 部署优势总结
-
-✅ **环境隔离**：不影响系统环境  
-✅ **快速部署**：5分钟完成  
-✅ **易于管理**：一条命令更新  
-✅ **跨平台**：统一部署方案  
-✅ **可扩展**：支持多实例部署  
-✅ **国内优化**：使用国内镜像，下载速度快
-
-**推荐使用场景**：
-- 开发布者本地测试
-- 服务器部署
-- 多环境隔离
-- 快速体验 OpenClaw
-
-**下一步**：
-- 配置 API 模型（见下文"API配置指南"）
-- 配置通讯渠道（见[第9章节：多平台集成](../03-advanced/09-multi-platform-integration.md)）
-- 安装 Skills（见[第8章节：Skills扩展](../03-advanced/08-skills-extension.md)）
+- **Container tự thoát ngay sau khi chạy**: Kiểm tra xem cổng `18789` có bị ứng dụng khác chiếm dụng không bằng lệnh `lsof -i :18789` hoặc đổi sang cổng khác trong tệp `.env`.
+- **Lỗi từ chối quyền (Permission Denied)**: Phân quyền lại thư mục dữ liệu bằng lệnh `chmod -R 777 ./data`.
+- **Không vào được Web UI**: Đảm bảo tường lửa (firewall/ufw) đã mở cổng 18789 trên máy chủ.
 
 ---
 
-## 更新和维护
+## Cập nhật và Bảo trì hệ thống
 
-> 🔄 **保支持最新**：定期更新 OpenClaw 以获得新功能和安全修复。
+> 🔄 **Luôn giữ hệ thống cập nhật**: Thường xuyên kiểm tra và nâng cấp OpenClaw để nhận các bản vá bảo mật, sửa lỗi tương thích và tính năng mới nhất.
 
-### 检查更新
+### Kiểm tra phiên bản
 
 ```bash
-# 检查当前版本
+# Xem phiên bản hiện tại đang cài đặt
 openclaw --version
 
-# 检查最新版本
+# Kiểm tra phiên bản mới nhất trên GitHub
 curl -s https://api.github.com/repos/openclaw/openclaw/releases/latest | grep tag_name
 ```
 
-### 本地安装更新
+### Nâng cấp bản cài đặt cục bộ
 
 ```bash
-# 方式一：使用安装脚本
-curl -fsSL https://openclaw.ai/install.sh | bash
+# Cách 1: Chạy lệnh cập nhật chính thức (Khuyên dùng)
+openclaw update
 
-# 方式二：手动更新
-cd ~/openclaw
-git pull origin main
-pnpm install
-pnpm build
+# Cách 2: Cài đặt lại từ script
+curl -fsSL https://openclaw.ai/install.sh | bash
 ```
 
-### Docker 更新
+### Nâng cấp môi trường Docker
 
 ```bash
-# 拉取最新镜像
+# Tải image mới nhất
 docker pull openclaw/openclaw:latest
 
-# 停止并删除旧内容器
-docker stop openclaw
-docker rm openclaw
-
-# 启动新内容器
-docker run -d \
-  --name openclaw \
-  -p 18789:18789 \
-  -v ~/.openclaw:/root/.openclaw \
-  --restart unless-stopped \
-  openclaw/openclaw:latest
+# Tái tạo container với image mới
+docker compose down
+docker compose pull
+docker compose up -d
 ```
 
-### 备份数据
+### Sao lưu dữ liệu định kỳ
 
-**本地安装备份**：
+**Sao lưu môi trường cục bộ**:
 ```bash
-# 备份配置和数据
+# Nén toàn bộ thư mục cấu hình và dữ liệu
 tar -czf openclaw-backup-$(date +%Y%m%d).tar.gz ~/.openclaw
 
-# 恢复数据
+# Khôi phục khi cần
 tar -xzf openclaw-backup-20260210.tar.gz -C ~/
 ```
 
-**Docker 备份**：
+### Giám sát và theo dõi nhật ký hoạt động
+
 ```bash
-# 备份数据卷
-docker run --rm \
-  -v ~/.openclaw:/data \
-  -v $(pwd):/backup \
-  alpine tar czf /backup/openclaw-backup-$(date +%Y%m%d).tar.gz /data
-
-# 恢复数据
-docker run --rm \
-  -v ~/.openclaw:/data \
-  -v $(pwd):/backup \
-  alpine tar xzf /backup/openclaw-backup-20260210.tar.gz -C /
-```
-
-### 监控和日志
-
-**查看日志**：
-```bash
-# 本地安装
+# Xem trực tiếp log hệ thống
 tail -f ~/.openclaw/logs/gateway.log
 
-# Docker
-docker logs -f openclaw
-```
-
-**监控指标**：
-```bash
-# 查看系统状态
+# Kiểm tra trạng thái sức khỏe của Gateway
 openclaw gateway status
 
-# 查看资源使用
-openclaw stats
-
-# 查看 API 消耗和额度
+# Kiểm tra mức độ tiêu thụ Token API
 openclaw status --usage
 ```
 
-### 故障排查
-
-**常见访问题**：
-
-1. **Gateway 无法启动**
-   ```bash
-   # 查看日志
-   openclaw logs
-   
-   # 检查端口占用
-   lsof -i :18789
-   
-   # 重启 Gateway
-   openclaw gateway restart
-   ```
-
-2. **API 连接失败**
-   ```bash
-   # 测试 API 连接
-   openclaw test api
-   
-   # 检查 API Key
-   openclaw config get models.providers
-   ```
-
-3. **性能访问题**
-   ```bash
-   # 清理缓存
-   openclaw cache clear
-   
-   # 重启服务
-   openclaw gateway restart
-   ```
-
-### 卸载
-
-**本地安装卸载**：
-```bash
-# 停止服务
-openclaw gateway stop
-
-# 删除文件
-rm -rf ~/.openclaw
-rm -rf ~/openclaw
-
-# 删除命令
-npm uninstall -g openclaw
-```
-
-**Docker 卸载**：
-```bash
-# 停止并删除内容器
-docker stop openclaw
-docker rm openclaw
-
-# 删除镜像
-docker rmi openclaw/openclaw
-
-# 删除数据
-rm -rf ~/.openclaw
-```
 ---
 
-## API配置指南
+## Hướng dẫn cấu hình API
 
-> OpenClaw需要连接AI模型才能工作，推荐使用**国产大模型**，性价比高。
+> OpenClaw cần kết nối với mô hình AI để hoạt động. Chúng tôi khuyến nghị kết hợp giữa các mô hình hiệu năng cao (Claude, GPT) và các mô hình giá rẻ (DeepSeek, Kimi, Qwen) để đạt hiệu quả tối ưu nhất.
 
-### 为什么需要API？
+### Vì sao cần cấu hình API?
 
-OpenClaw本身不包含AI模型，需要连接第三方API：
-- 官方API：价格贵、国内访问困难
-- 第三方API：价格便宜、国内直连
+Bản thân OpenClaw là một Cổng kết nối Gateway và khung điều phối Agent, không chứa sẵn trọng số mô hình:
+- API chính thức quốc tế (OpenAI, Anthropic): Năng lực suy luận và lập trình đỉnh cao
+- API giá rẻ (DeepSeek, Qwen, Moonshot Kimi): Chi phí cực thấp, kết nối trực tiếp mượt mà
 
-### API模型分类
+### Phân loại cấu hình mô hình API
 
-OpenClaw支持两种类型的API模型配置：
+OpenClaw hỗ trợ hai phương thức cấu hình mô hình:
 
-#### 1. 内置 API 模型（推荐新手）
+#### 1. Mô hình API tích hợp sẵn (Khuyên dùng cho người mới)
 
-**什么是内置API模型？**
+Hệ thống đã định nghĩa sẵn các tham số kỹ thuật cho các mô hình thông dụng. Bạn chỉ cần:
+- ✅ Lấy khóa xác thực (API Key) từ nhà cung cấp
+- ✅ Chạy trình hướng dẫn `openclaw onboard` và chọn nhà cung cấp tương ứng
+- ✅ Dán API Key vào là sử dụng được ngay
 
-OpenClaw已经预先配置好了多个主流AI模型的连接方式，你只需要：
-- ✅ 获取API Key
-- ✅ 在配置向导中选择对应模型
-- ✅ 粘贴API Key即可使用
+![Danh sách mô hình API tích hợp sẵn](https://upload.maynor1024.live/file/1770957195044__null_)
 
-**支持的内置模型**：
+**Mô hình quốc tế tiêu biểu**:
+- 🤖 **Anthropic (Claude 3.5 Sonnet / 4.6)**: Năng lực lập trình và suy luận logic cho Agent xuất sắc nhất
+- 🧠 **OpenAI (GPT-4o / GPT-5)**: Năng lực toàn diện, ổn định
+- 🔷 **Google (Gemini 2.0 / 3 Pro)**: Ngữ cảnh siêu dài, xử lý đa phương thức tốt
 
-OpenClaw内置支持非常多的API模型，包括但不限于：
+**Mô hình tối ưu chi phí (Khuyên dùng)**:
+- 🚀 **DeepSeek (V3 / R1)**: Vua hiệu năng trên giá thành, khả năng lập trình vượt trội
+- 🌙 **Moonshot AI (Kimi)**: Chuyên gia xử lý tài liệu dài, ngữ cảnh 2 triệu từ
+- 🎯 **Zhipu GLM**: Hiểu tiếng Việt và ngữ cảnh văn hóa Châu Á tốt
+- 📚 **Qwen (Alibaba)**: Mã nguồn mở mạnh mẽ, đa dạng kích thước mô hình
 
-![内置API模型列表](https://upload.maynor1024.live/file/1770957195044__null_)
+#### 2. Mô hình API tùy biến (Dành cho người dùng nâng cao)
 
-**国内模型**（推荐）：
-- 🌙 **Moonshot AI (Kimi)**：长文本专家，200万字上下文
-- 🧠 **DeepSeek**：性价比之王，推理能力强
-- 🎯 **智谱GLM**：中文理解好，多模态支持
-- 🚀 **通义千访问 (Qwen)**：阿里出品，稳定可靠
-- 🎨 **MiniMax**：对话自然，创意能力强
-- 📚 **百度文心**：中文语料丰富
-- 🔥 **字节豆包**：性价比高
+Phương thức này dành cho các trường hợp:
+- Dùng các mô hình mới ra mắt chưa có sẵn trong danh mục của OpenClaw
+- Kết nối tới cụm máy chủ AI nội bộ doanh nghiệp (vLLM, Ollama, TGI)
+- Sử dụng các cổng trung gian ủy quyền (API Proxy, OpenRouter, OneAPI)
 
-**国外模型**：
-- 🤖 **OpenAI (GPT-4/GPT-3.5)**：最强大但价格贵
-- 🦙 **Anthropic (Claude)**：推理能力强，安全性高
-- 🔷 **Google (Gemini)**：多模态能力强
-- 🌐 **Groq**：推理速度快
+Bảng 2-7 so sánh chi tiết giữa hai phương thức cấu hình.
 
-**优势**：
-- ✅ 配置简单，无需手动编写配置文件
-- ✅ 参数已优化，开箱即用
-- ✅ 自动更新，跟随OpenClaw版本
-- ✅ 适合新手，降低使用门槛
+**Bảng 2-7 So sánh giữa hai phương thức cấu hình API**
 
-**使用场景**：
-- 🎯 新手用户快速上手
-- 🎯 使用主流大模型
-- 🎯 不想折腾配置文件
-
-#### 2. 自定义 API（进阶用户）
-
-**什么是自定义API？**
-
-如果你想使用：
-- 🔧 OpenClaw未内置的模型
-- 🔧 自己搭建的模型服务
-- 🔧 第三方API代理服务
-- 🔧 企业内部的模型接口
-
-就需要使用自定义API配置。
-
-**配置方式**：
-
-需要手动编辑配置文件 `~/.openclaw/openclaw.json`，指定：
-- `baseUrl`：API服务地址
-- `apiKey`：认证密钥
-- `api`：API协议类型（如 `openai-chat`、`anthropic-messages`）
-- `models`：模型列表和参数
-
-**优势**：
-- ✅ 灵活性高，支持任何兼内容的API
-- ✅ 可以使用小众模型
-- ✅ 可以自定义模型参数
-- ✅ 适合企业定制化需求
-
-**劣势**：
-- ⚠️ 配置复杂，需要了解JSON格式
-- ⚠️ 需要手动维护配置
-- ⚠️ 参数错误可能导致无法使用
-
-**使用场景**：
-- 🎯 进阶用户
-- 🎯 使用非主流模型
-- 🎯 企业内部部署
-- 🎯 需要精细控制参数
-
-### 配置方式对比
-
-两种配置方式的对比如表 2-6 所示。
-
-**表 2-6 API 配置方式对比**
-
-| 特性 | 内置API模型 | 自定义API |
+| Đặc tính | Mô hình tích hợp sẵn | Mô hình tùy biến |
 |------|------------|-----------|
-| 配置难度 | ⭐ 简单 | ⭐⭐⭐⭐ 复杂 |
-| 适用人群 | 新手 | 进阶用户 |
-| 模型选择 | 主流模型 | 任意模型 |
-| 配置方式 | 向导选择 | 手动编辑 |
-| 维护成本 | 低 | 高 |
-| 灵活性 | 中 | 高 |
+| Độ phức tạp | ⭐ Rất đơn giản | ⭐⭐⭐ Cần chỉnh sửa tệp JSON |
+| Đối tượng phù hợp | Người mới bắt đầu | Lập trình viên, doanh nghiệp |
+| Phạm vi mô hình | Các mô hình phổ biến | Bất kỳ mô hình nào hỗ trợ chuẩn OpenAI |
+| Phương thức thiết lập | Chọn qua trình hướng dẫn CLI | Chỉnh sửa tệp `openclaw.json` |
+| Chi phí bảo trì | Rất thấp, tự cập nhật | Cần tự quản lý URL và endpoint |
 
-### 推荐配置路径
-
-**新手推荐**：
-```
-1. 使用内置API模型
-2. 选择国产模型（如 Kimi、DeepSeek）
-3. 通过 openclaw onboard 向导配置
-4. 先体验，熟悉后再考虑自定义
-```
-
-**进阶用户**：
-```
-1. 先用内置API模型熟悉OpenClaw
-2. 了解配置文件结构
-3. 根据需求添加自定义API
-4. 测试验证后投入使用
-```
 ---
 
-### 自定义API配置（进阶用户）
+### Hướng dẫn cấu hình API tùy biến (Chỉnh sửa tệp JSON)
 
-> ⚠️ **适合人群**：进阶用户、需要使用非主流模型、企业定制化需求
-
-#### 什么时候需要自定义API？
-
-如果你遇到以下情况，需要使用自定义API配置：
-
-1. **使用非内置模型**：
-   - OpenClaw未内置的小众模型
-   - 新发布布的模型（OpenClaw还未更新）
-   - 区域限定的模型
-
-2. **使用第三方代理**：
-   - API代理服务（如 OpenRouter、API2D）
-   - 企业内部的API网关
-   - 自建的模型服务
-
-3. **精细控制参数**：
-   - 自定义模型参数
-   - 调整上下文窗口大小
-   - 修改默认配置
-
-#### 配置文件位置
-
-> 📖 **详细说明**: 完整的配置文件结构和使用指南请参考 [配置文件结构完整指南](../config-file-structure.md)
+Tệp cấu hình lưu trữ tại: `~/.openclaw/openclaw.json`
 
 ```bash
-# 配置文件路径
-~/.openclaw/openclaw.json
-
-# 编辑配置文件
+# Mở tệp cấu hình bằng nano hoặc VS Code
 nano ~/.openclaw/openclaw.json
 ```
 
-#### 配置文件结构
-
-```json
-{
-  "models": {
-    "mode": "merge",
-    "providers": {
-      "你的供应商名称": {
-        "baseUrl": "API服务地址",
-        "apiKey": "你的API 密钥",
-        "auth": "认证方式",
-        "api": "API协议类型",
-        "models": [
-          {
-            "id": "模型ID",
-            "name": "模型显示名称",
-            "contextWindow": 上下文窗口大小,
-            "maxTokens": 最大输出tokens
-          }
-        ]
-      }
-    }
-  },
-  "agents": {
-    "defaults": {
-      "model": {
-        "primary": "供应商名称/模型ID"
-      }
-    }
-  }
-}
-```
-
-#### 示例1：配置DeepSeek（自定义方式）
+#### Cấu trúc tệp cấu hình mẫu:
 
 ```json
 {
@@ -2527,19 +1676,13 @@ nano ~/.openclaw/openclaw.json
     "providers": {
       "deepseek": {
         "baseUrl": "https://api.deepseek.com",
-        "apiKey": "sk-你的API 密钥",
+        "apiKey": "sk-your-api-key-here",
         "auth": "api-key",
         "api": "openai-chat",
         "models": [
           {
             "id": "deepseek-chat",
             "name": "DeepSeek Chat",
-            "contextWindow": 64000,
-            "maxTokens": 4096
-          },
-          {
-            "id": "deepseek-coder",
-            "name": "DeepSeek Coder",
             "contextWindow": 64000,
             "maxTokens": 4096
           }
@@ -2557,50 +1700,7 @@ nano ~/.openclaw/openclaw.json
 }
 ```
 
-#### 示例2：配置第三方API代理
-
-如果你使用API代理服务（如OpenRouter），配置如下：
-
-```json
-{
-  "models": {
-    "mode": "merge",
-    "providers": {
-      "openrouter": {
-        "baseUrl": "https://openrouter.ai/api/v1",
-        "apiKey": "sk-or-v1-你的密钥",
-        "auth": "api-key",
-        "api": "openai-chat",
-        "models": [
-          {
-            "id": "anthropic/claude-3.5-sonnet",
-            "name": "Claude 3.5 Sonnet",
-            "contextWindow": 200000,
-            "maxTokens": 8192
-          },
-          {
-            "id": "openai/gpt-4",
-            "name": "GPT-4",
-            "contextWindow": 128000,
-            "maxTokens": 4096
-          }
-        ]
-      }
-    }
-  },
-  "agents": {
-    "defaults": {
-      "model": {
-        "primary": "openrouter/anthropic/claude-3.5-sonnet"
-      }
-    }
-  }
-}
-```
-
-#### 示例3：配置多个模型供应商
-
-你可以同时配置多个供应商，根据需要切换：
+#### Cấu hình nhiều nhà cung cấp kèm chuỗi dự phòng (Fallback):
 
 ```json
 {
@@ -2609,7 +1709,7 @@ nano ~/.openclaw/openclaw.json
     "providers": {
       "deepseek": {
         "baseUrl": "https://api.deepseek.com",
-        "apiKey": "sk-你的DeepSeek密钥",
+        "apiKey": "sk-xxx",
         "auth": "api-key",
         "api": "openai-chat",
         "models": [
@@ -2623,7 +1723,7 @@ nano ~/.openclaw/openclaw.json
       },
       "moonshot": {
         "baseUrl": "https://api.moonshot.cn/v1",
-        "apiKey": "sk-你的Kimi密钥",
+        "apiKey": "sk-xxx",
         "auth": "api-key",
         "api": "openai-chat",
         "models": [
@@ -2641,537 +1741,196 @@ nano ~/.openclaw/openclaw.json
     "defaults": {
       "model": {
         "primary": "deepseek/deepseek-chat",
-        "fallback": "moonshot/moonshot-v1-128k"
+        "fallbacks": ["moonshot/moonshot-v1-128k"]
       }
     }
   }
 }
 ```
 
-#### 配置参数说明
+#### Giải thích các tham số cấu hình:
 
-| 参数 | 说明 | 示例 |
+| Tham số | Ý nghĩa | Ví dụ |
 |------|------|------|
-| `baseUrl` | API服务地址 | `https://api.deepseek.com` |
-| `apiKey` | API 密钥 | `sk-xxx` |
-| `auth` | 认证方式 | `api-key` 或 `bearer` |
-| `api` | API协议 | `openai-chat`、`anthropic-messages` |
-| `id` | 模型ID | `deepseek-chat` |
-| `name` | 显示名称 | `DeepSeek Chat` |
-| `contextWindow` | 上下文窗口 | `64000` |
-| `maxTokens` | 最大输出 | `4096` |
+| `baseUrl` | Địa chỉ endpoint dịch vụ API | `https://api.deepseek.com` |
+| `apiKey` | Khóa xác thực bí mật | `sk-xxx` |
+| `auth` | Phương thức xác thực | `api-key` hoặc `bearer` |
+| `api` | Chuẩn giao thức API | `openai-chat`, `anthropic-messages` |
+| `id` | Mã định danh mô hình | `deepseek-chat` |
+| `name` | Tên hiển thị trên giao diện | `DeepSeek Chat` |
+| `contextWindow` | Kích thước cửa sổ ngữ cảnh | `64000` |
+| `maxTokens` | Lượng token xuất tối đa | `4096` |
 
-#### 常见API协议类型
-
-- `openai-chat`：OpenAI兼内容接口（最常用）
-- `anthropic-messages`：Anthropic Claude接口
-- `google-generative-ai`：Google Gemini接口
-- `azure-openai`：Azure OpenAI接口
-
-#### 配置后重启服务
+Sau khi sửa tệp cấu hình, hãy khởi động lại Gateway:
 
 ```bash
-# 方式1：重启Gateway
 openclaw gateway restart
-
-# 方式2：停止后重新启动
-systemctl --user stop openclaw-gateway.service
-systemctl --user start openclaw-gateway.service
-
-# 方式3：完全重启
-systemctl --user restart openclaw-gateway.service
 ```
 
-#### 验证配置
+Kiểm tra danh sách mô hình và kết nối:
 
 ```bash
-# 查看当前配置的模型
+# Xem các mô hình hiện có
 openclaw models list
 
-# 测试模型连接
+# Thử nghiệm kết nối
 openclaw models test deepseek/deepseek-chat
 ```
 
-#### 常见访问题
-
-**Q1：配置后无法连接？**
-```
-检查项：
-✅ baseUrl是否正确
-✅ apiKey是否有效
-✅ 网络是否能访问API地址
-✅ 配置文件JSON格式是否正确
-```
-
-**Q2：如何切换模型？**
-```bash
-# 临时切换
-openclaw agent --message --model deepseek/deepseek-chat
-
-# 永久切换：修改配置文件中的 primary 字段
-```
-
-**Q3：如何添加多个模型？**
-```
-在 models 数组中添加多个模型对象即可
-每个模型需要有唯一的 id
-```
 ---
 
-### 内置API模型配置（推荐新手）
+### Hướng dẫn chi tiết thiết lập các mô hình giá rẻ phổ biến
 
-> 💡 **适合人群**：新手用户、想要快速上手的用户
+#### 1. Thiết lập DeepSeek (Vua hiệu năng trên giá thành)
 
-以下是几个常用的内置API模型配置教程，选择一个你喜欢的即可。
+**Đặc điểm nổi bật**:
+- 💰 **Chi phí siêu rẻ**: Chỉ khoảng 3.500 VNĐ cho mỗi triệu tokens đầu vào
+- 🧠 **Tư duy lập trình xuất sắc**: Rất mạnh trong viết mã và xử lý tác vụ suy luận
+- 🚀 **Khả năng suy luận R1**: Hỗ trợ chuỗi suy nghĩ chuyên sâu
 
-#### 1. Kimi 2.5 配置（推荐）
+**Các bước đăng ký & nạp tiền**:
+1. Truy cập: https://platform.deepseek.com/
+2. Đăng ký tài khoản và nạp tiền (nạp tối thiểu ~35.000 - 70.000 VNĐ để kích hoạt số dư khả dụng)
+3. DeepSeek tính phí theo lượng sử dụng thực tế (Pay-as-you-go), số dư tài khoản bắt buộc phải lớn hơn 0 để gọi được API
 
-**特点**：
-- 📚 **超长上下文**：支持200万字
-- 📄 **长文档处理**：论文、报告分析专家
-- 🎯 **中文理解好**：适合中文场景
-- 💰 **套餐划算**：重度使用建议购买套餐
+![Nền tảng DeepSeek](https://upload.maynor1024.live/file/1770957195044__null_)
+![Nạp tiền tài khoản](https://my.feishu.cn/space/api/box/stream/download/asynccode/?code=OWU5ZGEzMDE0Y2YyNDhhOTYwZjliNWY0OTM1YjgzMmVfa0dlYzNvMzFvUDVuY0J3cWZ6b3VDUkNLRHpKbmhHSURfVG9rZW46UmZuamJDV29vb0Q2bXl4VHUwcWNxYWFRbnZ1XzE3NzA5NTcxNjg6MTc3MDk2MDc2OF9WNA)
+![Giao diện nạp tiền DeepSeek](https://upload.maynor1024.live/file/1770961892504__null_-20260213135123663._null_)
 
-**配置步骤**：
+4. Vào mục **API Keys** → Nhấp "Create API Key"
+5. Đặt tên gợi nhớ và sao chép khóa API an toàn (khóa chỉ hiển thị một lần duy nhất khi tạo)
 
-**第一步：访问Kimi Code平台**
+![Tạo khóa API DeepSeek](https://upload.maynor1024.live/file/1770957195220__null_-20260213123309627._null_)
+![Giao diện tạo khóa API](https://upload.maynor1024.live/file/1770961848240_1770957195220__null_-20260213123309627._null_)
+![Lưu trữ khóa API](https://upload.maynor1024.live/file/1770957204667__null_-20260213123316852._null_)
 
-访问：https://www.kimi.com/code
-
-![Kimi Code平台](https://upload.maynor1024.live/file/1770957261204__null_-20260213123415103._null_)
-
-**第二步：购买套餐（可选）**
-
-> 💡 **提示**：OpenClaw消耗token较大，建议购买套餐更划算。
-
-推荐套餐：
-- **Allegretto套餐**：适合日常使用
-- 按需选择其他套餐
-
-![购买套餐](https://my.feishu.cn/space/api/box/stream/download/asynccode/?code=Mzk3ODdjZjE0NDY3Y2NkMTU1ZDZmMzg4YTAwYTg3ZDdfV3haZXdRMEU5OENVN0RCTzBwbmp2U2M5dU1XSm9MMWdfVG9rZW46Q0dYQWJ5NzRVbzB4MWt4b09QRmNwckUybm1lXzE3NzA5NTcyMzY6MTc3MDk2MDgzNl9WNA)
-
-**第三步：创建API Key**
-
-1. 打开控制台
-2. 创建API Key
-3. 名称随便取
-
-![创建API Key](https://upload.maynor1024.live/file/1770957262024__null_-20260213123418045._null_)
-
-**第四步：保存API Key**
-
-⚠️ **重要**：这个API Key一定要复制并保存！点击"完成"后就无法再查看了。
-
-![保存API Key](https://upload.maynor1024.live/file/1770957271422__null_-20260213123420103._null_)
-
-**第五步：配置到OpenClaw**
-
+Chạy cấu hình tự động:
 ```bash
-# 运行配置向导
 openclaw onboard
-
-# 配置流程：
-# 1. 选择 QuickStart
-# 2. 选择模型供应商：Moonshot AI
-# 3. 粘贴刚才复制的API Key
-# 4. 选择默认模型：kimi-code/kimi-for-codi
-# 5. 完成其他配置
+# Chọn QuickStart -> Chọn DeepSeek -> Dán API Key -> Hoàn tất
 ```
 
-**成本估算**：
-- 轻度使用：10-20元/月
-- 中度使用：30-50元/月
-- 重度使用：建议购买套餐
+#### 2. Thiết lập Kimi / Moonshot AI (Chuyên gia ngữ cảnh siêu dài)
 
----
+1. Truy cập: https://platform.moonshot.cn/
+2. Đăng ký tài khoản và vào mục API Keys
+3. Tạo và sao chép khóa API
 
-#### 2. DeepSeek 配置（性价比之王）
+![Nền tảng Kimi](https://upload.maynor1024.live/file/1770957261204__null_-20260213123415103._null_)
+![Gói ưu đãi Kimi](https://my.feishu.cn/space/api/box/stream/download/asynccode/?code=Mzk3ODdjZjE0NDY3Y2NkMTU1ZDZmMzg4YTAwYTg3ZDdfV3haZXdRMEU5OENVN0RCTzBwbmp2U2M5dU1XSm9MMWdfVG9rZW46Q0dYQWJ5NzRVbzB4MWt4b09QRmNwckUybm1lXzE3NzA5NTcyMzY6MTc3MDk2MDgzNl9WNA)
+![Gói cước Allegretto Kimi](https://upload.maynor1024.live/file/1770961947439__null_-20260213135221938._null_)
+![Tạo API Key Kimi](https://upload.maynor1024.live/file/1770957262024__null_-20260213123418045._null_)
+![Lưu API Key Kimi](https://upload.maynor1024.live/file/1770957271422__null_-20260213123420103._null_)
 
-**特点**：
-- 💰 **最便宜**：输入0.001元/千tokens
-- 🧠 **推理能力强**：适合复杂任务
-- 💻 **编程能力出色**：代码生成质量高
+#### Bảng so sánh chi phí các mô hình
 
-**配置步骤**：
-
-**第一步：注册并充值**
-
-访问：https://platform.deepseek.com/
-
-> ⚠️ **注意**：DeepSeek采用按量付费，账户余额必须大于0才能调用API。
-
-![DeepSeek平台](https://upload.maynor1024.live/file/1770957195044__null_)
-
-**第二步：充值账户**
-
-建议先充值10元试用：
-
-![充值账户](https://my.feishu.cn/space/api/box/stream/download/asynccode/?code=OWU5ZGEzMDE0Y2YyNDhhOTYwZjliNWY0OTM1YjgzMmVfa0dlYzNvMzFvUDVuY0J3cWZ6b3VDUkNLRHpKbmhHSURfVG9rZW46UmZuamJDV29vb0Q2bXl4VHUwcWNxYWFRbnZ1XzE3NzA5NTcxNjg6MTc3MDk2MDc2OF9WNA)
-
-**第三步：创建API Key**
-
-1. 保证账号有余额
-2. 点击"API keys"
-3. 点击"创建API key"
-
-![创建API Key](https://upload.maynor1024.live/file/1770957195220__null_-20260213123309627._null_)
-
-**第四步：保存API Key**
-
-⚠️ **重要**：API Key只显示一次，务必复制保存！
-
-名称随便取，复制API Key后妥善保存。
-
-![保存API Key](https://upload.maynor1024.live/file/1770957204667__null_-20260213123316852._null_)
-
-**第五步：配置到OpenClaw**
-
-```bash
-# 运行配置向导
-openclaw onboard
-
-# 配置流程：
-# 1. 选择 QuickStart
-# 2. 选择模型供应商：DeepSeek
-# 3. 粘贴API Key
-# 4. 选择默认模型：deepseek-chat
-# 5. 完成其他配置
-```
-
-**成本估算**：
-- 日常使用：5-10元/月
-- 中度使用：10-30元/月
-- 重度使用：30-50元/月
-
----
-
-### 国产大模型配置（其他选项）
-
-#### 1. DeepSeek配置（性价比之王）
-
-**特点**：
-- 💰 **最便宜**：输入0.001元/千tokens
-- 🧠 **推理能力强**：适合复杂任务
-- 💻 **编程能力出色**：代码生成质量高
-
-
-
- DeepSeek 的 API 调用是**按量付费**的，你的账户余额必须大于 0 才能正常调用接口。
-
- 如果账户没钱或余额不足，API 请求会直接失败，所以提前充值是保证服务可用的必要操作。
-
- 其他大模型也是同理，你要去找到对应网址去充值，然后获取API keys
-
-![img](https://upload.maynor1024.live/file/1770957195044__null_)
-
- 如果你只想先尝，可以就先花个10块钱玩一下
-
-![img](https://upload.maynor1024.live/file/1770961892504__null_-20260213135123663._null_)
-
- 保证账号有余额之后，点击”API keys“，然后点”创建 API key“
-
-![img](https://upload.maynor1024.live/file/1770961848240_1770957195220__null_-20260213123309627._null_)
-
- API key的名称：随便取。然后这个APIkey一定！一定！要复制下来，因为一般你点完”关闭“之后，你就再也无法查看你的API key了，如果你我忘记了你的API key，那只能重新创建一个了。
-
- 复制完后，找地方先存起来，后续在”第四步：OpenClaw 配置“的时候会用到
-
-![img](https://upload.maynor1024.live/file/1770957204667__null_-20260213123316852._null_)
-
-好，至此”第二步：配置模型“完成，进入”第三步：配置Bot“吧
-
-**配置步骤**：
-
-1. **注册账号**：
-   ```
-   访问：https://platform.deepseek.com/
-   注册并登录
-   ```
-
-2. **获取API Key**：
-   
-   ```
-   进入"API管理"
-   点击"创建API Key"
-   复制API Key（格式：sk-xxx）
-   ```
-   
-3. **配置到OpenClaw**：
-   ```bash
-   # 编辑配置文件
-   nano ~/.openclaw/openclaw.json
-   ```
-
-   添加配置：
-   ```json
-   {
-     "models": {
-       "mode": "merge",
-       "providers": {
-         "deepseek": {
-           "baseUrl": "https://api.deepseek.com",
-           "apiKey": "sk-你的API 密钥",
-           "auth": "api-key",
-           "api": "openai-chat",
-           "models": [
-             {
-               "id": "deepseek-chat",
-               "name": "DeepSeek Chat",
-               "contextWindow": 64000,
-               "maxTokens": 4096
-             }
-           ]
-         }
-       }
-     },
-     "agents": {
-       "defaults": {
-         "model": {
-           "primary": "deepseek/deepseek-chat"
-         }
-       }
-     }
-   }
-   ```
-
-4. **重启Gateway**：
-   ```bash
-   openclaw gateway restart
-   ```
-
-**成本估算**：
-- 日常使用：5-10元/月
-- 中度使用：10-30元/月
-- 重度使用：30-50元/月
-
-#### 2. Kimi配置（长文本专家）
-
-**特点**：
-- 📚 **超长上下文**：支持200万字
-- 📄 **长文档处理**：论文、报告分析专家
-- 🎯 **中文理解好**：适合中文场景
-
- 那如何使用，第一步，搜索 kimi code：https://www.kimi.com/code
-
-![img](https://upload.maynor1024.live/file/1770957261204__null_-20260213123415103._null_)
-
- 第二步，购买优惠套餐 plan，说实话，目前 OpenClaw 消耗 token 还挺大的，最好买个套餐划算一些，我买的是 Allegretto 套餐。
-
-![img](https://upload.maynor1024.live/file/1770961947439__null_-20260213135221938._null_)
-
- 第二步，打开控制台，创建 API key。名字随便取。
-
-![img](https://upload.maynor1024.live/file/1770957262024__null_-20260213123418045._null_)
-
- 这个APIkey一定！一定！要复制下来，因为一般你点完”完成“之后，你就再也无法查看你的API key了，如果你忘记了你的API key，那就只能重新创建一个了。复制完后，找地方先存起来，后续在”第四步：OpenClaw 配置“的时候会用到
-
-![img](https://upload.maynor1024.live/file/1770957271422__null_-20260213123420103._null_)
-
-**配置步骤**：
-
-1. **注册账号**：
-   ```
-   访问：https://platform.moonshot.cn/
-   注册并登录
-   ```
-
-2. **获取API Key**：
-   ```
-   进入"API管理"
-   点击"创建API Key"
-   复制API Key
-   ```
-
-3. **配置到OpenClaw**：
-   ```json
-   {
-     "models": {
-       "mode": "merge",
-       "providers": {
-         "moonshot": {
-           "baseUrl": "https://api.moonshot.cn/v1",
-           "apiKey": "sk-你的API 密钥",
-           "auth": "api-key",
-           "api": "openai-chat",
-           "models": [
-             {
-               "id": "moonshot-v1-8k",
-               "name": "Kimi k2.5",
-               "contextWindow": 8000,
-               "maxTokens": 4096
-             }
-           ]
-         }
-       }
-     },
-     "agents": {
-       "defaults": {
-         "model": {
-           "primary": "moonshot/moonshot-v1-8k"
-         }
-       }
-     }
-   }
-   ```
-
-**成本估算**：
-- 日常使用：10-20元/月
-- 中度使用：20-50元/月
-- 重度使用：50-100元/月
-
-#### 3. 其他国产大模型
-
-| 模型 | 特点 | 价格 | 官网 |
-|------|------|------|------|
-| GLM-4 | 多模态能力强 | 中等 | https://open.bigmodel.cn/ |
-| 文心一言 | 百度生态 | 中高 | https://cloud.baidu.com/ |
-| 通义千访问 | 阿里生态 | 中等 | https://dashscope.aliyun.com/ |
-
-### 国际模型配置（可选）
-
-如果需要使用Claude、GPT等国际模型：
-
-1. **直接使用官方API**（需要魔法）
-2. **使用第三方API服务**（国内直连）
-
-**推荐第三方API**：
-
-- 价格便宜50%-70%
-- 国内直连，无需魔法
-- 支持支付宝、微信支付
-
-### 成本对比
-
-| 模型 | 输入价格 | 输出价格 | 月费用估算 |
+| Mô hình | Giá đầu vào / 1M tokens | Giá đầu ra / 1M tokens | Ước tính chi phí hàng tháng |
 |------|----------|----------|-----------|
-| DeepSeek | 0.001元/千tokens | 0.002元/千tokens | 5-30元 |
-| Kimi | 0.012元/千tokens | 0.012元/千tokens | 10-50元 |
-| GLM-4 | 0.005元/千tokens | 0.005元/千tokens | 10-40元 |
-| Claude（第三方） | 0.015元/千tokens | 0.075元/千tokens | 50-200元 |
-| GPT-4（第三方） | 0.03元/千tokens | 0.06元/千tokens | 100-300元 |
+| DeepSeek V3 | ~$0.14 (~3.500 VNĐ) | ~$0.28 (~7.000 VNĐ) | 18.000 - 80.000 VNĐ |
+| Kimi K2.5 | ~$0.60 (~15.000 VNĐ) | ~$3.00 (~75.000 VNĐ) | 35.000 - 150.000 VNĐ |
+| Claude 3.5 Haiku | ~$0.80 (~20.000 VNĐ) | ~$4.00 (~100.000 VNĐ) | 50.000 - 200.000 VNĐ |
+| Claude 3.5 Sonnet | ~$3.00 (~75.000 VNĐ) | ~$15.00 (~375.000 VNĐ) | 150.000 - 500.000 VNĐ |
 
-💡 **省钱技巧**：
-- 日常对话用DeepSeek（最便宜）
-- 长文档用Kimi（长上下文）
-- 复杂任务用Claude（质量最高）
+---
 
-## 常见访问题解决
+## Xử lý các sự cố thường gặp
 
-### 安装访问题
+### Sự cố khi cài đặt
 
-**Q1: Node.js版本不对**
+**Q1: Phiên bản Node.js không tương thích**
 
 ```bash
-# 检查版本
+# Kiểm tra phiên bản hiện tại
 node --version
 
-# 如果低于22，升级
-nvm install 22
-nvm use 22
+# Nâng cấp lên Node 24 hoặc Node 26
+nvm install 24
+nvm use 24
 ```
 
-**Q2: 权限错误**
+**Q2: Lỗi phân quyền ghi thư mục ~/.openclaw**
 ```bash
-# macOS/Linux
+# macOS/Linux: Chuyển quyền sở hữu thư mục cho người dùng hiện tại
 sudo chown -R $USER ~/.openclaw
-
-# Windows
-# 以管理员身份运行PowerShell
 ```
 
-**Q3: 网络连接失败**
-- 检查网络连接
-- 尝试使用代理
-- 或使用云端部署
+### Sự cố về API và mô hình
 
-### API配置访问题
+**Q1: Báo lỗi API Key không hợp lệ (Unauthorized / Invalid Key)**
+- Kiểm tra xem đã sao chép đủ tiền tố (ví dụ `sk-...`) chưa
+- Kiểm tra xem có khoảng trắng thừa ở đầu hoặc cuối chuỗi khóa không
+- Đảm bảo tài khoản nhà cung cấp còn số dư khả dụng
 
-**Q1: API Key无效**
-- 检查是否完整复制（包括sk-前缀）
-- 检查是否有多余空格
-- 检查账户余额是否充足
+**Q2: Token hao hụt quá nhanh**
+- Đổi mô hình chính sang DeepSeek Chat để tiết kiệm chi phí
+- Giảm độ dài câu lệnh hoặc dọn dẹp các phiên hội thoại cũ
 
-**Q2: 模型不可用**
-- 检查模型ID是否正确
-- 检查API服务是否正常
-- 尝试切换其他模型
+### Sự cố về dịch vụ Gateway
 
-**Q3: Token消耗太快**
-- 使用更便宜的模型（DeepSeek）
-- 优化提示词
-- 定期清理会话历史
-
-### Gateway访问题
-
-**Q1: Gateway无法启动**
+**Q1: Gateway không khởi động được**
 ```bash
-# 查看日志
+# Xem chi tiết nhật ký lỗi
 tail -f ~/.openclaw/logs/gateway.log
 
-# 重启Gateway
+# Khởi động lại Gateway
 openclaw gateway restart
 ```
 
-**Q2: 端口被占用**
+**Q2: Trùng cổng dịch vụ 18789**
 ```bash
-# 查看端口占用
+# Kiểm tra tiến trình nào đang chiếm cổng
 lsof -i :18789
 
-# 修改端口
+# Đổi sang cổng khác (ví dụ 18790)
 openclaw config set gateway.port 18790
+openclaw gateway restart
 ```
 
-## 2.X 版本升级指南
+---
 
-> 🔄 **保持最新**：OpenClaw 迭代很快，升级通常会带来安全修复、provider 兼容性修复、渠道稳定性改进和新模型目录。
+## Hướng dẫn nâng cấp phiên bản 2.X
 
-> ⚠️ **当前推荐版本**：截至 **2026-09-10**，本教程推荐使用 **OpenClaw 2026.9.3（稳定版）**。升级前先备份 `~/.openclaw`；升级后务必运行 `openclaw doctor --fix`、`openclaw update repair` 和状态检查。
+> 🔄 **Giữ hệ thống cập nhật**: OpenClaw được cập nhật liên tục với các bản vá bảo mật, tối ưu kết nối đa kênh và tích hợp mô hình mới nhất.
 
-### 推荐版本
+> ⚠️ **Phiên bản chuẩn**: Tính đến **10/09/2026**, giáo trình khuyến nghị **OpenClaw v2026.9.3 (Bản ổn định)**. Trước khi nâng cấp, hãy sao lưu thư mục `~/.openclaw`. Sau khi nâng cấp, bắt buộc chạy `openclaw doctor --fix` và `openclaw update repair`.
 
-**当前推荐版本**：`2026.9.3`
-
-**版本确认命令**：
+### Lệnh kiểm tra phiên bản
 
 ```bash
 npm view openclaw version
 openclaw --version
 ```
 
-如果 `npm view openclaw version` 显示 `2026.9.3` 或更高版本，而你本机 `openclaw --version` 更低，就可以考虑升级。
-
-### 升级前必做
+### Những việc PHẢI LÀM trước khi nâng cấp
 
 ```bash
-# 1) 备份配置和本地状态
+# 1) Sao lưu dữ liệu cấu hình và trạng thái nội bộ
 cp -r ~/.openclaw ~/.openclaw.backup-$(date +%Y%m%d-%H%M%S)
 
-# 2) 记录当前版本
+# 2) Ghi lại phiên bản hiện tại
 openclaw --version > ~/openclaw-version-before-upgrade.txt
 
-# 3) 检查当前服务状态
+# 3) Kiểm tra trạng thái dịch vụ trước nâng cấp
 openclaw gateway status
 openclaw channels status
 ```
 
-> 不要跳过备份。OpenClaw 的配置、凭据引用、会话、插件状态都可能保存在 `~/.openclaw` 下。
+> ⚠️ Tuyệt đối không bỏ qua bước sao lưu. Toàn bộ cấu hình, hồ sơ xác thực và lịch sử trò chuyện đều nằm trong thư mục `~/.openclaw`.
 
-### 方式一：使用 `openclaw update`（推荐）
-
-`openclaw update` 是当前 CLI 的统一升级入口。全局 npm 安装会通过检测到的包管理器更新；source checkout 会走 git 更新、依赖安装、构建和 doctor 流程。
+### Cách 1: Sử dụng lệnh `openclaw update` (Khuyến nghị)
 
 ```bash
-# 预览升级动作，不真正写入
+# Chạy thử nghiệm để kiểm tra các bước nâng cấp (dry-run)
 openclaw update --tag 2026.9.3 --dry-run
 
-# 升级到教程推荐版本
+# Nâng cấp lên phiên bản khuyến nghị của giáo trình
 openclaw update --tag 2026.9.3 --yes
 
-# 如果你想直接跟随稳定频道
+# Hoặc theo dõi nhánh ổn định chính thức
 openclaw update --channel stable --yes
 ```
 
-升级完成后：
+Sau khi hoàn tất nâng cấp:
 
 ```bash
 openclaw update repair
@@ -3183,65 +1942,31 @@ openclaw channels status
 openclaw models status
 ```
 
-> 从 `2026.6.x` / `2026.7.x` / `2026.8.x` 跨大版本升级时，`doctor --fix` 会处理：OpenAI 路由迁移（`codex/*`、`openai-codex/*` → `openai/*`）、OpenProse 残留清理、会话 SQLite 相关修复、Workshop 技能归属迁移等。
+> **Lưu ý**: Khi nâng cấp từ các bản cũ `2026.6.x` / `2026.7.x` / `2026.8.x`, lệnh `doctor --fix` sẽ tự động xử lý chuyển đổi định tuyến OpenAI (`openai-codex/*` → `openai/*`), dọn dẹp tàn dư OpenProse, chuyển đổi lưu trữ SQLite cho hội thoại và cập nhật danh mục kỹ năng Workshop.
 
-### 方式二：npm 固定版本安装（兜底）
-
-如果 `openclaw update` 在你的环境里失败，或者你明确知道自己是 npm 全局安装，可以用固定版本覆盖安装。
+### Cách 2: Cài đặt cố định phiên bản qua npm (Phương án dự phòng)
 
 ```bash
-# 停止 Gateway
+# Dừng Gateway trước khi nâng cấp
 openclaw gateway stop
 
-# 安装推荐版本
+# Cài đặt cố định bản khuyến nghị
 npm install -g openclaw@2026.9.3 --allow-scripts=openclaw
 
-# 修复更新后的插件/配置收敛状态
+# Khắc phục và đồng bộ lại trạng thái
 openclaw update repair
 openclaw doctor --fix
 
-# 重启并验证
+# Khởi động lại và kiểm tra
 openclaw gateway restart
 openclaw --version
 openclaw gateway status
 openclaw channels status
 ```
 
-如果你不想固定版本，也可以使用：
+### Danh sách kiểm tra sau khi nâng cấp
 
-```bash
-npm install -g openclaw@latest --allow-scripts=openclaw
-```
-
-### 方式三：官方安装脚本
-
-如果你是首次安装，或希望安装器自动处理 Node、路径和 onboarding，可以继续使用官方脚本：
-
-```bash
-curl -fsSL https://openclaw.ai/install.sh | bash
-```
-
-如果只想安装 CLI、不立即跑 onboarding：
-
-```bash
-curl -fsSL https://openclaw.ai/install.sh | bash -s -- --no-onboard
-```
-
-### 方式四：Docker / 云端部署
-
-Docker 部署通常按镜像更新：
-
-```bash
-docker compose down
-docker compose pull
-docker compose up -d
-
-docker compose logs -f
-```
-
-云端一键镜像、面板插件或第三方托管版本，需要进入对应控制台查看镜像版本。不要只看网页 UI 是否能打开，一定要确认后端 OpenClaw 版本。
-
-### 升级后验证清单
+Chạy bộ lệnh kiểm tra toàn diện sau:
 
 ```bash
 openclaw --version
@@ -3254,51 +1979,22 @@ openclaw models status --probe
 openclaw skills check
 ```
 
-跨大版本后若仍有旧路由/插件残留，再跑一次：
+Nếu hệ thống thỏa mãn các điều kiện sau thì quá trình nâng cấp đã hoàn tất thành công:
+- `openclaw --version` hiển thị đúng `2026.9.3`
+- `openclaw doctor` không còn cảnh báo lỗi nghiêm trọng
+- `openclaw gateway status` báo dịch vụ hoạt động bình thường
+- `openclaw channels status` hiển thị đầy đủ các kênh liên kết
+- `openclaw models status --probe` kết nối tốt tới các nhà cung cấp mô hình
+
+### Các sự cố thường gặp khi nâng cấp
+
+#### npm báo lỗi EEXIST
 
 ```bash
-openclaw doctor --fix
+npm install -g openclaw@2026.9.3 --allow-scripts=openclaw --force
 ```
 
-看到下面结果，才算升级基本完成：
-
-- `openclaw --version` 返回 `2026.9.3` 或你指定的新版本
-- `openclaw doctor` 没有阻塞级错误
-- `openclaw gateway status` 显示 Gateway 正常运行
-- `openclaw channels status` 能看到你需要的渠道状态
-- `openclaw models status --probe` 没有明显认证失败
-
-### 2026.9.3 升级后重点验证
-
-从旧基线跳到 `v2026.9.3`，优先确认这些主线变化（而不是只核对版本号）：
-
-- **Node 运行时**：需要 Node **24.16+** 或 **26.1+**（推荐 26）；升级 OpenClaw 前先升级 Node
-- **Doctor 迁移**：`openclaw doctor --fix`（OpenAI 路由、`OpenProse` 清理、会话/状态修复）
-- **会话存储**：`2026.8.1` 起会话/转录进入 SQLite——**不要在未备份时降级**
-- **Skills / Workshop**：优先 `openclaw skills …`；Workshop 技能按 Agent 持久化；旧 `clawhub install …` 仅作历史参考
-- **更新恢复**：`2026.9.x` 支持更新预演与更干净的失败恢复；可用 `openclaw update status` 查看报告
-
-建议升级后至少做这组 smoke test：
-
-```bash
-node -v
-openclaw --version
-openclaw doctor
-openclaw infer model run --prompt "Reply with exactly: smoke-ok" --json
-openclaw models status --probe
-openclaw gateway status
-openclaw channels status
-```
-
-### 常见升级问题
-
-#### npm 报 EEXIST
-
-```bash
-npm install -g openclaw@2026.9.3 --allow-scripts=openclaw
-```
-
-#### Gateway 启动失败
+#### Gateway không khởi động được sau khi cập nhật
 
 ```bash
 openclaw update repair
@@ -3307,85 +2003,65 @@ openclaw gateway restart
 tail -f ~/.openclaw/logs/gateway.log
 ```
 
-#### 配置由更高版本写入
-
-这通常说明你正在用旧 CLI 读取新配置。先升级 CLI，再运行 repair 和 doctor：
-
-```bash
-npm install -g openclaw@2026.9.3 --allow-scripts=openclaw
-openclaw update repair
-openclaw doctor --fix
-```
-
-#### 端口被占用
+#### Trùng cổng dịch vụ
 
 ```bash
 lsof -i :18789
 kill -9 <PID>
 
-# 或换端口
+# Hoặc chuyển sang cổng khác
 openclaw config set gateway.port 18790
 openclaw gateway restart
 ```
 
-### 回滚建议
+### Hướng dẫn khôi phục phiên bản cũ (Rollback)
 
-回滚可能导致新版本写入的配置无法被旧版本识别，所以只在确实无法恢复时使用。优先从备份恢复配置，再安装目标版本。
+Nếu phiên bản mới phát sinh lỗi không thể khắc phục ngay, bạn có thể hoàn nguyên về bản sao lưu:
 
 ```bash
 openclaw gateway stop
-cp -r ~/.openclaw.backup-YYYYMMDD-HHMMSS/* ~/.openclaw/
-npm install -g openclaw@<target-version> --force
+cp -r ~/.openclaw.backup-*/* ~/.openclaw/
+npm install -g openclaw@<phiên-bản-cũ> --force
 openclaw doctor
 openclaw gateway restart
 ```
 
-### 升级节奏建议
+---
 
-- 普通用户：每月检查一次 `npm view openclaw version`
-- 生产环境：先在测试机升级，跑完 smoke test 再动主环境
-- 安全修复或渠道故障修复：优先升级
-- 正在跑重要自动化时：先暂停任务、备份，再升级
+## Tổng kết chương
+
+Sau khi hoàn thành chương này, bạn đã:
+
+✅ Nắm rõ sự khác biệt giữa triển khai cục bộ và máy chủ đám mây  
+✅ Hoàn tất cài đặt OpenClaw trên hệ điều hành của bạn (Mac, Windows, Linux hoặc Cloud)  
+✅ Cấu hình thành công API của các mô hình AI chất lượng cao  
+✅ Xác minh kết nối thành công và nắm vững quy trình bảo trì, nâng cấp hệ thống  
+
+## Bài tập thực hành
+
+1. Hoàn tất cài đặt OpenClaw trên thiết bị của bạn
+2. Cấu hình ít nhất một nhà cung cấp API (khuyên dùng DeepSeek hoặc Claude)
+3. Gửi tin nhắn thử nghiệm đầu tiên để kiểm tra phản hồi
+4. Kiểm tra phiên bản hệ thống và trạng thái kết nối bằng `openclaw doctor`
 
 ---
 
-## 本章节小结
+**Chương tiếp theo**: [Chương 3: Bắt đầu nhanh](03-quick-start.md) - Bắt đầu làm việc với OpenClaw
 
-通过本章节，你应该已经：
-
-✅ 了解了云端部署和本地部署的区别  
-✅ 完成了OpenClaw的安装（云端或本地）  
-✅ 配置了API（推荐国产大模型）  
-✅ 验证了安装是否成功  
-✅ 学会了如何升级OpenClaw
-
-## 实战练习
-
-1. 完成OpenClaw安装（云端或本地）
-2. 配置至少一个API（推荐DeepSeek或Kimi）
-3. 发布送第一条测试消息
-4. 验证AI是否正常回复
-5. 检查当前版本，如有更新可尝试升级
+**Trở về mục lục**: [README](../../README.md)
 
 ---
 
-**下一章节**：[第3章节：快速上手](03-quick-start.md) - 开始使用 OpenClaw
+## 🌐 Đọc trực tuyến
 
-**返回目附录**：[README](../../README.md)
+📖 **Bạn muốn đọc chương này trên nền tảng web?**
 
+[🔗 Đọc trực tuyến: Chương 2 - Thiết lập môi trường](https://awesome.tryopenclaw.asia/docs/01-basics/02-installation/)
 
----
+Truy cập website để có trải nghiệm đọc tối ưu:
+- 📱 Giao diện tương thích cho điện thoại, máy tính bảng và máy tính
+- 🌙 Chế độ nền tối (Dark mode) dịu mắt
+- 🔍 Tìm kiếm nội dung nhanh chóng
+- 📋 Thanh điều hướng trực quan, dễ dàng chuyển đổi các chương
 
-## 🌐 在线阅读
-
-📖 **想在线阅读此章节节？**
-
-[🔗 在线阅读此章节节](https://awesome.tryopenclaw.asia/docs/01-basics/02-installation/)
-
-访问网站获取更好的阅读体验：
-- 📱 响应式设计，支持手机、平板、电脑
--  支持黑暗模式，保护眼睛
-- 🔍 内置搜索功能，快速定位内内容
-- 📋 目附录导航，轻松跳转章节节
-
-[🏠 访问完整教网站](https://awesome.tryopenclaw.asia)
+[🏠 Truy cập website giáo trình đầy đủ](https://awesome.tryopenclaw.asia)

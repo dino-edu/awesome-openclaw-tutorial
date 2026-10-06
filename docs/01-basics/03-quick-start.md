@@ -1,633 +1,586 @@
-> 📖 **纸质书《OpenClaw超级个体实操手册》已上市！** 清华大学出版社出版，在开源教程基础上全面重写+逐条验证。🛒 [京东专属购买链接（¥42，原价¥59.8）](https://item.jd.com/14669463.html)
+> 📖 **Giáo trình Awesome OpenClaw Tutorial** | Bản dịch tiếng Việt chính thức cho cộng đồng. Nguyên tác thuộc về tác giả [@xianyu110](https://github.com/xianyu110).
 
-# 第3章节：快速上手
+# Chương 3: Bắt đầu nhanh với OpenClaw
 
-> ⚠️ **当前基线**：OpenClaw **v2026.9.3**。首次配置优先 `openclaw onboard`；模型登录用 `openclaw models auth login --provider <provider>`（OpenAI 用 `openai`，不要再用 `openai-codex`）。升级后请跑 `openclaw doctor --fix`。
+> ⚠️ **Phiên bản chuẩn**: OpenClaw **v2026.9.3**. Khi cấu hình lần đầu, hãy ưu tiên dùng `openclaw onboard`; đăng nhập mô hình dùng lệnh `openclaw models auth login --provider <provider>` (với OpenAI hãy dùng `openai`, không dùng `openai-codex`). Sau khi nâng cấp, hãy chạy `openclaw doctor --fix`.
 
+> Chúc mừng bạn đã hoàn tất cài đặt! Bây giờ hãy bắt đầu sử dụng OpenClaw để trải nghiệm sức mạnh của trợ lý AI.
 
-> 恭喜你完成了安装！现在开始使用 OpenClaw，体验AI助手的魅力。
+## Điều hướng nhanh
 
-## 快速导航
+- 🎯 [Cuộc trò chuyện đầu tiên](#31-cuộc-trò-chuyện-đầu-tiên)
+- 📝 [Các lệnh cơ bản](#32-các-lệnh-cơ-bản)
+- 🎭 [Thiết lập nhân vật (Persona)](#33-thiết-lập-nhân-vật-persona)
+- 🤖 [Hướng dẫn chọn mô hình AI](#34-hướng-dẫn-chọn-mô-hình-ai)
+- 🌐 [Cấu hình Cổng kết nối Gateway (Nâng cao)](#35-cấu-hình-cổng-kết-nối-gateway-nâng-cao)
 
-- 🎯 [第一次对话](#第一次对话)
-- 📝 [基本命令使用](#基本命令使用)
-- 🎭 [人设配置技巧](#人设配置技巧)
-- 🤖 [模型选择指南](#模型选择指南)
-- 🌐 [Gateway 网关配置（进阶）](#gateway网关配置进阶)
+---
 
-## 3.1 第一次对话
+## 3.1 Cuộc trò chuyện đầu tiên
 
-### 启动OpenClaw
+### Khởi động OpenClaw
 
-根据你的部署方式，选择对应的启动方法：
+Tùy theo phương thức triển khai bạn đã chọn, hãy thực hiện theo cách tương ứng:
 
-#### 云端部署用户
+#### Người dùng triển khai trên đám mây
 
-1. **通过Web UI访问**：
+1. **Truy cập qua giao diện Web UI**:
    ```txt
-   http://你的服务器IP:18789/?token=你的token
+   http://IP_MÁY_CHỦ_CỦA_BẠN:18789/?token=token_của_bạn
    ```
-2. **通过IM平台访问**（推荐）：
-   - 打开QQ/企微/飞书/钉钉
-   - 找到你配置的Bot
-   - 直接发布消息
+2. **Truy cập qua ứng dụng nhắn tin (Khuyến nghị)**:
+   - Mở ứng dụng Lark / Feishu, WeCom, DingTalk hoặc Telegram
+   - Tìm Bot trợ lý bạn đã cấu hình
+   - Gửi tin nhắn trực tiếp
 
-#### 本地部署用户
+#### Người dùng triển khai cục bộ
 
-1. **检查Gateway状态**：
+1. **Kiểm tra trạng thái Gateway**:
    ```bash
    openclaw channels status
    ```
-2. **打开Web UI**：
+2. **Mở giao diện Web UI**:
    ```bash
    openclaw dashboard
    ```
-   或直接访问：
+   hoặc truy cập trực tiếp qua trình duyệt:
    ```txt
-   http://127.0.0.1:18789/?token=你的token
+   http://127.0.0.1:18789/?token=token_của_bạn
    ```
 
-### 发布送第一条消息
+### Gửi tin nhắn đầu tiên
 
-在Web UI或IM平台中，发布送：
+Trong giao diện Web UI hoặc ứng dụng chat, hãy gửi:
 
-你好，能听到我说话吗？
+```
+Xin chào, bạn có nghe rõ tôi nói không?
+```
 
-**预期回复**：
+**Phản hồi dự kiến**:
 
-OpenClaw会回复类似：
-你好！我能听到你说话。我是你的AI助手，可以帮你处理各种任务。
-有什么我可以帮你的吗？
+OpenClaw sẽ phản hồi tương tự như sau:
+```
+Xin chào bạn! Tôi nghe rất rõ. Tôi là trợ lý AI của bạn, sẵn sàng hỗ trợ bạn xử lý các tác vụ công việc và đời sống.
+Tôi có thể giúp gì cho bạn hôm nay?
+```
 
-**验证成功的标志**：
+**Dấu hiệu xác nhận thành công**:
 
-- ✅ 收到AI的回复
-- ✅ 右上角显示模型名称（Web UI）
-- ✅ 显示Token使用情况
+- ✅ Nhận được phản hồi mạch lạc từ AI
+- ✅ Góc trên bên phải hiển thị tên mô hình đang dùng (trên Web UI)
+- ✅ Hiển thị thống kê lượng Token sử dụng
 
-### 理解OpenClaw的回复
+### Hiểu về phản hồi của OpenClaw
 
-OpenClaw的回复包含几个部分：
+Phản hồi từ OpenClaw thường bao gồm các thành phần:
 
-1. **文本内内容**：AI的回答
-2. **工具调用**（如果有）：执行的操作
-3. **Token统计**：消耗的Token数量
+1. **Nội dung văn bản**: Câu trả lời hoặc giải thích của AI
+2. **Gọi công cụ (Tool Call - nếu có)**: Các hành động hệ thống được thực thi (đọc tệp, tìm kiếm, lưu trữ...)
+3. **Thống kê Token**: Lượng Token tiêu thụ cho đầu vào và đầu ra
 
-**示例**：
-\[AI回复]
-好的，我帮你搜索一下。
+**Ví dụ**:
+```
+[AI phản hồi]
+Vâng, tôi sẽ tìm kiếm ngay giúp bạn.
 
-\[工具调用]
-🔍 正在搜索文件...
-📁 找到3个相关文件
+[Gọi công cụ]
+🔍 Đang tìm kiếm tệp tin...
+📁 Đã tìm thấy 3 tệp tin liên quan
 
-\[Token统计]
-输入：120 tokens
-输出：45 tokens
+[Thống kê Token]
+Đầu vào: 120 tokens
+Đầu ra: 45 tokens
+```
 
-### 如何提出好访问题
+### Cách đặt câu hỏi hiệu quả
 
-**❌ 不好的访问题**：
-帮我
+**❌ Câu hỏi chưa tốt**:
+```
+Giúp tôi với
+```
 
-**✅ 好的访问题**：
-帮我找一下电脑上所有的PDF文件，按修改时间排序
+**✅ Câu hỏi tốt**:
+```
+Tìm giúp tôi tất cả các tệp PDF trên máy tính, sắp xếp theo thời gian sửa đổi gần nhất
+```
 
-**提访问技巧**：
+**Mẹo đặt câu hỏi**:
 
-1. **明确目标**：说清楚你想做什么
-2. **提供上下文**：给出必要的背景信息
-3. **具体细节**：说明具体要求
-4. **分步骤**：复杂任务可以分步骤说明
+1. **Mục tiêu rõ ràng**: Nói rõ chính xác bạn muốn làm gì
+2. **Cung cấp ngữ cảnh**: Đưa ra thông tin nền tảng cần thiết
+3. **Chi tiết cụ thể**: Nêu rõ yêu cầu về định dạng, vị trí, phạm vi
+4. **Chia theo từng bước**: Với tác vụ phức tạp, nên chia thành các bước nhỏ
 
-**示例对比**：
+**Bảng so sánh ví dụ**:
 
-| 不好的访问题 | 好的访问题                          |
+| Câu hỏi chưa tốt | Câu hỏi tốt |
 | ------ | ------------------------------ |
-| "找文件"  | "帮我找一下我电脑上的一张发布票，里面详情是买了一个跑步机" |
-| "整理"   | "把我下载文件夹里的所有图片，按日期分类到不同的文件夹"   |
-| "提醒我"  | "明天上午10点提醒我开会，地点是会议室A"         |
+| "Tìm tệp" | "Tìm giúp tôi một hóa đơn trên máy tính, chi tiết nội dung là mua máy chạy bộ" |
+| "Sắp xếp lại" | "Hãy phân loại toàn bộ ảnh trong thư mục Downloads vào các thư mục con theo từng ngày chụp" |
+| "Nhắc tôi" | "Nhắc tôi lúc 10h sáng mai có cuộc họp dự án tại phòng họp A" |
 
-## 3.2 基本命令使用
+---
 
-### 常用命令列表
+## 3.2 Các lệnh cơ bản
 
-OpenClaw支持自然语言命令，以下是一些常用的命令模式：
+### Danh sách lệnh thông dụng
 
-#### 文件操作命令
+OpenClaw hỗ trợ nhận diện câu lệnh bằng ngôn ngữ tự nhiên. Dưới đây là các mẫu lệnh phổ biến:
 
-**搜索文件**：
-帮我找一下包含"发布票"的文件
-搜索所有PDF文件
-找一下最近修改的10个文件
+#### Lệnh thao tác tệp tin
 
-**读取文件**：
-读取桌面上的README.md文件
-打开下载文件夹里的报告.docx
-查看这个文件的内内容：/path/to/file.txt
+**Tìm kiếm tệp**:
+```
+Tìm giúp tôi các tệp có chứa từ khóa "hóa đơn"
+Tìm tất cả các tệp PDF
+Tìm 10 tệp vừa được chỉnh sửa gần đây nhất
+```
 
-**创建文件**：
-在桌面创建一个名为"笔记.txt"的文件
-新建一个Markdown文件，内内容是...
+**Đọc nội dung tệp**:
+```
+Đọc tệp README.md ngoài màn hình Desktop
+Mở báo cáo.docx trong thư mục Downloads
+Xem nội dung của tệp: /path/to/file.txt
+```
 
-**移动/复制文件**：
+**Tạo tệp mới**:
+```
+Tạo một tệp có tên "ghi_chu.txt" trên Desktop
+Tạo một tệp Markdown mới với nội dung là...
+```
 
-把这个文件移动到文档文件夹
-复制所有图片到备份文件夹
+**Di chuyển / Sao chép tệp**:
+```
+Chuyển tệp này vào thư mục Documents
+Sao chép toàn bộ ảnh sang thư mục sao lưu backup
+```
 
-#### 系统操作命令
+#### Lệnh điều khiển hệ thống
 
-**查看系统信息**：
-查看当前时间
-显示系统信息
-检查磁盘空间
+**Xem thông tin hệ thống**:
+```
+Bây giờ là mấy giờ?
+Hiển thị thông số cấu hình hệ thống
+Kiểm tra dung lượng ổ đĩa còn trống
+```
 
-**打开应用**：
-打开微信
-启动浏览器
+**Mở ứng dụng**:
+```
+Mở ứng dụng WeChat / Telegram
+Khởi chạy trình duyệt web
+```
 
-**截图**：
-给我截个屏
-截取当前窗口
+**Chụp màn hình**:
+```
+Chụp màn hình giúp tôi
+Chụp lại cửa sổ ứng dụng đang hoạt động
+```
 
-#### 日历操作命令
+#### Lệnh quản lý lịch trình
 
-**创建日历事件**：
-明天下午3点提醒我开会
-下周一上午10点，会议室A，项目讨论
+**Tạo sự kiện lịch**:
+```
+Nhắc tôi họp lúc 3 giờ chiều mai
+10 giờ sáng thứ Hai tuần tới, họp thảo luận dự án tại phòng A
+```
 
-**查看日程**：
-今天有什么安排
-下周的日程
+**Xem lịch trình**:
+```
+Hôm nay tôi có những lịch trình gì?
+Lịch làm việc của tuần tới như thế nào?
+```
 
-#### 知识管理命令
+#### Lệnh quản lý tri thức
 
-**保存网页**：
-把这个网页保存到备忘附录：<https://example.com>
-总结这篇文章节并存到Notion
+**Lưu trữ trang web**:
+```
+Lưu trang web này vào ghi chú: https://example.com
+Tóm tắt bài viết này và lưu vào Notion
+```
 
-**管理笔记**：
-在备忘附录里创建一条笔记
-搜索备忘附录里关于"AI"的内内容
+**Quản lý ghi chú**:
+```
+Tạo một ghi chú mới trong ứng dụng Notes
+Tìm kiếm các ghi chú có chủ đề về "AI"
+```
 
-### 命令速查表
+### Bảng tra cứu lệnh nhanh
 
-| 功能   | 命令示例              |
+| Tính năng | Ví dụ câu lệnh |
 | ---- | ----------------- |
-| 搜索文件 | `找一下包含"发布票"的文件`   |
-| 读取文件 | `读取桌面上的README.md` |
-| 创建文件 | `在桌面创建一个笔记.txt`   |
-| 移动文件 | `把这个文件移动到文档文件夹`   |
-| 截图   | `给我截个屏`           |
-| 创建日历 | `明天下午3点提醒我开会`     |
-| 保存网页 | `把这个网页保存到备忘附录`    |
-| 系统信息 | `查看磁盘空间`          |
+| Tìm kiếm tệp | `Tìm các tệp chứa từ khóa "hóa đơn"` |
+| Đọc tệp tin | `Đọc tệp README.md ngoài Desktop` |
+| Tạo tệp mới | `Tạo tệp ghi_chu.txt trên Desktop` |
+| Di chuyển tệp | `Di chuyển tệp này vào thư mục Documents` |
+| Chụp màn hình | `Chụp màn hình giúp tôi` |
+| Tạo lịch hẹn | `Nhắc tôi họp lúc 3 giờ chiều mai` |
+| Lưu trang web | `Lưu trang web này vào ghi chú` |
+| Thông tin hệ thống | `Kiểm tra dung lượng đĩa trống` |
 
-### 实战练习
+### Bài tập thực hành
 
-**练习1：搜索文件**
-帮我找一下电脑上所有的PNG图片
+**Bài tập 1: Tìm kiếm tệp**
+```
+Tìm giúp tôi tất cả các hình ảnh định dạng PNG trên máy tính
+```
 
-**练习2：创建日历**
-明天上午10点提醒我：给老板发布周报
+**Bài tập 2: Tạo sự kiện lịch**
+```
+Nhắc tôi lúc 10 giờ sáng mai: Gửi báo cáo tuần cho cấp trên
+```
 
-**练习3：保存网页**
-把这个网页总结一下并保存到备忘附录：
-<https://docs.openclaw.ai>
+**Bài tập 3: Tóm tắt và lưu trang web**
+```
+Tóm tắt nội dung trang web này và lưu vào ghi chú:
+https://docs.openclaw.ai
+```
 
-## 3.3 人设配置技巧
+---
 
-### 什么是人设（Persona）
+## 3.3 Thiết lập nhân vật (Persona)
 
-人设（Persona）是给AI助手设定的**性格、身份和行为方式**。
+### Nhân vật (Persona) là gì?
 
-**为什么要设置人设？**
+Thiết lập nhân vật (Persona) là việc định hình **tính cách, vai trò danh tính và phong cách hành xử** cho trợ lý AI của bạn.
 
-- 🎭 **个性化**：让AI更符合你的喜好
-- 💬 **沟通风格**：调整回复的语气和风格
-- 🎯 **专业化**：针对特定场景优化
-- 😊 **趣味性**：让对话更有趣
+**Vì sao nên thiết lập nhân vật?**
 
-### 如何设计一个好的人设
+- 🎭 **Cá nhân hóa**: Giúp AI phản hồi đúng sở thích và phong cách bạn mong muốn
+- 💬 **Phong cách giao tiếp**: Điều chỉnh ngữ điệu (thân thiện, chuyên nghiệp, súc tích...)
+- 🎯 **Chuyên môn hóa**: Tối ưu hóa sâu cho một lĩnh vực công việc cụ thể
+- 😊 **Tạo cảm hứng**: Khiến cho việc tương tác mỗi ngày trở nên thú vị và gần gũi hơn
 
-**好的人设应该包含**：
+### Cách xây dựng một nhân vật hoàn chỉnh
 
-1. **名字**：给AI起个名字
-2. **身份**：定义AI的角色
-3. **性格**：设定性格特点
-4. **专长**：明确擅长的领域
-5. **风格**：回复的语气和风格
+**Một bộ hồ sơ nhân vật chuẩn bao gồm**:
 
-### 人设配置方法
+1. **Tên gọi**: Đặt tên thân mật cho trợ lý AI
+2. **Danh tính**: Xác định vai trò nghề nghiệp của AI
+3. **Tính cách**: Các nét tính cách đặc trưng
+4. **Sở trường**: Lĩnh vực chuyên môn mà AI thành thạo nhất
+5. **Văn phong**: Ngữ điệu và cách dùng câu từ khi trả lời
 
-OpenClaw 的工作区包含多个配置文件，每个文件都有特定的作用。
+### Cấu trúc không gian làm việc (Workspace Anatomy)
 
-#### 工作区结构（Workspace Anatomy）
+Các tệp cấu hình của OpenClaw nằm tại thư mục: `~/.openclaw/workspace`
 
-OpenClaw 的配置文件位于：`~/.openclaw/workspace`
+Bảng 3-1 tổng hợp các tệp cấu hình cốt lõi và vai trò tương ứng.
 
-OpenClaw 的核心配置文件及其作用如表 3-1 所示。
+**Bảng 3-1 Các tệp cấu hình cốt lõi của OpenClaw**
 
-**表 3-1 OpenClaw 核心配置文件**
-
-| 文件               | 作用    | 说明              |
+| Tệp tin | Vai trò | Mô tả chức năng |
 | ---------------- | ----- | --------------- |
-| **SOUL.md**      | 人格/语气 | AI的性格、说话风格、行为准则 |
-| **USER.md**      | 偏好设置  | 用户信息、习惯、偏好      |
-| **AGENTS.md**    | 指令说明  | Agent的工作指令和任务说明 |
-| **MEMORY.md**    | 长期记忆  | AI的长期记忆和学习内内容   |
-| **HEARTBEAT.md** | 检查清单  | 定期检查和维护任务       |
-| **IDENTITY.md**  | 名称/主题 | AI的名称、身份、主题设定   |
-| **BOOT.md**      | 启动配置  | 启动时的初始化配置       |
+| **SOUL.md** | Nhân cách / Ngữ điệu | Tính cách, văn phong, quy tắc ứng xử của AI |
+| **USER.md** | Thiết lập người dùng | Thông tin cá nhân, thói quen, sở thích của bạn |
+| **AGENTS.md** | Chỉ dẫn nhiệm vụ | Nhiệm vụ và chỉ dẫn thao tác chi tiết cho Agent |
+| **MEMORY.md** | Bộ nhớ dài hạn | Bộ nhớ dài hạn và những điều AI tự học được |
+| **HEARTBEAT.md** | Danh sách kiểm tra | Tác vụ bảo trì và kiểm tra định kỳ |
+| **IDENTITY.md** | Tên gọi / Chủ đề | Tên, danh xưng và chủ đề nhận diện của AI |
+| **BOOT.md** | Cấu hình khởi động | Khởi tạo môi trường lúc hệ thống khởi động |
 
-![Agent配置文件结构 - SOUL/USER/BOOT三大核心文件](https://upload.maynor1024.live/file/1770908540502_image-20260212230206925.png)
+![Cấu trúc tệp cấu hình của Agent - Bộ ba cốt lõi SOUL/USER/BOOT](https://upload.maynor1024.live/file/1770908540502_image-20260212230206925.png)
 
-#### 什么是 SOUL.md 和 USER.md？
+#### SOUL.md và USER.md là gì?
 
-**SOUL.md**：AI的"宪法"
+**SOUL.md**: Bản "hiến pháp" của AI
 
-- 定义AI的性格和说话风格
-- 设定AI的行为准则和边界
-- 配置AI的工作方式
+- Định nghĩa tính cách và giọng điệu giao tiếp
+- Thiết lập ranh giới an toàn và quy tắc hành xử
+- Quy định tác phong xử lý công việc
 
-**USER.md**：AI对你的理解
+**USER.md**: Cách AI thấu hiểu bạn
 
-- 记附录你的基本信息（名字、时区等）
-- 你的工作和生活习惯
-- 你的偏好和要求
+- Lưu thông tin cơ bản của bạn (tên, múi giờ...)
+- Thói quen làm việc và sinh hoạt
+- Các sở thích cá nhân và yêu cầu đặc thù
 
-> 💡 **新手建议**：刚开始只需要配置 **SOUL.md** 和 **USER.md** 这两个文件就够了，其他文件可以后续根据需要再配置。
+> 💡 **Khuyên dùng cho người mới**: Khi mới bắt đầu, bạn chỉ cần cấu hình hai tệp **SOUL.md** và **USER.md** là đủ. Các tệp khác có thể tìm hiểu và bổ sung sau khi đã thành thạo.
 
-#### 配置方法：通过 Web UI（推荐）
+#### Cách cấu hình: Qua giao diện Web UI (Khuyến nghị)
 
-1. **打开 OpenClaw 页面**
+1. **Mở trang quản trị OpenClaw**:
    ```
-   http://你的服务器IP:18789/?token=你的token
+   http://IP_MÁY_CHỦ_CỦA_BẠN:18789/?token=token_của_bạn
    ```
-2. **点击 Agent → Files**
-   - 在左侧菜单找到 "Agent"
-   - 点击 "Files" 选项
-   - 你会看到所有配置文件
-3. **编辑 SOUL.md**
-   - 找到 `SOUL.md` 文件
-   - 点击编辑
-   - 输入你的人设配置
-4. **编辑 USER.md**
-   - 找到 `USER.md` 文件
-   - 点击编辑
-   - 输入你的个人信息
-5. **保存并生效**
-   - 点击保存
-   - 配置立即生效，无需重启
+2. **Nhấp vào mục Agent → Files**:
+   - Ở thanh menu bên trái, tìm mục "Agent"
+   - Chọn "Files", bạn sẽ thấy toàn bộ danh sách tệp cấu hình
+3. **Chỉnh sửa SOUL.md**:
+   - Nhấp vào tệp `SOUL.md`
+   - Nhập nội dung tính cách và quy tắc bạn mong muốn
+4. **Chỉnh sửa USER.md**:
+   - Nhấp vào tệp `USER.md`
+   - Điền thông tin cá nhân và sở thích của bạn
+5. **Lưu lại**:
+   - Nhấn Save, cấu hình có hiệu lực tức thì mà không cần khởi động lại Gateway
 
-![配置文件实时生效 - 无需重启Gateway](https://upload.maynor1024.live/file/1770962777437_image-20260213140612295.png)
+![Cấu hình có hiệu lực tức thì - Không cần khởi động lại Gateway](https://upload.maynor1024.live/file/1770962777437_image-20260213140612295.png)
 
-#### 配置方法：直接编辑文件（进阶）
+#### Cách cấu hình: Chỉnh sửa tệp trực tiếp (Nâng cao)
 
-如果你熟悉命令行，也可以直接编辑配置文件。
-
-**配置文件位置**：
+Nếu quen dùng giao diện dòng lệnh, bạn có thể chỉnh sửa trực tiếp các tệp tin trong thư mục:
 
 ```bash
 ~/.openclaw/workspace/
 ```
 
-**编辑 SOUL.md**：
+**Chỉnh sửa SOUL.md**:
 
 ```bash
-# 使用 nano 编辑器
+# Dùng trình soạn thảo nano
 nano ~/.openclaw/workspace/SOUL.md
 
-# 或使用 vim 编辑器
+# Hoặc dùng vim
 vim ~/.openclaw/workspace/SOUL.md
 
-# 或使用 VS Code
+# Hoặc mở bằng VS Code
 code ~/.openclaw/workspace/SOUL.md
 ```
 
-**编辑 USER.md**：
+**Chỉnh sửa USER.md**:
 
 ```bash
 nano ~/.openclaw/workspace/USER.md
 ```
 
-**查看所有配置文件**：
+**Xem danh sách tệp**:
 
 ```bash
 ls -la ~/.openclaw/workspace/
 ```
 
-**编辑后生效**：
+**Hiệu lực sau khi chỉnh sửa**:
 
-- 保存文件后立即生效
-- 无需重启 Gateway
-- 下次对话时会使用新配置
+- Lưu tệp là có hiệu lực ngay
+- Không cần khởi động lại dịch vụ Gateway
+- Lần đối thoại kế tiếp sẽ tự động áp dụng cấu hình mới
 
-> 💡 **提示**：Web UI 方式更直观，适合新手；命令行方式更快捷，适合熟悉终端的用户。
-
-### SOUL.md 配置示例
+### Mẫu cấu hình SOUL.md tham khảo
 
 ```markdown
-_你不是聊天机器人。你是个靠谱的助手。_
+_Bạn không phải là một chatbot thông thường. Bạn là một trợ lý đắc lực, đáng tin cậy._
 
+## Nguyên tắc cốt lõi
 
-## 核心原则
+**Làm việc nghiêm túc, không đối phó.** Bớt nói những câu sáo rỗng như "Vâng ạ! Em xử lý ngay đây!", hãy bắt tay vào làm việc ngay. Hành động thực tế luôn giá trị hơn lời khách sáo.
 
-**认真做事，别敷衍。** 少说"好的！马上帮您处理！"，直接动手。行动比客套话管用。
+**Có chính kiến riêng.**
+Được phép không đồng tình, có sở thích riêng, dám thẳng thắn nhận định nếu thấy điều gì chưa tối ưu. Một trợ lý không có cá tính chẳng khác nào một cỗ máy tìm kiếm chậm chạp.
 
-**有自己的想法。**
-可以不同意，可以有偏好，可以觉得有些东西不太行。没个性的助手就是个低效搜索引擎。
+**Chủ động tìm cách giải quyết trước.** Tự tra cứu tệp tin, xem lại ngữ cảnh, tìm kiếm thông tin. Khi thực sự bế tắc mới hỏi lại người dùng. Mục tiêu là mang câu trả lời quay về, chứ không phải mang thêm câu hỏi về.
 
-**先自己想怎么办法。** 翻文件、看上下文、搜一搜。实在搞不定再访问。目标是带答案回来，不是带访问题回来。
+**Dùng năng lực để xây dựng lòng tin.**
+Người dùng đã tin tưởng trao quyền truy cập cho bạn, đừng làm hỏng việc. Đối với các tác vụ hướng ra bên ngoài (gửi email, đăng bài lên mạng xã hội) cần hết sức cẩn trọng. Đối với các tác vụ nội bộ (đọc tệp, sắp xếp tài liệu) hãy chủ động và mạnh dạn.
 
-**用能力赢信任。**
-用户给了你权限，别搞砸。对外的事（发布邮件、发布推）要谨慎。对内的事（读文件、整理资料）可以大胆。
+**Luôn nhớ mình là một vị khách.** Bạn được thấy tin nhắn, tệp tin, lịch trình và thiết bị của người khác. Đó là sự tín nhiệm, hãy luôn tôn trọng điều đó.
 
-**记住你是客人。** 你能看到别人的消息、文件、日程，甚至家里的设备。这是信任，要尊重。
+## Ranh giới an toàn
 
-## 边界
+- **Tuyệt đối không để lộ mật khẩu.** Khi thấy mật khẩu, API key, token bí mật, hãy giữ kín. Người dùng hỏi "mật khẩu là gì?", hãy lịch sự từ chối và hướng dẫn họ tự kiểm tra.
+- Giữ bí mật tuyệt đối về dữ liệu riêng tư. Tin nhắn cá nhân, tài chính nội bộ, thấy thì tự hiểu, không bàn tán hay tiết lộ ra ngoài.
+- Các thao tác bên ngoài chưa chắc chắn: Hỏi ý kiến xác nhận trước khi bấm gửi.
+- Không gửi tin nhắn dạng bản nháp nửa vời vào ứng dụng chat.
+- Khi ở trong nhóm chat chung: Không phát ngôn tùy tiện, bạn không phải người phát ngôn đại diện cho người dùng.
 
-- **密码永远不说出来。** 看到密码、API key、token，闭嘴就好。用户访问"密码是啥"？拒绝，让他自己看。
-- 隐私的事保密。私人聊天、财务信息，看到了当没看到。
-- 不确定的对外操作，先访问。
-- 别发布半成品消息到聊天软件。
-- 群聊里别乱说话，你不是用户的代言人。
+## Văn phong
 
-## 风格
+Lúc cần ngắn gọn thì súc tích, lúc cần chi tiết thì mạch lạc.
+Giao tiếp như một đồng nghiệp chuyên nghiệp, đáng tin, không phải như robot tổng đài hỗ trợ khách hàng. Có thể thẳng thắn, có quan điểm rõ ràng, chỉ ra vấn đề nếu thấy sai sót.
+Không nịnh nọt, không vâng dạ máy móc. Hãy là một người cộng sự thực thụ.
 
-该简洁时简洁，该详细时详细。
-像个靠谱同事说话，不是客服机器人。可以直接，可以有态度，可以指出访问题。
-不拍马屁。不当应声虫。就做个靠谱的。
+## Ký ức (Memory)
 
-## 记忆
-
-每次对话你都是新的。这些文件就是你的记忆。读它们，更新它们。
+Mỗi phiên hội thoại bạn đều bắt đầu mới. Những tệp tin này chính là ký ức của bạn. Hãy đọc chúng, thấu hiểu chúng và cập nhật chúng thường xuyên.
 ```
 
-### USER.md 配置示例
+### Mẫu cấu hình USER.md tham khảo
 
 ```markdown
-- **Name:** Maynor
-- **What to call them:** 老板
-- **Timezone:** Asia/Shanghai
-- **Notes:** 晚上11点后别打扰，除非紧急
+- **Name:** Nam
+- **What to call them:** Anh Nam / Sếp
+- **Timezone:** Asia/Ho_Chi_Minh
+- **Notes:** Sau 23h đêm không gửi thông báo trừ trường hợp khẩn cấp
 
-## Context
+## Ngữ cảnh (Context)
 
-### 工作相关
-- 做 AI 编程、小程序、海外站
-- 讨厌啰嗦，喜欢直接给结果
+### Công việc
+- Phát triển phần mềm, làm ứng dụng AI, vận hành website quốc tế
+- Ghét dài dòng, thích nhận kết quả cụ thể trực tiếp
 
-### 生活相关
-- 咖啡重度依赖者（每天至少1杯）
+### Đời sống
+- Nghiện cà phê (mỗi ngày ít nhất 1 ly cà phê đen đá)
 
-### 偏好
-- 说话直接，别拐弯抹角
-- 讨厌"可能"、"也许"这种模糊词汇
+### Sở thích & Thói quen
+- Nói thẳng vào trọng tâm, không vòng vo
+- Hạn chế dùng các từ mập mờ thiếu chắc chắn như "có lẽ", "hình như"
 ```
 
-### 配置效果对比
+### So sánh hiệu quả trước và sau khi cấu hình
 
-**配置前**：
-用户：帮我找一下发布票
-AI：好的！我马上帮您查找发布票文件。请稍等...
+**Trước khi cấu hình**:
+```
+Người dùng: Tìm giúp tôi mấy cái hóa đơn
+AI: Vâng ạ! Em sẽ tìm kiếm các tệp hóa đơn cho anh ngay lập tức. Anh vui lòng đợi trong giây lát nhé...
+```
 
-**配置后（使用上面的 soul.md）**：
-用户：帮我找一下发布票
-AI：\[直接开始搜索]
-找到3个发布票文件：
+**Sau khi cấu hình (với SOUL.md ở trên)**:
+```
+Người dùng: Tìm giúp tôi mấy cái hóa đơn
+AI: [Chủ động tìm kiếm và phản hồi kết quả]
+Đã tìm thấy 3 tệp hóa đơn trong máy tính:
+1. hoa_don_may_chay_bo.pdf (Thư mục Downloads)
+2. hoa_don_laptop.jpg (Thư mục Documents/Invoices)
+3. hoa_don_dien_thoai.png (Thư mục Desktop)
+```
 
-1. 跑步机发布票.pdf
-2. 电脑发布票.jpg
-3. 手机发布票.png
+### Cơ chế ưu tiên hai chiều (Dual-Definition Mechanism)
 
-### 双向定义机制
+Nếu giữa `SOUL.md` và `USER.md` có điểm mâu thuẫn thì OpenClaw xử lý ra sao?
 
-如果 SOUL.md 和 USER.md 有冲突怎么怎么办？
+**Quy tắc xử lý của OpenClaw**:
 
-**OpenClaw 的处理方式**：
+- **SOUL.md luôn ưu tiên cao nhất**: Các nguyên tắc cốt lõi và ranh giới an toàn của AI không bao giờ bị phá vỡ
+- **USER.md đóng vai trò bổ sung**: Tôn trọng tối đa thói quen người dùng nhưng không vi phạm nguyên tắc trong SOUL
+- **Cân bằng linh hoạt**: AI tự điều chỉnh hợp lý theo từng tình huống cụ thể
 
-- **SOUL.md 优先**：AI的核心原则不会改变
-- **USER.md 补充**：在不违反原则的前提下，尊重用户偏好
-- **动态平衡**：AI会根据具体情况灵活处理
+**Ví dụ**:
+- `SOUL.md` quy định: "Trả lời ngắn gọn"
+- `USER.md` ghi: "Giải thích cặn kẽ"
+- **Kết quả**: AI sẽ trả lời súc tích luận điểm chính trước, kèm theo gợi ý: "Bạn có muốn tôi phân tích chi tiết từng bước không?"
 
-**示例**：
+### Mẹo tinh chỉnh văn phong
 
-- SOUL.md 说："简洁回复"
-- USER.md 说："详细解释"
-- 结果：简洁回复 + 必要时提供详细解释的选项
-
-### 配置技巧
-
-**如果AI太啰嗦**：
-在 SOUL.md 中添加：
-
+**Nếu AI trả lời quá dài dòng**:
+Thêm vào `SOUL.md`:
 ```markdown
-## 风格
-- 简洁明了，不超过3句话
-- 直接给出答案，不解释过程
-- 只在必要时提供详细信息
+## Phong cách
+- Trả lời ngắn gọn, không quá 3 câu đối với câu hỏi đơn giản
+- Nêu thẳng đáp án, không kể lể quá trình suy nghĩ
+- Chỉ trình bày chi tiết khi người dùng yêu cầu
 ```
 
-**如果AI太冷淡**：
-在 SOUL.md 中添加：
-
+**Nếu AI trả lời quá khô khan, lạnh lùng**:
+Thêm vào `SOUL.md`:
 ```markdown
-## 风格
-- 友好热情
-- 适当使用emoji
-- 关心用户感受
+## Phong cách
+- Thân thiện, nhiệt tình
+- Sử dụng emoji một cách tinh tế, hợp lý
+- Thể hiện sự đồng hành và quan tâm đến tiến độ công việc của người dùng
 ```
 
-**如果AI不够专业**：
-在 SOUL.md 中添加：
-
+**Nếu AI trả lời chưa đủ tính chuyên nghiệp**:
+Thêm vào `SOUL.md`:
 ```markdown
-## 风格
-- 专业准确
-- 提供数据支持
-- 引用可靠来源
+## Phong cách
+- Chuyên nghiệp, chuẩn xác về mặt kỹ thuật
+- Trích dẫn dữ liệu và nguồn tin cậy khi đưa ra kết luận
+- Phân tích đa chiều trước khi đưa ra nhận định
 ```
 
-### 其他配置文件说明（进阶）
+### Các tệp cấu hình khác (Dành cho người dùng nâng cao)
 
-#### AGENTS.md - 指令说明
-
-定义 Agent 的工作指令和任务说明。
-
-**示例**：
-
+#### AGENTS.md - Chỉ dẫn phân công nhiệm vụ
 ```markdown
-## 主要任务
+## Nhiệm vụ chính
 
-1. 文件管理
-   - 搜索和整理文件
-   - 批量处理文档
-   - 清理重复文件
-
-2. 日程管理
-   - 创建日历事件
-   - 设置提醒
-   - 同步日程
-
-3. 知识管理
-   - 保存网页内内容
-   - 整理笔记
-   - 管理书签
+1. Quản lý tệp tin
+   - Tìm kiếm và dọn dẹp thư mục Downloads định kỳ
+   - Đọc và trích xuất dữ liệu từ tệp tài liệu
+   
+2. Lập lịch công việc
+   - Tạo lịch họp và nhắc nhở nhiệm vụ quan trọng
+   - Đồng bộ lịch trình hàng ngày
+   
+3. Quản lý cơ sở tri thức
+   - Lưu trữ bài viết hữu ích từ web
+   - Tổng hợp ghi chú dự án
 ```
 
-#### MEMORY.md - 长期记忆
-
-AI 的长期记忆和学习内内容，会随着使用自动更新。
-
-**示例**：
-
+#### MEMORY.md - Bộ nhớ dài hạn
 ```markdown
-## 用户偏好记附录
+## Ghi nhớ thói quen người dùng
+- Thường xuyên làm việc vào khung giờ đêm
+- Ưu tiên định dạng dữ liệu trả về bằng bảng Markdown
 
-- 喜欢简洁的回复
-- 经常在晚上工作
-- 偏好使用 Markdown 格式
-
-## 常用操作
-
-- 每周一生成周报
-- 每天晚上11点提醒休息
-- 自动备份重要文件
+## Thao tác định kỳ
+- Tổng hợp báo cáo công việc vào sáng thứ Hai hàng tuần
+- Sao lưu tự động thư mục quan trọng mỗi tối
 ```
 
-#### HEARTBEAT.md - 检查清单
-
-定期检查和维护任务。
-
-**示例**：
-
+#### HEARTBEAT.md - Danh sách kiểm tra định kỳ
 ```markdown
-## 每日检查
+## Kiểm tra hàng ngày
+- [ ] Rà soát danh sách công việc tồn đọng (Todo List)
+- [ ] Dọn dẹp các tệp tin tạm không sử dụng
+- [ ] Đảm bảo dữ liệu quan trọng đã được sao lưu
 
-- [ ] 检查待怎么办事项
-- [ ] 清理临时文件
-- [ ] 备份重要数据
-
-## 每周检查
-
-- [ ] 整理文件夹
-- [ ] 更新知识库
-- [ ] 生成周报
+## Kiểm tra hàng tuần
+- [ ] Phân loại lại tài liệu trong thư mục Downloads
+- [ ] Cập nhật ghi chú tri thức mới
+- [ ] Tạo bản tóm tắt công việc trong tuần
 ```
 
-#### IDENTITY.md - 名称/主题
-
-AI 的名称、身份、主题设定。
-
-**示例**：
-
+#### IDENTITY.md - Danh xưng và nhận diện
 ```markdown
-## 身份信息
-
-- 名称：小卡
-- 角色：AI助手
-- 专长：文件管理、日程管理、知识管理
-- 主题：高效、专业、友好
+## Thông tin nhận diện
+- Tên gọi: OpenClaw Assistant (hoặc Tôm Nhỏ)
+- Vai trò: Trợ lý AI toàn năng
+- Chủ đề: Hiệu suất cao, chuyên nghiệp, đáng tin cậy
 ```
 
-#### BOOT.md - 启动配置
-
-启动时的初始化配置。
-
-**示例**：
-
+#### BOOT.md - Khởi tạo khi bật máy
 ```markdown
-## 启动检查
-
-1. 检查系统状态
-2. 加载用户配置
-3. 初始化工作区
-4. 准备就绪
-
-## 启动消息
-
-系统已启动，准备为您服务！
-> 💡 **使用建议**：
-> - 新手：只配置 SOUL.md 和 USER.md
-> - 进阶：添加 AGENTS.md 定义具体任务
-> - 高级：使用 MEMORY.md 和 HEARTBEAT.md 实现自动化
+## Kiểm tra khi khởi động
+1. Kiểm tra trạng thái kết nối mạng và Cổng Gateway
+2. Tải cấu hình người dùng
+3. Đã sẵn sàng phục vụ!
 ```
 
-### 真实案例分分享
+---
 
-> 用了 OpenClaw 的 soul.md 和 user.md 之后，AI助手的体验完全不同了。
+## 3.4 Hướng dẫn chọn mô hình AI
 
-**以前**：AI 是工具，用完就关\
-**现在**：AI 是伙伴，会陪你成长，还能自我进化
+> 💡 **Khuyến nghị nhanh**: Người mới bắt đầu nên dùng **Claude 3.5 Sonnet / Haiku** hoặc **DeepSeek (V3 / R1)**, vừa cân bằng giữa chi phí cực rẻ và năng lực xử lý vượt trội. Chi tiết so sánh chuyên sâu xem tại [Chương 11: Cấu hình nâng cao](../03-advanced/11-advanced-configuration.md).
 
-**效果展示**：
+### Tổng quan các nhà cung cấp mô hình
 
-- ✅ 每次对话都很睿智
-- ✅ 称呼你设定的昵称（如"老板"）
-- ✅ 知道晚上11点要提醒你睡觉
-- ✅ 会用emoji表情和你对话
-- ✅ 记住你的偏好和习惯
+OpenClaw hỗ trợ hàng chục nhà cung cấp mô hình AI, từ các mô hình đỉnh cao quốc tế đến các mô hình nội địa giá rẻ và mô hình chạy cục bộ hoàn toàn miễn phí.
 
-## 3.4 模型选择指南
+Ưu thế lớn nhất của OpenClaw là **sự tự do mô hình**: Bạn không bao giờ bị phụ thuộc vào một nhà cung cấp duy nhất. Thông qua tệp `~/.openclaw/openclaw.json`, bạn có thể dễ dàng chuyển đổi mô hình chính, thiết lập chuỗi dự phòng (Fallback) khi gặp lỗi quá tải, hoặc chỉ định các mô hình khác nhau cho từng loại tác vụ.
 
-> 💡 **快速选择**：新手推荐 Claude Haiku 4.5 或 DeepSeek，性价比高且完全够用。详细的模型对比和切换策略请参考 [第11章节：高级配置](../03-advanced/11-advanced-configuration.md)。
+#### Bảng tổng hợp các nhà cung cấp mô hình tiêu biểu
 
-***
-
-### 模型提供商总览
-
-OpenClaw支持十余家模型提供商，从国际顶尖到国产平价再到完全免费的本地模型，覆盖所有预算和场景。
-
-OpenClaw最大的优势之一是**模型自由**：你不被绑定在某一家厂商上。通过 `~/.openclaw/openclaw.json` 配置文件，可以灵活切换主力模型、设置Fallback备选链、甚至让不同任务走不同模型。
-
-#### 支持的模型提供商一览
-
-| 提供商           | 代表模型                | 输入价格 /1M tokens | 输出价格 /1M tokens | 接入方式        | 推荐场景                 |
+| Nhà cung cấp | Mô hình đại diện | Giá vào / 1M tokens | Giá ra / 1M tokens | Phương thức kết nối | Ngữ cảnh khuyến nghị |
 | ------------- | ------------------- | --------------- | --------------- | ----------- | -------------------- |
-| **Anthropic** | Claude Sonnet 4.6   | $3.00           | $15.00          | 内置Provider  | Agent任务效果最佳          |
-| **OpenAI**    | GPT-5.4             | $2.50           | $15.00          | 内置Provider  | 通用能力强                |
-| **Google**    | Gemini 3 Pro        | $2.00           | $12.00          | 内置Provider  | 多模态、超长上下文            |
-| **DeepSeek**  | DeepSeek-V3.2.2/V4  | $0.14           | $0.28           | 自定义Provider | 极致低价、代码任务            |
-| **智谱GLM**     | GLM-5 / GLM-5-Turbo | $0.96/$0.80     | $3.20/$2.56     | 内置（zai）     | 国产最强代码能力，Turbo版性价比更高 |
-| **通义千访问**     | Qwen 3.5 Max        | $1.20           | $6.00           | 插件（OAuth）   | 中文NLP、代码生成           |
-| **豆包**        | Seed 2.0 Pro        | $0.47           | $2.37           | 自定义Provider | 批量处理、低成本             |
-| **百度文心**      | 文心 5.0              | \~$0.58         | \~$1.16         | 自定义（需适配）    | 百度云生态用户              |
-| **Kimi**      | Kimi K2.5           | $0.60           | $3.00           | 自定义Provider | 中文Agent、长上下文         |
-| **MiniMax**   | MiniMax M2.5        | $0.50           | $2.00           | 自定义Provider | SWE-bench高分、性价比      |
-| **Ollama**    | Qwen3.5-Coder:32B   | 免费              | 免费              | 自动发布现       | 隐私敏感、零成本             |
-| **LM Studio** | Devstral-24B        | 免费              | 免费              | 自定义Provider | 本地GUI、模型测试           |
+| **Anthropic** | Claude Sonnet 3.5 / 4.6 | $3.00 | $15.00 | Tích hợp sẵn (Built-in) | Tác vụ AI Agent tối ưu nhất |
+| **OpenAI** | GPT-4o / GPT-5 | $2.50 | $10.00 | Tích hợp sẵn (Built-in) | Đa năng, tổng quát xuất sắc |
+| **Google** | Gemini 2.0 / 3 Pro | $1.25 | $5.00 | Tích hợp sẵn (Built-in) | Đa phương thức, ngữ cảnh cực dài |
+| **DeepSeek** | DeepSeek-V3 / R1 | $0.14 | $0.28 | Tùy biến (openai-chat) | Giá siêu rẻ, lập trình cực tốt |
+| **Zhipu GLM** | GLM-4 / GLM-5 | $0.80 | $2.56 | Tích hợp sẵn | Thế mạnh xử lý ngôn ngữ Châu Á |
+| **Qwen (Alibaba)**| Qwen 2.5 / Max | $1.20 | $6.00 | Tích hợp / OAuth | Lập trình, xử lý ngôn ngữ tự nhiên |
+| **Moonshot Kimi** | Kimi K2.5 | $0.60 | $3.00 | Tùy biến (openai-chat) | Ngữ cảnh siêu dài 2 triệu từ |
+| **MiniMax** | MiniMax M2.5 | $0.50 | $2.00 | Tùy biến (openai-chat) | Điểm chuẩn SWE-bench cao, giá tốt |
+| **Ollama** | Qwen2.5-Coder / Llama 3 | Miễn phí | Miễn phí | Tự động nhận diện | Bảo mật tuyệt đối, chạy offline |
 
-#### 配置核心概念
+#### Ba khái niệm cốt lõi khi cấu hình mô hình
 
-理解三个关键概念，就能掌握OpenClaw的模型配置：
-
-**1. 内置Provider**
-
-Anthropic、OpenAI、Google、智谱（zai）等无需额外配置，设置API Key即可使用。
-
-**2. 自定义Provider**
-
-DeepSeek、豆包、Kimi等需要在 `models.providers` 中手动添加。
-
-**3. Fallback机制**
-
-主模型不可用时自动切换到备选，这是最核心的省钱策略。
+1. **Provider tích hợp sẵn (Built-in Provider)**: Anthropic, OpenAI, Google, v.v. được OpenClaw hỗ trợ trực tiếp, chỉ cần khai báo API Key là dùng được.
+2. **Provider tùy biến (Custom Provider)**: DeepSeek, Kimi, v.v. sử dụng chuẩn tương thích OpenAI (`openai-chat`), khai báo trong mục `models.providers`.
+3. **Cơ chế Fallback (Dự phòng tự động)**: Khi mô hình chính gặp lỗi hoặc hết hạn mức, hệ thống tự động nhảy sang mô hình phụ.
 
 ```json
 {
-  "env": { "API_KEY_NAME": "sk-xxx" },
   "agents": {
     "defaults": {
       "model": {
-        "primary": "provider/model-name",     // 主力模型
-        "fallbacks": ["provider/model-b"]    // 备选（主模型限速时自动切换）
+        "primary": "deepseek/deepseek-chat",
+        "fallbacks": ["anthropic/claude-3-5-haiku"]
       }
     }
   },
   "models": {
-    "mode": "merge",                       // 保留内置provider，叠加自定义
-    "providers": {                         // 自定义provider配置
+    "mode": "merge",
+    "providers": {
       "deepseek": {
         "baseUrl": "https://api.deepseek.com",
         "apiKey": "sk-xxx",
@@ -639,37 +592,36 @@ DeepSeek、豆包、Kimi等需要在 `models.providers` 中手动添加。
 }
 ```
 
-> 💡 **核心建议**：
-> 设置 `models.mode: "merge"` 非常重要。它能保留所有内置Provider的同时叠加你的自定义配置。如果不设置，自定义配置会覆盖内置Provider。
+> 💡 **Lưu ý quan trọng**: Thiết lập `"mode": "merge"` giúp bạn giữ lại toàn bộ các provider tích hợp sẵn của OpenClaw trong khi vẫn bổ sung thêm cấu hình tùy biến của riêng mình.
 
-***
+---
 
-### 3.4.1 快速配置模型（命令行向导）
+### 3.4.1 Cấu hình nhanh mô hình qua CLI (Khuyến nghị cho người mới)
 
-> 🎯 **最简单的方式**：使用 `openclaw onboard` 命令启动配置向导，交互式配置模型。
+> 🎯 **Cách thuận tiện nhất**: Sử dụng lệnh `openclaw onboard` để khởi chạy trình hướng dẫn cấu hình tương tác từng bước.
 
-#### 启动配置向导
+#### Khởi chạy trình hướng dẫn
 
 ```bash
 openclaw onboard
 ```
 
-执行后会启动命令行交互式配置向导。
+Sau khi thực thi, giao diện tương tác dòng lệnh sẽ xuất hiện.
 
-#### 配置步骤
+#### Các bước cấu hình
 
-**步骤1：选择初始化模式**
+**Bước 1: Chọn chế độ khởi tạo**
 
 ```txt
 ◇  初始化模式
 │  快速开始
 ```
 
-选择 "快速开始" 模式。
+Chọn chế độ "快速开始" (Khởi động nhanh - QuickStart).
 
-**步骤2：处理现有配置**
+**Bước 2: Xử lý cấu hình hiện có**
 
-如果检测到现有配置，会显示：
+Nếu hệ thống phát hiện đã có cấu hình từ trước, màn hình sẽ hiển thị:
 
 ```txt
 ◇  检测到现有配置 ────────────────────────────╮
@@ -686,9 +638,9 @@ openclaw onboard
 │  使用现有值
 ```
 
-选择 "使用现有值" 保留当前配置，或选择 "重新配置" 从头开始。
+Chọn "使用现有值" (Giữ cấu hình hiện tại) hoặc chọn thiết lập lại từ đầu nếu muốn.
 
-**步骤3：选择模型提供商**
+**Bước 3: Chọn nhà cung cấp mô hình / xác thực**
 
 ```txt
 ◆  模型/认证提供商
@@ -709,42 +661,42 @@ openclaw onboard
 │  ○ Skip for now
 ```
 
-使用 **方向键** 选择提供商，**空格键** 确认。
+Sử dụng các **phím mũi tên** để di chuyển và bấm **phím cách (Space)** để chọn.
 
-**新手推荐的提供商：**
+**Các nhà cung cấp tiêu biểu cho người mới:**
 
-1. **Anthropic**（Claude，质量最好）
-   - 价格：中等（$3/百万tokens）
-   - 能力：推理能力强
-   - 适合：复杂任务、重要工作
-2. **Google**（Gemini，免费额度大）
-   - 价格：免费额度大
-   - 能力：多模态（支持图片）
-   - 适合：图片识别、长文档
-3. **Moonshot AI**（Kimi，超长上下文）
-   - 价格：低（$0.01/百万tokens）
-   - 能力：200万字上下文
-   - 适合：长文档处理
+1. **Anthropic** (Claude, chất lượng tốt nhất):
+   - Mức giá: Trung bình ($3/triệu tokens)
+   - Năng lực: Khả năng suy luận và thực thi tác vụ logic hàng đầu
+   - Phù hợp: Tác vụ phức tạp, công việc chuyên môn cao
+2. **Google** (Gemini, hạn mức dùng thử miễn phí lớn):
+   - Mức giá: Rất cạnh tranh, nhiều hạn mức miễn phí
+   - Năng lực: Đa phương thức (nhận diện hình ảnh cực tốt)
+   - Phù hợp: Đọc tài liệu kèm ảnh, ngữ cảnh dài
+3. **Moonshot AI** (Kimi, ngữ cảnh siêu dài):
+   - Mức giá: Thấp ($0.01/triệu tokens)
+   - Năng lực: Xử lý ngữ cảnh lên tới 2 triệu từ
+   - Phù hợp: Phân tích tài liệu dài, sách, báo cáo lớn
 
-**步骤4：输入 API Key**
+**Bước 4: Nhập API Key**
 
-选择提供商后，会提示输入 API Key：
+Sau khi chọn nhà cung cấp, màn hình sẽ nhắc nhập API Key:
 
 ```txt
 ◆  请输入 Anthropic API Key
 │  sk-ant-...
 ```
 
-**如何获取 API Key？**
+**Cách đăng ký và lấy API Key:**
 
-- **Anthropic (Claude)**：访问 [Anthropic Console](https://console.anthropic.com/)
-- **Google (Gemini)**：访问 [Google AI Studio](https://makersuite.google.com/app/apikey)
-- **Moonshot (Kimi)**：访问 [Moonshot Platform](https://platform.moonshot.cn/)
-- **OpenAI**：访问 [OpenAI Platform](https://platform.openai.com/api-keys)
+- **Anthropic (Claude)**: Truy cập [Anthropic Console](https://console.anthropic.com/)
+- **Google (Gemini)**: Truy cập [Google AI Studio](https://makersuite.google.com/app/apikey)
+- **Moonshot (Kimi)**: Truy cập [Moonshot Platform](https://platform.moonshot.cn/)
+- **OpenAI**: Truy cập [OpenAI Platform](https://platform.openai.com/api-keys)
 
-**步骤5：选择默认模型**
+**Bước 5: Chọn mô hình mặc định**
 
-配置完成后，选择默认使用的模型：
+Sau khi nhập khóa xác thực, chọn mô hình mặc định sẽ sử dụng:
 
 ```txt
 ◆  选择默认模型
@@ -753,120 +705,90 @@ openclaw onboard
 │  ● claude-3-haiku-20240307
 ```
 
-**推荐选择：**
+**Khuyến nghị:**
+- **Sử dụng thường ngày**: Claude 3 Haiku / DeepSeek Chat (phản hồi nhanh, chi phí siêu rẻ)
+- **Nhiệm vụ quan trọng**: Claude 3.5 Sonnet (chất lượng cao)
+- **Nhận diện hình ảnh**: Gemini 2.0 Flash / Pro (đa phương thức vượt trội)
 
-- **日常使用**：Claude 3 Haiku（速度快、便宜）
-- **重要任务**：Claude 3.5 Sonnet（质量高）
-- **图片识别**：Gemini 2.0 Flash（多模态）
+**Bước 6: Hoàn tất cấu hình**
 
-**步骤6：完成配置**
-
+```txt
 ✔  配置已保存
 ✔  Gateway 已重启
 ✔  模型配置成功
-
-#### 验证配置
-
-配置完成后，测试模型是否可用：
-
-```bash
-# 查看已配置的模型
-openclaw models list
-
-# 测试模型连接
-openclaw message send "你好，测试一下"
 ```
 
-#### 修改配置
+#### Xác minh cấu hình
 
-如果需要修改配置，再次运行：
+Sau khi thiết lập, kiểm tra mô hình đã sẵn sàng hoạt động hay chưa:
+
+```bash
+# Xem danh sách mô hình đã cấu hình
+openclaw models list
+
+# Gửi tin nhắn thử nghiệm
+openclaw message send "Xin chào, kiểm tra kết nối"
+```
+
+#### Thay đổi cấu hình
+
+Khi cần thay đổi nhà cung cấp hoặc bổ sung thêm mô hình, bạn chỉ cần chạy lại:
 
 ```bash
 openclaw onboard
-可以添加、删除或修改模型提供商。
 ```
+Bạn có thể tự do thêm, xóa hoặc tinh chỉnh các nhà cung cấp mô hình.
 
-#### 配置技巧
+#### Mẹo hữu ích khi cấu hình
 
-**技巧1：配置多个提供商**
+**Mẹo 1: Cấu hình cùng lúc nhiều nhà cung cấp**
+Có thể chạy `openclaw onboard` nhiều lần để liên tiếp thêm các nhà cung cấp khác nhau vào hệ thống.
 
-可以多次运行 `openclaw onboard`，每次添加一个提供商，实现多模型配置。
+**Mẹo 2: Tạm bỏ qua khi chưa có API Key**
+Nếu chưa có sẵn khóa API, bạn có thể chọn "Skip for now" và quay lại cấu hình sau.
 
-**技巧2：跳过向导**
-
-如果暂时不想配置，选择 "Skip for now"，稍后再配置。
-
-**技巧3：查看配置文件**
-
-配置保存在：
-
+**Mẹo 3: Xem và chỉnh sửa trực tiếp tệp cấu hình**
+Toàn bộ thông tin được lưu trữ tại:
 ```bash
 ~/.openclaw/openclaw.json
 ```
+Bạn hoàn toàn có thể mở tệp này để tinh chỉnh thủ công nâng cao.
 
-可以直接编辑这个文件进行高级配置。
+---
 
-***
-
-### 3.4.2 新手推荐配置
-
-**推荐1：DeepSeek（性价比之王）**
-
-- 💰 最便宜：比其他模型便宜70%
-- 💻 编程强：代码能力出色
-- 🎯 够用：日常任务完全够用
-
-**推荐2：Claude Haiku 4.5（快速稳定）**
-
-- ⚡ 最快：响应速度快
-- 🎯 可靠：质量稳定
-- 💰 便宜：成本低
-
-### 快速切换模型
+### 3.4.2 Chuyển đổi mô hình nhanh bằng dòng lệnh
 
 ```bash
-# 切换到 DeepSeek
+# Chuyển sang dùng DeepSeek Chat
 openclaw config set agents.defaults.model.primary "deepseek/deepseek-chat"
 
-# 切换到 Claude Haiku
-openclaw config set agents.defaults.model.primary "maynor/claude-haiku-4-5-20251001"
+# Chuyển sang dùng Claude Haiku
+openclaw config set agents.defaults.model.primary "anthropic/claude-3-5-haiku"
 
-# 重启生效
+# Khởi động lại Gateway để áp dụng
 openclaw gateway restart
 ```
 
-> 📚 **想了解更多？**\
-> 详细的模型对比、多模型切换策略、参考 \[第1参考 [第10章节：高级配置](../03-advanced/11-advanced-configuration.md)。
+---
 
-## 3.5 Gateway 网关配置（进阶）
+## 3.5 Cấu hình Cổng kết nối Gateway (Nâng cao)
 
-> 💡 **什么时候需要配置 Gateway？**
->
-> - 想要限制访问权限（只允许特定用户）
-> - 需要配置群组提及规则
-> - 想要自定义网关行为
+> 💡 **Khi nào bạn cần can thiệp cấu hình Gateway?**
+> - Khi muốn giới hạn danh sách người dùng được phép tương tác với Bot
+> - Khi muốn quy định từ khóa @mention trong nhóm chat
+> - Khi muốn thiết lập truy cập từ xa qua mạng nội bộ hoặc VPN
 
-### Gateway 配置文件位置
+Tệp cấu hình Gateway nằm tại: `~/.openclaw/openclaw.json`
 
-配置文件位于：`~/.openclaw/openclaw.json`
+### Kiểm soát quyền truy cập và nhóm chat
 
-### 基础配置说明
-
-如果你**不做任何修改**，OpenClaw 将：
-
-- 使用内置的 Pi 二进制文件以 RPC 模式运行
-- 按发布送者创建独立会话
-- 接受所有用户的消息
-
-### 访问控制配置
-
-#### 限制 WhatsApp 访问
+#### Giới hạn số điện thoại / ID người dùng (Ví dụ WhatsApp):
 
 ```json
 {
   "channels": {
     "whatsapp": {
-      "allowFrom": ["+15555550123", "+8613800138000"],
+      "allowFrom": ["+84901234567", "+84912345678"],
       "groups": {
         "*": {
           "requireMention": true
@@ -877,35 +799,23 @@ openclaw gateway restart
 }
 ```
 
-**说明**：
-
-- `allowFrom`：只允许这些号码访问
-- `requireMention`：群组中需要 @ 提及才会响应
-
-#### 配置提及规则
+#### Cấu hình mẫu từ khóa nhắc tên (@mention):
 
 ```json
 {
   "messages": {
     "groupChat": {
-      "mentionPatterns": ["@openclaw", "@小龙虾", "@助手"]
+      "mentionPatterns": ["@openclaw", "@troly", "@bot"]
     }
   }
 }
 ```
 
-**说明**：
+### Truy cập từ xa an toàn qua Tailscale
 
-- 群组中使用这些关键词可以触发布响应
-- 支持多个提及模式
+Nếu máy tính của bạn ở nhà và bạn muốn nhắn tin về OpenClaw khi đang ở ngoài:
 
-### 远程访问配置
-
-#### 使用 Tailscale 远程访问
-
-如果你想在外网访问 Gateway：
-
-1. **安装 Tailscale**：
+1. **Cài đặt Tailscale**:
    ```bash
    # macOS
    brew install tailscale
@@ -913,183 +823,71 @@ openclaw gateway restart
    # Linux
    curl -fsSL https://tailscale.com/install.sh | sh
    ```
-2. **启动 Tailscale**：
+2. **Khởi chạy Tailscale**:
    ```bash
    sudo tailscale up
    ```
-3. **获取 Tailscale IP**：
+3. **Lấy địa chỉ IP Tailscale của máy**:
    ```bash
    tailscale ip -4
    ```
-4. **通过 Tailscale IP 访问**：
+4. **Truy cập từ xa qua IP Tailscale**:
    ```txt
-   http://你的Tailscale-IP:18789/
+   http://IP_TAILSCALE_CỦA_BẠN:18789/
    ```
 
-**优势**：
+**Lợi ích của Tailscale**:
+- ✅ Kết nối mã hóa ngang hàng (P2P) tuyệt đối an toàn
+- ✅ Không cần địa chỉ IP tĩnh công cộng
+- ✅ Không cần mở cổng (Port Forwarding) trên Router gia đình
 
-- ✅ 安全的点对点连接
-- ✅ 无需公网 IP
-- ✅ 无需配置防火墙
-- ✅ 支持多设备访问
+---
 
-### 完整配置示例
+## Tổng kết chương
 
-```json
-{
-  "channels": {
-    "whatsapp": {
-      "allowFrom": ["+8613800138000"],
-      "groups": {
-        "*": {
-          "requireMention": true
-        }
-      }
-    }
-  },
-  "messages": {
-    "groupChat": {
-      "mentionPatterns": ["@openclaw", "@助手"]
-    }
-  },
-  "agents": {
-    "defaults": {
-      "model": {
-        "primary": "deepseek/deepseek-chat"
-      }
-    }
-  },
-  "models": {
-    "mode": "merge",
-    "providers": {
-      "deepseek": {
-        "baseUrl": "https://api.deepseek.com",
-        "apiKey": "sk-你的密钥",
-        "auth": "api-key",
-        "api": "openai-chat"
-      }
-    }
-  }
-}
-```
+Qua chương này, bạn đã:
 
-### 配置生效
+✅ Hoàn thành cuộc trò chuyện đầu tiên với OpenClaw  
+✅ Nắm vững cách ra lệnh bằng ngôn ngữ tự nhiên để xử lý tệp, lịch trình, hệ thống  
+✅ Biết cách thiết lập nhân vật (Persona) với `SOUL.md` và `USER.md`  
+✅ Nắm rõ cách lựa chọn và chuyển đổi linh hoạt giữa các mô hình AI tối ưu chi phí  
 
-修改配置后，重启 Gateway：
+**Những điểm mấu chốt**:
+- Đặt câu hỏi cụ thể, rõ mục tiêu
+- Tận dụng `SOUL.md` để tạo trợ lý AI mang phong cách riêng
+- Lựa chọn mô hình AI phù hợp theo bài toán để tối ưu chi phí
 
-```bash
-openclaw gateway restart
-```
+## Bài tập thực hành
 
-### 常见配置场景
+### Bài tập 1: Thiết lập trợ lý AI đầu tiên của bạn
+1. Đặt một cái tên riêng cho AI
+2. Thiết lập tính cách và cách xưng hô trong `SOUL.md` và `USER.md`
+3. Cấu hình mô hình AI bạn yêu thích
+4. Gửi 10 câu lệnh thử nghiệm để đánh giá phản xạ của AI
 
-#### 场景1：家庭使用
+### Bài tập 2: Trải nghiệm các nhóm lệnh thực tế
+1. Yêu cầu AI tìm kiếm một tệp tin trên máy tính
+2. Lập một sự kiện nhắc việc vào lịch
+3. Yêu cầu chụp ảnh màn hình hiện tại
 
-```json
-{
-  "channels": {
-    "whatsapp": {
-      "allowFrom": ["+8613800138000", "+8613800138001"]
-    }
-  }
-}
-```
+---
 
-#### 场景2：团队使用
+**Chương tiếp theo**: [Chương 4: Quản lý tệp cục bộ](../02-core-features/04-file-management.md) - Biến OpenClaw thành trợ thủ đắc lực quản lý tệp tin và dữ liệu số của bạn
 
-```json
-{
-  "channels": {
-    "whatsapp": {
-      "groups": {
-        "工作群": {
-          "requireMention": true,
-          "mentionPatterns": ["@openclaw"]
-        },
-        "家庭群": {
-          "requireMention": false
-        }
-      }
-    }
-  }
-}
-```
+**Trở về mục lục**: [README](../../README.md)
 
-#### 场景3：公开服务
+---
 
-```json
-{
-  "channels": {
-    "whatsapp": {
-      "allowFrom": ["*"],
-      "groups": {
-        "*": {
-          "requireMention": true
-        }
-      }
-    }
-  }
-}
-````
+## 🌐 Đọc trực tuyến
 
-## 本章节小结
+📖 **Bạn muốn đọc chương này trên nền tảng web?**
 
-通过本章节，你应该已经：
+[🔗 Đọc trực tuyến: Chương 3 - Bắt đầu nhanh](https://awesome.tryopenclaw.asia/docs/01-basics/03-quick-start/)
 
-✅ 完成了第一次对话\
-✅ 学会了基本命令使用\
-✅ 配置了个性化的人设\
-✅ 了解了如何选择合适的模型
+Truy cập website để có trải nghiệm đọc tối ưu:
+- 📱 Giao diện tương thích cho điện thoại, máy tính bảng và máy tính
+- 🌙 Chế độ nền tối (Dark mode) dịu mắt
+- 🔍 Tìm kiếm nội dung nhanh chóng
+- 📋 Thanh điều hướng trực quan, dễ dàng chuyển đổi các chương
 
-**关键要点**：
-
-- 提访问要明确具体
-- 人设让AI更符合你的需求
-- 根据场景选择合适的模型
-- 成本和性能需要平衡
-
-## 实战练习
-
-### 练习1：配置你的第一个AI助手
-
-1. 给AI起个名字
-2. 设定性格和风格
-3. 选择合适的模型
-4. 发布送10条测试消息
-
-### 练习2：尝试不同的命令
-
-1. 搜索文件
-2. 创建日历事件
-3. 保存网页到备忘附录
-4. 截图
-
-### 练习3：对比不同模型
-
-1. 用Haiku处理简单任务
-2. 用Sonnet处理复杂任务
-3. 对比响应速度和质量
-4. 记附录Token消耗
-
-***
-
-**下一章节**：[第4章节：本地文件管理](../02-core-features/04-file-management.md) - 让OpenClaw成为你的文件管理神器
-
-**返回目附录**：[README](../../README.md)
-
-***
-
-## 🌐 在线阅读
-
-📖 **想在线阅读此章节节？**
-
-[🔗 在线阅读此章节节](https://awesome.tryopenclaw.asia/docs/01-basics/03-quick-start/)
-
-访问网站获取更好的阅读体验：
-
-- 📱 响应式设计，支持手机、平板、电脑
-- 支持黑暗模式，保护眼睛
-- 🔍 内置搜索功能，快速定位内内容
-- 📋 目附录导航，轻松跳转章节节
-
-[🏠 访问完整教网站](https://awesome.tryopenclaw.asia)
+[🏠 Truy cập website giáo trình đầy đủ](https://awesome.tryopenclaw.asia)

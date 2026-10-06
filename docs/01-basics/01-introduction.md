@@ -1,422 +1,418 @@
-> 📖 **纸质书《OpenClaw超级个体实操手册》已上市！** 清华大学出版社出版，在开源教程基础上全面重写+逐条验证。🛒 [京东专属购买链接（¥42，原价¥59.8）](https://item.jd.com/14669463.html)
+> 📖 **Giáo trình Awesome OpenClaw Tutorial** | Bản dịch tiếng Việt chính thức cho cộng đồng. Nguyên tác thuộc về tác giả [@xianyu110](https://github.com/xianyu110).
 
-# 第1章：认识OpenClaw
+# Chương 1: Tìm hiểu về OpenClaw
 
-> 在开始使用 OpenClaw之前，先了解它是什么，为什么要用它，以及它能带来什么。
+> Trước khi bắt đầu sử dụng OpenClaw, hãy cùng tìm hiểu xem nó là gì, vì sao nên dùng và nó mang lại những giá trị gì cho bạn.
 
-> ⚠️ **版本说明**：截至 **2026-09-10**，本教程按 **OpenClaw v2026.9.3（稳定版，2026-09-08 发布）** 校对。升级自 2026.6.x / 2026.8.x 后请先跑 `openclaw doctor --fix`。
+> ⚠️ **Lưu ý phiên bản**: Tính đến **10/09/2026**, tài liệu này được đối chiếu theo **OpenClaw v2026.9.3 (Bản ổn định, phát hành 08/09/2026)**. Sau khi nâng cấp từ các phiên bản 2026.6.x / 2026.8.x, vui lòng chạy `openclaw doctor --fix` trước tiên.
 
-> 💡 **重要前提**：OpenClaw 现在的主线能力不只来自 Skills，还包括官方内建的记忆系统、Task Flow、媒体生成工具、Webhooks 和 `infer` CLI。教程中凡是遇到“第三方 Skill 安装失败”或“命令找不到”，优先按官方主路线排查。
+> 💡 **Tiền đề quan trọng**: Năng lực chủ đạo của OpenClaw hiện nay không chỉ đến từ Skills, mà còn bao gồm hệ thống ghi nhớ (Memory System) tích hợp sẵn chính thức, Task Flow, công cụ tạo media, Webhooks và CLI `infer`. Trong quá trình học, nếu gặp tình huống "cài đặt Skill bên thứ ba thất bại" hoặc "không tìm thấy lệnh", hãy ưu tiên kiểm tra theo lộ trình tính năng chính thức.
 
 ---
 
-## 1.1 什么是OpenClaw
+## 1.1 OpenClaw là gì?
 
-![OpenClaw Logo - 开源AI智能体网关](https://upload.maynor1024.live/file/1770806852123_openclaw-logo-text-dark.png)
+![OpenClaw Logo - Cổng Gateway AI Agent mã nguồn mở](https://upload.maynor1024.live/file/1770806852123_openclaw-logo-text-dark.png)
 
-### 一句话介绍
+### Giới thiệu trong một câu
 
-OpenClaw 是一个**开源的 AI 智能体 Gateway 网关**，让你可以在本地部署 AI 助手，访问本地文件，通过多个平台（飞书、企微、QQ等）随时使用。
+OpenClaw là một **Cổng kết nối AI Agent mã nguồn mở (Open-source AI Agent Gateway)**, cho phép bạn triển khai trợ lý AI ngay trên máy cục bộ hoặc máy chủ riêng, truy cập tệp tin nội bộ và tương tác thuận tiện qua nhiều ứng dụng nhắn tin (Lark / Feishu, WeCom, DingTalk, Telegram, Discord, v.v.) mọi lúc mọi nơi.
 
-> **项目名称演变**：OpenClaw 原名 Clawdbot，因 Anthropic 商标顾虑在 2026年1月27日更名为 Moltbot（过渡名），最终在1月30日确定为 OpenClaw。三个名字本质是同一个项目，功能完全一致。
+> **Lịch sử đổi tên dự án**: OpenClaw ban đầu có tên là Clawdbot. Do lo ngại về nhãn hiệu với Anthropic, dự án đã đổi tên thành Moltbot (tên chuyển tiếp) vào ngày 27/01/2026, và chính thức chốt tên gọi OpenClaw vào ngày 30/01/2026. Cả ba tên gọi thực chất là cùng một dự án, với tính năng hoàn toàn đồng nhất.
 
-### 核心能力
+### Năng lực cốt lõi
 
-- 🏠 **本地/云端部署**：在你的电脑或服务器上运行，数据和配置可控
-- 📁 **文件与工作区操作**：可以搜索、读取、编辑本地文件并执行自动化任务
-- 🧠 **记忆系统升级**：支持 Active Memory、Dreaming、Memory Wiki 等长期记忆能力
-- ⚙️ **自动化主线**：除了定时任务，还支持 Task Flow 和 Webhooks 驱动的持久化流程
-- 🎬 **媒体生成内建化**：官方支持图片、视频、音乐生成以及 ComfyUI 工作流接入
-- 💬 **多平台使用**：支持飞书、企微、钉钉、QQ、Telegram、Discord 等
-- 💰 **成本可控**：使用自己的 API 或本地能力，自行控制成本与安全边界
+- 🏠 **Triển khai Cục bộ / Đám mây**: Chạy trực tiếp trên máy tính cá nhân hoặc máy chủ riêng, hoàn toàn làm chủ dữ liệu và cấu hình
+- 📁 **Thao tác Tệp tin & Không gian làm việc**: Tìm kiếm, đọc, chỉnh sửa tệp tin cục bộ và thực thi các tác vụ tự động hóa
+- 🧠 **Nâng cấp Hệ thống Ghi nhớ**: Hỗ trợ bộ nhớ dài hạn với Active Memory, Dreaming, Memory Wiki
+- ⚙️ **Quy trình Tự động hóa Chủ đạo**: Ngoài lập lịch tác vụ định kỳ (Cron), còn hỗ trợ quy trình bền bỉ điều khiển bởi Task Flow và Webhooks
+- 🎬 **Tích hợp Sẵn Năng lực Tạo Media**: Hỗ trợ chính thức tạo hình ảnh, video, âm nhạc và tích hợp quy trình ComfyUI
+- 💬 **Đa nền tảng**: Hỗ trợ Lark / Feishu, WeCom, DingTalk, QQ, Telegram, Discord, v.v.
+- 💰 **Kiểm soát Chi phí Tuyệt đối**: Dùng API key của riêng bạn hoặc mô hình cục bộ, chủ động kiểm soát ngân sách và ranh giới an toàn
 
-### 2026.4 → 2026.9 你需要知道的主线
+### Những điểm cốt lõi bạn cần nắm từ bản 2026.4 → 2026.9
 
-> 下列能力从 2026.4 起进入主线；**2026.8.1（OpenClaw 2.0）** 与 **v2026.9.3** 又叠加了会话 SQLite、OpenAI 路由规范化和更新恢复等变化。跑教程前先确认 `npm view openclaw version` = `2026.9.3`。
+> Các năng lực dưới đây đã đi vào nhánh chính thức từ bản 2026.4; **2026.8.1 (OpenClaw 2.0)** và **v2026.9.3** tiếp tục bổ sung SQLite cho phiên hội thoại, chuẩn hóa định tuyến OpenAI và cơ chế khôi phục cập nhật. Trước khi thực hành giáo trình, hãy xác nhận `npm view openclaw version` = `2026.9.3`.
 
-#### 仍在用的核心能力
+#### Năng lực cốt lõi đang vận hành
 
-- **Active Memory**：在主回复前自动回忆用户偏好、上下文和历史细节
-- **Dreaming**：通过 light / deep / REM 三阶段，把高价值短期信息提升为长期记忆
-- **Memory Wiki**：把知识库从“普通笔记”升级为带 `claim / evidence`、矛盾检测和新鲜度排序的结构化知识层
-- **Task Flow + Webhooks**：把自动化从“定时触发”扩展为“可恢复、可追踪、可被外部系统驱动”的工作流
-- **`openclaw infer`**：统一模型、图片、音频、TTS、视频、网页搜索和 embedding 的 CLI 入口
-- **Control UI 多语言**：当前官方已支持简中、繁中、日语、韩语、法语、德语、西语等多语言界面
+- **Active Memory**: Tự động gợi nhớ sở thích người dùng, ngữ cảnh và chi tiết lịch sử trước khi tạo câu trả lời chính
+- **Dreaming**: Thông qua 3 giai đoạn light / deep / REM, chắt lọc và nâng cấp thông tin giá trị cao trong ngắn hạn thành bộ nhớ dài hạn
+- **Memory Wiki**: Nâng cấp cơ sở tri thức từ dạng "ghi chú thông thường" thành tầng tri thức có cấu trúc với `claim / evidence`, phát hiện mâu thuẫn và xếp hạng theo độ tươi mới
+- **Task Flow + Webhooks**: Mở rộng tự động hóa từ "kích hoạt theo thời gian" thành quy trình làm việc "có thể khôi phục, theo dõi vết và được điều khiển từ hệ thống bên ngoài"
+- **`openclaw infer`**: Điểm truy cập CLI hợp nhất cho mô hình ngôn ngữ, hình ảnh, âm thanh, TTS, video, tìm kiếm web và embedding
+- **Control UI Đa ngôn ngữ**: Giao diện chính thức hiện hỗ trợ tiếng Trung giản thể, phồn thể, tiếng Nhật, tiếng Hàn, tiếng Pháp, tiếng Đức, tiếng Tây Ban Nha...
 
-#### 升级到 v2026.9.3 还要记住
-- **Node**：`>=24.16.0 <25 || >=26.1.0`（推荐 Node 26）
-- **迁移**：`openclaw doctor --fix`（`openai/*` 路由、OpenProse 清理、Workshop 归属等）
-- **不要再默认推荐**：`openai-codex/*`、`/prose`、整串 `clawhub install …`
+#### Lưu ý khi nâng cấp lên v2026.9.3
+- **Node**: `>=24.16.0 <25 || >=26.1.0` (Khuyến nghị dùng Node 26)
+- **Di chuyển**: `openclaw doctor --fix` (định tuyến `openai/*`, dọn dẹp OpenProse, phân quyền Workshop...)
+- **Không còn khuyến nghị mặc định**: `openai-codex/*`, `/prose`, chuỗi lệnh `clawhub install …`
 
-### 工作原理
+### Nguyên lý hoạt động
 
-![OpenClaw 工作原理 - Gateway网关连接聊天应用和AI智能体](https://upload.maynor1024.live/file/1770956386804_nanobananapro-de8b9c6e-4c15-4267-b112-5b22b2435209-0__2_.png)
+![Nguyên lý hoạt động của OpenClaw - Cổng kết nối Gateway kết nối ứng dụng chat và AI Agent](https://upload.maynor1024.live/file/1770956386804_nanobananapro-de8b9c6e-4c15-4267-b112-5b22b2435209-0__2_.png)
 
-OpenClaw 通过 Gateway 网关将聊天应用连接到 AI 智能体。Gateway 是会话、路由和渠道连接的**唯一事实来源**。
+OpenClaw kết nối các ứng dụng chat với AI Agent thông qua cổng Gateway. Gateway chính là **nguồn chân lý duy nhất (Single Source of Truth)** cho phiên hội thoại, định tuyến và kết nối các kênh giao tiếp.
 
-**核心组件：**
+**Các thành phần cốt lõi:**
 
-1. **Gateway 网关**
-   - 连接各个聊天平台（飞书、企微、QQ、Telegram等）
-   - 管理会话和消息路由
-   - 默认地址：`http://127.0.0.1:18789/`
-   - 配置文件：`~/.openclaw/openclaw.json`
+1. **Cổng kết nối Gateway**
+   - Kết nối các nền tảng chat (Lark / Feishu, WeCom, QQ, Telegram, Discord, v.v.)
+   - Quản lý phiên làm việc và định tuyến tin nhắn
+   - Địa chỉ mặc định: `http://127.0.0.1:18789/`
+   - Tệp cấu hình: `~/.openclaw/openclaw.json`
 
-2. **AI 智能体**
-   - 支持 Claude、GPT、Gemini、DeepSeek、Kimi 等多种模型
-   - 可以本地运行或远程调用
+2. **AI Agent (Tác tử AI)**
+   - Hỗ trợ đa dạng mô hình: Claude, GPT, Gemini, DeepSeek, Qwen, Kimi, GLM, MiniMax...
+   - Có thể chạy mô hình cục bộ hoặc gọi API từ xa
 
-3. **Skills 技能系统**
-   - 文件管理、知识管理、自动化等
-   - 可自定义开发
+3. **Hệ thống Kỹ năng (Skills System)**
+   - Quản lý tệp tin, quản lý tri thức, tự động hóa...
+   - Có thể tự phát triển và mở rộng tùy biến
 
 4. **ClawHub**
-   - 技能市场，可以下载和分享 Skills
+   - Chợ kỹ năng, nơi bạn có thể tải về và chia sẻ các Skills
 
-> 💡 **Gateway 网关是什么？**  
-> Gateway 是 OpenClaw 的核心服务，它像一个"中央调度站"，负责：
-> - 接收来自不同平台的消息（飞书、企微、QQ、Telegram等）
-> - 将消息转发给 AI 智能体处理
-> - 把 AI 的回复发送回对应平台
-> - 管理所有的会话和上下文
+> 💡 **Cổng kết nối Gateway là gì?**  
+> Gateway là dịch vụ trung tâm của OpenClaw, hoạt động như một "trạm điều phối đầu não", đảm nhiệm:
+> - Tiếp nhận tin nhắn từ các nền tảng khác nhau (Lark / Feishu, WeCom, QQ, Telegram...)
+> - Chuyển tiếp tin nhắn cho AI Agent xử lý
+> - Gửi phản hồi của AI trở lại nền tảng tương ứng
+> - Quản lý toàn bộ phiên hội thoại và ngữ cảnh
 > 
-> 这就是为什么你可以在任何平台上使用 OpenClaw，因为 Gateway 统一管理了所有的连接。
+> Nhờ Gateway quản lý hợp nhất tất cả kết nối, bạn có thể tương tác với OpenClaw mượt mà từ bất kỳ nền tảng nhắn tin nào.
 
-![Gateway 工作流程 - 消息路由和会话管理](https://upload.maynor1024.live/file/1770956080282_nanobananapro-de8b9c6e-4c15-4267-b112-5b22b2435209-0.png)
+![Quy trình hoạt động của Gateway - Định tuyến tin nhắn và quản lý phiên](https://upload.maynor1024.live/file/1770956080282_nanobananapro-de8b9c6e-4c15-4267-b112-5b22b2435209-0.png)
 
 ---
 
-## 1.2 为什么选择OpenClaw
+## 1.2 Vì sao nên chọn OpenClaw?
 
-### 与在线AI的本质区别
+### Khác biệt bản chất so với AI trực tuyến
 
-OpenClaw 与传统在线 AI 服务在部署方式、数据隐私和功能扩展等方面存在本质差异，如表 1-3 所示。
+OpenClaw và các dịch vụ AI trực tuyến truyền thống có sự khác biệt bản chất về phương thức triển khai, quyền riêng tư dữ liệu và khả năng mở rộng tính năng, như được thể hiện trong Bảng 1-3.
 
-**表 1-3 OpenClaw 与在线 AI 对比**
+**Bảng 1-3 So sánh giữa OpenClaw và AI trực tuyến**
 
-| 特性 | OpenClaw | ChatGPT/Claude网页版 |
+| Đặc tính | OpenClaw | ChatGPT/Claude bản web |
 |------|----------|---------------------|
-| 部署方式 | 本地/云端 | 在线服务 |
-| 数据隐私 | ✅ 完全掌控 | ⚠️ 上传到服务器 |
-| 本地文件访问 | ✅ 支持 | ❌ 不支持 |
-| 系统操作 | ✅ 支持 | ❌ 不支持 |
-| 功能扩展 | ✅ Skills系统 | ❌ 固定功能 |
-| 成本 | 按需付费 | 订阅制 |
-| 多平台集成 | ✅ 支持 | ⚠️ 有限 |
+| Phương thức triển khai | Cục bộ / Máy chủ riêng | Dịch vụ đám mây trực tuyến |
+| Quyền riêng tư dữ liệu | ✅ Hoàn toàn làm chủ | ⚠️ Tải lên máy chủ nhà cung cấp |
+| Truy cập tệp tin cục bộ | ✅ Hỗ trợ đầy đủ | ❌ Không hỗ trợ |
+| Thao tác hệ thống | ✅ Hỗ trợ | ❌ Không hỗ trợ |
+| Mở rộng tính năng | ✅ Hệ thống Skills | ❌ Tính năng cố định |
+| Chi phí | Trả theo mức sử dụng thực tế | Đăng ký thuê bao cố định |
+| Tích hợp đa nền tảng | ✅ Hỗ trợ mạnh mẽ | ⚠️ Hạn chế |
 
-**简单来说**：
-- ChatGPT/Claude：像在网吧上网，方便但受限
-- OpenClaw：像自己的电脑，自由但需要配置
+**Nói một cách đơn giản**:
+- ChatGPT/Claude: Giống như ngồi máy tính ở quán net, tiện lợi nhưng bị hạn chế nhiều mặt
+- OpenClaw: Giống như sở hữu chiếc máy tính riêng của bạn, tự do tuyệt đối nhưng cần bạn tự thiết lập
 
-### 五大核心优势
+### Năm ưu thế cốt lõi
 
-#### 1. 本地部署，保护隐私
+#### 1. Triển khai cục bộ, bảo vệ quyền riêng tư tuyệt đối
 
-**场景**：你需要AI帮你整理公司的财务报表
+**Tình huống**: Bạn cần AI hỗ trợ phân tích và tổng hợp báo cáo tài chính nội bộ của công ty
 
-- ❌ **在线AI**：需要上传文件到服务器，存在泄密风险
-- ✅ **OpenClaw**：文件不离开你的电脑，完全安全
+- ❌ **AI trực tuyến**: Phải tải tệp tin lên máy chủ bên thứ ba, tiềm ẩn nguy cơ rò rỉ dữ liệu mật
+- ✅ **OpenClaw**: Tệp tin không bao giờ rời khỏi máy tính của bạn, an toàn tuyệt đối
 
-#### 2. 访问本地文件和系统
+#### 2. Truy cập tệp tin cục bộ và điều khiển hệ thống
 
-**场景**：你想找一张去年的发票
+**Tình huống**: Bạn cần tìm lại một hóa đơn mua sắm từ năm ngoái
 
-- ❌ **在线AI**：无法访问你的电脑，只能手动找
-- ✅ **OpenClaw**：直接搜索电脑上的所有文件，秒找到
+- ❌ **AI trực tuyến**: Không thể truy cập máy tính của bạn, bạn phải tự tìm kiếm thủ công
+- ✅ **OpenClaw**: Tự động tìm kiếm tức thì trên toàn bộ ổ đĩa máy tính, ra kết quả trong vài giây
 
-**真实案例**：
-我：帮我找一下我电脑上的一张发票，里面详情是买了一个跑步机
-OpenClaw：[搜索中...] 找到了！这是您的跑步机发票 [发送文件]
+**Ví dụ thực tế**:
+Bạn: Tìm giúp tôi một hóa đơn trên máy tính, nội dung chi tiết là mua một chiếc máy chạy bộ
+OpenClaw: [Đang tìm kiếm...] Đã tìm thấy! Đây là hóa đơn mua máy chạy bộ của bạn [Đã gửi tệp kèm theo]
 
+#### 3. Hệ sinh thái Skills mở rộng linh hoạt
 
-#### 3. 可扩展的Skills生态
+**Tình huống**: Bạn muốn nhờ AI hỗ trợ vẽ hình minh họa
 
-**场景**：你想让AI帮你画图
+- ❌ **AI trực tuyến**: Tính năng cố định, nếu nền tảng không hỗ trợ thì bạn không thể làm gì hơn
+- ✅ **OpenClaw**: Cài đặt Banana Skills là hỗ trợ tạo ảnh tức thì
 
-- ❌ **在线AI**：功能固定，不支持就没办法
-- ✅ **OpenClaw**：安装 Banana Skills，立即支持画图
+**Các nhóm Skills thông dụng**:
+- Quản lý tệp: Tìm kiếm thông minh, xử lý hàng loạt, tự động sắp xếp
+- Quản lý tri thức: Lưu trữ trang web, đồng bộ ghi chú, quản lý bài báo nghiên cứu
+- Quản lý lịch trình: Đồng bộ lịch, nhắc nhở thông minh
+- Tự động hóa: Tác vụ định kỳ (Cron), theo dõi website, gửi báo cáo hàng ngày
+- Công cụ tiện ích: Chụp màn hình, dịch thuật, tạo ảnh, sinh video
 
-**可用的Skills**：
-- 文件管理：智能搜索、批量处理、自动整理
-- 知识管理：网页剪藏、笔记同步、论文管理
-- 日程管理：日历同步、智能提醒
-- 自动化：定时任务、网站监控、日报推送
-- 工具类：截图、翻译、画图、视频生成
+#### 4. Hỗ trợ đa nền tảng nhắn tin
 
-#### 4. 多平台支持
+**Tình huống**: Bạn đang ở ngoài đường và cần AI xử lý gấp một tệp tin trên máy làm việc
 
-**场景**：你在外面，想让AI帮你处理文件
+- ❌ **AI trực tuyến**: Phải mở trình duyệt web trên điện thoại, thao tác bất tiện
+- ✅ **OpenClaw**: Mở ứng dụng Lark / Feishu, WeCom, Telegram hoặc Discord, gửi tin nhắn trực tiếp
 
-- ❌ **在线AI**：需要打开网页，操作不便
-- ✅ **OpenClaw**：打开飞书/企微/QQ，直接发消息
+**Các nền tảng được hỗ trợ**:
+- 🏢 **WeCom (WeChat Doanh nghiệp)**: Cộng tác đội ngũ
+- 📱 **DingTalk**: Tự động hóa văn phòng
+- 🚀 **Lark / Feishu**: Quản lý dự án
+- 💬 **QQ**: Trợ lý cá nhân
+- 🌐 **Telegram / Discord**: Nền tảng quốc tế
 
-**支持的平台**：
-- 🏢 **企业微信**：团队协作
-- 📱 **钉钉**：办公自动化
-- 🚀 **飞书**：项目管理
-- 💬 **QQ**：个人助手
-- 🌐 **Telegram/Discord**：国际平台
+#### 5. Kiểm soát chi phí tối đa
 
-#### 5. 成本可控
+**Tình huống**: Bạn lo ngại chi phí thuê bao AI hàng tháng quá đắt đỏ
 
-**场景**：你担心AI使用费用太高
+- ❌ **ChatGPT Plus**: $20/tháng (gần 500.000 VNĐ), chi phí cố định dù dùng ít hay nhiều
+- ✅ **OpenClaw**: Trả theo mức sử dụng thực tế (pay-as-you-go), dùng bao nhiêu trả bấy nhiêu
 
-- ❌ **ChatGPT Plus**：20美元/月，固定费用
-- ✅ **OpenClaw**：按需付费，用多少花多少
+**So sánh chi phí** (Mức sử dụng hàng tháng: Trung bình):
+- ChatGPT Plus: $20 (~500.000 VNĐ)
+- Claude Pro: $20 (~500.000 VNĐ)
+- OpenClaw + DeepSeek: 18.000 - 100.000 VNĐ
+- OpenClaw + Kimi / Qwen: 35.000 - 170.000 VNĐ
 
-**成本对比**（月使用量：中等）：
-- ChatGPT Plus：20美元（约140元）
-- Claude Pro：20美元（约140元）
-- OpenClaw + DeepSeek：5-30元
-- OpenClaw + Kimi：10-50元
+💡 **Mẹo tiết kiệm chi phí**: Kết hợp các mô hình mã nguồn mở hoặc nhà cung cấp tối ưu chi phí như DeepSeek có thể giúp bạn tiết kiệm 50% - 70% ngân sách so với thuê bao cố định.
 
-💡 **省钱技巧**：使用国产大模型可以节省50%-70%成本
-
-![真实用户案例 - 内容创作者的效率提升之路](https://upload.maynor1024.live/file/1770956135054_nanobananapro-f4cf9d4d-92b3-4ce5-a2ce-b38e5873b2d4-0__1_.png)
+![Ca thực tế người dùng - Con đường nâng cao hiệu suất của nhà sáng tạo nội dung](https://upload.maynor1024.live/file/1770956135054_nanobananapro-f4cf9d4d-92b3-4ce5-a2ce-b38e5873b2d4-0__1_.png)
 
 ---
 
-## 1.3 OpenClaw vs 主流AI工具
+## 1.3 So sánh OpenClaw với các công cụ AI phổ biến
 
-OpenClaw 与主流 AI 工具在功能定位和成本结构上存在显著差异。下面从核心功能、成本和适用人群三个维度进行详细对比。
+OpenClaw và các công cụ AI chủ đạo có định vị tính năng và cấu trúc chi phí khác biệt rõ rệt. Dưới đây là bảng phân tích chi tiết theo 3 khía cạnh: tính năng cốt lõi, chi phí và đối tượng phù hợp.
 
-#### 核心功能对比
+#### So sánh tính năng cốt lõi
 
-OpenClaw 在本地文件访问、系统操作和自动化任务方面具有明显优势，如表 1-1 所示。
+OpenClaw sở hữu lợi thế vượt trội về truy cập tệp tin cục bộ, thao tác hệ thống và thực thi tác vụ tự động hóa, như thể hiện trong Bảng 1-1.
 
-**表 1-1 主流 AI 工具功能对比**
+**Bảng 1-1 So sánh tính năng giữa các công cụ AI chủ đạo**
 
-| 功能特性 | OpenClaw | ChatGPT Plus | Cursor | Claude Pro |
+| Tính năng | OpenClaw | ChatGPT Plus | Cursor | Claude Pro |
 |---------|----------|--------------|--------|------------|
-| **本地文件访问** | ✅ 完整支持 | ❌ 不支持 | ✅ 支持 | ❌ 不支持 |
-| **系统操作** | ✅ 日历/备忘录/截图 | ❌ 不支持 | ⚠️ 有限 | ❌ 不支持 |
-| **多平台集成** | ✅ 飞书/企微/钉钉/QQ | ⚠️ 有限 | ❌ 不支持 | ⚠️ 有限 |
-| **Skills扩展** | ✅ 1715+ | ❌ 不支持 | ⚠️ 插件 | ❌ 不支持 |
-| **多模型切换** | ✅ 随意切换 | ❌ 固定GPT | ✅ 支持 | ❌ 固定Claude |
-| **代码能力** | ✅ 强 | ⚠️ 中等 | ✅ 强 | ✅ 强 |
-| **自动化任务** | ✅ 完整支持 | ❌ 不支持 | ❌ 不支持 | ❌ 不支持 |
+| **Truy cập tệp tin cục bộ** | ✅ Hỗ trợ toàn diện | ❌ Không hỗ trợ | ✅ Hỗ trợ | ❌ Không hỗ trợ |
+| **Thao tác hệ thống** | ✅ Lịch / Ghi chú / Chụp màn hình | ❌ Không hỗ trợ | ⚠️ Hạn chế | ❌ Không hỗ trợ |
+| **Tích hợp đa nền tảng** | ✅ Lark / WeCom / DingTalk / Telegram | ⚠️ Hạn chế | ❌ Không hỗ trợ | ⚠️ Hạn chế |
+| **Mở rộng Skills** | ✅ 1715+ Skills | ❌ Không hỗ trợ | ⚠️ Plugins | ❌ Không hỗ trợ |
+| **Chuyển đổi đa mô hình** | ✅ Tự do chuyển đổi | ❌ Cố định GPT | ✅ Hỗ trợ | ❌ Cố định Claude |
+| **Năng lực lập trình** | ✅ Mạnh mẽ | ⚠️ Trung bình | ✅ Rất mạnh | ✅ Rất mạnh |
+| **Tác vụ tự động hóa** | ✅ Hỗ trợ toàn diện | ❌ Không hỗ trợ | ❌ Không hỗ trợ | ❌ Không hỗ trợ |
 
-#### 成本对比
+#### So sánh chi phí
 
-OpenClaw 采用按量付费模式，相比固定月费的在线服务可节省 73%-96% 的成本，如表 1-2 所示。
+OpenClaw áp dụng mô hình thanh toán theo lượng sử dụng thực tế, giúp tiết kiệm từ 73% đến 96% chi phí so với các dịch vụ trực tuyến tính phí thuê bao tháng, như trong Bảng 1-2.
 
-**表 1-2 年度成本对比**
+**Bảng 1-2 So sánh chi phí theo năm**
 
-| 项目 | OpenClaw | ChatGPT Plus | Cursor | Claude Pro |
+| Khoản mục | OpenClaw | ChatGPT Plus | Cursor | Claude Pro |
 |------|----------|--------------|--------|------------|
-| **月费** | 5-50元 | 140元 | 140元 | 140元 |
-| **年费** | 60-600元 | 1680元 | 1680元 | 1680元 |
-| **节省** | - | 节省73%-96% | 节省73%-96% | 节省73%-96% |
-| **计费方式** | 按量付费 | 固定月费 | 固定月费 | 固定月费 |
+| **Phí tháng** | 18.000 - 180.000 VNĐ | ~500.000 VNĐ ($20) | ~500.000 VNĐ ($20) | ~500.000 VNĐ ($20) |
+| **Phí năm** | 200.000 - 2.000.000 VNĐ | ~6.000.000 VNĐ ($240) | ~6.000.000 VNĐ ($240) | ~6.000.000 VNĐ ($240) |
+| **Mức tiết kiệm** | - | Tiết kiệm 73%-96% | Tiết kiệm 73%-96% | Tiết kiệm 73%-96% |
+| **Hình thức tính phí** | Trả theo lượng dùng | Thuê bao tháng cố định | Thuê bao tháng cố định | Thuê bao tháng cố định |
 
-**成本说明**：
-- OpenClaw 成本 = 服务器费用（可选）+ API 费用
-- 本地部署：0元服务器 + 5-30元 API = 5-30元/月
-- 云端部署：20元服务器 + 5-30元 API = 25-50元/月
+**Giải thích chi phí**:
+- Chi phí OpenClaw = Chi phí máy chủ (tùy chọn) + Chi phí API token
+- Triển khai cục bộ: 0 VNĐ máy chủ + 18.000 - 100.000 VNĐ API = 18.000 - 100.000 VNĐ/tháng
+- Triển khai đám mây: ~70.000 VNĐ máy chủ VPS + 18.000 - 100.000 VNĐ API = ~90.000 - 170.000 VNĐ/tháng
 
-#### 适合人群
+#### Đối tượng phù hợp
 
-✅ **强烈推荐OpenClaw的人群**：
-1. **超级个体/自由职业者** - 需要一个人顶一个团队
-2. **知识工作者** - 需要管理大量文档和知识
-3. **程序员** - 需要代码辅助和自动化
-4. **内容创作者** - 需要素材管理和多平台发布
-5. **注重隐私** - 不想上传敏感文件到云端
-6. **成本敏感** - 想要高性价比的AI助手
+✅ **Những ai đặc biệt nên sử dụng OpenClaw**:
+1. **Cá nhân độc lập (Solopreneur) / Freelancer** - Cần một người vận hành khối lượng công việc của cả một đội ngũ
+2. **Người làm việc tri thức (Knowledge Worker)** - Cần quản lý khối lượng lớn tài liệu và dữ liệu cá nhân
+3. **Lập trình viên** - Cần trợ lý hỗ trợ viết mã và tự động hóa quy trình phát triển
+4. **Nhà sáng tạo nội dung (Content Creator)** - Cần quản lý tư liệu và xuất bản nội dung đa kênh
+5. **Người đề cao quyền riêng tư** - Không muốn tải dữ liệu nhạy cảm lên máy chủ đám mây
+6. **Người quan tâm đến chi phí** - Mong muốn sở hữu trợ lý AI hiệu năng cao với chi phí tối ưu nhất
 
-⚠️ **如果你只需要简单对话，可以考虑**：
-- ChatGPT Plus：最简单，开箱即用
-- Claude Pro：长文本处理能力强
+⚠️ **Nếu bạn chỉ có nhu cầu trò chuyện đơn giản, có thể cân nhắc**:
+- ChatGPT Plus: Đơn giản nhất, sẵn sàng dùng ngay không cần cài đặt
+- Claude Pro: Xử lý ngữ cảnh dài rất xuất sắc
 
-💡 **最佳方案**：
-- 日常对话：ChatGPT/Claude
-- 工作助手：OpenClaw（本地文件、自动化、多平台）
-- 代码编写：Cursor + OpenClaw
+💡 **Mô hình phối hợp tối ưu**:
+- Trò chuyện thường ngày: ChatGPT / Claude
+- Trợ lý công việc toàn diện: OpenClaw (tệp cục bộ, tự động hóa, đa nền tảng)
+- Lập trình chuyên sâu: Cursor + OpenClaw
 
-### 真实案例：为什么我选择OpenClaw
+### Ca thực tế: Vì sao tôi chọn OpenClaw?
 
-> 我是一个内容创作者，每天需要：
-> - 整理大量的资料和文章
-> - 管理日程和任务
-> - 生成图片和视频
-> - 多平台发布内容
+> Tôi là một nhà sáng tạo nội dung, công việc mỗi ngày bao gồm:
+> - Tổng hợp và chọn lọc lượng lớn tư liệu, bài viết
+> - Quản lý lịch trình và phân bổ nhiệm vụ
+> - Tạo hình ảnh minh họa và video
+> - Đăng tải nội dung lên nhiều nền tảng
 >
-> 以前我需要：
-> - ChatGPT：写文案
-> - Notion：管理笔记
-> - Midjourney：画图
-> - 各种工具：自动化
+> Trước đây, tôi cần dùng:
+> - ChatGPT: Viết nội dung, kịch bản
+> - Notion: Quản lý ghi chú
+> - Midjourney: Tạo ảnh
+> - Các công cụ rời rạc khác: Chạy tự động hóa
 >
-> 现在只需要OpenClaw：
-> - 一个助手搞定所有事情
-> - 成本降低70%
-> - 效率提升10倍
+> Giờ đây, chỉ cần OpenClaw:
+> - Một trợ lý duy nhất giải quyết toàn bộ quy trình
+> - Chi phí giảm tới 70%
+> - Hiệu suất tăng gấp 10 lần
 
-![OpenClaw 多场景应用示意图 - 覆盖工作生活各个方面](https://upload.maynor1024.live/file/1771037222148_nanobananapro-de8b9c6e-4c15-4267-b112-5b22b2435209-0.png)
+![Minh họa ứng dụng đa ngữ cảnh của OpenClaw - Bao quát mọi mặt công việc và đời sống](https://upload.maynor1024.live/file/1771037222148_nanobananapro-de8b9c6e-4c15-4267-b112-5b22b2435209-0.png)
 
 ---
 
-## 1.4 适用场景
+## 1.4 Ngữ cảnh ứng dụng phù hợp
 
-### ✅ 适合使用 OpenClaw的场景
+### ✅ Trường hợp NÊN dùng OpenClaw
 
-#### 1. 个人效率提升
+#### 1. Nâng cao hiệu suất cá nhân
 
-**知识工作者**：
-- 整理大量文档和资料
-- 管理日程和任务
-- 自动化重复工作
+**Người làm việc tri thức**:
+- Tổng hợp và phân loại lượng lớn văn bản, tài liệu
+- Quản lý lịch trình công việc và nhắc nhở nhiệm vụ
+- Tự động hóa các đầu việc thủ công lặp đi lặp lại
 
-**程序员**：
-- 代码搜索和管理
-- 技术文档整理
-- 开发环境管理
+**Lập trình viên**:
+- Tìm kiếm và đối chiếu mã nguồn nội bộ
+- Quản lý tài liệu kỹ thuật
+- Tự động hóa cấu hình môi trường phát triển
 
-**内容创作者**：
-- 资料收集和整理
-- 内容创作辅助
-- 多平台发布
+**Nhà sáng tạo nội dung**:
+- Thu thập và phân loại tư liệu ý tưởng
+- Trợ lực sáng tạo kịch bản, bài viết
+- Xuất bản tự động trên nhiều nền tảng
 
-**学生**：
-- 课程资料管理
-- 论文阅读和笔记
-- 学习计划管理
+**Sinh viên & Nghiên cứu sinh**:
+- Quản lý tài liệu môn học
+- Đọc bài báo khoa học và hệ thống hóa ghi chú
+- Lập và theo dõi kế hoạch học tập
 
-#### 2. 知识管理
+#### 2. Quản lý tri thức
 
-- 网页文章存档
-- GitHub项目管理
-- 论文笔记整理
-- 跨设备同步
+- Lưu trữ trang web để đọc ngoại tuyến
+- Quản lý kho dự án GitHub cá nhân
+- Hệ thống hóa ghi chú tài liệu nghiên cứu
+- Đồng bộ dữ liệu mượt mà giữa các thiết bị
 
-#### 3. 编程开发
+#### 3. Phát triển phần mềm & Lập trình
 
-- 代码搜索和理解
-- 技术文档查询
-- 开发环境配置
-- 项目管理
+- Tìm kiếm và phân tích logic mã nguồn
+- Tra cứu nhanh tài liệu kỹ thuật
+- Quản lý và thiết lập môi trường phát triển
+- Tự động hóa điều phối dự án
 
-#### 4. 团队协作
+#### 4. Cộng tác đội ngũ
 
-- 项目管理自动化
-- 文档协作优化
-- 会议记录整理
-- 团队知识库建设
+- Tự động hóa quản trị tiến độ dự án
+- Tối ưu hóa quy trình cộng tác tài liệu
+- Tổng hợp và trích xuất biên bản cuộc họp
+- Xây dựng cơ sở tri thức nội bộ cho nhóm
 
-#### 5. 创意工作
+#### 5. Sáng tạo nội dung số
 
-- AI绘画工作流
-- 视频脚本生成
-- 多语言翻译
-- 数据分析自动化
+- Quy trình vẽ tranh AI tự động
+- Tạo kịch bản video theo chủ đề
+- Dịch thuật đa ngôn ngữ có ngữ cảnh
+- Tự động hóa phân tích và trực quan hóa dữ liệu
 
-### ❌ 不适合使用 OpenClaw的场景
+### ❌ Trường hợp KHÔNG NÊN dùng OpenClaw
 
-#### 1. 纯在线对话
+#### 1. Chỉ có nhu cầu trò chuyện trực tuyến đơn giản
 
-如果你只是想偶尔和AI对话，不需要访问本地文件：
-- ChatGPT网页版更方便
-- 无需安装配置
-- 打开就能用
+Nếu bạn chỉ muốn thỉnh thoảng trò chuyện hỏi đáp với AI mà không cần chạm vào tệp tin máy tính:
+- ChatGPT bản web tiện lợi hơn rất nhiều
+- Không cần cài đặt hay thiết lập môi trường
+- Mở trình duyệt là dùng được ngay
 
-#### 2. 专业代码编辑
+#### 2. Chỉnh sửa mã nguồn chuyên sâu trong IDE
 
-如果你只需要代码补全和编辑：
-- Cursor更专业
-- GitHub Copilot更方便
-- 集成度更高
+Nếu bạn chỉ cần tính năng tự động hoàn thành mã (code completion) và chỉnh sửa code trực tiếp:
+- Cursor hoặc VS Code với Copilot mang lại trải nghiệm chuyên dụng hơn
+- Tích hợp sâu vào trình biên tập
+- Đỡ công đoạn kết nối gateway
 
-#### 3. 移动端为主
+#### 3. Ưu tiên sử dụng hoàn toàn trên thiết bị di động
 
-如果你主要在手机上使用：
-- ChatGPT App更方便
-- Claude App更流畅
-- 无需配置
+Nếu nhu cầu chủ yếu của bạn là nhắn tin trên điện thoại:
+- Ứng dụng di động ChatGPT hoặc Claude mượt mà hơn
+- Không cần quản lý máy chủ hay máy tính ở nhà bật 24/7
 
-#### 4. 不想折腾
+#### 4. Không muốn dành thời gian thiết lập kỹ thuật
 
-如果你：
-- 不想学习新工具
-- 不想配置环境
-- 只想开箱即用
+Nếu bạn:
+- Ngại tìm hiểu công cụ mới
+- Không muốn cài đặt môi trường dòng lệnh
+- Chỉ thích những gì có sẵn dùng được ngay ("mì ăn liền")
 
-那么在线AI服务更适合你。
+Khi đó, các dịch vụ AI trực tuyến thương mại sẽ phù hợp với bạn hơn.
 
-### 💡 最佳实践
+### 💡 Gợi ý phối hợp tối ưu nhất
 
-**推荐组合**：
-1. **OpenClaw**：日常工作助手
-2. **Cursor**：代码编辑
-3. **ChatGPT**：移动端对话
+**Bộ công cụ đề xuất**:
+1. **OpenClaw**: Trợ lý công việc toàn năng hàng ngày
+2. **Cursor / VS Code**: Soạn thảo và chỉnh sửa mã nguồn
+3. **ChatGPT**: Trò chuyện nhanh trên di động
 
-**使用建议**：
-- 在电脑上：优先使用 OpenClaw
-- 写代码时：使用Cursor
-- 在外面时：使用ChatGPT App
+**Lời khuyên sử dụng**:
+- Khi làm việc trên máy tính: Ưu tiên dùng OpenClaw
+- Khi viết mã chuyên sâu: Dùng Cursor kết hợp OpenClaw
+- Khi di chuyển bên ngoài: Dùng ứng dụng ChatGPT hoặc nhắn tin về OpenClaw qua bot Telegram/Lark
 
-![AI工具能力对比雷达图 - OpenClaw在任务规划和自动化方面的优势](https://upload.maynor1024.live/file/1770956241802_nanobananapro-de8b9c6e-4c15-4267-b112-5b22b2435209-0__1_.png)
+![Biểu đồ radar so sánh năng lực các công cụ AI - Thế mạnh của OpenClaw trong lập kế hoạch nhiệm vụ và tự động hóa](https://upload.maynor1024.live/file/1770956241802_nanobananapro-de8b9c6e-4c15-4267-b112-5b22b2435209-0__1_.png)
 
 ---
 
-## 1.5 OpenClaw vs 其他AI工具能力对比
+## 1.5 So sánh chi tiết năng lực giữa OpenClaw và các công cụ AI khác
 
-不同 AI 工具在任务规划、自动执行、代码质量等维度上各有侧重。OpenClaw 在任务规划和自动化方面表现突出，如表 1-4 所示。
+Mỗi công cụ AI có trọng tâm thế mạnh riêng ở các khía cạnh như lập kế hoạch nhiệm vụ, tự động thực thi và chất lượng mã nguồn. OpenClaw thể hiện ưu thế vượt trội ở khả năng hoạch định nhiệm vụ và tự động hóa quy trình, như trình bày trong Bảng 1-4.
 
-**表 1-4 AI 工具能力维度对比**
+**Bảng 1-4 So sánh các chiều năng lực giữa các công cụ AI**
 
-| 能力维度 | OpenClaw | Claude Code | Cursor | ChatGPT |
+| Chiều năng lực | OpenClaw | Claude Code | Cursor | ChatGPT |
 |---------|----------|-------------|--------|---------|
-| 任务规划 | ⭐⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐ |
-| 自动执行 | ⭐⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐ |
-| 自我修复 | ⭐⭐⭐⭐⭐ | ⭐⭐ | ⭐⭐ | ⭐ |
-| 工程级操作 | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐ |
-| 本地自动化 | ⭐⭐⭐⭐⭐ | ⭐⭐ | ⭐⭐ | ⭐ |
-| 代码质量 | ⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ |
-| 易用性 | ⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
+| Lập kế hoạch nhiệm vụ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐ |
+| Tự động thực thi | ⭐⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐ |
+| Tự phục hồi lỗi | ⭐⭐⭐⭐⭐ | ⭐⭐ | ⭐⭐ | ⭐ |
+| Thao tác cấp kỹ thuật | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐ |
+| Tự động hóa cục bộ | ⭐⭐⭐⭐⭐ | ⭐⭐ | ⭐⭐ | ⭐ |
+| Chất lượng mã nguồn | ⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ |
+| Độ dễ tiếp cận | ⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
 
-**核心差异：**
-- **OpenClaw**：强在任务规划和自动执行完整工程流程
-- **Claude Code/Cursor**：强在代码质量与理解
-- **ChatGPT**：强在对话体验和易用性
-
-
+**Điểm khác biệt cốt lõi:**
+- **OpenClaw**: Vượt trội trong việc lập kế hoạch nhiệm vụ và tự động thực thi trọn vẹn quy trình kỹ thuật
+- **Claude Code / Cursor**: Mạnh nhất về độ tinh tế và chất lượng của mã nguồn được sinh ra
+- **ChatGPT**: Trải nghiệm giao tiếp đối thoại thân thiện và trực quan nhất
 
 ---
 
-## 本章小结
+## Tổng kết chương
 
-通过本章，你应该了解了：
+Qua chương này, bạn đã nắm được:
 
-✅ **OpenClaw是什么**：本地AI助手，通过Gateway连接多个平台  
-✅ **核心优势**：本地部署、文件访问、可扩展、多平台、成本低  
-✅ **与其他AI的区别**：更适合作为个人工作助手  
-✅ **适用场景**：效率提升、知识管理、编程开发、团队协作  
-✅ **不适合场景**：纯对话、移动端为主、不想折腾
+✅ **OpenClaw là gì**: Trợ lý AI cục bộ kết nối đa nền tảng nhắn tin thông qua Cổng kết nối Gateway  
+✅ **Ưu thế cốt lõi**: Triển khai nội bộ, truy cập tệp tin, mở rộng linh hoạt, đa nền tảng, chi phí tối ưu  
+✅ **Khác biệt với AI trực tuyến**: Định vị là người trợ lý công việc đắc lực cho cá nhân  
+✅ **Ngữ cảnh nên dùng**: Nâng cao năng suất, quản lý tri thức, phát triển phần mềm, cộng tác nhóm  
+✅ **Ngữ cảnh không nên dùng**: Chỉ trò chuyện thông thường, thuần di động, ngại thiết lập kỹ thuật  
 
-## 思考题
+## Câu hỏi ôn tập
 
-1. 你目前使用什么AI工具？遇到了什么问题？
-2. OpenClaw的哪个功能最吸引你？
-3. 你打算用OpenClaw做什么？
-
----
-
-**下一章**：[第2章：环境搭建](02-installation.md) - 5分钟完成安装
-
-**返回目录**：[README](../../README.md)
+1. Bạn hiện đang sử dụng những công cụ AI nào? Những công cụ đó có hạn chế gì khiến bạn chưa hài lòng?
+2. Tính năng nào của OpenClaw gây ấn tượng lớn nhất với bạn?
+3. Bạn dự định sẽ ứng dụng OpenClaw vào công việc hay dự án cụ thể nào đầu tiên?
 
 ---
 
-## 🌐 在线阅读
+**Chương tiếp theo**: [Chương 2: Thiết lập môi trường](02-installation.md) - Hoàn tất cài đặt chỉ trong 5 phút
 
-📖 **想在线阅读此章节？**
+**Trở về mục lục**: [README](../../README.md)
 
-[🔗 在线阅读：第1章 - OpenClaw是什么？](https://awesome.tryopenclaw.asia/docs/01-basics/01-introduction/)
+---
 
-访问网站获取更好的阅读体验：
-- 📱 响应式设计，支持手机、平板、电脑
-- 🌙 支持黑暗模式，保护眼睛
-- 🔍 内置搜索功能，快速定位内容
-- 📋 目录导航，轻松跳转章节
+## 🌐 Đọc trực tuyến
 
-[🏠 访问完整教程网站](https://awesome.tryopenclaw.asia)
+📖 **Bạn muốn đọc chương này trên nền tảng web?**
+
+[🔗 Đọc trực tuyến: Chương 1 - Tìm hiểu về OpenClaw](https://awesome.tryopenclaw.asia/docs/01-basics/01-introduction/)
+
+Trải nghiệm đọc tốt hơn trên website giáo trình:
+- 📱 Thiết kế tương thích hoàn hảo cho điện thoại, máy tính bảng và máy tính
+- 🌙 Chế độ nền tối (Dark Mode) dịu mắt
+- 🔍 Tích hợp tìm kiếm nhanh nội dung
+- 📋 Thanh điều hướng mục lục trực quan, dễ dàng chuyển đổi giữa các chương
+
+[🏠 Truy cập website giáo trình đầy đủ](https://awesome.tryopenclaw.asia)
