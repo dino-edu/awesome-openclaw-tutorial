@@ -28,7 +28,7 @@
 
 ---
 
-### Nhiệm Vụ 1: Bản Địa Hóa Hạ Tầng, Cấu Hình Jekyll & Giao Diện Web
+### Task 1: Bản Địa Hóa Hạ Tầng, Cấu Hình Jekyll & Giao Diện Web
 
 **Tệp tin:**
 - Sửa đổi: `_config.yml`
@@ -100,7 +100,7 @@ git commit -m "feat(i18n): localize Jekyll infrastructure, navigation, and searc
 
 ---
 
-### Nhiệm Vụ 2: Bản Địa Hóa Trang Chủ & Lộ Trình Học Tập
+### Task 2: Bản Địa Hóa Trang Chủ & Lộ Trình Học Tập
 
 **Tệp tin:**
 - Sửa đổi: `README.md`
@@ -132,7 +132,7 @@ git commit -m "docs(i18n): translate README, index, and LEARNING-PATH to Vietnam
 
 ---
 
-### Nhiệm Vụ 3: Phần 1 - Nhập Môn & Nền Tảng (Chương 1 đến 3)
+### Task 3: Phần 1 - Nhập Môn & Nền Tảng (Chương 1 đến 3)
 
 **Tệp tin:**
 - Sửa đổi: `docs/01-basics/01-introduction.md` (~422 dòng)
@@ -164,7 +164,7 @@ git commit -m "docs(i18n): translate Part 1 Basics (Chapters 1-3) to Vietnamese"
 
 ---
 
-### Nhiệm Vụ 4: Phần 2 - Tính Năng Cốt Lõi (Chương 4 đến 7)
+### Task 4: Phần 2 - Tính Năng Cốt Lõi (Chương 4 đến 7)
 
 **Tệp tin:**
 - Sửa đổi: `docs/02-core-features/04-file-management.md` (~697 dòng)
@@ -189,7 +189,7 @@ git commit -m "docs(i18n): translate Part 2 Core Features (Chapters 4-7) to Viet
 
 ---
 
-### Nhiệm Vụ 5: Phần 3 - Ứng Dụng Nâng Cao & Tài Liệu Bổ Trợ (Chương 8 đến 11 + `docs/*.md`)
+### Task 5: Phần 3 - Ứng Dụng Nâng Cao & Tài Liệu Bổ Trợ (Chương 8 đến 11 + `docs/*.md`)
 
 **Tệp tin:**
 - Sửa đổi: `docs/03-advanced/08-skills-extension.md` (~322 dòng)
@@ -217,7 +217,7 @@ git commit -m "docs(i18n): translate Part 3 Advanced (Chapters 8-11) and standal
 
 ---
 
-### Nhiệm Vụ 6: Phần 4 - Ca Thực Chiến & Thư Mục Mẫu `examples/` (Chương 12 đến 15)
+### Task 6: Phần 4 - Ca Thực Chiến & Thư Mục Mẫu `examples/` (Chương 12 đến 15)
 
 **Tệp tin:**
 - Sửa đổi: `docs/04-practical-cases/12-personal-productivity.md` (~300 dòng)
@@ -240,7 +240,7 @@ git commit -m "docs(i18n): translate Part 4 Practical Cases (Chapters 12-15) and
 
 ---
 
-### Nhiệm Vụ 7: Hệ Thống Phụ Lục Kỹ Thuật (Phụ lục A đến N)
+### Task 7: Hệ Thống Phụ Lục Kỹ Thuật (Phụ lục A đến N)
 
 **Tệp tin:**
 - Sửa đổi: `appendix/A-command-reference.md`
@@ -265,7 +265,7 @@ git commit -m "docs(i18n): translate all Appendixes (A through N) to Vietnamese"
 
 ---
 
-### Nhiệm Vụ 8: Hướng Dẫn Bổ Trợ `tutorials/`
+### Task 8: Hướng Dẫn Bổ Trợ `tutorials/`
 
 **Tệp tin:**
 - Sửa đổi: `tutorials/COST-CALCULATOR.md`
@@ -284,7 +284,7 @@ git commit -m "docs(i18n): translate standalone tutorials to Vietnamese"
 
 ---
 
-### Nhiệm Vụ 9: Tái Tạo Chỉ Mục Tìm Kiếm, Rà Soát Liên Kết & QA Toàn Bộ Dự Án
+### Task 9: Tái Tạo Chỉ Mục Tìm Kiếm, Rà Soát Liên Kết & QA Toàn Bộ Dự Án
 
 **Tệp tin:**
 - Sinh mới: `search-index.json`, `search-index-expanded.json`
