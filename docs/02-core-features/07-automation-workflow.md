@@ -565,7 +565,7 @@ A: Bạn chỉ cần nói với OpenClaw: *"Hãy dừng tác vụ [Tên tác v�
 
 ---
 
-**Chương tiếp theo**: [Chương 8: Mở rộng Skills](08-skills-extension.md) - Khám phá chợ kỹ năng ClawHub và tự phát triển Custom Skills cho riêng bạn
+**Chương tiếp theo**: [Chương 8: Mở rộng Skills](../03-advanced/08-skills-extension.md) - Khám phá chợ kỹ năng ClawHub và tự phát triển Custom Skills cho riêng bạn
 
 **Trở về mục lục**: [README](../../README.md)
 

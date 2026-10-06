@@ -100,13 +100,13 @@
 <summary><b>🔧 Tra cứu nhanh lỗi thường gặp (Bấm để mở rộng)</b></summary>
 
 ### Vấn đề cài đặt và cấu hình
-- [Cài đặt thất bại xử lý thế nào?](appendix/E-common-problems.md#安装配置问题)
-- [Kết nối API thất bại?](appendix/E-common-problems.md#api连接问题)
-- [Bot Lark/Feishu không phản hồi?](docs/03-advanced/09-multi-platform-integration.md#常见问题)
+- [Cài đặt thất bại xử lý thế nào?](appendix/E-common-problems.md#sự-cố-cài-đặt-và-cấu-hình)
+- [Kết nối API thất bại?](appendix/E-common-problems.md#sự-cố-kết-nối-api)
+- [Bot Lark/Feishu không phản hồi?](appendix/E-common-problems.md#q13-bot-lark--feishu-không-phản-hồi-tin-nhắn)
 
 ### Vấn đề trong quá trình sử dụng
 - [AI trở nên "im lặng", không chịu thao tác?](#🔧-phiên-bản-202632-ai-không-thực-hiện-lệnh-hoặc-im-lặng) → Chuyển sang profile `full`
-- [Khởi động Gateway thất bại?](appendix/E-common-problems.md#gateway问题) → Kiểm tra cấu hình xác thực (auth)
+- [Khởi động Gateway thất bại?](appendix/E-common-problems.md#sự-cố-gateway) → Kiểm tra cấu hình xác thực (auth)
 
 ### Tối ưu chi phí sử dụng
 - [Chi phí gọi API quá cao?](docs/03-advanced/11-advanced-configuration.md)

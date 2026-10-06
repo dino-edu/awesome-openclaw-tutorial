@@ -72,8 +72,8 @@ def extract_content_summary(content, max_length=500):
     content = re.sub(r'\[.*?\]\(.*?\)', '', content)
     # 移除 markdown 标记
     content = re.sub(r'[#*`\[\]]', '', content)
-    # 移除特殊字符，保留中文、英文、数字
-    content = re.sub(r'[^\u4e00-\u9fa5a-zA-Z0-9\s]', ' ', content)
+    # 移除特殊字符，保留中文、英文、数字以及越南语重音拉丁字符
+    content = re.sub(r'[^\w\s\u4e00-\u9fa5]', ' ', content)
     # 压缩空白
     content = re.sub(r'\s+', ' ', content).strip()
 
@@ -145,12 +145,12 @@ def main():
                         search_index.append(doc)
                         print(f"✓ 已索引: {doc['title']}")
 
-    # 添加首页
+    # Thêm trang chủ (Homepage)
     search_index.insert(0, {
-        'title': '首页',
+        'title': 'Trang chủ',
         'url': '/',
-        'excerpt': '从零开始打造你的AI工作助手：最全面的中文教程',
-        'content': 'OpenClaw 一本书玩转 OpenClaw：超级个体实战指南 从零开始打造你的 AI 工作助手 最全面的中文教程 涵盖安装 配置 实战案例 避坑指南',
+        'excerpt': 'Giáo trình OpenClaw toàn diện cho cá nhân độc lập: Từ con số không xây dựng trợ lý AI',
+        'content': 'OpenClaw Giáo trình OpenClaw toàn diện cho cá nhân độc lập Super individual practical guide Xây dựng trợ lý làm việc AI từ con số không Giáo trình tiếng Việt toàn diện nhất Cài đặt Cấu hình Thực chiến Tránh lỗi',
         'category': 'root'
     })
 

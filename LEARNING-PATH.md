@@ -142,7 +142,7 @@ Tùy theo mục đích sử dụng, bạn có thể lựa chọn lộ trình t�
 #### Buổi sáng (1 giờ): Tìm kiếm tệp thông minh
 
 📖 **Tài liệu đọc**:
-- [Chương 4: Quản lý tệp](docs/02-core-features/04-file-management.md#智能搜索)
+- [Chương 4: Quản lý tệp](docs/02-core-features/04-file-management.md#41-tìm-kiếm-tệp-thông-minh)
 
 🎯 **Nhiệm vụ thực hành**:
 1. Tìm theo định dạng: "Tìm tất cả các tệp PDF trong thư mục Documents"
@@ -158,7 +158,7 @@ Tùy theo mục đích sử dụng, bạn có thể lựa chọn lộ trình t�
 #### Buổi chiều (1 giờ): Xử lý hàng loạt & Tự động hóa tệp
 
 📖 **Tài liệu đọc**:
-- [Chương 4: Quản lý tệp](docs/02-core-features/04-file-management.md#批量处理)
+- [Chương 4: Quản lý tệp](docs/02-core-features/04-file-management.md#42-xử-lý-tệp-hàng-loạt)
 
 🎯 **Nhiệm vụ thực hành**:
 1. Đổi tên hàng loạt: "Đổi tên các ảnh chụp màn hình theo định dạng YYYY-MM-DD"
@@ -184,7 +184,7 @@ Tùy theo mục đích sử dụng, bạn có thể lựa chọn lộ trình t�
 #### Buổi sáng (1 giờ): Thu thập và lưu trữ tri thức từ Web
 
 📖 **Tài liệu đọc**:
-- [Chương 5: Quản lý tri thức](docs/02-core-features/05-knowledge-management.md#网页剪藏)
+- [Chương 5: Quản lý tri thức](docs/02-core-features/05-knowledge-management.md#51-sau-phiên-bản-20264-đâu-là-luồng-cơ-sở-tri-thức-chuẩn-xác)
 
 🎯 **Nhiệm vụ thực hành**:
 1. Lưu bài viết kỹ thuật vào hệ thống ghi chú
@@ -200,7 +200,7 @@ Tùy theo mục đích sử dụng, bạn có thể lựa chọn lộ trình t�
 #### Buổi chiều (1 giờ): Thiết lập cấu trúc cơ sở tri thức
 
 📖 **Tài liệu đọc**:
-- [Chương 5: Quản lý tri thức](docs/02-core-features/05-knowledge-management.md#知识库搭建)
+- [Chương 5: Quản lý tri thức](docs/02-core-features/05-knowledge-management.md#53-memory-wiki-biên-dịch-tri-thức-dài-hạn-thành-tầng-tri-thức-có-cấu-trúc-và-truy-nguyên-bằng-chứng)
 
 🎯 **Nhiệm vụ thực hành**:
 1. Chọn công cụ lưu trữ phù hợp (Markdown cục bộ / Obsidian / Notion)
@@ -280,7 +280,7 @@ Tùy theo mục đích sử dụng, bạn có thể lựa chọn lộ trình t�
 #### Buổi chiều (1 giờ): Cài đặt và thực hành Skills
 
 📖 **Tài liệu đọc**:
-- [Chương 8: Mở rộng Skills](docs/03-advanced/08-skills-extension.md#必装skills推荐) & [Phụ lục B](appendix/B-skills-catalog.md)
+- [Chương 8: Mở rộng Skills](docs/03-advanced/08-skills-extension.md#82-bắt-đầu-nhanh-tra-cứu-cài-đặt-và-quản-lý-chuẩn-chính-thức) & [Phụ lục B](appendix/B-skills-catalog.md)
 
 🎯 **Nhiệm vụ thực hành**:
 1. Cài đặt Brave Search (tìm kiếm thông tin trực tiếp trên web thời gian thực)
@@ -308,7 +308,7 @@ Tùy theo mục đích sử dụng, bạn có thể lựa chọn lộ trình t�
 #### Buổi sáng (1 giờ): Tác vụ định kỳ Cron
 
 📖 **Tài liệu đọc**:
-- [Chương 7: Luồng công việc tự động hóa](docs/02-core-features/07-automation-workflow.md#定时任务)
+- [Chương 7: Luồng công việc tự động hóa](docs/02-core-features/07-automation-workflow.md#71-thiết-lập-tác-vụ-định-kỳ-cron-jobs)
 
 🎯 **Nhiệm vụ thực hành**:
 1. Thiết lập tác vụ tổng hợp điểm tin tức AI mỗi sáng 8:00
@@ -324,7 +324,7 @@ Tùy theo mục đích sử dụng, bạn có thể lựa chọn lộ trình t�
 #### Buổi chiều (1 - 2 giờ): Giám sát website & Webhook
 
 📖 **Tài liệu đọc**:
-- [Chương 7: Luồng công việc tự động hóa](docs/02-core-features/07-automation-workflow.md#网站监控) & [Chương 13](docs/04-practical-cases/13-advanced-automation.md)
+- [Chương 7: Luồng công việc tự động hóa](docs/02-core-features/07-automation-workflow.md#72-thực-chiến-giám-sát-website) & [Chương 13](docs/04-practical-cases/13-advanced-automation.md)
 
 🎯 **Nhiệm vụ thực hành**:
 1. Giám sát cập nhật từ blog công nghệ quan tâm

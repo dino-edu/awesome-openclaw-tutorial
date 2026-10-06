@@ -509,9 +509,9 @@ source ~/.zshrc
 
 ## 🔗 Liên kết Tham khảo Liên quan
 
-- [Chương 2: Cài đặt và Môi trường](01-basics/02-installation.md) - Hướng dẫn triển khai OpenClaw
-- [Chương 11: Cấu hình Nâng cao](03-advanced/11-advanced-configuration.md) - Tối ưu mô hình, bộ nhớ, phê duyệt và hiệu năng
-- [Mẫu Tệp Cấu hình Chuẩn](../appendix/H-config-templates.md) - Bộ sưu tập các mẫu cấu hình cho nhiều kịch bản
+- [Chương 2: Cài đặt và Môi trường](../docs/01-basics/02-installation.md) - Hướng dẫn triển khai OpenClaw
+- [Chương 11: Cấu hình Nâng cao](../docs/03-advanced/11-advanced-configuration.md) - Tối ưu mô hình, bộ nhớ, phê duyệt và hiệu năng
+- [Mẫu Tệp Cấu hình Chuẩn](H-config-templates.md) - Bộ sưu tập các mẫu cấu hình cho nhiều kịch bản
 
 ---
 

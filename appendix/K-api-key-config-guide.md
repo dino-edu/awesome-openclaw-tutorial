@@ -584,9 +584,9 @@ openclaw models list
 
 ## 📚 Tài liệu Tham khảo Liên quan
 
-- [Hướng dẫn Cấu trúc Tệp Cấu hình](config-file-structure.md) - Giải thích chi tiết các tệp trong thư mục `~/.openclaw`
-- [Chương 2: Cài đặt và Môi trường](01-basics/02-installation.md) - Hướng dẫn triển khai nền tảng
-- [Chương 11: Cấu hình Nâng cao](03-advanced/11-advanced-configuration.md) - Mô hình, bộ nhớ, phê duyệt và tối ưu hiệu năng
+- [Hướng dẫn Cấu trúc Tệp Cấu hình](L-config-file-structure.md) - Giải thích chi tiết các tệp trong thư mục `~/.openclaw`
+- [Chương 2: Cài đặt và Môi trường](../docs/01-basics/02-installation.md) - Hướng dẫn triển khai nền tảng
+- [Chương 11: Cấu hình Nâng cao](../docs/03-advanced/11-advanced-configuration.md) - Mô hình, bộ nhớ, phê duyệt và tối ưu hiệu năng
 
 ---
 
